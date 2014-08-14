@@ -1,0 +1,410 @@
+/*------------------------------------------------------
+  MIXINS
+-------------------------------------------------------*/
+.clear-fix {
+  display: block;
+  zoom: 1;
+}
+.clear-fix:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/*------------------------------------------------------
+  ACTUAL CSS RULES SORTA
+-------------------------------------------------------*/
+html {
+  min-height: 100%;
+}
+body {
+  color: #ffffff;
+  background-color: #061639;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 105%;
+  text-align: center;
+  min-height: 100%;
+}
+div {
+  padding: 0;
+  margin: 0;
+}
+a:link {
+  color: #96a3be;
+}
+a:visited {
+  color: #5c6e92;
+}
+a:hover {
+  color: #c5cddb;
+}
+a:active {
+  color: #e5e8ef;
+}
+h1 {
+  color: #7788aa;
+  font-size: 2em;
+}
+h2 {
+  color: #7788aa;
+  font-size: 1.3em;
+}
+h3 {
+  color: #7788aa;
+  font-size: 1.1em;
+  text-align: center;
+}
+h4 {
+  color: #7788aa;
+  font-size: 0.8em;
+  text-align: center;
+}
+#wrapper {
+  background-color: #152a55;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 100%;
+}
+.section {
+  background-color: #2e4372;
+  -webkit-box-shadow: 0 0 5px 5px #13264d inset;
+  -moz-box-shadow: 0 0 5px 5px #13264d inset;
+  box-shadow: 0 0 5px 5px #13264d inset;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+}
+.inner-section {
+  padding: 5px;
+  margin: 5px;
+}
+.click-passthrough {
+  pointer-events: none;
+}
+#title {
+  clear: both;
+  background-color: #2e4372;
+  -webkit-box-shadow: 0 0 5px 5px #13264d inset;
+  -moz-box-shadow: 0 0 5px 5px #13264d inset;
+  box-shadow: 0 0 5px 5px #13264d inset;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+}
+#title h1 {
+  margin: 0.5em;
+}
+#title h2 {
+  text-align: left;
+  margin: 0.5em;
+}
+#titlebar {
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  font-weight: bold;
+  color: #7788aa;
+  font-size: 1.3em;
+}
+#titlebar ul {
+  padding: 0.5em 0;
+  margin: 0.1em 1em;
+}
+#titlebar li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: inline;
+}
+#titlebar li:before {
+  content: " | ";
+}
+#titlebar li:first-child:before {
+  content: none;
+}
+#contentMenu {
+  overflow: hidden;
+}
+#contentMenu ul {
+  padding: 0;
+  margin: 0;
+}
+#contentMenu li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: inline;
+}
+#contentMenu #tabList {
+  float: left;
+}
+#contentMenu #tabList li {
+  font-weight: bold;
+  list-style-type: none;
+  display: inline;
+}
+#contentMenu #tabList li:before {
+  content: " | ";
+}
+#contentMenu #tabList li:first-child:before {
+  content: none;
+}
+#contentMenu #tabButtons {
+  float: right;
+  width: 30em;
+}
+#sidebar {
+  float: left;
+  text-align: left;
+  width: 25%;
+  background-color: #2e4372;
+  -webkit-box-shadow: 0 0 5px 5px #13264d inset;
+  -moz-box-shadow: 0 0 5px 5px #13264d inset;
+  box-shadow: 0 0 5px 5px #13264d inset;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+}
+#sidebar table {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #061639;
+  border: 1px solid #7788aa;
+  padding: 0.5em;
+}
+#sidebar td {
+  font-size: 1.1em;
+  padding: 0.1em;
+}
+#sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#sidebar li {
+  padding: 0.5em;
+  margin: 0;
+}
+#status {
+  padding: 5px;
+  margin: 5px;
+}
+#log {
+  padding: 5px;
+  margin: 5px;
+  overflow: hidden;
+}
+#log h3 {
+  display: inline;
+}
+#resource-essence {
+  text-shadow: 0 0 1em #ACE3D1;
+}
+#researchDiv {
+  text-align: center;
+}
+#researchDiv li {
+  color: #7788aa;
+  font-size: 90%;
+  padding: 0.1em;
+  margin: 0;
+  list-style-type: none;
+  display: inline;
+}
+#researchDiv li:before {
+  content: " | ";
+}
+#researchDiv li:first-child:before {
+  content: none;
+}
+#content {
+  background-color: #2e4372;
+  -webkit-box-shadow: 0 0 5px 5px #13264d inset;
+  -moz-box-shadow: 0 0 5px 5px #13264d inset;
+  box-shadow: 0 0 5px 5px #13264d inset;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+  padding: 0.5em;
+}
+#tabMessage {
+  padding: 5px;
+  margin: 5px;
+  padding: 1.4em;
+}
+#buttonList {
+  padding: 5px;
+  margin: 5px;
+  padding: 1.0em;
+}
+#tabBorder {
+  border-bottom: 0.5em double #4e638e;
+}
+button {
+  background-color: #4e638e;
+  color: #ffffff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 2px solid #7788aa;
+  padding: 10px;
+  margin: 1% auto;
+  cursor: pointer;
+  display: block;
+  min-width: 12em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 90%;
+  vertical-align: middle;
+}
+button.min {
+  padding: 0.1em;
+  margin: 1%;
+  min-width: 0;
+  width: auto;
+  display: inline;
+  float: right;
+}
+button:hover {
+  -webkit-box-shadow: 0px 0px 2px 2px #7788aa;
+  -moz-box-shadow: 0px 0px 2px 2px #7788aa;
+  box-shadow: 0px 0px 2px 2px #7788aa;
+}
+button:active {
+  background-color: #152a55;
+  color: #4e638e;
+  -webkit-box-shadow: 0px 3px 7px 7px #061639 inset;
+  -moz-box-shadow: 0px 3px 7px 7px #061639 inset;
+  box-shadow: 0px 3px 7px 7px #061639 inset;
+}
+button:focus {
+  outline: 0;
+}
+button:disabled {
+  background-color: #040d22;
+  color: #2e4372;
+  cursor: default;
+  border-color: #2e4372;
+}
+button:disabled:hover {
+  box-shadow: none;
+}
+button:disabled:active {
+  box-shadow: none;
+}
+#overlay {
+  -webkit-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  z-index: 10;
+}
+.smallDesc {
+  font-size: 60%;
+  color: #7788aa;
+}
+.medDesc {
+  font-size: 80%;
+  color: #d5dae5;
+}
+#pane {
+  background-color: #152a55;
+  -webkit-box-shadow: 0 0 5px 5px #051230 inset;
+  -moz-box-shadow: 0 0 5px 5px #051230 inset;
+  box-shadow: 0 0 5px 5px #051230 inset;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 1em 2em;
+  margin: auto;
+  overflow: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  border: double #2e4372;
+  max-height: 90%;
+  z-index: 11;
+}
+#pane h2 {
+  padding-bottom: 0.5em;
+}
+#pane #paneHeaderEnd {
+  border-bottom: 0.5em double #2e4372;
+}
+#pane #paneHeaderTitleDiv {
+  vertical-align: center;
+  float: left;
+  display: inline;
+  text-align: left;
+}
+#pane #paneHeaderTitleDiv h3 {
+  display: inline;
+}
+#pane #paneHeaderCloseButtonDiv {
+  vertical-align: center;
+  float: right;
+  display: inline;
+  text-align: right;
+}
+#pane #paneHeaderCloseButtonDiv button {
+  display: inline;
+  width: auto;
+}
+#pane #paneHeaderCloseButton {
+  margin: auto;
+  float: none;
+  min-width: 0;
+}
+#pane table {
+  margin: auto;
+  text-align: left;
+  white-space: nowrap;
+}
+#pane .option-button {
+  min-width: 0;
+  width: 4em;
+}
+#pane .paneContentDiv {
+  border-bottom: 0.4em double #2e4372;
+}
+#pane #changelogDiv {
+  text-align: left;
+}
+#pane #changelogDiv h3 {
+  text-align: left;
+}
+#pane #optionLabel {
+  width: 20em;
+}
+#pane #endCredits {
+  font-size: 90%;
+}

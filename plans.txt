@@ -1,0 +1,232 @@
+CHANGELOG:
+
+- A WHOLE BUNCH OF STUFF (<v0.21)
+
+- DATA (v0.21)
+    - Save
+    - Load
+
+v 0.22:
+    - Offline mode (save timestamp of last save so that on load calculate what should have been done)
+
+v 0.23:
+
+	- Change save/load messages to not be coupled to save/load functions
+		- have calling functions log
+    - Autosave (5 minute duration default, 1 minute minimum)
+    - change income system
+            - resources can impact income directly
+            - instead of adding income, recalculate income on any change to resource table
+    - Options
+        - Buy 1/Buy 100/Buy Max buttons (this setting should be saved as well as other options)
+        - A WAY TO ACTUALLY CHANGE THESE OPTIONS
+        - Autosave frequency
+        - Toggle offline mode (toggle)
+        - Log length max (5 minimum, 30 max)
+        - Sidebar width (20%, 25%, 30%, 35%)
+        - Show animations (toggle)
+
+v 0.3:
+
+	- adjust resourceList to html to darken span colour if a parameter is passed
+	- add descriptions to options
+    - save import/export
+            - could be handled entirely in one text field in options menu
+    - add ending screen
+        - fade in overlay
+        - show credits and end of game
+
+v 0.4:
+
+    - Gate tab
+    		- unlocked through a lab upgrade
+    		- requires a whole bunch of resources in different slots to open
+    		- ends game on opening
+	- Laboratory tab
+	    - upgrades
+	        - allow new things
+	        - improve existing things
+
+
+			
+	- add content for the expectation we don't get past diplomacy/trading tab
+	
+
+
+
+sharks
+rays
+crabs
+fish
+sand
+science
+crystal
+kelp
+sea apple - can be used for a science boost
+sharkonium
+
+
+DONE: [xenobiology] buy science with sea apples
+DONE: [transmutation] buy sharkonium with crystal and sand
+
+DONE: fish -> crab -> crystal (very slow) 
+
+DONE: crystals + sharks -> science shark -> science
+[regular biology] shark + lots of fish -> nurse shark -> sharks
+[laser tech] crystals + rays -> laser ray -> -sand +crystals
+[sea apples] sand + crab -> planter crab -> kelp
+
+[automation] crystals + sand + sharkonium -> crystalminer -> +crystals (higher than crabs)
+[automation] crystals + sharkonium -> autotransmuter -> -crystals +sharkonium
+[automation] sharkonium -> fishmachine -> +fish (higher than sharks)
+
+
+
+
+science:
+
+- crystal bite-gear - shark multiplier x 2
+- crystal spades - ray multiplier x 2
+- crystal containers - science shark multiplier x 2
+    - underwater chemistry - science shark multiplier x 2
+
+    - seabed geology - rays multiplier x 2
+        - thermal vents
+            - laser rays - enable laser rays
+            - automation - enable expensive but better structures
+                - engineering - crystalminer x 2, autotransmuter x 2, fishmachine x 2
+        - kelp horticulture - enable planter crabs
+            - xenobiology - enable converting sea apples to science
+                - regular biology - enable nurse sharks
+            - sun observation - planters x 2
+
+(thermal vents) (underwater chemistry)
+    - transmutation - allows conversion of crystal to sharkonium
+
+(seabed geology) (sun observation)
+    - exploration - shark multiplier x 1.5, ray multiplier x 1.5
+        - far exploration - crab multiplier x 3
+			- gate exploration
+
+
+
+
+
+                !!!!!!!!!!!!DONE!!!!!!!!!!!!!!
+
+
+				
+				
+				
+				
+
+
+v 0.48
+
+Things to do: 
+apply Dylan's fix, 
+	change line 59 of ascii85 to (bytes.charCodeAt(i+3))) >>> 0;
+reduce big costs by an order of magnitude or so, 
+add "buy 10", "buy 1/3 max" and "buy 1/2 max" buttons
+display research effects on research buttons,
+display effectiveness multipliers in income table (after amount, before rate), 
+provide better cost calculation: rather than have the calculation be a function, set costs to be based on constant or linear and call appropriate functions from cost lookup table?
+add crab and ray generators and required tech
+consolidate options pane and other panes into one generic pane!
+
+changelog option	
+
+
+
+v 0.5
+
+add text changes to home to guide player to what they should be doing next
+
+add sand machine
+
+add button to toggle button effect help text
+
+grotto (stats tab), 
+	list upgrades, 
+	reveal what each resource is supplying in terms of income,
+	reveal total amount ever made of resource,
+	allows disposal (add disposal message to resources)
+	
+	
+research for grotto (stats tab)
+
+recycler [requires research, research will require machines]
+	allow selling (reprocessing?) of things into a new junk resource
+	
+	process junk into new resources (add junk values for resources)
+
+
+	
+	
+update	
+
+
+
+
+
+
+v 0.5:
+
+    - Trading tab
+        - factions
+            - representatives
+            - trades
+			- unlock prereqs
+            - resources
+			- resource generation strength increased through resources!
+			- bonus resources if they like you!
+			- they like you the more resources you give them
+			
+			factions: dolphins, whales, cephalopods, crustaceans
+			
+            
+
+
+			
+			
+			
+			
+			
+			
+
+	
+UNUSED POSSIBLE FUTURE STUFF
+
+
+v World
+
+    - World tab
+        - assemble squads from resources!
+            - this should be handled automatically, if a squad is needed in a place and one isn't on the way one gets sent
+        - select territories to send squads to!
+            - choose what sort of squads to send??
+        - living world - everything else moves on a timer!
+        - home base can never be destroyed
+        - other factions cannot have more than three bases
+
+    - combat plans:
+    - squads have a faction, a strength, a health and possibly a special feature (implemented via function)
+    - factions have bases and squad types (pick random appropriate animal??)
+    - bases
+
+    - Gate tab (have it be able to be activated on discovery)
+
+    ~ MOSTLY COMPLETE ~
+
+v Terrain
+    - terrains
+        - ocean (bluh)
+        - caves (attacking squads have strength reduced by 1)
+        - chasms (special encounters, occupying squads have health reduced by 1 each tick)
+        - fish school (bonus to fish income while occupied)
+        - crystals (bonus to tech income while occupied??)
+
+v Chasms
+    - get to chasms to fight ancient mechanical abyss creatures (non-diplomatic faction) and collect crystalline fish
+    - gate requires some crystalline fish to activate
+    - activating gate ends game!
