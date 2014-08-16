@@ -23,7 +23,7 @@ SharkGame.Gate = {
         fish: 1E9,
         sand: 1E9,
         crystal: 1E9,
-        kelp: 1E5,
+        kelp: 1E6,
         seaApple: 1E6,
         sharkonium: 1E8
     },
@@ -41,8 +41,8 @@ SharkGame.Gate = {
 
         // create costsMet
         var costsMet = g.costsMet = {};
-        $.each(g.costs, function(i,v) {
-            costsMet[i] = false;
+        $.each(g.costs, function(k,v) {
+            costsMet[k] = false;
         });
 
         g.opened = false;
@@ -57,10 +57,10 @@ SharkGame.Gate = {
         if(!g.shouldBeOpen()) {
             var amountOfSlots = 0;
             var buttonList = $('#buttonList');
-            $.each(g.costs, function(i,v) {
-                if( !g.costsMet[i] ) {
-                    var resourceName = SharkGame.Resources.getResourceName(i);
-                    SharkGame.Button.makeButton("gateCost-" + i, "Insert " + resourceName + " into " + resourceName + " slot", buttonList, SharkGame.Gate.onGateButton);
+            $.each(g.costs, function(k,v) {
+                if( !g.costsMet[k] ) {
+                    var resourceName = SharkGame.Resources.getResourceName(k);
+                    SharkGame.Button.makeButton("gateCost-" + k, "Insert " + resourceName + " into " + resourceName + " slot", buttonList, SharkGame.Gate.onGateButton);
                     amountOfSlots++;
                 }
             });
@@ -109,7 +109,7 @@ SharkGame.Gate = {
     shouldBeOpen: function () {
         var g = SharkGame.Gate;
         var won = true;
-        $.each(g.costsMet, function(i,v) {
+        $.each(g.costsMet, function(_,v) {
             won = won && v;
         });
         return won;

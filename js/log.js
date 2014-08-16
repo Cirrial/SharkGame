@@ -36,14 +36,14 @@ SharkGame.Log = {
 
         SharkGame.Log.correctLogLength();
 
-        // adjust opacities because why not
-//        var alpha = 1;
-//        var delta = 1 / l.MESSAGES_MAX;
-//        messageList.find('li').each(function(i, v) {
-//            $(this).css("opacity", alpha);
-//            alpha += delta;
-//        });
+        return messageItem;
+    },
 
+    addError: function (message) {
+        var l = SharkGame.Log;
+        var messageItem = l.addMessage("Error: " + message);
+        messageItem.addClass("error");
+        return messageItem;
     },
 
     correctLogLength: function() {
@@ -71,7 +71,7 @@ SharkGame.Log = {
     clearMessages: function () {
         var l = SharkGame.Log;
         // remove each element from page
-        $.each(l.messages, function (i, v) {
+        $.each(l.messages, function (_, v) {
             v.remove();
         });
         // wipe array

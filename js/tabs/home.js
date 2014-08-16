@@ -19,13 +19,19 @@ SharkGame.Home = {
     },
 
     switchTo: function () {
+        var h = SharkGame.Home;
         var content = $('#content');
         var tabMessage = $('<div>').attr("id", "tabMessage");
-        var message = SharkGame.Home.homeMessage;
+        var message = h.homeMessage;
         if(SharkGame.Tabs[SharkGame.Lab.tabId].discovered) {
-            message += SharkGame.Home.bonusMessage;
+            message += h.bonusMessage;
         }
+        tabMessage.html(message);
         content.append(tabMessage);
+        var helpButtonDiv = $('<div>');
+        helpButtonDiv.css({margin: "auto", clear: "both"});
+        SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
+        content.append(helpButtonDiv);
         content.append($('<div>').attr("id", "buttonList"));
     },
 
@@ -38,9 +44,10 @@ SharkGame.Home = {
         var buttonList = $('#buttonList');
 
         // for each button entry in the home tab,
-        $.each(SharkGame.HomeActions, function(id,value) {
+        $.each(SharkGame.HomeActions, function(key,value) {
             // check if a button exists
-            var button = $('#' + id);
+            var button = $('#' + key);
+            var helpText;
             if(button.length === 0) {
                 // add it if prerequisites have been met
                 var prereqsMet = true; // assume true until proven false
@@ -52,14 +59,14 @@ SharkGame.Home = {
 
                 // check upgrade prerequisites
                 if(value.prereq.upgrade) {
-                    $.each(value.prereq.upgrade, function(i,v){
+                    $.each(value.prereq.upgrade, function(_,v){
                         prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
                     });
                 }
 
                 if(prereqsMet) {
                     // add button
-                    var buttonSelector = SharkGame.Button.makeButton(id, value.name, buttonList, h.onHomeButton);
+                    var buttonSelector = SharkGame.Button.makeButton(key, value.name, buttonList, h.onHomeButton);
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -96,6 +103,11 @@ SharkGame.Home = {
                 var costText = r.resourceListToString(actionCost, !enableButton);
                 if(costText != "") {
                     label += "<br/>Cost: " + costText;
+                }
+                if(SharkGame.Settings.current.showTabHelp) {
+                    if(value.helpText) {
+                        label += "<br/><span class='medDesc'>" + value.helpText + "</span>";
+                    }
                 }
                 button.prop("disabled", !enableButton).html(label);
             }
@@ -168,7 +180,7 @@ SharkGame.Home = {
             var resource = SharkGame.ResourceTable[action.max];
             var currAmount = resource.amount;
             if(resource.jobs) {
-                $.each(resource.jobs, function(i, v) {
+                $.each(resource.jobs, function(_, v) {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
@@ -195,14 +207,13 @@ SharkGame.Home = {
             var resource = SharkGame.ResourceTable[action.max];
             var currAmount = resource.amount;
             if(resource.jobs) {
-                $.each(resource.jobs, function(i, v) {
+                $.each(resource.jobs, function(_, v) {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
-            currAmount += 0.1;
             max = Number.MAX_VALUE;
             var rawCost = action.cost;
-            $.each(rawCost, function(i,v) {
+            $.each(rawCost, function(_,v) {
                 var resource = SharkGame.ResourceTable[v.resource];
 
                 var costFunction = v.costFunction;
@@ -220,6 +231,10 @@ SharkGame.Home = {
             });
         }
         return Math.floor(max);
+    },
+
+    toggleHelp: function() {
+        SharkGame.Settings.current.showTabHelp = !SharkGame.Settings.current.showTabHelp;
     }
 };
 
@@ -251,7 +266,8 @@ SharkGame.HomeActions = {
             "Ate a shrimp. Wait. That's not a fish.",
             "Almost ate a remora.",
             "Dropped the bass."
-        ]
+        ],
+        helpText: "Use your natural shark prowess to find and catch a fish."
     },
 
     'seaApplesToScience': {
@@ -276,7 +292,8 @@ SharkGame.HomeActions = {
             "This is perhaps maybe insightful!",
             "Why are we even doing this? Who knows! Science!",
             "What is even the point of these things? Why are they named for fruit? They're squirming!"
-        ]
+        ],
+        helpText: "Dissect sea apples to gain additional science. Research!"
     },
 
     'transmuteSharkonium': {
@@ -308,7 +325,8 @@ SharkGame.HomeActions = {
             "The substance that knows no name! Except the name sharkonium!",
             "The substance that knows no description! It's weird to look at.",
             "The foundation of a modern shark frenzy!"
-        ]
+        ],
+        helpText: "Convert ordinary resources into sharkonium, building material of the future!"
     },
 
     'getShark': {
@@ -371,7 +389,8 @@ SharkGame.HomeActions = {
             "A frenzy of sharks!",
             "A gam of sharks! Yes, that's correct." ,
             "A college of sharks! They're a little smarter than a school."
-        ]
+        ],
+        helpText: "Recruit a shark to help catch more fish."
     },
 
     'getManta': {
@@ -442,7 +461,8 @@ SharkGame.HomeActions = {
             "A whole lotta rays!",
             "The sand is just flying everywhere!" ,
             "So many rays."
-        ]
+        ],
+        helpText: "Hire a ray to help collect fish. They might kick up some sand from the seabed."
     },
 
 
@@ -502,7 +522,8 @@ SharkGame.HomeActions = {
             "A dose of crabs!",
             "A cribble of crabs! Okay, no, that one's made up.",
             "So many crabs."
-        ]
+        ],
+        helpText: "Hire a crab to find things that sharks and rays overlook."
     },
 
     'getScientist': {
@@ -536,7 +557,8 @@ SharkGame.HomeActions = {
             "Building a smarter, better shark!",
             "Beakers! Beakers underwater! It's madness!",
             "Let the science commence!"
-        ]
+        ],
+        helpText: "Train a shark in the fine art of research and the science of, well, science."
     },
 
     'getNurse': {
@@ -569,7 +591,8 @@ SharkGame.HomeActions = {
             "Sharks forever!",
             "The sharks will never end. The sharks are eternal.",
             "More sharks to make more sharks to make more sharks..."
-        ]
+        ],
+        helpText: "Remove a shark from fish duty and set them to shark making duty."
     },
 
     'getLaser': {
@@ -602,11 +625,12 @@ SharkGame.HomeActions = {
             "Laser ray armada in position!",
             "Ray crystal processing initiative is growing stronger every day!",
             "Welcome to the future! The future is lasers!"
-        ]
+        ],
+        helpText: "Remove a ray from sand detail and let them fuse sand into raw crystal."
     },
 
     'getMaker': {
-        name: "Condition a ray maker",
+        name: "Instruct a ray maker",
         effect: {
             resource: {
                 'maker' : 1
@@ -637,7 +661,8 @@ SharkGame.HomeActions = {
             "Rapidly breeding aquatic wildlife is probably a severe ecological hazard. Good thing this isn't Earth's oceans, probably!",
             "Have you ever thought about what the rays wanted? Because this might have been what they wanted after all.",
             "MORE LASER RAYS FOR THE LASER ARMY-- oh. Well, this is good too."
-        ]
+        ],
+        helpText: "Remove a ray from sand business and let them concentrate on making more rays."
     },
 
     'getPlanter': {
@@ -671,7 +696,8 @@ SharkGame.HomeActions = {
             "Strike the sand!",
             "Pat the sand very gently and put kelp in it!",
             "More kelp. The apples. They hunger. They hunger for kelp."
-        ]
+        ],
+        helpText: "Equip a crab with the equipment and training to plant kelp across the ocean bottom."
     },
 
     'getBrood': {
@@ -707,7 +733,8 @@ SharkGame.HomeActions = {
             "More crabs are always a good idea. Crystals aren't cheap.",
             "The broods swell in number. The sharks are uneasy, but the concern soon passes.",
             "Yes. Feed the kelp. Feed it. Feeeeeed it."
-        ]
+        ],
+        helpText: "Meld several crabs into a terrifying, incomprehensible crab-producing brood cluster."
     },
 
     'getCrystalMiner': {
@@ -740,7 +767,42 @@ SharkGame.HomeActions = {
             "The miners dig.",
             "The crystal shall be harvested.",
             "Crystal miners are complete."
-        ]
+        ],
+        helpText: "Construct a machine to automatically harvest crystals efficiently."
+    },
+
+    'getSandDigger': {
+        name: "Build sand digger",
+        effect: {
+            resource: {
+                'sandDigger' : 1
+            }
+        },
+        cost: [
+            {resource: "sand", costFunction: "linear", priceIncrease: 500},
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 150}
+        ],
+        max: "sandDigger",
+        prereq: {
+            upgrade: [
+                "automation"
+            ]
+        },
+        outcomes: [
+            "Sand digger constructed.",
+            "Sand digger reaches into the seabed.",
+            "The digger begins to shuffle sand into its machine maw. Rays dart away.",
+            "The machine is online.",
+            "The machine acts immediately, shovelling sand."
+        ],
+        multiOutcomes: [
+            "The machines increase in number.",
+            "The diggers devour.",
+            "All sand must be gathered.",
+            "The rays are concerned.",
+            "Devour the sands. Consume."
+        ],
+        helpText: "Construct a machine to automatically dig up sand efficiently."
     },
 
     'getAutoTransmuter': {
@@ -773,7 +835,8 @@ SharkGame.HomeActions = {
             "All is change.",
             "Change is all.",
             "The machines know many secrets, yet cannot speak of them."
-        ]
+        ],
+        helpText: "Construct a machine to automatically transmute sand and crystal to sharkonium."
     },
 
     'getFishMachine': {
@@ -806,7 +869,8 @@ SharkGame.HomeActions = {
             "The fishing machines are more efficient than the sharks. But they aren't very smart.",
             "Automated fishing.",
             "The power of many, many sharks, in many, many devices."
-        ]
+        ],
+        helpText: "Construct a machine to automatically gather fish efficiently."
     }
 };
 
@@ -843,7 +907,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: absolute max items that can be held with invested and current resources
     linearMax: function(a, b, k) {
-        return Math.floor(Math.sqrt((a*a) + a + (2 * b/k) + 0.25) - 0.5)
+        return Math.sqrt((a*a) + a + (2 * b/k) + 0.25) - 0.5;
     }
 
 //    exponentialCost: function(a, b, k) {

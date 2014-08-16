@@ -115,11 +115,8 @@ science:
                 !!!!!!!!!!!!DONE!!!!!!!!!!!!!!
 
 
-				
-				
-				
-				
 
+				
 
 v 0.48
 
@@ -140,37 +137,58 @@ changelog option
 
 v 0.5
 
-add text changes to home to guide player to what they should be doing next
+- crab broods aren't massively OP now
+- change planter crab colour to a colour that can be read on the button
+- add useful metadata to index for bots, copyright note at bottom of page
+The above variably named Shark Game is copyright Cirr 2014
+- fix oscillation of resources
+- do not use resource colours in table if resource colours turned off
+- remove multiplier from table
+- go over save code, add dylan changes, tidy up error handling and detection (maybe add error logging to the actual log i have in the game instead of using alert()) (credit dylan for compression)
+- add support for people not having javascript on by showing something along the lines of "you need a javascript to this game!!!"
+use sad shark ascii
+- change every instance of i in object property loops to k
+- x10 more gate kelp
+- add sand machine
+- add button to toggle button effect help text
+- add help text for each action
+- add concise help overview in top menu
 
-add sand machine
 
-add button to toggle button effect help text
 
-grotto (stats tab), 
+^^^!! stuff above this line is done !!^^^
+
+
+
+- add text changes to home to guide player to what they should be doing next: advisor
+
+
+- add resource categories
+- add grouping for resources based on categories [MAKE INTO A PREFERENCE]
+- track timestamp of when current run was started, total playing time
+	handle case of not having those timestamps by creating it
+
+- grotto (stats tab), 
 	list upgrades, 
 	reveal what each resource is supplying in terms of income,
 	reveal total amount ever made of resource,
-	allows disposal (add disposal message to resources)
-	
-	
-research for grotto (stats tab)
-
-recycler [requires research, research will require machines]
-	allow selling (reprocessing?) of things into a new junk resource
-	
+	allows disposal (add disposal message to resource categories)
+- research for grotto (stats tab)
+- recycler [requires research, research will require machines]
+	allow selling (reprocessing?) of things into a new junk resource	
 	process junk into new resources (add junk values for resources)
-
-
-	
-	
-update	
-
-
-
+- add new template for save version
+- FAVICON!! 16x16
+- META IMG! 125x125
+- update changelog
+- push update!!
 
 
 
-v 0.5:
+
+
+
+v 0.6:
 
     - Trading tab
         - factions
@@ -182,8 +200,11 @@ v 0.5:
 			- bonus resources if they like you!
 			- they like you the more resources you give them
 			
-			factions: dolphins, whales, cephalopods, crustaceans
+			factions: cetaceans, cephalopods, crustaceans, chelonians (turtles)
 			
+			dolphins and whales hate sharks
+			lobsters and shimp like sharks for crab allies
+			the other two are neutral
             
 
 

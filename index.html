@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>new shark game</title>
-    <meta charset="utf-8">
+    <!-- Welcome to a shark. I hope you enjoy this aquatic organism. -->
 
+    <title>New Shark Game</title>
+    <meta charset="utf-8">
+    <meta itemprop="description" name="description" property="og:description" content="A web game about resources, discovery and sharks.">
+    <meta itemprop="image" property="og:image" content="img/sharkgame.png" />
+    <meta itemprop="name" property="og:title" content="New Shark Game" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="image_src" href="img/sharkgame.png" />
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
     <script>
@@ -11,19 +17,24 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
         ga('create', 'UA-53819232-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 
-    <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="jquery.animate-colors-min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script>
+    <!--
+     When I actually end up using these, I should uncomment them. Til then, they're just taking up space.
+    <script type="text/javascript" src="js/lib/jquery.animate-colors-min.js"></script>
+    <script type="text/javascript" src="js/lib/jcanvas.min.js"></script>
+    -->
 
     <!-- Modified version of Jacob Rus script from 2009 -->
-    <script type="text/javascript" src="base64-ascii85.js"></script>
-
-    <script type="text/javascript" src="pako.js"></script>
+    <script type="text/javascript" src="js/lib/base64-ascii85.js"></script>
+    <!-- Single-file version of pako, for compression/decompression -->
+    <script type="text/javascript" src="js/lib/pako.js"></script>
+    <!-- Escapes.js renders ANSI art -->
+    <!-- UNUSED (for now) -->
+    <!-- <script type="text/javascript" src="js/lib/escapes.min.js"></script> -->
 
     <!-- Cirr's code starts here. I hope you find it insightful if you came here to peer at it,
         but Javascript is hardly my most familiar language. The code here likely stinks. -->
@@ -37,29 +48,55 @@
     <script type="text/javascript" src="js/tabs/lab.js"></script>
     <script type="text/javascript" src="js/tabs/gate.js"></script>
 
-
-	
 </head>
 <body>
 <div id="wrapper">
-    <div id="title">
-        <h1 id="gameName">- NEW SHARK GAME -</h1>
-        <h4 id="versionNumber"></h4>
-        <div id="titlebar">
-            <ul id="titlemenu">
-            </ul>
+
+    <noscript>
+    <div class="section">
+        <h1>New Shark Game?</h1>
+        <p>Oh dear! It seems you have Javascript disabled, or that your current browser does not support scripts.</p>
+        <p>Shark Game requires scripts to work. Otherwise it's just a static webpage that doesn't do much.</p>
+        <div style="margin: auto; width: 20em">
+            <pre>
+     ,
+       .';
+   .-'` .'
+ ,`.-'-.`\
+; /     '-'
+| \       ,-,
+\  '-.__   )_`'._
+ '.     ```      ``'--._
+.-' ,                   `'-.
+ '-'`-._           ((   o   )  - scripts plz.
+  jgs   `'--....(`- ,__..--'
+                 '-'`
+            </pre>
         </div>
     </div>
-    <div id="sidebar">
-        <div id="status">
+    </noscript>
+
+    <div id="game">
+        <div id="title">
+            <h1 id="gameName">- NEW SHARK GAME -</h1>
+            <h4 id="versionNumber"></h4>
+            <div id="titlebar">
+                <ul id="titlemenu">
+                </ul>
+            </div>
         </div>
-        <div id="log">
+        <div id="sidebar">
+            <div id="status">
+            </div>
+            <div id="log">
+            </div>
         </div>
+        <div id="content">
+        </div>
+        <div class="clear-fix"></div>
+        <div id="overlay"></div>
     </div>
-    <div id="content">
-    </div>
-    <div class="clear-fix"></div>
-    <div id="overlay"></div>
+    <div id="copyright" class="medDesc">The above variably-named Shark Game &copy; <a href="http://cirri.al">Cirrial</a>, 2014. All rights reserved.</div>
 </div>
 </body>
 </html>

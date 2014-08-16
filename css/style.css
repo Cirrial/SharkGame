@@ -72,6 +72,12 @@ h4 {
   border-radius: 10px;
   height: 100%;
 }
+pre {
+  text-align: left;
+}
+#game {
+  display: none;
+}
 .section {
   background-color: #2e4372;
   -webkit-box-shadow: 0 0 5px 5px #13264d inset;
@@ -211,8 +217,12 @@ h4 {
 #log h3 {
   display: inline;
 }
+#log .error {
+  color: #e03030;
+  text-shadow: 0 0 0.8em #800000;
+}
 #resource-essence {
-  text-shadow: 0 0 1em #ACE3D1;
+  text-shadow: 0 0 1em #ace3d1;
 }
 #researchDiv {
   text-align: center;
@@ -285,6 +295,12 @@ button.min {
   display: inline;
   float: right;
 }
+button.min-block {
+  padding: 0.1em;
+  margin: auto;
+  min-width: 0;
+  vertical-align: super;
+}
 button:hover {
   -webkit-box-shadow: 0px 0px 2px 2px #7788aa;
   -moz-box-shadow: 0px 0px 2px 2px #7788aa;
@@ -311,6 +327,10 @@ button:disabled:hover {
 }
 button:disabled:active {
   box-shadow: none;
+}
+button:disabled .medDesc {
+  font-size: 80%;
+  color: #343f54;
 }
 #overlay {
   -webkit-opacity: 0.5;
@@ -361,7 +381,7 @@ button:disabled:active {
   border-bottom: 0.5em double #2e4372;
 }
 #pane #paneHeaderTitleDiv {
-  vertical-align: center;
+  vertical-align: middle;
   float: left;
   display: inline;
   text-align: left;
@@ -370,7 +390,7 @@ button:disabled:active {
   display: inline;
 }
 #pane #paneHeaderCloseButtonDiv {
-  vertical-align: center;
+  vertical-align: middle;
   float: right;
   display: inline;
   text-align: right;

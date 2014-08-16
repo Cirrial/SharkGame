@@ -4,8 +4,6 @@ SharkGame.Settings = {
 
     buyAmount: {
         defaultSetting: 1,
-        name: "Buy Amount",
-        desc: "How are you seeing this?",
         show: false,
         options: [
             1,
@@ -14,6 +12,15 @@ SharkGame.Settings = {
             -3,
             -2,
             -1
+        ]
+    },
+
+    showTabHelp: {
+        defaultSetting: false,
+        show: false,
+        options: [
+            true,
+            false
         ]
     },
 
@@ -110,6 +117,9 @@ SharkGame.Settings = {
         options : [
             true,
             false
-        ]
+        ],
+        onChange: function() {
+            SharkGame.Resources.rebuildTable = true;
+        }
     }
 };
