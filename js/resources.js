@@ -202,50 +202,50 @@ SharkGame.Resources = {
 
     rebuildTable: false,
 
-    init: function () {
+    init: function() {
         // set all the amounts and total amounts of resources to 0
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.ResourceTable[k].amount = 0;
             SharkGame.ResourceTable[k].totalAmount = 0;
             SharkGame.ResourceTable[k].incomeMultiplier = 1;
         });
 
         // populate income table with an entry for each resource!!
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.IncomeTable[k] = 0;
         });
     },
 
-    processIncomes: function (timeDelta) {
-        $.each(SharkGame.IncomeTable, function (k, v) {
+    processIncomes: function(timeDelta) {
+        $.each(SharkGame.IncomeTable, function(k, v) {
             SharkGame.Resources.changeResource(k, v * timeDelta);
         });
     },
 
-    recalculateIncomeTable: function () {
+    recalculateIncomeTable: function() {
         var r = SharkGame.Resources;
         // clear income table first
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.IncomeTable[k] = 0;
         });
 
         // for each resource, add incomes
-        $.each(SharkGame.ResourceTable, function (_, value) {
-            if ( value.income ) {
+        $.each(SharkGame.ResourceTable, function(_, value) {
+            if(value.income) {
                 var essenceMultiplier = (r.getResource("essence") + 1);
 
                 var canTakeCost = true;
                 // run over all resources first to check if this is true
-                $.each(value.income, function (k, v) {
+                $.each(value.income, function(k, v) {
                     var change = v * value.amount * value.incomeMultiplier * essenceMultiplier;
-                    if ( change < 0 && r.getResource(k) <= 0 ) {
+                    if(change < 0 && r.getResource(k) <= 0) {
                         canTakeCost = false;
                     }
                 });
 
                 // if there is a cost and it can be taken (or if there is no cost)
                 // run over all resources to fill the income table
-                $.each(value.income, function (k, v) {
+                $.each(value.income, function(k, v) {
                     var incomeChange = v * value.amount * value.incomeMultiplier * essenceMultiplier;
                     if(incomeChange < 0 || canTakeCost) {
                         SharkGame.IncomeTable[k] += incomeChange
@@ -255,22 +255,22 @@ SharkGame.Resources = {
         });
     },
 
-    getIncome: function (resource) {
+    getIncome: function(resource) {
         return SharkGame.IncomeTable[resource]
     },
 
-    getMultiplier: function (resource) {
+    getMultiplier: function(resource) {
         return SharkGame.ResourceTable[resource].incomeMultiplier;
     },
 
-    setMultiplier: function (resource, multiplier) {
+    setMultiplier: function(resource, multiplier) {
         SharkGame.ResourceTable[resource].incomeMultiplier = multiplier;
         SharkGame.Resources.recalculateIncomeTable();
     },
 
     // Adds or subtracts resources based on amount given.
-    changeResource: function (resource, amount) {
-        if ( Math.abs(amount) < SharkGame.EPSILON ) {
+    changeResource: function(resource, amount) {
+        if(Math.abs(amount) < SharkGame.EPSILON) {
             return; // ignore changes below epsilon
         }
 
@@ -278,15 +278,15 @@ SharkGame.Resources = {
         var prevTotalAmount = resourceTable.totalAmount;
 
         resourceTable.amount += amount;
-        if ( resourceTable.amount < 0 ) {
+        if(resourceTable.amount < 0) {
             resourceTable.amount = 0;
         }
 
-        if ( amount > 0 ) {
+        if(amount > 0) {
             resourceTable.totalAmount += amount;
         }
 
-        if ( prevTotalAmount < SharkGame.EPSILON ) {
+        if(prevTotalAmount < SharkGame.EPSILON) {
             // we got a new resource
             SharkGame.Resources.rebuildTable = true;
         }
@@ -294,24 +294,24 @@ SharkGame.Resources = {
         SharkGame.Resources.recalculateIncomeTable();
     },
 
-    setResource: function (resource, newValue) {
+    setResource: function(resource, newValue) {
         var resourceTable = SharkGame.ResourceTable[resource];
 
         resourceTable.amount = newValue;
-        if ( resourceTable.amount < 0 ) {
+        if(resourceTable.amount < 0) {
             resourceTable.amount = 0;
         }
         SharkGame.Resources.recalculateIncomeTable();
     },
 
-    getResource: function (resource) {
+    getResource: function(resource) {
         return SharkGame.ResourceTable[resource].amount;
     },
 
-    haveAnyResources: function () {
+    haveAnyResources: function() {
         var anyResources = false;
-        $.each(SharkGame.ResourceTable, function (_, v) {
-            if ( !anyResources ) {
+        $.each(SharkGame.ResourceTable, function(_, v) {
+            if(!anyResources) {
                 anyResources = v.totalAmount > 0;
             }
         });
@@ -320,44 +320,44 @@ SharkGame.Resources = {
 
     // returns true if enough resources are held (>=)
     // false if they are not
-    checkResources: function (resourceList) {
+    checkResources: function(resourceList) {
         var sufficientResources = true;
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             var currentResource = SharkGame.Resources.getResource(k);
             var listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
-            if ( typeof listResource === 'undefined' ) {
+            if(typeof listResource === 'undefined') {
                 listResource = 0;
             }
-            if ( currentResource < listResource ) {
+            if(currentResource < listResource) {
                 sufficientResources = false;
             }
         });
         return sufficientResources;
     },
 
-    changeManyResources: function (resourceList, subtract) {
-        if ( typeof subtract === 'undefined' ) {
+    changeManyResources: function(resourceList, subtract) {
+        if(typeof subtract === 'undefined') {
             subtract = false;
         }
 
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             var listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
-            if ( typeof listResource === 'undefined' ) {
+            if(typeof listResource === 'undefined') {
                 listResource = 0;
             }
-            if ( subtract ) {
+            if(subtract) {
                 listResource *= -1;
             }
             SharkGame.Resources.changeResource(k, listResource);
         });
     },
 
-    scaleResourceList: function (resourceList, amount) {
+    scaleResourceList: function(resourceList, amount) {
         var newList = {};
-        $.each(SharkGame.ResourceTable, function (k, v) {
-            if ( typeof resourceList[k] !== 'undefined' ) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(typeof resourceList[k] !== 'undefined') {
                 newList[k] = resourceList[k] * amount;
             } else {
                 newList[k] = 0;
@@ -367,22 +367,22 @@ SharkGame.Resources = {
     },
 
     // update values in table without adding rows
-    updateResourcesTable: function () {
+    updateResourcesTable: function() {
         var rTable = $('#resourceTable');
         var m = SharkGame.Main;
         var r = SharkGame.Resources;
 
         // if resource table does not exist, there are no resources, so do not construct table
         // if a resource became visible when it previously wasn't, reconstruct the table
-        if ( r.rebuildTable ) {
+        if(r.rebuildTable) {
             r.reconstructResourcesTable();
         } else {
             // loop over table rows, update values
-            $.each(SharkGame.ResourceTable, function (k, v) {
+            $.each(SharkGame.ResourceTable, function(k, v) {
                 $('#amount-' + k).html(m.beautify(v.amount, true));
 
                 var income = r.getIncome(k);
-                if ( Math.abs(income) > SharkGame.EPSILON ) {
+                if(Math.abs(income) > SharkGame.EPSILON) {
                     var changeChar = income > 0 ? "+" : "";
                     $('#income-' + k).html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
                 } else {
@@ -393,13 +393,13 @@ SharkGame.Resources = {
     },
 
     // add rows to table (more expensive than updating existing DOM elements)
-    reconstructResourcesTable: function () {
+    reconstructResourcesTable: function() {
         var rTable = $('#resourceTable');
         var m = SharkGame.Main;
         var r = SharkGame.Resources;
 
         // if resource table does not exist, create
-        if ( rTable.length <= 0 ) {
+        if(rTable.length <= 0) {
             var statusDiv = $('#status');
             statusDiv.prepend('<h3>Stuff</h3>');
             statusDiv.append($('<table>').attr("id", 'resourceTable'));
@@ -410,10 +410,10 @@ SharkGame.Resources = {
         rTable.empty();
 
         // iterate through data, if total amount > 0 add a row
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             var income = r.getIncome(k);
             var row = $('<tr>');
-            if ( v.totalAmount > 0 ) {
+            if(v.totalAmount > 0) {
                 row.append($('<td>')
                         .attr("id", "resource-" + k)
                         .html(SharkGame.Resources.getResourceName(k))
@@ -429,7 +429,7 @@ SharkGame.Resources = {
 
                 row.append(incomeId);
 
-                if ( Math.abs(income) > SharkGame.EPSILON ) {
+                if(Math.abs(income) > SharkGame.EPSILON) {
                     var changeChar = income > 0 ? "+" : "";
                     incomeId.html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
                 }
@@ -442,13 +442,13 @@ SharkGame.Resources = {
         r.rebuildTable = false;
     },
 
-    getResourceName: function (resourceName, darken, forceSingle) {
+    getResourceName: function(resourceName, darken, forceSingle) {
         var resource = SharkGame.ResourceTable[resourceName];
         var name = (((Math.floor(resource.amount) - 1) < SharkGame.EPSILON) || forceSingle) ? resource.singleName : resource.name;
 
-        if ( SharkGame.Settings.current.colorCosts ) {
+        if(SharkGame.Settings.current.colorCosts) {
             var color = resource.color;
-            if ( darken ) {
+            if(darken) {
                 color = SharkGame.colorLum(resource.color, -0.5);
             }
             name = "<span class='click-passthrough' style='color:" + color + "'>" + name + "</span>";
@@ -457,15 +457,15 @@ SharkGame.Resources = {
     },
 
     // make a resource list object into a string describing its contents
-    resourceListToString: function (resourceList, darken) {
-        if ( $.isEmptyObject(resourceList) ) {
+    resourceListToString: function(resourceList, darken) {
+        if($.isEmptyObject(resourceList)) {
             return "";
         }
         var formattedResourceList = "";
-        $.each(SharkGame.ResourceTable, function (k, v) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
             var listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
-            if ( listResource > 0 ) {
+            if(listResource > 0) {
                 var isSingular = (Math.floor(listResource) - 1) < SharkGame.EPSILON;
                 formattedResourceList += SharkGame.Main.beautify(listResource);
                 formattedResourceList += " " + SharkGame.Resources.getResourceName(k, darken, isSingular) + ", ";

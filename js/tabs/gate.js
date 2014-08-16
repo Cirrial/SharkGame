@@ -28,7 +28,7 @@ SharkGame.Gate = {
         sharkonium: 1E8
     },
 
-    init: function () {
+    init: function() {
         var g = SharkGame.Gate;
         // register tab
         SharkGame.Tabs[g.tabId] = {
@@ -41,14 +41,14 @@ SharkGame.Gate = {
 
         // create costsMet
         var costsMet = g.costsMet = {};
-        $.each(g.costs, function(k,v) {
+        $.each(g.costs, function(k, v) {
             costsMet[k] = false;
         });
 
         g.opened = false;
     },
 
-    switchTo: function () {
+    switchTo: function() {
         var g = SharkGame.Gate;
         var content = $('#content');
         content.append($('<div>').attr("id", "tabMessage"));
@@ -57,8 +57,8 @@ SharkGame.Gate = {
         if(!g.shouldBeOpen()) {
             var amountOfSlots = 0;
             var buttonList = $('#buttonList');
-            $.each(g.costs, function(k,v) {
-                if( !g.costsMet[k] ) {
+            $.each(g.costs, function(k, v) {
+                if(!g.costsMet[k]) {
                     var resourceName = SharkGame.Resources.getResourceName(k);
                     SharkGame.Button.makeButton("gateCost-" + k, "Insert " + resourceName + " into " + resourceName + " slot", buttonList, SharkGame.Gate.onGateButton);
                     amountOfSlots++;
@@ -75,17 +75,17 @@ SharkGame.Gate = {
     update: function() {
     },
 
-    onGateButton: function () {
+    onGateButton: function() {
         var g = SharkGame.Gate;
         var resourceId = ($(this).attr("id")).split("-")[1];
 
         var message = "";
         var cost = g.costs[resourceId] * (SharkGame.Resources.getResource("essence") + 1);
-        if(SharkGame.ResourceTable[resourceId].amount >= cost ) {
+        if(SharkGame.ResourceTable[resourceId].amount >= cost) {
             SharkGame.Gate.costsMet[resourceId] = true;
             SharkGame.Resources.changeResource(resourceId, -cost);
             $(this).remove();
-            if( g.shouldBeOpen()) {
+            if(g.shouldBeOpen()) {
                 message = g.messageAllPaid;
                 // add enter gate button
                 SharkGame.Button.makeButton("gateEnter", "Enter gate", $('#buttonList'), g.onEnterButton);
@@ -100,16 +100,16 @@ SharkGame.Gate = {
         $('#tabMessage').html(message);
     },
 
-    onEnterButton: function () {
+    onEnterButton: function() {
         $('#tabMessage').html(SharkGame.Gate.messageEnter);
         $(this).remove();
         SharkGame.Main.endGame();
     },
 
-    shouldBeOpen: function () {
+    shouldBeOpen: function() {
         var g = SharkGame.Gate;
         var won = true;
-        $.each(g.costsMet, function(_,v) {
+        $.each(g.costsMet, function(_, v) {
             won = won && v;
         });
         return won;

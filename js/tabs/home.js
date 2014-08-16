@@ -7,7 +7,7 @@ SharkGame.Home = {
     homeMessage: "You are a shark in a strange blue sea.",
     bonusMessage: "<br/><span class='medDesc'>You can hear faint cries and songs in the distance.</span>",
 
-    init: function () {
+    init: function() {
         var h = SharkGame.Home;
         // register tab
         SharkGame.Tabs[h.tabId] = {
@@ -18,7 +18,7 @@ SharkGame.Home = {
         };
     },
 
-    switchTo: function () {
+    switchTo: function() {
         var h = SharkGame.Home;
         var content = $('#content');
         var tabMessage = $('<div>').attr("id", "tabMessage");
@@ -35,7 +35,7 @@ SharkGame.Home = {
         content.append($('<div>').attr("id", "buttonList"));
     },
 
-    update: function () {
+    update: function() {
         var h = SharkGame.Home;
         var r = SharkGame.Resources;
         var amountToBuy = SharkGame.Settings.current.buyAmount;
@@ -44,7 +44,7 @@ SharkGame.Home = {
         var buttonList = $('#buttonList');
 
         // for each button entry in the home tab,
-        $.each(SharkGame.HomeActions, function(key,value) {
+        $.each(SharkGame.HomeActions, function(key, value) {
             // check if a button exists
             var button = $('#' + key);
             var helpText;
@@ -59,7 +59,7 @@ SharkGame.Home = {
 
                 // check upgrade prerequisites
                 if(value.prereq.upgrade) {
-                    $.each(value.prereq.upgrade, function(_,v){
+                    $.each(value.prereq.upgrade, function(_, v) {
                         prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
                     });
                 }
@@ -114,7 +114,7 @@ SharkGame.Home = {
         });
     },
 
-    onHomeButton: function () {
+    onHomeButton: function() {
         var h = SharkGame.Home;
         var r = SharkGame.Resources;
         var amountToBuy = SharkGame.Settings.current.buyAmount;
@@ -146,7 +146,7 @@ SharkGame.Home = {
         } else if(amount > 0) {
             // cost action
             // check cost, only proceed if sufficient resources (prevention against lazy cheating, god, at least cheat in the right resources)
-            if( r.checkResources(actionCost)) {
+            if(r.checkResources(actionCost)) {
                 // take cost
                 r.changeManyResources(actionCost, true);
                 // execute effects
@@ -172,11 +172,11 @@ SharkGame.Home = {
     },
 
 
-    getCost : function(action, amount) {
+    getCost: function(action, amount) {
         var calcCost = {};
         var rawCost = action.cost;
 
-        $.each(rawCost, function(i,v) {
+        $.each(rawCost, function(i, v) {
             var resource = SharkGame.ResourceTable[action.max];
             var currAmount = resource.amount;
             if(resource.jobs) {
@@ -201,7 +201,7 @@ SharkGame.Home = {
     },
 
 
-    getMax : function(action) {
+    getMax: function(action) {
         var max = -1;
         if(action.max) {
             var resource = SharkGame.ResourceTable[action.max];
@@ -213,7 +213,7 @@ SharkGame.Home = {
             }
             max = Number.MAX_VALUE;
             var rawCost = action.cost;
-            $.each(rawCost, function(_,v) {
+            $.each(rawCost, function(_, v) {
                 var resource = SharkGame.ResourceTable[v.resource];
 
                 var costFunction = v.costFunction;
@@ -333,7 +333,7 @@ SharkGame.HomeActions = {
         name: "Recruit shark",
         effect: {
             resource: {
-                'shark' : 1
+                'shark': 1
             }
         },
         cost: [
@@ -342,7 +342,7 @@ SharkGame.HomeActions = {
         max: "shark",
         prereq: {
             resource: {
-                'fish' : 5
+                'fish': 5
             }
         },
         outcomes: [
@@ -397,7 +397,7 @@ SharkGame.HomeActions = {
         name: "Hire ray",
         effect: {
             resource: {
-                'ray' : 1
+                'ray': 1
             }
         },
         cost: [
@@ -406,7 +406,7 @@ SharkGame.HomeActions = {
         max: "ray",
         prereq: {
             resource: {
-                'fish' : 15
+                'fish': 15
             }
         },
         outcomes: [
@@ -470,7 +470,7 @@ SharkGame.HomeActions = {
         name: "Acquire crab",
         effect: {
             resource: {
-                'crab' : 1
+                'crab': 1
             }
         },
         cost: [
@@ -479,8 +479,8 @@ SharkGame.HomeActions = {
         max: "crab",
         prereq: {
             resource: {
-                'shark' : 4,
-                'ray' : 4
+                'shark': 4,
+                'ray': 4
             }
         },
         outcomes: [
@@ -530,7 +530,7 @@ SharkGame.HomeActions = {
         name: "Train science shark",
         effect: {
             resource: {
-                'scientist' : 1
+                'scientist': 1
             }
         },
         cost: [
@@ -540,7 +540,7 @@ SharkGame.HomeActions = {
         max: "scientist",
         prereq: {
             resource: {
-                'crystal' : 20
+                'crystal': 20
             }
         },
         outcomes: [
@@ -565,7 +565,7 @@ SharkGame.HomeActions = {
         name: "Train nurse shark",
         effect: {
             resource: {
-                'nurse' : 1
+                'nurse': 1
             }
         },
         cost: [
@@ -599,7 +599,7 @@ SharkGame.HomeActions = {
         name: "Equip laser ray",
         effect: {
             resource: {
-                'laser' : 1
+                'laser': 1
             }
         },
         cost: [
@@ -633,7 +633,7 @@ SharkGame.HomeActions = {
         name: "Instruct a ray maker",
         effect: {
             resource: {
-                'maker' : 1
+                'maker': 1
             }
         },
         cost: [
@@ -669,7 +669,7 @@ SharkGame.HomeActions = {
         name: "Gear up planter crab",
         effect: {
             resource: {
-                'planter' : 1
+                'planter': 1
             }
         },
         cost: [
@@ -704,7 +704,7 @@ SharkGame.HomeActions = {
         name: "Form crab brood",
         effect: {
             resource: {
-                'brood' : 1
+                'brood': 1
             }
         },
         cost: [
@@ -741,7 +741,7 @@ SharkGame.HomeActions = {
         name: "Build crystal miner",
         effect: {
             resource: {
-                'crystalMiner' : 1
+                'crystalMiner': 1
             }
         },
         cost: [
@@ -775,7 +775,7 @@ SharkGame.HomeActions = {
         name: "Build sand digger",
         effect: {
             resource: {
-                'sandDigger' : 1
+                'sandDigger': 1
             }
         },
         cost: [
@@ -809,7 +809,7 @@ SharkGame.HomeActions = {
         name: "Build auto-transmuter",
         effect: {
             resource: {
-                'autoTransmuter' : 1
+                'autoTransmuter': 1
             }
         },
         cost: [
@@ -875,7 +875,6 @@ SharkGame.HomeActions = {
 };
 
 
-
 SharkGame.MathUtil = {
 
     // a = current amount
@@ -891,7 +890,7 @@ SharkGame.MathUtil = {
     // k = constant price
     // returns: absolute max items that can be held with invested and current resources
     constantMax: function(a, b, k) {
-        return b/k + a;
+        return b / k + a;
     },
 
     // a = current amount
@@ -899,7 +898,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: cost to get to b from a
     linearCost: function(a, b, k) {
-        return ((k/2) * (b*b + b)) - ((k/2) * (a*a + a));
+        return ((k / 2) * (b * b + b)) - ((k / 2) * (a * a + a));
     },
 
     // a = current amount
@@ -907,7 +906,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: absolute max items that can be held with invested and current resources
     linearMax: function(a, b, k) {
-        return Math.sqrt((a*a) + a + (2 * b/k) + 0.25) - 0.5;
+        return Math.sqrt((a * a) + a + (2 * b / k) + 0.25) - 0.5;
     }
 
 //    exponentialCost: function(a, b, k) {

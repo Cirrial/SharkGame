@@ -14,7 +14,7 @@ SharkGame.Lab = {
     messageDone: "Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
         "Looks like that's it! No more things to figure out.",
 
-    init: function () {
+    init: function() {
         var l = SharkGame.Lab;
         // register tab
         SharkGame.Tabs[l.tabId] = {
@@ -26,12 +26,12 @@ SharkGame.Lab = {
         };
 
         // add default purchased state to each upgrade
-        $.each(SharkGame.Upgrades, function (k, v) {
+        $.each(SharkGame.Upgrades, function(k, v) {
             SharkGame.Upgrades[k].purchased = false;
         });
     },
 
-    switchTo: function () {
+    switchTo: function() {
         var l = SharkGame.Lab;
         var content = $('#content');
 
@@ -40,7 +40,7 @@ SharkGame.Lab = {
         content.append($('<div>').attr("id", "buttonList"));
     },
 
-    update: function () {
+    update: function() {
         var r = SharkGame.Resources;
         var l = SharkGame.Lab;
 
@@ -48,20 +48,20 @@ SharkGame.Lab = {
         var buttonList = $('#buttonList');
 
         // for each upgrade not yet bought
-        $.each(SharkGame.Upgrades, function (key, value) {
-            if ( value.purchased ) {
+        $.each(SharkGame.Upgrades, function(key, value) {
+            if(value.purchased) {
                 return; // skip this upgrade altogether
             }
 
             // check if a button exists
             var button = $('#' + key);
-            if ( button.length === 0 ) {
+            if(button.length === 0) {
                 // add it if prequisite upgrades have been completed
                 var prereqsMet = true; // assume true until proven false
 
                 // check upgrade prerequisites
-                if ( value.required ) {
-                    $.each(value.required, function (_, v) {
+                if(value.required) {
+                    $.each(value.required, function(_, v) {
                         if(SharkGame.Upgrades[v]) {
                             prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
                         } else {
@@ -69,11 +69,11 @@ SharkGame.Lab = {
                         }
                     });
                 }
-                if ( prereqsMet ) {
+                if(prereqsMet) {
                     // add button
                     var effects = SharkGame.Lab.getResearchEffects(value);
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
-                    if ( SharkGame.Settings.current.showAnimations ) {
+                    if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
                             .slideDown(50)
@@ -86,7 +86,7 @@ SharkGame.Lab = {
                 var upgradeCost = SharkGame.Upgrades[key].cost;
 
                 var enableButton;
-                if ( $.isEmptyObject(upgradeCost) ) {
+                if($.isEmptyObject(upgradeCost)) {
                     enableButton = true; // always enable free buttons
                 } else {
                     enableButton = r.checkResources(upgradeCost);
@@ -95,7 +95,7 @@ SharkGame.Lab = {
                 var effects = SharkGame.Lab.getResearchEffects(value, !enableButton);
                 var label = value.name + "<br/>" + value.desc + "<br/>" + effects;
                 var costText = r.resourceListToString(upgradeCost, !enableButton);
-                if ( costText != "" ) {
+                if(costText != "") {
                     label += "<br/>Cost: " + costText;
                 }
                 button.prop("disabled", !enableButton).html(label);
@@ -103,21 +103,21 @@ SharkGame.Lab = {
         });
     },
 
-    onLabButton: function () {
+    onLabButton: function() {
         var r = SharkGame.Resources;
         var l = SharkGame.Lab;
         var u = SharkGame.Upgrades;
 
         var upgradeId = $(this).attr("id");
         var upgrade = u[upgradeId];
-        if ( upgrade.purchased ) {
+        if(upgrade.purchased) {
             $(this).remove();
             return; // something went wrong don't even pay attention to this function
         }
 
         var upgradeCost = u[upgradeId].cost;
 
-        if ( r.checkResources(upgradeCost) ) {
+        if(r.checkResources(upgradeCost)) {
             // kill button
             $(this).remove();
             // take resources
@@ -131,19 +131,19 @@ SharkGame.Lab = {
         }
     },
 
-    addUpgrade: function (upgradeId) {
+    addUpgrade: function(upgradeId) {
         var l = SharkGame.Lab;
         var r = SharkGame.Resources;
         var u = SharkGame.Upgrades;
         var upgrade = u[upgradeId];
-        if ( upgrade ) {
+        if(upgrade) {
             upgrade.purchased = true;
             //l.updateResearchList();
 
             // if the upgrade has effects, do them
             if(upgrade.effect) {
                 if(upgrade.effect.multiplier) {
-                    $.each(upgrade.effect.multiplier, function(k,v) {
+                    $.each(upgrade.effect.multiplier, function(k, v) {
                         var newMultiplier = v * r.getMultiplier(k);
                         r.setMultiplier(k, newMultiplier)
                     });
@@ -188,7 +188,7 @@ SharkGame.Lab = {
     allResearchDone: function() {
         var u = SharkGame.Upgrades;
         var allDone = true;
-        $.each(u, function (k, v) {
+        $.each(u, function(k, v) {
             allDone = allDone && v.purchased;
         });
         return allDone;

@@ -29,7 +29,7 @@ SharkGame.Settings = {
         name: "Offline Mode",
         desc: "Let your numbers increase even with the game closed!",
         show: true,
-        options : [
+        options: [
             true,
             false
         ]
@@ -41,7 +41,7 @@ SharkGame.Settings = {
         name: "Autosave Frequency",
         desc: "Number of minutes between autosaves.",
         show: true,
-        options : [
+        options: [
             1,
             2,
             5,
@@ -51,16 +51,16 @@ SharkGame.Settings = {
         onChange: function() {
             clearInterval(SharkGame.Main.autosaveHandler);
             SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
-            SharkGame.Log.addMessage("Now autosaving every " + SharkGame.Settings.current.autosaveFrequency + " minute" + SharkGame.plural(SharkGame.Settings.current.autosaveFrequency)  + ".");
+            SharkGame.Log.addMessage("Now autosaving every " + SharkGame.Settings.current.autosaveFrequency + " minute" + SharkGame.plural(SharkGame.Settings.current.autosaveFrequency) + ".");
         }
     },
 
-    logMessageMax : {
+    logMessageMax: {
         defaultSetting: 10,
         name: "Max Log Messages",
         desc: "How many messages to show before removing old ones.",
         show: true,
-        options : [
+        options: [
             5,
             10,
             15,
@@ -74,12 +74,12 @@ SharkGame.Settings = {
         }
     },
 
-    sidebarWidth : {
+    sidebarWidth: {
         defaultSetting: "25%",
         name: "Sidebar Width",
         desc: "How much screen estate the sidebar should take.",
         show: true,
-        options : [
+        options: [
             "20%",
             "25%",
             "30%",
@@ -103,7 +103,7 @@ SharkGame.Settings = {
         name: "Show Animations",
         desc: "Show animations or don't. YOU DECIDE.",
         show: true,
-        options : [
+        options: [
             true,
             false
         ]
@@ -114,7 +114,7 @@ SharkGame.Settings = {
         name: "Color Resource Names",
         desc: "When displaying costs, color names of stuff.",
         show: true,
-        options : [
+        options: [
             true,
             false
         ],
