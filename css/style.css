@@ -192,6 +192,11 @@ pre {
   border: 1px solid #7788aa;
   padding: 0.5em;
 }
+#sidebar table h3 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 #sidebar td {
   font-size: 1.1em;
   padding: 0.1em;
@@ -313,6 +318,10 @@ button:active {
   -moz-box-shadow: 0px 3px 7px 7px #061639 inset;
   box-shadow: 0px 3px 7px 7px #061639 inset;
 }
+button:active .medDesc {
+  font-size: 80%;
+  color: #485673;
+}
 button:focus {
   outline: 0;
 }
@@ -346,10 +355,12 @@ button:disabled .medDesc {
 .smallDesc {
   font-size: 60%;
   color: #7788aa;
+  pointer-events: none;
 }
 .medDesc {
   font-size: 80%;
   color: #d5dae5;
+  pointer-events: none;
 }
 #pane {
   background-color: #152a55;

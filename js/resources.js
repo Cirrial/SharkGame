@@ -191,6 +191,50 @@ SharkGame.ResourceTable = {
 
 };
 
+SharkGame.ResourceCategories = {
+    special: {
+        name: "Special",
+        resources: [
+            "essence"
+        ]
+    },
+    workers: {
+        name: "Workers",
+        resources: [
+            "shark",
+            "ray",
+            "crab",
+            "scientist",
+            "nurse",
+            "laser",
+            "maker",
+            "planter",
+            "brood"
+        ]
+    },
+    machines: {
+        name: "Machines",
+        resources: [
+            "crystalMiner",
+            "sandDigger",
+            "autoTransmuter",
+            "fishMachine"
+        ]
+    },
+    stuff: {
+        name: "Stuff",
+        resources: [
+            "science",
+            "fish",
+            "sand",
+            "crystal",
+            "kelp",
+            "seaApple",
+            "sharkonium"
+        ]
+    }
+};
+
 SharkGame.IncomeTable = {
 };
 
@@ -308,6 +352,18 @@ SharkGame.Resources = {
         return SharkGame.ResourceTable[resource].amount;
     },
 
+    getTotalResource: function(resource) {
+        return SharkGame.ResourceTable[resource].totalAmount;
+    },
+
+    isCategoryVisible: function(category) {
+        var visible = false;
+        $.each(category.resources, function(_, v) {
+            visible = visible || (SharkGame.ResourceTable[v].totalAmount > 0);
+        });
+        return visible;
+    },
+
     haveAnyResources: function() {
         var anyResources = false;
         $.each(SharkGame.ResourceTable, function(_, v) {
@@ -409,37 +465,65 @@ SharkGame.Resources = {
         // remove the table contents entirely
         rTable.empty();
 
-        // iterate through data, if total amount > 0 add a row
-        $.each(SharkGame.ResourceTable, function(k, v) {
-            var income = r.getIncome(k);
-            var row = $('<tr>');
-            if(v.totalAmount > 0) {
-                row.append($('<td>')
-                        .attr("id", "resource-" + k)
-                        .html(SharkGame.Resources.getResourceName(k))
-                );
-
-                row.append($('<td>')
-                        .attr("id", "amount-" + k)
-                        .html(m.beautify(v.amount))
-                );
-
-                var incomeId = $('<td>')
-                    .attr("id", "income-" + k);
-
-                row.append(incomeId);
-
-                if(Math.abs(income) > SharkGame.EPSILON) {
-                    var changeChar = income > 0 ? "+" : "";
-                    incomeId.html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
+        if(SharkGame.Settings.current.groupResources) {
+            $.each(SharkGame.ResourceCategories, function(_, category) {
+                if(r.isCategoryVisible(category)) {
+                    var headerRow = $("<tr>")
+                        .attr("colSpan", 3)
+                        .append($("<h3>")
+                            .html(category.name)
+                    );
+                    rTable.append(headerRow);
+                    $.each(category.resources, function(k, v) {
+                        if(r.getTotalResource(v) > 0) {
+                            var row = r.constructResourceTableRow(v);
+                            rTable.append(row);
+                        }
+                    });
                 }
-
-
-                rTable.append(row);
-            }
-        });
+            });
+        } else {
+            // iterate through data, if total amount > 0 add a row
+            $.each(SharkGame.ResourceTable, function(k, v) {
+                if(r.getTotalResource(k) > 0) {
+                    var row = r.constructResourceTableRow(k);
+                    rTable.append(row);
+                }
+            });
+        }
 
         r.rebuildTable = false;
+    },
+
+    constructResourceTableRow: function(resourceKey) {
+        var m = SharkGame.Main;
+        var r = SharkGame.Resources;
+        var k = resourceKey;
+        var v = SharkGame.ResourceTable[k];
+        var income = r.getIncome(k);
+        var row = $('<tr>');
+        if(v.totalAmount > 0) {
+            row.append($('<td>')
+                    .attr("id", "resource-" + k)
+                    .html(SharkGame.Resources.getResourceName(k))
+            );
+
+            row.append($('<td>')
+                    .attr("id", "amount-" + k)
+                    .html(m.beautify(v.amount))
+            );
+
+            var incomeId = $('<td>')
+                .attr("id", "income-" + k);
+
+            row.append(incomeId);
+
+            if(Math.abs(income) > SharkGame.EPSILON) {
+                var changeChar = income > 0 ? "+" : "";
+                incomeId.html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
+            }
+        }
+        return row;
     },
 
     getResourceName: function(resourceName, darken, forceSingle) {

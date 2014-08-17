@@ -266,6 +266,12 @@ pre {
     background-color: @color-darker;
     border: 1px solid @color-lighter;
     padding: 0.5em;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
   }
 
   td {
@@ -382,6 +388,11 @@ button {
     background-color: @color-dark;
     color: @color-light;
     .box-shadow-inset(0px, 3px, 7px, 7px, @color-darker);
+
+    .medDesc {
+      font-size: 80%;
+      color: darken(@color-lighter, 20%);
+    }
   }
 
   &:focus {
@@ -423,11 +434,13 @@ button {
 .smallDesc {
   font-size: 60%;
   color: @color-lighter;
+  .click-passthrough;
 }
 
 .medDesc {
   font-size: 80%;
   color: lighten(@color-lighter, 30%);
+  .click-passthrough;
 }
 
 #pane {

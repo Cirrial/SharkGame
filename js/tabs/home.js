@@ -238,7 +238,6 @@ SharkGame.Home = {
     }
 };
 
-
 SharkGame.HomeActions = {
     'catchFish': {
         name: "Catch fish",

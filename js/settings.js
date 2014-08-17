@@ -24,6 +24,22 @@ SharkGame.Settings = {
         ]
     },
 
+    groupResources: {
+        defaultSetting: false,
+        name: "Group Resources",
+        desc: "Group resources in the table into categories for legibility.",
+        show: true,
+        options: [
+            true,
+            false
+        ],
+        onChange: function() {
+            SharkGame.Resources.rebuildTable = true;
+        }
+    },
+
+
+
     offlineModeActive: {
         defaultSetting: true,
         name: "Offline Mode",

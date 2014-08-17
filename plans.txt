@@ -153,8 +153,10 @@ use sad shark ascii
 - add button to toggle button effect help text
 - add help text for each action
 - add concise help overview in top menu
-
-
+- add resource categories
+- add grouping for resources based on categories [MAKE INTO A PREFERENCE]
+- track timestamp of when current run was started, total playing time
+	handle case of not having those timestamps by creating it
 
 ^^^!! stuff above this line is done !!^^^
 
@@ -162,25 +164,25 @@ use sad shark ascii
 
 - add text changes to home to guide player to what they should be doing next: advisor
 
-
-- add resource categories
-- add grouping for resources based on categories [MAKE INTO A PREFERENCE]
-- track timestamp of when current run was started, total playing time
-	handle case of not having those timestamps by creating it
-
 - grotto (stats tab), 
 	list upgrades, 
 	reveal what each resource is supplying in terms of income,
 	reveal total amount ever made of resource,
 	allows disposal (add disposal message to resource categories)
 - research for grotto (stats tab)
+
 - recycler [requires research, research will require machines]
+	add junk values to resources
 	allow selling (reprocessing?) of things into a new junk resource	
 	process junk into new resources (add junk values for resources)
+	
 - add new template for save version
+
 - FAVICON!! 16x16
 - META IMG! 125x125
+
 - update changelog
+
 - push update!!
 
 
@@ -251,3 +253,5 @@ v Chasms
     - get to chasms to fight ancient mechanical abyss creatures (non-diplomatic faction) and collect crystalline fish
     - gate requires some crystalline fish to activate
     - activating gate ends game!
+	
+		
