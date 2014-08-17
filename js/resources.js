@@ -194,12 +194,14 @@ SharkGame.ResourceTable = {
 SharkGame.ResourceCategories = {
     special: {
         name: "Special",
+        disposeMessage: "What have you done??",
         resources: [
             "essence"
         ]
     },
     workers: {
         name: "Workers",
+        disposeMessage: "You bid farewell as your workforce gets small.",
         resources: [
             "shark",
             "ray",
@@ -468,10 +470,9 @@ SharkGame.Resources = {
         if(SharkGame.Settings.current.groupResources) {
             $.each(SharkGame.ResourceCategories, function(_, category) {
                 if(r.isCategoryVisible(category)) {
-                    var headerRow = $("<tr>")
+                    var headerRow = $("<tr>").append($("<td>")
                         .attr("colSpan", 3)
-                        .append($('<div>')
-                            .append($("<h3>")
+                        .append($("<h3>")
                                 .html(category.name)
                         ));
                     rTable.append(headerRow);

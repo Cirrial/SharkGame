@@ -191,13 +191,11 @@ pre {
   background-color: #061639;
   border: 1px solid #7788aa;
   padding: 0.5em;
-}
-#sidebar table div {
-  margin: auto;
+  overflow: hidden;
 }
 #sidebar table h3 {
   padding: .5em;
-  width: 100%;
+  width: auto;
   margin: auto;
   text-align: center;
   color: #b6bfd1;
