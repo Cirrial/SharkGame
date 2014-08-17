@@ -319,7 +319,7 @@ SharkGame.Save = {
                     flattenPart(slot[1], src[slot[0]]);
                 } else {
                     var elem = src[slot];
-                    if(typeof elem === "number" && slot!== "timestamp" && slot !== "timestampLastSave" && slot !== "timestampGameStart" && slot !== "timestampRunStart") {
+                    if(typeof elem === "number" && slot !== "timestampLastSave" && slot !== "timestampGameStart" && slot !== "timestampRunStart") {
                         elem = Number(elem.toPrecision(5));
                     }
                     out.push(elem);
