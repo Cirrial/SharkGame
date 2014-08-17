@@ -31,11 +31,20 @@ SharkGame.Stats = {
         var s = SharkGame.Stats;
         var content = $('#content');
         content.append($('<div>').attr("id", "tabMessage"));
-        content.append($('<div>').attr("id", "incomeData"));
-        content.append($('<div>').attr("id", "disposeResource"));
-        content.append($('<div>').attr("id", "upgradeList"));
-        content.append($('<div>').addClass("clear-fix"));
+        var statsContainer = $('<div>').attr("id", "statsContainer");
+        content.append(statsContainer);
+        statsContainer.append($('<div>').attr("id", "statsLeftContainer")
+                .append($('<div>').attr("id", "incomeData"))
+                .append($('<div>').attr("id", "disposeResource"))
+                .append($('<div>').attr("id", "generalStats"))
+        );
+        statsContainer.append($('<div>').attr("id", "upgradeList"));
+        statsContainer.append($('<div>').addClass("clear-fix"));
         $('#tabMessage').html(s.message);
+
+        var disposeSel = $('#disposeResource');
+        disposeSel.append($('<h3>').html("Dispose of Stuff"));
+        s.createDisposeButtons();
 
         var table = s.createIncomeTable();
         var incomeDataSel = $('#incomeData');
@@ -43,16 +52,116 @@ SharkGame.Stats = {
         incomeDataSel.append($('<p>').html("(Listed below are resources, the income each resource gives you, and the total income you're getting from each thing.)").addClass("medDesc"));
         incomeDataSel.append(table);
 
+        var genStats = $('#generalStats');
+        genStats.append($('<h3>').html("General Stats"));
+        genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
+        if(SharkGame.Resources.getResource("essence") > 0) {
+            genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
+        }
+        genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
+        genStats.append(s.createTotalAmountTable());
+
         s.createUpgradeList();
+
+        SharkGame.Main.createBuyButtons("rid");
     },
 
     update: function() {
+        var m = SharkGame.Main;
         var s = SharkGame.Stats;
 
+        s.updateDisposeButtons();
+        s.updateIncomeTable();
+        s.updateTotalAmountTable();
         if(s.recreateIncomeTable) {
             s.createIncomeTable();
+            s.createTotalAmountTable();
             s.recreateIncomeTable = false;
         }
+
+        // update run times
+        var currTime = (new Date()).getTime();
+        $('#gameTime').html(m.formatTime(currTime - SharkGame.timestampGameStart));
+        $('#runTime').html(m.formatTime(currTime - SharkGame.timestampRunStart));
+    },
+
+    createDisposeButtons: function() {
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        var buttonDiv = $('#disposeResource');
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(r.getTotalResource(k) > 0 && r.getCategoryOfResource(k) !== "special") {
+                SharkGame.Button.makeButton("dispose-" + k, "Dispose of " + r.getResourceName(k), buttonDiv, SharkGame.Stats.onDispose);
+            }
+        });
+    },
+
+    updateDisposeButtons: function() {
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(r.getTotalResource(k) > 0) {
+                var button = $('#dispose-' + k);
+                var resourceAmount = r.getResource(k);
+                var amountToDispose = SharkGame.Settings.current.buyAmount;
+                if(amountToDispose < 0) {
+                    var max = resourceAmount;
+                    var divisor = Math.floor(amountToDispose) * -1;
+                    amountToDispose = (max / divisor);
+                }
+                var forceSingular = amountToDispose === 1;
+                var disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);
+                button.html("Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular))
+                    .prop("disabled", disableButton);
+            }
+        });
+    },
+
+    onDispose: function() {
+        var r = SharkGame.Resources;
+        var l = SharkGame.Log;
+        var resourceName = ($(this).attr("id")).split("-")[1];
+        var resourceAmount = r.getResource(resourceName);
+        var amountToDispose = SharkGame.Settings.current.buyAmount;
+        if(amountToDispose < 0) {
+            var max = resourceAmount;
+            var divisor = Math.floor(amountToDispose) * -1;
+            amountToDispose = (max / divisor);
+        }
+        if(resourceAmount >= amountToDispose) {
+            r.changeResource(resourceName, -amountToDispose);
+            var category = SharkGame.ResourceCategories[r.getCategoryOfResource(resourceName)];
+            l.addMessage(category.disposeMessage);
+        } else {
+            l.addMessage("Can't dispose that much! You don't have enough of it.");
+        }
+    },
+
+    updateIncomeTable: function() {
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
+                var income = SharkGame.ResourceTable[k].income;
+                $.each(income, function(incomeKey, incomeValue) {
+                    var cell = $("#income-" + k + "-" + incomeKey);
+                    var changeChar = incomeValue > 0 ? "+" : "";
+                    cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>");
+                });
+            }
+        });
+    },
+
+    updateTotalAmountTable: function() {
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        $.each(SharkGame.ResourceTable, function(k,v) {
+            var totalResource = r.getTotalResource(k);
+            if(totalResource > 0) {
+                var cell = $("#totalAmount-" + k);
+                cell.html(m.beautify(totalResource));
+            }
+        });
     },
 
     createIncomeTable: function() {
@@ -65,36 +174,81 @@ SharkGame.Stats = {
             incomesTable.empty();
         }
 
+        var essenceMultiplierCol = null;
+        var addEssenceMultiplier = false;
+        if(r.getResource("essence")) {
+            addEssenceMultiplier = true;
+        }
+
+        var formatCounter = 0;
+
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
                 var income = SharkGame.ResourceTable[k].income;
-                var body = $("<tbody>");
                 var row = $("<tr>");
                 var numIncomes = _.size(income);
                 var counter = 0;
-                row.append($("<td>").html(r.getResourceName(k)).attr("rowspan", numIncomes));
+
+                var rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
+                row.append($("<td>").html(r.getResourceName(k)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                 $.each(income, function(incomeKey, incomeValue) {
                     var changeChar = incomeValue > 0 ? "+" : "";
-                    row.append($("<td>").html(r.getResourceName(incomeKey)));
-                    row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>"));
+                    row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
+                    row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
                     if(counter === 0) {
-                        row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>"));
+                        row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
                     }
+                    if(addEssenceMultiplier) {
+                        essenceMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + (r.getResource("essence") + 1) + "</span>").addClass("essenceGlow");
+                        row.append(essenceMultiplierCol);
+                        addEssenceMultiplier = false;
+                    }
+
                     row.append($("<td>").attr("id", "income-" + k + "-" + incomeKey)
-                        .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>"));
+                        .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>").addClass(rowStyle));
 
                     counter++;
-                    body.append(row);
+                    incomesTable.append(row);
                     row = $("<tr>");
                 });
 
                 // throw away dangling values
                 row = null;
-                incomesTable.append(body);
+                formatCounter++;
             }
         });
+
+        if(essenceMultiplierCol) {
+            var rowCount = incomesTable.find("tr").length;
+            essenceMultiplierCol.attr("rowspan", rowCount);
+        }
+
         return incomesTable;
+    },
+
+    createTotalAmountTable: function() {
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        var totalAmountTable = $("#totalAmountTable");
+        if(totalAmountTable.length === 0) {
+            totalAmountTable = $("<table>").attr("id", "totalAmountTable");
+        } else {
+            totalAmountTable.empty();
+        }
+
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(r.getTotalResource(k) > 0) {
+                var row = $('<tr>');
+
+                row.append($('<td>').html(r.getResourceName(k)));
+                row.append($('<td>').html(m.beautify(r.getTotalResource(k))).attr("id", "totalAmount-" + k));
+
+                totalAmountTable.append(row);
+            }
+        });
+
+        return totalAmountTable;
     },
 
     createUpgradeList: function() {

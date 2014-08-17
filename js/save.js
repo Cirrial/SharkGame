@@ -206,6 +206,10 @@ SharkGame.Save = {
                 saveData.timestampRunStart = currTimestamp;
             }
 
+            SharkGame.timestampLastSave = saveData.timestampLastSave;
+            SharkGame.timestampGameStart = saveData.timestampGameStart;
+            SharkGame.timestampRunStart  = saveData.timestampRunStart;
+
             // if offline mode is enabled
             if(SharkGame.Settings.current.offlineModeActive) {
                 // get times elapsed since last save game
@@ -266,6 +270,7 @@ SharkGame.Save = {
             SharkGame.Save.loadGame(saveData);
         } catch(err) {
             SharkGame.Log.addError(err.message);
+            console.log(err.trace);
         }
         // refresh current tab
         SharkGame.Main.setUpTab();
@@ -275,7 +280,12 @@ SharkGame.Save = {
         // get save
         var saveData = localStorage.getItem(SharkGame.Save.saveFileName);
         if(saveData === null) {
-            saveData = SharkGame.Save.saveGame(true);
+            try {
+                saveData = SharkGame.Save.saveGame(true);
+            } catch(err) {
+                SharkGame.Log.addError(err.message);
+                console.log(err.trace);
+            }
         }
         // encode save
         return ascii85.encode(saveData);
@@ -375,7 +385,7 @@ SharkGame.Save = {
         // and they start based on the version they were saved
         function(save) {
             save = $.extend(true, save, {
-                "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}},
+                "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}, "junk": {"amount": 0, "totalAmount": 0}},
                 "settings": {"showTabHelp": false, "groupResources": false},
                 "timestampLastSave": save.timestamp,
                 "timestampGameStart": null,

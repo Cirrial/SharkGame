@@ -24,9 +24,9 @@ $.extend(SharkGame, {
     dt: (1 / 10),
     before: null,
 
-    timestampLastSave: 0,
-    timestampGameStart: 0,
-    timestampRunStart: 0,
+    timestampLastSave: null,
+    timestampGameStart: null,
+    timestampRunStart: null,
 
     sidebarHidden: true,
     titlebarGenerated: false,
@@ -87,7 +87,12 @@ SharkGame.TitleBar = {
         name: "save",
         onClick: function() {
             try {
-                SharkGame.Save.saveGame();
+                try{
+                    SharkGame.Save.saveGame();
+                } catch(err) {
+                    SharkGame.Log.addError(err);
+                    console.log(err);
+                }
                 SharkGame.Log.addMessage("Saved game.");
             } catch(err) {
                 SharkGame.Log.addError(err.message);
@@ -131,7 +136,12 @@ SharkGame.TitleBar = {
                 SharkGame.Save.deleteSave();
                 SharkGame.Main.init(); // reset
                 SharkGame.Resources.changeResource("essence", essence);
-                SharkGame.Save.saveGame();
+                try{
+                    SharkGame.Save.saveGame();
+                } catch(err) {
+                    SharkGame.Log.addError(err);
+                    console.log(err.trace);
+                }
             }
         }
     },
@@ -165,7 +175,15 @@ SharkGame.Main = {
             if(suppressDecimals) {
                 formatted = "0";
             } else {
-                formatted = number.toFixed(2) + "";
+                if(number > 0.001) {
+                    formatted = number.toFixed(2) + "";
+                } else {
+                    if(number > 0.0001){
+                        formatted = number.toFixed(3) + "";
+                    } else {
+                        formatted = 0;
+                    }
+                }
             }
         } else {
             var negative = false;
@@ -228,10 +246,11 @@ SharkGame.Main = {
                 numHours %= 24;
                 formatted += numHours + ":";
             }
-            numMinutes &= 60;
+            numMinutes %= 60;
             formatted += (numMinutes < 10 ? ("0" + numMinutes) : numMinutes) + ":";
         }
         numSeconds %= 60;
+        numSeconds = Math.floor(numSeconds);
         formatted += (numSeconds < 10 ? ("0" + numSeconds) : numSeconds);
         return formatted;
     },
@@ -251,9 +270,9 @@ SharkGame.Main = {
         SharkGame.gameOver = false;
 
         // initialise timestamps to something sensible
-        SharkGame.timestampLastSave = currDate.getTime();
-        SharkGame.timestampGameStart = currDate.getTime();
-        SharkGame.timestampRunStart = currDate.getTime();
+        SharkGame.timestampLastSave = SharkGame.timestampLastSave || currDate.getTime();
+        SharkGame.timestampGameStart = SharkGame.timestampGameStart || currDate.getTime();
+        SharkGame.timestampRunStart = SharkGame.timestampRunStart || currDate.getTime();
 
         // reset settings
         SharkGame.Settings.current = {};
@@ -290,7 +309,7 @@ SharkGame.Main = {
                 SharkGame.Log.addMessage("Loaded game.");
             } catch(err) {
                 SharkGame.Log.addError(err.message);
-                console.log(err);
+                console.log(err.trace);
             }
         }
 
@@ -339,7 +358,7 @@ SharkGame.Main = {
             SharkGame.before = new Date();
         } catch(err) {
             SharkGame.Log.addError(err.message);
-            console.log(err);
+            console.log(err.trace);
         }
     },
 
@@ -388,6 +407,7 @@ SharkGame.Main = {
             SharkGame.Log.addMessage("Autosaved.");
         } catch(err) {
             SharkGame.Log.addError(err.message);
+            console.log(err.trace);
         }
     },
 
@@ -461,7 +481,7 @@ SharkGame.Main = {
         }
     },
 
-    createBuyButtons: function() {
+    createBuyButtons: function(customLabel) {
         // add buy buttons
         var buttonList = $('#tabButtons');
         buttonList.empty();
@@ -474,7 +494,7 @@ SharkGame.Main = {
                     .attr("id", "buy-" + v)
                     .prop("disabled", disableButton)
             ));
-            var label = "buy ";
+            var label = customLabel ? customLabel + " " : "buy ";
             if(amount < 0) {
                 if(amount < -2) {
                     label += "1/3 max"
@@ -695,6 +715,7 @@ SharkGame.Main = {
                 SharkGame.Log.addMessage("Game saved.");
             } catch(err) {
                 SharkGame.Log.addError(err.message);
+                console.log(err.trace);
             }
         }
     },

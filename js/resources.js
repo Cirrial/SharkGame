@@ -25,7 +25,7 @@ SharkGame.ResourceTable = {
     'ray': {
         name: 'rays',
         singleName: 'ray',
-        color: '#383BD1',
+        color: '#0C0FAD',
         income: {
             'fish': 0.2,
             'sand': 1
@@ -57,7 +57,8 @@ SharkGame.ResourceTable = {
         color: '#DCEBF5',
         income: {
             'science': 0.5
-        }
+        },
+        junkValue: 300
     },
 
     'nurse': {
@@ -66,7 +67,8 @@ SharkGame.ResourceTable = {
         color: '#C978DE',
         income: {
             'shark': 0.01
-        }
+        },
+        junkValue: 300
     },
 
     'laser': {
@@ -76,7 +78,8 @@ SharkGame.ResourceTable = {
         income: {
             'sand': -2,
             'crystal': 1
-        }
+        },
+        junkValue: 350
     },
 
     'maker': {
@@ -85,7 +88,8 @@ SharkGame.ResourceTable = {
         color: '#5355ED',
         income: {
             'ray': 0.05
-        }
+        },
+        junkValue: 400
     },
 
     'planter': {
@@ -94,7 +98,8 @@ SharkGame.ResourceTable = {
         color: '#AAE03D',
         income: {
             'kelp': 0.3
-        }
+        },
+        junkValue: 400
     },
 
     'brood': {
@@ -103,7 +108,8 @@ SharkGame.ResourceTable = {
         color: '#9E7272',
         income: {
             'crab': 0.2
-        }
+        },
+        junkValue: 400
     },
 
     'crystalMiner': {
@@ -112,7 +118,8 @@ SharkGame.ResourceTable = {
         color: '#B2CFCB',
         income: {
             crystal: 200
-        }
+        },
+        junkValue: 500
     },
 
     'sandDigger': {
@@ -121,7 +128,8 @@ SharkGame.ResourceTable = {
         color: '#D6CF9F',
         income: {
             sand: 300
-        }
+        },
+        junkValue: 500
     },
 
     'autoTransmuter': {
@@ -132,7 +140,8 @@ SharkGame.ResourceTable = {
             crystal: -50,
             sand: -150,
             sharkonium: 20
-        }
+        },
+        junkValue: 500
     },
 
     'fishMachine': {
@@ -141,31 +150,36 @@ SharkGame.ResourceTable = {
         color: '#C9C7A7',
         income: {
             fish: 1000
-        }
+        },
+        junkValue: 500
     },
 
     'science': {
         name: 'science',
         singleName: 'science',
-        color: '#BBA4E0'
+        color: '#BBA4E0',
+        junkValue: 0
     },
 
     'fish': {
         name: 'fish',
         singleName: 'fish',
-        color: '#E3D85B'
+        color: '#E3D85B',
+        junkValue: 2
     },
 
     'sand': {
         name: 'sand',
         singleName: 'sand',
-        color: '#C7BD75'
+        color: '#C7BD75',
+        junkValue: 3
     },
 
     'crystal': {
         name: 'crystals',
         singleName: 'crystal',
-        color: '#6FD9CC'
+        color: '#6FD9CC',
+        junkValue: 15
     },
 
     'kelp': {
@@ -174,19 +188,29 @@ SharkGame.ResourceTable = {
         color: '#9CC232',
         income: {
             'seaApple': 0.001
-        }
+        },
+        junkValue: 20
     },
 
     'seaApple': {
         name: 'sea apples',
         singleName: 'sea apple',
-        color: '#F0C2C2'
+        color: '#F0C2C2',
+        junkValue: 30
     },
 
     'sharkonium': {
         name: 'sharkonium',
         singleName: 'sharkonium',
-        color: '#8D70CC'
+        color: '#8D70CC',
+        junkValue: 70
+    },
+
+    'junk': {
+        name: 'residue',
+        singleName: 'residue',
+        color: '#605050',
+        junkValue: 1
     }
 
 };
@@ -234,7 +258,14 @@ SharkGame.ResourceCategories = {
             "crystal",
             "kelp",
             "seaApple",
-            "sharkonium"
+        ]
+    },
+    processed: {
+        name: "Processed",
+        disposeMessage: "Disposed of, very carefully, with lots of currents and plenty of distance.",
+        resources: [
+            "sharkonium",
+            "junk"
         ]
     }
 };
@@ -380,6 +411,24 @@ SharkGame.Resources = {
             visible = visible || (SharkGame.ResourceTable[v].totalAmount > 0);
         });
         return visible;
+    },
+
+    getCategoryOfResource: function(resourceName) {
+        var categoryName = "";
+        $.each(SharkGame.ResourceCategories, function(categoryKey, categoryValue) {
+            if(categoryName !== "") {
+                return;
+            }
+            $.each(categoryValue.resources, function(k, v) {
+                if(categoryName !== "") {
+                    return;
+                }
+                if(resourceName == v) {
+                    categoryName = categoryKey;
+                }
+            });
+        });
+        return categoryName;
     },
 
     haveAnyResources: function() {

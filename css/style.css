@@ -26,6 +26,7 @@ body {
   font-size: 105%;
   text-align: center;
   min-height: 100%;
+  overflow-y: scroll;
 }
 div {
   padding: 0;
@@ -263,42 +264,57 @@ pre {
   margin: 5px;
   padding: 1.0em;
 }
-#incomeData {
-  padding: 0.1em;
+#statsContainer {
+  padding: 5px;
+  margin: 5px;
+  padding: 1.0em;
+}
+#statsLeftContainer {
   float: left;
-  width: 40%;
-  padding-bottom: 1em;
-  border-bottom: 0.1em dashed #7788aa;
+  width: 50%;
 }
-#incomeData tbody:nth-child(odd) {
-  background: #061639;
-}
-#incomeData tbody:nth-child(even) {
-  background: #081f50;
-}
-#incomeData table {
+#statsLeftContainer table {
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
   padding: 0.1em;
   border: 1px solid #7788aa;
   border-collapse: collapse;
+  background: #061639;
 }
-#incomeData td {
+#statsLeftContainer td {
   margin: 0;
-  font-size: 1.1em;
-  padding: 0.3em;
+  font-size: 0.9em;
+  padding: 0.2em;
+}
+#incomeData {
+  padding: 0.1em 0.1em 1em;
+  border-bottom: 0.1em dashed #7788aa;
+  border-top: 0.1em dashed #7788aa;
+}
+#incomeData .oddRow {
+  background: #061639;
+}
+#incomeData .evenRow {
+  background: #081f50;
+}
+#incomeData .essenceGlow {
+  text-shadow: 0 0 1em #ace3d1;
+  background: #152a55;
+}
+#generalStats .timeDisplay {
+  font-style: italic;
+  font-size: 110%;
 }
 #disposeResource {
   padding: 0.1em;
-  float: left;
-  width: 40%;
 }
 #upgradeList {
   float: right;
   text-align: left;
   margin: auto;
-  width: 35%;
-  padding: 0.2em 0.2em 0.2em 1.3em;
+  width: 40%;
+  padding: 0.2em 0.2em 0.2em 2em;
   border-left: 0.1em dashed #7788aa;
 }
 #upgradeList ul {
