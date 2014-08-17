@@ -273,8 +273,8 @@ SharkGame.Main = {
         // initialise tabs
         SharkGame.Home.init();
         SharkGame.Lab.init();
-        //SharkGame.Stats.init();
-        //SharkGame.Recycler.init();
+        SharkGame.Stats.init();
+        SharkGame.Recycler.init();
         SharkGame.Gate.init();
 
         if(!SharkGame.titlebarGenerated) {
@@ -307,513 +307,503 @@ SharkGame.Main = {
     },
 
     tick: function() {
-    try {
-        if(SharkGame.gameOver) {
-            return;
-        }
-        var now = new Date();
-        var elapsedTime = (now.getTime() - SharkGame.before.getTime());
+        try {
+            if(SharkGame.gameOver) {
+                return;
+            }
+            var now = new Date();
+            var elapsedTime = (now.getTime() - SharkGame.before.getTime());
 
+            var r = SharkGame.Resources;
+            var m = SharkGame.Main;
+
+            // check if the sidebar needs to come back
+            if(SharkGame.sidebarHidden) {
+                m.showSidebarIfNeeded();
+            }
+
+            if(elapsedTime > SharkGame.INTERVAL) {
+                // Compensate for lost time.
+                m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
+
+            } else {
+                m.processSimTime(SharkGame.dt);
+            }
+            r.updateResourcesTable();
+
+            var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
+            tabCode.update();
+
+            m.checkTabUnlocks();
+
+            SharkGame.before = new Date();
+        } catch(err) {
+            SharkGame.Log.addError(err.message);
+            console.log(err);
+        }
+    },
+
+    checkTabUnlocks: function() {
+        $.each(SharkGame.Tabs, function(k, v) {
+            if(k === "current" || v.discovered) {
+                return;
+            }
+            var reqsMet = true;
+
+            // check resources
+            if(v.discoverReq.resource) {
+                reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource);
+            }
+
+            // check upgrades
+            if(v.discoverReq.upgrade) {
+                $.each(v.discoverReq.upgrade, function(_, value) {
+                    if(SharkGame.Upgrades[value]) {
+                        reqsMet = reqsMet && SharkGame.Upgrades[value].purchased;
+                    } else {
+                        reqsMet = false; // can't have a nonexistent upgrade
+                    }
+                });
+            }
+
+            if(reqsMet) {
+                // unlock tab!
+                SharkGame.Main.discoverTab(k);
+                SharkGame.Log.addDiscovery("Discovered " + v.name + "!");
+            }
+        });
+    },
+
+    processSimTime: function(numberOfSeconds) {
         var r = SharkGame.Resources;
         var m = SharkGame.Main;
 
-        // check if the sidebar needs to come back
-        if(SharkGame.sidebarHidden) {
-            m.showSidebarIfNeeded();
-        }
+        // currently just does income calculation, but who knows what terrible things could happen in future
+        r.processIncomes(numberOfSeconds);
+    },
 
-        if(elapsedTime > SharkGame.INTERVAL) {
-            // Compensate for lost time.
-            m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
-
-        } else {
-            m.processSimTime(SharkGame.dt);
-        }
-        r.updateResourcesTable();
-
-        var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
-        tabCode.update();
-
-        m.checkTabUnlocks();
-
-        SharkGame.before = new Date();
-    } catch(err) {
-        SharkGame.Log.addError(err.message);
-        console.log(err);
-    }
-}
-,
-
-checkTabUnlocks: function() {
-    $.each(SharkGame.Tabs, function(k, v) {
-        if(k === "current" || v.discovered) {
-            return;
-        }
-        var reqsMet = true;
-
-        // check resources
-        if(v.discoverReq.resource) {
-            reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource);
-        }
-
-        // check upgrades
-        if(v.discoverReq.upgrade) {
-            $.each(v.discoverReq.upgrade, function(_, value) {
-                reqsMet = reqsMet && SharkGame.Upgrades[value].purchased;
-            });
-        }
-
-        if(reqsMet) {
-            // unlock tab!
-            SharkGame.Main.discoverTab(k);
-            SharkGame.Log.addDiscovery("Discovered " + v.name + "!");
-        }
-    });
-}
-,
-
-processSimTime: function(numberOfSeconds) {
-    var r = SharkGame.Resources;
-    var m = SharkGame.Main;
-
-    // currently just does income calculation, but who knows what terrible things could happen in future
-    r.processIncomes(numberOfSeconds);
-}
-,
-
-autosave: function() {
-    try {
-        SharkGame.Save.saveGame();
-        SharkGame.Log.addMessage("Autosaved.");
-    } catch(err) {
-        SharkGame.Log.addError(err.message);
-    }
-}
-,
-
-setUpTitleBar: function() {
-    var titleMenu = $('#titlemenu');
-    $.each(SharkGame.TitleBar, function(k, v) {
-        titleMenu.append("<li><a id='" + k + "' href='#'>" + v.name + "</a></li>");
-        $('#' + k).click(v.onClick);
-    });
-
-    SharkGame.titlebarGenerated = true;
-}
-,
-
-setUpTab: function() {
-    var tabs = SharkGame.Tabs;
-    // empty out content div
-    var content = $('#content');
-    content.empty();
-    content.append('<div id="contentMenu"><ul id="tabList"></ul><ul id="tabButtons"></ul></div><div id="tabBorder" class="clear-fix"></div>');
-
-    SharkGame.Main.createTabNavigation();
-    SharkGame.Main.createBuyButtons();
-
-    // set up tab specific stuff
-    var tabCode = tabs[tabs.current].code;
-    tabCode.switchTo();
-
-    document.title = "[" + tabs[tabs.current].name + "] " + SharkGame.GAME_NAME;
-}
-,
-
-createTabMenu: function() {
-    SharkGame.Main.createTabNavigation();
-    SharkGame.Main.createBuyButtons();
-}
-,
-
-createTabNavigation: function() {
-    var tabs = SharkGame.Tabs;
-    $('#tabList').empty();
-    // add navigation
-    // check if we have more than one discovered tab, else bypass this
-    var numTabsDiscovered = 0;
-    $.each(tabs, function(k, v) {
-        if(v.discovered) {
-            numTabsDiscovered++;
-        }
-    })
-    if(numTabsDiscovered > 1) {
-        var tabList = $('#tabList');
-        // add a header for each discovered tab
-        // make it a link if it's not the current tab
-        $.each(tabs, function(k, v) {
-            var onThisTab = (SharkGame.Tabs.current === k);
-            if(v.discovered) {
-                var tabListItem = $('<li>');
-                if(onThisTab) {
-                    tabListItem.html(v.name);
-                } else {
-                    tabListItem.append($('<a>')
-                            .attr("id", "tab-" + k)
-                            .attr("href", "#")
-                            .html(v.name)
-                            .click(function() {
-                                var tab = ($(this).attr("id")).split("-")[1];
-                                SharkGame.Main.changeTab(tab);
-                            })
-                    );
-                }
-                tabList.append(tabListItem);
-            }
-        })
-    }
-}
-,
-
-createBuyButtons: function() {
-    // add buy buttons
-    var buttonList = $('#tabButtons');
-    buttonList.empty();
-    $.each(SharkGame.Settings.buyAmount.options, function(_, v) {
-        var amount = v;
-        var disableButton = (v === SharkGame.Settings.current.buyAmount);
-        buttonList.prepend($('<li>')
-            .append($('<button>')
-                .addClass("min")
-                .attr("id", "buy-" + v)
-                .prop("disabled", disableButton)
-        ));
-        var label = "buy ";
-        if(amount < 0) {
-            if(amount < -2) {
-                label += "1/3 max"
-            } else if(amount < -1) {
-                label += "1/2 max"
-            } else if(amount < 0) {
-                label += "max"
-            }
-        } else {
-            label += SharkGame.Main.beautify(amount);
-        }
-        $('#buy-' + v).html(label)
-            .click(function() {
-                var thisButton = $(this);
-                SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
-                $("button[id^='buy-']").prop("disabled", false);
-                thisButton.prop("disabled", true);
-            });
-    });
-}
-,
-
-changeTab: function(tab) {
-    SharkGame.Tabs.current = tab;
-    SharkGame.Main.setUpTab();
-}
-,
-
-discoverTab: function(tab) {
-    SharkGame.Tabs[tab].discovered = true;
-    // force a total redraw of the navigation
-    SharkGame.Main.createTabMenu();
-}
-,
-
-
-showSidebarIfNeeded: function() {
-    // if we have any non-zero resources, show sidebar
-    // if we have any log entries, show sidebar
-    if(SharkGame.Resources.haveAnyResources() || SharkGame.Log.haveAnyMessages()) {
-        // show sidebar
-        if(SharkGame.Settings.current.showAnimations) {
-            $('#sidebar').show("500");
-        } else {
-            $('#sidebar').show();
-        }
-        // flag sidebar as shown
-        SharkGame.sidebarHidden = false;
-    }
-}
-,
-
-showOptions: function() {
-    var optionsContent = SharkGame.Main.setUpOptions();
-    SharkGame.Main.showPane("Options", optionsContent);
-}
-,
-
-setUpOptions: function() {
-    var optionsTable = $('<table>').attr("id", "optionTable");
-    // add settings specified in settings.js
-    $.each(SharkGame.Settings, function(key, value) {
-        if(key === "current" || !value.show) {
-            return;
-        }
-        var row = $('<tr>');
-
-        // show setting name
-        row.append($('<td>')
-                .attr("id", "optionLabel")
-                .html(value.name + ":" +
-                    "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
-        );
-
-        var currentSetting = SharkGame.Settings.current[key];
-
-        // show setting adjustment buttons
-        $.each(value.options, function(k, v) {
-            var isCurrentSetting = (k == value.options.indexOf(currentSetting));
-            row.append($('<td>').append($('<button>')
-                    .attr("id", "optionButton-" + key + "-" + k)
-                    .addClass("option-button")
-                    .prop("disabled", isCurrentSetting)
-                    .html((typeof v === "boolean") ? (v ? "on" : "off") : v)
-                    .click(SharkGame.Main.onOptionClick)
-            ));
-        });
-
-        optionsTable.append(row);
-    });
-
-    // add save import/export
-    var row = $('<tr>');
-    row.append($('<td>')
-            .html("Import/Export Save:<br/><span class='smallDesc'>(Import or export save as text! Remember to keep it safe!)</span>")
-    );
-    row.append($('<td>').append($('<button>')
-            .html("import")
-            .addClass("option-button")
-            .click(function() {
-                var importText = $('#importExportField').val();
-                if(importText === "") {
-                    SharkGame.hidePane();
-                    SharkGame.Log.addError("You need to paste something in first!");
-                } else if(confirm("Are you absolutely sure? This will override your current save.")) {
-                    SharkGame.Save.importData(importText);
-                }
-            })
-    ));
-    row.append($('<td>').append($('<button>')
-            .html("export")
-            .addClass("option-button")
-            .click(function() {
-                $('#importExportField').val(SharkGame.Save.exportData());
-            })
-    ));
-    // add the actual text box
-    row.append($('<td>').attr("colSpan", 4)
-        .append($('<input>')
-            .attr("type", "text")
-            .attr("id", "importExportField")
-    ));
-
-    optionsTable.append(row);
-
-    return optionsTable;
-}
-,
-
-onOptionClick: function() {
-    var buttonLabel = $(this).attr("id");
-    var settingInfo = buttonLabel.split("-");
-    var settingName = settingInfo[1];
-    var optionIndex = parseInt(settingInfo[2]);
-
-    // change setting to specified setting!
-    var newSetting = SharkGame.Settings[settingName].options[optionIndex];
-    SharkGame.Settings.current[settingName] = newSetting;
-
-    // update relevant table cell!
-//        $('#option-' + settingName)
-//            .html("(" + ((typeof newSetting === "boolean") ? (newSetting ? "on" : "off") : newSetting) + ")");
-
-    // enable all buttons
-    $('button[id^="optionButton-' + settingName + '"]').prop("disabled", false);
-
-    // disable this button
-    $(this).attr("disabled", "true");
-
-    // if there is a callback, call it, else call the no op
-    (SharkGame.Settings[settingName].onChange || $.noop)();
-}
-,
-
-showChangelog: function() {
-    var changelogContent = $('<div>').attr("id", "changelogDiv");
-    $.each(SharkGame.Changelog, function(version, changes) {
-        var segment = $('<div>').addClass("paneContentDiv");
-        segment.append($('<h3>').html(version + ": "));
-        var changeList = $('<ul>');
-        $.each(changes, function(_, v) {
-            changeList.append($('<li>').html(v));
-        });
-        segment.append(changeList);
-        changelogContent.append(segment);
-    });
-    SharkGame.Main.showPane("Changelog", changelogContent);
-}
-,
-
-showHelp: function() {
-    var helpDiv = $('<div>');
-    helpDiv.append($('<div>').append(SharkGame.help).addClass("paneContentDiv"));
-    SharkGame.Main.showPane("Help", helpDiv);
-}
-,
-
-endGame: function() {
-    // stop ticking, foreverrrr
-    clearInterval(SharkGame.Main.tickHandler);
-    SharkGame.Main.tickHandler = null;
-    // stop autosaving too
-    clearInterval(SharkGame.Main.autosaveHandler);
-    SharkGame.Main.autosaveHandler = null;
-
-    // bring up overlay, but much darker
-    var docHeight = $(document).height();
-    var overlay = $('#overlay');
-    overlay.height(docHeight);
-    if(SharkGame.Settings.current.showAnimations) {
-        overlay.show()
-            .css("opacity", 0)
-            .animate({opacity: 0.8}, 4000, "swing", SharkGame.Main.showEnding);
-    } else {
-        overlay.show()
-            .css("opacity", 0.8);
-        SharkGame.Main.showEnding();
-    }
-
-    // flag game as over
-    SharkGame.gameOver = true;
-}
-,
-
-showEnding: function() {
-    var endPane = $('<div>');
-    endPane.append($('<div>').append(SharkGame.ending).addClass("paneContentDiv"));
-    endPane.append($('<div>').append(SharkGame.credits).addClass("paneContentDiv"));
-    var buttonDiv = $('<div>').attr("id", "endButton").addClass("paneContentDiv");
-    endPane.append(buttonDiv);
-    SharkGame.Button.makeButton("closeEnding", "Enter the New Ocean", buttonDiv, SharkGame.Main.loopGame);
-    SharkGame.Main.showPane("The End", endPane, true, 4000, 0.8);
-}
-,
-
-loopGame: function() {
-    if(SharkGame.gameOver) {
-        SharkGame.gameOver = false;
-        SharkGame.Main.hidePane();
-        SharkGame.Save.deleteSave();
-        var essence = SharkGame.Resources.getResource("essence");
-        essence++;
-        SharkGame.Main.init();
-        SharkGame.Log.addMessage("Something feels different about you. The gate feels as though it has changed you.");
-        SharkGame.Resources.changeResource("essence", essence);
-        SharkGame.timestampRunStart = (new Date()).getTime();
+    autosave: function() {
         try {
             SharkGame.Save.saveGame();
-            SharkGame.Log.addMessage("Game saved.");
+            SharkGame.Log.addMessage("Autosaved.");
         } catch(err) {
             SharkGame.Log.addError(err.message);
         }
-    }
-}
-,
+    },
 
-buildPane: function() {
-    var pane;
-    pane = $('<div>').attr("id", "pane");
-    $('body').append(pane);
+    setUpTitleBar: function() {
+        var titleMenu = $('#titlemenu');
+        $.each(SharkGame.TitleBar, function(k, v) {
+            titleMenu.append("<li><a id='" + k + "' href='#'>" + v.name + "</a></li>");
+            $('#' + k).click(v.onClick);
+        });
 
-    // set up structure of pane
-    var titleDiv = $('<div>').attr("id", "paneHeader");
-    titleDiv.append($('<div>').attr("id", "paneHeaderTitleDiv"));
-    titleDiv.append($('<div>')
-        .attr("id", "paneHeaderCloseButtonDiv")
-        .append($('<button>')
-            .attr("id", "paneHeaderCloseButton")
-            .addClass("min")
-            .html("&nbsp x &nbsp")
-            .click(SharkGame.Main.hidePane)
-    ));
-    pane.append(titleDiv);
-    pane.append($('<div>').attr("id", "paneHeaderEnd").addClass("clear-fix"));
-    pane.append($('<div>').attr("id", "paneContent"));
+        SharkGame.titlebarGenerated = true;
+    },
 
-    pane.hide();
-    SharkGame.paneGenerated = true;
-    return pane;
-}
-,
+    setUpTab: function() {
+        var tabs = SharkGame.Tabs;
+        // empty out content div
+        var content = $('#content');
+        content.empty();
+        content.append('<div id="contentMenu"><ul id="tabList"></ul><ul id="tabButtons"></ul></div><div id="tabBorder" class="clear-fix"></div>');
 
-showPane: function(title, contents, hideCloseButton, fadeInTime, customOpacity) {
-    var pane;
+        SharkGame.Main.createTabNavigation();
+        SharkGame.Main.createBuyButtons();
 
-    // GENERATE PANE IF THIS IS THE FIRST TIME
-    if(!SharkGame.paneGenerated) {
-        pane = SharkGame.Main.buildPane();
-    } else {
-        pane = $('#pane');
-    }
+        // set up tab specific stuff
+        var tabCode = tabs[tabs.current].code;
+        tabCode.switchTo();
 
-    // begin fading in/displaying overlay if it isn't already visible
-    var overlay = $("#overlay");
-    // is it already up?
-    fadeInTime = fadeInTime || 600;
-    if(overlay.is(':hidden')) {
-        // nope, show overlay
-        var overlayOpacity = customOpacity || 0.5;
+        document.title = "[" + tabs[tabs.current].name + "] " + SharkGame.GAME_NAME;
+    },
+
+    createTabMenu: function() {
+        SharkGame.Main.createTabNavigation();
+        SharkGame.Main.createBuyButtons();
+    },
+
+    createTabNavigation: function() {
+        var tabs = SharkGame.Tabs;
+        $('#tabList').empty();
+        // add navigation
+        // check if we have more than one discovered tab, else bypass this
+        var numTabsDiscovered = 0;
+        $.each(tabs, function(k, v) {
+            if(v.discovered) {
+                numTabsDiscovered++;
+            }
+        })
+        if(numTabsDiscovered > 1) {
+            var tabList = $('#tabList');
+            // add a header for each discovered tab
+            // make it a link if it's not the current tab
+            $.each(tabs, function(k, v) {
+                var onThisTab = (SharkGame.Tabs.current === k);
+                if(v.discovered) {
+                    var tabListItem = $('<li>');
+                    if(onThisTab) {
+                        tabListItem.html(v.name);
+                    } else {
+                        tabListItem.append($('<a>')
+                                .attr("id", "tab-" + k)
+                                .attr("href", "#")
+                                .html(v.name)
+                                .click(function() {
+                                    var tab = ($(this).attr("id")).split("-")[1];
+                                    SharkGame.Main.changeTab(tab);
+                                })
+                        );
+                    }
+                    tabList.append(tabListItem);
+                }
+            })
+        }
+    },
+
+    createBuyButtons: function() {
+        // add buy buttons
+        var buttonList = $('#tabButtons');
+        buttonList.empty();
+        $.each(SharkGame.Settings.buyAmount.options, function(_, v) {
+            var amount = v;
+            var disableButton = (v === SharkGame.Settings.current.buyAmount);
+            buttonList.prepend($('<li>')
+                .append($('<button>')
+                    .addClass("min")
+                    .attr("id", "buy-" + v)
+                    .prop("disabled", disableButton)
+            ));
+            var label = "buy ";
+            if(amount < 0) {
+                if(amount < -2) {
+                    label += "1/3 max"
+                } else if(amount < -1) {
+                    label += "1/2 max"
+                } else if(amount < 0) {
+                    label += "max"
+                }
+            } else {
+                label += SharkGame.Main.beautify(amount);
+            }
+            $('#buy-' + v).html(label)
+                .click(function() {
+                    var thisButton = $(this);
+                    SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
+                    $("button[id^='buy-']").prop("disabled", false);
+                    thisButton.prop("disabled", true);
+                });
+        });
+    },
+
+    changeTab: function(tab) {
+        SharkGame.Tabs.current = tab;
+        SharkGame.Main.setUpTab();
+    },
+
+    discoverTab: function(tab) {
+        SharkGame.Tabs[tab].discovered = true;
+        // force a total redraw of the navigation
+        SharkGame.Main.createTabMenu();
+    },
+
+
+    showSidebarIfNeeded: function() {
+        // if we have any non-zero resources, show sidebar
+        // if we have any log entries, show sidebar
+        if(SharkGame.Resources.haveAnyResources() || SharkGame.Log.haveAnyMessages()) {
+            // show sidebar
+            if(SharkGame.Settings.current.showAnimations) {
+                $('#sidebar').show("500");
+            } else {
+                $('#sidebar').show();
+            }
+            // flag sidebar as shown
+            SharkGame.sidebarHidden = false;
+        }
+    },
+
+    showOptions: function() {
+        var optionsContent = SharkGame.Main.setUpOptions();
+        SharkGame.Main.showPane("Options", optionsContent);
+    },
+
+    setUpOptions: function() {
+        var optionsTable = $('<table>').attr("id", "optionTable");
+        // add settings specified in settings.js
+        $.each(SharkGame.Settings, function(key, value) {
+            if(key === "current" || !value.show) {
+                return;
+            }
+            var row = $('<tr>');
+
+            // show setting name
+            row.append($('<td>')
+                    .attr("id", "optionLabel")
+                    .html(value.name + ":" +
+                        "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
+            );
+
+            var currentSetting = SharkGame.Settings.current[key];
+
+            // show setting adjustment buttons
+            $.each(value.options, function(k, v) {
+                var isCurrentSetting = (k == value.options.indexOf(currentSetting));
+                row.append($('<td>').append($('<button>')
+                        .attr("id", "optionButton-" + key + "-" + k)
+                        .addClass("option-button")
+                        .prop("disabled", isCurrentSetting)
+                        .html((typeof v === "boolean") ? (v ? "on" : "off") : v)
+                        .click(SharkGame.Main.onOptionClick)
+                ));
+            });
+
+            optionsTable.append(row);
+        });
+
+        // add save import/export
+        var row = $('<tr>');
+        row.append($('<td>')
+                .html("Import/Export Save:<br/><span class='smallDesc'>(Import or export save as text! Remember to keep it safe!)</span>")
+        );
+        row.append($('<td>').append($('<button>')
+                .html("import")
+                .addClass("option-button")
+                .click(function() {
+                    var importText = $('#importExportField').val();
+                    if(importText === "") {
+                        SharkGame.hidePane();
+                        SharkGame.Log.addError("You need to paste something in first!");
+                    } else if(confirm("Are you absolutely sure? This will override your current save.")) {
+                        SharkGame.Save.importData(importText);
+                    }
+                })
+        ));
+        row.append($('<td>').append($('<button>')
+                .html("export")
+                .addClass("option-button")
+                .click(function() {
+                    $('#importExportField').val(SharkGame.Save.exportData());
+                })
+        ));
+        // add the actual text box
+        row.append($('<td>').attr("colSpan", 4)
+            .append($('<input>')
+                .attr("type", "text")
+                .attr("id", "importExportField")
+        ));
+
+        optionsTable.append(row);
+
+        return optionsTable;
+    },
+
+    onOptionClick: function() {
+        var buttonLabel = $(this).attr("id");
+        var settingInfo = buttonLabel.split("-");
+        var settingName = settingInfo[1];
+        var optionIndex = parseInt(settingInfo[2]);
+
+        // change setting to specified setting!
+        var newSetting = SharkGame.Settings[settingName].options[optionIndex];
+        SharkGame.Settings.current[settingName] = newSetting;
+
+        // update relevant table cell!
+//        $('#option-' + settingName)
+//            .html("(" + ((typeof newSetting === "boolean") ? (newSetting ? "on" : "off") : newSetting) + ")");
+
+        // enable all buttons
+        $('button[id^="optionButton-' + settingName + '"]').prop("disabled", false);
+
+        // disable this button
+        $(this).attr("disabled", "true");
+
+        // if there is a callback, call it, else call the no op
+        (SharkGame.Settings[settingName].onChange || $.noop)();
+    },
+
+    showChangelog: function() {
+        var changelogContent = $('<div>').attr("id", "changelogDiv");
+        $.each(SharkGame.Changelog, function(version, changes) {
+            var segment = $('<div>').addClass("paneContentDiv");
+            segment.append($('<h3>').html(version + ": "));
+            var changeList = $('<ul>');
+            $.each(changes, function(_, v) {
+                changeList.append($('<li>').html(v));
+            });
+            segment.append(changeList);
+            changelogContent.append(segment);
+        });
+        SharkGame.Main.showPane("Changelog", changelogContent);
+    },
+
+    showHelp: function() {
+        var helpDiv = $('<div>');
+        helpDiv.append($('<div>').append(SharkGame.help).addClass("paneContentDiv"));
+        SharkGame.Main.showPane("Help", helpDiv);
+    },
+
+    endGame: function() {
+        // stop ticking, foreverrrr
+        clearInterval(SharkGame.Main.tickHandler);
+        SharkGame.Main.tickHandler = null;
+        // stop autosaving too
+        clearInterval(SharkGame.Main.autosaveHandler);
+        SharkGame.Main.autosaveHandler = null;
+
+        // bring up overlay, but much darker
+        var docHeight = $(document).height();
+        var overlay = $('#overlay');
+        overlay.height(docHeight);
         if(SharkGame.Settings.current.showAnimations) {
             overlay.show()
                 .css("opacity", 0)
-                .animate({opacity: overlayOpacity}, fadeInTime);
+                .animate({opacity: 0.8}, 4000, "swing", SharkGame.Main.showEnding);
         } else {
             overlay.show()
-                .css("opacity", overlayOpacity);
+                .css("opacity", 0.8);
+            SharkGame.Main.showEnding();
         }
-        // adjust overlay height
-        overlay.height($(document).height());
-    }
 
-    // adjust header
-    var titleDiv = $('#paneHeaderTitleDiv');
-    var closeButtonDiv = $('#paneHeaderCloseButtonDiv');
+        // flag game as over
+        SharkGame.gameOver = true;
+    },
 
-    if(!title || title === "") {
-        titleDiv.hide();
-    } else {
-        titleDiv.show();
-        if(!hideCloseButton) {
-            // put back to left
-            titleDiv.css({"float": "left", "text-align": "left", "clear": "none"});
-            titleDiv.html("<h3>" + title + "</h3>");
+    showEnding: function() {
+        var endPane = $('<div>');
+        endPane.append($('<div>').append(SharkGame.ending).addClass("paneContentDiv"));
+        endPane.append($('<div>').append(SharkGame.credits).addClass("paneContentDiv"));
+        var buttonDiv = $('<div>').attr("id", "endButton").addClass("paneContentDiv");
+        endPane.append(buttonDiv);
+        SharkGame.Button.makeButton("closeEnding", "Enter the New Ocean", buttonDiv, SharkGame.Main.loopGame);
+        SharkGame.Main.showPane("The End", endPane, true, 4000, 0.8);
+    },
+
+    loopGame: function() {
+        if(SharkGame.gameOver) {
+            SharkGame.gameOver = false;
+            SharkGame.Main.hidePane();
+            SharkGame.Save.deleteSave();
+            var essence = SharkGame.Resources.getResource("essence");
+            essence++;
+            SharkGame.Main.init();
+            SharkGame.Log.addMessage("Something feels different about you. The gate feels as though it has changed you.");
+            SharkGame.Resources.changeResource("essence", essence);
+            SharkGame.timestampRunStart = (new Date()).getTime();
+            try {
+                SharkGame.Save.saveGame();
+                SharkGame.Log.addMessage("Game saved.");
+            } catch(err) {
+                SharkGame.Log.addError(err.message);
+            }
+        }
+    },
+
+    buildPane: function() {
+        var pane;
+        pane = $('<div>').attr("id", "pane");
+        $('body').append(pane);
+
+        // set up structure of pane
+        var titleDiv = $('<div>').attr("id", "paneHeader");
+        titleDiv.append($('<div>').attr("id", "paneHeaderTitleDiv"));
+        titleDiv.append($('<div>')
+            .attr("id", "paneHeaderCloseButtonDiv")
+            .append($('<button>')
+                .attr("id", "paneHeaderCloseButton")
+                .addClass("min")
+                .html("&nbsp x &nbsp")
+                .click(SharkGame.Main.hidePane)
+        ));
+        pane.append(titleDiv);
+        pane.append($('<div>').attr("id", "paneHeaderEnd").addClass("clear-fix"));
+        pane.append($('<div>').attr("id", "paneContent"));
+
+        pane.hide();
+        SharkGame.paneGenerated = true;
+        return pane;
+    },
+
+    showPane: function(title, contents, hideCloseButton, fadeInTime, customOpacity) {
+        var pane;
+
+        // GENERATE PANE IF THIS IS THE FIRST TIME
+        if(!SharkGame.paneGenerated) {
+            pane = SharkGame.Main.buildPane();
         } else {
-            // center
-            titleDiv.css({"float": "none", "text-align": "center", "clear": "both"});
-            titleDiv.html("<h2>" + title + "</h2>");
+            pane = $('#pane');
         }
+
+        // begin fading in/displaying overlay if it isn't already visible
+        var overlay = $("#overlay");
+        // is it already up?
+        fadeInTime = fadeInTime || 600;
+        if(overlay.is(':hidden')) {
+            // nope, show overlay
+            var overlayOpacity = customOpacity || 0.5;
+            if(SharkGame.Settings.current.showAnimations) {
+                overlay.show()
+                    .css("opacity", 0)
+                    .animate({opacity: overlayOpacity}, fadeInTime);
+            } else {
+                overlay.show()
+                    .css("opacity", overlayOpacity);
+            }
+            // adjust overlay height
+            overlay.height($(document).height());
+        }
+
+        // adjust header
+        var titleDiv = $('#paneHeaderTitleDiv');
+        var closeButtonDiv = $('#paneHeaderCloseButtonDiv');
+
+        if(!title || title === "") {
+            titleDiv.hide();
+        } else {
+            titleDiv.show();
+            if(!hideCloseButton) {
+                // put back to left
+                titleDiv.css({"float": "left", "text-align": "left", "clear": "none"});
+                titleDiv.html("<h3>" + title + "</h3>");
+            } else {
+                // center
+                titleDiv.css({"float": "none", "text-align": "center", "clear": "both"});
+                titleDiv.html("<h2>" + title + "</h2>");
+            }
+        }
+        if(hideCloseButton) {
+            closeButtonDiv.hide();
+        } else {
+            closeButtonDiv.show();
+        }
+
+        // adjust content
+        var paneContent = $('#paneContent');
+        paneContent.empty();
+
+        paneContent.append(contents);
+        if(SharkGame.Settings.current.showAnimations && customOpacity) {
+            pane.show()
+                .css("opacity", 0)
+                .animate({opacity: 1.0}, fadeInTime);
+        } else {
+            pane.show();
+        }
+    },
+
+    hidePane: function() {
+        $('#overlay').hide();
+        $('#pane').hide();
+    },
+
+    // DEBUG FUNCTIONS
+    discoverAll: function() {
+        $.each(SharkGame.Tabs, function(k, v) {
+            if(k !== "current") {
+                SharkGame.Main.discoverTab(k);
+            }
+        });
     }
-    if(hideCloseButton) {
-        closeButtonDiv.hide();
-    } else {
-        closeButtonDiv.show();
-    }
-
-    // adjust content
-    var paneContent = $('#paneContent');
-    paneContent.empty();
-
-    paneContent.append(contents);
-    if(SharkGame.Settings.current.showAnimations && customOpacity) {
-        pane.show()
-            .css("opacity", 0)
-            .animate({opacity: 1.0}, fadeInTime);
-    } else {
-        pane.show();
-    }
-}
-,
-
-hidePane: function() {
-    $('#overlay').hide();
-    $('#pane').hide();
-}
-
 }
 ;
 

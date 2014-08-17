@@ -24,11 +24,12 @@ SharkGame.Save = {
         });
 
         $.each(SharkGame.Tabs, function(k, v) {
-            saveData.tabs[k] = {
-                discovered: v.discovered
+            if(k !== "current") {
+                saveData.tabs[k] = v.discovered;
+            } else {
+                saveData.tabs.current = v;
             }
         });
-        saveData.tabs.current = SharkGame.Tabs.current;
 
         $.each(SharkGame.Gate.costsMet, function(k, v) {
             saveData.gateCostsMet[k] = v;
@@ -166,7 +167,7 @@ SharkGame.Save = {
             if(saveData.tabs) {
                 $.each(saveData.tabs, function(k, v) {
                     if(SharkGame.Tabs[k]) {
-                        SharkGame.Tabs[k].discovered = v.discovered;
+                        SharkGame.Tabs[k].discovered = v;
                     }
                 });
                 if(saveData.tabs.current) {
@@ -338,13 +339,16 @@ SharkGame.Save = {
                 if(typeof slot === "object") {
                     out[slot[0]] = expandPart(slot[1]);
                 } else {
+                    if (data.length === 0) throw new Error("Incorrect save length.");
                     out[slot] = data.shift();
                 }
             });
             return out;
         }
 
-        return expandPart(SharkGame.Save.createBlueprint(template));
+        var expanded = expandPart(SharkGame.Save.createBlueprint(template));
+        if (data.length !== 0) throw new Error("Incorrect save length.");
+        return expanded;
     },
 
     saveUpdaters: [ //used to update saves and to make templates
@@ -368,16 +372,17 @@ SharkGame.Save = {
 
         // future updaters for save versions beyond the base:
         // they get passed the result of the previous updater and it continues in a chain
-        // and they start based on the version they were save
-
+        // and they start based on the version they were saved
         function(save) {
             save = $.extend(true, save, {
                 "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}},
                 "settings": {"showTabHelp": false, "groupResources": false},
-                "timestampLastSave": null,
+                "timestampLastSave": save.timestamp,
                 "timestampGameStart": null,
                 "timestampRunStart": null
             });
+            // reformat tabs
+            save.tabs = {"current": save.tabs["current"], "home": save.tabs["home"].discovered, "lab": save.tabs["lab"].discovered, "gate": save.tabs["gate"].discovered, "stats": false, "recycler": false};
             delete save.timestamp;
             return save;
         }

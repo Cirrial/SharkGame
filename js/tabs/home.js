@@ -10,39 +10,47 @@ SharkGame.Home = {
     // Priority: later messages display if available, otherwise earlier ones.
     extraMessages: [
         {
-            message: ""
+            message: "&nbsp<br/>&nbsp"
         },
         {
             unlock: {resource: {fish: 5}},
-            message: "You attract the attention of some sharks. Maybe they can help you catch fish!"
+            message: "You attract the attention of some sharks. Maybe they can help you catch fish!<br/>&nbsp"
         },
         {
             unlock: {resource: {fish: 15}},
-            message: "Some rays drift over."
+            message: "Some rays drift over.<br/>&nbsp"
+        },
+        {
+            unlock: {resource: {shark: 1, ray: 1}},
+            message: "You have quite the group going now.<br/>&nbsp"
         },
         {
             unlock: {resource: {shark: 4, ray: 4}},
-            message: "Some curious crabs come over."
+            message: "Some curious crabs come over.<br/>&nbsp"
+        },
+        {
+            unlock: {resource: {shark: 1, ray: 1, crab: 1}},
+            message: "Your new tribe is at your command!<br/>&nbsp"
         },
         {
             unlock: {resource: {shark: 1, crystal: 10}},
-            message: "The crystals are shiny. Some sharks stare at them curiously."
+            message: "The crystals are shiny. Some sharks stare at them curiously.<br/>&nbsp"
         },
         {
             unlock: {resource: {scientist: 1}},
-            message: "The science sharks swim in their own school."
+            message: "The science sharks swim in their own school.<br/>&nbsp"
         },
         {
             unlock: {upgrade: ["crystalContainer"]},
-            message: "More discoveries are needed."
+            message: "More discoveries are needed.<br/>&nbsp"
         },
         {
             unlock: {resource: {nurse: 1}},
-            message: "The shark community grows with time."
+            message: "The shark community grows with time.<br/>&nbsp"
         },
         {
             unlock: {upgrade: ["exploration"]},
-            message: "You hear faint songs and cries in the distance."
+            message: "You hear faint songs and cries in the distance.<br/>&nbsp"
         },
         {
             unlock: {upgrade: ["automation"]},
@@ -54,7 +62,7 @@ SharkGame.Home = {
         },
         {
             unlock: {upgrade: ["gateDiscovery"]},
-            message: "The gate beckons. The secret must be unlocked."
+            message: "The gate beckons. The secret must be unlocked.<br/>&nbsp"
         }
     ],
 

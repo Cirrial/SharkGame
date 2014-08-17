@@ -2,13 +2,15 @@ SharkGame.Recycler = {
 
     tabId: "recycler",
     tabDiscovered: false,
-    tabName: "Universal Recycler",
+    tabName: "Recycler",
 
     discoverReq: {
         upgrade: [
             "recyclerDiscovery"
         ]
     },
+
+    message: "The recycler allows for the repurposing of any and all of your unwanted materials.<br/><span class='medDesc'>Feed the machines. Feed them.</span>",
 
     init: function() {
         var r = SharkGame.Recycler;
@@ -27,7 +29,7 @@ SharkGame.Recycler = {
         var content = $('#content');
         content.append($('<div>').attr("id", "tabMessage"));
         content.append($('<div>').attr("id", "buttonList"));
-        $('#tabMessage').html(message);
+        $('#tabMessage').html(r.message);
     },
 
     update: function() {

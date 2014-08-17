@@ -136,6 +136,7 @@ SharkGame.Settings = {
         ],
         onChange: function() {
             SharkGame.Resources.rebuildTable = true;
+            SharkGame.Stats.recreateIncomeTable = true;
         }
     }
 };

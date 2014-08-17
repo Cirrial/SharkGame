@@ -200,8 +200,8 @@ SharkGame.ResourceCategories = {
         ]
     },
     workers: {
-        name: "Workers",
-        disposeMessage: "You bid farewell as your workforce gets small.",
+        name: "Helpers",
+        disposeMessage: "You bid farewell as your community gets smaller.",
         resources: [
             "shark",
             "ray",
@@ -216,6 +216,7 @@ SharkGame.ResourceCategories = {
     },
     machines: {
         name: "Machines",
+        disposeMessage: "The stopped machines are left as a home for tinier life.",
         resources: [
             "crystalMiner",
             "sandDigger",
@@ -225,6 +226,7 @@ SharkGame.ResourceCategories = {
     },
     stuff: {
         name: "Stuff",
+        disposeMessage: "The stuff is dumped in some random hole in the ocean.",
         resources: [
             "science",
             "fish",
@@ -244,6 +246,7 @@ SharkGame.IncomeTable = {
 SharkGame.Resources = {
 
     INCOME_COLOR: '#808080',
+    TOTAL_INCOME_COLOR: '#A0A0A0',
     MULTIPLIER_COLOR: '#606060',
 
     rebuildTable: false,
@@ -299,6 +302,19 @@ SharkGame.Resources = {
                 });
             }
         });
+    },
+
+    getIncomeFromResource: function(generator, output) {
+        var generatorResource = SharkGame.ResourceTable[generator];
+        var essenceMultiplier = (SharkGame.Resources.getResource("essence") + 1);
+        var income = 0;
+        if(generatorResource.income) {
+            var outputResourceAmount = generatorResource.income[output];
+            if(outputResourceAmount) {
+                income = outputResourceAmount * generatorResource.amount * generatorResource.incomeMultiplier * essenceMultiplier;
+            }
+        }
+        return income;
     },
 
     getIncome: function(resource) {

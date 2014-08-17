@@ -161,13 +161,13 @@ use sad shark ascii
 
 ^^^!! stuff above this line is done !!^^^
 
-
-
 - grotto (stats tab), 
-	list upgrades, 
+	
 	reveal what each resource is supplying in terms of income,
+	list upgrades, 
 	reveal total amount ever made of resource,
-	allows disposal (add disposal message to resource categories)
+	allows disposal (add disposal message to resource categories),
+	list time spent in game and current loop
 - research for grotto (stats tab)
 
 - recycler [requires research, research will require machines]
@@ -182,15 +182,14 @@ use sad shark ascii
 
 - update changelog
 
+- uncomment analytics
+
 - push update!!
-
-
-
-
 
 
 v 0.6:
 
+	
     - Trading tab
         - factions
             - representatives
@@ -207,14 +206,9 @@ v 0.6:
 			lobsters and shimp like sharks for crab allies
 			the other two are neutral
             
+	- CHEEVOS
+		- design some first before implementing anything
 
-
-			
-			
-			
-			
-			
-			
 
 	
 UNUSED POSSIBLE FUTURE STUFF

@@ -253,7 +253,8 @@ pre {
 
   #tabButtons {
     float: right;
-    width: 30em;
+    width: 26em;
+    overflow: auto;
   }
 }
 
@@ -270,12 +271,14 @@ pre {
     border: 1px solid @color-lighter;
     padding: 0.5em;
     overflow: hidden;
+    text-align: left;
 
     h3 {
       padding: .5em;
       width: auto;
       margin: auto;
       text-align: center;
+      font-size: 1.05em;
       color: lighten(@color-lighter, 20%);
       border-top: 0.1em dashed @color-lighter;
       border-bottom: 0.1em dashed @color-lighter;
@@ -327,17 +330,17 @@ pre {
   text-shadow: 0 0 1em @color-essence;
 }
 
-#researchDiv {
-  text-align: center;
-
-  li {
-    color: @color-lighter;
-    font-size: 90%;
-    padding: 0.1em;
-    margin: 0;
-    .pipe-separators;
-  }
-}
+//#researchDiv {
+//  text-align: center;
+//
+//  li {
+//    color: @color-lighter;
+//    font-size: 90%;
+//    padding: 0.1em;
+//    margin: 0;
+//    .pipe-separators;
+//  }
+//}
 
 #content {
   .section;
@@ -352,6 +355,58 @@ pre {
 #buttonList {
   .inner-section;
   padding: 1.0em;
+}
+
+#incomeData {
+  padding: 0.1em;
+  float: left;
+  width: 40%;
+  padding-bottom: 1em;
+  border-bottom: 0.1em dashed @color-lighter;
+
+  tbody:nth-child(odd) { background: @color-darker; }
+  tbody:nth-child(even) { background: lighten(@color-darker, 5%); }
+
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.1em;
+    border: 1px solid @color-lighter;
+    border-collapse: collapse;
+    //border-spacing: 0;
+  }
+
+  td {
+    margin: 0;
+    font-size: 1.1em;
+    padding: 0.3em;
+  }
+}
+
+#disposeResource {
+  padding: 0.1em;
+  float: left;
+  width: 40%;
+}
+
+#upgradeList {
+  float: right;
+  text-align: left;
+  margin: auto;
+  width: 35%;
+  padding: 0.2em 0.2em 0.2em 1.3em;
+  border-left: 0.1em dashed @color-lighter;
+
+  ul {
+    list-style-type: square;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 0.5em 0.5em 0.5em 0.2em;
+    margin: 0;
+  }
 }
 
 #tabBorder {

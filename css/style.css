@@ -169,7 +169,8 @@ pre {
 }
 #contentMenu #tabButtons {
   float: right;
-  width: 30em;
+  width: 26em;
+  overflow: auto;
 }
 #sidebar {
   float: left;
@@ -192,12 +193,14 @@ pre {
   border: 1px solid #7788aa;
   padding: 0.5em;
   overflow: hidden;
+  text-align: left;
 }
 #sidebar table h3 {
   padding: .5em;
   width: auto;
   margin: auto;
   text-align: center;
+  font-size: 1.05em;
   color: #b6bfd1;
   border-top: 0.1em dashed #7788aa;
   border-bottom: 0.1em dashed #7788aa;
@@ -238,23 +241,6 @@ pre {
 #resource-essence {
   text-shadow: 0 0 1em #ace3d1;
 }
-#researchDiv {
-  text-align: center;
-}
-#researchDiv li {
-  color: #7788aa;
-  font-size: 90%;
-  padding: 0.1em;
-  margin: 0;
-  list-style-type: none;
-  display: inline;
-}
-#researchDiv li:before {
-  content: " | ";
-}
-#researchDiv li:first-child:before {
-  content: none;
-}
 #content {
   background-color: #2e4372;
   -webkit-box-shadow: 0 0 5px 5px #13264d inset;
@@ -276,6 +262,53 @@ pre {
   padding: 5px;
   margin: 5px;
   padding: 1.0em;
+}
+#incomeData {
+  padding: 0.1em;
+  float: left;
+  width: 40%;
+  padding-bottom: 1em;
+  border-bottom: 0.1em dashed #7788aa;
+}
+#incomeData tbody:nth-child(odd) {
+  background: #061639;
+}
+#incomeData tbody:nth-child(even) {
+  background: #081f50;
+}
+#incomeData table {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.1em;
+  border: 1px solid #7788aa;
+  border-collapse: collapse;
+}
+#incomeData td {
+  margin: 0;
+  font-size: 1.1em;
+  padding: 0.3em;
+}
+#disposeResource {
+  padding: 0.1em;
+  float: left;
+  width: 40%;
+}
+#upgradeList {
+  float: right;
+  text-align: left;
+  margin: auto;
+  width: 35%;
+  padding: 0.2em 0.2em 0.2em 1.3em;
+  border-left: 0.1em dashed #7788aa;
+}
+#upgradeList ul {
+  list-style-type: square;
+  padding: 0;
+  margin: 0;
+}
+#upgradeList li {
+  padding: 0.5em 0.5em 0.5em 0.2em;
+  margin: 0;
 }
 #tabBorder {
   border-bottom: 0.5em double #4e638e;
