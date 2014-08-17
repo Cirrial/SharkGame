@@ -216,17 +216,23 @@ SharkGame.Main = {
                                 var numYears = Math.floor(numMonths / 12);
                                 formatted += numYears + "Y, ";
                             }
+                            numMonths %= 12;
                             formatted += numMonths + "M, ";
                         }
+                        numWeeks %= 4;
                         formatted += numWeeks + "W, ";
                     }
+                    numDays %= 7;
                     formatted += numDays + "D, ";
                 }
+                numHours %= 24;
                 formatted += numHours + ":";
             }
+            numMinutes &= 60;
             formatted += (numMinutes < 10 ? ("0" + numMinutes) : numMinutes) + ":";
         }
-        formatted += (numSeconds < 10 ? ("0" + numMinutes) : numMinutes) + ":";
+        numSeconds %= 60;
+        formatted += (numSeconds < 10 ? ("0" + numSeconds) : numSeconds);
         return formatted;
     },
 
@@ -267,6 +273,8 @@ SharkGame.Main = {
         // initialise tabs
         SharkGame.Home.init();
         SharkGame.Lab.init();
+        //SharkGame.Stats.init();
+        //SharkGame.Recycler.init();
         SharkGame.Gate.init();
 
         if(!SharkGame.titlebarGenerated) {
@@ -358,7 +366,7 @@ checkTabUnlocks: function() {
         if(reqsMet) {
             // unlock tab!
             SharkGame.Main.discoverTab(k);
-            SharkGame.Log.addMessage("Discovered " + v.name + "!");
+            SharkGame.Log.addDiscovery("Discovered " + v.name + "!");
         }
     });
 }

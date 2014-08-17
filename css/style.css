@@ -192,10 +192,17 @@ pre {
   border: 1px solid #7788aa;
   padding: 0.5em;
 }
+#sidebar table div {
+  margin: auto;
+}
 #sidebar table h3 {
-  margin: 0;
-  padding: 0;
+  padding: .5em;
+  width: 100%;
+  margin: auto;
   text-align: center;
+  color: #b6bfd1;
+  border-top: 0.1em dashed #7788aa;
+  border-bottom: 0.1em dashed #7788aa;
 }
 #sidebar td {
   font-size: 1.1em;
@@ -225,6 +232,10 @@ pre {
 #log .error {
   color: #e03030;
   text-shadow: 0 0 0.8em #800000;
+}
+#log .discovery {
+  color: #ace3d1;
+  text-shadow: 0 0 0.8em #60c9a7;
 }
 #resource-essence {
   text-shadow: 0 0 1em #ace3d1;

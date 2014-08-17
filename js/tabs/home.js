@@ -5,7 +5,58 @@ SharkGame.Home = {
     tabName: "Home Sea",
 
     homeMessage: "You are a shark in a strange blue sea.",
-    bonusMessage: "<br/><span class='medDesc'>You can hear faint cries and songs in the distance.</span>",
+    currentExtraMessageIndex: -1,
+
+    // Priority: later messages display if available, otherwise earlier ones.
+    extraMessages: [
+        {
+            message: ""
+        },
+        {
+            unlock: {resource: {fish: 5}},
+            message: "You attract the attention of some sharks. Maybe they can help you catch fish!"
+        },
+        {
+            unlock: {resource: {fish: 15}},
+            message: "Some rays drift over."
+        },
+        {
+            unlock: {resource: {shark: 4, ray: 4}},
+            message: "Some curious crabs come over."
+        },
+        {
+            unlock: {resource: {shark: 1, crystal: 10}},
+            message: "The crystals are shiny. Some sharks stare at them curiously."
+        },
+        {
+            unlock: {resource: {scientist: 1}},
+            message: "The science sharks swim in their own school."
+        },
+        {
+            unlock: {upgrade: ["crystalContainer"]},
+            message: "More discoveries are needed."
+        },
+        {
+            unlock: {resource: {nurse: 1}},
+            message: "The shark community grows with time."
+        },
+        {
+            unlock: {upgrade: ["exploration"]},
+            message: "You hear faint songs and cries in the distance."
+        },
+        {
+            unlock: {upgrade: ["automation"]},
+            message: "Machines to do things for you.<br/>Machines to do things faster than you or any shark."
+        },
+        {
+            unlock: {upgrade: ["farExploration"]},
+            message: "This place is not your home. You remember a crystal blue ocean.<br/>The chasms beckon."
+        },
+        {
+            unlock: {upgrade: ["gateDiscovery"]},
+            message: "The gate beckons. The secret must be unlocked."
+        }
+    ],
 
     init: function() {
         var h = SharkGame.Home;
@@ -22,17 +73,57 @@ SharkGame.Home = {
         var h = SharkGame.Home;
         var content = $('#content');
         var tabMessage = $('<div>').attr("id", "tabMessage");
-        var message = h.homeMessage;
-        if(SharkGame.Tabs[SharkGame.Lab.tabId].discovered) {
-            message += h.bonusMessage;
-        }
-        tabMessage.html(message);
         content.append(tabMessage);
+        h.currentExtraMessageIndex = -1;
+        h.updateMessage(true);
         var helpButtonDiv = $('<div>');
         helpButtonDiv.css({margin: "auto", clear: "both"});
         SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
         content.append(helpButtonDiv);
         content.append($('<div>').attr("id", "buttonList"));
+    },
+
+    updateMessage: function(suppressAnimation) {
+        var h = SharkGame.Home;
+        var r = SharkGame.Resources;
+        var u = SharkGame.Upgrades;
+        var selectedIndex = h.currentExtraMessageIndex;
+        $.each(h.extraMessages, function(i, v) {
+            var showThisMessage = true;
+            // check if should show this message
+            if(v.unlock) {
+                if(v.unlock.resource) {
+                    $.each(v.unlock.resource, function(k, v) {
+                        showThisMessage = showThisMessage && (r.getResource(k) >= v);
+                    });
+                }
+                if(v.unlock.upgrade) {
+                    $.each(v.unlock.upgrade, function(i, v) {
+                        showThisMessage = showThisMessage && u[v].purchased;
+                    });
+                }
+            }
+            if(showThisMessage) {
+                selectedIndex = i;
+            }
+        });
+        // only edit DOM if necessary
+        if(h.currentExtraMessageIndex !== selectedIndex) {
+            h.currentExtraMessageIndex = selectedIndex;
+            var tabMessage = $('#tabMessage');
+            var message = h.homeMessage;
+            message += "<br/><span class='medDesc'>" + h.extraMessages[selectedIndex].message + "</span>";
+
+            if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
+                tabMessage.animate({opacity: 0}, 100, function() {
+                    var thisSel = $(this);
+                    thisSel.html(message)
+                        .animate({opacity: 1}, 100);
+                })
+            } else {
+                tabMessage.html(message);
+            }
+        }
     },
 
     update: function() {
@@ -112,6 +203,9 @@ SharkGame.Home = {
                 button.prop("disabled", !enableButton).html(label);
             }
         });
+
+        // update home message
+        h.updateMessage();
     },
 
     onHomeButton: function() {

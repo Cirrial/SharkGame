@@ -157,12 +157,11 @@ use sad shark ascii
 - add grouping for resources based on categories [MAKE INTO A PREFERENCE]
 - track timestamp of when current run was started, total playing time
 	handle case of not having those timestamps by creating it
+- add text changes to home to guide player to what they should be doing next: advisor
 
 ^^^!! stuff above this line is done !!^^^
 
 
-
-- add text changes to home to guide player to what they should be doing next: advisor
 
 - grotto (stats tab), 
 	list upgrades, 

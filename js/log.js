@@ -46,6 +46,13 @@ SharkGame.Log = {
         return messageItem;
     },
 
+    addDiscovery: function(message) {
+        var l = SharkGame.Log;
+        var messageItem = l.addMessage(message);
+        messageItem.addClass("discovery");
+        return messageItem;
+    },
+
     correctLogLength: function() {
         var l = SharkGame.Log;
         var showAnims = SharkGame.Settings.current.showAnimations;

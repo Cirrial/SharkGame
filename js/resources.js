@@ -470,9 +470,10 @@ SharkGame.Resources = {
                 if(r.isCategoryVisible(category)) {
                     var headerRow = $("<tr>")
                         .attr("colSpan", 3)
-                        .append($("<h3>")
-                            .html(category.name)
-                    );
+                        .append($('<div>')
+                            .append($("<h3>")
+                                .html(category.name)
+                        ));
                     rTable.append(headerRow);
                     $.each(category.resources, function(k, v) {
                         if(r.getTotalResource(v) > 0) {

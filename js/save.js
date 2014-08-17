@@ -35,7 +35,7 @@ SharkGame.Save = {
         });
 
         $.each(SharkGame.Settings, function(k, v) {
-            if(i !== "current") {
+            if(k !== "current") {
                 saveData.settings[k] = SharkGame.Settings.current[k];
             }
         });
@@ -185,7 +185,7 @@ SharkGame.Save = {
 
             if(saveData.settings) {
                 $.each(saveData.settings, function(k, v) {
-                    if(SharkGame.Settings.current[k]) {
+                    if(SharkGame.Settings.current[k] !== undefined) {
                         SharkGame.Settings.current[k] = v;
                         // update anything tied to this setting right off the bat
                         (SharkGame.Settings[k].onChange || $.noop)();
@@ -371,13 +371,15 @@ SharkGame.Save = {
         // and they start based on the version they were save
 
         function(save) {
-            return $.extend(true, save, {
+            save = $.extend(true, save, {
                 "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}},
                 "settings": {"showTabHelp": false, "groupResources": false},
-                "timestampLastSave": save.timestamp,
+                "timestampLastSave": null,
                 "timestampGameStart": null,
                 "timestampRunStart": null
             });
+            delete save.timestamp;
+            return save;
         }
     ]
 };

@@ -13,6 +13,9 @@
 @color-error: #E03030;
 @color-error-bg: #800000;
 
+@color-discovery: #ACE3D1;
+@color-discovery-bg: darken(@color-discovery, 20%);
+
 @color-text: white;
 @color-link: lighten(@color-lighter, 10%);
 
@@ -267,10 +270,18 @@ pre {
     border: 1px solid @color-lighter;
     padding: 0.5em;
 
+    div {
+      margin: auto;
+    }
+
     h3 {
-      margin: 0;
-      padding: 0;
+      padding: .5em;
+      width: 100%;
+      margin: auto;
       text-align: center;
+      color: lighten(@color-lighter, 20%);
+      border-top: 0.1em dashed @color-lighter;
+      border-bottom: 0.1em dashed @color-lighter;
     }
   }
 
@@ -306,6 +317,11 @@ pre {
   .error {
     color: @color-error;
     text-shadow: 0 0 0.8em @color-error-bg;
+  }
+
+  .discovery {
+    color: @color-discovery;
+    text-shadow: 0 0 0.8em @color-discovery-bg;
   }
 }
 
