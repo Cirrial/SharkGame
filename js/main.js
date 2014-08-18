@@ -17,7 +17,7 @@ $.extend(SharkGame, {
         "Saucy Sharks"
     ],
     GAME_NAME: null,
-    VERSION: 0.52,
+    VERSION: 0.53,
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
