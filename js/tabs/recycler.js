@@ -32,9 +32,9 @@ SharkGame.Recycler = {
     ],
 
     allowedCategories: [
-        "machines",
-        "stuff",
-        "processed"
+        {category: "machines", cost: "linear"},
+        {category: "stuff", cost: "constant"},
+        {category: "processed", cost: "constant"}
     ],
 
     bannedResources: [
@@ -107,6 +107,9 @@ SharkGame.Recycler = {
                     var divisor = Math.floor(selectedAmount) * -1;
                     inputAmount = resourceAmount / divisor;
                     outputAmount = y.getMaxToBuy(k) / divisor;
+
+                    inputAmount = Math.floor(inputAmount);
+                    outputAmount = Math.floor(outputAmount);
                 }
 
                 // update input button
@@ -138,7 +141,7 @@ SharkGame.Recycler = {
         var outputButtonDiv = $('#outputButtons');
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0
-                && y.allowedCategories.indexOf(r.getCategoryOfResource(k)) !== -1
+                && _.findWhere(y.allowedCategories, {category: r.getCategoryOfResource(k)})
                 && y.bannedResources.indexOf(k) === -1) {
                 SharkGame.Button.makeButton("input-" + k, "Recycle " + r.getResourceName(k), inputButtonDiv, y.onInput);
                 SharkGame.Button.makeButton("output-" + k, "Convert to " + r.getResourceName(k), outputButtonDiv, y.onOutput);
@@ -159,6 +162,7 @@ SharkGame.Recycler = {
         if(selectedAmount < 0) {
             var divisor = Math.floor(selectedAmount) * -1;
             amount = resourceAmount / divisor;
+            amount = Math.floor(amount);
         }
 
         if(resourceAmount >= amount) {
@@ -183,10 +187,19 @@ SharkGame.Recycler = {
         if(selectedAmount < 0) {
             var divisor = Math.floor(selectedAmount) * -1;
             amount = y.getMaxToBuy(resourceName) / divisor;
+            amount = Math.floor(amount);
         }
 
         var currentResourceAmount = r.getResource(resourceName);
-        var junkNeeded = SharkGame.MathUtil.linearCost(currentResourceAmount, currentResourceAmount + amount, junkPerResource);
+        var junkNeeded;
+
+        var costFunction = _.findWhere(y.allowedCategories, {category: r.getCategoryOfResource(resourceName)}).cost;
+        if(costFunction === "linear") {
+            junkNeeded = SharkGame.MathUtil.linearCost(currentResourceAmount, currentResourceAmount + amount, junkPerResource);
+        } else if(costFunction === "constant") {
+            junkNeeded = SharkGame.MathUtil.constantCost(currentResourceAmount, currentResourceAmount + amount, junkPerResource);
+        }
+
         if(junkAmount >= junkNeeded) {
             r.changeResource(resourceName, amount);
             r.changeResource("junk", -junkNeeded);
@@ -200,7 +213,13 @@ SharkGame.Recycler = {
         var resourceAmount = SharkGame.Resources.getResource(resource);
         var junkAmount = SharkGame.Resources.getResource("junk");
         var junkPricePerResource = SharkGame.ResourceTable[resource].junkValue;
-        var max = SharkGame.MathUtil.linearMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
+        var costFunction = _.findWhere(SharkGame.Recycler.allowedCategories, {category: r.getCategoryOfResource(resource)}).cost;
+        var max = 0;
+        if(costFunction === "linear") {
+            max = SharkGame.MathUtil.linearMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
+        } else if(costFunction === "constant") {
+            max = SharkGame.MathUtil.constantMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
+        }
         return Math.floor(max);
     }
 };

@@ -839,6 +839,9 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.53": [
+        "Changed Recycler so that residue into new machines is linear, but into new rsources is constant."
+    ],
     "0.52": [
         "Emergency bug-fixes.",
         "Cost to assemble residue into new things is now LINEAR (gets more expensive as you have more things) instead of CONSTANT."

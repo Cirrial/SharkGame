@@ -183,19 +183,21 @@ use sad shark ascii
 
 
 
-mine - 100 crystal 100 sand 20 sharkonium
-dig  500 sand 150 sharkonium
-auto - 100 crystal 200 sharkonium
-fish - 100 sharkonium
+mine - 100 crystal 100 sand 20 sharkonium (3200)
+dig  500 sand 150 sharkonium (12000)
+auto - 100 crystal 200 sharkonium (15500)
+fish - 100 sharkonium (7000)
 
 
-
-
-
+Sharkfall
+Heart of Sharkness
+Sharks and Recreation
+Alone in the Shark
 
 
 v 0.6:
 
+	- centralise pre-req checking (if it's worth doing)
 	
     - Trading tab
         - factions
@@ -212,10 +214,24 @@ v 0.6:
 			dolphins and whales hate sharks
 			lobsters and shimp like sharks for crab allies
 			the other two are neutral
+			
+		- events
+			- conducting diplomatic missions will lead to events
+				- can lead to relations increasing or decreasing
+				- perhaps lead to more specific actions that can be done with a faction
+				- lead into clues on how to get home
             
 	- CHEEVOS
 		- design some first before implementing anything
-
+	
+	- essence shop
+		- make essence no longer a multiplier
+		- things to buy:
+			- permanent multiplier ala essence's previous function
+			- settlers (initial bundles of sharks, rays, crabs)
+			- artifacts (undetermined random effect, only work for the next run, one positive and one negative effect)
+				- 2 or 3 essence to buy this feature permanently, choose to activate it before going through gate
+				- more essence for one with an upgrade that lets you pick the positive and negative effect
 
 	
 UNUSED POSSIBLE FUTURE STUFF
