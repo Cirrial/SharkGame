@@ -185,7 +185,8 @@ SharkGame.Recycler = {
             amount = y.getMaxToBuy(resourceName) / divisor;
         }
 
-        var junkNeeded = amount * junkPerResource;
+        var currentResourceAmount = r.getResource(resourceName);
+        var junkNeeded = SharkGame.MathUtil.linearCost(currentResourceAmount, currentResourceAmount + amount, junkPerResource);
         if(junkAmount >= junkNeeded) {
             r.changeResource(resourceName, amount);
             r.changeResource("junk", -junkNeeded);
@@ -199,7 +200,7 @@ SharkGame.Recycler = {
         var resourceAmount = SharkGame.Resources.getResource(resource);
         var junkAmount = SharkGame.Resources.getResource("junk");
         var junkPricePerResource = SharkGame.ResourceTable[resource].junkValue;
-        var max = SharkGame.MathUtil.constantMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
+        var max = SharkGame.MathUtil.linearMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
         return Math.floor(max);
     }
 };

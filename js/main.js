@@ -17,7 +17,7 @@ $.extend(SharkGame, {
         "Saucy Sharks"
     ],
     GAME_NAME: null,
-    VERSION: 0.51,
+    VERSION: 0.52,
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
@@ -839,6 +839,10 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.52": [
+        "Emergency bug-fixes.",
+        "Cost to assemble residue into new things is now LINEAR (gets more expensive as you have more things) instead of CONSTANT."
+    ],
     "0.51": [
         "Edited the wording of import/export saving.",
         "Made machine recycling less HORRIBLY BROKEN in terms of how much a machine is worth."

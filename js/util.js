@@ -41,7 +41,7 @@ SharkGame.MathUtil = {
 //    exponentialMax: function(a, b, k) {
 //        return Math.floor(Math.log(Math.pow(b,a) + (b-1) * b / k) / Math.log(a));
 //    }
-}
+};
 
 //linear floor(sqrt(current^2 + current + 2 * price/k + 1/4) - 1/2)
 //exponential floor(log(b^old + (b-1) * price / k) / log(b))
