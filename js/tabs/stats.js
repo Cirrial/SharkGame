@@ -12,7 +12,9 @@ SharkGame.Stats = {
         ]
     },
 
-    message: "The grotto is a place to keep a better track of resources.</br></br>You can also dispose of those you don't need anymore.",
+    message: "The grotto is a place to keep a better track of resources." +
+        "</br></br>You can also dispose of those you don't need anymore." +
+        "</br>Disposing specialists returns them to their normal, previous lives.",
 
     init: function() {
         var s = SharkGame.Stats;
@@ -111,8 +113,12 @@ SharkGame.Stats = {
                 }
                 var forceSingular = amountToDispose === 1;
                 var disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);
-                button.html("Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular))
-                    .prop("disabled", disableButton);
+                var label = "Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular);
+                if(amountToDispose <= 0) {
+                    label = "Can't dispose any more " + r.getResourceName(k, disableButton, forceSingular);
+                }
+
+                button.html(label).prop("disabled", disableButton);
             }
         });
     },
@@ -131,7 +137,11 @@ SharkGame.Stats = {
         if(resourceAmount >= amountToDispose) {
             r.changeResource(resourceName, -amountToDispose);
             var category = SharkGame.ResourceCategories[r.getCategoryOfResource(resourceName)];
-            l.addMessage(category.disposeMessage);
+            var employmentPool = r.getBaseOfResource(resourceName);
+            if(employmentPool) {
+                r.changeResource(employmentPool, amountToDispose);
+            }
+            l.addMessage(SharkGame.choose(category.disposeMessage));
         } else {
             l.addMessage("Can't dispose that much! You don't have enough of it.");
         }

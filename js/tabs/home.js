@@ -166,6 +166,7 @@ SharkGame.Home = {
                 if(prereqsMet) {
                     // add button
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name, buttonList, h.onHomeButton);
+
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -316,17 +317,17 @@ SharkGame.Home = {
             max = Number.MAX_VALUE;
             var rawCost = action.cost;
             $.each(rawCost, function(_, v) {
-                var resource = SharkGame.ResourceTable[v.resource];
+                var costResource = SharkGame.ResourceTable[v.resource];
 
                 var costFunction = v.costFunction;
                 var k = v.priceIncrease;
                 var subMax = -1;
                 switch(costFunction) {
                     case "constant":
-                        subMax = SharkGame.MathUtil.constantMax(currAmount, resource.amount, k) - currAmount;
+                        subMax = SharkGame.MathUtil.constantMax(currAmount, costResource.amount, k) - currAmount;
                         break;
                     case "linear":
-                        subMax = SharkGame.MathUtil.linearMax(currAmount, resource.amount, k) - currAmount;
+                        subMax = SharkGame.MathUtil.linearMax(currAmount, costResource.amount, k) - currAmount;
                         break;
                 }
                 max = Math.min(max, subMax);
@@ -659,7 +660,7 @@ SharkGame.HomeActions = {
             "Beakers! Beakers underwater! It's madness!",
             "Let the science commence!"
         ],
-        helpText: "Train a shark in the fine art of research and the science of, well, science."
+        helpText: "Train a shark in the fine art of research and the science of, well, science.",
     },
 
     'getNurse': {

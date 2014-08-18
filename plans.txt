@@ -158,22 +158,23 @@ use sad shark ascii
 - track timestamp of when current run was started, total playing time
 	handle case of not having those timestamps by creating it
 - add text changes to home to guide player to what they should be doing next: advisor
-
-^^^!! stuff above this line is done !!^^^
-
-- grotto (stats tab), 
-	
+- grotto (stats tab), 	
 	reveal what each resource is supplying in terms of income,
 	list upgrades, 
 	reveal total amount ever made of resource,
 	allows disposal (add disposal message to resource categories),
 	list time spent in game and current loop
-- research for grotto (stats tab)
-
-- recycler [requires research, research will require machines]
+	disposing specialists returns to base population
+- recycler
 	add junk values to resources
 	allow selling (reprocessing?) of things into a new junk resource	
 	process junk into new resources (add junk values for resources)
+	
+^^^!! stuff above this line is done !!^^^
+
+	
+- research for grotto (stats tab)
+- research for recycler (requires automation)	
 	
 - add new template for save version
 
@@ -209,7 +210,7 @@ v 0.6:
 	- CHEEVOS
 		- design some first before implementing anything
 
-
+1408306703079
 	
 UNUSED POSSIBLE FUTURE STUFF
 

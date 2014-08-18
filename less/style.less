@@ -8,6 +8,14 @@
 @color-dark: #152A55;
 @color-darker: #061639;
 
+@color-danger-lighter: #975F5F;
+@color-danger-light: #714141;
+@color-danger-med: #6B2B2B;
+@color-danger-dark: #5C1919;
+@color-danger-darker: #450808;
+
+
+
 @color-essence: #ACE3D1;
 
 @color-error: #E03030;
@@ -275,11 +283,11 @@ pre {
     text-align: left;
 
     h3 {
-      padding: .5em;
+      padding: .2em;
       width: auto;
       margin: auto;
       text-align: center;
-      font-size: 1.05em;
+      font-size: 0.9em;
       color: lighten(@color-lighter, 20%);
       border-top: 0.1em dashed @color-lighter;
       border-bottom: 0.1em dashed @color-lighter;
@@ -390,7 +398,6 @@ pre {
 #incomeData {
   padding: 0.1em 0.1em 1em;
   border-bottom: 0.1em dashed @color-lighter;
-  border-top: 0.1em dashed @color-lighter;
 
   .oddRow { background: @color-darker; }
   .evenRow { background: lighten(@color-darker, 5%); }
@@ -408,7 +415,8 @@ pre {
 }
 
 #disposeResource {
-  padding: 0.1em;
+  padding: 0.1em 0.1em 0.5em;
+  border-bottom: 0.1em dashed @color-lighter;
 }
 
 #upgradeList {
@@ -429,6 +437,33 @@ pre {
     padding: 0.5em 0.5em 0.5em 0.2em;
     margin: 0;
   }
+}
+
+#recyclerContainer {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+#inputButtons {
+  float: left;
+  margin: auto;
+  width: 20%;
+}
+
+#junkDisplay {
+  float: left;
+  margin: auto;
+  width: 15%;
+  background-color: @color-danger-darker;
+  color: @color-danger-lighter;
+  border: 0.1em solid @color-danger-lighter;
+  padding: 0.2em;
+}
+
+#outputButtons {
+  float: left;
+  margin: auto;
+  width: 20%;
 }
 
 #tabBorder {
@@ -531,6 +566,11 @@ button {
   font-size: 80%;
   color: lighten(@color-lighter, 30%);
   .click-passthrough;
+}
+
+.copyrightNotice {
+  font-size: 80%;
+  color: lighten(@color-lighter, 30%);
 }
 
 #pane {

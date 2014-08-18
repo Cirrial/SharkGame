@@ -87,7 +87,7 @@ SharkGame.TitleBar = {
         name: "save",
         onClick: function() {
             try {
-                try{
+                try {
                     SharkGame.Save.saveGame();
                 } catch(err) {
                     SharkGame.Log.addError(err);
@@ -136,7 +136,7 @@ SharkGame.TitleBar = {
                 SharkGame.Save.deleteSave();
                 SharkGame.Main.init(); // reset
                 SharkGame.Resources.changeResource("essence", essence);
-                try{
+                try {
                     SharkGame.Save.saveGame();
                 } catch(err) {
                     SharkGame.Log.addError(err);
@@ -178,7 +178,7 @@ SharkGame.Main = {
                 if(number > 0.001) {
                     formatted = number.toFixed(2) + "";
                 } else {
-                    if(number > 0.0001){
+                    if(number > 0.0001) {
                         formatted = number.toFixed(3) + "";
                     } else {
                         formatted = 0;
@@ -280,7 +280,7 @@ SharkGame.Main = {
             if(k === "current") {
                 return;
             }
-            SharkGame.Settings.current[k] = v.defaultSetting;
+            SharkGame.Settings.current[k] = SharkGame.Settings.current[k] || v.defaultSetting;
         });
 
         // initialise and reset resources
@@ -326,40 +326,35 @@ SharkGame.Main = {
     },
 
     tick: function() {
-        try {
-            if(SharkGame.gameOver) {
-                return;
-            }
-            var now = new Date();
-            var elapsedTime = (now.getTime() - SharkGame.before.getTime());
-
-            var r = SharkGame.Resources;
-            var m = SharkGame.Main;
-
-            // check if the sidebar needs to come back
-            if(SharkGame.sidebarHidden) {
-                m.showSidebarIfNeeded();
-            }
-
-            if(elapsedTime > SharkGame.INTERVAL) {
-                // Compensate for lost time.
-                m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
-
-            } else {
-                m.processSimTime(SharkGame.dt);
-            }
-            r.updateResourcesTable();
-
-            var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
-            tabCode.update();
-
-            m.checkTabUnlocks();
-
-            SharkGame.before = new Date();
-        } catch(err) {
-            SharkGame.Log.addError(err.message);
-            console.log(err.trace);
+        if(SharkGame.gameOver) {
+            return;
         }
+        var now = new Date();
+        var elapsedTime = (now.getTime() - SharkGame.before.getTime());
+
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+
+        // check if the sidebar needs to come back
+        if(SharkGame.sidebarHidden) {
+            m.showSidebarIfNeeded();
+        }
+
+        if(elapsedTime > SharkGame.INTERVAL) {
+            // Compensate for lost time.
+            m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
+
+        } else {
+            m.processSimTime(SharkGame.dt);
+        }
+        r.updateResourcesTable();
+
+        var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
+        tabCode.update();
+
+        m.checkTabUnlocks();
+
+        SharkGame.before = new Date();
     },
 
     checkTabUnlocks: function() {

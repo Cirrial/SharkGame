@@ -197,11 +197,11 @@ pre {
   text-align: left;
 }
 #sidebar table h3 {
-  padding: .5em;
+  padding: .2em;
   width: auto;
   margin: auto;
   text-align: center;
-  font-size: 1.05em;
+  font-size: 0.9em;
   color: #b6bfd1;
   border-top: 0.1em dashed #7788aa;
   border-bottom: 0.1em dashed #7788aa;
@@ -290,7 +290,6 @@ pre {
 #incomeData {
   padding: 0.1em 0.1em 1em;
   border-bottom: 0.1em dashed #7788aa;
-  border-top: 0.1em dashed #7788aa;
 }
 #incomeData .oddRow {
   background: #061639;
@@ -307,7 +306,8 @@ pre {
   font-size: 110%;
 }
 #disposeResource {
-  padding: 0.1em;
+  padding: 0.1em 0.1em 0.5em;
+  border-bottom: 0.1em dashed #7788aa;
 }
 #upgradeList {
   float: right;
@@ -325,6 +325,29 @@ pre {
 #upgradeList li {
   padding: 0.5em 0.5em 0.5em 0.2em;
   margin: 0;
+}
+#recyclerContainer {
+  display: inline-block;
+  margin: 0 auto;
+}
+#inputButtons {
+  float: left;
+  margin: auto;
+  width: 20%;
+}
+#junkDisplay {
+  float: left;
+  margin: auto;
+  width: 15%;
+  background-color: #450808;
+  color: #975f5f;
+  border: 0.1em solid #975f5f;
+  padding: 0.2em;
+}
+#outputButtons {
+  float: left;
+  margin: auto;
+  width: 20%;
 }
 #tabBorder {
   border-bottom: 0.5em double #4e638e;
@@ -419,6 +442,10 @@ button:disabled .medDesc {
   font-size: 80%;
   color: #d5dae5;
   pointer-events: none;
+}
+.copyrightNotice {
+  font-size: 80%;
+  color: #d5dae5;
 }
 #pane {
   background-color: #152a55;

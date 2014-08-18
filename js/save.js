@@ -148,7 +148,7 @@ SharkGame.Save = {
                     // check that this isn't an old resource that's been removed from the game for whatever reason
                     if(SharkGame.ResourceTable[k]) {
                         SharkGame.ResourceTable[k].amount = isNaN(v.amount) ? 0 : v.amount;
-                        SharkGame.ResourceTable[k].totalAmount = isNaN(v.totalAmount) ? 0 : v.amount;
+                        SharkGame.ResourceTable[k].totalAmount = isNaN(v.totalAmount) ? 0 : v.totalAmount;
                     }
                 });
             }
@@ -386,6 +386,7 @@ SharkGame.Save = {
         function(save) {
             save = $.extend(true, save, {
                 "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}, "junk": {"amount": 0, "totalAmount": 0}},
+                "upgrades" : {},
                 "settings": {"showTabHelp": false, "groupResources": false},
                 "timestampLastSave": save.timestamp,
                 "timestampGameStart": null,
