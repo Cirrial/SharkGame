@@ -119,7 +119,7 @@ SharkGame.ResourceTable = {
         income: {
             crystal: 200
         },
-        junkValue: 500
+        junkValue: 32000 //100 crystal 100 sand 20 sharkonium (3200)
     },
 
     'sandDigger': {
@@ -129,7 +129,7 @@ SharkGame.ResourceTable = {
         income: {
             sand: 300
         },
-        junkValue: 500
+        junkValue: 120000 //500 sand 150 sharkonium (12000)
     },
 
     'autoTransmuter': {
@@ -141,7 +141,7 @@ SharkGame.ResourceTable = {
             sand: -150,
             sharkonium: 20
         },
-        junkValue: 500
+        junkValue: 155000 //100 crystal 200 sharkonium (15500)
     },
 
     'fishMachine': {
@@ -151,7 +151,7 @@ SharkGame.ResourceTable = {
         income: {
             fish: 1000
         },
-        junkValue: 500
+        junkValue: 70000 //100 sharkonium (7000)
     },
 
     'science': {
