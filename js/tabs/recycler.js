@@ -186,7 +186,7 @@ SharkGame.Recycler = {
         }
 
         var junkNeeded = amount * junkPerResource;
-        if(junkAmount > junkNeeded) {
+        if(junkAmount >= junkNeeded) {
             r.changeResource(resourceName, amount);
             r.changeResource("junk", -junkNeeded);
             l.addMessage(SharkGame.choose(y.recyclerOutputMessages));
