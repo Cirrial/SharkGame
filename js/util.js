@@ -13,6 +13,7 @@ SharkGame.MathUtil = {
     // k = constant price
     // returns: absolute max items that can be held with invested and current resources
     constantMax: function(a, b, k) {
+        b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
         return b / k + a;
     },
 
@@ -29,6 +30,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: absolute max items that can be held with invested and current resources
     linearMax: function(a, b, k) {
+        b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
         return Math.sqrt((a * a) + a + (2 * b / k) + 0.25) - 0.5;
     }
 
