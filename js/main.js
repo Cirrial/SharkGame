@@ -17,7 +17,7 @@ $.extend(SharkGame, {
         "Saucy Sharks"
     ],
     GAME_NAME: null,
-    VERSION: 0.485,
+    VERSION: 0.51,
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
@@ -579,7 +579,7 @@ SharkGame.Main = {
         // add save import/export
         var row = $('<tr>');
         row.append($('<td>')
-                .html("Import/Export Save:<br/><span class='smallDesc'>(Import or export save as text! Remember to keep it safe!)</span>")
+                .html("Import/Export Save:<br/><span class='smallDesc'>(You should probably save first!) Import or export save as text. Keep your save safe!</span>")
         );
         row.append($('<td>').append($('<button>')
                 .html("import")
@@ -839,9 +839,26 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.51": [
+        "Edited the wording of import/export saving.",
+        "Made machine recycling less HORRIBLY BROKEN in terms of how much a machine is worth."
+    ],
     "0.5": [
+        "Added the Grotto - a way to better understand what you've accomplished so far.",
+        "Added the Recycler. Enjoy discovering its function!",
+        "Added sand machines for more machine sand goodness.",
+        "Fixed oscillation/flickering of resources when at zero with anything providing a negative income.",
+        "Added 'support' for people stumbling across the page with scripts turned off.",
+        "Upped the gate kelp requirement by 10x, due to request.",
+        "Added time tracking. Enjoy seeing how much of your life you've invested in this game.",
+        "Added grouping for displaying resources on the left.",
+        "Added some help and action descriptions.",
+        "Added some text to the home tab to let people have an idea of where they should be heading in the very early game.",
+        "Thanks to assistance from others, the saves are now much, much smaller than before.",
         "Made crab broods less ridiculously explosive.",
-        ""
+        "Adjusted some resource colours.",
+        "Added a favicon, probably.",
+        "<span class='medDesc'>Added an overdue copyright notice I guess.</span>"
     ],
     "0.48": [
         "Saves are now compressed both in local storage and in exported strings.",

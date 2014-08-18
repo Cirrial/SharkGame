@@ -327,27 +327,28 @@ pre {
   margin: 0;
 }
 #recyclerContainer {
-  display: inline-block;
   margin: 0 auto;
+  overflow: hidden;
+  width: 40em;
 }
 #inputButtons {
   float: left;
   margin: auto;
-  width: 20%;
+  min-width: 14em;
 }
 #junkDisplay {
   float: left;
   margin: auto;
-  width: 15%;
+  width: 10em;
   background-color: #450808;
-  color: #975f5f;
+  color: #d4bbbb;
   border: 0.1em solid #975f5f;
   padding: 0.2em;
 }
 #outputButtons {
   float: left;
   margin: auto;
-  width: 20%;
+  min-width: 14em;
 }
 #tabBorder {
   border-bottom: 0.5em double #4e638e;

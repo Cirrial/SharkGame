@@ -440,22 +440,23 @@ pre {
 }
 
 #recyclerContainer {
-  display: inline-block;
   margin: 0 auto;
+  overflow: hidden;
+  width: 40em;
 }
 
 #inputButtons {
   float: left;
   margin: auto;
-  width: 20%;
+  min-width: 14em;
 }
 
 #junkDisplay {
   float: left;
   margin: auto;
-  width: 15%;
+  width: 10em;
   background-color: @color-danger-darker;
-  color: @color-danger-lighter;
+  color: lighten(@color-danger-lighter, 30%);
   border: 0.1em solid @color-danger-lighter;
   padding: 0.2em;
 }
@@ -463,7 +464,7 @@ pre {
 #outputButtons {
   float: left;
   margin: auto;
-  width: 20%;
+  min-width: 14em;
 }
 
 #tabBorder {

@@ -386,7 +386,7 @@ SharkGame.Save = {
         function(save) {
             save = $.extend(true, save, {
                 "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}, "junk": {"amount": 0, "totalAmount": 0}},
-                "upgrades" : {},
+                "upgrades" : {statsDiscovery: null, recyclerDiscovery: null},
                 "settings": {"showTabHelp": false, "groupResources": false},
                 "timestampLastSave": save.timestamp,
                 "timestampGameStart": null,

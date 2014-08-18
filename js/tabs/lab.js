@@ -259,6 +259,19 @@ SharkGame.Upgrades = {
         }
     },
 
+    statsDiscovery: {
+        name: "Storage Caverns",
+        desc: "It's about time to start moving the stores we have to a better place. We've found one but it needs setting up.",
+        researchedMessage: "All the goods we've acquired are now being stored and itemised in a mostly flooded cavern system. No more stray currents washing it all away!",
+        effectDesc: "By storing things in a centralised location, we now finally have an idea of what we're doing. Sort of.",
+        cost: {
+            science: 150
+        },
+        required: [
+            "crystalContainer"
+        ]
+    },
+
     underwaterChemistry: {
         name: "Underwater Chemistry",
         desc: "With the weird bottles, we can now put things and other things into them and see what happens.",
@@ -356,6 +369,19 @@ SharkGame.Upgrades = {
                 sandDigger: 2
             }
         }
+    },
+
+    recyclerDiscovery: {
+        name: "Recycler",
+        desc: "Devise a system of pulverising unwanted resources into a component paste, and reusing them as something else.",
+        researchedMessage: "Well this thing is frankly terrifying. I wouldn't swim anywhere near the input holes if I were you. Maybe it'll help though!",
+        effectDesc: "Allows recycling of materials by virtue of a horrifying mechanical maw that consumes all that ventures near it. Future?",
+        cost: {
+            science: 3000
+        },
+        required: [
+            "automation"
+        ]
     },
 
     kelpHorticulture: {

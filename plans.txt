@@ -169,23 +169,29 @@ use sad shark ascii
 	add junk values to resources
 	allow selling (reprocessing?) of things into a new junk resource	
 	process junk into new resources (add junk values for resources)
+- research for grotto (stats tab)
+- research for recycler (requires automation)
+- add new template for save version	
+- FAVICON!! 16x16
+- META IMG! 125x125
+- update changelog
+- uncomment analytics
+- push update!!
 	
 ^^^!! stuff above this line is done !!^^^
 
-	
-- research for grotto (stats tab)
-- research for recycler (requires automation)	
-	
-- add new template for save version
 
-- FAVICON!! 16x16
-- META IMG! 125x125
 
-- update changelog
 
-- uncomment analytics
+mine - 100 crystal 100 sand 20 sharkonium
+dig  500 sand 150 sharkonium
+auto - 100 crystal 200 sharkonium
+fish - 100 sharkonium
 
-- push update!!
+
+
+
+
 
 
 v 0.6:
@@ -210,7 +216,7 @@ v 0.6:
 	- CHEEVOS
 		- design some first before implementing anything
 
-1408306703079
+
 	
 UNUSED POSSIBLE FUTURE STUFF
 
