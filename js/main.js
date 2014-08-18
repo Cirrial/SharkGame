@@ -840,7 +840,7 @@ SharkGame.Button = {
 
 SharkGame.Changelog = {
     "0.53": [
-        "Changed Recycler so that residue into new machines is linear, but into new rsources is constant."
+        "Changed Recycler so that residue into new machines is linear, but into new resources is constant."
     ],
     "0.52": [
         "Emergency bug-fixes.",
