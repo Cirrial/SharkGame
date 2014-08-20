@@ -62,6 +62,14 @@
   opacity: @opacity;
 }
 
+.transition(...) {
+  -webkit-transition:@arguments;
+  -moz-transition:@arguments;
+  -o-transition:@arguments;;
+  -ms-transition:@arguments;
+  transition:@arguments;
+}
+
 .no-select() {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -452,6 +460,7 @@ pre {
 }
 
 #junkDisplay {
+  position: relative;
   float: left;
   margin: auto;
   width: 10em;
@@ -459,6 +468,7 @@ pre {
   color: lighten(@color-danger-lighter, 30%);
   border: 0.1em solid @color-danger-lighter;
   padding: 0.2em;
+  z-index: 5;
 }
 
 #outputButtons {

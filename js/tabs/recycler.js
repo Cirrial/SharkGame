@@ -40,7 +40,8 @@ SharkGame.Recycler = {
     bannedResources: [
         "essence",
         "junk",
-        "science"
+        "science",
+        "seaApple"
     ],
 
     init: function() {
@@ -84,8 +85,10 @@ SharkGame.Recycler = {
         var y = SharkGame.Recycler;
         var m = SharkGame.Main;
 
+        var junkAmount = r.getResource("junk");
+
         var junkDisplay = $('#junkDisplay');
-        junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(r.getResource("junk")) + "<br/><br/>RESIDUE");
+        junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(junkAmount) + "<br/><br/>RESIDUE");
     },
 
     updateButtons: function() {

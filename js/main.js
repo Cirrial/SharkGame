@@ -14,10 +14,14 @@ $.extend(SharkGame, {
         "Shark Saver",
         "Shoal Sharker",
         "Shark Souls",
-        "Saucy Sharks"
+        "Saucy Sharks",
+        "Sharkfall",
+        "Heart of Sharkness",
+        "Sharks and Recreation",
+        "Alone in the Shark"
     ],
     GAME_NAME: null,
-    VERSION: 0.53,
+    VERSION: 0.531,
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
@@ -839,6 +843,9 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.531": [
+        "Banned sea apples from the recycler because the feedback loop is actually far more crazy powerful than I was expecting. Whoops!"
+    ],
     "0.53": [
         "Changed Recycler so that residue into new machines is linear, but into new resources is constant."
     ],

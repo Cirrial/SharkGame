@@ -337,6 +337,7 @@ pre {
   min-width: 14em;
 }
 #junkDisplay {
+  position: relative;
   float: left;
   margin: auto;
   width: 10em;
@@ -344,6 +345,7 @@ pre {
   color: #d4bbbb;
   border: 0.1em solid #975f5f;
   padding: 0.2em;
+  z-index: 5;
 }
 #outputButtons {
   float: left;
