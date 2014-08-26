@@ -1,5 +1,6 @@
 var SharkGame = SharkGame || {};
 
+
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
     GAME_NAMES: ["Five Seconds A Shark",
@@ -42,7 +43,8 @@ $.extend(SharkGame, {
         "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
         "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
         "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
-        "<p>Additional code and credit help, as well as hosting, provided by Dylan.</p>" +
+        "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
+        "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>" +
         "<p>Thank you for playing! You're all awesome!</p>",
 
     ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +

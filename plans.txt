@@ -192,6 +192,13 @@ fish - 100 sharkonium (7000)
 
 v 0.6:
 
+	- give end of run time at end of game (ty sam)
+	- add extended credits link on menu
+	- use google CDN for jquery and underscore loading
+	
+	^^^!! stuff above this line is done !!^^^	
+		
+
 	- add share menu
 	
 <!-- AddToAny BEGIN -->
@@ -207,7 +214,13 @@ v 0.6:
 <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
 <!-- AddToAny END -->
 		
-		
+	
+	- donates
+	 "hi you can *donate to help save sharks* if you want but if you would rather *support the developer* that is okay too"
+	
+	
+	
+	- add option (enabled by default) to warn players of poor purchasing decisions
 		
     - Trading tab
         - factions
