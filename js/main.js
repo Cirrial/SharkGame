@@ -691,8 +691,12 @@ SharkGame.Main = {
     },
 
     showEnding: function() {
+        var currTime = (new Date()).getTime();
+        var m = SharkGame.Main;
+
         var endPane = $('<div>');
         endPane.append($('<div>').append(SharkGame.ending).addClass("paneContentDiv"));
+        endPane.append($('<div>').html("Exploration time:<br/>").append(m.formatTime(currTime - SharkGame.timestampRunStart)).addClass("paneContentDiv"));
         endPane.append($('<div>').append(SharkGame.credits).addClass("paneContentDiv"));
         var buttonDiv = $('<div>').attr("id", "endButton").addClass("paneContentDiv");
         endPane.append(buttonDiv);
