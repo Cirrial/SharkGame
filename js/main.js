@@ -23,7 +23,7 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.531,
+    VERSION: 0.59,
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
@@ -851,6 +851,13 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.59": [
+        "Bunch of small fixes and tweaks!",
+        "End of run time now shown at the end of a run.",
+        "A couple of fixes for issues only found in IE11.",
+        "Fixed a bug that could let people buy hundreds of things for cheap by overwhelming the game's capacity for input. Hopefully fixed, anyway.",
+        "Gaudy social media share menu shoehorned in below the game title. Enjoy!"
+    ],
     "0.531": [
         "Banned sea apples from the recycler because the feedback loop is actually far more crazy powerful than I was expecting. Whoops!"
     ],
