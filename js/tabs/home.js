@@ -180,9 +180,11 @@ SharkGame.Home = {
                 var amount = amountToBuy;
                 var actionCost;
                 if(amountToBuy < 0) {
-                    var max = h.getMax(value);
-                    var divisor = Math.floor((amountToBuy)) * -1;
-                    amount = (max / divisor);
+                    var max = Math.floor(h.getMax(value));
+                    // convert divisor from a negative number to a positive fraction
+                    var divisor = 1 / (Math.floor((amountToBuy)) * -1);
+                    amount = max * divisor;
+                    amount = Math.floor(amount);
                     if(amount < 1) amount = 1;
                     actionCost = h.getCost(value, amount);
                 } else {
@@ -198,7 +200,7 @@ SharkGame.Home = {
 
                 var label = value.name;
                 if(!$.isEmptyObject(actionCost) && amount > 1) {
-                    label += " (" + SharkGame.Main.beautify(amount) + ")";
+                    label += " (" + amount + ")";
                 }
                 var costText = r.resourceListToString(actionCost, !enableButton);
                 if(costText != "") {
@@ -230,9 +232,16 @@ SharkGame.Home = {
         if(amountToBuy < 0) {
             // unlimited mode, calculate the highest we can go
             var max = h.getMax(action);
+            // floor max
+            max = Math.floor(max);
             if(max > 0) {
-                var divisor = Math.floor((amountToBuy)) * -1;
-                amount = (max / divisor);
+                // convert divisor from a negative number to a positive fraction
+                var divisor = 1 / (Math.floor((amountToBuy)) * -1);
+                amount = max * divisor;
+                // floor amount
+                amount = Math.floor(amount);
+                // make it worth entering this function
+                if(amount < 1) amount = 1;
                 actionCost = h.getCost(action, amount);
             }
         } else {

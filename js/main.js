@@ -45,8 +45,8 @@ $.extend(SharkGame, {
         "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
         "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
         "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
-        "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>" +
-        "<p>Thank you for playing! You're all awesome!</p>",
+        "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>",
+
 
     ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
         "<p>The gate leads away from this strange ocean...</p>" +
@@ -128,6 +128,13 @@ SharkGame.TitleBar = {
         name: "help",
         onClick: function() {
             SharkGame.Main.showHelp();
+        }
+    },
+
+    creditsLink: {
+        name: "credits",
+        onClick: function() {
+            SharkGame.Main.showPane("Credits", SharkGame.credits);
         }
     },
 
@@ -699,7 +706,6 @@ SharkGame.Main = {
         var endPane = $('<div>');
         endPane.append($('<div>').append(SharkGame.ending).addClass("paneContentDiv"));
         endPane.append($('<div>').html("Exploration time:<br/>").append(m.formatTime(currTime - SharkGame.timestampRunStart)).addClass("paneContentDiv"));
-        endPane.append($('<div>').append(SharkGame.credits).addClass("paneContentDiv"));
         var buttonDiv = $('<div>').attr("id", "endButton").addClass("paneContentDiv");
         endPane.append(buttonDiv);
         SharkGame.Button.makeButton("closeEnding", "Enter the New Ocean", buttonDiv, SharkGame.Main.loopGame);
