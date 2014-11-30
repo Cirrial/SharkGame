@@ -53,13 +53,25 @@ $.extend(SharkGame, {
         "<p>Back home to the oceans you came from!</p>" +
         "<h3>Or are they?</h3>",
 
-    help: "<p>This game is a game about discovery, resources, and does not demand your full attention. You are free to pay as much attention to the game as you want. " +
+    help: "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
+        "You are free to pay as much attention to the game as you want. " +
         "It will happily run in the background, and works even while closed.</p>" +
         "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
         "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
-        "<p>If you are ever stuck, try actions you haven't yet tried. Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
+        "<p>If you are ever stuck, try actions you haven't yet tried. " +
+        "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
 
-
+    donate: "<p>You can <a href='http://www.sharksavers.org/en/home/' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
+        "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
+        "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
+        "<a href='https://www.paypal.com/cgi-bin/" +
+        "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
+        "item_name=Shark%20Game%20Developer%20Support&" +
+        "item_number=Shark%20Game%20Support&no_note=1&" +
+        "no_shipping=1&currency_code=USD&" +
+        "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
+        "target='_blank'>support the developer</a>" +
+        " if you'd like.)</span></p>",
 
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
@@ -165,6 +177,14 @@ SharkGame.TitleBar = {
                     console.log(err.trace);
                 }
             }
+        }
+    },
+
+    donateLink: {
+        name: "donate",
+        main: false,
+        onClick: function() {
+            SharkGame.Main.showPane("Donate", SharkGame.donate);
         }
     }
 };

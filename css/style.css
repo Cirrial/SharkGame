@@ -441,6 +441,10 @@ button:disabled .medDesc {
   font-size: 80%;
   color: #343f54;
 }
+.button-icon {
+  vertical-align: middle;
+  display: inline-block;
+}
 #overlay {
   -webkit-opacity: 0.5;
   -moz-opacity: 0.5;
@@ -456,6 +460,12 @@ button:disabled .medDesc {
   font-size: 60%;
   color: #7788aa;
   pointer-events: none;
+}
+.smallDescAllowClicks {
+  font-size: 60%;
+  color: #7788aa;
+  pointer-events: none;
+  pointer-events: auto;
 }
 .medDesc {
   font-size: 80%;

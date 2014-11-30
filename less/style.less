@@ -367,20 +367,6 @@ pre {
   text-shadow: 0 0 1em @color-essence;
 }
 
-
-
-//#researchDiv {
-//  text-align: center;
-//
-//  li {
-//    color: @color-lighter;
-//    font-size: 90%;
-//    padding: 0.1em;
-//    margin: 0;
-//    .pipe-separators;
-//  }
-//}
-
 #content {
   .section;
   padding: 0.5em;
@@ -395,6 +381,10 @@ pre {
   .inner-section;
   padding: 1.0em;
 }
+
+//////////////////////////////////////////////////////////////
+// STATS
+//////////////////////////////////////////////////////////////
 
 #statsContainer {
   .inner-section;
@@ -467,6 +457,10 @@ pre {
   }
 }
 
+//////////////////////////////////////////////////////////////
+// RECYCLER
+//////////////////////////////////////////////////////////////
+
 #recyclerContainer {
   margin: 0 auto;
   overflow: hidden;
@@ -496,6 +490,10 @@ pre {
   margin: auto;
   min-width: 14em;
 }
+
+//////////////////////////////////////////////////////////////
+// MAIN I THINK
+//////////////////////////////////////////////////////////////
 
 #tabBorder {
   border-bottom: 0.5em double @color-light;
@@ -577,6 +575,13 @@ button {
   }
 }
 
+.button-icon {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+
+
 #overlay {
   .opacity(0.5);
   position: absolute;
@@ -591,6 +596,11 @@ button {
   font-size: 60%;
   color: @color-lighter;
   .click-passthrough;
+}
+
+.smallDescAllowClicks {
+  .smallDesc;
+  pointer-events: auto;
 }
 
 .medDesc {
