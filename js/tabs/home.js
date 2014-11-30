@@ -121,6 +121,7 @@ SharkGame.Home = {
             var tabMessage = $('#tabMessage');
             var message = h.homeMessage;
             message += "<br/><span class='medDesc'>" + h.extraMessages[selectedIndex].message + "</span>";
+            message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
 
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
                 tabMessage.animate({opacity: 0}, 100, function() {
@@ -166,7 +167,11 @@ SharkGame.Home = {
                 if(prereqsMet) {
                     // add button
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name, buttonList, h.onHomeButton);
-
+                    var imagePath = "http://placekitten.com/g/50/50";
+                    if(value.image) {
+                        imagePath = value.image;
+                    }
+                    buttonSelector.prepend("<img class='button-icon' src='" + imagePath + "'>");
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -212,6 +217,11 @@ SharkGame.Home = {
                     }
                 }
                 button.prop("disabled", !enableButton).html(label);
+                var imagePath = "http://placekitten.com/g/50/50";
+                if(value.image) {
+                    imagePath = value.image;
+                }
+                button.prepend("<img class='button-icon' src='" + imagePath + "'>");
             }
         });
 
@@ -356,6 +366,7 @@ SharkGame.Home = {
 SharkGame.HomeActions = {
     'catchFish': {
         name: "Catch fish",
+        image: "img/raw/purchaseicons_0.png",
         effect: {
             resource: {
                 'fish': 1
@@ -386,6 +397,7 @@ SharkGame.HomeActions = {
 
     'seaApplesToScience': {
         name: "Study sea apples",
+        image: "img/raw/purchaseicons_1.png",
         effect: {
             resource: {
                 science: 5

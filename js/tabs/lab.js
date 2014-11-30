@@ -36,6 +36,7 @@ SharkGame.Lab = {
         var content = $('#content');
 
         var message = l.allResearchDone() ? l.messageDone : l.message;
+        message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
         content.append($('<div>').attr("id", "tabMessage").html(message));
         content.append($('<div>').attr("id", "buttonList"));
     },
@@ -73,6 +74,7 @@ SharkGame.Lab = {
                     // add button
                     var effects = SharkGame.Lab.getResearchEffects(value);
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
+                    buttonSelector.prepend("<img src='http://placekitten.com/g/80/80' class='button-icon'>");
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -98,6 +100,7 @@ SharkGame.Lab = {
                 if(costText != "") {
                     label += "<br/>Cost: " + costText;
                 }
+                label = "<img src='http://placekitten.com/g/80/80' class='tab-scene-image'>" + label;
                 button.prop("disabled", !enableButton).html(label);
             }
         });

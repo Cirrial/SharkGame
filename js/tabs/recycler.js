@@ -67,7 +67,9 @@ SharkGame.Recycler = {
         container.append($('<div>').attr("id", "outputButtons"));
         content.append(container);
         content.append($('<div>').addClass("clear-fix"));
-        $('#tabMessage').html(y.message);
+        var message = y.message;
+        message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        $('#tabMessage').html(message);
 
         m.createBuyButtons("eat");
         y.createButtons();

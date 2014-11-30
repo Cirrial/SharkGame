@@ -105,7 +105,6 @@ pre {
 }
 #title {
   clear: both;
-  background-color: #2e4372;
   -webkit-box-shadow: 0 0 5px 5px #13264d inset;
   -moz-box-shadow: 0 0 5px 5px #13264d inset;
   box-shadow: 0 0 5px 5px #13264d inset;
@@ -114,6 +113,9 @@ pre {
   border-radius: 10px;
   padding: 5px;
   overflow: hidden;
+  background: no-repeat center;
+  background-color: #2e4372;
+  background-image: url("http://placekitten.com/g/500/200");
 }
 #title h1 {
   margin: 0.5em;
@@ -274,6 +276,13 @@ pre {
   padding: 5px;
   margin: 5px;
   padding: 1.4em;
+  background: url("http://placehold.it/100x400/4E638E/2E4372") repeat-x center;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  -webkit-box-shadow: 0 0 30px 30px #2e4372 inset;
+  -moz-box-shadow: 0 0 30px 30px #2e4372 inset;
+  box-shadow: 0 0 30px 30px #2e4372 inset;
 }
 #buttonList {
   padding: 5px;
@@ -357,10 +366,13 @@ pre {
   float: left;
   margin: auto;
   width: 10em;
-  background-color: #450808;
+  background: #450808 url('http://placehold.it/100/5D0909/975F5F') center;
   color: #d4bbbb;
   border: 0.1em solid #975f5f;
-  padding: 0.2em;
+  -webkit-box-shadow: 0 0 15px 15px #450808 inset;
+  -moz-box-shadow: 0 0 15px 15px #450808 inset;
+  box-shadow: 0 0 15px 15px #450808 inset;
+  padding: 0.5em;
   z-index: 5;
 }
 #outputButtons {
@@ -426,10 +438,10 @@ button:focus {
   outline: 0;
 }
 button:disabled {
-  background-color: #040d22;
-  color: #2e4372;
+  background-color: #061639;
+  color: #3d5896;
   cursor: default;
-  border-color: #2e4372;
+  border-color: #3d5896;
 }
 button:disabled:hover {
   box-shadow: none;
@@ -439,11 +451,23 @@ button:disabled:active {
 }
 button:disabled .medDesc {
   font-size: 80%;
-  color: #343f54;
+  color: #3e4b63;
 }
 .button-icon {
   vertical-align: middle;
-  display: inline-block;
+  display: block;
+  margin: 0 auto 0.4em auto;
+}
+.tab-scene-image {
+  vertical-align: middle;
+  display: block;
+  margin: 0.1em auto 0.4em auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 5px #152a55;
+  -moz-box-shadow: 0 0 5px 5px #152a55;
+  box-shadow: 0 0 5px 5px #152a55;
 }
 #overlay {
   -webkit-opacity: 0.5;

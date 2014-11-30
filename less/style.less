@@ -79,6 +79,15 @@
   user-select: none;
 }
 
+.multi-column-list(@count: 2, @separation: 5px) {
+  -moz-column-count: @count;
+  -moz-column-gap: @separation;
+  -webkit-column-count: @count;
+  -webkit-column-gap: @separation;
+  column-count: @count;
+  column-gap: @separation;
+}
+
 .pipe-separators() {
   list-style-type: none;
   display: inline;
@@ -215,6 +224,9 @@ pre {
 #title {
   clear: both;
   .section;
+  background: no-repeat center;
+  background-color: @color-med;
+  background-image: url("http://placekitten.com/g/500/200");
 
   h1 {
     //text-align: left;
@@ -375,7 +387,11 @@ pre {
 #tabMessage {
   .inner-section;
   padding: 1.4em;
+  background: url("http://placehold.it/100x400/4E638E/2E4372") repeat-x center;
+  .border-radius(0.5em);
+  .box-shadow-inset(0, 0, 30px, 30px, @color-med);
 }
+
 
 #buttonList {
   .inner-section;
@@ -478,10 +494,11 @@ pre {
   float: left;
   margin: auto;
   width: 10em;
-  background-color: @color-danger-darker;
+  background: @color-danger-darker url('http://placehold.it/100/5D0909/975F5F') center;
   color: lighten(@color-danger-lighter, 30%);
   border: 0.1em solid @color-danger-lighter;
-  padding: 0.2em;
+  .box-shadow-inset(0, 0, 15px, 15px, @color-danger-darker);
+  padding: 0.5em;
   z-index: 5;
 }
 
@@ -554,10 +571,10 @@ button {
   }
 
   &:disabled {
-    background-color: darken(@color-darker, 5%);
-    color: @color-med;
+    background-color: @color-darker;
+    color: lighten(@color-med, 10%);
     cursor: default;
-    border-color: @color-med;
+    border-color: lighten(@color-med, 10%);
 
     &:hover {
       box-shadow: none;
@@ -569,15 +586,28 @@ button {
 
     .medDesc {
       font-size: 80%;
-      color: darken(@color-lighter, 30%);
+      color: darken(@color-lighter, 25%);
     }
 
   }
 }
 
+//////////////////////////////////////////////////////////////
+// IMAGES AND PICTURES ETC
+//////////////////////////////////////////////////////////////
+
 .button-icon {
   vertical-align: middle;
-  display: inline-block;
+  display: block;
+  margin: 0 auto 0.4em auto;
+}
+
+.tab-scene-image {
+  vertical-align: middle;
+  display: block;
+  margin: 0.1em auto 0.4em auto;
+  .border-radius(5px);
+  .box-shadow(0, 0, 5px, 5px, @color-dark);
 }
 
 

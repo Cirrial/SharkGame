@@ -897,6 +897,11 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "0.6": [
+        "Major graphical update!",
+        "Now features graphics sort of!",
+        "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>"
+    ],
     "0.59": [
         "Bunch of small fixes and tweaks!",
         "End of run time now shown at the end of a run.",

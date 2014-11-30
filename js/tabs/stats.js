@@ -42,7 +42,9 @@ SharkGame.Stats = {
         );
         statsContainer.append($('<div>').attr("id", "upgradeList"));
         statsContainer.append($('<div>').addClass("clear-fix"));
-        $('#tabMessage').html(s.message);
+        var message = s.message;
+        message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        $('#tabMessage').html(message);
 
         var disposeSel = $('#disposeResource');
         disposeSel.append($('<h3>').html("Dispose of Stuff"));

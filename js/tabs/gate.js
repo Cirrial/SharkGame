@@ -25,8 +25,7 @@ SharkGame.Gate = {
         crystal: 1E9,
         kelp: 1E6,
         seaApple: 1E6,
-        sharkonium: 1E8,
-
+        sharkonium: 1E8
     },
 
     init: function() {
@@ -98,6 +97,7 @@ SharkGame.Gate = {
             var diff = cost - SharkGame.ResourceTable[resourceId].amount;
             message += SharkGame.Main.beautify(diff) + " more.";
         }
+        message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
         $('#tabMessage').html(message);
     },
 
