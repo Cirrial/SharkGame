@@ -63,7 +63,7 @@ SharkGame.Log = {
                 // remove oldest message
                 if (showAnims) {
                     l.messages[0].animate({opacity: 0.0}, 100, "swing", function () {
-                        this.remove()
+                        $(this).remove();
                     });
                 } else {
                     l.messages[0].remove();

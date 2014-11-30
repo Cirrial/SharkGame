@@ -156,7 +156,8 @@ SharkGame.Recycler = {
         var r = SharkGame.Resources;
         var l = SharkGame.Log;
         var y = SharkGame.Recycler;
-        var resourceName = ($(this).attr("id")).split("-")[1];
+        var button = $(this);
+        var resourceName = button.attr("id").split("-")[1];
         var resourceAmount = r.getResource(resourceName);
         var junkPerResource = SharkGame.ResourceTable[resourceName].junkValue;
 
@@ -175,13 +176,17 @@ SharkGame.Recycler = {
         } else {
             l.addMessage("You don't have enough for that!");
         }
+
+        // disable button until next frame
+        button.prop("disabled", true);
     },
 
     onOutput: function() {
         var r = SharkGame.Resources;
         var l = SharkGame.Log;
         var y = SharkGame.Recycler;
-        var resourceName = ($(this).attr("id")).split("-")[1];
+        var button = $(this);
+        var resourceName = button.attr("id").split("-")[1];
         var junkAmount = r.getResource("junk");
         var junkPerResource = SharkGame.ResourceTable[resourceName].junkValue;
 
@@ -209,6 +214,9 @@ SharkGame.Recycler = {
         } else {
             l.addMessage("You don't have enough for that!");
         }
+
+        // disable button until next frame
+        button.prop("disabled", true);
     },
 
     getMaxToBuy: function(resource) {

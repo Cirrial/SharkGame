@@ -222,7 +222,8 @@ SharkGame.Home = {
         var r = SharkGame.Resources;
         var amountToBuy = SharkGame.Settings.current.buyAmount;
         // get related entry in home button table
-        var buttonName = $(this).attr("id");
+        var button = $(this);
+        var buttonName = button.attr("id");
         var action = SharkGame.HomeActions[buttonName];
         var actionCost = {};
         var amount = 0;
@@ -272,6 +273,8 @@ SharkGame.Home = {
                 SharkGame.Log.addMessage("You can't afford that!");
             }
         }
+        // disable button until next frame
+        button.prop("disabled", true);
     },
 
 
@@ -550,7 +553,8 @@ SharkGame.HomeActions = {
             "A porcupine ray joins you.",
             "A sepia stingaree joins you.",
             "A banded stingaree joins you.",
-            "A spotted stingaree joins you."
+            "A spotted stingaree joins you.",
+            "A sea pancake joins you."
         ],
         multiOutcomes: [
             "A whole bunch of rays join you.",

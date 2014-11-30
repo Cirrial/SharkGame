@@ -33,22 +33,16 @@
 
     <!-- load frameworks -->
     <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- underscore -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-
-    <!--
-     When I actually end up using these, I should uncomment them. Til then, they're just taking up space.
-    <script type="text/javascript" src="js/lib/jquery.animate-colors-min.js"></script>
-    -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <!-- AddToAny -->
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
 
     <!-- Modified version of Jacob Rus script from 2009 -->
     <script type="text/javascript" src="js/lib/base64-ascii85.js"></script>
     <!-- Single-file version of pako, for compression/decompression -->
     <script type="text/javascript" src="js/lib/pako.js"></script>
-    <!-- Escapes.js renders ANSI art -->
-    <!-- UNUSED (for now) -->
-    <!-- <script type="text/javascript" src="js/lib/escapes.min.js"></script> -->
 
     <!-- Cirr's code starts here. I hope you find it insightful if you came here to peer at it,
         but Javascript is hardly my most familiar language. The code here likely stinks. -->
@@ -97,6 +91,15 @@
         <div id="title">
             <h1 id="gameName">- SHARK GAME -</h1>
             <h4 id="versionNumber"></h4>
+            <div id="shareWrapper">
+                <div class="a2a_kit a2a_default_style">
+                    <a class="a2a_dd" href="https://www.addtoany.com/share_save">Share</a>
+                    <span class="a2a_divider"></span>
+                    <a class="a2a_button_facebook"></a>
+                    <a class="a2a_button_twitter"></a>
+                    <a class="a2a_button_google_plus"></a>
+                </div>
+            </div>
             <div id="titlebar">
                 <ul id="titlemenu">
                 </ul>

@@ -65,7 +65,9 @@ SharkGame.Save = {
 
         if(!suppressSavingToStorage) {
             try {
-                localStorage.setItem(SharkGame.Save.saveFileName, saveString);
+                // convert compressed data to ascii85 for friendlier browser support (IE11 doesn't like weird binary data)
+                var convertedSaveString = ascii85.encode(saveString);
+                localStorage.setItem(SharkGame.Save.saveFileName, convertedSaveString);
             } catch(err) {
                 throw new Error("Couldn't save to local storage. Reason: " + err.message);
             }
@@ -79,6 +81,15 @@ SharkGame.Save = {
 
         if(!saveDataString) {
             throw new Error("Tried to load game, but no game to load.");
+        }
+
+        // if first letter of string is <, data is encoded in ascii85, decode it.
+        if(saveDataString.substring(0, 2) === "<~") {
+            try {
+                saveDataString = ascii85.decode(saveDataString);
+            } catch(err) {
+                throw new Error("Saved data looked like it was encoded in ascii85, but it couldn't be decoded. Can't load.")
+            }
         }
 
         // if first letter of string is x, data is compressed and needs uncompressing.
@@ -263,7 +274,7 @@ SharkGame.Save = {
         try {
             saveData = ascii85.decode(data);
         } catch(err) {
-            SharkGame.Log.addError("That's not encoded properly. Are you sure that's a real save export string?");
+            SharkGame.Log.addError("That's not encoded properly. Are you sure that's the full save export string?");
         }
         // load the game from this save data string
         try {
@@ -287,8 +298,12 @@ SharkGame.Save = {
                 console.log(err.trace);
             }
         }
-        // encode save
-        return ascii85.encode(saveData);
+        // check if save isn't encoded
+        if(saveData.substring(0, 2) !== "<~") {
+            // encode it
+            saveData = ascii85.encode(saveData);
+        }
+        return saveData;
     },
 
     savedGameExists: function() {

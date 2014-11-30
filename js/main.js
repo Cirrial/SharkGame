@@ -22,6 +22,7 @@ $.extend(SharkGame, {
         "Alone in the Shark"
     ],
     GAME_NAME: null,
+    ACTUAL_GAME_NAME: "Shark Game",
     VERSION: 0.531,
     EPSILON: 1E-6, // floating point comparison is a joy
 
@@ -57,6 +58,8 @@ $.extend(SharkGame, {
         "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
         "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
         "<p>If you are ever stuck, try actions you haven't yet tried. Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
+
+
 
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
@@ -267,6 +270,7 @@ SharkGame.Main = {
         SharkGame.before = currDate;
         if(SharkGame.GAME_NAME === null) {
             SharkGame.GAME_NAME = SharkGame.choose(SharkGame.GAME_NAMES);
+            document.title = SharkGame.ACTUAL_GAME_NAME + ": " + SharkGame.GAME_NAME;
         }
         $('#sidebar').hide();
         $('#overlay').hide();
@@ -435,8 +439,6 @@ SharkGame.Main = {
         // set up tab specific stuff
         var tabCode = tabs[tabs.current].code;
         tabCode.switchTo();
-
-        document.title = "[" + tabs[tabs.current].name + "] " + SharkGame.GAME_NAME;
     },
 
     createTabMenu: function() {
