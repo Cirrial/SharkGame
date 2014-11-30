@@ -33,10 +33,10 @@ div {
   margin: 0;
 }
 a:link {
-  color: #96a3be;
+  color: #7788aa;
 }
 a:visited {
-  color: #5c6e92;
+  color: #7788aa;
 }
 a:hover {
   color: #c5cddb;
@@ -45,7 +45,7 @@ a:active {
   color: #e5e8ef;
 }
 h1 {
-  color: #7788aa;
+  color: #b6bfd1;
   font-size: 2em;
 }
 h2 {
@@ -131,10 +131,6 @@ pre {
   color: #7788aa;
   font-size: 1.3em;
 }
-#titlebar ul {
-  padding: 0.5em 0;
-  margin: 0.1em 1em;
-}
 #titlebar li {
   padding: 0;
   margin: 0;
@@ -146,6 +142,20 @@ pre {
 }
 #titlebar li:first-child:before {
   content: none;
+}
+#titlebar ul {
+  padding: 0.5em 0;
+  margin: 0.1em 1em;
+}
+#titlemenu a:link,
+#titlemenu a:visited {
+  color: #a6b1c7;
+}
+#titlemenu a:hover {
+  color: #d5dae5;
+}
+#subtitlemenu {
+  font-size: 0.8em;
 }
 #contentMenu {
   overflow: hidden;

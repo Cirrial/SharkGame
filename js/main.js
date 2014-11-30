@@ -94,6 +94,7 @@ $.extend(SharkGame, {
 SharkGame.TitleBar = {
     saveLink: {
         name: "save",
+        main: true,
         onClick: function() {
             try {
                 try {
@@ -112,6 +113,7 @@ SharkGame.TitleBar = {
 
     optionsLink: {
         name: "options",
+        main: true,
         onClick: function() {
             SharkGame.Main.showOptions();
         }
@@ -119,6 +121,7 @@ SharkGame.TitleBar = {
 
     changelogLink: {
         name: "changelog",
+        main: false,
         onClick: function() {
             SharkGame.Main.showChangelog();
         }
@@ -126,6 +129,7 @@ SharkGame.TitleBar = {
 
     helpLink: {
         name: "help",
+        main: true,
         onClick: function() {
             SharkGame.Main.showHelp();
         }
@@ -133,6 +137,7 @@ SharkGame.TitleBar = {
 
     creditsLink: {
         name: "credits",
+        main: false,
         onClick: function() {
             SharkGame.Main.showPane("Credits", SharkGame.credits);
         }
@@ -140,6 +145,7 @@ SharkGame.TitleBar = {
 
     resetLink: {
         name: "reset",
+        main: true,
         onClick: function() {
             var message = "Are you absolutely sure you want to reset?\n";
             var essence = SharkGame.Resources.getResource("essence");
@@ -160,18 +166,7 @@ SharkGame.TitleBar = {
                 }
             }
         }
-    },
-
-    wipeLink: {
-        name: "wipe save",
-        onClick: function() {
-            if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
-                SharkGame.Save.deleteSave();
-                SharkGame.Main.init(); // reset
-            }
-        }
     }
-
 };
 
 SharkGame.Tabs = {
@@ -425,8 +420,14 @@ SharkGame.Main = {
 
     setUpTitleBar: function() {
         var titleMenu = $('#titlemenu');
+        var subTitleMenu = $('#subtitlemenu');
         $.each(SharkGame.TitleBar, function(k, v) {
-            titleMenu.append("<li><a id='" + k + "' href='#'>" + v.name + "</a></li>");
+            var option = "<li><a id='" + k + "' href='#'>" + v.name + "</a></li>";
+            if(v.main) {
+                titleMenu.append(option);
+            } else {
+                subTitleMenu.append(option);
+            }
             $('#' + k).click(v.onClick);
         });
 
@@ -591,10 +592,11 @@ SharkGame.Main = {
             optionsTable.append(row);
         });
 
+        // SAVE IMPORT/EXPORT
         // add save import/export
         var row = $('<tr>');
         row.append($('<td>')
-                .html("Import/Export Save:<br/><span class='smallDesc'>(You should probably save first!) Import or export save as text. Keep your save safe!</span>")
+                .html("Import/Export Save:<br/><span class='smallDesc'>(You should probably save first!) Import or export save as text. Keep it safe!</span>")
         );
         row.append($('<td>').append($('<button>')
                 .html("import")
@@ -622,9 +624,27 @@ SharkGame.Main = {
                 .attr("type", "text")
                 .attr("id", "importExportField")
         ));
-
         optionsTable.append(row);
 
+
+
+        // SAVE WIPE
+        // add save wipe
+        row = $('<tr>');
+        row.append($('<td>')
+                .html("Wipe Save<br/><span class='smallDesc'>Completely wipe your save and reset the game. COMPLETELY. FOREVER.</span>")
+        );
+        row.append($('<td>').append($('<button>')
+                .html("wipe")
+                .addClass("option-button")
+                .click(function() {
+                    if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
+                        SharkGame.Save.deleteSave();
+                        SharkGame.Main.init(); // reset
+                    }
+                })
+        ));
+        optionsTable.append(row);
         return optionsTable;
     },
 

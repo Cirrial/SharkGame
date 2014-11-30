@@ -131,11 +131,11 @@ div {
 
 a {
   &:link {
-    color: @color-link;
+    color: darken(@color-link, 10%);
   }
 
   &:visited {
-    color: darken(@color-link, 20%);
+    color: darken(@color-link, 10%);
   }
 
   &:hover {
@@ -148,7 +148,7 @@ a {
 }
 
 h1 {
-  color: @color-lighter;
+  color: lighten(@color-lighter, 20%);
   font-size: 2em;
 }
 
@@ -234,12 +234,6 @@ pre {
   text-align: center;
   font-weight: bold;
   color: @color-lighter;
-  font-size: 1.3em;
-
-  ul {
-    padding: 0.5em 0;
-    margin: 0.1em 1em;
-  }
 
   li {
     padding: 0;
@@ -247,6 +241,25 @@ pre {
     .pipe-separators;
   }
 
+  ul {
+    padding: 0.5em 0;
+    margin: 0.1em 1em;
+  }
+
+  font-size: 1.3em;
+}
+
+#titlemenu {
+  a:link, a:visited {
+    color: lighten(@color-lighter, 15%);
+  }
+  a:hover {
+    color: lighten(@color-link, 20%);
+  }
+}
+
+#subtitlemenu {
+  font-size: 0.8em;
 }
 
 #contentMenu {

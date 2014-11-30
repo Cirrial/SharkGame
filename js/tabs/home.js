@@ -200,7 +200,7 @@ SharkGame.Home = {
 
                 var label = value.name;
                 if(!$.isEmptyObject(actionCost) && amount > 1) {
-                    label += " (" + amount + ")";
+                    label += " (" + SharkGame.Main.beautify(amount) + ")";
                 }
                 var costText = r.resourceListToString(actionCost, !enableButton);
                 if(costText != "") {
