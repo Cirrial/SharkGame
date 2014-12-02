@@ -3,6 +3,7 @@ SharkGame.Stats = {
     tabId: "stats",
     tabDiscovered: false,
     tabName: "Grotto",
+    tabBg: "img/raw/bg-grotto.png",
 
     recreateIncomeTable: true,
 
@@ -43,8 +44,8 @@ SharkGame.Stats = {
         statsContainer.append($('<div>').attr("id", "upgradeList"));
         statsContainer.append($('<div>').addClass("clear-fix"));
         var message = s.message;
-        message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
-        $('#tabMessage').html(message);
+        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        $('#tabMessage').html(message).css("background-image", "url('" + s.tabBg + "')");
 
         var disposeSel = $('#disposeResource');
         disposeSel.append($('<h3>').html("Dispose of Stuff"));

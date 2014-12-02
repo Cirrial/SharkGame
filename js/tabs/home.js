@@ -3,6 +3,7 @@ SharkGame.Home = {
     tabId: "home",
     tabDiscovered: true,
     tabName: "Home Sea",
+    tabBg: "img/raw/bg-homesea.png",
 
     homeMessage: "You are a shark in a strange blue sea.",
     currentExtraMessageIndex: -1,
@@ -89,6 +90,7 @@ SharkGame.Home = {
         SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
         content.append(helpButtonDiv);
         content.append($('<div>').attr("id", "buttonList"));
+        tabMessage.css("background-image", "url('" + h.tabBg + "')");
     },
 
     updateMessage: function(suppressAnimation) {
@@ -120,9 +122,8 @@ SharkGame.Home = {
             h.currentExtraMessageIndex = selectedIndex;
             var tabMessage = $('#tabMessage');
             var message = h.homeMessage;
-            message += "<br/><span class='medDesc'>" + h.extraMessages[selectedIndex].message + "</span>";
-            message = "<img src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
-
+            message += "<br/><span id='extraMessage' class='medDesc'>" + h.extraMessages[selectedIndex].message + "</span>";
+            message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
                 tabMessage.animate({opacity: 0}, 100, function() {
                     var thisSel = $(this);
@@ -167,11 +168,6 @@ SharkGame.Home = {
                 if(prereqsMet) {
                     // add button
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name, buttonList, h.onHomeButton);
-                    var imagePath = "http://placekitten.com/g/50/50";
-                    if(value.image) {
-                        imagePath = value.image;
-                    }
-                    buttonSelector.prepend("<img class='button-icon' src='" + imagePath + "'>");
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -216,12 +212,18 @@ SharkGame.Home = {
                         label += "<br/><span class='medDesc'>" + value.helpText + "</span>";
                     }
                 }
-                button.prop("disabled", !enableButton).html(label);
-                var imagePath = "http://placekitten.com/g/50/50";
-                if(value.image) {
-                    imagePath = value.image;
+                button.prop("disabled", !enableButton)
+                var imagepath = null;
+                if(typeof value.imageIndex === 'number') {
+                    imagepath = "img/raw/purchaseicons_" + value.imageIndex;
+                    if(enableButton) {
+                        imagepath += ".png";
+                    } else {
+                        imagepath += "-disabled.png";
+                    }
                 }
-                button.prepend("<img class='button-icon' src='" + imagePath + "'>");
+                label = SharkGame.getImageIconHTML(imagepath, 50, 50) + label;
+                button.html(label);
             }
         });
 
@@ -366,7 +368,7 @@ SharkGame.Home = {
 SharkGame.HomeActions = {
     'catchFish': {
         name: "Catch fish",
-        image: "img/raw/purchaseicons_0.png",
+        imageIndex: 0,
         effect: {
             resource: {
                 'fish': 1
@@ -397,7 +399,7 @@ SharkGame.HomeActions = {
 
     'seaApplesToScience': {
         name: "Study sea apples",
-        image: "img/raw/purchaseicons_1.png",
+        imageIndex: 1,
         effect: {
             resource: {
                 science: 5
@@ -424,6 +426,7 @@ SharkGame.HomeActions = {
 
     'transmuteSharkonium': {
         name: "Transmute stuff to sharkonium",
+        imageIndex: 2,
         effect: {
             resource: {
                 sharkonium: 1
@@ -457,6 +460,7 @@ SharkGame.HomeActions = {
 
     'getShark': {
         name: "Recruit shark",
+        imageIndex: 3,
         effect: {
             resource: {
                 'shark': 1
@@ -521,6 +525,7 @@ SharkGame.HomeActions = {
 
     'getManta': {
         name: "Hire ray",
+        imageIndex: 4,
         effect: {
             resource: {
                 'ray': 1
@@ -595,6 +600,7 @@ SharkGame.HomeActions = {
 
     'getCrab': {
         name: "Acquire crab",
+        imageIndex: 5,
         effect: {
             resource: {
                 'crab': 1
@@ -655,6 +661,7 @@ SharkGame.HomeActions = {
 
     'getScientist': {
         name: "Train science shark",
+        imageIndex: 6,
         effect: {
             resource: {
                 'scientist': 1
@@ -690,6 +697,7 @@ SharkGame.HomeActions = {
 
     'getNurse': {
         name: "Train nurse shark",
+        imageIndex: 7,
         effect: {
             resource: {
                 'nurse': 1
@@ -724,6 +732,7 @@ SharkGame.HomeActions = {
 
     'getLaser': {
         name: "Equip laser ray",
+        imageIndex: 8,
         effect: {
             resource: {
                 'laser': 1
@@ -758,6 +767,7 @@ SharkGame.HomeActions = {
 
     'getMaker': {
         name: "Instruct a ray maker",
+        imageIndex: 9,
         effect: {
             resource: {
                 'maker': 1
@@ -794,6 +804,7 @@ SharkGame.HomeActions = {
 
     'getPlanter': {
         name: "Gear up planter crab",
+        imageIndex: 10,
         effect: {
             resource: {
                 'planter': 1
@@ -829,6 +840,7 @@ SharkGame.HomeActions = {
 
     'getBrood': {
         name: "Form crab brood",
+        imageIndex: 11,
         effect: {
             resource: {
                 'brood': 1
@@ -866,6 +878,7 @@ SharkGame.HomeActions = {
 
     'getCrystalMiner': {
         name: "Build crystal miner",
+        imageIndex: 12,
         effect: {
             resource: {
                 'crystalMiner': 1
@@ -893,13 +906,15 @@ SharkGame.HomeActions = {
             "The machines rise.",
             "The miners dig.",
             "The crystal shall be harvested.",
-            "Crystal miners are complete."
+            "Crystal miners are complete.",
+            "Giant machines blot out our sun."
         ],
         helpText: "Construct a machine to automatically harvest crystals efficiently."
     },
 
     'getSandDigger': {
         name: "Build sand digger",
+        imageIndex: 13,
         effect: {
             resource: {
                 'sandDigger': 1
@@ -927,13 +942,15 @@ SharkGame.HomeActions = {
             "The diggers devour.",
             "All sand must be gathered.",
             "The rays are concerned.",
-            "Devour the sands. Consume."
+            "Devour the sands. Consume.",
+            "Giant machines blot out our sun."
         ],
         helpText: "Construct a machine to automatically dig up sand efficiently."
     },
 
     'getAutoTransmuter': {
         name: "Build auto-transmuter",
+        imageIndex: 14,
         effect: {
             resource: {
                 'autoTransmuter': 1
@@ -961,13 +978,15 @@ SharkGame.HomeActions = {
             "The difference between science and magic is reliable application.",
             "All is change.",
             "Change is all.",
-            "The machines know many secrets, yet cannot speak of them."
+            "The machines know many secrets, yet cannot speak of them.",
+            "Giant machines blot out our sun."
         ],
         helpText: "Construct a machine to automatically transmute sand and crystal to sharkonium."
     },
 
     'getFishMachine': {
         name: "Build fish machine",
+        imageIndex: 15,
         effect: {
             resource: {
                 fishMachine: 1
@@ -995,7 +1014,8 @@ SharkGame.HomeActions = {
             "Your metal servants can sate the hunger. The hunger for fish.",
             "The fishing machines are more efficient than the sharks. But they aren't very smart.",
             "Automated fishing.",
-            "The power of many, many sharks, in many, many devices."
+            "The power of many, many sharks, in many, many devices.",
+            "Giant machines blot out our sun."
         ],
         helpText: "Construct a machine to automatically gather fish efficiently."
     }

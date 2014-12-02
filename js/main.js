@@ -100,6 +100,16 @@ $.extend(SharkGame, {
         }
 
         return rgb;
+    },
+    getImageIconHTML: function(imagePath, width, height) {
+        if(!imagePath) {
+            imagePath = "//placekitten.com/g/" + Math.floor(width) + "/" + Math.floor(height);
+        }
+        var imageHtml = "";
+        if(SharkGame.Settings.current.iconPositions !== "off") {
+            imageHtml += "<img width=" + width + " height=" + height + " src='" + imagePath + "' class='button-icon-" + SharkGame.Settings.current.iconPositions + "'>";
+        }
+        return imageHtml;
     }
 });
 

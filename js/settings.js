@@ -138,5 +138,17 @@ SharkGame.Settings = {
             SharkGame.Resources.rebuildTable = true;
             SharkGame.Stats.recreateIncomeTable = true;
         }
+    },
+
+    iconPositions: {
+        defaultSetting: "top",
+        name: "Icon Positions",
+        desc: "Where should icons go on the buttons?",
+        show: true,
+        options: [
+            "top",
+            "side",
+            "off"
+        ]
     }
 };

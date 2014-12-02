@@ -67,6 +67,14 @@ h4 {
   margin-right: auto;
   display: inline-block;
   text-align: center;
+  margin-top: 0.8em;
+  background: #2e4372;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 2px 2px #2e4372;
+  -moz-box-shadow: 0 0 2px 2px #2e4372;
+  box-shadow: 0 0 2px 2px #2e4372;
 }
 #wrapper {
   background-color: #152a55;
@@ -105,6 +113,7 @@ pre {
 }
 #title {
   clear: both;
+  background-color: #2e4372;
   -webkit-box-shadow: 0 0 5px 5px #13264d inset;
   -moz-box-shadow: 0 0 5px 5px #13264d inset;
   box-shadow: 0 0 5px 5px #13264d inset;
@@ -113,16 +122,18 @@ pre {
   border-radius: 10px;
   padding: 5px;
   overflow: hidden;
-  background: no-repeat center;
-  background-color: #2e4372;
-  background-image: url("http://placekitten.com/g/500/200");
+  background: #2e4372 url("../img/sharklogo.png") no-repeat center;
+  text-shadow: 2px 2px 3px #061639;
 }
 #title h1 {
-  margin: 0.5em;
+  margin: 0.1em auto 0.3em auto;
 }
 #title h2 {
   text-align: left;
-  margin: 0.5em;
+  margin: 0.2em;
+}
+#title h4 {
+  margin: 0.2em auto 1.5em;
 }
 #titlebar {
   height: auto;
@@ -146,8 +157,8 @@ pre {
   content: none;
 }
 #titlebar ul {
-  padding: 0.5em 0;
-  margin: 0.1em 1em;
+  padding: 0.2em 0;
+  margin: 0.4em auto 0.6em auto;
 }
 #titlemenu a:link,
 #titlemenu a:visited {
@@ -276,7 +287,7 @@ pre {
   padding: 5px;
   margin: 5px;
   padding: 1.4em;
-  background: url("http://placehold.it/100x400/4E638E/2E4372") repeat-x center;
+  background: url("http://placehold.it/200x400/4E638E/2E4372") repeat-x center;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
   border-radius: 0.5em;
@@ -366,7 +377,7 @@ pre {
   float: left;
   margin: auto;
   width: 10em;
-  background: #450808 url('http://placehold.it/100/5D0909/975F5F') center;
+  background: #450808 url('../img/recyclerbg.png') center;
   color: #d4bbbb;
   border: 0.1em solid #975f5f;
   -webkit-box-shadow: 0 0 15px 15px #450808 inset;
@@ -434,6 +445,12 @@ button:active .medDesc {
   font-size: 80%;
   color: #485673;
 }
+button:active img {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #152a55;
+}
 button:focus {
   outline: 0;
 }
@@ -453,10 +470,48 @@ button:disabled .medDesc {
   font-size: 80%;
   color: #3e4b63;
 }
+button:disabled img {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #061639;
+}
 .button-icon {
   vertical-align: middle;
+  background-color: #7788aa;
+  -webkit-box-shadow: 0 0 3px 3px #7788aa;
+  -moz-box-shadow: 0 0 3px 3px #7788aa;
+  box-shadow: 0 0 3px 3px #7788aa;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+.button-icon-top {
+  vertical-align: middle;
+  background-color: #7788aa;
+  -webkit-box-shadow: 0 0 3px 3px #7788aa;
+  -moz-box-shadow: 0 0 3px 3px #7788aa;
+  box-shadow: 0 0 3px 3px #7788aa;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  pointer-events: none;
   display: block;
   margin: 0 auto 0.4em auto;
+}
+.button-icon-side {
+  vertical-align: middle;
+  background-color: #7788aa;
+  -webkit-box-shadow: 0 0 3px 3px #7788aa;
+  -moz-box-shadow: 0 0 3px 3px #7788aa;
+  box-shadow: 0 0 3px 3px #7788aa;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  pointer-events: none;
+  display: inline-block;
+  margin: 0em 0.4em 0.4em 0.4em;
 }
 .tab-scene-image {
   vertical-align: middle;

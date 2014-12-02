@@ -42,6 +42,12 @@
   box-shadow: @arguments;
 }
 
+.clear-box-shadow() {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
 .box-shadow-inset(@x: 0; @y: 0; @blur: 1px; @spread: 1px; @color: #000;) {
   -webkit-box-shadow: @arguments inset;
   -moz-box-shadow: @arguments inset;
@@ -183,6 +189,11 @@ h4 {
   margin-right: auto;
   display: inline-block;
   text-align: center;
+  margin-top: 0.8em;
+  background: @color-med;
+
+  .border-radius(3px);
+  .box-shadow(0, 0, 2px, 2px, @color-med);
 }
 
 #wrapper {
@@ -224,18 +235,21 @@ pre {
 #title {
   clear: both;
   .section;
-  background: no-repeat center;
-  background-color: @color-med;
-  background-image: url("http://placekitten.com/g/500/200");
+  background: @color-med url("../img/sharklogo.png") no-repeat center;
+  text-shadow: 2px 2px 3px @color-darker;
 
   h1 {
     //text-align: left;
-    margin: 0.5em;
+    margin: 0.1em auto 0.3em auto;
   }
 
   h2 {
     text-align: left;
-    margin: 0.5em;
+    margin: 0.2em;
+  }
+
+  h4 {
+    margin: 0.2em auto 1.5em;
   }
 }
 
@@ -254,8 +268,8 @@ pre {
   }
 
   ul {
-    padding: 0.5em 0;
-    margin: 0.1em 1em;
+    padding: 0.2em 0;
+    margin: 0.4em auto 0.6em auto;
   }
 
   font-size: 1.3em;
@@ -387,7 +401,7 @@ pre {
 #tabMessage {
   .inner-section;
   padding: 1.4em;
-  background: url("http://placehold.it/100x400/4E638E/2E4372") repeat-x center;
+  background: url("http://placehold.it/200x400/4E638E/2E4372") repeat-x center;
   .border-radius(0.5em);
   .box-shadow-inset(0, 0, 30px, 30px, @color-med);
 }
@@ -494,7 +508,7 @@ pre {
   float: left;
   margin: auto;
   width: 10em;
-  background: @color-danger-darker url('http://placehold.it/100/5D0909/975F5F') center;
+  background: @color-danger-darker url('../img/recyclerbg.png') center;
   color: lighten(@color-danger-lighter, 30%);
   border: 0.1em solid @color-danger-lighter;
   .box-shadow-inset(0, 0, 15px, 15px, @color-danger-darker);
@@ -564,6 +578,11 @@ button {
       font-size: 80%;
       color: darken(@color-lighter, 20%);
     }
+
+    img {
+      .clear-box-shadow();
+      background-color: @color-dark;
+    }
   }
 
   &:focus {
@@ -589,6 +608,11 @@ button {
       color: darken(@color-lighter, 25%);
     }
 
+    img {
+      .clear-box-shadow();
+      background-color: @color-darker;
+    }
+
   }
 }
 
@@ -598,8 +622,22 @@ button {
 
 .button-icon {
   vertical-align: middle;
+  background-color: @color-lighter;
+  .box-shadow(0, 0, 3px, 3px, @color-lighter);
+  .border-radius(5px);
+  .click-passthrough;
+}
+
+.button-icon-top {
+  .button-icon;
   display: block;
   margin: 0 auto 0.4em auto;
+}
+
+.button-icon-side {
+  .button-icon;
+  display: inline-block;
+  margin: 0em 0.4em 0.4em 0.4em;
 }
 
 .tab-scene-image {
