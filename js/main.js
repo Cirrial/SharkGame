@@ -73,6 +73,9 @@ $.extend(SharkGame, {
         "target='_blank'>support the developer</a>" +
         " if you'd like.)</span></p>",
 
+    spritePath: "img/sharksprites.png",
+    eventPath: "img/events/",
+
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
     },
@@ -110,6 +113,24 @@ $.extend(SharkGame, {
             imageHtml += "<img width=" + width + " height=" + height + " src='" + imagePath + "' class='button-icon-" + SharkGame.Settings.current.iconPositions + "'>";
         }
         return imageHtml;
+    },
+    getIconSpriteDiv: function(imageName) {
+        if(SharkGame.Settings.current.iconPositions !== "off") {
+            var spriteData = SharkGame.Sprites[imageName];
+            var imageDiv = $('<div>');
+            imageDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+            if(spriteData) {
+                imageDiv.css('background-image', 'url(' + SharkGame.spritePath + ')');
+                imageDiv.css('background-position', "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
+                imageDiv.width(spriteData.frame.w);
+                imageDiv.height(spriteData.frame.h);
+            } else {
+                imageDiv.css('background-image', 'url("//placekitten.com/g/50/50")');
+                imageDiv.width(50);
+                imageDiv.height(50);
+            }
+            return imageDiv;
+        }
     }
 });
 

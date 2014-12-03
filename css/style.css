@@ -199,7 +199,7 @@ pre {
 }
 #contentMenu #tabButtons {
   float: right;
-  width: 26em;
+  width: 30em;
   overflow: auto;
 }
 #sidebar {
@@ -294,6 +294,7 @@ pre {
   -webkit-box-shadow: 0 0 30px 30px #2e4372 inset;
   -moz-box-shadow: 0 0 30px 30px #2e4372 inset;
   box-shadow: 0 0 30px 30px #2e4372 inset;
+  text-shadow: 0 0 0.3em #152a55;
 }
 #buttonList {
   padding: 5px;
@@ -445,7 +446,7 @@ button:active .medDesc {
   font-size: 80%;
   color: #485673;
 }
-button:active img {
+button:active div {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -470,7 +471,7 @@ button:disabled .medDesc {
   font-size: 80%;
   color: #3e4b63;
 }
-button:disabled img {
+button:disabled div {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -513,7 +514,7 @@ button:disabled img {
   display: inline-block;
   margin: 0em 0.4em 0.4em 0.4em;
 }
-.tab-scene-image {
+#tabSceneImage {
   vertical-align: middle;
   display: block;
   margin: 0.1em auto 0.4em auto;

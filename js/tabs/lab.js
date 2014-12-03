@@ -3,7 +3,7 @@ SharkGame.Lab = {
     tabId: "lab",
     tabDiscovered: false,
     tabName: "Laboratory",
-    tabBg: "img/raw/bg-lab.png",
+    tabBg: "img/bg/bg-lab.png",
 
     discoverReq: {
         resource: {
@@ -37,7 +37,7 @@ SharkGame.Lab = {
         var content = $('#content');
 
         var message = l.allResearchDone() ? l.messageDone : l.message;
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
         content.append($('<div>').attr("id", "tabMessage").html(message));
         content.append($('<div>').attr("id", "buttonList"));
         $('#tabMessage').css("background-image", "url('" + l.tabBg + "')");

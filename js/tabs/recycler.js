@@ -3,7 +3,7 @@ SharkGame.Recycler = {
     tabId: "recycler",
     tabDiscovered: false,
     tabName: "Recycler",
-    tabBg: "img/raw/bg-recycler.png",
+    tabBg: "img/bg/bg-recycler.png",
 
     discoverReq: {
         upgrade: [
@@ -69,7 +69,7 @@ SharkGame.Recycler = {
         content.append(container);
         content.append($('<div>').addClass("clear-fix"));
         var message = y.message;
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
         $('#tabMessage').html(message).css("background-image", "url('" + y.tabBg + "')");;
 
         m.createBuyButtons("eat");

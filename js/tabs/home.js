@@ -3,7 +3,7 @@ SharkGame.Home = {
     tabId: "home",
     tabDiscovered: true,
     tabName: "Home Sea",
-    tabBg: "img/raw/bg-homesea.png",
+    tabBg: "img/bg/bg-homesea.png",
 
     homeMessage: "You are a shark in a strange blue sea.",
     currentExtraMessageIndex: -1,
@@ -11,59 +11,78 @@ SharkGame.Home = {
     // Priority: later messages display if available, otherwise earlier ones.
     extraMessages: [
         {
-            message: "&nbsp<br/>&nbsp"
+            message: "&nbsp<br/>&nbsp",
+            imageIndex: 1
         },
         {
             unlock: {resource: {fish: 5}},
-            message: "You attract the attention of some sharks. Maybe they can help you catch fish!<br/>&nbsp"
+            message: "You attract the attention of a shark. Maybe they can help you catch fish!<br/>&nbsp",
+            imageIndex: 2
+        },
+        {
+            unlock: {resource: {shark: 1}},
+            message: "More sharks swim over, curious and watchful.<br/>&nbsp",
+            imageIndex: 3
         },
         {
             unlock: {resource: {fish: 15}},
-            message: "Some rays drift over.<br/>&nbsp"
+            message: "Some rays drift over.<br/>&nbsp",
+            imageIndex: 4
         },
         {
             unlock: {resource: {shark: 1, ray: 1}},
-            message: "You have quite the group going now.<br/>&nbsp"
+            message: "You have quite the group going now.<br/>&nbsp",
+            imageIndex: 5
         },
         {
             unlock: {resource: {shark: 4, ray: 4}},
-            message: "Some curious crabs come over.<br/>&nbsp"
+            message: "Some curious crabs come over.<br/>&nbsp",
+            imageIndex: 6
         },
         {
             unlock: {resource: {shark: 1, ray: 1, crab: 1}},
-            message: "Your new tribe is at your command!<br/>&nbsp"
+            message: "Your new tribe is at your command!<br/>&nbsp",
+            imageIndex: 7
         },
         {
             unlock: {resource: {shark: 1, crystal: 10}},
-            message: "The crystals are shiny. Some sharks stare at them curiously.<br/>&nbsp"
+            message: "The crystals are shiny. Some sharks stare at them curiously.<br/>&nbsp",
+            imageIndex: 8
         },
         {
             unlock: {resource: {scientist: 1}},
-            message: "The science sharks swim in their own school.<br/>&nbsp"
+            message: "The science sharks swim in their own school.<br/>&nbsp",
+            imageIndex: 9
         },
         {
             unlock: {upgrade: ["crystalContainer"]},
-            message: "More discoveries are needed.<br/>&nbsp"
+            message: "More discoveries are needed.<br/>&nbsp",
+            imageIndex: 10
         },
         {
             unlock: {resource: {nurse: 1}},
-            message: "The shark community grows with time.<br/>&nbsp"
+            message: "The shark community grows with time.<br/>&nbsp",
+            imageIndex: 11
         },
         {
             unlock: {upgrade: ["exploration"]},
-            message: "You hear faint songs and cries in the distance.<br/>&nbsp"
+            message: "You hear faint songs and cries in the distance.<br/>&nbsp",
+            imageIndex: 12
         },
         {
             unlock: {upgrade: ["automation"]},
-            message: "Machines to do things for you.<br/>Machines to do things faster than you or any shark."
+            message: "Machines to do things for you.<br/>Machines to do things faster than you or any shark.",
+            imageIndex: 13
         },
         {
             unlock: {upgrade: ["farExploration"]},
-            message: "This place is not your home. You remember a crystal blue ocean.<br/>The chasms beckon."
+            message: "This place is not your home. You remember a crystal blue ocean.<br/>The chasms beckon.",
+            imageIndex: 14
         },
         {
             unlock: {upgrade: ["gateDiscovery"]},
-            message: "The gate beckons. The secret must be unlocked.<br/>&nbsp"
+            message: "The gate beckons. The secret must be unlocked.<br/>&nbsp",
+            imageIndex: 15
         }
     ],
 
@@ -119,19 +138,34 @@ SharkGame.Home = {
         });
         // only edit DOM if necessary
         if(h.currentExtraMessageIndex !== selectedIndex) {
+            var oldIndex = h.currentExtraMessageIndex;
+            if(oldIndex < 0) {
+                oldIndex = 0;
+            }
             h.currentExtraMessageIndex = selectedIndex;
             var tabMessage = $('#tabMessage');
             var message = h.homeMessage;
-            message += "<br/><span id='extraMessage' class='medDesc'>" + h.extraMessages[selectedIndex].message + "</span>";
-            message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+            var oldTabSceneImagePath = SharkGame.eventPath + "homesea-" + h.extraMessages[oldIndex].imageIndex + ".png";
+            var tabSceneImagePath = SharkGame.eventPath + "homesea-" + h.extraMessages[selectedIndex].imageIndex + ".png";
+            message += "<br/><span id='extraMessage' class='medDesc'>&nbsp<br/>&nbsp</span>";
+            message = "<img id='tabSceneImage' width=400 height=200 src='" + oldTabSceneImagePath + "'>" + message;
+            tabMessage.html(message);
+
+            var extraMessageSel = $('#extraMessage');
+            var imageSel = $('#tabSceneImage');
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
-                tabMessage.animate({opacity: 0}, 100, function() {
+                extraMessageSel.animate({opacity: 0}, 200, function() {
                     var thisSel = $(this);
-                    thisSel.html(message)
-                        .animate({opacity: 1}, 100);
-                })
+                    thisSel.animate({opacity: 1}, 200).html(h.extraMessages[selectedIndex].message);
+                });
+                imageSel.animate({opacity: 0}, 500, function() {
+                    var thisSel = $(this);
+                    thisSel.attr('src', tabSceneImagePath);
+                    thisSel.animate({opacity: 1}, 500);
+                });
             } else {
-                tabMessage.html(message);
+                extraMessageSel.html(h.extraMessages[selectedIndex].message);
+                imageSel.attr('src', tabSceneImagePath);
             }
         }
     },
@@ -213,17 +247,20 @@ SharkGame.Home = {
                     }
                 }
                 button.prop("disabled", !enableButton)
-                var imagepath = null;
+                button.html(label);
+
+
+                var spritename = null;
                 if(typeof value.imageIndex === 'number') {
-                    imagepath = "img/raw/purchaseicons_" + value.imageIndex;
-                    if(enableButton) {
-                        imagepath += ".png";
-                    } else {
-                        imagepath += "-disabled.png";
+                    spritename = "purchaseicons_" + value.imageIndex;
+                    if(!enableButton) {
+                        spritename += "-disabled";
                     }
                 }
-                label = SharkGame.getImageIconHTML(imagepath, 50, 50) + label;
-                button.html(label);
+                var iconDiv = SharkGame.getIconSpriteDiv(spritename);
+                if(iconDiv) {
+                    button.prepend(iconDiv);
+                }
             }
         });
 

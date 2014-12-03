@@ -1,6 +1,6 @@
 SharkGame.Save = {
 
-    saveFileName: "sharkGameSave",
+    saveFileName: "sharkGameSaveUnstable",
 
     saveGame: function(suppressSavingToStorage, dontFlat) {
         // populate save data object

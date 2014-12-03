@@ -316,7 +316,7 @@ pre {
 
   #tabButtons {
     float: right;
-    width: 26em;
+    width: 30em;
     overflow: auto;
   }
 }
@@ -404,6 +404,7 @@ pre {
   background: url("http://placehold.it/200x400/4E638E/2E4372") repeat-x center;
   .border-radius(0.5em);
   .box-shadow-inset(0, 0, 30px, 30px, @color-med);
+  text-shadow: 0 0 0.3em @color-dark;
 }
 
 
@@ -579,7 +580,7 @@ button {
       color: darken(@color-lighter, 20%);
     }
 
-    img {
+    div {
       .clear-box-shadow();
       background-color: @color-dark;
     }
@@ -608,7 +609,7 @@ button {
       color: darken(@color-lighter, 25%);
     }
 
-    img {
+    div {
       .clear-box-shadow();
       background-color: @color-darker;
     }
@@ -623,6 +624,7 @@ button {
 .button-icon {
   vertical-align: middle;
   background-color: @color-lighter;
+
   .box-shadow(0, 0, 3px, 3px, @color-lighter);
   .border-radius(5px);
   .click-passthrough;
@@ -640,7 +642,7 @@ button {
   margin: 0em 0.4em 0.4em 0.4em;
 }
 
-.tab-scene-image {
+#tabSceneImage {
   vertical-align: middle;
   display: block;
   margin: 0.1em auto 0.4em auto;

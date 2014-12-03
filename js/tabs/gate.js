@@ -3,7 +3,7 @@ SharkGame.Gate = {
     tabId: "gate",
     tabDiscovered: false,
     tabName: "Strange Gate",
-    tabBg: "img/raw/bg-gate.png",
+    tabBg: "img/bg/bg-gate.png",
 
     discoverReq: {
         upgrade: [
@@ -70,7 +70,7 @@ SharkGame.Gate = {
         }
 
         var message = g.shouldBeOpen() ? g.messageOpened : (amountOfSlots > 1 ? g.message : g.messageOneSlot);
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
         $('#tabMessage').html(message).css("background-image", "url('" + g.tabBg + "')");
     },
 
@@ -99,7 +99,7 @@ SharkGame.Gate = {
             var diff = cost - SharkGame.ResourceTable[resourceId].amount;
             message += SharkGame.Main.beautify(diff) + " more.";
         }
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' class='tab-scene-image'>" + message;
+        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
         $('#tabMessage').html(message);
     },
 
