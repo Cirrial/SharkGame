@@ -19,6 +19,10 @@ SharkGame.Gate = {
     messageAllPaid: "The last slot closes. The structure opens. The water glows and shimmers within it.<br/>A gentle tug pulls at you.",
     messageEnter: "You swim through the gate...",
 
+    sceneClosedImage: "img/events/misc/scene-gate-closed.png",
+    sceneAlmostOpenImage: "img/events/misc/scene-gate-one-slot.png",
+    sceneOpenImage: "img/events/misc/scene-gate-open.png",
+
     costsMet: {},
     costs: {
         fish: 1E9,
@@ -70,7 +74,7 @@ SharkGame.Gate = {
         }
 
         var message = g.shouldBeOpen() ? g.messageOpened : (amountOfSlots > 1 ? g.message : g.messageOneSlot);
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
+        message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
         $('#tabMessage').html(message).css("background-image", "url('" + g.tabBg + "')");
     },
 
@@ -99,7 +103,7 @@ SharkGame.Gate = {
             var diff = cost - SharkGame.ResourceTable[resourceId].amount;
             message += SharkGame.Main.beautify(diff) + " more.";
         }
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
+        message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
         $('#tabMessage').html(message);
     },
 
@@ -116,5 +120,16 @@ SharkGame.Gate = {
             won = won && v;
         });
         return won;
+    },
+
+    getSceneImagePath: function() {
+        var g = SharkGame.Gate;
+        var amountOfSlots = 0;
+        $.each(g.costsMet, function(k, v) {
+            if(v) amountOfSlots++;
+        });
+        amountOfSlots = _.size(g.costs) - amountOfSlots;
+        var sceneImagePath = g.shouldBeOpen() ? g.sceneOpenImage : (amountOfSlots > 1 ? g.sceneClosedImage : g.sceneAlmostOpenImage);
+        return sceneImagePath;
     }
 };

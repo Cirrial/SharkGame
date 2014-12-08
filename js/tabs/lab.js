@@ -5,6 +5,9 @@ SharkGame.Lab = {
     tabName: "Laboratory",
     tabBg: "img/bg/bg-lab.png",
 
+    sceneImage: "img/events/misc/scene-lab.png",
+    sceneDoneImage: "img/events/misc/scene-lab-done.png",
+
     discoverReq: {
         resource: {
             science: 10
@@ -14,6 +17,8 @@ SharkGame.Lab = {
     message: "Sort of just off to the side, the science sharks congregate and discuss things with words you've never heard before.",
     messageDone: "Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
         "Looks like that's it! No more things to figure out.",
+
+
 
     init: function() {
         var l = SharkGame.Lab;
@@ -36,11 +41,22 @@ SharkGame.Lab = {
         var l = SharkGame.Lab;
         var content = $('#content');
 
-        var message = l.allResearchDone() ? l.messageDone : l.message;
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
+        var allResearchDone = l.allResearchDone();
+        var message = allResearchDone ? l.messageDone : l.message;
+        var imgSrc = allResearchDone ? l.sceneDoneImage : l.sceneImage;
+        message = "<img width=400 height=200 src='" + imgSrc + "' id='tabSceneImage'>" + message;
         content.append($('<div>').attr("id", "tabMessage").html(message));
-        content.append($('<div>').attr("id", "buttonList"));
+        var buttonListContainer = $('<div>').attr("id", "buttonLeftContainer");
+        buttonListContainer.append($('<div>').attr("id", "buttonList").append($("<h3>").html("Available Upgrades")));
+        content.append(buttonListContainer);
+        content.append($('<div>').attr("id", "upgradeList"));
+        content.append($('<div>').addClass("clear-fix"));
         $('#tabMessage').css("background-image", "url('" + l.tabBg + "')");
+
+        l.updateUpgradeList();
+        if(allResearchDone) {
+            $('#buttonList').append($('<p>').html("All clear here!"));
+        }
     },
 
     update: function() {
@@ -76,7 +92,6 @@ SharkGame.Lab = {
                     // add button
                     var effects = SharkGame.Lab.getResearchEffects(value);
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
-                    buttonSelector.prepend(SharkGame.getImageIconHTML(value.image, 80, 80));
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -102,8 +117,19 @@ SharkGame.Lab = {
                 if(costText != "") {
                     label += "<br/>Cost: " + costText;
                 }
-                label = SharkGame.getImageIconHTML(value.image, 80, 80) + label;
                 button.prop("disabled", !enableButton).html(label);
+
+                var spritename = "technologies/" + key;
+                if(!enableButton) {
+                    spritename += "-disabled";
+                }
+                if(SharkGame.Settings.current.iconPositions !== "off") {
+                    var iconDiv = SharkGame.changeSprite(spritename);
+                    if(iconDiv) {
+                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                        button.prepend(iconDiv);
+                    }
+                }
             }
         });
     },
@@ -129,6 +155,8 @@ SharkGame.Lab = {
             r.changeManyResources(upgradeCost, true);
             // purchase upgrade
             l.addUpgrade(upgradeId);
+            // update upgrade list
+            l.updateUpgradeList();
 
             if(upgrade.researchedMessage) {
                 SharkGame.Log.addMessage(upgrade.researchedMessage);
@@ -214,6 +242,22 @@ SharkGame.Lab = {
         }
         effects += ")</span>";
         return effects;
+    },
+
+    updateUpgradeList: function() {
+        var u = SharkGame.Upgrades;
+        var upgradeList = $('#upgradeList');
+        upgradeList.empty();
+        upgradeList.append($("<h3>").html("Researched Upgrades"));
+        var list = $('<ul>');
+        $.each(u, function(k, v) {
+            if(v.purchased) {
+                list.append($("<li>")
+                        .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")
+                );
+            }
+        });
+        upgradeList.append(list);
     }
 };
 
@@ -222,7 +266,7 @@ SharkGame.Upgrades = {
         name: "Crystal Bite-Gear",
         desc: "Bite the crystals we have into something to help biting!",
         researchedMessage: "Weird teeth-wear has been developed, and sharks can now catch fish better as a result.",
-        effectDesc: "Sharks are twice as effective with their new biting gear.",
+        effectDesc: "Sharks are twice as effective with their new biting gear. Turns out they work better outside the mouth!",
         cost: {
             science: 50
         },

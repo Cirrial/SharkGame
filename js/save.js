@@ -411,6 +411,16 @@ SharkGame.Save = {
             save.tabs = {"current": save.tabs["current"], "home": save.tabs["home"].discovered, "lab": save.tabs["lab"].discovered, "gate": save.tabs["gate"].discovered, "stats": false, "recycler": false};
             delete save.timestamp;
             return save;
+        },
+
+        function(save) {
+            // add new setting to list of saves
+            save = $.extend(true, save, {
+                "settings": {"iconPositions": "top"}
+            });
+            return save;
         }
+
+
     ]
 };

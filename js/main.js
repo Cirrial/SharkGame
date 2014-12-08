@@ -23,7 +23,8 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.59,
+    VERSION: 0.6,
+    VERSION_NAME: "Return of Shark",
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 10 FPS
@@ -40,7 +41,7 @@ $.extend(SharkGame, {
 
     gameOver: false,
 
-    credits: "<p>This game was originally created in 3 days for <a href='http://www.twitch.tv/seamergency'>Seamergency 2014</a>.<br/>" +
+    credits: "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
         "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
         "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
         "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
@@ -61,7 +62,7 @@ $.extend(SharkGame, {
         "<p>If you are ever stuck, try actions you haven't yet tried. " +
         "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
 
-    donate: "<p>You can <a href='http://www.sharksavers.org/en/home/' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
+    donate: "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
         "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
         "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
         "<a href='https://www.paypal.com/cgi-bin/" +
@@ -74,7 +75,6 @@ $.extend(SharkGame, {
         " if you'd like.)</span></p>",
 
     spritePath: "img/sharksprites.png",
-    eventPath: "img/events/",
 
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
@@ -114,24 +114,24 @@ $.extend(SharkGame, {
         }
         return imageHtml;
     },
-    getIconSpriteDiv: function(imageName) {
-        if(SharkGame.Settings.current.iconPositions !== "off") {
-            var spriteData = SharkGame.Sprites[imageName];
-            var imageDiv = $('<div>');
-            imageDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-            if(spriteData) {
-                imageDiv.css('background-image', 'url(' + SharkGame.spritePath + ')');
-                imageDiv.css('background-position', "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
-                imageDiv.width(spriteData.frame.w);
-                imageDiv.height(spriteData.frame.h);
-            } else {
-                imageDiv.css('background-image', 'url("//placekitten.com/g/50/50")');
-                imageDiv.width(50);
-                imageDiv.height(50);
-            }
-            return imageDiv;
+    changeSprite: function(imageName, imageDiv) {
+        var spriteData = SharkGame.Sprites[imageName];
+        if(!imageDiv) {
+            imageDiv = $('<div>');
         }
+        if(spriteData) {
+            imageDiv.css('background-image', 'url(' + SharkGame.spritePath + ')');
+            imageDiv.css('background-position', "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
+            imageDiv.width(spriteData.frame.w);
+            imageDiv.height(spriteData.frame.h);
+        } else {
+            imageDiv.css('background-image', 'url("//placekitten.com/g/50/50")');
+            imageDiv.width(50);
+            imageDiv.height(50);
+        }
+        return imageDiv;
     }
+
 });
 
 SharkGame.TitleBar = {
@@ -328,7 +328,7 @@ SharkGame.Main = {
         $('#sidebar').hide();
         $('#overlay').hide();
         $('#gameName').html("- " + SharkGame.GAME_NAME + " -");
-        $('#versionNumber').html("v " + SharkGame.VERSION);
+        $('#versionNumber').html("v " + SharkGame.VERSION + " — " + SharkGame.VERSION_NAME);
         SharkGame.sidebarHidden = true;
         SharkGame.gameOver = false;
 
@@ -496,7 +496,13 @@ SharkGame.Main = {
         SharkGame.Main.createBuyButtons();
 
         // set up tab specific stuff
-        var tabCode = tabs[tabs.current].code;
+        var tab = tabs[tabs.current];
+        if(!tab) {
+            // in case of error, default to home
+            SharkGame.Tabs.current = "home";
+            tab = tabs["home"];
+        }
+        var tabCode = tab.code;
         tabCode.switchTo();
     },
 
@@ -909,8 +915,7 @@ SharkGame.Main = {
             }
         });
     }
-}
-;
+};
 
 SharkGame.Button = {
     makeButton: function(id, name, div, handler) {
@@ -928,9 +933,14 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
-    "0.6": [
+    "0.6 - Return of Shark": [
         "Major graphical update!",
         "Now features graphics sort of!",
+        "Some UI rearrangements:" +
+            "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
+            "<li>General stats now on right of grotto instead of left.</li>" +
+            "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
+        "Pointless version subtitle!",
         "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>"
     ],
     "0.59": [
@@ -1013,7 +1023,6 @@ SharkGame.Changelog = {
         "Resource table, log, initial buttons, the works."
     ]
 };
-
 
 $(document).ready(function() {
     $('#game').show();

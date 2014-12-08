@@ -5,6 +5,8 @@ SharkGame.Stats = {
     tabName: "Grotto",
     tabBg: "img/bg/bg-grotto.png",
 
+    sceneImage: "img/events/misc/scene-grotto.png",
+
     recreateIncomeTable: true,
 
     discoverReq: {
@@ -39,12 +41,14 @@ SharkGame.Stats = {
         statsContainer.append($('<div>').attr("id", "statsLeftContainer")
                 .append($('<div>').attr("id", "incomeData"))
                 .append($('<div>').attr("id", "disposeResource"))
+        );
+        statsContainer.append($('<div>').attr("id", "statsRightContainer")
                 .append($('<div>').attr("id", "generalStats"))
         );
-        statsContainer.append($('<div>').attr("id", "upgradeList"));
+
         statsContainer.append($('<div>').addClass("clear-fix"));
         var message = s.message;
-        message = "<img width=400 height=200 src='http://placekitten.com/g/400/200' id='tabSceneImage'>" + message;
+        message = "<img width=400 height=200 src='" + s.sceneImage + "' id='tabSceneImage'>" + message;
         $('#tabMessage').html(message).css("background-image", "url('" + s.tabBg + "')");
 
         var disposeSel = $('#disposeResource');
@@ -65,8 +69,6 @@ SharkGame.Stats = {
         }
         genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
         genStats.append(s.createTotalAmountTable());
-
-        s.createUpgradeList();
 
         SharkGame.Main.createBuyButtons("rid");
     },
@@ -262,22 +264,9 @@ SharkGame.Stats = {
         });
 
         return totalAmountTable;
-    },
-
-    createUpgradeList: function() {
-        var u = SharkGame.Upgrades;
-        var upgradeList = $('#upgradeList');
-        upgradeList.append($("<h3>").html("Upgrades"));
-        var list = $('<ul>');
-        $.each(u, function(k, v) {
-            if(v.purchased) {
-                list.append($("<li>")
-                        .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")
-                );
-            }
-        });
-        upgradeList.append(list);
     }
+
+
 
 
 };

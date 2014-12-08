@@ -10,6 +10,7 @@ SharkGame.Home = {
 
     // Priority: later messages display if available, otherwise earlier ones.
     extraMessages: [
+        // FIRST RUN
         {
             message: "&nbsp<br/>&nbsp",
             imageIndex: 1
@@ -84,6 +85,8 @@ SharkGame.Home = {
             message: "The gate beckons. The secret must be unlocked.<br/>&nbsp",
             imageIndex: 15
         }
+        // LATER RUNS
+
     ],
 
     init: function() {
@@ -138,34 +141,30 @@ SharkGame.Home = {
         });
         // only edit DOM if necessary
         if(h.currentExtraMessageIndex !== selectedIndex) {
-            var oldIndex = h.currentExtraMessageIndex;
-            if(oldIndex < 0) {
-                oldIndex = 0;
-            }
             h.currentExtraMessageIndex = selectedIndex;
             var tabMessage = $('#tabMessage');
+            var sceneDiv = $('#tabSceneImage');
+            if(sceneDiv.size() === 0) {
+                sceneDiv = $('<div>').attr("id", "tabSceneImage");
+            }
             var message = h.homeMessage;
-            var oldTabSceneImagePath = SharkGame.eventPath + "homesea-" + h.extraMessages[oldIndex].imageIndex + ".png";
-            var tabSceneImagePath = SharkGame.eventPath + "homesea-" + h.extraMessages[selectedIndex].imageIndex + ".png";
             message += "<br/><span id='extraMessage' class='medDesc'>&nbsp<br/>&nbsp</span>";
-            message = "<img id='tabSceneImage' width=400 height=200 src='" + oldTabSceneImagePath + "'>" + message;
-            tabMessage.html(message);
+            tabMessage.html(message).prepend(sceneDiv);
 
             var extraMessageSel = $('#extraMessage');
-            var imageSel = $('#tabSceneImage');
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
                 extraMessageSel.animate({opacity: 0}, 200, function() {
                     var thisSel = $(this);
                     thisSel.animate({opacity: 1}, 200).html(h.extraMessages[selectedIndex].message);
                 });
-                imageSel.animate({opacity: 0}, 500, function() {
+                sceneDiv.animate({opacity: 0}, 500, function() {
                     var thisSel = $(this);
-                    thisSel.attr('src', tabSceneImagePath);
+                    SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
                     thisSel.animate({opacity: 1}, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
-                imageSel.attr('src', tabSceneImagePath);
+                SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
             }
         }
     },
@@ -250,16 +249,16 @@ SharkGame.Home = {
                 button.html(label);
 
 
-                var spritename = null;
-                if(typeof value.imageIndex === 'number') {
-                    spritename = "purchaseicons_" + value.imageIndex;
-                    if(!enableButton) {
-                        spritename += "-disabled";
-                    }
+                var spritename = "actions/" + key;
+                if(!enableButton) {
+                    spritename += "-disabled";
                 }
-                var iconDiv = SharkGame.getIconSpriteDiv(spritename);
-                if(iconDiv) {
-                    button.prepend(iconDiv);
+                if(SharkGame.Settings.current.iconPositions !== "off") {
+                    var iconDiv = SharkGame.changeSprite(spritename);
+                    if(iconDiv) {
+                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                        button.prepend(iconDiv);
+                    }
                 }
             }
         });
@@ -405,7 +404,6 @@ SharkGame.Home = {
 SharkGame.HomeActions = {
     'catchFish': {
         name: "Catch fish",
-        imageIndex: 0,
         effect: {
             resource: {
                 'fish': 1
@@ -436,7 +434,6 @@ SharkGame.HomeActions = {
 
     'seaApplesToScience': {
         name: "Study sea apples",
-        imageIndex: 1,
         effect: {
             resource: {
                 science: 5
@@ -463,7 +460,6 @@ SharkGame.HomeActions = {
 
     'transmuteSharkonium': {
         name: "Transmute stuff to sharkonium",
-        imageIndex: 2,
         effect: {
             resource: {
                 sharkonium: 1
@@ -497,7 +493,6 @@ SharkGame.HomeActions = {
 
     'getShark': {
         name: "Recruit shark",
-        imageIndex: 3,
         effect: {
             resource: {
                 'shark': 1
@@ -562,7 +557,6 @@ SharkGame.HomeActions = {
 
     'getManta': {
         name: "Hire ray",
-        imageIndex: 4,
         effect: {
             resource: {
                 'ray': 1
@@ -637,7 +631,6 @@ SharkGame.HomeActions = {
 
     'getCrab': {
         name: "Acquire crab",
-        imageIndex: 5,
         effect: {
             resource: {
                 'crab': 1
@@ -698,7 +691,6 @@ SharkGame.HomeActions = {
 
     'getScientist': {
         name: "Train science shark",
-        imageIndex: 6,
         effect: {
             resource: {
                 'scientist': 1
@@ -734,7 +726,6 @@ SharkGame.HomeActions = {
 
     'getNurse': {
         name: "Train nurse shark",
-        imageIndex: 7,
         effect: {
             resource: {
                 'nurse': 1
@@ -769,7 +760,6 @@ SharkGame.HomeActions = {
 
     'getLaser': {
         name: "Equip laser ray",
-        imageIndex: 8,
         effect: {
             resource: {
                 'laser': 1
@@ -804,7 +794,6 @@ SharkGame.HomeActions = {
 
     'getMaker': {
         name: "Instruct a ray maker",
-        imageIndex: 9,
         effect: {
             resource: {
                 'maker': 1
@@ -841,7 +830,6 @@ SharkGame.HomeActions = {
 
     'getPlanter': {
         name: "Gear up planter crab",
-        imageIndex: 10,
         effect: {
             resource: {
                 'planter': 1
@@ -877,7 +865,6 @@ SharkGame.HomeActions = {
 
     'getBrood': {
         name: "Form crab brood",
-        imageIndex: 11,
         effect: {
             resource: {
                 'brood': 1
@@ -915,7 +902,6 @@ SharkGame.HomeActions = {
 
     'getCrystalMiner': {
         name: "Build crystal miner",
-        imageIndex: 12,
         effect: {
             resource: {
                 'crystalMiner': 1
@@ -951,7 +937,6 @@ SharkGame.HomeActions = {
 
     'getSandDigger': {
         name: "Build sand digger",
-        imageIndex: 13,
         effect: {
             resource: {
                 'sandDigger': 1
@@ -987,7 +972,6 @@ SharkGame.HomeActions = {
 
     'getAutoTransmuter': {
         name: "Build auto-transmuter",
-        imageIndex: 14,
         effect: {
             resource: {
                 'autoTransmuter': 1
@@ -1023,7 +1007,6 @@ SharkGame.HomeActions = {
 
     'getFishMachine': {
         name: "Build fish machine",
-        imageIndex: 15,
         effect: {
             resource: {
                 fishMachine: 1

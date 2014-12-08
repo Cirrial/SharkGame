@@ -1,6 +1,5 @@
 SharkGame.ResourceTable = {
 
-    // THIS IS SPECIAL: DO NOT RENAME IT
     'essence': {
         name: 'essence',
         singleName: 'essence',

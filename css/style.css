@@ -47,20 +47,24 @@ a:active {
 h1 {
   color: #b6bfd1;
   font-size: 2em;
+  text-shadow: 0 0 0.3em #061639;
 }
 h2 {
   color: #7788aa;
   font-size: 1.3em;
+  text-shadow: 0 0 0.3em #061639;
 }
 h3 {
   color: #7788aa;
   font-size: 1.1em;
   text-align: center;
+  text-shadow: 0 0 0.3em #061639;
 }
 h4 {
   color: #7788aa;
   font-size: 0.8em;
   text-align: center;
+  text-shadow: 0 0 0.3em #061639;
 }
 #shareWrapper {
   margin-left: auto;
@@ -68,6 +72,7 @@ h4 {
   display: inline-block;
   text-align: center;
   margin-top: 0.8em;
+  margin-bottom: 0.2em;
   background: #2e4372;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -287,7 +292,7 @@ pre {
   padding: 5px;
   margin: 5px;
   padding: 1.4em;
-  background: url("http://placehold.it/200x400/4E638E/2E4372") repeat-x center;
+  background: repeat-x center;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
   border-radius: 0.5em;
@@ -301,10 +306,28 @@ pre {
   margin: 5px;
   padding: 1.0em;
 }
+#buttonLeftContainer {
+  float: left;
+  width: 50%;
+}
 #statsContainer {
   padding: 5px;
   margin: 5px;
   padding: 1.0em;
+}
+.statsInnerContainer table {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.1em;
+  border: 1px solid #7788aa;
+  border-collapse: collapse;
+  background: #061639;
+}
+.statsInnerContainer td {
+  margin: 0;
+  font-size: 0.9em;
+  padding: 0.2em;
 }
 #statsLeftContainer {
   float: left;
@@ -320,6 +343,24 @@ pre {
   background: #061639;
 }
 #statsLeftContainer td {
+  margin: 0;
+  font-size: 0.9em;
+  padding: 0.2em;
+}
+#statsRightContainer {
+  float: right;
+  width: 45%;
+}
+#statsRightContainer table {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.1em;
+  border: 1px solid #7788aa;
+  border-collapse: collapse;
+  background: #061639;
+}
+#statsRightContainer td {
   margin: 0;
   font-size: 0.9em;
   padding: 0.2em;
@@ -524,6 +565,34 @@ button:disabled div {
   -webkit-box-shadow: 0 0 5px 5px #152a55;
   -moz-box-shadow: 0 0 5px 5px #152a55;
   box-shadow: 0 0 5px 5px #152a55;
+}
+#tabSceneImageRed {
+  vertical-align: middle;
+  display: block;
+  margin: 0.1em auto 0.4em auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 5px #152a55;
+  -moz-box-shadow: 0 0 5px 5px #152a55;
+  box-shadow: 0 0 5px 5px #152a55;
+  -webkit-box-shadow: 0 0 5px 5px #5c1919;
+  -moz-box-shadow: 0 0 5px 5px #5c1919;
+  box-shadow: 0 0 5px 5px #5c1919;
+}
+#tabSceneImageEssence {
+  vertical-align: middle;
+  display: block;
+  margin: 0.1em auto 0.4em auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 5px #152a55;
+  -moz-box-shadow: 0 0 5px 5px #152a55;
+  box-shadow: 0 0 5px 5px #152a55;
+  -webkit-box-shadow: 0 0 5px 5px #3eb890;
+  -moz-box-shadow: 0 0 5px 5px #3eb890;
+  box-shadow: 0 0 5px 5px #3eb890;
 }
 #overlay {
   -webkit-opacity: 0.5;

@@ -165,23 +165,27 @@ a {
 h1 {
   color: lighten(@color-lighter, 20%);
   font-size: 2em;
+  text-shadow: 0 0 0.3em @color-darker;
 }
 
 h2 {
   color: @color-lighter;
   font-size: 1.3em;
+  text-shadow: 0 0 0.3em @color-darker;
 }
 
 h3 {
   color: @color-lighter;
   font-size: 1.1em;
-  text-align: center
+  text-align: center;
+  text-shadow: 0 0 0.3em @color-darker;
 }
 
 h4 {
   color: @color-lighter;
   font-size: 0.8em;
-  text-align: center
+  text-align: center;
+  text-shadow: 0 0 0.3em @color-darker;
 }
 
 #shareWrapper {
@@ -190,6 +194,7 @@ h4 {
   display: inline-block;
   text-align: center;
   margin-top: 0.8em;
+  margin-bottom: 0.2em;
   background: @color-med;
 
   .border-radius(3px);
@@ -401,7 +406,7 @@ pre {
 #tabMessage {
   .inner-section;
   padding: 1.4em;
-  background: url("http://placehold.it/200x400/4E638E/2E4372") repeat-x center;
+  background: repeat-x center;
   .border-radius(0.5em);
   .box-shadow-inset(0, 0, 30px, 30px, @color-med);
   text-shadow: 0 0 0.3em @color-dark;
@@ -413,6 +418,11 @@ pre {
   padding: 1.0em;
 }
 
+#buttonLeftContainer {
+  float: left;
+  width: 50%;
+}
+
 //////////////////////////////////////////////////////////////
 // STATS
 //////////////////////////////////////////////////////////////
@@ -420,12 +430,10 @@ pre {
 #statsContainer {
   .inner-section;
   padding: 1.0em;
+
 }
 
-#statsLeftContainer {
-  float: left;
-  width: 50%;
-
+.statsInnerContainer {
   table {
     text-align: left;
     margin-left: auto;
@@ -442,6 +450,18 @@ pre {
     font-size: 0.9em;
     padding: 0.2em;
   }
+}
+
+#statsLeftContainer {
+  float: left;
+  width: 50%;
+  .statsInnerContainer;
+}
+
+#statsRightContainer {
+  float: right;
+  width: 45%;
+  .statsInnerContainer;
 }
 
 #incomeData {
@@ -648,6 +668,16 @@ button {
   margin: 0.1em auto 0.4em auto;
   .border-radius(5px);
   .box-shadow(0, 0, 5px, 5px, @color-dark);
+}
+
+#tabSceneImageRed {
+  #tabSceneImage;
+  .box-shadow(0, 0, 5px, 5px, @color-danger-dark);
+}
+
+#tabSceneImageEssence {
+  #tabSceneImage;
+  .box-shadow(0, 0, 5px, 5px, darken(@color-essence, 30%));
 }
 
 
