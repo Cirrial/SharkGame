@@ -88,7 +88,7 @@ SharkGame.Save = {
             try {
                 saveDataString = ascii85.decode(saveDataString);
             } catch(err) {
-                throw new Error("Saved data looked like it was encoded in ascii85, but it couldn't be decoded. Can't load.")
+                throw new Error("Saved data looked like it was encoded in ascii85, but it couldn't be decoded. Can't load. Your save: " + saveDataString)
             }
         }
 
@@ -98,7 +98,7 @@ SharkGame.Save = {
             try {
                 saveDataString = pako.inflate(saveDataString, {to: 'string'});
             } catch(err) {
-                throw new Error("Saved data is compressed, but it can't be decompressed. Can't load.");
+                throw new Error("Saved data is compressed, but it can't be decompressed. Can't load. Your save: " + saveDataString);
             }
         }
 
@@ -107,7 +107,7 @@ SharkGame.Save = {
             try {
                 saveData = JSON.parse(saveDataString);
             } catch(err) {
-                var errMessage = "Couldn't load save data. It didn't parse correctly.";
+                var errMessage = "Couldn't load save data. It didn't parse correctly. Your save: " + saveDataString;
                 if(importSaveData) {
                     errMessage += " Did you paste the entire string?";
                 }
@@ -120,7 +120,7 @@ SharkGame.Save = {
             try {
                 //check version
                 var currentVersion = SharkGame.Save.saveUpdaters.length - 1;
-                var saveVersion = saveData.shift()
+                var saveVersion = saveData.shift();
                 if(typeof saveVersion !== "number" || saveVersion % 1 !== 0 || saveVersion < 0 || saveVersion > currentVersion) {
                     throw new Error("Invalid save version!");
                 }
@@ -134,7 +134,7 @@ SharkGame.Save = {
                 saveData = SharkGame.Save.expandData(template, saveData);
                 saveData.saveVersion = saveVersion;
             } catch(err) {
-                throw new Error("Couldn't unpack packed save data. Reason: " + err.message);
+                throw new Error("Couldn't unpack packed save data. Reason: " + err.message + ". Your save: " + saveDataString);
             }
         }
 
@@ -264,7 +264,7 @@ SharkGame.Save = {
                 }
             }
         } else {
-            throw new Error("Couldn't load saved game. I don't know how to break this to you, but I think your save is corrupted.");
+            throw new Error("Couldn't load saved game. I don't know how to break this to you, but I think your save is corrupted. Your save: " + saveDataString);
         }
     },
 

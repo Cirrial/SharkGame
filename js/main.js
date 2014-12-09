@@ -5,6 +5,7 @@ var SharkGame = SharkGame || {};
 $.extend(SharkGame, {
     GAME_NAMES: ["Five Seconds A Shark",
         "Next Shark Game",
+        "Next Shark Game: Barkfest",
         "Sharky Clicker",
         "Weird Oceans",
         "You Have To Name The Shark Game",
@@ -19,7 +20,8 @@ $.extend(SharkGame, {
         "Sharkfall",
         "Heart of Sharkness",
         "Sharks and Recreation",
-        "Alone in the Shark"
+        "Alone in the Shark",
+        "Sharkpocalypse"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
@@ -29,11 +31,11 @@ $.extend(SharkGame, {
 
     INTERVAL: (1000 / 10), // 10 FPS
     dt: (1 / 10),
-    before: null,
+    before: new Date(),
 
-    timestampLastSave: null,
-    timestampGameStart: null,
-    timestampRunStart: null,
+    timestampLastSave: new Date(),
+    timestampGameStart: new Date(),
+    timestampRunStart: new Date(),
 
     sidebarHidden: true,
     titlebarGenerated: false,
@@ -226,8 +228,8 @@ SharkGame.Tabs = {
 
 SharkGame.Main = {
 
-    tickHandler: null,
-    autosaveHandler: null,
+    tickHandler: -1,
+    autosaveHandler: -1,
 
     beautify: function(number, suppressDecimals) {
 
@@ -349,6 +351,9 @@ SharkGame.Main = {
         // initialise and reset resources
         SharkGame.Resources.init();
 
+        // initialise world
+        SharkGame.World.init();
+
         // reset log
         SharkGame.Log.clearMessages();
 
@@ -379,11 +384,11 @@ SharkGame.Main = {
         // set up tab after load
         SharkGame.Main.setUpTab();
 
-        if(SharkGame.Main.tickHandler == null) {
+        if(SharkGame.Main.tickHandler === -1) {
             SharkGame.Main.tickHandler = setInterval(SharkGame.Main.tick, SharkGame.INTERVAL);
         }
 
-        if(SharkGame.Main.autosaveHandler == null) {
+        if(SharkGame.Main.autosaveHandler === -1) {
             SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
         }
     },
@@ -453,9 +458,8 @@ SharkGame.Main = {
 
     processSimTime: function(numberOfSeconds) {
         var r = SharkGame.Resources;
-        var m = SharkGame.Main;
 
-        // currently just does income calculation, but who knows what terrible things could happen in future
+        // income calculation
         r.processIncomes(numberOfSeconds);
     },
 
@@ -513,7 +517,8 @@ SharkGame.Main = {
 
     createTabNavigation: function() {
         var tabs = SharkGame.Tabs;
-        $('#tabList').empty();
+        var tabList = $('#tabList');
+        tabList.empty();
         // add navigation
         // check if we have more than one discovered tab, else bypass this
         var numTabsDiscovered = 0;
@@ -523,7 +528,6 @@ SharkGame.Main = {
             }
         })
         if(numTabsDiscovered > 1) {
-            var tabList = $('#tabList');
             // add a header for each discovered tab
             // make it a link if it's not the current tab
             $.each(tabs, function(k, v) {
@@ -712,8 +716,7 @@ SharkGame.Main = {
         var optionIndex = parseInt(settingInfo[2]);
 
         // change setting to specified setting!
-        var newSetting = SharkGame.Settings[settingName].options[optionIndex];
-        SharkGame.Settings.current[settingName] = newSetting;
+        SharkGame.Settings.current[settingName] = SharkGame.Settings[settingName].options[optionIndex];
 
         // update relevant table cell!
 //        $('#option-' + settingName)
@@ -753,10 +756,10 @@ SharkGame.Main = {
     endGame: function() {
         // stop ticking, foreverrrr
         clearInterval(SharkGame.Main.tickHandler);
-        SharkGame.Main.tickHandler = null;
+        SharkGame.Main.tickHandler = -1;
         // stop autosaving too
         clearInterval(SharkGame.Main.autosaveHandler);
-        SharkGame.Main.autosaveHandler = null;
+        SharkGame.Main.autosaveHandler = -1;
 
         // bring up overlay, but much darker
         var docHeight = $(document).height();
@@ -931,6 +934,30 @@ SharkGame.Button = {
             .click(handler);
     }
 };
+
+SharkGame.FunFacts = [
+    "Shark Game's initial bare minimum code came from an abandoned idle game about bees. Almost no trace of bees remains!",
+    "The existence of resources that create resources that create resources in this game were inspired by Derivative Clicker!",
+    "Kitten Game was an inspiration for this game! This surprises probably no one. The very first message the game gives you is a nod of sorts.",
+    "There have been social behaviours observed in lemon sharks, and evidence that suggests they prefer company to being alone.",
+    "Sea apples are a type of sea cucumber.",
+    "Magic crystals are probably not real.",
+    "There is nothing suspicious about the machines.",
+    "There are many species of sharks that investigate things with their mouths. This can end badly for the subject of investigation.",
+    "Some shark species display 'tonic immobility' when rubbed on the nose. They stop moving, appear deeply relaxed, and can stay this way for up to 15 minutes before swimming away.",
+    "In some shark species eggs hatch within their mothers, and in some of these species the hatched babies eat unfertilised or even unhatched eggs.",
+    "Rays can be thought of as flattened sharks.",
+    "Rays are pancakes of the sea. (note: probably not true)",
+    "Chimaera are related to sharks and rays and have a venomous spine in front of their dorsal fin.",
+    "More people are killed by lightning every year than by sharks.",
+    "There are real eusocial shrimps that live as a community in sponges on reefs, complete with queens.",
+    "White sharks have been observed to have a variety of body language signals to indicate submission and dominance towards each other without violence.",
+    "Sharks with lasers were overdone, okay?",
+    "There is a surprising deficit of cookie in this game.",
+    "Remoras were banished from the oceans in the long bygone eras. The sharks hope they never come back.",
+    "A kiss from a shark can make you immortal. But only if they want you to be immortal.",
+    "A shark is worth one in the bush, and a bunch in the sea water. Don't put sharks in bushes."
+];
 
 SharkGame.Changelog = {
     "0.6 - Return of Shark": [

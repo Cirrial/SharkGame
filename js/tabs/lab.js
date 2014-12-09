@@ -81,11 +81,17 @@ SharkGame.Lab = {
                 // check upgrade prerequisites
                 if(value.required) {
                     $.each(value.required, function(_, v) {
+                        // check previous upgrade research
                         if(SharkGame.Upgrades[v]) {
                             prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
                         } else {
                             prereqsMet = false; // if the required upgrade doesn't exist, we definitely don't have it
                         }
+
+                        // check existence of resource cost
+                        $.each(value.cost, function(k, v) {
+                            prereqsMet = prereqsMet && SharkGame.World.doesResourceExist(k);
+                        });
                     });
                 }
                 if(prereqsMet) {
@@ -185,39 +191,6 @@ SharkGame.Lab = {
         }
     },
 
-//    updateResearchList: function () {
-//        var u = SharkGame.Upgrades;
-//        var researchDiv = $('#researchDiv');
-//
-//        // check if research list has to be added
-//        if ( !(researchDiv.length) ) {
-//
-//            researchDiv = $('<div>')
-//                .attr("id", "researchDiv")
-//                .append($('<h3>')
-//                    .html("Upgrades"))
-//                .append($('<ul>')
-//                    .attr("id", "researchList")
-//            );
-//            // append after resource table
-//            var rTable = $('#resourceTable');
-//            if ( rTable.length <= 0 ) {
-//                return;
-//            } else {
-//                rTable.after(researchDiv);
-//            }
-//        }
-//
-//        var researchList = $('#researchList');
-//        researchList.empty();
-//        // add researched upgrades to list
-//        $.each(u, function (k, v) {
-//            if ( v.purchased ) {
-//                researchList.append($('<li>').html(v.name));
-//            }
-//        });
-//    },
-
     allResearchDone: function() {
         var u = SharkGame.Upgrades;
         var allDone = true;
@@ -294,7 +267,7 @@ SharkGame.Upgrades = {
 
     crystalContainer: {
         name: "Crystal Containers",
-        desc: "Make weird bottle globe things from the crystals we have. Maybe useful??",
+        desc: "Make weird bottle things from the crystals we have. Maybe useful??",
         researchedMessage: "Well, things can go into these containers that aren't water. This makes science easier!",
         effectDesc: "Science sharks are twice as effective at making with the science.",
         cost: {

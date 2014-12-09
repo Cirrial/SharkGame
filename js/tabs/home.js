@@ -172,6 +172,7 @@ SharkGame.Home = {
     update: function() {
         var h = SharkGame.Home;
         var r = SharkGame.Resources;
+        var w = SharkGame.World;
         var amountToBuy = SharkGame.Settings.current.buyAmount;
 
         // cache a selector
@@ -181,7 +182,6 @@ SharkGame.Home = {
         $.each(SharkGame.HomeActions, function(key, value) {
             // check if a button exists
             var button = $('#' + key);
-            var helpText;
             if(button.length === 0) {
                 // add it if prerequisites have been met
                 var prereqsMet = true; // assume true until proven false
@@ -191,11 +191,26 @@ SharkGame.Home = {
                     prereqsMet = prereqsMet && r.checkResources(value.prereq.resource);
                 }
 
+                // check if resource cost exists
+                if(value.cost) {
+                    $.each(value.cost, function(i, v) {
+                        var costResource = v.resource;
+                        prereqsMet = prereqsMet && w.doesResourceExist(costResource);
+                    })
+                }
+
                 // check upgrade prerequisites
                 if(value.prereq.upgrade) {
                     $.each(value.prereq.upgrade, function(_, v) {
                         prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
                     });
+                }
+
+                // check if resulting resource exists
+                if(value.effect.resource) {
+                    $.each(value.effect.resource, function(k, v) {
+                        prereqsMet = prereqsMet && w.doesResourceExist(k);
+                    })
                 }
 
                 if(prereqsMet) {
@@ -719,7 +734,9 @@ SharkGame.HomeActions = {
             "Look at all this science!",
             "Building a smarter, better shark!",
             "Beakers! Beakers underwater! It's madness!",
-            "Let the science commence!"
+            "Let the science commence!",
+            "Underwater clipboards! No I don't know how that works either!",
+            "Careful teeth record the discoveries!"
         ],
         helpText: "Train a shark in the fine art of research and the science of, well, science.",
     },

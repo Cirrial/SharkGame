@@ -164,7 +164,7 @@ SharkGame.Recycler = {
         var button = $(this);
         var resourceName = button.attr("id").split("-")[1];
         var resourceAmount = r.getResource(resourceName);
-        var junkPerResource = SharkGame.ResourceTable[resourceName].junkValue;
+        var junkPerResource = SharkGame.ResourceTable[resourceName].value;
 
         var selectedAmount = SharkGame.Settings.current.buyAmount;
         var amount = selectedAmount;
@@ -193,7 +193,7 @@ SharkGame.Recycler = {
         var button = $(this);
         var resourceName = button.attr("id").split("-")[1];
         var junkAmount = r.getResource("junk");
-        var junkPerResource = SharkGame.ResourceTable[resourceName].junkValue;
+        var junkPerResource = SharkGame.ResourceTable[resourceName].value;
 
         var selectedAmount = SharkGame.Settings.current.buyAmount;
         var amount = selectedAmount;
@@ -229,7 +229,7 @@ SharkGame.Recycler = {
         var y = SharkGame.Recycler;
         var resourceAmount = SharkGame.Resources.getResource(resource);
         var junkAmount = SharkGame.Resources.getResource("junk");
-        var junkPricePerResource = SharkGame.ResourceTable[resource].junkValue;
+        var junkPricePerResource = SharkGame.ResourceTable[resource].value;
         var category = r.getCategoryOfResource(resource);
         var max = 0;
         if(y.allowedCategories[category]) {

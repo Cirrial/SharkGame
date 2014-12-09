@@ -4,7 +4,7 @@ SharkGame.ResourceTable = {
         name: 'essence',
         singleName: 'essence',
         color: '#ACE3D1',
-        junkValue: -1
+        value: -1
     },
 
     'shark': {
@@ -18,7 +18,7 @@ SharkGame.ResourceTable = {
             "scientist",
             "nurse"
         ],
-        junkValue: 100
+        value: 1000
     },
 
     'ray': {
@@ -33,7 +33,7 @@ SharkGame.ResourceTable = {
             "laser",
             "maker"
         ],
-        junkValue: 150
+        value: 1500
     },
 
     'crab': {
@@ -47,7 +47,7 @@ SharkGame.ResourceTable = {
             "planter",
             "brood"
         ],
-        junkValue: 100
+        value: 1000
     },
 
     'scientist': {
@@ -57,7 +57,7 @@ SharkGame.ResourceTable = {
         income: {
             'science': 0.5
         },
-        junkValue: 300
+        value: 3000
     },
 
     'nurse': {
@@ -67,7 +67,7 @@ SharkGame.ResourceTable = {
         income: {
             'shark': 0.01
         },
-        junkValue: 300
+        value: 3000
     },
 
     'laser': {
@@ -78,7 +78,7 @@ SharkGame.ResourceTable = {
             'sand': -2,
             'crystal': 1
         },
-        junkValue: 350
+        value: 3500
     },
 
     'maker': {
@@ -88,7 +88,7 @@ SharkGame.ResourceTable = {
         income: {
             'ray': 0.05
         },
-        junkValue: 400
+        value: 4000
     },
 
     'planter': {
@@ -98,7 +98,7 @@ SharkGame.ResourceTable = {
         income: {
             'kelp': 0.3
         },
-        junkValue: 400
+        value: 4000
     },
 
     'brood': {
@@ -108,7 +108,7 @@ SharkGame.ResourceTable = {
         income: {
             'crab': 0.2
         },
-        junkValue: 400
+        value: 4000
     },
 
     'crystalMiner': {
@@ -118,7 +118,7 @@ SharkGame.ResourceTable = {
         income: {
             crystal: 200
         },
-        junkValue: 32000 //100 crystal 100 sand 20 sharkonium (3200)
+        value: 32000 //100 crystal 100 sand 20 sharkonium (3200)
     },
 
     'sandDigger': {
@@ -128,7 +128,7 @@ SharkGame.ResourceTable = {
         income: {
             sand: 300
         },
-        junkValue: 120000 //500 sand 150 sharkonium (12000)
+        value: 120000 //500 sand 150 sharkonium (12000)
     },
 
     'autoTransmuter': {
@@ -140,7 +140,7 @@ SharkGame.ResourceTable = {
             sand: -150,
             sharkonium: 20
         },
-        junkValue: 155000 //100 crystal 200 sharkonium (15500)
+        value: 155000 //100 crystal 200 sharkonium (15500)
     },
 
     'fishMachine': {
@@ -150,35 +150,35 @@ SharkGame.ResourceTable = {
         income: {
             fish: 1000
         },
-        junkValue: 70000 //100 sharkonium (7000)
+        value: 70000 //100 sharkonium (7000)
     },
 
     'science': {
         name: 'science',
         singleName: 'science',
         color: '#BBA4E0',
-        junkValue: 0
+        value: 0
     },
 
     'fish': {
         name: 'fish',
         singleName: 'fish',
         color: '#E3D85B',
-        junkValue: 2
+        value: 2
     },
 
     'sand': {
         name: 'sand',
         singleName: 'sand',
         color: '#C7BD75',
-        junkValue: 3
+        value: 3
     },
 
     'crystal': {
         name: 'crystals',
         singleName: 'crystal',
         color: '#6FD9CC',
-        junkValue: 15
+        value: 15
     },
 
     'kelp': {
@@ -188,28 +188,28 @@ SharkGame.ResourceTable = {
         income: {
             'seaApple': 0.001
         },
-        junkValue: 20
+        value: 20
     },
 
     'seaApple': {
         name: 'sea apples',
         singleName: 'sea apple',
         color: '#F0C2C2',
-        junkValue: 30
+        value: 30
     },
 
     'sharkonium': {
         name: 'sharkonium',
         singleName: 'sharkonium',
         color: '#8D70CC',
-        junkValue: 70
+        value: 70
     },
 
     'junk': {
         name: 'residue',
         singleName: 'residue',
         color: '#605050',
-        junkValue: 1
+        value: 1
     }
 
 };
@@ -291,6 +291,22 @@ SharkGame.ResourceCategories = {
             "science"
         ]
     },
+    animals: {
+        name: "Animals",
+        disposeMessage: [
+            "Go free, simple creatures!",
+            "What does famine even mean, really?",
+            "We'll probably not need that or regret it or whatever.",
+            "But we need that to eat!",
+            "We didn't need all of that anyway.",
+            "Do you think the aim of the game is to make the numbers go DOWN?!",
+            "Sure hope you know what you're doing here."
+        ],
+        resources: [
+            "fish",
+            "seaApple"
+        ]
+    },
     stuff: {
         name: "Materials",
         disposeMessage: [
@@ -303,11 +319,9 @@ SharkGame.ResourceCategories = {
             "Well I hope you know what you're doing."
         ],
         resources: [
-            "fish",
             "sand",
             "crystal",
-            "kelp",
-            "seaApple"
+            "kelp"
         ]
     },
     processed: {
@@ -323,6 +337,15 @@ SharkGame.ResourceCategories = {
         resources: [
             "sharkonium",
             "junk"
+        ]
+    },
+    harmful: {
+        name: "Harmful",
+        disposeMessage: [
+            "Oh, you'd like that, wouldn't you."
+        ],
+        resources: [
+
         ]
     }
 };
@@ -361,20 +384,33 @@ SharkGame.Resources = {
 
     recalculateIncomeTable: function() {
         var r = SharkGame.Resources;
+        var w = SharkGame.World;
+
+
         // clear income table first
         $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.IncomeTable[k] = 0;
         });
 
+        var worldResources = w.worldResources;
+        var essenceMultiplier = (r.getResource("essence") + 1);
+
         // for each resource, add incomes
-        $.each(SharkGame.ResourceTable, function(_, value) {
-            if(value.income) {
-                var essenceMultiplier = (r.getResource("essence") + 1);
+        $.each(SharkGame.ResourceTable, function(name, resource) {
+
+            var worldResourceInfo = worldResources[name];
+            // for this resource, calculate the income it generates
+            if(resource.income) {
+
+                var worldMultiplier = 1;
+                if(worldResourceInfo) {
+                    worldMultiplier = worldResourceInfo.incomeMultiplier;
+                }
 
                 var canTakeCost = true;
                 // run over all resources first to check if this is true
-                $.each(value.income, function(k, v) {
-                    var change = v * value.amount * value.incomeMultiplier * essenceMultiplier;
+                $.each(resource.income, function(k, v) {
+                    var change = v * resource.amount * resource.incomeMultiplier * worldMultiplier * essenceMultiplier;
                     if(change < 0 && r.getResource(k) <= 0) {
                         canTakeCost = false;
                     }
@@ -382,12 +418,18 @@ SharkGame.Resources = {
 
                 // if there is a cost and it can be taken (or if there is no cost)
                 // run over all resources to fill the income table
-                $.each(value.income, function(k, v) {
-                    var incomeChange = v * value.amount * value.incomeMultiplier * essenceMultiplier;
+                $.each(resource.income, function(k, v) {
+                    var incomeChange = v * resource.amount * resource.incomeMultiplier * worldMultiplier  * essenceMultiplier;
                     if(incomeChange < 0 || canTakeCost) {
                         SharkGame.IncomeTable[k] += incomeChange
                     }
                 });
+            }
+
+            // calculate the income that should be added to this resource
+            if(worldResourceInfo) {
+                var worldResourceIncome = worldResourceInfo.income;
+                SharkGame.IncomeTable[name] += worldResourceIncome * essenceMultiplier;
             }
         });
     },
@@ -426,6 +468,13 @@ SharkGame.Resources = {
 
         var resourceTable = SharkGame.ResourceTable[resource];
         var prevTotalAmount = resourceTable.totalAmount;
+
+        // remove resource from table if something is trying to alter something that shouldn't exist
+        if(!SharkGame.World.doesResourceExist(resource)) {
+            resourceTable.amount = 0;
+            resourceTable.totalAmount = 0;
+            return; // keep at non-existing forever
+        }
 
         resourceTable.amount += amount;
         if(resourceTable.amount < 0) {
@@ -486,6 +535,14 @@ SharkGame.Resources = {
             });
         });
         return categoryName;
+    },
+
+    getResourcesInCategory: function(categoryName) {
+        var resources = [];
+        $.each(SharkGame.ResourceCategories[categoryName].resources, function(i, v) {
+            resources.push(v);
+        });
+        return resources;
     },
 
     getBaseOfResource: function(resourceName) {
@@ -703,5 +760,64 @@ SharkGame.Resources = {
         // snip off trailing suffix
         formattedResourceList = formattedResourceList.slice(0, -2);
         return formattedResourceList;
+    },
+
+    getResourceSources: function(resource) {
+        var sources = {"income" : [], "actions" : []};
+        // go through all incomes
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            if(v.income) {
+                var incomeForResource = v.income[resource];
+                if(incomeForResource > 0) {
+                    sources.income.push(k);
+                }
+            }
+        });
+        // go through all actions
+        $.each(SharkGame.HomeActions, function(k, v) {
+            var resourceEffect = v.effect.resource;
+            if(resourceEffect) {
+                if(resourceEffect[resource] > 0) {
+                    sources.actions.push(k);
+                }
+            }
+        });
+        return sources;
+    },
+
+    // create all chains that terminate only at a cost-free action to determine how to get to a resource
+    // will return a weird vaguely tree structure of nested arrays (ughhh I need to learn how to OOP in javascript at some point, what a hack)
+    getResourceDependencyChains: function(resource, alreadyKnownList) {
+        var r = SharkGame.Resources;
+        var l = SharkGame.World;
+        var dependencies = [];
+        if(!alreadyKnownList) {
+            alreadyKnownList = []; // tracks resources we've already seen, an effort to combat cyclic dependencies
+        }
+
+        var sources = r.getResourceSources(resource);
+        // get resource costs for actions that directly get this
+        // only care about the resource types required
+        $.each(sources.actions, function(_, v) {
+            var actionCost = SharkGame.HomeActions[v].cost;
+            $.each(actionCost, function(_, w){
+                var resource = w.resource;
+                if(l.doesResourceExist(resource)) {
+                    dependencies.push(resource);
+                    alreadyKnownList.push(resource);
+                }
+            })
+        });
+
+        // get dependencies for income resources
+        $.each(sources.income, function(_, v) {
+            if(l.doesResourceExist(v)) {
+                if(alreadyKnownList.indexOf(v) === -1) {
+                    dependencies.push(r.getResourceDependencyChains(v, alreadyKnownList));
+                }
+            }
+        });
+
+        return dependencies;
     }
 };

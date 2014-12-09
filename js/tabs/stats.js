@@ -15,6 +15,11 @@ SharkGame.Stats = {
         ]
     },
 
+    bannedDisposeCategories: [
+        "special",
+        "harmful"
+    ],
+
     message: "The grotto is a place to keep a better track of resources." +
         "</br></br>You can also dispose of those you don't need anymore." +
         "</br>Disposing specialists returns them to their normal, previous lives.",
@@ -94,10 +99,11 @@ SharkGame.Stats = {
 
     createDisposeButtons: function() {
         var r = SharkGame.Resources;
+        var s = SharkGame.Stats;
         var m = SharkGame.Main;
         var buttonDiv = $('#disposeResource');
         $.each(SharkGame.ResourceTable, function(k, v) {
-            if(r.getTotalResource(k) > 0 && r.getCategoryOfResource(k) !== "special") {
+            if(r.getTotalResource(k) > 0 && s.bannedDisposeCategories.indexOf(r.getCategoryOfResource(k)) === -1) {
                 SharkGame.Button.makeButton("dispose-" + k, "Dispose of " + r.getResourceName(k), buttonDiv, SharkGame.Stats.onDispose);
             }
         });
