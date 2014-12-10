@@ -1,15 +1,69 @@
 SharkGame.WorldTypes = {
+    start: {
+        name: "Start",
+        desc: "",
+        absentResources: [
+            "tar",
+            "ice",
+            "shrimp",
+            "lobster",
+            "dolphin",
+            "whale",
+            "chimaera",
+            "octopus",
+            "eel",
+            "queen",
+            "berrier",
+            "biologist",
+            "warren",
+            "seeker",
+            "harvester",
+            "savant",
+            "treasurer",
+            "chorus",
+            "transmuter",
+            "explorer",
+            "collector",
+            "scavenger",
+            "technician",
+            "sifter",
+            "purifier",
+            "heater",
+            "spongeFarmer",
+            "berrySprayer",
+            "glassMaker",
+            "silentArchivist",
+            "tirelessCrafter",
+            "clamCollector",
+            "sprongeSmelter",
+            "seaScourer",
+            "prostheticPolyp",
+            "sponge",
+            "jellyfish",
+            "clam",
+            "coral",
+            "algae",
+            "coralglass",
+            "delphinium",
+            "spronge"
+        ],
+        modifiers: []
+    },
     marine: {
         name: "Marine",
         desc: "",
-        absentResources: [],
-        modifiers: []
+        absentResources: [
+            "ice"
+        ],
+        modifiers: [
+
+        ]
     },
     chaotic: {
         name: "Chaotic",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
             { modifier: "planetaryIncome", category: "frenzy", amount: 0.1 },
@@ -21,7 +75,7 @@ SharkGame.WorldTypes = {
         name: "Haven",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
 
@@ -31,7 +85,7 @@ SharkGame.WorldTypes = {
         name: "Tempestuous",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
 
@@ -41,7 +95,7 @@ SharkGame.WorldTypes = {
         name: "Violent",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
 
@@ -51,7 +105,7 @@ SharkGame.WorldTypes = {
         name: "Abandoned",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
 
@@ -61,7 +115,7 @@ SharkGame.WorldTypes = {
         name: "Shrouded",
         desc: "",
         absentResources: [
-
+            "ice"
         ],
         modifiers: [
 
@@ -93,13 +147,19 @@ SharkGame.WorldModifiers = {
         $.each(resourceList, function(i, v) {
             wr[v].incomeMultiplier = level * amount;
         });
+    },
+    planetaryIncomeReciprocalMultiplier: function(level, resourceCategory, amount) {
+        var wr = SharkGame.World.worldResources;
+        var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
+        $.each(resourceList, function(i, v) {
+            wr[v].incomeMultiplier = (1/level  * amount);
+        });
     }
-
 };
 
 SharkGame.World = {
 
-    worldType: "marine",
+    worldType: "start",
     worldResources: {},
     planetLevel: 1,
 
@@ -136,6 +196,14 @@ SharkGame.World = {
 
     // does this resource exist on this planet?
     doesResourceExist: function(resourceName) {
-        return SharkGame.World.worldResources[resourceName].exists;
+        var info = SharkGame.World.worldResources[resourceName];
+        if(!info) {
+            return false;
+        }
+        return info.exists;
+    },
+
+    getWorldMultiplier: function(resourceName) {
+        return SharkGame.World.worldResources[resourceName].incomeMultiplier;
     }
 };

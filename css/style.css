@@ -273,8 +273,11 @@ pre {
   color: #ace3d1;
   text-shadow: 0 0 0.8em #60c9a7;
 }
+#resource-numen {
+  text-shadow: 0 0 0.3em #ffffff, 0 0 0.6em #ffffff, 0 0 0.8em #ffffff;
+}
 #resource-essence {
-  text-shadow: 0 0 1em #ace3d1;
+  text-shadow: 0 0 0.6em #ace3d1;
 }
 #content {
   background-color: #2e4372;

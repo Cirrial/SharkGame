@@ -69,7 +69,7 @@ SharkGame.Stats = {
         var genStats = $('#generalStats');
         genStats.append($('<h3>').html("General Stats"));
         genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
-        if(SharkGame.Resources.getResource("essence") > 0) {
+        if(SharkGame.Resources.getTotalResource("essence") > 0) {
             genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
         }
         genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
@@ -188,6 +188,7 @@ SharkGame.Stats = {
     createIncomeTable: function() {
         var r = SharkGame.Resources;
         var m = SharkGame.Main;
+        var w = SharkGame.World;
         var incomesTable = $("#incomeTable");
         if(incomesTable.length === 0) {
             incomesTable = $("<table>").attr("id", "incomeTable");
@@ -195,10 +196,10 @@ SharkGame.Stats = {
             incomesTable.empty();
         }
 
-        var essenceMultiplierCol = null;
-        var addEssenceMultiplier = false;
-        if(r.getResource("essence")) {
-            addEssenceMultiplier = true;
+        var numenMultiplierCol = null;
+        var addNumenMultiplier = false;
+        if(r.getResource("numen")) {
+            addNumenMultiplier = true;
         }
 
         var formatCounter = 0;
@@ -219,11 +220,17 @@ SharkGame.Stats = {
                     row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
                     if(counter === 0) {
                         row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
+                        var worldMultiplier = w.getWorldMultiplier(k);
+                        if(worldMultiplier !== 1) {
+                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                        } else {
+                            row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                        }
                     }
-                    if(addEssenceMultiplier) {
-                        essenceMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + (r.getResource("essence") + 1) + "</span>").addClass("essenceGlow");
-                        row.append(essenceMultiplierCol);
-                        addEssenceMultiplier = false;
+                    if(addNumenMultiplier) {
+                        numenMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getResource("numen") + 1) + "</span>").addClass("essenceGlow");
+                        row.append(numenMultiplierCol);
+                        addNumenMultiplier = false;
                     }
 
                     row.append($("<td>").attr("id", "income-" + k + "-" + incomeKey)
@@ -240,9 +247,9 @@ SharkGame.Stats = {
             }
         });
 
-        if(essenceMultiplierCol) {
+        if(numenMultiplierCol) {
             var rowCount = incomesTable.find("tr").length;
-            essenceMultiplierCol.attr("rowspan", rowCount);
+            numenMultiplierCol.attr("rowspan", rowCount);
         }
 
         return incomesTable;

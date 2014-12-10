@@ -355,7 +355,7 @@ SharkGame.Home = {
         var rawCost = action.cost;
 
         $.each(rawCost, function(i, v) {
-            var resource = SharkGame.ResourceTable[action.max];
+            var resource = SharkGame.PlayerResources[action.max];
             var currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, function(_, v) {
@@ -382,7 +382,7 @@ SharkGame.Home = {
     getMax: function(action) {
         var max = -1;
         if(action.max) {
-            var resource = SharkGame.ResourceTable[action.max];
+            var resource = SharkGame.PlayerResources[action.max];
             var currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, function(_, v) {
@@ -392,7 +392,7 @@ SharkGame.Home = {
             max = Number.MAX_VALUE;
             var rawCost = action.cost;
             $.each(rawCost, function(_, v) {
-                var costResource = SharkGame.ResourceTable[v.resource];
+                var costResource = SharkGame.PlayerResources[v.resource];
 
                 var costFunction = v.costFunction;
                 var k = v.priceIncrease;
@@ -718,7 +718,8 @@ SharkGame.HomeActions = {
         max: "scientist",
         prereq: {
             resource: {
-                'crystal': 20
+                'crystal': 20,
+                'shark': 1
             }
         },
         outcomes: [
@@ -754,6 +755,9 @@ SharkGame.HomeActions = {
         ],
         max: "nurse",
         prereq: {
+            resource: {
+                'shark': 1
+            },
             upgrade: [
                 "biology"
             ]
@@ -788,6 +792,9 @@ SharkGame.HomeActions = {
         ],
         max: "laser",
         prereq: {
+            resource: {
+                'ray': 1
+            },
             upgrade: [
                 "laserRays"
             ]
@@ -823,6 +830,9 @@ SharkGame.HomeActions = {
         ],
         max: "maker",
         prereq: {
+            resource: {
+                'ray': 1
+            },
             upgrade: [
                 "rayBiology"
             ]
@@ -858,6 +868,9 @@ SharkGame.HomeActions = {
         ],
         max: "planter",
         prereq: {
+            resource: {
+                'crab': 1
+            },
             upgrade: [
                 "kelpHorticulture"
             ]
@@ -893,6 +906,9 @@ SharkGame.HomeActions = {
         ],
         max: "brood",
         prereq: {
+            resource: {
+                'crab': 1
+            },
             upgrade: [
                 "crabBiology"
             ]
@@ -931,6 +947,9 @@ SharkGame.HomeActions = {
         ],
         max: "crystalMiner",
         prereq: {
+            resource: {
+                'sharkonium': 20
+            },
             upgrade: [
                 "automation"
             ]
@@ -965,6 +984,9 @@ SharkGame.HomeActions = {
         ],
         max: "sandDigger",
         prereq: {
+            resource: {
+                'sharkonium': 150
+            },
             upgrade: [
                 "automation"
             ]
@@ -1000,6 +1022,9 @@ SharkGame.HomeActions = {
         ],
         max: "autoTransmuter",
         prereq: {
+            resource: {
+                'sharkonium': 200
+            },
             upgrade: [
                 "automation"
             ]
@@ -1034,6 +1059,9 @@ SharkGame.HomeActions = {
         ],
         max: "fishMachine",
         prereq: {
+            resource: {
+                'sharkonium': 100
+            },
             upgrade: [
                 "automation"
             ]

@@ -12,7 +12,7 @@ SharkGame.Save = {
         saveData.upgrades = {};
         saveData.gateCostsMet = {};
 
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        $.each(SharkGame.PlayerResources, function(k, v) {
             saveData.resources[k] = {
                 amount: v.amount,
                 totalAmount: v.totalAmount
@@ -157,9 +157,9 @@ SharkGame.Save = {
             if(saveData.resources) {
                 $.each(saveData.resources, function(k, v) {
                     // check that this isn't an old resource that's been removed from the game for whatever reason
-                    if(SharkGame.ResourceTable[k]) {
-                        SharkGame.ResourceTable[k].amount = isNaN(v.amount) ? 0 : v.amount;
-                        SharkGame.ResourceTable[k].totalAmount = isNaN(v.totalAmount) ? 0 : v.totalAmount;
+                    if(SharkGame.PlayerResources[k]) {
+                        SharkGame.PlayerResources[k].amount = isNaN(v.amount) ? 0 : v.amount;
+                        SharkGame.PlayerResources[k].totalAmount = isNaN(v.totalAmount) ? 0 : v.totalAmount;
                     }
                 });
             }
@@ -420,6 +420,8 @@ SharkGame.Save = {
             });
             return save;
         }
+
+        // change junk to residue
 
 
     ]

@@ -29,8 +29,8 @@ $.extend(SharkGame, {
     VERSION_NAME: "Return of Shark",
     EPSILON: 1E-6, // floating point comparison is a joy
 
-    INTERVAL: (1000 / 20), // 20 FPS
-    dt: (1 / 20),
+    INTERVAL: (1000 / 10), // 20 FPS
+    dt: (1 / 10),
     before: new Date(),
 
     timestampLastSave: new Date(),
@@ -269,12 +269,15 @@ SharkGame.Main = {
             } else {
                 suffix = suffixes[suffixIndex];
                 // fix number to be compliant with suffix
-                number /= Math.pow(1000, suffixIndex);
-
-                if(suffixIndex == 0) {
+                if(suffixIndex > 0) {
+                    number /= Math.pow(1000, suffixIndex);
+                }
+                if(suffixIndex === 0) {
                     formatted = (negative ? "-" : "") + Math.floor(number) + suffix;
-                } else {
+                } else if(suffixIndex > 0) {
                     formatted = (negative ? "-" : "") + number.toFixed(precision) + suffix;
+                } else {
+                    formatted = (negative ? "-" : "") + number.toFixed(precision);
                 }
             }
         }
