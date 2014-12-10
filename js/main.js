@@ -29,8 +29,8 @@ $.extend(SharkGame, {
     VERSION_NAME: "Return of Shark",
     EPSILON: 1E-6, // floating point comparison is a joy
 
-    INTERVAL: (1000 / 10), // 10 FPS
-    dt: (1 / 10),
+    INTERVAL: (1000 / 20), // 20 FPS
+    dt: (1 / 20),
     before: new Date(),
 
     timestampLastSave: new Date(),

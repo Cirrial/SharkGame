@@ -72,7 +72,7 @@ SharkGame.Settings = {
     },
 
     logMessageMax: {
-        defaultSetting: 10,
+        defaultSetting: 20,
         name: "Max Log Messages",
         desc: "How many messages to show before removing old ones.",
         show: true,

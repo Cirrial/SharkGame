@@ -1,13 +1,13 @@
 SharkGame.ResourceTable = {
 
-    'essence': {
+    essence: {
         name: 'essence',
         singleName: 'essence',
         color: '#ACE3D1',
         value: -1
     },
 
-    'shark': {
+    shark: {
         name: 'sharks',
         singleName: 'shark',
         color: '#92C1E0',
@@ -21,7 +21,7 @@ SharkGame.ResourceTable = {
         value: 1000
     },
 
-    'ray': {
+    ray: {
         name: 'rays',
         singleName: 'ray',
         color: '#0C0FAD',
@@ -36,7 +36,7 @@ SharkGame.ResourceTable = {
         value: 1500
     },
 
-    'crab': {
+    crab: {
         name: 'crabs',
         singleName: 'crab',
         color: '#9C2424',
@@ -50,7 +50,7 @@ SharkGame.ResourceTable = {
         value: 1000
     },
 
-    'scientist': {
+    scientist: {
         name: 'science sharks',
         singleName: 'science shark',
         color: '#DCEBF5',
@@ -60,7 +60,7 @@ SharkGame.ResourceTable = {
         value: 3000
     },
 
-    'nurse': {
+    nurse: {
         name: 'nurse sharks',
         singleName: 'nurse shark',
         color: '#C978DE',
@@ -70,7 +70,7 @@ SharkGame.ResourceTable = {
         value: 3000
     },
 
-    'laser': {
+    laser: {
         name: 'laser rays',
         singleName: 'laser ray',
         color: '#E85A5A',
@@ -81,7 +81,7 @@ SharkGame.ResourceTable = {
         value: 3500
     },
 
-    'maker': {
+    maker: {
         name: 'ray makers',
         singleName: 'ray maker',
         color: '#5355ED',
@@ -91,7 +91,7 @@ SharkGame.ResourceTable = {
         value: 4000
     },
 
-    'planter': {
+    planter: {
         name: 'planter crabs',
         singleName: 'planter crab',
         color: '#AAE03D',
@@ -101,7 +101,7 @@ SharkGame.ResourceTable = {
         value: 4000
     },
 
-    'brood': {
+    brood: {
         name: 'crab broods',
         singleName: 'crab brood',
         color: '#9E7272',
@@ -111,7 +111,7 @@ SharkGame.ResourceTable = {
         value: 4000
     },
 
-    'crystalMiner': {
+    crystalMiner: {
         name: 'crystal miners',
         singleName: 'crystal miner',
         color: '#B2CFCB',
@@ -121,7 +121,7 @@ SharkGame.ResourceTable = {
         value: 32000 //100 crystal 100 sand 20 sharkonium (3200)
     },
 
-    'sandDigger': {
+    sandDigger: {
         name: 'sand diggers',
         singleName: 'sand digger',
         color: '#D6CF9F',
@@ -131,7 +131,7 @@ SharkGame.ResourceTable = {
         value: 120000 //500 sand 150 sharkonium (12000)
     },
 
-    'autoTransmuter': {
+    autoTransmuter: {
         name: 'auto-transmuters',
         singleName: 'auto-transmuter',
         color: '#B5A7D1',
@@ -143,7 +143,7 @@ SharkGame.ResourceTable = {
         value: 155000 //100 crystal 200 sharkonium (15500)
     },
 
-    'fishMachine': {
+    fishMachine: {
         name: 'fish machines',
         singleName: 'fish machine',
         color: '#C9C7A7',
@@ -153,35 +153,35 @@ SharkGame.ResourceTable = {
         value: 70000 //100 sharkonium (7000)
     },
 
-    'science': {
+    science: {
         name: 'science',
         singleName: 'science',
         color: '#BBA4E0',
         value: 0
     },
 
-    'fish': {
+    fish: {
         name: 'fish',
         singleName: 'fish',
         color: '#E3D85B',
         value: 2
     },
 
-    'sand': {
+    sand: {
         name: 'sand',
         singleName: 'sand',
         color: '#C7BD75',
         value: 3
     },
 
-    'crystal': {
+    crystal: {
         name: 'crystals',
         singleName: 'crystal',
         color: '#6FD9CC',
         value: 15
     },
 
-    'kelp': {
+    kelp: {
         name: 'kelp',
         singleName: 'kelp',
         color: '#9CC232',
@@ -191,26 +191,28 @@ SharkGame.ResourceTable = {
         value: 20
     },
 
-    'seaApple': {
+    seaApple: {
         name: 'sea apples',
         singleName: 'sea apple',
         color: '#F0C2C2',
-        value: 30
+        value: 20
     },
 
-    'sharkonium': {
+    sharkonium: {
         name: 'sharkonium',
         singleName: 'sharkonium',
         color: '#8D70CC',
         value: 70
     },
 
-    'junk': {
+    junk: {
         name: 'residue',
         singleName: 'residue',
         color: '#605050',
         value: 1
     }
+
+
 
 };
 
@@ -241,6 +243,21 @@ SharkGame.ResourceCategories = {
             "crab"
         ]
     },
+    breeders: {
+        name: "Breeders",
+        disposeMessage: [
+            "Parenting is hard work anyway.",
+            "Overpopulation is a real concern!",
+            "Responsible population management is always good to see.",
+            "You sure you want to disrupt this accelerated growth curve?",
+            "Back to a simpler life, maybe."
+        ],
+        resources: [
+            "nurse",
+            "maker",
+            "brood"
+        ]
+    },
     specialists: {
         name: "Specialists",
         disposeMessage: [
@@ -253,11 +270,8 @@ SharkGame.ResourceCategories = {
         ],
         resources: [
             "scientist",
-            "nurse",
             "laser",
-            "maker",
-            "planter",
-            "brood"
+            "planter"
         ]
     },
     machines: {
@@ -420,7 +434,7 @@ SharkGame.Resources = {
                 // run over all resources to fill the income table
                 $.each(resource.income, function(k, v) {
                     var incomeChange = v * resource.amount * resource.incomeMultiplier * worldMultiplier  * essenceMultiplier;
-                    if(incomeChange < 0 || canTakeCost) {
+                    if((incomeChange < 0 || canTakeCost) && SharkGame.World.doesResourceExist(k)) {
                         SharkGame.IncomeTable[k] += incomeChange
                     }
                 });
@@ -472,7 +486,6 @@ SharkGame.Resources = {
         // remove resource from table if something is trying to alter something that shouldn't exist
         if(!SharkGame.World.doesResourceExist(resource)) {
             resourceTable.amount = 0;
-            resourceTable.totalAmount = 0;
             return; // keep at non-existing forever
         }
 
@@ -655,6 +668,7 @@ SharkGame.Resources = {
         var rTable = $('#resourceTable');
         var m = SharkGame.Main;
         var r = SharkGame.Resources;
+        var w = SharkGame.World;
 
         // if resource table does not exist, create
         if(rTable.length <= 0) {
@@ -687,7 +701,7 @@ SharkGame.Resources = {
         } else {
             // iterate through data, if total amount > 0 add a row
             $.each(SharkGame.ResourceTable, function(k, v) {
-                if(r.getTotalResource(k) > 0) {
+                if(r.getTotalResource(k) > 0 && w.doesResourceExist(k))  {
                     var row = r.constructResourceTableRow(k);
                     rTable.append(row);
                 }
@@ -751,7 +765,7 @@ SharkGame.Resources = {
         $.each(SharkGame.ResourceTable, function(k, v) {
             var listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
-            if(listResource > 0) {
+            if(listResource > 0 && SharkGame.World.doesResourceExist(k)) {
                 var isSingular = (Math.floor(listResource) - 1) < SharkGame.EPSILON;
                 formattedResourceList += SharkGame.Main.beautify(listResource);
                 formattedResourceList += " " + SharkGame.Resources.getResourceName(k, darken, isSingular) + ", ";

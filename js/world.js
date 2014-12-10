@@ -2,10 +2,8 @@ SharkGame.WorldTypes = {
     marine: {
         name: "Marine",
         desc: "",
-        absentResources: [
-
-        ],
-        modifiers: {}
+        absentResources: [],
+        modifiers: []
     },
     chaotic: {
         name: "Chaotic",
@@ -25,7 +23,9 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     },
     tempestuous: {
         name: "Tempestuous",
@@ -33,7 +33,9 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     },
     violent: {
         name: "Violent",
@@ -41,7 +43,9 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     },
     abandoned: {
         name: "Abandoned",
@@ -49,7 +53,9 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     },
     shrouded: {
         name: "Shrouded",
@@ -57,7 +63,9 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     },
     frigid: {
         name: "Frigid",
@@ -65,53 +73,65 @@ SharkGame.WorldTypes = {
         absentResources: [
 
         ],
-        modifiers: {}
+        modifiers: [
+
+        ]
     }
 };
 
 SharkGame.WorldModifiers = {
-    planetaryBoost: function(level, resourceCategory, amount) {
-        var w = SharkGame.World;
-        var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
-        $.each(resourceList, function(i, v) {
-
-        });
-    },
     planetaryIncome: function(level, resourceCategory, amount) {
-        var w = SharkGame.World;
+        var wr = SharkGame.World.worldResources;
         var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
         $.each(resourceList, function(i, v) {
-
+            wr[v].income = level * amount;
         });
     },
     planetaryIncomeMultiplier: function(level, resourceCategory, amount) {
-        var w = SharkGame.World;
+        var wr = SharkGame.World.worldResources;
         var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
         $.each(resourceList, function(i, v) {
-
+            wr[v].incomeMultiplier = level * amount;
         });
     }
+
 };
 
 SharkGame.World = {
 
+    worldType: "marine",
     worldResources: {},
     planetLevel: 1,
 
     init: function() {
         var w = SharkGame.World;
+        var wr = w.worldResources;
         var rt = SharkGame.ResourceTable;
 
         // set up defaults
         $.each(rt, function(k, v) {
-            w.worldResources[k] = {};
-            w.worldResources[k].exists = true;
-            w.worldResources[k].boost = 0;
-            w.worldResources[k].income = 0;
-            w.worldResources[k].incomeMultiplier = 1;
+            wr[k] = {};
+            wr[k].exists = true;
+            wr[k].income = 0;
+            wr[k].incomeMultiplier = 1;
         });
 
-        w.worldResources.sharkonium.exists = false;
+        w.applyWorldProperties(w.planetLevel);
+    },
+
+    applyWorldProperties: function(level) {
+        var w = SharkGame.World;
+        var wr = w.worldResources;
+        var worldInfo = SharkGame.WorldTypes[w.worldType];
+        // disable resources not allowed on planet
+        $.each(worldInfo.absentResources, function(i, v) {
+            wr[v].exists = false;
+        });
+
+        // apply world modifiers
+        $.each(worldInfo.modifiers, function(i, v) {
+            SharkGame.WorldModifiers[v.modifier](level, v.category, v.amount);
+        });
     },
 
     // does this resource exist on this planet?

@@ -241,7 +241,8 @@ SharkGame.Upgrades = {
         researchedMessage: "Weird teeth-wear has been developed, and sharks can now catch fish better as a result.",
         effectDesc: "Sharks are twice as effective with their new biting gear. Turns out they work better outside the mouth!",
         cost: {
-            science: 50
+            science: 50,
+            fish: 10
         },
         effect: {
             multiplier: {
@@ -256,7 +257,8 @@ SharkGame.Upgrades = {
         researchedMessage: "The rays can now bother the sand more effectively, and dig up more sand now!",
         effectDesc: "Rays are twice as effective with their specially adapted digging tools.",
         cost: {
-            science: 50
+            science: 50,
+            sand: 20
         },
         effect: {
             multiplier: {
@@ -269,7 +271,7 @@ SharkGame.Upgrades = {
         name: "Crystal Containers",
         desc: "Make weird bottle things from the crystals we have. Maybe useful??",
         researchedMessage: "Well, things can go into these containers that aren't water. This makes science easier!",
-        effectDesc: "Science sharks are twice as effective at making with the science.",
+        effectDesc: "Scientists are twice as effective at making with the science.",
         cost: {
             science: 100,
             crystal: 50
@@ -284,7 +286,7 @@ SharkGame.Upgrades = {
     statsDiscovery: {
         name: "Storage Caverns",
         desc: "It's about time to start moving the stores we have to a better place. We've found one but it needs setting up.",
-        researchedMessage: "All the goods we've acquired are now being stored and itemised in a mostly flooded cavern system. No more stray currents washing it all away!",
+        researchedMessage: "All the goods we've acquired are now being stored and itemised in a mostly flooded cavern system. No more stray currents washing it all away hopefully!",
         effectDesc: "By storing things in a centralised location, we now finally have an idea of what we're doing. Sort of.",
         cost: {
             science: 150
@@ -298,9 +300,10 @@ SharkGame.Upgrades = {
         name: "Underwater Chemistry",
         desc: "With the weird bottles, we can now put things and other things into them and see what happens.",
         researchedMessage: "Well, nothing useful was determined, but if we keep on doing it we make tremendous leaps for science!",
-        effectDesc: "Science sharks are twice as effective with their new chemical insights.",
+        effectDesc: "Scientists are twice as effective with their new chemical insights.",
         cost: {
-            science: 200
+            science: 200,
+            crystal: 50
         },
         required: [
             "crystalContainer"
@@ -318,7 +321,8 @@ SharkGame.Upgrades = {
         researchedMessage: "Not only did we find a whole bunch of weird things, the rays found that there was more sand!",
         effectDesc: "Rays are twice as effective with their understanding of the seabed and its varieties of sediment.",
         cost: {
-            science: 250
+            science: 250,
+            sand: 250
         },
         required: [
             "crystalContainer"
@@ -336,7 +340,8 @@ SharkGame.Upgrades = {
         researchedMessage: "This is a wondrous, unending source of heat! Something good must come from this.",
         effectDesc: "A power source for future technologies has been discovered.",
         cost: {
-            science: 300
+            science: 300,
+            sand: 500
         },
         required: [
             "seabedGeology"
@@ -349,7 +354,9 @@ SharkGame.Upgrades = {
         researchedMessage: "The rays can now be granted gear that will let them fuse sand into crystal! Future!",
         effectDesc: "Laser rays can now be geared up to burn the very sand to glassy crystal.",
         cost: {
-            science: 100
+            science: 100,
+            sand: 2000,
+            crystal: 100
         },
         required: [
             "thermalVents"
