@@ -320,7 +320,9 @@ SharkGame.Resources = {
         if(rTable.length <= 0) {
             var statusDiv = $('#status');
             statusDiv.prepend('<h3>Stuff</h3>');
-            statusDiv.append($('<table>').attr("id", 'resourceTable'));
+            var tableContainer = $('<div>').attr("id", "resourceTableContainer");
+            tableContainer.append($('<table>').attr("id", 'resourceTable'));
+            statusDiv.append(tableContainer);
             rTable = $('#resourceTable');
         }
 

@@ -331,6 +331,14 @@ pre {
   width: @sidebar-width;
   .section;
 
+  #resourceTableContainer {
+    //width: 100%;
+    //max-width: 23em;
+    margin-left: auto;
+    margin-right: auto;
+    //overflow: auto;
+  }
+
   table {
     margin-left: auto;
     margin-right: auto;
@@ -339,6 +347,9 @@ pre {
     padding: 0.5em;
     overflow: hidden;
     text-align: left;
+    //table-layout: fixed;
+    //display: block;
+    //max-width: 90%;
 
     h3 {
       padding: .2em;
@@ -355,6 +366,8 @@ pre {
   td {
     font-size: 1.1em;
     padding: 0.1em;
+    word-break: break-all;
+    word-wrap: break-word;
   }
 
   ul {

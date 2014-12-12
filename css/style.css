@@ -221,6 +221,10 @@ pre {
   padding: 5px;
   overflow: hidden;
 }
+#sidebar #resourceTableContainer {
+  margin-left: auto;
+  margin-right: auto;
+}
 #sidebar table {
   margin-left: auto;
   margin-right: auto;
@@ -243,6 +247,8 @@ pre {
 #sidebar td {
   font-size: 1.1em;
   padding: 0.1em;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 #sidebar ul {
   list-style-type: none;

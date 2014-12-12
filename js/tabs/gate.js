@@ -76,11 +76,12 @@ SharkGame.Gate = {
 
     onGateButton: function() {
         var g = SharkGame.Gate;
+        var r= SharkGame.Resources;
         var resourceId = ($(this).attr("id")).split("-")[1];
 
         var message = "";
-        var cost = g.costs[resourceId] * (SharkGame.Resources.getResource("essence") + 1);
-        if(SharkGame.ResourceTable[resourceId].amount >= cost) {
+        var cost = g.costs[resourceId] * (SharkGame.Resources.getResource("numen") + 1);
+        if(r.getResource(resourceId) >= cost) {
             SharkGame.Gate.costsMet[resourceId] = true;
             SharkGame.Resources.changeResource(resourceId, -cost);
             $(this).remove();
@@ -93,7 +94,7 @@ SharkGame.Gate = {
             }
         } else {
             message = g.messageCantPay + "<br/>";
-            var diff = cost - SharkGame.ResourceTable[resourceId].amount;
+            var diff = cost - r.getResource(resourceId);
             message += SharkGame.Main.beautify(diff) + " more.";
         }
         message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;

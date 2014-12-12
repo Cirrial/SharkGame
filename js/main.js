@@ -27,7 +27,7 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.61,
+    VERSION: 0.62,
     VERSION_NAME: "Return of Shark",
     EPSILON: 1E-6, // floating point comparison is a joy
 
@@ -48,37 +48,37 @@ $.extend(SharkGame, {
     gameOver: false,
 
     credits: "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
-        "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
-        "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
-        "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
-        "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
-        "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>",
+    "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
+    "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
+    "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
+    "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
+    "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>",
 
 
     ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
-        "<p>The gate leads away from this strange ocean...</p>" +
-        "<p>Back home to the oceans you came from!</p>" +
-        "<h3>Or are they?</h3>",
+    "<p>The gate leads away from this strange ocean...</p>" +
+    "<p>Back home to the oceans you came from!</p>" +
+    "<h3>Or are they?</h3>",
 
     help: "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
-        "You are free to pay as much attention to the game as you want. " +
-        "It will happily run in the background, and works even while closed.</p>" +
-        "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
-        "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
-        "<p>If you are ever stuck, try actions you haven't yet tried. " +
-        "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
+    "You are free to pay as much attention to the game as you want. " +
+    "It will happily run in the background, and works even while closed.</p>" +
+    "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
+    "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
+    "<p>If you are ever stuck, try actions you haven't yet tried. " +
+    "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
 
     donate: "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
-        "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
-        "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
-        "<a href='https://www.paypal.com/cgi-bin/" +
-        "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
-        "item_name=Shark%20Game%20Developer%20Support&" +
-        "item_number=Shark%20Game%20Support&no_note=1&" +
-        "no_shipping=1&currency_code=USD&" +
-        "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
-        "target='_blank'>support the developer</a>" +
-        " if you'd like.)</span></p>",
+    "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
+    "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
+    "<a href='https://www.paypal.com/cgi-bin/" +
+    "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
+    "item_name=Shark%20Game%20Developer%20Support&" +
+    "item_number=Shark%20Game%20Support&no_note=1&" +
+    "no_shipping=1&currency_code=USD&" +
+    "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
+    "target='_blank'>support the developer</a>" +
+    " if you'd like.)</span></p>",
 
     spritePath: "img/sharksprites.png",
 
@@ -391,7 +391,6 @@ SharkGame.Main = {
         SharkGame.Main.setUpTab();
 
 
-
         if(SharkGame.Main.tickHandler === -1) {
             SharkGame.Main.tickHandler = setInterval(SharkGame.Main.tick, SharkGame.INTERVAL);
         }
@@ -641,7 +640,7 @@ SharkGame.Main = {
             row.append($('<td>')
                     .attr("id", "optionLabel")
                     .html(value.name + ":" +
-                        "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
+                    "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
             );
 
             var currentSetting = SharkGame.Settings.current[key];
@@ -694,7 +693,6 @@ SharkGame.Main = {
                 .attr("id", "importExportField")
         ));
         optionsTable.append(row);
-
 
 
         // SAVE WIPE
@@ -968,6 +966,10 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
+    "0.62": [
+        "Fixed infinity resource requirement for gate.",
+        "Attempted to fix resource table breaking in some browsers for some sidebar widths."
+    ],
     "0.61": [
         "Added categories for buttons in the home sea, because there are going to be so many buttons.",
         "Miscellaneous shuffling of files.",
@@ -977,9 +979,9 @@ SharkGame.Changelog = {
         "Major graphical update!",
         "Now features graphics sort of!",
         "Some UI rearrangements:" +
-            "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
-            "<li>General stats now on right of grotto instead of left.</li>" +
-            "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
+        "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
+        "<li>General stats now on right of grotto instead of left.</li>" +
+        "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
         "Pointless version subtitle!",
         "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>"
     ],
@@ -1026,8 +1028,8 @@ SharkGame.Changelog = {
         "Big costs significantly reduced.",
         "Buy 10, Buy 1/3 max and Buy 1/2 max buttons added.",
         "Research impact now displayed on research buttons.",
-            "Resource effectiveness multipliers now displayed in table." +
-            "<ul><li>These are not multipliers for how much of that resource you are getting.</li></ul>",
+        "Resource effectiveness multipliers now displayed in table." +
+        "<ul><li>These are not multipliers for how much of that resource you are getting.</li></ul>",
         "Some dumb behind the scenes things to make the code look nicer.",
         "Added this changelog!",
         "Removed upgrades list on the left. It'll come back in a future version.",
