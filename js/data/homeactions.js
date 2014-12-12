@@ -724,3 +724,54 @@ SharkGame.HomeActions = {
         helpText: "Construct a machine to automatically gather fish efficiently."
     }
 };
+
+SharkGame.HomeActionCategories = {
+
+    all: { // This category should be handled specially.
+        name: "All",
+        actions: []
+    },
+
+    basic: {
+        name: "Frenzy",
+        actions: [
+            "catchFish",
+            "prySponge",
+            "getClam",
+            "getShark",
+            "getManta",
+            "getCrab"
+        ]
+    },
+
+    professions: {
+        name: "Professions",
+        actions: [
+            "getScientist",
+            "getNurse",
+            "getLaser",
+            "getMaker",
+            "getPlanter",
+            "getBrood"
+        ]
+    },
+
+    research: {
+        name: "Research",
+        actions: [
+            "seaApplesToScience"
+        ]
+    },
+
+    industry: {
+        name: "Industry",
+        actions: [
+            "transmuteSharkonium",
+            "smeltCoralglass",
+            "getCrystalMiner",
+            "getSandDigger",
+            "getAutoTransmuter",
+            "getFishMachine"
+        ]
+    }
+};

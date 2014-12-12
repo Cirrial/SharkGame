@@ -380,8 +380,13 @@ SharkGame.Main = {
             SharkGame.Log.addMessage("Loaded game.");
         }
 
+        // discover actions that were present in last save
+        SharkGame.Home.discoverActions();
+
         // set up tab after load
         SharkGame.Main.setUpTab();
+
+
 
         if(SharkGame.Main.tickHandler === -1) {
             SharkGame.Main.tickHandler = setInterval(SharkGame.Main.tick, SharkGame.INTERVAL);
@@ -476,7 +481,7 @@ SharkGame.Main = {
         var titleMenu = $('#titlemenu');
         var subTitleMenu = $('#subtitlemenu');
         $.each(SharkGame.TitleBar, function(k, v) {
-            var option = "<li><a id='" + k + "' href='#'>" + v.name + "</a></li>";
+            var option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
             if(v.main) {
                 titleMenu.append(option);
             } else {
@@ -525,7 +530,7 @@ SharkGame.Main = {
             if(v.discovered) {
                 numTabsDiscovered++;
             }
-        })
+        });
         if(numTabsDiscovered > 1) {
             // add a header for each discovered tab
             // make it a link if it's not the current tab
@@ -538,7 +543,7 @@ SharkGame.Main = {
                     } else {
                         tabListItem.append($('<a>')
                                 .attr("id", "tab-" + k)
-                                .attr("href", "#")
+                                .attr("href", "javascript:;")
                                 .html(v.name)
                                 .click(function() {
                                     var tab = ($(this).attr("id")).split("-")[1];

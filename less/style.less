@@ -14,8 +14,6 @@
 @color-danger-dark: #5C1919;
 @color-danger-darker: #450808;
 
-
-
 @color-essence: #ACE3D1;
 @color-numen: #FFFFFF;
 
@@ -426,19 +424,40 @@ pre {
   padding: 1.0em;
 }
 
-#homeButtonLeftColumn {
-  float: left;
-  width: 33%;
-}
+#homeTabs {
 
-#homeButtonMiddleColumn {
-  float: left;
-  width: 34%;
-}
+  margin-bottom: 1em;
 
-#homeButtonRightColumn {
-  float: left;
-  width: 33%;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-weight: bold;
+    .pipe-separators;
+  }
+
+  .newItemAdded {
+    a {
+      &:link {
+        color: @color-discovery;
+        text-shadow: 0 0 0.8em @color-discovery-bg;
+      }
+      &:visited {
+        color: @color-discovery;
+        text-shadow: 0 0 0.8em @color-discovery-bg;
+      }
+      &:hover {
+        color: lighten(@color-discovery, 10%);
+        text-shadow: 0 0 0.8em lighten(@color-discovery-bg, 10%);
+      }
+      &:active {
+        color: lighten(@color-discovery, 10%);
+        text-shadow: 0 0 0.8em lighten(@color-discovery-bg, 10%);
+      }
+    }
+  }
 }
 
 #buttonLeftContainer {

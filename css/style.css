@@ -309,17 +309,39 @@ pre {
   margin: 5px;
   padding: 1.0em;
 }
-#homeButtonLeftColumn {
-  float: left;
-  width: 33%;
+#homeTabs {
+  margin-bottom: 1em;
 }
-#homeButtonMiddleColumn {
-  float: left;
-  width: 34%;
+#homeTabs ul {
+  padding: 0;
+  margin: 0;
 }
-#homeButtonRightColumn {
-  float: left;
-  width: 33%;
+#homeTabs li {
+  font-weight: bold;
+  list-style-type: none;
+  display: inline;
+}
+#homeTabs li:before {
+  content: " | ";
+}
+#homeTabs li:first-child:before {
+  content: none;
+}
+#homeTabs .newItemAdded a:link {
+  color: #ace3d1;
+  text-shadow: 0 0 0.8em #60c9a7;
+}
+#homeTabs .newItemAdded a:visited {
+  color: #ace3d1;
+  text-shadow: 0 0 0.8em #60c9a7;
+}
+#homeTabs .newItemAdded a:hover {
+  color: #d2f0e6;
+  text-shadow: 0 0 0.8em #86d6bc;
+}
+#homeTabs .newItemAdded a:active {
+  color: #d2f0e6;
+  text-shadow: 0 0 0.8em #86d6bc;
 }
 #buttonLeftContainer {
   float: left;

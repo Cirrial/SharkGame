@@ -5,6 +5,8 @@ SharkGame.Home = {
     tabName: "Home Sea",
     tabBg: "img/bg/bg-homesea.png",
 
+    currentButtonTab: "all",
+
     homeMessage: "You are a shark in a strange blue sea.",
     currentExtraMessageIndex: -1,
 
@@ -98,6 +100,10 @@ SharkGame.Home = {
             discovered: h.tabDiscovered,
             code: h
         };
+        // populate action discoveries
+        $.each(SharkGame.HomeActions, function(actionName, actionData) {
+            actionData.discovered = false;
+        });
     },
 
     switchTo: function() {
@@ -107,12 +113,102 @@ SharkGame.Home = {
         content.append(tabMessage);
         h.currentExtraMessageIndex = -1;
         h.updateMessage(true);
+        // button tabs
+        var buttonTabDiv = $('<div>').attr("id", "homeTabs");
+        content.append(buttonTabDiv);
+        h.createButtonTabs();
+        // help button
         var helpButtonDiv = $('<div>');
         helpButtonDiv.css({margin: "auto", clear: "both"});
         SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
         content.append(helpButtonDiv);
+        // button list
         content.append($('<div>').attr("id", "buttonList"));
+        // background art!
         tabMessage.css("background-image", "url('" + h.tabBg + "')");
+    },
+
+    discoverActions: function() {
+        var h = SharkGame.Home;
+        $.each(SharkGame.HomeActions, function(actionName, actionData) {
+            actionData.discovered = h.areActionPrereqsMet(actionName);
+        });
+    },
+
+    createButtonTabs: function() {
+        var buttonTabDiv = $('#homeTabs');
+        var buttonTabList = $('<ul>').attr("id", "homeTabsList");
+        buttonTabDiv.empty();
+        var tabAmount = 0;
+
+        // add a header for each discovered category
+        // make it a link if it's not the current tab
+        $.each(SharkGame.HomeActionCategories, function(k, v) {
+            var onThisTab = (SharkGame.Home.currentButtonTab === k);
+
+            var categoryDiscovered = false;
+            if(k === "all") {
+                categoryDiscovered = true;
+            } else {
+                $.each(v.actions, function(_, actionName) {
+                    categoryDiscovered = categoryDiscovered || SharkGame.HomeActions[actionName].discovered;
+                });
+            }
+
+            if(categoryDiscovered) {
+                var tabListItem = $('<li>');
+                if(onThisTab) {
+                    tabListItem.html(v.name);
+                } else {
+                    tabListItem.append($('<a>')
+                            .attr("id", "buttonTab-" + k)
+                            .attr("href", "javascript:;")
+                            .html(v.name)
+                            .click(function() {
+                                var tab = ($(this).attr("id")).split("-")[1];
+                                SharkGame.Home.changeButtonTab(tab);
+                            })
+                    );
+                    if(v.hasNewItem) {
+                        tabListItem.addClass("newItemAdded");
+                    }
+                }
+                buttonTabList.append(tabListItem);
+                tabAmount++;
+            }
+        });
+        // finally at the very end just throw the damn list away if it only has two options
+        // "all" + another category is completely pointless
+        if(tabAmount > 2) {
+            buttonTabDiv.append(buttonTabList);
+        }
+    },
+
+    updateTab: function(tabToUpdate) {
+        // return if we're looking at all buttons, no change there
+        if(SharkGame.Home.currentButtonTab === "all") {
+            return;
+        }
+        SharkGame.HomeActionCategories[tabToUpdate].hasNewItem = true;
+        var tabItem = $('#buttonTab-' + tabToUpdate);
+        if(tabItem.length > 0) {
+            tabItem.parent().addClass("newItemAdded");
+        } else {
+            SharkGame.Home.createButtonTabs();
+        }
+    },
+
+    changeButtonTab: function(tabToChangeTo) {
+        var h = SharkGame.Home;
+        SharkGame.HomeActionCategories[tabToChangeTo].hasNewItem = false;
+        if(tabToChangeTo === "all") {
+            $.each(SharkGame.HomeActionCategories, function(k, v) {
+                v.hasNewItem = false;
+            })
+        }
+        h.currentButtonTab = tabToChangeTo;
+        $('#buttonList').empty();
+        h.createButtonTabs();
     },
 
     updateMessage: function(suppressAnimation) {
@@ -175,75 +271,75 @@ SharkGame.Home = {
         var w = SharkGame.World;
         var amountToBuy = SharkGame.Settings.current.buyAmount;
 
-        // cache a selector
-        var buttonList = $('#buttonList');
-
         // for each button entry in the home tab,
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
-            // check if a button exists
-            var button = $('#' + actionName);
-            if(button.length === 0) {
-                if(h.areActionPrereqsMet(actionName)) {
-                    // a new action that did not have a button has been made possible, time to remake the button list
-                    var buttonSelector = SharkGame.Button.makeButton(actionName, actionData.name, buttonList, h.onHomeButton);
-                    if(SharkGame.Settings.current.showAnimations) {
-                        buttonSelector.hide()
-                            .css("opacity", 0)
-                            .slideDown(50)
-                            .animate({opacity: 1.0}, 50);
+            var actionTab = h.getActionCategory(actionName);
+            var onTab = (actionTab === h.currentButtonTab) || (h.currentButtonTab === "all");
+            if(onTab) {
+                var button = $('#' + actionName);
+                if(button.length === 0) {
+                    if(actionData.discovered || h.areActionPrereqsMet(actionName)) {
+                        actionData.discovered = true;
+                        h.addButton(actionName);
                     }
-                    //h.remakeButtons();
+                } else {
+                    // button exists
+                    // disable or enable button based on cost being met
+                    var amount = amountToBuy;
+                    var actionCost;
+                    if(amountToBuy < 0) {
+                        var max = Math.floor(h.getMax(actionData));
+                        // convert divisor from a negative number to a positive fraction
+                        var divisor = 1 / (Math.floor((amountToBuy)) * -1);
+                        amount = max * divisor;
+                        amount = Math.floor(amount);
+                        if(amount < 1) amount = 1;
+                        actionCost = h.getCost(actionData, amount);
+                    } else {
+                        actionCost = h.getCost(actionData, amountToBuy);
+                    }
+                    // disable button if resources can't be met
+                    var enableButton;
+                    if($.isEmptyObject(actionCost)) {
+                        enableButton = true; // always enable free buttons
+                    } else {
+                        enableButton = r.checkResources(actionCost);
+                    }
+
+                    var label = actionData.name;
+                    if(!$.isEmptyObject(actionCost) && amount > 1) {
+                        label += " (" + SharkGame.Main.beautify(amount) + ")";
+                    }
+                    var costText = r.resourceListToString(actionCost, !enableButton);
+                    if(costText != "") {
+                        label += "<br/>Cost: " + costText;
+                    }
+                    if(SharkGame.Settings.current.showTabHelp) {
+                        if(actionData.helpText) {
+                            label += "<br/><span class='medDesc'>" + actionData.helpText + "</span>";
+                        }
+                    }
+                    button.prop("disabled", !enableButton)
+                    button.html(label);
+
+
+                    var spritename = "actions/" + actionName;
+                    if(!enableButton) {
+                        spritename += "-disabled";
+                    }
+                    if(SharkGame.Settings.current.iconPositions !== "off") {
+                        var iconDiv = SharkGame.changeSprite(spritename);
+                        if(iconDiv) {
+                            iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                            button.prepend(iconDiv);
+                        }
+                    }
                 }
             } else {
-                // button exists
-                // disable or enable button based on cost being met
-                var amount = amountToBuy;
-                var actionCost;
-                if(amountToBuy < 0) {
-                    var max = Math.floor(h.getMax(actionData));
-                    // convert divisor from a negative number to a positive fraction
-                    var divisor = 1 / (Math.floor((amountToBuy)) * -1);
-                    amount = max * divisor;
-                    amount = Math.floor(amount);
-                    if(amount < 1) amount = 1;
-                    actionCost = h.getCost(actionData, amount);
-                } else {
-                    actionCost = h.getCost(actionData, amountToBuy);
-                }
-                // disable button if resources can't be met
-                var enableButton;
-                if($.isEmptyObject(actionCost)) {
-                    enableButton = true; // always enable free buttons
-                } else {
-                    enableButton = r.checkResources(actionCost);
-                }
-
-                var label = actionData.name;
-                if(!$.isEmptyObject(actionCost) && amount > 1) {
-                    label += " (" + SharkGame.Main.beautify(amount) + ")";
-                }
-                var costText = r.resourceListToString(actionCost, !enableButton);
-                if(costText != "") {
-                    label += "<br/>Cost: " + costText;
-                }
-                if(SharkGame.Settings.current.showTabHelp) {
-                    if(actionData.helpText) {
-                        label += "<br/><span class='medDesc'>" + actionData.helpText + "</span>";
-                    }
-                }
-                button.prop("disabled", !enableButton)
-                button.html(label);
-
-
-                var spritename = "actions/" + actionName;
-                if(!enableButton) {
-                    spritename += "-disabled";
-                }
-                if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(spritename);
-                    if(iconDiv) {
-                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-                        button.prepend(iconDiv);
+                if(!actionData.discovered) {
+                    if(h.areActionPrereqsMet(actionName)) {
+                        actionData.discovered = true;
+                        h.updateTab(actionTab);
                     }
                 }
             }
@@ -252,6 +348,7 @@ SharkGame.Home = {
         // update home message
         h.updateMessage();
     },
+
 
     areActionPrereqsMet: function(actionName) {
         var r = SharkGame.Resources;
@@ -284,19 +381,36 @@ SharkGame.Home = {
         return prereqsMet;
     },
 
-    remakeButtons: function() {
+    addButton: function(actionName) {
+        var h = SharkGame.Home;
         var buttonListSel = $('#buttonList');
-        buttonListSel.empty();
+        var actionData = SharkGame.HomeActions[actionName];
 
-
-        // add button
-        var buttonSelector = SharkGame.Button.makeButton(key, value.name, buttonList, h.onHomeButton);
+        var buttonSelector = SharkGame.Button.makeButton(actionName, actionData.name, buttonListSel, h.onHomeButton);
         if(SharkGame.Settings.current.showAnimations) {
             buttonSelector.hide()
                 .css("opacity", 0)
                 .slideDown(50)
                 .animate({opacity: 1.0}, 50);
         }
+    },
+
+    getActionCategory: function(actionName) {
+        var categoryName = "";
+        $.each(SharkGame.HomeActionCategories, function(categoryKey, categoryValue) {
+            if(categoryName !== "") {
+                return;
+            }
+            $.each(categoryValue.actions, function(k, v) {
+                if(categoryName !== "") {
+                    return;
+                }
+                if(actionName == v) {
+                    categoryName = categoryKey;
+                }
+            });
+        });
+        return categoryName;
     },
 
     onHomeButton: function() {
@@ -365,7 +479,6 @@ SharkGame.Home = {
         // disable button until next frame
         button.prop("disabled", true);
     },
-
 
     getCost: function(action, amount) {
         var calcCost = {};
