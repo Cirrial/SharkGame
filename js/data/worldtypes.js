@@ -241,7 +241,7 @@ SharkGame.WorldTypes = {
             "seaApple",
             "coral",
             "algae",
-            "kelp",
+            "kelp"
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },

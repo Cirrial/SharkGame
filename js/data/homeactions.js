@@ -378,7 +378,7 @@ SharkGame.HomeActions = {
             "Underwater clipboards! No I don't know how that works either!",
             "Careful teeth record the discoveries!"
         ],
-        helpText: "Train a shark in the fine art of research and the science of, well, science.",
+        helpText: "Train a shark in the fine art of research and the science of, well, science."
     },
 
     'getNurse': {
