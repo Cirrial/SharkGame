@@ -21,11 +21,13 @@ $.extend(SharkGame, {
         "Heart of Sharkness",
         "Sharks and Recreation",
         "Alone in the Shark",
-        "Sharkpocalypse"
+        "Sharkpocalypse",
+        "Shark of Darkness",
+        "Strange Oceans"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.6,
+    VERSION: 0.61,
     VERSION_NAME: "Return of Shark",
     EPSILON: 1E-6, // floating point comparison is a joy
 
@@ -966,6 +968,11 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
+    "0.61": [
+        "Added categories for buttons in the home sea, because there are going to be so many buttons.",
+        "Miscellaneous shuffling of files.",
+        "Some groundwork laid for v0.7, which will be the actual official release."
+    ],
     "0.6 - Return of Shark": [
         "Major graphical update!",
         "Now features graphics sort of!",
