@@ -63,6 +63,7 @@ SharkGame.WorldTypes = {
         desc: "A serene blue world. Peaceful, beautiful, so close to home.",
         absentResources: [
             "ice",
+            "heater",
             "shrimp",
             "chimaera",
             "eel"
@@ -81,9 +82,10 @@ SharkGame.WorldTypes = {
     },
     chaotic: {
         name: "Chaotic",
-        desc: "A",
+        desc: "A frenetic world, torn by immaterial force.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater"
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "frenzy", amount: 0.1 },
@@ -91,19 +93,22 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "stuff", amount: -0.1 }
         ],
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            sponge: 1E8,
+            clam: 1E8,
+            sand: 1E10,
+            crystal: 1E10,
+            purifier: 1E4,
+            sharkonium: 1E10
         }
     },
     haven: {
         name: "Haven",
-        desc: "",
+        desc: "An aquamarine world of plenty. So beautiful, yet so vulnerable.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater",
+            "chimaera",
+            "eel"
         ],
         modifiers: [
             { modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
@@ -112,30 +117,45 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncomeMultiplier", resource: "tar", amount: 2 }
         ],
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            fish: 1E10,
+            clam: 1E10,
+            sponge: 1E10,
+            kelp: 1E12,
+            coralglass: 1E7,
+            coral: 1E9
         }
     },
     tempestuous: {
         name: "Tempestuous",
-        desc: "",
+        desc: "A swirling maelstrom of storms where nothing rests.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater",
+            "sand"
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "tar", amount: 1 },
             { modifier: "planetaryIncome", resource: "stuff", amount: -0.2 }
-        ]
+        ],
+        gateCosts: {
+            residue: 1E12,
+            coral: 1E9,
+            spronge: 1E9,
+            delphinium: 1E9,
+            sharkonium: 1E9,
+            crystal: 1E9
+        }
     },
     violent: {
         name: "Violent",
-        desc: "",
+        desc: "An ocean close to boiling and choking under sulphuric fumes.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater",
+            "octopus",
+            "eel",
+            "chimaera",
+            "whale"
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
@@ -144,33 +164,54 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "coral", amount: 1 },
             { modifier: "planetaryIncome", resource: "algae", amount: 1 },
             { modifier: "planetaryIncome", resource: "sponge", amount: 1 }
-        ]
+        ],
+        gateCosts: {
+            sand: 1E12,
+            kelp: 1E12,
+            coral: 1E12,
+            algae: 1E12,
+            sponge: 1E12,
+            residue: 1E12
+        }
     },
     abandoned: {
         name: "Abandoned",
-        desc: "",
+        desc: "A dying world filled with machinery.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater",
+            "shrimp",
+            "chimaera",
+            "lobster",
+            "eel",
+            "jellyfish",
+            "clam",
+            "algae",
+            "whale"
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "tar", amount: 1 },
             { modifier: "planetaryStartingResources", resource: "machines", amount: 5 }
         ],
-        // remember to slash these severely
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            residue: 1E12,
+            tar: 1E7,
+            coralglass: 1E6,
+            spronge: 1E6,
+            delphinium: 1E6,
+            sharkonium: 1E6
         }
     },
     shrouded: {
         name: "Shrouded",
-        desc: "",
+        desc: "A dark, murky ocean of secrecy and danger.",
         absentResources: [
-            "ice"
+            "ice",
+            "heater",
+            "lobster",
+            "crab",
+            "shrimp",
+            "sponge"
         ],
         modifiers: [
             { modifier: "planetaryResourceBoost", resource: "crystal", amount: 1 },
@@ -180,19 +221,27 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "specialists", amount: 0.5 }
         ],
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            jellyfish: 1E12,
+            clam: 1E9,
+            crystal: 1E11,
+            science: 1E14,
+            sharkonium: 1E10,
+            fish: 1E10
         }
     },
     frigid: {
         name: "Frigid",
-        desc: "",
+        desc: "A cold, chilling ocean freezing slowly to death.",
         absentResources: [
-
+            "dolphin",
+            "whale",
+            "crab",
+            "lobster",
+            "shrimp",
+            "seaApple",
+            "coral",
+            "algae",
+            "kelp",
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
@@ -201,12 +250,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "ice", amount: 0.5 }
         ],
         gateCosts: {
-            fish: 1E9,
             sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            crystal: 1E6,
+            clam: 1E8,
+            ice: 1E4,
+            sharkonium: 1E9,
+            fish: 1E9
         }
     }
 };

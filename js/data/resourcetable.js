@@ -382,7 +382,7 @@ SharkGame.ResourceTable = {
         singleName: 'eel technician',
         color: '#7FB6A3',
         income: {
-            'science': 0
+            'science': 0.8
         },
         value: 3000
     },
@@ -392,8 +392,8 @@ SharkGame.ResourceTable = {
         singleName: 'eel sifter',
         color: '#473E21',
         income: {
-            'sand': 0,
-            'crystal': 0
+            'sand': 0.2,
+            'crystal': 0.9
         },
         value: 3000
     },

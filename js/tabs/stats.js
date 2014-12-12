@@ -215,39 +215,42 @@ SharkGame.Stats = {
                 row.append($("<td>").html(r.getResourceName(k)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                 $.each(income, function(incomeKey, incomeValue) {
-                    var changeChar = incomeValue > 0 ? "+" : "";
-                    row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
-                    row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
+                    if(w.doesResourceExist(incomeKey)) {
+                        var changeChar = incomeValue > 0 ? "+" : "";
+                        row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
+                        row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
 
-                    // does this resource get a boost multiplier?
-                    var boostMultiplier = SharkGame.World.worldResources[incomeKey].boostMultiplier;
-                    if(boostMultiplier !== 1) {
-                        row.append($("<td>").html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
-                    } else {
-                        row.append($("<td>").addClass(rowStyle)); // empty cell
-                    }
-
-                    if(counter === 0) {
-                        row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
-                        var worldMultiplier = w.getWorldIncomeMultiplier(k);
-                        if(worldMultiplier !== 1) {
-                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                        // does this resource get a boost multiplier?
+                        var boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
+                        if(boostMultiplier !== 1) {
+                            row.append($("<td>").html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
                         } else {
-                            row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                            row.append($("<td>").addClass(rowStyle)); // empty cell
                         }
-                    }
-                    if(addSpecialMultiplier) {
-                        numenMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
-                        row.append(numenMultiplierCol);
-                        addSpecialMultiplier = false;
+
+                        if(counter === 0) {
+                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
+                            var worldMultiplier = w.getWorldIncomeMultiplier(k);
+                            if(worldMultiplier !== 1) {
+                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                            } else {
+                                row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                            }
+                        }
+                        if(addSpecialMultiplier) {
+                            numenMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
+                            row.append(numenMultiplierCol);
+                            addSpecialMultiplier = false;
+                        }
+
+                        row.append($("<td>").attr("id", "income-" + k + "-" + incomeKey)
+                            .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>").addClass(rowStyle));
+
+                        counter++;
+                        incomesTable.append(row);
+                        row = $("<tr>");
                     }
 
-                    row.append($("<td>").attr("id", "income-" + k + "-" + incomeKey)
-                        .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>").addClass(rowStyle));
-
-                    counter++;
-                    incomesTable.append(row);
-                    row = $("<tr>");
                 });
 
                 // throw away dangling values

@@ -37,6 +37,8 @@ $.extend(SharkGame, {
     timestampGameStart: new Date(),
     timestampRunStart: new Date(),
 
+    worldsCompleted: 0,
+
     sidebarHidden: true,
     titlebarGenerated: false,
     paneGenerated: false,
