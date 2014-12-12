@@ -421,8 +421,6 @@ SharkGame.Save = {
             return save;
         }
 
-        // change junk to residue
-
 
     ]
 };

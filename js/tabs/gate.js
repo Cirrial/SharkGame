@@ -24,14 +24,7 @@ SharkGame.Gate = {
     sceneOpenImage: "img/events/misc/scene-gate-open.png",
 
     costsMet: {},
-    costs: {
-        fish: 1E9,
-        sand: 1E9,
-        crystal: 1E9,
-        kelp: 1E6,
-        seaApple: 1E6,
-        sharkonium: 1E8
-    },
+    costs: {},
 
     init: function() {
         var g = SharkGame.Gate;

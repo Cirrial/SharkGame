@@ -177,6 +177,7 @@ SharkGame.Recycler = {
         if(resourceAmount >= amount) {
             r.changeResource(resourceName, -amount);
             r.changeResource("junk", amount * junkPerResource);
+            r.changeResource("tar", amount * junkPerResource * 0.001);
             l.addMessage(SharkGame.choose(y.recyclerInputMessages));
         } else {
             l.addMessage("You don't have enough for that!");

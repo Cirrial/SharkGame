@@ -355,6 +355,7 @@ SharkGame.Main = {
         SharkGame.Resources.init();
 
         // initialise world
+        // MAKE SURE GATE IS INITIALISED AFTER WORLD!!
         SharkGame.World.init();
 
         // reset log
@@ -375,13 +376,8 @@ SharkGame.Main = {
 
         // load save game data if present
         if(SharkGame.Save.savedGameExists()) {
-            try {
-                SharkGame.Save.loadGame();
-                SharkGame.Log.addMessage("Loaded game.");
-            } catch(err) {
-                SharkGame.Log.addError(err.message);
-                console.log(err.trace);
-            }
+            SharkGame.Save.loadGame();
+            SharkGame.Log.addMessage("Loaded game.");
         }
 
         // set up tab after load

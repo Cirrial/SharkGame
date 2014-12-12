@@ -724,7 +724,7 @@ SharkGame.ResourceTable = {
     },
 
 
-    // HARMFUL/ENVIRONMENTAL
+    // HARMFUL
 
     tar: {
         name: 'tar',
@@ -973,15 +973,7 @@ SharkGame.ResourceCategories = {
             "Oh, you'd like that, wouldn't you."
         ],
         resources: [
-            "tar"
-        ]
-    },
-    environmental: {
-        name: "Environmental",
-        disposeMessage: [
-            "You can't fight the world itself like this."
-        ],
-        resources: [
+            "tar",
             "ice"
         ]
     }

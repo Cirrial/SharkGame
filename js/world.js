@@ -1,165 +1,32 @@
-SharkGame.WorldTypes = {
-    start: {
-        name: "Start",
-        desc: "",
-        absentResources: [
-            "tar",
-            "ice",
-            "shrimp",
-            "lobster",
-            "dolphin",
-            "whale",
-            "chimaera",
-            "octopus",
-            "eel",
-            "queen",
-            "berrier",
-            "biologist",
-            "warren",
-            "seeker",
-            "harvester",
-            "savant",
-            "treasurer",
-            "chorus",
-            "transmuter",
-            "explorer",
-            "collector",
-            "scavenger",
-            "technician",
-            "sifter",
-            "purifier",
-            "heater",
-            "spongeFarmer",
-            "berrySprayer",
-            "glassMaker",
-            "silentArchivist",
-            "tirelessCrafter",
-            "clamCollector",
-            "sprongeSmelter",
-            "seaScourer",
-            "prostheticPolyp",
-            "sponge",
-            "jellyfish",
-            "clam",
-            "coral",
-            "algae",
-            "coralglass",
-            "delphinium",
-            "spronge"
-        ],
-        modifiers: []
-    },
-    marine: {
-        name: "Marine",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    chaotic: {
-        name: "Chaotic",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-            { modifier: "planetaryIncome", category: "frenzy", amount: 0.1 },
-            { modifier: "planetaryIncome", category: "animals", amount: -0.1 },
-            { modifier: "planetaryIncome", category: "stuff", amount: -0.1 }
-        ]
-    },
-    haven: {
-        name: "Haven",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    tempestuous: {
-        name: "Tempestuous",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    violent: {
-        name: "Violent",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    abandoned: {
-        name: "Abandoned",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    shrouded: {
-        name: "Shrouded",
-        desc: "",
-        absentResources: [
-            "ice"
-        ],
-        modifiers: [
-
-        ]
-    },
-    frigid: {
-        name: "Frigid",
-        desc: "",
-        absentResources: [
-
-        ],
-        modifiers: [
-
-        ]
-    }
-};
-
 SharkGame.WorldModifiers = {
-    planetaryIncome: function(level, resourceCategory, amount) {
+    planetaryIncome: function(level, resourceName, amount) {
         var wr = SharkGame.World.worldResources;
-        var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
-        $.each(resourceList, function(i, v) {
-            wr[v].income = level * amount;
-        });
+        wr[resourceName].income = level * amount;
     },
-    planetaryIncomeMultiplier: function(level, resourceCategory, amount) {
+    planetaryIncomeMultiplier: function(level, resourceName, amount) {
         var wr = SharkGame.World.worldResources;
-        var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
-        $.each(resourceList, function(i, v) {
-            wr[v].incomeMultiplier = level * amount;
-        });
+        wr[resourceName].incomeMultiplier = level * amount;
     },
-    planetaryIncomeReciprocalMultiplier: function(level, resourceCategory, amount) {
+    planetaryIncomeReciprocalMultiplier: function(level, resourceName, amount) {
         var wr = SharkGame.World.worldResources;
-        var resourceList = SharkGame.Resources.getResourcesInCategory(resourceCategory);
-        $.each(resourceList, function(i, v) {
-            wr[v].incomeMultiplier = (1/level  * amount);
-        });
+        wr[resourceName].incomeMultiplier = (1 / (level * amount));
+    },
+    planetaryResourceBoost: function(level, resourceName, amount) {
+        var wr = SharkGame.World.worldResources;
+        wr[resourceName].boostMultiplier = level  * amount;
+    },
+    planetaryResourceReciprocalBoost: function(level, resourceName, amount) {
+        var wr = SharkGame.World.worldResources;
+        wr[resourceName].boostMultiplier = level  * amount;
+    },
+    planetaryStartingResources: function(level, resourceName, amount) {
+        SharkGame.World.changeResource(resourceName, level  * amount);
     }
 };
 
 SharkGame.World = {
 
-    worldType: "start",
+    worldType: "marine",
     worldResources: {},
     planetLevel: 1,
 
@@ -174,6 +41,7 @@ SharkGame.World = {
             wr[k].exists = true;
             wr[k].income = 0;
             wr[k].incomeMultiplier = 1;
+            wr[k].boostMultiplier = 1;
         });
 
         w.applyWorldProperties(w.planetLevel);
@@ -181,6 +49,7 @@ SharkGame.World = {
 
     applyWorldProperties: function(level) {
         var w = SharkGame.World;
+        var g = SharkGame.Gate;
         var wr = w.worldResources;
         var worldInfo = SharkGame.WorldTypes[w.worldType];
         // disable resources not allowed on planet
@@ -188,9 +57,21 @@ SharkGame.World = {
             wr[v].exists = false;
         });
 
+        // set up gate costs
+        $.each(worldInfo.gateCosts, function(k, v) {
+            g.costs[k] = v * w.planetLevel;
+        });
+
         // apply world modifiers
         $.each(worldInfo.modifiers, function(i, v) {
-            SharkGame.WorldModifiers[v.modifier](level, v.category, v.amount);
+            if(SharkGame.Resources.isCategory(v)) {
+                var resourceList = SharkGame.Resources.getResourcesInCategory(v);
+                $.each(resourceList, function(i, v) {
+                    SharkGame.WorldModifiers[v.modifier](level, v.resource, v.amount);
+                });
+            } else {
+                SharkGame.WorldModifiers[v.modifier](level, v.resource, v.amount);
+            }
         });
     },
 
@@ -203,7 +84,11 @@ SharkGame.World = {
         return info.exists;
     },
 
-    getWorldMultiplier: function(resourceName) {
+    getWorldIncomeMultiplier: function(resourceName) {
         return SharkGame.World.worldResources[resourceName].incomeMultiplier;
+    },
+
+    getWorldBoostMultiplier: function(resourceName) {
+        return SharkGame.World.worldResources[resourceName].boostMultiplier;
     }
 };

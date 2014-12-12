@@ -43,62 +43,72 @@ SharkGame.Resources = {
         });
 
         var worldResources = w.worldResources;
-        var numenMultiplier = (r.getResource("numen") + 1);
 
         // for each resource, add incomes
         $.each(SharkGame.ResourceTable, function(name, resource) {
 
             var worldResourceInfo = worldResources[name];
-            var playerResources = SharkGame.PlayerResources[name];
-            // for this resource, calculate the income it generates
-            if(resource.income) {
+            if(worldResourceInfo.exists) {
+                var playerResource = SharkGame.PlayerResources[name];
+                // for this resource, calculate the income it generates
+                if(resource.income) {
 
-                var worldMultiplier = 1;
-                if(worldResourceInfo) {
-                    worldMultiplier = worldResourceInfo.incomeMultiplier;
-                }
+                    var worldMultiplier = 1;
+                    if(worldResourceInfo) {
+                        worldMultiplier = worldResourceInfo.incomeMultiplier;
+                    }
 
-                var canTakeCost = true;
-                // run over all resources first to check if this is true
-                if(!resource.forceIncome) {
+                    var canTakeCost = true;
+                    // run over all resources first to check if this is true
+                    if(!resource.forceIncome) {
+                        $.each(resource.income, function(k, v) {
+                            var affectedResourceBoostMultiplier = worldResources[k].boostMultiplier;
+                            var change = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                            if(change < 0 && r.getResource(k) <= 0) {
+                                canTakeCost = false;
+                            }
+                        });
+                    }
+
+                    // if there is a cost and it can be taken (or if there is no cost)
+                    // run over all resources to fill the income table
                     $.each(resource.income, function(k, v) {
-                        var change = v * playerResources.amount * playerResources.incomeMultiplier * worldMultiplier * numenMultiplier;
-                        if(change < 0 && r.getResource(k) <= 0) {
-                            canTakeCost = false;
+                        var affectedResourceBoostMultiplier = worldResources[k].boostMultiplier;
+                        var incomeChange = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                        if((incomeChange < 0 || canTakeCost) && SharkGame.World.doesResourceExist(k)) {
+                            SharkGame.PlayerIncomeTable[k] += incomeChange
                         }
                     });
                 }
 
-                // if there is a cost and it can be taken (or if there is no cost)
-                // run over all resources to fill the income table
-                $.each(resource.income, function(k, v) {
-                    var incomeChange = v * playerResources.amount * playerResources.incomeMultiplier * worldMultiplier * numenMultiplier;
-                    if((incomeChange < 0 || canTakeCost) && SharkGame.World.doesResourceExist(k)) {
-                        SharkGame.PlayerIncomeTable[k] += incomeChange
-                    }
-                });
-            }
-
-            // calculate the income that should be added to this resource
-            if(worldResourceInfo) {
-                var worldResourceIncome = worldResourceInfo.income;
-                SharkGame.PlayerIncomeTable[name] += worldResourceIncome * numenMultiplier;
+                // calculate the income that should be added to this resource
+                if(worldResourceInfo) {
+                    var worldResourceIncome = worldResourceInfo.income;
+                    var affectedResourceBoostMultiplier = worldResources[name].boostMultiplier;
+                    SharkGame.PlayerIncomeTable[name] += worldResourceIncome * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                }
             }
         });
     },
 
     getIncomeFromResource: function(generator, output) {
+        var r = SharkGame.Resources;
+        var w = SharkGame.World;
         var generatorResource = SharkGame.ResourceTable[generator];
         var ownedResource = SharkGame.PlayerResources[generator]
-        var numenMultiplier = (SharkGame.Resources.getResource("numen") + 1);
         var income = 0;
         if(generatorResource.income) {
             var outputResourceAmount = generatorResource.income[output];
             if(outputResourceAmount) {
-                income = outputResourceAmount * ownedResource.amount * ownedResource.incomeMultiplier * SharkGame.World.getWorldMultiplier(generator) * numenMultiplier;
+                income = outputResourceAmount * ownedResource.amount * ownedResource.incomeMultiplier
+                * w.getWorldIncomeMultiplier(generator) * w.getWorldBoostMultiplier(output) * r.getSpecialMultiplier();
             }
         }
         return income;
+    },
+
+    getSpecialMultiplier: function() {
+        return  Math.max((SharkGame.Resources.getResource("numen") * 10), 1);
     },
 
     getIncome: function(resource) {
@@ -196,6 +206,10 @@ SharkGame.Resources = {
             resources.push(v);
         });
         return resources;
+    },
+
+    isCategory: function(name) {
+        return !(typeof(SharkGame.ResourceCategories[name]) === 'undefined')
     },
 
     getBaseOfResource: function(resourceName) {
@@ -389,12 +403,6 @@ SharkGame.Resources = {
         return name;
     },
 
-    // TESTING FUNCTION
-    giveMeSomeOfEverything: function(amount) {
-        $.each(SharkGame.ResourceTable, function(k, v) {
-            SharkGame.Resources.changeResource(k, amount);
-        });
-    },
 
     // make a resource list object into a string describing its contents
     resourceListToString: function(resourceList, darken) {
@@ -439,6 +447,15 @@ SharkGame.Resources = {
         return sources;
     },
 
+    // TESTING FUNCTIONS
+    giveMeSomeOfEverything: function(amount) {
+        $.each(SharkGame.ResourceTable, function(k, v) {
+            SharkGame.Resources.changeResource(k, amount);
+        });
+    },
+
+
+    // this was going to be used to randomise what resources were available but it needs better work to point out what is REQUIRED and what is OPTIONAL
     // create all chains that terminate only at a cost-free action to determine how to get to a resource
     // will return a weird vaguely tree structure of nested arrays (ughhh I need to learn how to OOP in javascript at some point, what a hack)
     getResourceDependencyChains: function(resource, alreadyKnownList) {
