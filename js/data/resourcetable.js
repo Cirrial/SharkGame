@@ -3,7 +3,7 @@ SharkGame.ResourceTable = {
     // SPECIAL
 
     numen: {
-        name: 'numen',
+        name: 'numina',
         singleName: 'numen',
         //desc: "You think as a deity. You act as a deity. You are a deity.",
         color: '#FFFFFF',
@@ -39,7 +39,7 @@ SharkGame.ResourceTable = {
         name: 'rays',
         singleName: 'ray',
         //desc: "Kindred to the sharks.",
-        color: '#0C0FAD',
+        color: '#797CFC',
         income: {
             'fish': 0.2,
             'sand': 1
@@ -163,7 +163,7 @@ SharkGame.ResourceTable = {
         },
         jobs: [
             "technician",
-            "warren",
+            "pit",
             "sifter"
         ],
         value: 3000
@@ -235,9 +235,9 @@ SharkGame.ResourceTable = {
         value: 4000
     },
 
-    warren: {
-        name: 'eel warrens',
-        singleName: 'eel warren',
+    pit: {
+        name: 'eel pits',
+        singleName: 'eel pit',
         color: '#3F6E86',
         income: {
             'eel': 0.01
@@ -747,7 +747,7 @@ SharkGame.ResourceTable = {
             queen: -0.0001,
             berrier: -0.0001,
             biologist: -0.0001,
-            warren: -0.0001,
+            pit: -0.0001,
             scientist: -0.0001,
             laser: -0.0001,
             planter: -0.0001,
@@ -838,7 +838,7 @@ SharkGame.ResourceCategories = {
             "queen",
             "berrier",
             "biologist",
-            "warren"
+            "pit"
         ]
     },
     specialists: {

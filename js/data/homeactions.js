@@ -756,18 +756,18 @@ SharkGame.HomeActionCategories = {
         ]
     },
 
-    research: {
-        name: "Research",
+    processing: {
+        name: "Processing",
         actions: [
-            "seaApplesToScience"
+            "seaApplesToScience",
+            "transmuteSharkonium",
+            "smeltCoralglass"
         ]
     },
 
-    industry: {
-        name: "Industry",
+    machines: {
+        name: "Machines",
         actions: [
-            "transmuteSharkonium",
-            "smeltCoralglass",
             "getCrystalMiner",
             "getSandDigger",
             "getAutoTransmuter",

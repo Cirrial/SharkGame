@@ -1,4 +1,18 @@
 SharkGame.WorldTypes = {
+    test: {
+        name: "Test",
+        desc: "You REALLY shouldn't be seeing this.",
+        absentResources: [],
+        modifiers: [],
+        gateCosts: {
+            fish: 1E3,
+            sand: 1E3,
+            crystal: 1E3,
+            kelp: 1E3,
+            seaApple: 1E3,
+            sharkonium: 1E3
+        }
+    },
     start: {
         name: "Start",
         desc: "You shouldn't be seeing this.",
@@ -240,8 +254,7 @@ SharkGame.WorldTypes = {
             "shrimp",
             "seaApple",
             "coral",
-            "algae",
-            "kelp"
+            "algae"
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },

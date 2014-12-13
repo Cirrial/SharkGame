@@ -55,9 +55,11 @@ SharkGame.Upgrades = {
         cost: {
             science: 150
         },
-        required: [
-            "crystalContainer"
-        ]
+        required: {
+            upgrades: [
+                "crystalContainer"
+            ]
+        }
     },
 
     underwaterChemistry: {
@@ -69,9 +71,11 @@ SharkGame.Upgrades = {
             science: 200,
             crystal: 50
         },
-        required: [
-            "crystalContainer"
-        ],
+        required: {
+            upgrades: [
+                "crystalContainer"
+            ]
+        },
         effect: {
             multiplier: {
                 scientist: 2
@@ -88,9 +92,11 @@ SharkGame.Upgrades = {
             science: 250,
             sand: 250
         },
-        required: [
-            "crystalContainer"
-        ],
+        required: {
+            upgrades: [
+                "crystalContainer"
+            ]
+        },
         effect: {
             multiplier: {
                 ray: 2
@@ -107,9 +113,11 @@ SharkGame.Upgrades = {
             science: 300,
             sand: 500
         },
-        required: [
-            "seabedGeology"
-        ]
+        required: {
+            upgrades: [
+                "seabedGeology"
+            ]
+        }
     },
 
     laserRays: {
@@ -122,9 +130,14 @@ SharkGame.Upgrades = {
             sand: 2000,
             crystal: 100
         },
-        required: [
-            "thermalVents"
-        ]
+        required: {
+            upgrades: [
+                "thermalVents"
+            ],
+            resources: [
+                "ray"
+            ]
+        }
     },
 
     automation: {
@@ -136,10 +149,12 @@ SharkGame.Upgrades = {
             science: 1000,
             sharkonium: 100
         },
-        required: [
-            "thermalVents",
-            "transmutation"
-        ]
+        required: {
+            upgrades: [
+                "thermalVents",
+                "transmutation"
+            ]
+        }
     },
 
     engineering: {
@@ -151,9 +166,11 @@ SharkGame.Upgrades = {
             science: 2000,
             sharkonium: 2000
         },
-        required: [
-            "automation"
-        ],
+        required: {
+            upgrades: [
+                "automation"
+            ]
+        },
         effect: {
             multiplier: {
                 crystalMiner: 2,
@@ -173,9 +190,11 @@ SharkGame.Upgrades = {
             science: 3000,
             sharkonium: 3000
         },
-        required: [
-            "automation"
-        ]
+        required: {
+            upgrades: [
+                "automation"
+            ]
+        }
     },
 
     kelpHorticulture: {
@@ -187,9 +206,34 @@ SharkGame.Upgrades = {
             science: 500,
             sand: 2000
         },
-        required: [
-            "seabedGeology"
-        ]
+        required: {
+            upgrades: [
+                "seabedGeology"
+            ],
+            resources: [
+                "kelp"
+            ]
+        }
+    },
+
+    biology: {
+        name: "Biology",
+        desc: "What is a shark? What is inside a shark, except for large amounts of fish?",
+        researchedMessage: "With a new understanding of their own biology, sharks can now specialise in the manufacture of new sharks.",
+        effectDesc: "Sharks are twice as effective. Did you know shark eggs don't actually form just because a shark wills them to exist?",
+        cost: {
+            science: 400
+        },
+        required: {
+            upgrades: [
+                "underwaterChemistry"
+            ]
+        },
+        effect: {
+            multiplier: {
+                shark: 2
+            }
+        }
     },
 
     xenobiology: {
@@ -198,33 +242,23 @@ SharkGame.Upgrades = {
         researchedMessage: "Results inconclusive! Further research required. It could be such a benefit for science!",
         effectDesc: "Kelp produces sea apples twice as fast. We finally almost sort of understand what a sea apple is. It isn't a fruit.",
         cost: {
-            science: 300,
-            seaApple: 300
+            science: 600,
+            seaApples: 300
         },
-        required: [
-            "kelpHorticulture"
-        ],
+        required: {
+            upgrades: [
+                "kelpHorticulture",
+                "biology"
+            ],
+            resources: [
+                "seaApple",
+                "jellyfish",
+                "sponge"
+            ]
+        },
         effect: {
             multiplier: {
                 kelp: 2
-            }
-        }
-    },
-
-    biology: {
-        name: "Biology",
-        desc: "We probably should have done this BEFORE poking at weird things.",
-        researchedMessage: "With a new understanding of their own biology, sharks can now specialise in the manufacture of new sharks.",
-        effectDesc: "Sharks are twice as effective. Did you know shark eggs don't actually form just because a shark wills them to exist?",
-        cost: {
-            science: 400
-        },
-        required: [
-            "xenobiology"
-        ],
-        effect: {
-            multiplier: {
-                shark: 2
             }
         }
     },
@@ -238,10 +272,15 @@ SharkGame.Upgrades = {
             science: 700,
             sand: 600
         },
-        required: [
-            "biology",
-            "laserRays"
-        ],
+        required: {
+            upgrades: [
+                "biology",
+                "laserRays"
+            ],
+            resources: [
+                "ray"
+            ]
+        },
         effect: {
             multiplier: {
                 ray: 2,
@@ -259,10 +298,15 @@ SharkGame.Upgrades = {
             science: 500,
             kelp: 1000
         },
-        required: [
-            "biology",
-            "sunObservation"
-        ],
+        required: {
+            upgrades: [
+                "biology",
+                "sunObservation"
+            ],
+            resources: [
+                "crab"
+            ]
+        },
         effect: {
             multiplier: {
                 crab: 4,
@@ -279,9 +323,14 @@ SharkGame.Upgrades = {
         cost: {
             science: 5000
         },
-        required: [
-            "kelpHorticulture"
-        ],
+        required: {
+            upgrades: [
+                "kelpHorticulture"
+            ],
+            resources: [
+                "crab"
+            ]
+        },
         effect: {
             multiplier: {
                 planter: 2
@@ -296,12 +345,15 @@ SharkGame.Upgrades = {
         effectDesc: "Enables transmutation of some random junk we have lying around into sharkonium, material of the future.",
         cost: {
             science: 1000,
-            crystal: 2000
+            crystal: 2000,
+            sand: 4000
         },
-        required: [
-            "thermalVents",
-            "underwaterChemistry"
-        ]
+        required: {
+            upgrades: [
+                "thermalVents",
+                "underwaterChemistry"
+            ]
+        }
     },
 
     exploration: {
@@ -313,10 +365,12 @@ SharkGame.Upgrades = {
             science: 5000,
             fish: 5000
         },
-        required: [
-            "seabedGeology",
-            "sunObservation"
-        ],
+        required: {
+            upgrades: [
+                "seabedGeology",
+                "sunObservation"
+            ]
+        },
         effect: {
             multiplier: {
                 shark: 2,
@@ -334,9 +388,11 @@ SharkGame.Upgrades = {
             science: 8000,
             fish: 15000
         },
-        required: [
-            "exploration"
-        ],
+        required: {
+            upgrades: [
+                "exploration"
+            ]
+        },
         effect: {
             multiplier: {
                 crab: 4
@@ -355,9 +411,11 @@ SharkGame.Upgrades = {
             ray: 50000,
             crab: 50000
         },
-        required: [
-            "farExploration"
-        ]
+        required: {
+            upgrades: [
+                "farExploration"
+            ]
+        }
     }
 
 };

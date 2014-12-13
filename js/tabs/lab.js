@@ -62,6 +62,7 @@ SharkGame.Lab = {
     update: function() {
         var r = SharkGame.Resources;
         var l = SharkGame.Lab;
+        var w = SharkGame.World;
 
         // cache a selector
         var buttonList = $('#buttonList');
@@ -80,18 +81,30 @@ SharkGame.Lab = {
 
                 // check upgrade prerequisites
                 if(value.required) {
-                    $.each(value.required, function(_, v) {
-                        // check previous upgrade research
-                        if(SharkGame.Upgrades[v]) {
-                            prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
-                        } else {
-                            prereqsMet = false; // if the required upgrade doesn't exist, we definitely don't have it
-                        }
-
-                        // check existence of resource cost
-                        $.each(value.cost, function(k, v) {
-                            prereqsMet = prereqsMet && SharkGame.World.doesResourceExist(k);
+                    // check previous upgrades
+                    if(value.required.upgrades) {
+                        $.each(value.required.upgrades, function(_, v) {
+                            // check previous upgrade research
+                            if(SharkGame.Upgrades[v]) {
+                                prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
+                            } else {
+                                prereqsMet = false; // if the required upgrade doesn't exist, we definitely don't have it
+                            }
                         });
+                    }
+                    if(value.required.resources) {
+                        // check if any related resources exist in the world for this to make sense
+                        // unlike the costs where all resources in the cost must exist, this is an either/or scenario
+                        var relatedResourcesExist = false;
+                        $.each(value.required.resources, function(_, v) {
+                            relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
+                        });
+                        prereqsMet = prereqsMet && relatedResourcesExist;
+                    }
+                    // check existence of resource cost
+                    // this is the final check, everything that was permitted previously will be made false
+                    $.each(value.cost, function(k, v) {
+                        prereqsMet = prereqsMet && w.doesResourceExist(k);
                     });
                 }
                 if(prereqsMet) {
@@ -205,7 +218,9 @@ SharkGame.Lab = {
         if(upgrade.effect) {
             if(upgrade.effect.multiplier) {
                 $.each(upgrade.effect.multiplier, function(k, v) {
-                    effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
+                    if(SharkGame.World.doesResourceExist(k)) {
+                        effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
+                    }
                 });
                 // remove trailing suffix
                 effects = effects.slice(0, -2);

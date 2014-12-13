@@ -26,7 +26,7 @@ SharkGame.WorldModifiers = {
 
 SharkGame.World = {
 
-    worldType: "start",
+    worldType: "test",
     worldResources: {},
     planetLevel: 1,
 
