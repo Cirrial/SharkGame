@@ -75,7 +75,7 @@ SharkGame.ResourceTable = {
         },
         jobs: [
             "queen",
-            "seeker"
+            "worker"
         ],
         value: 500
     },
@@ -140,7 +140,13 @@ SharkGame.ResourceTable = {
     },
 
     octopus: {
-        name: 'octopuses', // IT'S NOT A LATIN OR GREEK WORD, IT'S NOT OCTOPI OR OCTOPODES, EMBRACE ENGLISH
+        name: 'octopuses', // the word 'octopus' in english is taken from latin
+        // which in turn took it from greek
+        // when it was taken from greek and made into latin it kept the original plural
+        // now the word is taken from latin and maybe we should take the original plural but
+        // look basically the point is this is a long and storied word
+        // and the english plural system should apply because we're talking about octopus, not ὀκτώπους, so just
+        // why are you reading this
         singleName: 'octopus',
         color: '#965F37',
         income: {
@@ -281,9 +287,9 @@ SharkGame.ResourceTable = {
         value: 4000
     },
 
-    seeker: {
-        name: 'seeker shrimp',
-        singleName: 'seeker shrimp',
+    worker: {
+        name: 'worker shrimp',
+        singleName: 'worker shrimp',
         color: '#D83902',
         income: {
             'crystal': 0.5
@@ -490,9 +496,8 @@ SharkGame.ResourceTable = {
         singleName: 'sponge farmer',
         color: '#EB9A75',
         income: {
-            sponge: 20,
-            algae: 20,
-            tar: 0.00001
+            sponge: 10,
+            algae: 10
         },
         value: 50000
     },
@@ -502,8 +507,7 @@ SharkGame.ResourceTable = {
         singleName: 'berry sprayer',
         color: '#38296C',
         income: {
-            lobster: 3,
-            tar: 0.00001
+            lobster: 1
         },
         value: 50000
     },
@@ -513,10 +517,9 @@ SharkGame.ResourceTable = {
         singleName: 'glass maker',
         color: '#E39E66',
         income: {
-            coralglass: 20,
+            coralglass: 10,
             coral: -150,
-            sand: -150,
-            tar: 0.00001
+            sand: -150
         },
         value: 50000
     },
@@ -574,8 +577,8 @@ SharkGame.ResourceTable = {
         singleName: 'sea scourer',
         color: '#8E8F91',
         income: {
-            tar: -10,
-            junk: 40
+            tar: -1,
+            junk: 10
         },
         value: 50000
     },
@@ -623,6 +626,10 @@ SharkGame.ResourceTable = {
         name: 'sponge',
         singleName: 'sponge',
         color: '#ED9847',
+        income: {
+            sponge: 0.1,
+            algae: -1
+        },
         value: 3
     },
 
@@ -636,7 +643,7 @@ SharkGame.ResourceTable = {
     clam: {
         name: 'clams',
         singleName: 'clam',
-        color: '#4C5264	',
+        color: '#828FB5',
         value: 3
     },
 
@@ -751,7 +758,7 @@ SharkGame.ResourceTable = {
             scientist: -0.0001,
             laser: -0.0001,
             planter: -0.0001,
-            seeker: -0.0001,
+            worker: -0.0001,
             harvester: -0.0001,
             savant: -0.0001,
             treasurer: -0.0001,
@@ -855,7 +862,7 @@ SharkGame.ResourceCategories = {
             "scientist",
             "laser",
             "planter",
-            "seeker",
+            "worker",
             "harvester",
             "savant",
             "treasurer",

@@ -648,44 +648,6 @@ SharkGame.HomeActions = {
         helpText: "Construct a machine to automatically dig up sand efficiently."
     },
 
-    'getAutoTransmuter': {
-        name: "Build auto-transmuter",
-        effect: {
-            resource: {
-                'autoTransmuter': 1
-            }
-        },
-        cost: [
-            {resource: "crystal", costFunction: "linear", priceIncrease: 100},
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 200}
-        ],
-        max: "autoTransmuter",
-        prereq: {
-            resource: {
-                'sharkonium': 200
-            },
-            upgrade: [
-                "automation"
-            ]
-        },
-        outcomes: [
-            "Auto-transmuter activated.",
-            "Auto-transmuter constructed.",
-            "Transmutation machine online.",
-            "Construction complete.",
-            "Provide inputs. Only the output matters."
-        ],
-        multiOutcomes: [
-            "Auto-transmuters are prepared.",
-            "The difference between science and magic is reliable application.",
-            "All is change.",
-            "Change is all.",
-            "The machines know many secrets, yet cannot speak of them.",
-            "Giant machines blot out our sun."
-        ],
-        helpText: "Construct a machine to automatically transmute sand and crystal to sharkonium."
-    },
-
     'getFishMachine': {
         name: "Build fish machine",
         effect: {
@@ -718,10 +680,46 @@ SharkGame.HomeActions = {
             "Your metal servants can sate the hunger. The hunger for fish.",
             "The fishing machines are more efficient than the sharks. But they aren't very smart.",
             "Automated fishing.",
-            "The power of many, many sharks, in many, many devices.",
-            "Giant machines blot out our sun."
+            "The power of many, many sharks, in many, many devices."
         ],
         helpText: "Construct a machine to automatically gather fish efficiently."
+    },
+
+    'getAutoTransmuter': {
+        name: "Build auto-transmuter",
+        effect: {
+            resource: {
+                'autoTransmuter': 1
+            }
+        },
+        cost: [
+            {resource: "crystal", costFunction: "linear", priceIncrease: 100},
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "autoTransmuter",
+        prereq: {
+            resource: {
+                'sharkonium': 200
+            },
+            upgrade: [
+                "engineering"
+            ]
+        },
+        outcomes: [
+            "Auto-transmuter activated.",
+            "Auto-transmuter constructed.",
+            "Transmutation machine online.",
+            "Construction complete.",
+            "Provide inputs. Only the output matters."
+        ],
+        multiOutcomes: [
+            "Auto-transmuters are prepared.",
+            "The difference between science and magic is reliable application.",
+            "All is change.",
+            "Change is all.",
+            "The machines know many secrets, yet cannot speak of them."
+        ],
+        helpText: "Construct a machine to automatically transmute sand and crystal to sharkonium."
     }
 };
 
@@ -733,7 +731,7 @@ SharkGame.HomeActionCategories = {
     },
 
     basic: {
-        name: "Frenzy",
+        name: "Basic",
         actions: [
             "catchFish",
             "prySponge",
@@ -745,7 +743,7 @@ SharkGame.HomeActionCategories = {
     },
 
     professions: {
-        name: "Professions",
+        name: "Jobs",
         actions: [
             "getScientist",
             "getNurse",

@@ -208,7 +208,13 @@ SharkGame.Stats = {
             if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
                 var income = SharkGame.ResourceTable[k].income;
                 var row = $("<tr>");
-                var numIncomes = _.size(income);
+
+                var numIncomes = 0;
+                $.each(income, function(incomeResourceName, incomeResourceData) {
+                    if(w.doesResourceExist(incomeResourceName)) {
+                        numIncomes++;
+                    }
+                });
                 var counter = 0;
 
                 var rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";

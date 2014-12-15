@@ -92,20 +92,9 @@ SharkGame.Lab = {
                             }
                         });
                     }
-                    if(value.required.resources) {
-                        // check if any related resources exist in the world for this to make sense
-                        // unlike the costs where all resources in the cost must exist, this is an either/or scenario
-                        var relatedResourcesExist = false;
-                        $.each(value.required.resources, function(_, v) {
-                            relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
-                        });
-                        prereqsMet = prereqsMet && relatedResourcesExist;
-                    }
-                    // check existence of resource cost
-                    // this is the final check, everything that was permitted previously will be made false
-                    $.each(value.cost, function(k, v) {
-                        prereqsMet = prereqsMet && w.doesResourceExist(k);
-                    });
+
+                    // validate if upgrade is possible
+                    prereqsMet = prereqsMet && l.isUpgradePossible(key);
                 }
                 if(prereqsMet) {
                     // add button
@@ -206,11 +195,39 @@ SharkGame.Lab = {
 
     allResearchDone: function() {
         var u = SharkGame.Upgrades;
+        var l = SharkGame.Lab;
         var allDone = true;
         $.each(u, function(k, v) {
-            allDone = allDone && v.purchased;
+            if(l.isUpgradePossible(k)) {
+                allDone = allDone && v.purchased;
+            }
         });
         return allDone;
+    },
+
+    isUpgradePossible: function(upgradeName) {
+        var w = SharkGame.World;
+        var upgradeData = SharkGame.Upgrades[upgradeName];
+        var isPossible = true;
+
+        if(upgradeData.required) {
+            if(upgradeData.required.resources) {
+                // check if any related resources exist in the world for this to make sense
+                // unlike the costs where all resources in the cost must exist, this is an either/or scenario
+                var relatedResourcesExist = false;
+                $.each(upgradeData.required.resources, function(_, v) {
+                    relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
+                });
+                isPossible = isPossible && relatedResourcesExist;
+            }
+            // check existence of resource cost
+            // this is the final check, everything that was permitted previously will be made false
+            $.each(upgradeData.cost, function(k, v) {
+                isPossible = isPossible && w.doesResourceExist(k);
+            });
+        }
+
+        return isPossible;
     },
 
     getResearchEffects: function(upgrade, darken) {
