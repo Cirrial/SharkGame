@@ -502,6 +502,9 @@ SharkGame.Home = {
                 case "linear":
                     cost = SharkGame.MathUtil.linearCost(currAmount, currAmount + amount, k);
                     break;
+                case "unique":
+                    cost = SharkGame.MathUtil.uniqueCost(currAmount, currAmount + amount, k);
+                    break;
             }
             calcCost[v.resource] = cost;
         });
@@ -533,6 +536,9 @@ SharkGame.Home = {
                         break;
                     case "linear":
                         subMax = SharkGame.MathUtil.linearMax(currAmount, costResource.amount, k) - currAmount;
+                        break;
+                    case "unique":
+                        subMax = SharkGame.MathUtil.uniqueMax(currAmount, costResource.amount, k) - currAmount;
                         break;
                 }
                 max = Math.min(max, subMax);

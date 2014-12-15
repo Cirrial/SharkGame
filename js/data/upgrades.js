@@ -1017,10 +1017,9 @@ SharkGame.Upgrades = {
         researchedMessage: "A strange structure was found from clues within the chasms. The cost was great, but the discovery is greater!",
         effectDesc: "Something ancient lurked in the depths.",
         cost: {
-            science: 1E8,
-            shark: 50000,
-            ray: 50000,
-            crab: 50000
+            science: 1E10,
+            shark: 1000,
+            fish: 50000
         },
         required: {
             upgrades: [

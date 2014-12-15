@@ -38,10 +38,12 @@ SharkGame.HomeActions = {
         },
         cost: {},
         prereq: {
-            // no prereqs
+            upgrade: [
+                "spongeCollection"
+            ]
         },
         outcomes: [
-            "TODO - SPONGE"
+            "TODO"
         ],
         helpText: "Grab a sponge from the seabed for future use."
     },
@@ -55,12 +57,33 @@ SharkGame.HomeActions = {
         },
         cost: {},
         prereq: {
-            // no prereqs
+            upgrade: [
+                "clamScooping"
+            ]
         },
         outcomes: [
-            "TODO - CLAM"
+            "TODO"
         ],
         helpText: "Fetch a clam. Why do we need clams now? Who knows."
+    },
+
+    'getJellyfish': {
+        name: "Get jellyfish",
+        effect: {
+            resource: {
+                'jellyfish': 1
+            }
+        },
+        cost: {},
+        prereq: {
+            upgrade: [
+                "jellyfishHunting"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Take a great risk in catching a jellyfish without being stung."
     },
 
     'seaApplesToScience': {
@@ -75,6 +98,9 @@ SharkGame.HomeActions = {
         ],
         max: "seaApple",
         prereq: {
+            resource: {
+                seaApple: 1
+            },
             upgrade: [
                 "xenobiology"
             ]
@@ -87,6 +113,81 @@ SharkGame.HomeActions = {
             "What is even the point of these things? Why are they named for fruit? They're squirming!"
         ],
         helpText: "Dissect sea apples to gain additional science. Research!"
+    },
+
+    'spongeToScience': {
+        name: "Dissect sponge",
+        effect: {
+            resource: {
+                science: 5
+            }
+        },
+        cost: [
+            {resource: "sponge", costFunction: "constant", priceIncrease: 1}
+        ],
+        max: "sponge",
+        prereq: {
+            resource: {
+                sponge: 1
+            },
+            upgrade: [
+                "xenobiology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Dissect sponges to learn their porous secrets. Science!"
+    },
+
+    'jellyfishToScience': {
+        name: "Dismantle jellyfish",
+        effect: {
+            resource: {
+                science: 5
+            }
+        },
+        cost: [
+            {resource: "jellyfish", costFunction: "constant", priceIncrease: 1}
+        ],
+        max: "jellyfish",
+        prereq: {
+            resource: {
+                jellyfish: 1
+            },
+            upgrade: [
+                "xenobiology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Examine the goop inside the stinging jellies! Discovery!"
+    },
+
+    'pearlConversion': {
+        name: "Convert clam pearls",
+        effect: {
+            resource: {
+                crystal: 0.2
+            }
+        },
+        cost: [
+            {resource: "clam", costFunction: "constant", priceIncrease: 1}
+        ],
+        max: "clam",
+        prereq: {
+            resource: {
+                clam: 1
+            },
+            upgrade: [
+                "pearlConversion"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Convert a pearl (and the clam around it) into crystal."
     },
 
     'transmuteSharkonium': {
@@ -136,13 +237,59 @@ SharkGame.HomeActions = {
         max: "coralglass",
         prereq: {
             upgrade: [
-                "transmutation"
+                "coralglassSmelting"
             ]
         },
         outcomes: [
-            "TODO - CORALGLASS"
+            "TODO"
         ],
         helpText: "Smelt resources into coralglass for use in crustacean machines!"
+    },
+
+    'fuseDelphinium': {
+        name: "Fuse stuff into delphinium",
+        effect: {
+            resource: {
+                delphinium: 1
+            }
+        },
+        cost: [
+            {resource: "coral", costFunction: "constant", priceIncrease: 15},
+            {resource: "crystal", costFunction: "constant", priceIncrease: 5}
+        ],
+        max: "delphinium",
+        prereq: {
+            upgrade: [
+                "aquamarineFusion"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Fuse valuable resources into delphinium, which is kinda like sharkonium. Except worse."
+    },
+
+    'forgeSpronge': {
+        name: "Forge sponge into spronge",
+        effect: {
+            resource: {
+                spronge: 1
+            }
+        },
+        cost: [
+            {resource: "sponge", costFunction: "constant", priceIncrease: 5},
+            {resource: "junk", costFunction: "constant", priceIncrease: 15}
+        ],
+        max: "spronge",
+        prereq: {
+            upgrade: [
+                "industrialGradeSponge"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Repurpose boring old sponge into spronge, building material of the future."
     },
 
     'getShark': {
@@ -341,6 +488,107 @@ SharkGame.HomeActions = {
             "So many crabs."
         ],
         helpText: "Hire a crab to find things that sharks and rays overlook."
+    },
+
+    'getShrimp': {
+        name: "Acquire shrimp",
+        effect: {
+            resource: {
+                'shrimp': 1
+            }
+        },
+        cost: [
+            {resource: "sponge", costFunction: "linear", priceIncrease: 5}
+        ],
+        max: "shrimp",
+        prereq: {
+            resource: {
+                'sponge': 5
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Convince shrimp to assist you in the gathering of sponge."
+    },
+
+    'getLobster': {
+        name: "Gain lobster",
+        effect: {
+            resource: {
+                'lobster': 1
+            }
+        },
+        cost: [
+            {resource: "clam", costFunction: "linear", priceIncrease: 10}
+        ],
+        max: "lobster",
+        prereq: {
+            resource: {
+                'clam': 10
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Lobster like clams. Will work for clams. Good work. Many clams."
+    },
+
+    'getDolphin': {
+        name: "Fetch dolphin",
+        effect: {
+            resource: {
+                'dolphin': 1
+            }
+        },
+        cost: [
+            {resource: "fish", costFunction: "linear", priceIncrease: 10}
+        ],
+        max: "dolphin",
+        prereq: {
+            resource: {
+                'fish': 10,
+                'shark': 50
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Pay a dolphin to help us. Prepare to put up with whining."
+    },
+
+    'getWhale': {
+        name: "Reach whale",
+        effect: {
+            resource: {
+                'whale': 1
+            }
+        },
+        cost: [
+            {resource: "fish", costFunction: "linear", priceIncrease: 1e5}
+        ],
+        max: "whale",
+        prereq: {
+            resource: {
+                'fish': 1e5
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Persuade one of the great whales to help us out."
     },
 
     'getScientist': {
@@ -736,9 +984,17 @@ SharkGame.HomeActionCategories = {
             "catchFish",
             "prySponge",
             "getClam",
+            "getJellyfish",
             "getShark",
             "getManta",
-            "getCrab"
+            "getCrab",
+            "getShrimp",
+            "getLobster",
+            "getDolphin",
+            "getWhale",
+            "getChimaera",
+            "getOctopus",
+            "getEel"
         ]
     },
 
@@ -758,8 +1014,13 @@ SharkGame.HomeActionCategories = {
         name: "Processing",
         actions: [
             "seaApplesToScience",
+            "spongeToScience",
+            "jellyfishToScience",
+            "pearlConversion",
             "transmuteSharkonium",
-            "smeltCoralglass"
+            "smeltCoralglass",
+            "fuseDelphinium",
+            "forgeSpronge"
         ]
     },
 

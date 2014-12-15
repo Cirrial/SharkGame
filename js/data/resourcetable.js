@@ -507,7 +507,7 @@ SharkGame.ResourceTable = {
         singleName: 'berry sprayer',
         color: '#38296C',
         income: {
-            lobster: 1
+            lobster: 6
         },
         value: 50000
     },
@@ -601,7 +601,7 @@ SharkGame.ResourceTable = {
         singleName: 'science',
         //desc: "Lifeblood of progress.",
         color: '#BBA4E0',
-        value: 0
+        value: 100
     },
 
     // ANIMALS
@@ -770,7 +770,7 @@ SharkGame.ResourceTable = {
             technician: -0.0001,
             sifter: -0.0001
         },
-        value: 0,
+        value: -100,
         forceIncome: true
     },
 
@@ -788,7 +788,7 @@ SharkGame.ResourceTable = {
             seaApple: -0.001,
             sponge: -0.001
         },
-        value: 0,
+        value: -100,
         forceIncome: true
     }
 
