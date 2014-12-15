@@ -32,7 +32,7 @@ SharkGame.WorldTypes = {
             "pit",
             "worker",
             "harvester",
-            "savant",
+            "philosopher",
             "treasurer",
             "chorus",
             "transmuter",
@@ -64,12 +64,12 @@ SharkGame.WorldTypes = {
         modifiers: [],
         // initial gate cost, scaled by planetary level
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            fish: 1E4,
+            sand: 1E4,
+            crystal: 1E4,
+            kelp: 1E3,
+            seaApple: 1E3,
+            sharkonium: 1E4
         }
     },
     marine: {
@@ -99,7 +99,9 @@ SharkGame.WorldTypes = {
         desc: "A frenetic world, torn by immaterial force.",
         absentResources: [
             "ice",
-            "heater"
+            "heater",
+            "eel",
+            "whale"
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "frenzy", amount: 0.1 },
@@ -145,7 +147,8 @@ SharkGame.WorldTypes = {
         absentResources: [
             "ice",
             "heater",
-            "sand"
+            "sand",
+            "clam"
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "tar", amount: 1 },

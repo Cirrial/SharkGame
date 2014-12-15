@@ -357,7 +357,7 @@ SharkGame.Home = {
         var action = SharkGame.HomeActions[actionName];
         // check resource prerequisites
         if(action.prereq.resource) {
-            prereqsMet = prereqsMet && r.checkResources(action.prereq.resource);
+            prereqsMet = prereqsMet && r.checkResources(action.prereq.resource, true);
         }
         // check if resource cost exists
         if(action.cost) {

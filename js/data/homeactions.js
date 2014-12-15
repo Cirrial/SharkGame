@@ -1,4 +1,7 @@
 SharkGame.HomeActions = {
+
+    // FREEBIES ////////////////////////////////////////////////////////////////////////////////
+
     'catchFish': {
         name: "Catch fish",
         effect: {
@@ -85,6 +88,8 @@ SharkGame.HomeActions = {
         ],
         helpText: "Take a great risk in catching a jellyfish without being stung."
     },
+
+    // CONVERSIONS ////////////////////////////////////////////////////////////////////////////////
 
     'seaApplesToScience': {
         name: "Study sea apples",
@@ -190,6 +195,8 @@ SharkGame.HomeActions = {
         helpText: "Convert a pearl (and the clam around it) into crystal."
     },
 
+    // MAKE ADVANCED RESOURCES  ///////////////////////////////////////////////////////////////////////////////
+
     'transmuteSharkonium': {
         name: "Transmute stuff to sharkonium",
         effect: {
@@ -291,6 +298,8 @@ SharkGame.HomeActions = {
         ],
         helpText: "Repurpose boring old sponge into spronge, building material of the future."
     },
+
+    // BUY ANIMALS ////////////////////////////////////////////////////////////////////////////////
 
     'getShark': {
         name: "Recruit shark",
@@ -563,7 +572,7 @@ SharkGame.HomeActions = {
         multiOutcomes: [
             "TODO"
         ],
-        helpText: "Pay a dolphin to help us. Prepare to put up with whining."
+        helpText: "Pay a dolphin to help us catch fish. Prepare to put up with whining."
     },
 
     'getWhale': {
@@ -588,8 +597,85 @@ SharkGame.HomeActions = {
         multiOutcomes: [
             "TODO"
         ],
-        helpText: "Persuade one of the great whales to help us out."
+        helpText: "Persuade one of the great whales to help us out. They can round up entire schools."
     },
+
+    'getEel': {
+        name: "Hire eel",
+        effect: {
+            resource: {
+                'eel': 1
+            }
+        },
+        cost: [
+            {resource: "fish", costFunction: "linear", priceIncrease: 15}
+        ],
+        max: "octopus",
+        prereq: {
+            resource: {
+                'fish': 50
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Offer a new home and fish supply to an eel. They can round up fish and sand."
+    },
+
+    'getChimaera': {
+        name: "Procure chimaera",
+        effect: {
+            resource: {
+                'chimaera': 1
+            }
+        },
+        cost: [
+            {resource: "jellyfish", costFunction: "linear", priceIncrease: 20}
+        ],
+        max: "chimaera",
+        prereq: {
+            resource: {
+                'jellyfish': 20
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Convince a chimaera to hunt in the darker depths for us."
+    },
+
+    'getOctopus': {
+        name: "Employ octopus",
+        effect: {
+            resource: {
+                'octopus': 1
+            }
+        },
+        cost: [
+            {resource: "clam", costFunction: "linear", priceIncrease: 15}
+        ],
+        max: "octopus",
+        prereq: {
+            resource: {
+                'clam': 60
+            }
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Pay an octopus for their efficient clam retrieval services."
+    },
+
+    // SHARK JOBS ////////////////////////////////////////////////////////////////////////////////
 
     'getScientist': {
         name: "Train science shark",
@@ -666,6 +752,8 @@ SharkGame.HomeActions = {
         helpText: "Remove a shark from fish duty and set them to shark making duty."
     },
 
+    // RAY JOBS ////////////////////////////////////////////////////////////////////////////////
+
     'getLaser': {
         name: "Equip laser ray",
         effect: {
@@ -741,6 +829,8 @@ SharkGame.HomeActions = {
         ],
         helpText: "Remove a ray from sand business and let them concentrate on making more rays."
     },
+
+    // CRAB JOBS ////////////////////////////////////////////////////////////////////////////////
 
     'getPlanter': {
         name: "Gear up planter crab",
@@ -819,6 +909,461 @@ SharkGame.HomeActions = {
         ],
         helpText: "Meld several crabs into a terrifying, incomprehensible crab-producing brood cluster."
     },
+
+    // SHRIMP JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getQueen': {
+        name: "Crown shrimp queen",
+        effect: {
+            resource: {
+                'queen': 1
+            }
+        },
+        cost: [
+            {resource: "shrimp", costFunction: "constant", priceIncrease: 1},
+            {resource: "sponge", costFunction: "linear", priceIncrease: 50}
+        ],
+        max: "queen",
+        prereq: {
+            resource: {
+                'shrimp': 1
+            },
+            upgrade: [
+                "eusociality"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "Okay, so it's not exactly a royal role, but hey, they're gonna be making eggs for a long time. Humour them."
+        ],
+        helpText: "Create a shrimp queen to make more shrimp."
+    },
+
+    'getWorker': {
+        name: "Crown shrimp queen",
+        effect: {
+            resource: {
+                'worker': 1
+            }
+        },
+        cost: [
+            {resource: "shrimp", costFunction: "constant", priceIncrease: 1},
+            {resource: "sponge", costFunction: "linear", priceIncrease: 20}
+        ],
+        max: "worker",
+        prereq: {
+            resource: {
+                'shrimp': 1
+            },
+            upgrade: [
+                "eusociality"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Dedicate a shrimp to collecting crystals instead of algae."
+    },
+
+    // LOBSTER JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getBerrier': {
+        name: "Form lobster berrier",
+        effect: {
+            resource: {
+                'berrier': 1
+            }
+        },
+        cost: [
+            {resource: "lobster", costFunction: "constant", priceIncrease: 1},
+            {resource: "clam", costFunction: "linear", priceIncrease: 30}
+        ],
+        max: "berrier",
+        prereq: {
+            resource: {
+                'lobster': 1
+            },
+            upgrade: [
+                "crustaceanBiology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters."
+    },
+
+    'getHarvester': {
+        name: "Train lobster harvester",
+        effect: {
+            resource: {
+                'harvester': 1
+            }
+        },
+        cost: [
+            {resource: "lobster", costFunction: "constant", priceIncrease: 1},
+            {resource: "clam", costFunction: "linear", priceIncrease: 25},
+            {resource: "sponge", costFunction: "linear", priceIncrease: 5}
+        ],
+        max: "harvester",
+        prereq: {
+            resource: {
+                'lobster': 1
+            },
+            upgrade: [
+                "crustaceanBiology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters."
+    },
+
+    // DOLPHIN JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getPhilosopher': {
+        name: "Qualify dolphin philosopher",
+        effect: {
+            resource: {
+                'philosopher': 1
+            }
+        },
+        cost: [
+            {resource: "dolphin", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 30},
+            {resource: "coral", costFunction: "linear", priceIncrease: 10}
+        ],
+        max: "philosopher",
+        prereq: {
+            resource: {
+                'dolphin': 1
+            },
+            upgrade: [
+                "delphinePhilosophy"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Determine which of these dolphins is actually smart, and not just repeating empty phrases."
+    },
+
+    'getTreasurer': {
+        name: "Promote dolphin treasurer",
+        effect: {
+            resource: {
+                'treasurer': 1
+            }
+        },
+        cost: [
+            {resource: "dolphin", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 20},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 20}
+        ],
+        max: "treasurer",
+        prereq: {
+            resource: {
+                'dolphin': 1
+            },
+            upgrade: [
+                "delphinePhilosophy"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Promote a dolphin to a harder job involving interest on precious coral and crystal or something like that."
+    },
+
+    'getBiologist': {
+        name: "Train dolphin biologist",
+        effect: {
+            resource: {
+                'biologist': 1
+            }
+        },
+        cost: [
+            {resource: "dolphin", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 10},
+            {resource: "science", costFunction: "linear", priceIncrease: 20}
+        ],
+        max: "biologist",
+        prereq: {
+            resource: {
+                'dolphin': 1
+            },
+            upgrade: [
+                "dolphinBiology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Train a dolphin to specialise in biology. Dolphin biology, specifically, and production, apparently."
+    },
+
+    // WHALE JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getChorus': {
+        name: "Assemble whale chorus",
+        effect: {
+            resource: {
+                'chorus': 1
+            }
+        },
+        cost: [
+            {resource: "whale", costFunction: "unique", priceIncrease: 1000}
+        ],
+        max: "chorus",
+        prereq: {
+            resource: {
+                'whale': 1
+            },
+            upgrade: [
+                "eternalSong"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        helpText: "Form the singers of the eternal song. Let it flow through this world."
+    },
+
+    // EEL JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getPit': {
+        name: "Dig eel pit",
+        effect: {
+            resource: {
+                'pit': 1
+            }
+        },
+        cost: [
+            {resource: "eel", costFunction: "constant", priceIncrease: 3},
+            {resource: "fish", costFunction: "linear", priceIncrease: 50},
+            {resource: "sand", costFunction: "linear", priceIncrease: 20}
+        ],
+        max: "pit",
+        prereq: {
+            resource: {
+                'eel': 1
+            },
+            upgrade: [
+                "eelHabitats"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Find a suitable pit for eels to make more eels."
+    },
+
+    'getTechnician': {
+        name: "Teach eel technician",
+        effect: {
+            resource: {
+                'technician': 1
+            }
+        },
+        cost: [
+            {resource: "eel", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 30},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 5}
+        ],
+        max: "technician",
+        prereq: {
+            resource: {
+                'eel': 1
+            },
+            upgrade: [
+                "eelHabitats"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Instruct an eel in the fine art of shark science."
+    },
+
+    'getSifter': {
+        name: "Train eel sifter",
+        effect: {
+            resource: {
+                'sifter': 1
+            }
+        },
+        cost: [
+            {resource: "eel", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 30}
+        ],
+        max: "sifter",
+        prereq: {
+            resource: {
+                'eel': 1
+            },
+            upgrade: [
+                "eelHabitats"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Specialise an eel in finding interesting things on the seabed."
+    },
+
+    // CHIMAERA JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getTransmuter': {
+        name: "Induct chimaera transmuter",
+        effect: {
+            resource: {
+                'transmuter': 1
+            }
+        },
+        cost: [
+            {resource: "chimaera", costFunction: "constant", priceIncrease: 1},
+            {resource: "jellyfish", costFunction: "linear", priceIncrease: 10},
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 10}
+        ],
+        max: "transmuter",
+        prereq: {
+            resource: {
+                'chimaera': 1
+            },
+            upgrade: [
+                "chimaeraMysticism"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Reveal the mysteries of transmutation to a chimaera."
+    },
+
+    'getExplorer': {
+        name: "Prepare chimaera explorer",
+        effect: {
+            resource: {
+                'explorer': 1
+            }
+        },
+        cost: [
+            {resource: "chimaera", costFunction: "constant", priceIncrease: 1},
+            {resource: "jellyfish", costFunction: "linear", priceIncrease: 30},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 30}
+        ],
+        max: "explorer",
+        prereq: {
+            resource: {
+                'chimaera': 1
+            },
+            upgrade: [
+                "chimaeraMysticism"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Help prepare a chimaera for exploration to parts unknown. Their efforts will be good for science."
+    },
+
+    // OCTOPUS JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getCollector': {
+        name: "Reassign octopus as collector",
+        effect: {
+            resource: {
+                'collector': 1
+            }
+        },
+        cost: [
+            {resource: "octopus", costFunction: "constant", priceIncrease: 1},
+            {resource: "clam", costFunction: "linear", priceIncrease: 50}
+        ],
+        max: "collector",
+        prereq: {
+            resource: {
+                'octopus': 1
+            },
+            upgrade: [
+                "octopusMethodology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Delegate an octopus to collect crystal and coral."
+    },
+
+    'getScavenger': {
+        name: "Reassign octopus as scavenger",
+        effect: {
+            resource: {
+                'scavenger': 1
+            }
+        },
+        cost: [
+            {resource: "octopus", costFunction: "constant", priceIncrease: 1},
+            {resource: "clam", costFunction: "linear", priceIncrease: 30}
+        ],
+        max: "scavenger",
+        prereq: {
+            resource: {
+                'octopus': 1
+            },
+            upgrade: [
+                "octopusMethodology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Delegate an octopus to scavenge sponge and sand."
+    },
+
+    // SHARK MACHINES ////////////////////////////////////////////////////////////////////////////////
 
     'getCrystalMiner': {
         name: "Build crystal miner",
@@ -968,7 +1513,332 @@ SharkGame.HomeActions = {
             "The machines know many secrets, yet cannot speak of them."
         ],
         helpText: "Construct a machine to automatically transmute sand and crystal to sharkonium."
+    },
+
+    'getSkimmer': {
+        name: "Build skimmer",
+        effect: {
+            resource: {
+                'skimmer': 1
+            }
+        },
+        cost: [
+            {resource: "residue", costFunction: "linear", priceIncrease: 300},
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "skimmer",
+        prereq: {
+            resource: {
+                'residue': 100
+            },
+            upgrade: [
+                "engineering"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Construct a machine to automatically recycle kelp and sand into residue."
+    },
+
+    'getPurifier': {
+        name: "Build purifier",
+        effect: {
+            resource: {
+                'purifier': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 500}
+        ],
+        max: "purifier",
+        prereq: {
+            resource: {
+                'sharkonium': 500
+            },
+            upgrade: [
+                "environmentalism"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Construct a machine to restore vitality to our increasingly murky waters."
+    },
+
+    // CRUSTACEAN MACHINES /////////////////////////////////////////////////////////
+
+    'getSpongeFarmer': {
+        name: "Build sponge farmer",
+        effect: {
+            resource: {
+                'spongeFarmer': 1
+            }
+        },
+        cost: [
+            {resource: "coralglass", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "spongeFarmer",
+        prereq: {
+            resource: {
+                'coralglass': 200
+            },
+            upgrade: [
+                "coralCircuitry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This crustacean machine automatically farms and harvests sponge."
+    },
+
+    'getBerrySprayer': {
+        name: "Build berry sprayer",
+        effect: {
+            resource: {
+                'berrySprayer': 1
+            }
+        },
+        cost: [
+            {resource: "coralglass", costFunction: "linear", priceIncrease: 500}
+        ],
+        max: "berrySprayer",
+        prereq: {
+            resource: {
+                'coralglass': 500,
+                'lobster': 2
+            },
+            upgrade: [
+                "coralCircuitry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This crustacean machine distributes lobster eggs for optimal hatching conditions."
+    },
+
+    'getGlassMaker': {
+        name: "Build glass maker",
+        effect: {
+            resource: {
+                'glassMaker': 1
+            }
+        },
+        cost: [
+            {resource: "coralglass", costFunction: "linear", priceIncrease: 400},
+            {resource: "sand", costFunction: "linear", priceIncrease: 200},
+            {resource: "coral", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "glassMaker",
+        prereq: {
+            resource: {
+                'coralglass': 400
+            },
+            upgrade: [
+                "coralCircuitry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This crustacean machine automatically makes coralglass out of coral and sand through processes we don't fully understand."
+    },
+
+    // DOLPHIN MACHINES /////////////////////////////////////////////////////////
+
+    'getSilentArchivist': {
+        name: "Build silent archivist",
+        effect: {
+            resource: {
+                'silentArchivist': 1
+            }
+        },
+        cost: [
+            {resource: "delphinium", costFunction: "linear", priceIncrease: 300},
+            {resource: "science", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "silentArchivist",
+        prereq: {
+            resource: {
+                'delphinium': 300
+            },
+            upgrade: [
+                "dolphinTechnology"
+            ]
+        },
+        outcomes: [
+            "I think the machine is mocking us. They automated mocking our works. Those crafty blighters!"
+        ],
+        multiOutcomes: [
+            "More archivers of our grand works as a collective."
+        ],
+        helpText: "This dolphin machine archives, critiques, and catalogues our science."
+    },
+
+    'getTirelessCrafter': {
+        name: "Build tireless crafter",
+        effect: {
+            resource: {
+                'tirelessCrafter': 1
+            }
+        },
+        cost: [
+            {resource: "delphinium", costFunction: "linear", priceIncrease: 200},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 200},
+            {resource: "coral", costFunction: "linear", priceIncrease: 200}
+        ],
+        max: "tirelessCrafter",
+        prereq: {
+            resource: {
+                'delphinium': 200
+            },
+            upgrade: [
+                "dolphinTechnology"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This dolphin machine creates delphinium. What good that is to us is a mystery. Use it to make their useless machines, I guess?"
+    },
+
+    // OCTOPUS MACHINES /////////////////////////////////////////////////////////
+
+    'getClamCollector': {
+        name: "Build clam collector",
+        effect: {
+            resource: {
+                'clamCollector': 1
+            }
+        },
+        cost: [
+            {resource: "spronge", costFunction: "linear", priceIncrease: 50}
+        ],
+        max: "clamCollector",
+        prereq: {
+            resource: {
+                'spronge': 50
+            },
+            upgrade: [
+                "sprongeBiomimicry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This octopus machine collects clams. Simple purpose, simple machine."
+    },
+
+    'getSprongeSmelter': {
+        name: "Build spronge smelter",
+        effect: {
+            resource: {
+                'sprongeSmelter': 1
+            }
+        },
+        cost: [
+            {resource: "spronge", costFunction: "linear", priceIncrease: 100}
+        ],
+        max: "sprongeSmelter",
+        prereq: {
+            resource: {
+                'spronge': 100
+            },
+            upgrade: [
+                "sprongeBiomimicry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This octopus machine imbues sponge with industrial potential. Requires residue for function."
+    },
+
+    'getSeaScourer': {
+        name: "Build sea scourer",
+        effect: {
+            resource: {
+                'seaScourer': 1
+            }
+        },
+        cost: [
+            {resource: "spronge", costFunction: "linear", priceIncrease: 100},
+            {resource: "junk", costFunction: "linear", priceIncrease: 50}
+        ],
+        max: "seaScourer",
+        prereq: {
+            resource: {
+                'spronge': 100
+            },
+            upgrade: [
+                "sprongeBiomimicry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This octopus machine converts pollution into more useful resources."
+    },
+
+    'getProstheticPolyp': {
+        name: "Build prosthetic polyp",
+        effect: {
+            resource: {
+                'prostheticPolyp': 1
+            }
+        },
+        cost: [
+            {resource: "spronge", costFunction: "linear", priceIncrease: 100},
+            {resource: "coral", costFunction: "linear", priceIncrease: 50}
+        ],
+        max: "prostheticPolyp",
+        prereq: {
+            resource: {
+                'spronge': 100,
+                'coral': 50
+            },
+            upgrade: [
+                "sprongeBiomimicry"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "This octopus machine synthesizes coral faster than an entire colony of polyps ever could."
     }
+
 };
 
 SharkGame.HomeActionCategories = {
@@ -979,7 +1849,7 @@ SharkGame.HomeActionCategories = {
     },
 
     basic: {
-        name: "Basic",
+        name: "Frenzy",
         actions: [
             "catchFish",
             "prySponge",
@@ -992,9 +1862,9 @@ SharkGame.HomeActionCategories = {
             "getLobster",
             "getDolphin",
             "getWhale",
+            "getEel",
             "getChimaera",
-            "getOctopus",
-            "getEel"
+            "getOctopus"
         ]
     },
 
@@ -1002,11 +1872,31 @@ SharkGame.HomeActionCategories = {
         name: "Jobs",
         actions: [
             "getScientist",
-            "getNurse",
             "getLaser",
-            "getMaker",
             "getPlanter",
-            "getBrood"
+            "getWorker",
+            "getHarvester",
+            "getPhilosopher",
+            "getTreasurer",
+            "getTechnician",
+            "getSifter",
+            "getTransmuter",
+            "getExplorer",
+            "getCollector",
+            "getScavenger"
+        ]
+    },
+
+    breeders: {
+        name: "Producers",
+        actions: [
+            "getNurse",
+            "getMaker",
+            "getBrood",
+            "getQueen",
+            "getBerrier",
+            "getBiologist",
+            "getPit"
         ]
     },
 
@@ -1025,12 +1915,37 @@ SharkGame.HomeActionCategories = {
     },
 
     machines: {
-        name: "Machines",
+        name: "Shark Machines",
         actions: [
             "getCrystalMiner",
             "getSandDigger",
             "getAutoTransmuter",
-            "getFishMachine"
+            "getFishMachine",
+            "getSkimmer",
+            "getPurifier",
+            "getHeater"
+        ]
+    },
+
+    otherMachines: {
+        name: "Other Machines",
+        actions: [
+            "getSpongeFarmer",
+            "getBerrySprayer",
+            "getGlassMaker",
+            "getSilentArchivist",
+            "getTirelessCrafter",
+            "getClamCollector",
+            "getSprongeSmelter",
+            "getSeaScourer",
+            "getProstheticPolyp"
+        ]
+    },
+
+    unique: {
+        name: "Unique",
+        actions: [
+            "getChorus"
         ]
     }
 };

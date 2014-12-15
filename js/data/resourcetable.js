@@ -101,10 +101,11 @@ SharkGame.ResourceTable = {
         color: '#C6BAC6',
         income: {
             'fish': 1,
-            'sponge': 0.1
+            'sponge': 0.1,
+            'jellyfish': 0.05
         },
         jobs: [
-            "savant",
+            "philosopher",
             "treasurer",
             "biologist"
         ],
@@ -307,9 +308,9 @@ SharkGame.ResourceTable = {
         value: 3000
     },
 
-    savant: {
-        name: 'dolphin savants',
-        singleName: 'dolphin savant',
+    philosopher: {
+        name: 'dolphin philosophers',
+        singleName: 'dolphin philosopher',
         color: '#9FBCBF',
         income: {
             'science': 1
@@ -333,7 +334,7 @@ SharkGame.ResourceTable = {
         singleName: 'whale chorus',
         color: '#85BBA9',
         income: {
-            'essence': 2e-5
+            'essence': 1e-7
         },
         value: 10000
     },
@@ -355,8 +356,8 @@ SharkGame.ResourceTable = {
         singleName: 'chimaera explorer',
         color: '#64685A',
         income: {
-            'science': 0.3,
-            'jellyfish': 0.01
+            'science': 5,
+            'jellyfish': 0.5
         },
         value: 3000
     },
@@ -760,9 +761,8 @@ SharkGame.ResourceTable = {
             planter: -0.0001,
             worker: -0.0001,
             harvester: -0.0001,
-            savant: -0.0001,
+            philosopher: -0.0001,
             treasurer: -0.0001,
-            chorus: -0.0001,
             transmuter: -0.0001,
             explorer: -0.0001,
             collector: -0.0001,
@@ -864,7 +864,7 @@ SharkGame.ResourceCategories = {
             "planter",
             "worker",
             "harvester",
-            "savant",
+            "philosopher",
             "treasurer",
             "chorus",
             "transmuter",
@@ -975,7 +975,7 @@ SharkGame.ResourceCategories = {
         ]
     },
     harmful: {
-        name: "Pollution",
+        name: "Harmful",
         disposeMessage: [
             "Oh, you'd like that, wouldn't you."
         ],

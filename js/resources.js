@@ -245,10 +245,15 @@ SharkGame.Resources = {
 
     // returns true if enough resources are held (>=)
     // false if they are not
-    checkResources: function(resourceList) {
+    checkResources: function(resourceList, total) {
         var sufficientResources = true;
         $.each(SharkGame.ResourceTable, function(k, v) {
-            var currentResource = SharkGame.Resources.getResource(k);
+            var currentResource;
+            if(!total) {
+                currentResource = SharkGame.Resources.getResource(k);
+            } else {
+                currentResource = SharkGame.Resources.getTotalResource(k);
+            }
             var listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
             if(typeof listResource === 'undefined') {
