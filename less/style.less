@@ -21,7 +21,10 @@
 @color-error-bg: #800000;
 
 @color-discovery: #ACE3D1;
-@color-discovery-bg: darken(@color-discovery, 20%);
+@color-discovery-bg: darken(@color-discovery, 15%);
+@color-discovery-bg-dark: darken(@color-discovery, 30%);
+@color-discovery-bg-darker: darken(@color-discovery, 45%);
+@color-discovery-bg-darkest: darken(@color-discovery, 60%);
 
 @color-text: white;
 @color-link: lighten(@color-lighter, 10%);
@@ -68,11 +71,11 @@
 }
 
 .transition(...) {
-  -webkit-transition:@arguments;
-  -moz-transition:@arguments;
-  -o-transition:@arguments;;
-  -ms-transition:@arguments;
-  transition:@arguments;
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;;
+  -ms-transition: @arguments;
+  transition: @arguments;
 }
 
 .no-select() {
@@ -431,7 +434,6 @@ pre {
   text-shadow: 0 0 0.3em @color-dark;
 }
 
-
 #buttonList {
   .inner-section;
   padding: 1.0em;
@@ -523,8 +525,12 @@ pre {
   padding: 0.1em 0.1em 1em;
   border-bottom: 0.1em dashed @color-lighter;
 
-  .oddRow { background: @color-darker; }
-  .evenRow { background: lighten(@color-darker, 5%); }
+  .oddRow {
+    background: @color-darker;
+  }
+  .evenRow {
+    background: lighten(@color-darker, 5%);
+  }
   .essenceGlow {
     text-shadow: 0 0 1em @color-essence;
     background: @color-dark;
@@ -735,8 +741,6 @@ button {
   .box-shadow(0, 0, 5px, 5px, darken(@color-essence, 30%));
 }
 
-
-
 #overlay {
   .opacity(0.5);
   position: absolute;
@@ -768,6 +772,8 @@ button {
   font-size: 80%;
   color: lighten(@color-lighter, 30%);
 }
+
+// PANE
 
 #pane {
 
@@ -855,4 +861,121 @@ button {
     font-size: 90%;
   }
 }
+
+// GATEWAY STUFF
+
+.gateway {
+
+  text-shadow: 0 0 0.7em lighten(@color-discovery, 5%);
+
+  h1 {
+    color: lighten(@color-discovery, 10%);
+    text-shadow: 0 0 0.5em lighten(@color-discovery, 20%),
+                 0 0 1em lighten(@color-discovery, 20%);
+  }
+
+  h2 {
+    color: @color-discovery;
+    text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
+    0 0 1em lighten(@color-discovery, 10%);
+  }
+
+  h3 {
+    color: @color-discovery;
+    text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
+    0 0 1em lighten(@color-discovery, 10%);
+  }
+
+  h4 {
+    color: @color-discovery;
+    text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
+    0 0 1em lighten(@color-discovery, 10%);
+  }
+
+  .medDesc {
+    color: lighten(@color-discovery-bg-dark, 30%);
+  }
+
+  .smallDesc {
+    color: @color-discovery;
+  }
+}
+
+.gatewayButton {
+  background-color: @color-discovery-bg-dark;
+  border-color: @color-discovery;
+  text-shadow: 0 0 0.5em lighten(@color-discovery, 5%);
+
+  div {
+    background-color: @color-discovery-bg;
+    .box-shadow(0, 0, 3px, 3px, @color-discovery-bg);
+  }
+
+  &:hover {
+    //background-color: @highlight-color;
+    //color: @super-highlight;
+    .box-shadow(0px, 0px, 2px, 2px, @color-discovery);
+  }
+
+  &:active {
+    background-color: @color-discovery-bg-darker;
+    color: @color-discovery-bg;
+    .box-shadow-inset(0px, 3px, 7px, 7px, @color-discovery-bg-darker);
+
+    .medDesc {
+      color: darken(@color-discovery, 10%);
+    }
+
+    div {
+      background-color: @color-discovery-bg-darker;
+      .clear-box-shadow();
+    }
+  }
+
+  &:disabled {
+    background-color: @color-discovery-bg-darkest;
+    color: lighten(@color-discovery-bg-darker, 10%);
+    border-color: lighten(@color-discovery-bg-darker, 10%);
+
+    .medDesc {
+      color: darken(@color-discovery-bg, 15%);
+    }
+
+    div {
+      background-color: @color-discovery-bg-darkest;
+      .clear-box-shadow();
+    }
+
+  }
+}
+
+.gateway button {
+  .gatewayButton;
+}
+
+button.gateway {
+  .gatewayButton;
+}
+
+#pane.gateway  {
+  .border-radius(3em);
+  background-color: @color-discovery-bg-darker;
+  .box-shadow(0, 0, 2em, 2em, @color-discovery-bg-darker);
+  border: none;
+
+  #paneHeaderEnd {
+    border-bottom: none;//0.1em solid @color-discovery-bg-dark;
+  }
+
+  .paneContentDiv {
+    border-bottom: none;//0.1em solid @color-discovery-bg-dark;
+  }
+}
+
+#overlay.gateway  {
+  .opacity(1.0);
+  background-color: @color-discovery-bg-darkest;
+}
+
+
 

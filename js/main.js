@@ -112,7 +112,7 @@ $.extend(SharkGame, {
     },
     getImageIconHTML: function(imagePath, width, height) {
         if(!imagePath) {
-            imagePath = "//placekitten.com/g/" + Math.floor(width) + "/" + Math.floor(height);
+            imagePath = "http://placekitten.com/g/" + Math.floor(width) + "/" + Math.floor(height);
         }
         var imageHtml = "";
         if(SharkGame.Settings.current.iconPositions !== "off") {
@@ -131,7 +131,7 @@ $.extend(SharkGame, {
             imageDiv.width(spriteData.frame.w);
             imageDiv.height(spriteData.frame.h);
         } else {
-            imageDiv.css('background-image', 'url("//placekitten.com/g/50/50")');
+            imageDiv.css('background-image', 'url("http://placekitten.com/g/50/50")');
             imageDiv.width(50);
             imageDiv.height(50);
         }
@@ -239,7 +239,9 @@ SharkGame.Main = {
 
         var formatted;
 
-        if(number < 1 && number >= 0) {
+        if(number === Number.POSITIVE_INFINITY) {
+            formatted = "infinite";
+        } else if(number < 1 && number >= 0) {
             if(suppressDecimals) {
                 formatted = "0";
             } else {

@@ -1572,6 +1572,35 @@ SharkGame.HomeActions = {
         helpText: "Construct a machine to restore vitality to our increasingly murky waters."
     },
 
+    'getHeater': {
+        name: "Build heater",
+        effect: {
+            resource: {
+                'heater': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 300}
+        ],
+        max: "heater",
+        prereq: {
+            resource: {
+                'ice': 1,
+                'sharkonium': 300
+            },
+            upgrade: [
+                "thermalConditioning"
+            ]
+        },
+        outcomes: [
+            "TODO"
+        ],
+        multiOutcomes: [
+            "TODO"
+        ],
+        helpText: "Construct a machine to combat the advancing ice shelf."
+    },
+
     // CRUSTACEAN MACHINES /////////////////////////////////////////////////////////
 
     'getSpongeFarmer': {

@@ -321,9 +321,9 @@ SharkGame.Resources = {
         var r = SharkGame.Resources;
         var w = SharkGame.World;
 
+        var statusDiv = $('#status');
         // if resource table does not exist, create
         if(rTable.length <= 0) {
-            var statusDiv = $('#status');
             statusDiv.prepend('<h3>Stuff</h3>');
             var tableContainer = $('<div>').attr("id", "resourceTableContainer");
             tableContainer.append($('<table>').attr("id", 'resourceTable'));
@@ -333,6 +333,8 @@ SharkGame.Resources = {
 
         // remove the table contents entirely
         rTable.empty();
+
+        var anyResourcesInTable = false;
 
         if(SharkGame.Settings.current.groupResources) {
             $.each(SharkGame.ResourceCategories, function(_, category) {
@@ -347,6 +349,7 @@ SharkGame.Resources = {
                         if(r.getTotalResource(v) > 0) {
                             var row = r.constructResourceTableRow(v);
                             rTable.append(row);
+                            anyResourcesInTable = true;
                         }
                     });
                 }
@@ -357,8 +360,17 @@ SharkGame.Resources = {
                 if(r.getTotalResource(k) > 0 && w.doesResourceExist(k)) {
                     var row = r.constructResourceTableRow(k);
                     rTable.append(row);
+                    anyResourcesInTable = true;
                 }
             });
+        }
+
+        // if the table is still empty, hide the status div
+        // otherwise show it
+        if(!anyResourcesInTable) {
+            statusDiv.hide();
+        } else {
+            statusDiv.show();
         }
 
         r.rebuildTable = false;

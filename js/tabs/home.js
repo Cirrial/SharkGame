@@ -103,6 +103,7 @@ SharkGame.Home = {
         // populate action discoveries
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
             actionData.discovered = false;
+            actionData.newlyDiscovered = false;
         });
     },
 
@@ -132,6 +133,7 @@ SharkGame.Home = {
         var h = SharkGame.Home;
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
             actionData.discovered = h.areActionPrereqsMet(actionName);
+            actionData.newlyDiscovered = false;
         });
     },
 
@@ -279,7 +281,10 @@ SharkGame.Home = {
                 var button = $('#' + actionName);
                 if(button.length === 0) {
                     if(actionData.discovered || h.areActionPrereqsMet(actionName)) {
-                        actionData.discovered = true;
+                        if(!actionData.discovered) {
+                            actionData.discovered = true;
+                            actionData.newlyDiscovered = true;
+                        }
                         h.addButton(actionName);
                     }
                 } else {
@@ -339,6 +344,7 @@ SharkGame.Home = {
                 if(!actionData.discovered) {
                     if(h.areActionPrereqsMet(actionName)) {
                         actionData.discovered = true;
+                        actionData.newlyDiscovered = true;
                         h.updateTab(actionTab);
                     }
                 }
@@ -392,6 +398,9 @@ SharkGame.Home = {
                 .css("opacity", 0)
                 .slideDown(50)
                 .animate({opacity: 1.0}, 50);
+        }
+        if(actionData.newlyDiscovered) {
+            buttonSelector.addClass("gateway");
         }
     },
 
@@ -475,6 +484,10 @@ SharkGame.Home = {
             } else {
                 SharkGame.Log.addMessage("You can't afford that!");
             }
+        }
+        if(button.hasClass("gateway")) {
+            action.newlyDiscovered = false;
+            button.removeClass("gateway");
         }
         // disable button until next frame
         button.prop("disabled", true);
