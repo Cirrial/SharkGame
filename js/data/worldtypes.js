@@ -217,7 +217,10 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "tar", amount: 1 },
-            { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 2 }
+            { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 2 },
+            { modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 5 },
+            { modifier: "planetaryStartingResources", resource: "sandDigger", amount: 5 },
+            { modifier: "planetaryStartingResources", resource: "skimmer", amount: 5 }
         ],
         gateCosts: {
             residue: 1E12,

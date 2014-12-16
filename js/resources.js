@@ -6,9 +6,12 @@ SharkGame.Resources = {
 
     INCOME_COLOR: '#808080',
     TOTAL_INCOME_COLOR: '#A0A0A0',
-    MULTIPLIER_COLOR: '#606060',
+    UPGRADE_MULTIPLIER_COLOR: '#606060',
+    BOOST_MULTIPLIER_COLOR: '#60A060',
+    WORLD_MULTIPLIER_COLOR: '#6060A0',
+    ARTIFACT_MULTIPLIER_COLOR: '#A06060',
 
-
+    specialMultiplier: 1,
     rebuildTable: false,
 
     init: function() {
@@ -58,12 +61,14 @@ SharkGame.Resources = {
                         worldMultiplier = worldResourceInfo.incomeMultiplier;
                     }
 
+                    var artifactMultiplier = w.getArtifactMultiplier(name);
+
                     var canTakeCost = true;
                     // run over all resources first to check if this is true
                     if(!resource.forceIncome) {
                         $.each(resource.income, function(k, v) {
                             var affectedResourceBoostMultiplier = worldResources[k].boostMultiplier;
-                            var change = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                            var change = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * artifactMultiplier * r.getSpecialMultiplier();
                             if(change < 0 && r.getResource(k) <= 0) {
                                 canTakeCost = false;
                             }
@@ -74,7 +79,7 @@ SharkGame.Resources = {
                     // run over all resources to fill the income table
                     $.each(resource.income, function(k, v) {
                         var affectedResourceBoostMultiplier = worldResources[k].boostMultiplier;
-                        var incomeChange = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                        var incomeChange = v * playerResource.amount * playerResource.incomeMultiplier * worldMultiplier * affectedResourceBoostMultiplier * artifactMultiplier * r.getSpecialMultiplier();
                         if((incomeChange < 0 || canTakeCost) && SharkGame.World.doesResourceExist(k)) {
                             SharkGame.PlayerIncomeTable[k] += incomeChange
                         }
@@ -108,7 +113,7 @@ SharkGame.Resources = {
     },
 
     getSpecialMultiplier: function() {
-        return  Math.max((SharkGame.Resources.getResource("numen") * 10), 1);
+        return Math.max((SharkGame.Resources.getResource("numen") * 10), 1) * SharkGame.Resources.specialMultiplier;
     },
 
     getIncome: function(resource) {
@@ -133,10 +138,8 @@ SharkGame.Resources = {
         var resourceTable = SharkGame.PlayerResources[resource];
         var prevTotalAmount = resourceTable.totalAmount;
 
-        // remove resource from table if something is trying to alter something that shouldn't exist
         if(!SharkGame.World.doesResourceExist(resource)) {
-            resourceTable.amount = 0;
-            return; // keep at non-existing forever
+            return; // don't change resources that don't technically exist
         }
 
         resourceTable.amount += amount;

@@ -935,11 +935,23 @@ button.gateway:disabled div {
   opacity: 1;
   background-color: #174636;
 }
-.gateway #essenceCount {
+.gateway .essenceCount {
   color: #60c9a7;
   text-shadow: 0 0 0.6em #60c9a7;
 }
-.gateway #numenCount {
+.gateway .essenceCountBrighter {
+  color: #bfe9dc;
+  text-shadow: 0 0 0.6em #bfe9dc;
+}
+.gateway .numenCount {
   color: #ffffff;
   text-shadow: 0 0 0.3em #ffffff, 0 0 0.6em #ffffff, 0 0 0.8em #ffffff;
+}
+#artifactButtonList {
+  list-style-type: none;
+  display: inline;
+}
+#artifactButtonList button {
+  display: inline-block;
+  margin: 0.2em;
 }

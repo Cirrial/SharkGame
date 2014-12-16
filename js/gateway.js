@@ -1,5 +1,7 @@
 SharkGame.Gateway = {
 
+    NUM_ARTIFACTS_TO_SHOW: 3,
+    NUM_PLANETS_TO_SHOW: 3,
     transitioning: false,
 
     allowedWorlds: [
@@ -13,17 +15,42 @@ SharkGame.Gateway = {
         "frigid"
     ],
 
-    init: function() {
+    artifactPool: [],
+    planetPool: [],
 
+    init: function() {
+        // initialise artifact levels to 0 if they don't have a level
+        _.each(SharkGame.Artifacts, function(artifactData) {
+            if(!artifactData.level) {
+                artifactData.level = 0;
+            }
+        });
+
+        // apply artifacts
+        SharkGame.Gateway.applyArtifacts();
     },
 
-    enterGate: function() {
+    update: function() {
+        var g = SharkGame.Gateway;
+        g.updateArtifactButtons();
+    },
+
+    enterGate: function(dontAwardEssence) {
         var m = SharkGame.Main;
         var g = SharkGame.Gateway;
 
+        // AWARD ESSENCE
+        var essenceReward = 0;
+        if(!dontAwardEssence) {
+            essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
+            SharkGame.Resources.changeResource("essence", essenceReward);
+        }
+
         // PREPARE ARTIFACTS
+        g.prepareArtifactSelection(g.NUM_ARTIFACTS_TO_SHOW);
 
         // PREPARE PLANETS
+        g.preparePlanetSelection(g.NUM_PLANETS_TO_SHOW);
 
         // SAVE
         SharkGame.Save.saveGame();
@@ -49,13 +76,13 @@ SharkGame.Gateway = {
                 .css("opacity", 0)
                 .animate({opacity: 1.0}, 1000, "swing", function() {  // put back to 4000
                     g.cleanUp();
-                    g.showGateway();
+                    g.showGateway(essenceReward);
                 });
         } else {
             overlay.show()
                 .css("opacity", 1.0);
             g.cleanUp();
-            g.showGateway();
+            g.showGateway(essenceReward);
         }
     },
 
@@ -68,7 +95,7 @@ SharkGame.Gateway = {
         $('#overlay').height(docHeight);
     },
 
-    showGateway: function() {
+    showGateway: function(essenceRewarded) {
         var m = SharkGame.Main;
         var r = SharkGame.Resources;
         var g = SharkGame.Gateway;
@@ -83,16 +110,28 @@ SharkGame.Gateway = {
         gatewayContent.append($('<p>').html("You are a shark in the space between worlds."));
         gatewayContent.append($('<p>').html("Something unseen says,").addClass("medDesc"));
         gatewayContent.append($('<em>').attr("id", "gatewayVoiceMessage").html(g.getVoiceMessage()));
-        gatewayContent.append($('<p>').html("You have <span id='essenceCount'>" + m.beautify(essenceHeld) + "</span> essence."));
+        if(essenceRewarded > 0) {
+            gatewayContent.append($('<p>').html("Entering the gate has changed you, granting you <span id='essenceCount'>" + m.beautify(essenceRewarded) + "</span> essence."));
+        }
+        gatewayContent.append($('<p>').html("You have <span id='essenceHeldDisplay' class='essenceCount'>" + m.beautify(essenceHeld) + "</span> essence."));
         if(numenHeld > 0) {
             var numenName = (numenHeld > 1) ? "numina" : "numen";
-            gatewayContent.append($('<p>').html("You also have <span id='numenCount'>" + m.beautify(numenHeld) + "</span> " + numenName + ", and you radiate divinity."));
+            gatewayContent.append($('<p>').html("You also have <span class='numenCount'>" + m.beautify(numenHeld) + "</span> " + numenName + ", and you radiate divinity."));
         }
         gatewayContent.append($('<p>').attr("id", "gatewayStatusMessage").addClass("medDesc"));
 
+        // show artifact pool
+        var artifactPool = $('<div>');
+        artifactPool.append($('<h3>').html("ARTIFACTS"));
+        var artifactButtonList = $('<div>').attr("id", "artifactButtonList");
+        _.each(g.artifactPool, function(artifactName) {
+            SharkGame.Button.makeButton("artifact-" + artifactName, artifactName, artifactButtonList, g.onArtifactButton);
+        });
+        artifactPool.append(artifactButtonList);
+        gatewayContent.append(artifactPool);
+        g.updateArtifactButtons();
 
-
-
+        // show planet pool
 
 
         m.showPane("GATEWAY", gatewayContent, true, 500, true);
@@ -100,11 +139,103 @@ SharkGame.Gateway = {
     },
 
 
-    activateArtifact: function(artifactName, artifactLevel) {
-        var artifactData = SharkGame.Artifacts[artifactName];
-        if(artifactData) {
+    prepareArtifactSelection: function(numArtifacts) {
+        var g = SharkGame.Gateway;
+        // empty existing pool
+        g.artifactPool = [];
 
+        // create pool of qualified artifacts
+        var qualifiedArtifactPool = [];
+        $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
+            var qualified = false;
+            if(artifactData.required) {
+                _.each(artifactData.required, function(resourceName) {
+                    qualified = qualified || SharkGame.World.doesResourceExist(resourceName);
+                })
+            } else {
+                qualified = true;
+            }
+            if(qualified) {
+                qualifiedArtifactPool.push(artifactName);
+            }
+        });
+
+        // pull random items from the pool
+        for(var i = 0; i < numArtifacts; i++) {
+            var choice = SharkGame.choose(qualifiedArtifactPool);
+            var index = qualifiedArtifactPool.indexOf(choice);
+            // take it out of the qualified pool (avoid duplicates)
+            qualifiedArtifactPool.splice(index, 1);
+            // add choice to pool
+            g.artifactPool.push(choice);
         }
+    },
+
+    onArtifactButton: function() {
+        var button = $(this);
+        var buttonName = button.attr("id");
+        var artifactName = buttonName.split("-")[1];
+        var artifactData = SharkGame.Artifacts[artifactName];
+        var cost = artifactData.cost(artifactData.level);
+        var essence = SharkGame.Resources.getResource("essence");
+        if(essence >= cost) {
+            SharkGame.Resources.changeResource("essence", -cost);
+            artifactData.level++;
+            $('#gatewayStatusMessage').html("Your will crystallises. " + artifactData.name + " is now power " + artifactData.level + ".");
+            $('#essenceHeldDisplay').html(SharkGame.Main.beautify(SharkGame.Resources.getResource("essence")));
+        }
+        // disable button until next frame
+        button.prop("disabled", true);
+    },
+
+    updateArtifactButtons: function() {
+        var g = SharkGame.Gateway;
+        var r = SharkGame.Resources;
+        var m = SharkGame.Main;
+        var essenceHeld = r.getResource("essence");
+        _.each(g.artifactPool, function(artifactName) {
+            var buttonSel = $('#artifact-' + artifactName);
+            if(buttonSel.length > 0) {
+                var artifactData = SharkGame.Artifacts[artifactName];
+                var cost = artifactData.cost(artifactData.level);
+                var disableButton = false;
+                if(essenceHeld < cost) {
+                    disableButton = true;
+                }
+                var label = artifactData.name +
+                    "<br><span class='medDesc'>( Pwr <span class='essenceCountBrighter'>" + (artifactData.level + 1) + "</span> )</span>" +
+                    "<br><span class='medDesc'>" + artifactData.desc +
+                    "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
+
+                buttonSel.prop("disabled", disableButton).html(label);
+
+                var spritename = "artifacts/" + artifactName;
+                if(disableButton) {
+                    spritename += "-disabled";
+                }
+                if(SharkGame.Settings.current.iconPositions !== "off") {
+                    var iconDiv = SharkGame.changeSprite(spritename);
+                    if(iconDiv) {
+                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                        buttonSel.prepend(iconDiv);
+                    }
+                }
+            }
+        });
+    },
+
+    preparePlanetSelection: function(numPlanets) {
+
+    },
+
+    applyArtifacts: function() {
+        // handle general effects
+        // special effects are handled by horrible spaghetti code sprinkled between this, World, and Resources
+        $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
+            if(artifactData.effect) {
+                artifactData.effect(artifactData.level);
+            }
+        });
     },
 
     getVoiceMessage: function() {
@@ -147,6 +278,11 @@ SharkGame.Gateway = {
 
         message = SharkGame.choose(messagePool);
         return "\"" + message + "\"";
+    },
+
+    getMaxWorldQualitiesToShow: function() {
+        var psLevel = SharkGame.Artifacts.planetScanner.level;
+        return (psLevel > 0) ? psLevel + 1 : 1;
     }
 
 };

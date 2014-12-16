@@ -18,6 +18,13 @@ SharkGame.WorldModifiers = {
     planetaryResourceReciprocalBoost: function(level, resourceName, amount) {
         var wr = SharkGame.World.worldResources;
         wr[resourceName].boostMultiplier = level  * amount;
+    },
+    planetaryStartingResources: function(level, resourceName, amount) {
+        var bonus = level * amount;
+        var res = SharkGame.Resources.getTotalResource(resourceName);
+        if(res < bonus) {
+            SharkGame.Resources.changeResource(resourceName, bonus);
+        }
     }
 };
 
@@ -29,8 +36,11 @@ SharkGame.World = {
 
     init: function() {
         var w = SharkGame.World;
+        var g = SharkGame.Gateway;
+
         w.resetWorldProperties();
         w.applyWorldProperties(w.planetLevel);
+        w.applyGateCosts(w.planetLevel);
     },
 
     resetWorldProperties: function() {
@@ -50,31 +60,47 @@ SharkGame.World = {
 
     applyWorldProperties: function(level) {
         var w = SharkGame.World;
-        var g = SharkGame.Gate;
         var wr = w.worldResources;
         var worldInfo = SharkGame.WorldTypes[w.worldType];
+
+        // get multiplier
+        var terraformMultiplier = w.getTerraformMultiplier();
+        var effectiveLevel = Math.max(Math.floor(level * terraformMultiplier), 1);
+
         // disable resources not allowed on planet
         $.each(worldInfo.absentResources, function(i, v) {
             wr[v].exists = false;
         });
 
-        // set up gate costs
-        $.each(worldInfo.gateCosts, function(k, v) {
-            g.costs[k] = v * w.planetLevel;
-        });
 
         // apply world modifiers
         $.each(worldInfo.modifiers, function(i, v) {
             if(SharkGame.Resources.isCategory(v)) {
                 var resourceList = SharkGame.Resources.getResourcesInCategory(v);
                 $.each(resourceList, function(i, v) {
-                    SharkGame.WorldModifiers[v.modifier](level, v.resource, v.amount);
+                    SharkGame.WorldModifiers[v.modifier](effectiveLevel, v.resource, v.amount);
                 });
             } else {
-                SharkGame.WorldModifiers[v.modifier](level, v.resource, v.amount);
+                SharkGame.WorldModifiers[v.modifier](effectiveLevel, v.resource, v.amount);
             }
         });
     },
+
+    applyGateCosts: function(level) {
+        var w = SharkGame.World;
+        var g = SharkGame.Gate;
+        var worldInfo = SharkGame.WorldTypes[w.worldType];
+
+        // get multiplier
+        var gateCostMultiplier = w.getGateCostMultiplier();
+
+        // set up gate costs
+        $.each(worldInfo.gateCosts, function(k, v) {
+            g.costs[k] = Math.floor(v * w.planetLevel * gateCostMultiplier);
+        });
+    },
+
+
 
     // does this resource exist on this planet?
     doesResourceExist: function(resourceName) {
@@ -85,11 +111,33 @@ SharkGame.World = {
         return info.exists;
     },
 
+    forceExistence: function(resourceName) {
+        SharkGame.World.worldResources[resourceName].exists = true;
+    },
+
     getWorldIncomeMultiplier: function(resourceName) {
         return SharkGame.World.worldResources[resourceName].incomeMultiplier;
     },
 
     getWorldBoostMultiplier: function(resourceName) {
         return SharkGame.World.worldResources[resourceName].boostMultiplier;
+    },
+
+    getArtifactMultiplier: function(resourceName) {
+        var artifactMultiplier = SharkGame.World.worldResources[resourceName].artifactMultiplier;
+        if(!artifactMultiplier) artifactMultiplier = 1;
+        return artifactMultiplier;
+    },
+
+    // these things are only impacted by artifacts so far
+
+    getTerraformMultiplier: function() {
+        var ptLevel = SharkGame.Artifacts.planetTerraformer.level;
+        return (ptLevel > 0) ? Math.pow(0.9, ptLevel) : 1;
+    },
+
+    getGateCostMultiplier: function() {
+        var gcrLevel = SharkGame.Artifacts.gateCostReducer.level;
+        return (gcrLevel > 0) ? Math.pow(0.9, gcrLevel) : 1;
     }
 };

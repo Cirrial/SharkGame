@@ -196,7 +196,7 @@ SharkGame.Stats = {
             incomesTable.empty();
         }
 
-        var numenMultiplierCol = null;
+        var specialMultiplierCol = null;
         var addSpecialMultiplier = false;
         if(r.getSpecialMultiplier() > 1) {
             addSpecialMultiplier = true;
@@ -229,23 +229,31 @@ SharkGame.Stats = {
                         // does this resource get a boost multiplier?
                         var boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
                         if(boostMultiplier !== 1) {
-                            row.append($("<td>").html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
+                            row.append($("<td>").html("<span style='color: " + r.BOOST_MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
                         } else {
                             row.append($("<td>").addClass(rowStyle)); // empty cell
                         }
 
                         if(counter === 0) {
-                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
+                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.UPGRADE_MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
+                            // does this income get a world multiplier?
                             var worldMultiplier = w.getWorldIncomeMultiplier(k);
                             if(worldMultiplier !== 1) {
-                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.WORLD_MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                            } else {
+                                row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                            }
+                            // does this income get an artifact multiplier?
+                            var artifactMultiplier = w.getArtifactMultiplier(k);
+                            if(artifactMultiplier !== 1) {
+                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.ARTIFACT_MULTIPLIER_COLOR + "'>x" + m.beautify(artifactMultiplier) + "</span>").addClass(rowStyle));
                             } else {
                                 row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
                             }
                         }
                         if(addSpecialMultiplier) {
-                            numenMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
-                            row.append(numenMultiplierCol);
+                            specialMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
+                            row.append(specialMultiplierCol);
                             addSpecialMultiplier = false;
                         }
 
@@ -265,9 +273,9 @@ SharkGame.Stats = {
             }
         });
 
-        if(numenMultiplierCol) {
+        if(specialMultiplierCol) {
             var rowCount = incomesTable.find("tr").length;
-            numenMultiplierCol.attr("rowspan", rowCount);
+            specialMultiplierCol.attr("rowspan", rowCount);
         }
 
         return incomesTable;

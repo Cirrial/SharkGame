@@ -372,7 +372,7 @@ SharkGame.Main = {
         // MAKE SURE GATE IS INITIALISED AFTER WORLD!!
         SharkGame.World.init();
 
-        // TODO - activate artifacts here
+        SharkGame.Gateway.init();
 
         // reset log
         SharkGame.Log.clearMessages();
@@ -414,34 +414,37 @@ SharkGame.Main = {
 
     tick: function() {
         if(SharkGame.gameOver) {
-            return;
-        }
-        var now = new Date();
-        var elapsedTime = (now.getTime() - SharkGame.before.getTime());
-
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
-
-        // check if the sidebar needs to come back
-        if(SharkGame.sidebarHidden) {
-            m.showSidebarIfNeeded();
-        }
-
-        if(elapsedTime > SharkGame.INTERVAL) {
-            // Compensate for lost time.
-            m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
-
+            // tick gateway stuff
+            SharkGame.Gateway.update();
         } else {
-            m.processSimTime(SharkGame.dt);
+            // tick main game stuff
+            var now = new Date();
+            var elapsedTime = (now.getTime() - SharkGame.before.getTime());
+
+            var r = SharkGame.Resources;
+            var m = SharkGame.Main;
+
+            // check if the sidebar needs to come back
+            if(SharkGame.sidebarHidden) {
+                m.showSidebarIfNeeded();
+            }
+
+            if(elapsedTime > SharkGame.INTERVAL) {
+                // Compensate for lost time.
+                m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
+
+            } else {
+                m.processSimTime(SharkGame.dt);
+            }
+            r.updateResourcesTable();
+
+            var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
+            tabCode.update();
+
+            m.checkTabUnlocks();
+
+            SharkGame.before = new Date();
         }
-        r.updateResourcesTable();
-
-        var tabCode = SharkGame.Tabs[SharkGame.Tabs.current].code;
-        tabCode.update();
-
-        m.checkTabUnlocks();
-
-        SharkGame.before = new Date();
     },
 
     checkTabUnlocks: function() {
@@ -771,10 +774,10 @@ SharkGame.Main = {
         SharkGame.Main.showPane("Help", helpDiv);
     },
 
-    endGame: function() {
+    endGame: function(dontAwardEssence) {
         // stop ticking, foreverrrr
-        clearInterval(SharkGame.Main.tickHandler);
-        SharkGame.Main.tickHandler = -1;
+        //clearInterval(SharkGame.Main.tickHandler);
+        //SharkGame.Main.tickHandler = -1;
         // stop autosaving too
         clearInterval(SharkGame.Main.autosaveHandler);
         SharkGame.Main.autosaveHandler = -1;
@@ -783,7 +786,7 @@ SharkGame.Main = {
         SharkGame.gameOver = true;
 
         // kick over to passage
-        SharkGame.Gateway.enterGate();
+        SharkGame.Gateway.enterGate(dontAwardEssence);
     },
 
     purgeGame: function() {

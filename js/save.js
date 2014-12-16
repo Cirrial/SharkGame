@@ -175,9 +175,11 @@ SharkGame.Save = {
                 });
             }
 
+            // TODO - load artifacts (need to have the terraformer and cost reducer loaded before world init)
+
             // TODO - load world type and level and apply world properties
 
-            // TODO - load artifacts and levels and apply their properties
+            // TODO - apply artifacts (world needs to be init first before applying other artifacts)
 
             if(saveData.tabs) {
                 $.each(saveData.tabs, function(k, v) {

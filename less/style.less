@@ -982,17 +982,31 @@ button.gateway {
   background-color: @color-discovery-bg-darkest;
 }
 
-.gateway #essenceCount {
+.gateway .essenceCount {
   color: darken(@color-essence, 20%);
   text-shadow: 0 0 0.6em darken(@color-essence, 20%);
 }
 
-.gateway #numenCount {
+.gateway .essenceCountBrighter {
+  color: lighten(@color-essence, 5%);
+  text-shadow: 0 0 0.6em lighten(@color-essence, 5%);
+}
+
+.gateway .numenCount {
   color: @color-numen;
   text-shadow: 0 0 0.3em @color-numen,
   0 0 0.6em @color-numen,
   0 0 0.8em @color-numen;
 }
 
+#artifactButtonList {
+  list-style-type: none;
+  display: inline;
+
+  button {
+    display: inline-block;
+    margin: 0.2em;
+  }
+}
 
 
