@@ -192,31 +192,6 @@ SharkGame.TitleBar = {
         }
     },
 
-    resetLink: {
-        name: "reset",
-        main: true,
-        onClick: function() {
-            var message = "Are you absolutely sure you want to reset?\n";
-            var essence = SharkGame.Resources.getResource("essence");
-            if(essence > 0) {
-                message += "You'll keep your essence, but lose everything else.";
-            } else {
-                message += "You'll lose absolutely everything. NO bonuses for this.";
-            }
-            if(confirm(message)) {
-                SharkGame.Save.deleteSave();
-                SharkGame.Main.init(); // reset
-                SharkGame.Resources.changeResource("essence", essence);
-                try {
-                    SharkGame.Save.saveGame();
-                } catch(err) {
-                    SharkGame.Log.addError(err);
-                    console.log(err.trace);
-                }
-            }
-        }
-    },
-
     donateLink: {
         name: "donate",
         main: false,
