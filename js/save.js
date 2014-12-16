@@ -175,6 +175,10 @@ SharkGame.Save = {
                 });
             }
 
+            // TODO - load world type and level and apply world properties
+
+            // TODO - load artifacts and levels and apply their properties
+
             if(saveData.tabs) {
                 $.each(saveData.tabs, function(k, v) {
                     if(SharkGame.Tabs[k]) {
@@ -220,6 +224,9 @@ SharkGame.Save = {
             SharkGame.timestampLastSave = saveData.timestampLastSave;
             SharkGame.timestampGameStart = saveData.timestampGameStart;
             SharkGame.timestampRunStart  = saveData.timestampRunStart;
+
+            // TODO - load existence in in-between state,
+            // TODO - else check for offline mode and process
 
             // if offline mode is enabled
             if(SharkGame.Settings.current.offlineModeActive) {

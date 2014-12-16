@@ -746,21 +746,26 @@ button:disabled div {
   font-size: 90%;
 }
 .gateway {
+  text-align: center;
   text-shadow: 0 0 0.7em #bfe9dc;
 }
 .gateway h1 {
+  text-align: center;
   color: #d2f0e6;
   text-shadow: 0 0 0.5em #f8fdfb, 0 0 1em #f8fdfb;
 }
 .gateway h2 {
+  text-align: center;
   color: #ace3d1;
   text-shadow: 0 0 0.5em #d2f0e6, 0 0 1em #d2f0e6;
 }
 .gateway h3 {
+  text-align: center;
   color: #ace3d1;
   text-shadow: 0 0 0.5em #d2f0e6, 0 0 1em #d2f0e6;
 }
 .gateway h4 {
+  text-align: center;
   color: #ace3d1;
   text-shadow: 0 0 0.5em #d2f0e6, 0 0 1em #d2f0e6;
 }
@@ -929,4 +934,12 @@ button.gateway:disabled div {
   -moz-opacity: 1;
   opacity: 1;
   background-color: #174636;
+}
+.gateway #essenceCount {
+  color: #60c9a7;
+  text-shadow: 0 0 0.6em #60c9a7;
+}
+.gateway #numenCount {
+  color: #ffffff;
+  text-shadow: 0 0 0.3em #ffffff, 0 0 0.6em #ffffff, 0 0 0.8em #ffffff;
 }

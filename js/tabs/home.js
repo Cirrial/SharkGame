@@ -6,8 +6,6 @@ SharkGame.Home = {
     tabBg: "img/bg/bg-homesea.png",
 
     currentButtonTab: "all",
-
-    homeMessage: "You are a shark in a strange blue sea.",
     currentExtraMessageIndex: -1,
 
     // Priority: later messages display if available, otherwise earlier ones.
@@ -105,6 +103,9 @@ SharkGame.Home = {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
         });
+
+        // rename home tab
+        SharkGame.Home.tabName = SharkGame.WorldTypes[SharkGame.World.worldType].name + " Ocean";
     },
 
     switchTo: function() {
@@ -217,6 +218,7 @@ SharkGame.Home = {
         var h = SharkGame.Home;
         var r = SharkGame.Resources;
         var u = SharkGame.Upgrades;
+        var wi = SharkGame.WorldTypes[SharkGame.World.worldType];
         var selectedIndex = h.currentExtraMessageIndex;
         $.each(h.extraMessages, function(i, v) {
             var showThisMessage = true;
@@ -245,7 +247,7 @@ SharkGame.Home = {
             if(sceneDiv.size() === 0) {
                 sceneDiv = $('<div>').attr("id", "tabSceneImage");
             }
-            var message = h.homeMessage;
+            var message = "You are a shark in a " + wi.shortDesc + " sea.";
             message += "<br/><span id='extraMessage' class='medDesc'>&nbsp<br/>&nbsp</span>";
             tabMessage.html(message).prepend(sceneDiv);
 

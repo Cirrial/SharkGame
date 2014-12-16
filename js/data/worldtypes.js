@@ -2,6 +2,7 @@ SharkGame.WorldTypes = {
     test: {
         name: "Test",
         desc: "You REALLY shouldn't be seeing this.",
+        shortDesc: "testing",
         absentResources: [],
         modifiers: [],
         gateCosts: {
@@ -14,8 +15,9 @@ SharkGame.WorldTypes = {
         }
     },
     start: {
-        name: "Start",
+        name: "Home",
         desc: "You shouldn't be seeing this.",
+        shortDesc: "strange blue",
         absentResources: [
             "tar",
             "ice",
@@ -75,6 +77,7 @@ SharkGame.WorldTypes = {
     marine: {
         name: "Marine",
         desc: "A serene blue world. Peaceful, beautiful, so close to home.",
+        shortDesc: "strange blue",
         absentResources: [
             "ice",
             "heater",
@@ -97,6 +100,7 @@ SharkGame.WorldTypes = {
     chaotic: {
         name: "Chaotic",
         desc: "A frenetic world, torn by immaterial force.",
+        shortDesc: "swirling cyan",
         absentResources: [
             "ice",
             "heater",
@@ -120,6 +124,7 @@ SharkGame.WorldTypes = {
     haven: {
         name: "Haven",
         desc: "An aquamarine world of plenty. So beautiful, yet so vulnerable.",
+        shortDesc: "thriving aquamarine",
         absentResources: [
             "ice",
             "heater",
@@ -144,10 +149,12 @@ SharkGame.WorldTypes = {
     tempestuous: {
         name: "Tempestuous",
         desc: "A swirling maelstrom of storms where nothing rests.",
+        shortDesc: "stormy grey",
         absentResources: [
             "ice",
             "heater",
             "sand",
+            "chimaera",
             "clam"
         ],
         modifiers: [
@@ -166,6 +173,7 @@ SharkGame.WorldTypes = {
     violent: {
         name: "Violent",
         desc: "An ocean close to boiling and choking under sulphuric fumes.",
+        shortDesc: "searing red",
         absentResources: [
             "ice",
             "heater",
@@ -194,6 +202,7 @@ SharkGame.WorldTypes = {
     abandoned: {
         name: "Abandoned",
         desc: "A dying world filled with machinery.",
+        shortDesc: "murky black",
         absentResources: [
             "ice",
             "heater",
@@ -208,7 +217,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "tar", amount: 1 },
-            { modifier: "planetaryStartingResources", resource: "machines", amount: 5 }
+            { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 2 }
         ],
         gateCosts: {
             residue: 1E12,
@@ -222,6 +231,7 @@ SharkGame.WorldTypes = {
     shrouded: {
         name: "Shrouded",
         desc: "A dark, murky ocean of secrecy and danger.",
+        shortDesc: "dark mysterious",
         absentResources: [
             "ice",
             "heater",
@@ -249,11 +259,13 @@ SharkGame.WorldTypes = {
     frigid: {
         name: "Frigid",
         desc: "A cold, chilling ocean freezing slowly to death.",
+        shortDesc: "freezing white",
         absentResources: [
             "dolphin",
             "whale",
             "crab",
             "lobster",
+            "chimaera",
             "shrimp",
             "seaApple",
             "coral",

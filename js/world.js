@@ -18,9 +18,6 @@ SharkGame.WorldModifiers = {
     planetaryResourceReciprocalBoost: function(level, resourceName, amount) {
         var wr = SharkGame.World.worldResources;
         wr[resourceName].boostMultiplier = level  * amount;
-    },
-    planetaryStartingResources: function(level, resourceName, amount) {
-        SharkGame.World.changeResource(resourceName, level  * amount);
     }
 };
 
@@ -31,6 +28,12 @@ SharkGame.World = {
     planetLevel: 1,
 
     init: function() {
+        var w = SharkGame.World;
+        w.resetWorldProperties();
+        w.applyWorldProperties(w.planetLevel);
+    },
+
+    resetWorldProperties: function() {
         var w = SharkGame.World;
         var wr = w.worldResources;
         var rt = SharkGame.ResourceTable;
@@ -43,8 +46,6 @@ SharkGame.World = {
             wr[k].incomeMultiplier = 1;
             wr[k].boostMultiplier = 1;
         });
-
-        w.applyWorldProperties(w.planetLevel);
     },
 
     applyWorldProperties: function(level) {

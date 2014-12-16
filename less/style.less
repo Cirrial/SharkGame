@@ -866,27 +866,32 @@ button {
 
 .gateway {
 
+  text-align: center;
   text-shadow: 0 0 0.7em lighten(@color-discovery, 5%);
 
   h1 {
+    text-align: center;
     color: lighten(@color-discovery, 10%);
     text-shadow: 0 0 0.5em lighten(@color-discovery, 20%),
-                 0 0 1em lighten(@color-discovery, 20%);
+    0 0 1em lighten(@color-discovery, 20%);
   }
 
   h2 {
+    text-align: center;
     color: @color-discovery;
     text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
     0 0 1em lighten(@color-discovery, 10%);
   }
 
   h3 {
+    text-align: center;
     color: @color-discovery;
     text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
     0 0 1em lighten(@color-discovery, 10%);
   }
 
   h4 {
+    text-align: center;
     color: @color-discovery;
     text-shadow: 0 0 0.5em lighten(@color-discovery, 10%),
     0 0 1em lighten(@color-discovery, 10%);
@@ -957,24 +962,36 @@ button.gateway {
   .gatewayButton;
 }
 
-#pane.gateway  {
+#pane.gateway {
   .border-radius(3em);
   background-color: @color-discovery-bg-darker;
   .box-shadow(0, 0, 2em, 2em, @color-discovery-bg-darker);
   border: none;
 
   #paneHeaderEnd {
-    border-bottom: none;//0.1em solid @color-discovery-bg-dark;
+    border-bottom: none; //0.1em solid @color-discovery-bg-dark;
   }
 
   .paneContentDiv {
-    border-bottom: none;//0.1em solid @color-discovery-bg-dark;
+    border-bottom: none; //0.1em solid @color-discovery-bg-dark;
   }
 }
 
-#overlay.gateway  {
+#overlay.gateway {
   .opacity(1.0);
   background-color: @color-discovery-bg-darkest;
+}
+
+.gateway #essenceCount {
+  color: darken(@color-essence, 20%);
+  text-shadow: 0 0 0.6em darken(@color-essence, 20%);
+}
+
+.gateway #numenCount {
+  color: @color-numen;
+  text-shadow: 0 0 0.3em @color-numen,
+  0 0 0.6em @color-numen,
+  0 0 0.8em @color-numen;
 }
 
 

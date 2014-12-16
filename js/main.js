@@ -223,6 +223,14 @@ SharkGame.TitleBar = {
         onClick: function() {
             SharkGame.Main.showPane("Donate", SharkGame.donate);
         }
+    },
+
+    endLink: {
+        name: "end game",
+        main: true,
+        onClick: function() {
+            SharkGame.Main.endGame();
+        }
     }
 };
 
@@ -363,6 +371,8 @@ SharkGame.Main = {
         // initialise world
         // MAKE SURE GATE IS INITIALISED AFTER WORLD!!
         SharkGame.World.init();
+
+        // TODO - activate artifacts here
 
         // reset log
         SharkGame.Log.clearMessages();
@@ -769,22 +779,18 @@ SharkGame.Main = {
         clearInterval(SharkGame.Main.autosaveHandler);
         SharkGame.Main.autosaveHandler = -1;
 
-        // bring up overlay, but much darker
-        var docHeight = $(document).height();
-        var overlay = $('#overlay');
-        overlay.height(docHeight);
-        if(SharkGame.Settings.current.showAnimations) {
-            overlay.show()
-                .css("opacity", 0)
-                .animate({opacity: 0.8}, 4000, "swing", SharkGame.Main.showEnding);
-        } else {
-            overlay.show()
-                .css("opacity", 0.8);
-            SharkGame.Main.showEnding();
-        }
-
         // flag game as over
         SharkGame.gameOver = true;
+
+        // kick over to passage
+        SharkGame.Gateway.enterGate();
+    },
+
+    purgeGame: function() {
+        // empty out all the containers!
+        $('#status').empty();
+        $('#log').empty();
+        $('#content').empty();
     },
 
     showEnding: function() {
