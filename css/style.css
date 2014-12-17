@@ -996,3 +996,19 @@ button.gateway:disabled div {
   -moz-box-shadow: 0 0 3px 3px #73d0b1;
   box-shadow: 0 0 3px 3px #73d0b1;
 }
+button.planetButton {
+  background-color: transparent;
+  border: none;
+  text-shadow: 0 0 0.5em #bfe9dc;
+}
+button.planetButton:hover {
+  text-shadow: 0 0 0.3em #bfe9dc, 0 0 0.6em #d2f0e6, 0 0 0.9em #e5f6f1;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+button.planetButton:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}

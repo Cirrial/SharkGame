@@ -36,14 +36,22 @@ SharkGame.Gate = {
             discoverReq: g.discoverReq,
             code: g
         };
+        g.opened = false;
+    },
 
-        // create costsMet
-        var costsMet = g.costsMet = {};
-        $.each(g.costs, function(k, v) {
-            costsMet[k] = false;
+    createSlots: function(gateSlots, planetLevel, gateCostMultiplier) {
+        var g = SharkGame.Gate;
+        // create costs
+        g.costs = {};
+        $.each(gateSlots, function(k, v) {
+            g.costs[k] = Math.floor(v * planetLevel * gateCostMultiplier);
         });
 
-        g.opened = false;
+        // create costsMet
+        g.costsMet = {};
+        $.each(g.costs, function(k, v) {
+            g.costsMet[k] = false;
+        });
     },
 
     switchTo: function() {

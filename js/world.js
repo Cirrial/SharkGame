@@ -111,10 +111,7 @@ SharkGame.World = {
         // get multiplier
         var gateCostMultiplier = w.getGateCostMultiplier();
 
-        // set up gate costs
-        $.each(worldInfo.gateCosts, function(k, v) {
-            g.costs[k] = Math.floor(v * w.planetLevel * gateCostMultiplier);
-        });
+        SharkGame.Gate.createSlots(worldInfo.gateCosts, w.planetLevel, gateCostMultiplier);
     },
 
     getWorldEntryMessage: function() {

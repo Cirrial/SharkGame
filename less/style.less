@@ -1012,9 +1012,9 @@ button.gateway {
 .gatewayPropertyList {
   list-style-type: none;
   padding-left: 0;
-    li {
-      padding-left: 0;
-    }
+  li {
+    padding-left: 0;
+  }
 }
 
 #planetContainer {
@@ -1030,6 +1030,7 @@ button.gateway {
 .gateway ::selection {
   background-color: @color-discovery-bg-darkest;
 }
+
 .gateway ::-moz-selection {
   background-color: @color-discovery-bg-darkest;
 }
@@ -1047,8 +1048,22 @@ button.gateway {
   padding: 0.2em;
   margin: 1.5em;
 
-
   .gatewayButton {
     .box-shadow(0, 0, 3px, 3px, @color-discovery-bg);
+  }
+}
+
+button.planetButton {
+  background-color: transparent;
+  border: none;
+  text-shadow: 0 0 0.5em lighten(@color-discovery, 5%);
+
+  &:hover {
+    text-shadow: 0 0 0.3em lighten(@color-discovery, 5%), 0 0 0.6em lighten(@color-discovery, 10%), 0 0 0.9em lighten(@color-discovery, 15%);
+    .clear-box-shadow();
+  }
+
+  &:active {
+    .clear-box-shadow();
   }
 }

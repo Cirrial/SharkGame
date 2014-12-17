@@ -35,6 +35,10 @@ SharkGame.Gateway = {
     update: function() {
         var g = SharkGame.Gateway;
         g.updateArtifactButtons();
+
+        var overlay = $('#overlay');
+        var docHeight = $(window).height();
+        overlay.height(docHeight);
     },
 
     enterGate: function(loadingFromSave) {
@@ -167,12 +171,18 @@ SharkGame.Gateway = {
         gatewayContent.append($('<p>').attr("id", "gatewayStatusMessage").addClass("medDesc"));
 
         // show artifact pool
-        var artifactPool = $('<div>').addClass("gatewayButtonList");
-        _.each(g.artifactPool, function(artifactName) {
-            SharkGame.Button.makeButton("artifact-" + artifactName, artifactName, artifactPool, g.onArtifactButton);
-        });
-        gatewayContent.append(artifactPool);
-        g.updateArtifactButtons();
+        if(_.size(g.artifactPool) === 0) {
+            // we exhausted the pool (!!!)
+            gatewayContent.append($('<p>').append($('<em>').html("You may not have achieved perfection, but it would take a deity to improve your capabilities further.")));
+        } else {
+            // there's something to show
+            var artifactPool = $('<div>').addClass("gatewayButtonList");
+            _.each(g.artifactPool, function(artifactName) {
+                SharkGame.Button.makeButton("artifact-" + artifactName, artifactName, artifactPool, g.onArtifactButton);
+            });
+            gatewayContent.append(artifactPool);
+            g.updateArtifactButtons();
+        }
 
         // add return to gateway button
         var returnButtonDiv = $('<div>');
@@ -200,7 +210,7 @@ SharkGame.Gateway = {
             SharkGame.Button.makeButton("planet-" + planetInfo.type, planetInfo.type + " " + planetInfo.level, planetPool, function() {
                 g.selectedWorld = $(this).attr("id").split("-")[1];
                 g.switchViews(g.confirmWorld);
-            });
+            }).addClass("planetButton");
         });
         gatewayContent.append(planetPool);
 
@@ -298,11 +308,21 @@ SharkGame.Gateway = {
             } else {
                 qualified = true;
             }
+
+            // check max level
+            if(artifactData.max) {
+                if(artifactData.level >= artifactData.max) {
+                    qualified = false;
+                }
+            }
+
             if(qualified) {
                 qualifiedArtifactPool.push(artifactName);
             }
         });
 
+        // Reduce number of artifacts added to pool to however many we can actually have
+        numArtifacts = Math.min(numArtifacts, qualifiedArtifactPool.length);
         // pull random items from the pool
         for(var i = 0; i < numArtifacts; i++) {
             var choice = SharkGame.choose(qualifiedArtifactPool);
@@ -324,7 +344,12 @@ SharkGame.Gateway = {
         if(essence >= cost) {
             SharkGame.Resources.changeResource("essence", -cost);
             artifactData.level++;
-            $('#gatewayStatusMessage').html("Your will crystallises into the " + artifactData.name + ", at power " + artifactData.level + ".");
+            var gatewayStatusMessageSel = $('#gatewayStatusMessage');
+            if(artifactData.level >= artifactData.max) {
+                gatewayStatusMessageSel.html("You reach the limit of the " + artifactData.name + ". You cannot improve it further.");
+            } else {
+                gatewayStatusMessageSel.html("Your will crystallises into the " + artifactData.name + ", at power " + artifactData.level + ".");
+            }
             $('#essenceHeldDisplay').html(SharkGame.Main.beautify(SharkGame.Resources.getResource("essence")));
         }
         // disable button until next frame
@@ -341,15 +366,18 @@ SharkGame.Gateway = {
             if(buttonSel.length > 0) {
                 var artifactData = SharkGame.Artifacts[artifactName];
                 var cost = artifactData.cost(artifactData.level);
+                var maxedOut = (artifactData.level >= artifactData.max);
                 var disableButton = false;
-                if(essenceHeld < cost) {
+                if(essenceHeld < cost || maxedOut) {
                     disableButton = true;
                 }
+                var purchaseLevel = maxedOut ? "Max" : (artifactData.level + 1);
                 var label = artifactData.name +
-                    "<br><span class='medDesc'>( Pwr <span class='essenceCountBrighter'>" + (artifactData.level + 1) + "</span> )</span>" +
-                    "<br><span class='medDesc'>" + artifactData.desc +
-                    "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
-
+                    "<br><span class='medDesc'>( Pwr <span class='essenceCountBrighter'>" + purchaseLevel + "</span> )</span>" +
+                    "<br><span class='medDesc'>" + artifactData.desc;
+                if(!maxedOut) {
+                    label += "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
+                }
                 buttonSel.prop("disabled", disableButton).html(label);
 
                 var spritename = "artifacts/" + artifactName;
