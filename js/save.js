@@ -422,11 +422,34 @@ SharkGame.Save = {
             return save;
         },
 
+        // v0.6
         function(save) {
             // add new setting to list of saves
             save = $.extend(true, save, {
                 "settings": {"iconPositions": "top"}
             });
+            return save;
+        },
+
+        // v0.7
+        function(save) {
+            save = $.extend(true, save, {
+                "settings": {"showTabImages": true},
+                "tabs": {"reflection": false},
+                "timestampRunEnd": null
+            });
+            _.each(["shrimp", "lobster", "dolphin", "whale", "chimaera", "octopus", "eel", "queen", "berrier", "biologist", "pit", "worker", "harvester", "philosopher", "treasurer", "chorus", "transmuter", "explorer", "collector", "scavenger", "technician", "sifter", "skimmer", "purifier", "heater", "spongeFarmer", "berrySprayer", "glassMaker", "silentArchivist", "tirelessCrafter", "clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp", "sponge", "jellyfish", "clam", "coral", "algae", "coralglass", "delphinium", "spronge", "tar", "ice"], function(v) {
+                save.resources[v] = {amount: 0, totalAmount: 0};
+            });
+            _.each(["environmentalism", "thermalConditioning", "coralglassSmelting", "industrialGradeSponge", "aquamarineFusion", "coralCircuitry", "sprongeBiomimicry", "dolphinTechnology", "spongeCollection", "jellyfishHunting", "clamScooping", "pearlConversion", "crustaceanBiology", "eusociality", "wormWarriors", "cetaceanAwareness", "dolphinBiology", "delphinePhilosophy", "coralHalls", "eternalSong", "eelHabitats", "creviceCreches", "bioelectricity", "chimaeraMysticisim", "abyssalEnigmas", "octopusMethodology", "octalEfficiency"], function(v) {
+                save.upgrades[v] = false;
+            });
+            save.world = {type: "start", level: 1};
+            save.artifacts = {};
+            _.each(["permanentMultiplier", "planetTerraformer", "gateCostReducer", "planetScanner", "sharkMigrator", "rayMigrator", "crabMigrator", "shrimpMigrator", "lobsterMigrator", "dolphinMigrator", "whaleMigrator", "eelMigrator", "chimaeraMigrator", "octopusMigrator", "sharkTotem", "rayTotem", "crabTotem", "shrimpTotem", "lobsterTotem", "dolphinTotem", "whaleTotem", "eelTotem", "chimaeraTotem", "octopusTotem", "progressTotem", "carapaceTotem", "inspirationTotem", "industryTotem", "wardingTotem"], function(v) {
+                save.artifacts[v] = 0;
+            });
+            save.gateway = {betweenRuns: false, planetPool: {}, artifactPool: {}};
             return save;
         }
 

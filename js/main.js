@@ -367,6 +367,7 @@ SharkGame.Main = {
         SharkGame.Stats.init();
         SharkGame.Recycler.init();
         SharkGame.Gate.init();
+        SharkGame.Reflection.init();
 
         if(!SharkGame.titlebarGenerated) {
             SharkGame.Main.setUpTitleBar();
@@ -440,7 +441,7 @@ SharkGame.Main = {
 
             // check resources
             if(v.discoverReq.resource) {
-                reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource);
+                reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource, true);
             }
 
             // check upgrades

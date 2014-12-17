@@ -285,7 +285,7 @@ SharkGame.Artifacts = {
     wardingTotem: {
         name: "Totem of Warding",
         desc: "Todo",
-        required: ["tar"],
+        required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             if(level === 0) {
