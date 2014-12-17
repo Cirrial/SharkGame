@@ -1,36 +1,54 @@
 SharkGame.WorldModifiers = {
-    planetaryIncome: function(level, resourceName, amount) {
-        var wr = SharkGame.World.worldResources;
-        wr[resourceName].income = level * amount;
+    planetaryIncome: {
+        name: "Planetary Income",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].income = level * amount;
+        }
     },
-    planetaryIncomeMultiplier: function(level, resourceName, amount) {
-        var wr = SharkGame.World.worldResources;
-        wr[resourceName].incomeMultiplier = level * amount;
+    planetaryIncomeMultiplier: {
+        name: "Planetary Income Multiplier",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].incomeMultiplier = level * amount;
+        }
     },
-    planetaryIncomeReciprocalMultiplier: function(level, resourceName, amount) {
-        var wr = SharkGame.World.worldResources;
-        wr[resourceName].incomeMultiplier = (1 / (level * amount));
+    planetaryIncomeReciprocalMultiplier: {
+        name: "Planetary Income Reciprocal Multiplier",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].incomeMultiplier = (1 / (level * amount));
+        }
     },
-    planetaryResourceBoost: function(level, resourceName, amount) {
-        var wr = SharkGame.World.worldResources;
-        wr[resourceName].boostMultiplier = level  * amount;
+    planetaryResourceBoost: {
+        name: "Planetary Boost",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].boostMultiplier = level * amount;
+        }
     },
-    planetaryResourceReciprocalBoost: function(level, resourceName, amount) {
-        var wr = SharkGame.World.worldResources;
-        wr[resourceName].boostMultiplier = level  * amount;
+    planetaryResourceReciprocalBoost: {
+        name: "Planetary Reciprocal Boost",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].boostMultiplier = level * amount;
+        }
     },
-    planetaryStartingResources: function(level, resourceName, amount) {
-        var bonus = level * amount;
-        var res = SharkGame.Resources.getTotalResource(resourceName);
-        if(res < bonus) {
-            SharkGame.Resources.changeResource(resourceName, bonus);
+    planetaryStartingResources: {
+        name: "Planetary Starting Resources",
+        apply: function(level, resourceName, amount) {
+            var bonus = level * amount;
+            var res = SharkGame.Resources.getTotalResource(resourceName);
+            if(res < bonus) {
+                SharkGame.Resources.changeResource(resourceName, bonus);
+            }
         }
     }
 };
 
 SharkGame.World = {
 
-    worldType: "test",
+    worldType: "start",
     worldResources: {},
     planetLevel: 1,
 
@@ -78,10 +96,10 @@ SharkGame.World = {
             if(SharkGame.Resources.isCategory(v)) {
                 var resourceList = SharkGame.Resources.getResourcesInCategory(v);
                 $.each(resourceList, function(i, v) {
-                    SharkGame.WorldModifiers[v.modifier](effectiveLevel, v.resource, v.amount);
+                    SharkGame.WorldModifiers[v.modifier].apply(effectiveLevel, v.resource, v.amount);
                 });
             } else {
-                SharkGame.WorldModifiers[v.modifier](effectiveLevel, v.resource, v.amount);
+                SharkGame.WorldModifiers[v.modifier].apply(effectiveLevel, v.resource, v.amount);
             }
         });
     },
@@ -99,7 +117,6 @@ SharkGame.World = {
             g.costs[k] = Math.floor(v * w.planetLevel * gateCostMultiplier);
         });
     },
-
 
 
     // does this resource exist on this planet?

@@ -86,7 +86,7 @@ SharkGame.WorldTypes = {
             "eel"
         ],
         modifiers: [
-            { modifier: "planetaryResourceBoost", resource: "fish", amount: 0.5 }
+            { modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }
         ],
         gateCosts: {
             fish: 1E9,
@@ -162,7 +162,7 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "stuff", amount: -0.2 }
         ],
         gateCosts: {
-            residue: 1E12,
+            junk: 1E12,
             coral: 1E9,
             spronge: 1E9,
             delphinium: 1E9,
@@ -196,7 +196,7 @@ SharkGame.WorldTypes = {
             coral: 1E12,
             algae: 1E12,
             sponge: 1E12,
-            residue: 1E12
+            junk: 1E12
         }
     },
     abandoned: {
@@ -223,7 +223,7 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryStartingResources", resource: "skimmer", amount: 5 }
         ],
         gateCosts: {
-            residue: 1E12,
+            junk: 1E14,
             tar: 1E7,
             coralglass: 1E6,
             spronge: 1E6,
@@ -290,3 +290,4 @@ SharkGame.WorldTypes = {
         }
     }
 };
+

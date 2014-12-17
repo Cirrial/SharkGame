@@ -3,7 +3,7 @@ SharkGame.ArtifactUtil = {
         return Math.floor(Math.pow(2, level + 1));
     },
     migratorEffect: function(level, resourceName) {
-        if(level === 0) {
+        if(level < 1) {
             return;
         }
         var amount = Math.pow(5, level);
@@ -18,7 +18,7 @@ SharkGame.ArtifactUtil = {
         return Math.floor(Math.pow(2.5, level + 1));
     },
     totemEffect: function(level, resourceList) {
-        if(level === 0) {
+        if(level < 1) {
             return;
         }
         var wr = SharkGame.World.worldResources;
@@ -70,7 +70,7 @@ SharkGame.Artifacts = {
     sharkMigrator: {
         name: "Shark Migrator",
         desc: "Todo",
-        requires: ["shark"],
+        required: ["shark"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shark");
@@ -79,7 +79,7 @@ SharkGame.Artifacts = {
     rayMigrator: {
         name: "Ray Migrator",
         desc: "Todo",
-        requires: ["ray"],
+        required: ["ray"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "ray");
@@ -88,7 +88,7 @@ SharkGame.Artifacts = {
     crabMigrator: {
         name: "Crab Migrator",
         desc: "Todo",
-        requires: ["crab"],
+        required: ["crab"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "crab");
@@ -97,7 +97,7 @@ SharkGame.Artifacts = {
     shrimpMigrator: {
         name: "Shrimp Migrator",
         desc: "Todo",
-        requires: ["shrimp"],
+        required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shrimp");
@@ -106,7 +106,7 @@ SharkGame.Artifacts = {
     lobsterMigrator: {
         name: "Lobster Migrator",
         desc: "Todo",
-        requires: ["lobster"],
+        required: ["lobster"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "lobster");
@@ -115,7 +115,7 @@ SharkGame.Artifacts = {
     dolphinMigrator: {
         name: "Dolphin Migrator",
         desc: "Todo",
-        requires: ["dolphin"],
+        required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "dolphin");
@@ -124,7 +124,7 @@ SharkGame.Artifacts = {
     whaleMigrator: {
         name: "Whale Migrator",
         desc: "Todo",
-        requires: ["whale"],
+        required: ["whale"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "whale");
@@ -133,7 +133,7 @@ SharkGame.Artifacts = {
     eelMigrator: {
         name: "Eel Migrator",
         desc: "Todo",
-        requires: ["eel"],
+        required: ["eel"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "eel");
@@ -142,7 +142,7 @@ SharkGame.Artifacts = {
     chimaeraMigrator: {
         name: "Chimaera Migrator",
         desc: "Todo",
-        requires: ["chimaera"],
+        required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "chimaera");
@@ -151,7 +151,7 @@ SharkGame.Artifacts = {
     octopusMigrator: {
         name: "Octopus Migrator",
         desc: "Todo",
-        requires: ["octopus"],
+        required: ["octopus"],
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "octopus");
@@ -160,7 +160,7 @@ SharkGame.Artifacts = {
     sharkTotem: {
         name: "Totem of Shark",
         desc: "Todo",
-        requires: ["shark"],
+        required: ["shark"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse"]);
@@ -169,7 +169,7 @@ SharkGame.Artifacts = {
     rayTotem: {
         name: "Totem of Ray",
         desc: "Todo",
-        requires: ["ray"],
+        required: ["ray"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["ray", "laser", "maker"]);
@@ -178,7 +178,7 @@ SharkGame.Artifacts = {
     crabTotem: {
         name: "Totem of Crab",
         desc: "Todo",
-        requires: ["crab"],
+        required: ["crab"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["crab", "planter", "brood"]);
@@ -187,7 +187,7 @@ SharkGame.Artifacts = {
     shrimpTotem: {
         name: "Totem of Shrimp",
         desc: "Todo",
-        requires: ["shrimp"],
+        required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shrimp", "worker", "queen"]);
@@ -196,7 +196,7 @@ SharkGame.Artifacts = {
     lobsterTotem: {
         name: "Totem of Lobster",
         desc: "Todo",
-        requires: ["lobster"],
+        required: ["lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["lobster", "berrier", "harvester"]);
@@ -205,7 +205,7 @@ SharkGame.Artifacts = {
     dolphinTotem: {
         name: "Totem of Dolphin",
         desc: "Todo",
-        requires: ["dolphin"],
+        required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["dolphin", "philosopher", "biologist", "treasurer"]);
@@ -214,7 +214,7 @@ SharkGame.Artifacts = {
     whaleTotem: {
         name: "Totem of Whale",
         desc: "Todo",
-        requires: ["whale"],
+        required: ["whale"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["whale", "chorus"]);
@@ -223,7 +223,7 @@ SharkGame.Artifacts = {
     eelTotem: {
         name: "Totem of Eel",
         desc: "Todo",
-        requires: ["eel"],
+        required: ["eel"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["eel", "sifter", "pit", "technician"]);
@@ -232,7 +232,7 @@ SharkGame.Artifacts = {
     chimaeraTotem: {
         name: "Totem of Chimaera",
         desc: "Todo",
-        requires: ["chimaera"],
+        required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["chimaera", "transmuter", "explorer"]);
@@ -241,7 +241,7 @@ SharkGame.Artifacts = {
     octopusTotem: {
         name: "Totem of Octopus",
         desc: "Todo",
-        requires: ["octopus"],
+        required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["octopus", "collector", "scavenger"]);
@@ -258,7 +258,7 @@ SharkGame.Artifacts = {
     carapaceTotem: {
         name: "Totem of Carapace",
         desc: "Todo",
-        requires: ["shrimp", "lobster"],
+        required: ["shrimp", "lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["spongeFarmer", "berrySprayer", "glassMaker"]);
@@ -267,7 +267,7 @@ SharkGame.Artifacts = {
     inspirationTotem: {
         name: "Totem of Inspiration",
         desc: "Todo",
-        requires: ["dolphin"],
+        required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["silentArchivist", "tirelessCrafter"]);
@@ -276,7 +276,7 @@ SharkGame.Artifacts = {
     industryTotem: {
         name: "Totem of Industry",
         desc: "Todo",
-        requires: ["octopus"],
+        required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp"]);
@@ -285,7 +285,7 @@ SharkGame.Artifacts = {
     wardingTotem: {
         name: "Totem of Warding",
         desc: "Todo",
-        requires: ["tar"],
+        required: ["tar"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
             if(level === 0) {

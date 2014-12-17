@@ -311,6 +311,14 @@ SharkGame.Main = {
         return formatted;
     },
 
+    // credit where it's due, i didn't write this (regexes fill me with fear), pulled from
+    // http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript/196991#196991
+    toTitleCase: function(str) {
+        return str.replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    },
+
     // also functions as a reset
     init: function() {
         var currDate = new Date();
@@ -750,10 +758,7 @@ SharkGame.Main = {
     },
 
     endGame: function(dontAwardEssence) {
-        // stop ticking, foreverrrr
-        //clearInterval(SharkGame.Main.tickHandler);
-        //SharkGame.Main.tickHandler = -1;
-        // stop autosaving too
+        // stop autosaving
         clearInterval(SharkGame.Main.autosaveHandler);
         SharkGame.Main.autosaveHandler = -1;
 

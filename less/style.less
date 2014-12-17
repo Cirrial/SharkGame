@@ -999,7 +999,7 @@ button.gateway {
   0 0 0.8em @color-numen;
 }
 
-#artifactButtonList {
+.gatewayButtonList {
   list-style-type: none;
   display: inline;
 
@@ -1009,4 +1009,27 @@ button.gateway {
   }
 }
 
+.gatewayPropertyList {
+  list-style-type: none;
+  padding-left: 0;
+    li {
+      padding-left: 0;
+    }
+}
 
+#planetContainer {
+  text-align: center;
+  margin: 0.5em auto;
+  padding: 0.5em;
+
+  div {
+    margin: auto;
+  }
+}
+
+.gateway ::selection {
+  background-color: @color-discovery-bg-darker;
+}
+.gateway ::-moz-selection {
+  background-color: @color-discovery-bg-darker;
+}

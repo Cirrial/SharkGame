@@ -947,11 +947,32 @@ button.gateway:disabled div {
   color: #ffffff;
   text-shadow: 0 0 0.3em #ffffff, 0 0 0.6em #ffffff, 0 0 0.8em #ffffff;
 }
-#artifactButtonList {
+.gatewayButtonList {
   list-style-type: none;
   display: inline;
 }
-#artifactButtonList button {
+.gatewayButtonList button {
   display: inline-block;
   margin: 0.2em;
+}
+.gatewayPropertyList {
+  list-style-type: none;
+  padding-left: 0;
+}
+.gatewayPropertyList li {
+  padding-left: 0;
+}
+#planetContainer {
+  text-align: center;
+  margin: 0.5em auto;
+  padding: 0.5em;
+}
+#planetContainer div {
+  margin: auto;
+}
+.gateway ::selection {
+  background-color: #2b7f63;
+}
+.gateway ::-moz-selection {
+  background-color: #2b7f63;
 }
