@@ -971,8 +971,28 @@ button.gateway:disabled div {
   margin: auto;
 }
 .gateway ::selection {
-  background-color: #2b7f63;
+  background-color: #174636;
 }
 .gateway ::-moz-selection {
-  background-color: #2b7f63;
+  background-color: #174636;
+}
+#artifactList {
+  margin: 0.5em auto;
+}
+.artifactDiv {
+  display: inline-block;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  background-color: #174636;
+  -webkit-box-shadow: 0 0 0.5em 0.5em #174636;
+  -moz-box-shadow: 0 0 0.5em 0.5em #174636;
+  box-shadow: 0 0 0.5em 0.5em #174636;
+  padding: 0.2em;
+  margin: 1.5em;
+}
+.artifactDiv .gatewayButton {
+  -webkit-box-shadow: 0 0 3px 3px #73d0b1;
+  -moz-box-shadow: 0 0 3px 3px #73d0b1;
+  box-shadow: 0 0 3px 3px #73d0b1;
 }

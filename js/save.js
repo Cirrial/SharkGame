@@ -11,6 +11,9 @@ SharkGame.Save = {
         saveData.settings = {};
         saveData.upgrades = {};
         saveData.gateCostsMet = {};
+        saveData.world = { type: SharkGame.World.worldType, level: SharkGame.World.planetLevel };
+        saveData.artifacts = {};
+        saveData.gateway = {betweenRuns: SharkGame.gameOver};
 
         $.each(SharkGame.PlayerResources, function(k, v) {
             saveData.resources[k] = {
@@ -41,11 +44,16 @@ SharkGame.Save = {
             }
         });
 
+        $.each(SharkGame.Artifacts, function(k, v) {
+            saveData.artifacts[k] = v.level;
+        });
+
         // add timestamp
         //saveData.timestamp = (new Date()).getTime();
         saveData.timestampLastSave = (new Date()).getTime();
         saveData.timestampGameStart = SharkGame.timestampGameStart;
         saveData.timestampRunStart = SharkGame.timestampRunStart;
+        saveData.timestampRunEnd = SharkGame.timestampRunEnd;
 
         if(dontFlat) {
             saveData.saveVersion = SharkGame.Save.saveUpdaters.length - 1;
@@ -175,11 +183,25 @@ SharkGame.Save = {
                 });
             }
 
-            // TODO - load artifacts (need to have the terraformer and cost reducer loaded before world init)
+            // load artifacts (need to have the terraformer and cost reducer loaded before world init)
+            if(saveData.artifacts) {
+                $.each(saveData.artifacts, function(k, v) {
+                    SharkGame.Artifacts[k].level = v;
+                });
+            }
 
-            // TODO - load world type and level and apply world properties
+            // load world type and level and apply world properties
+            if(saveData.world) {
+                SharkGame.World.worldType = saveData.world.type;
+                SharkGame.World.planetLevel = saveData.world.level;
+                SharkGame.World.init();
+                SharkGame.Home.init();
+            }
 
-            // TODO - apply artifacts (world needs to be init first before applying other artifacts)
+            // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
+            if(saveData.artifacts) {
+                SharkGame.Gateway.applyArtifacts();
+            }
 
             if(saveData.tabs) {
                 $.each(saveData.tabs, function(k, v) {
@@ -222,16 +244,27 @@ SharkGame.Save = {
             if((typeof saveData.timestampRunStart !== "number")) {
                 saveData.timestampRunStart = currTimestamp;
             }
+            if((typeof saveData.timestampRunEnd !== "number")) {
+                saveData.timestampRunEnd = currTimestamp;
+            }
 
             SharkGame.timestampLastSave = saveData.timestampLastSave;
             SharkGame.timestampGameStart = saveData.timestampGameStart;
             SharkGame.timestampRunStart  = saveData.timestampRunStart;
+            SharkGame.timestampRunEnd = saveData.timestampRunEnd;
 
-            // TODO - load existence in in-between state,
-            // TODO - else check for offline mode and process
+            // load existence in in-between state,
+            // else check for offline mode and process
+            var simulateOffline = SharkGame.Settings.current.offlineModeActive;
+            if(saveData.gateway) {
+                if(saveData.gateway.betweenRuns) {
+                    simulateOffline = false;
+                    SharkGame.Main.endGame(true);
+                }
+            }
 
             // if offline mode is enabled
-            if(SharkGame.Settings.current.offlineModeActive) {
+            if(simulateOffline) {
                 // get times elapsed since last save game
                 var now = (new Date()).getTime();
                 var secondsElapsed = (now - saveData.timestampLastSave) / 1000;
@@ -449,7 +482,7 @@ SharkGame.Save = {
             _.each(["permanentMultiplier", "planetTerraformer", "gateCostReducer", "planetScanner", "sharkMigrator", "rayMigrator", "crabMigrator", "shrimpMigrator", "lobsterMigrator", "dolphinMigrator", "whaleMigrator", "eelMigrator", "chimaeraMigrator", "octopusMigrator", "sharkTotem", "rayTotem", "crabTotem", "shrimpTotem", "lobsterTotem", "dolphinTotem", "whaleTotem", "eelTotem", "chimaeraTotem", "octopusTotem", "progressTotem", "carapaceTotem", "inspirationTotem", "industryTotem", "wardingTotem"], function(v) {
                 save.artifacts[v] = 0;
             });
-            save.gateway = {betweenRuns: false, planetPool: {}, artifactPool: {}};
+            save.gateway = {betweenRuns: false};
             return save;
         }
 

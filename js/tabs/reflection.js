@@ -5,7 +5,7 @@ SharkGame.Reflection = {
     tabName: "Reflection",
     tabBg: "img/bg/bg-gate.png",
 
-    sceneImage: "http://placehold.it/400x200",
+    sceneImage: "//placehold.it/400x200",
 
     discoverReq: {
         resource: {
@@ -50,13 +50,23 @@ SharkGame.Reflection = {
     updateArtifactList: function() {
         var m = SharkGame.Main;
         var listSel = $('#artifactList');
-        _.each(SharkGame.Artifacts, function(artifactData) {
+        $.each(SharkGame.Artifacts, function(artifactKey, artifactData) {
             if(artifactData.level > 0) {
-                var item = $('<div>');
-                item.append(artifactData.name +
+                var item = $('<div>').addClass("artifactDiv");
+                item.append("<em>" + artifactData.name + "</em>" +
                 "<br><span class='medDesc'>(Power: " + m.beautify(artifactData.level) + ")</span>" +
                 "<br>" + artifactData.desc);
                 listSel.append(item);
+
+                var spritename = "artifacts/" + artifactKey;
+                if(SharkGame.Settings.current.iconPositions !== "off") {
+                    var iconDiv = SharkGame.changeSprite(spritename);
+                    if(iconDiv) {
+                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                        iconDiv.addClass("gatewayButton");
+                        item.prepend(iconDiv);
+                    }
+                }
             }
         });
         if($('#artifactList > div').length === 0) {

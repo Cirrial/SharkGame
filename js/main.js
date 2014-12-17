@@ -133,7 +133,7 @@ $.extend(SharkGame, {
             imageDiv.width(spriteData.frame.w);
             imageDiv.height(spriteData.frame.h);
         } else {
-            imageDiv.css('background-image', 'url("http://placehold.it/50x50")');
+            imageDiv.css('background-image', 'url("//placehold.it/50x50")');
             imageDiv.width(50);
             imageDiv.height(50);
         }
@@ -759,7 +759,7 @@ SharkGame.Main = {
         SharkGame.Main.showPane("Help", helpDiv);
     },
 
-    endGame: function(dontAwardEssence) {
+    endGame: function(loadingFromSave) {
         // stop autosaving
         clearInterval(SharkGame.Main.autosaveHandler);
         SharkGame.Main.autosaveHandler = -1;
@@ -771,7 +771,7 @@ SharkGame.Main = {
         SharkGame.timestampRunEnd = (new Date()).getTime();
 
         // kick over to passage
-        SharkGame.Gateway.enterGate(dontAwardEssence);
+        SharkGame.Gateway.enterGate(loadingFromSave);
     },
 
     purgeGame: function() {
@@ -811,6 +811,10 @@ SharkGame.Main = {
                 SharkGame.Log.addError(err.message);
                 console.log(err.trace);
             }
+
+            // remove any errant classes
+            $('#pane').removeClass("gateway");
+            $('#overlay').removeClass("gateway");
         }
     },
 

@@ -37,13 +37,13 @@ SharkGame.Gateway = {
         g.updateArtifactButtons();
     },
 
-    enterGate: function(dontAwardEssence) {
+    enterGate: function(loadingFromSave) {
         var m = SharkGame.Main;
         var g = SharkGame.Gateway;
 
         // AWARD ESSENCE
         var essenceReward = 0;
-        if(!dontAwardEssence) {
+        if(!loadingFromSave) {
             if(SharkGame.wonGame) {
                 essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
             } else {

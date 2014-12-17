@@ -1028,8 +1028,27 @@ button.gateway {
 }
 
 .gateway ::selection {
-  background-color: @color-discovery-bg-darker;
+  background-color: @color-discovery-bg-darkest;
 }
 .gateway ::-moz-selection {
-  background-color: @color-discovery-bg-darker;
+  background-color: @color-discovery-bg-darkest;
+}
+
+#artifactList {
+  margin: 0.5em auto;
+}
+
+.artifactDiv {
+  display: inline-block;
+
+  .border-radius(0.5em);
+  background-color: @color-discovery-bg-darkest;
+  .box-shadow(0, 0, 0.5em, 0.5em, @color-discovery-bg-darkest);
+  padding: 0.2em;
+  margin: 1.5em;
+
+
+  .gatewayButton {
+    .box-shadow(0, 0, 3px, 3px, @color-discovery-bg);
+  }
 }
