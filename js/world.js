@@ -90,16 +90,15 @@ SharkGame.World = {
             wr[v].exists = false;
         });
 
-
         // apply world modifiers
-        $.each(worldInfo.modifiers, function(i, v) {
-            if(SharkGame.Resources.isCategory(v)) {
-                var resourceList = SharkGame.Resources.getResourcesInCategory(v);
-                $.each(resourceList, function(i, v) {
-                    SharkGame.WorldModifiers[v.modifier].apply(effectiveLevel, v.resource, v.amount);
+        _.each(worldInfo.modifiers, function(modifierData) {
+            if(SharkGame.Resources.isCategory(modifierData.resource)) {
+                var resourceList = SharkGame.Resources.getResourcesInCategory(modifierData.resource);
+                _.each(resourceList, function(resourceName) {
+                    SharkGame.WorldModifiers[modifierData.modifier].apply(effectiveLevel, resourceName, modifierData.amount);
                 });
             } else {
-                SharkGame.WorldModifiers[v.modifier].apply(effectiveLevel, v.resource, v.amount);
+                SharkGame.WorldModifiers[modifierData.modifier].apply(effectiveLevel, modifierData.resource, modifierData.amount);
             }
         });
     },
@@ -118,6 +117,10 @@ SharkGame.World = {
         });
     },
 
+    getWorldEntryMessage: function() {
+        var w = SharkGame.World;
+        return SharkGame.WorldTypes[w.worldType].entry;
+    },
 
     // does this resource exist on this planet?
     doesResourceExist: function(resourceName) {

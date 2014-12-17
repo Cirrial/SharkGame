@@ -71,7 +71,9 @@ SharkGame.Recycler = {
         content.append(container);
         content.append($('<div>').addClass("clear-fix"));
         var message = y.message;
-        message = "<img width=400 height=200 src='" + y.sceneImage + "' id='tabSceneImageRed'>" + message;
+        if(SharkGame.Settings.current.showTabImages) {
+            message = "<img width=400 height=200 src='" + y.sceneImage + "' id='tabSceneImageRed'>" + message;
+        }
         $('#tabMessage').html(message).css("background-image", "url('" + y.tabBg + "')");;
 
         m.createBuyButtons("eat");

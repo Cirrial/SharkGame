@@ -215,6 +215,10 @@ SharkGame.Resources = {
         return !(typeof(SharkGame.ResourceCategories[name]) === 'undefined')
     },
 
+    isInCategory: function(resource, category) {
+        return SharkGame.ResourceCategories[category].resources.indexOf(resource) !== -1;
+    },
+
     getBaseOfResource: function(resourceName) {
         // if there are super-categories/base jobs of a resource, return that, otherwise return null
         var baseResourceName = null;

@@ -67,7 +67,10 @@ SharkGame.Gate = {
         }
 
         var message = g.shouldBeOpen() ? g.messageOpened : (amountOfSlots > 1 ? g.message : g.messageOneSlot);
-        message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+
+        if(SharkGame.Settings.current.showTabImages) {
+            message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+        }
         $('#tabMessage').html(message).css("background-image", "url('" + g.tabBg + "')");
     },
 
@@ -97,13 +100,16 @@ SharkGame.Gate = {
             var diff = cost - r.getResource(resourceId);
             message += SharkGame.Main.beautify(diff) + " more.";
         }
-        message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+        if(SharkGame.Settings.current.showTabImages) {
+            message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+        }
         $('#tabMessage').html(message);
     },
 
     onEnterButton: function() {
         $('#tabMessage').html(SharkGame.Gate.messageEnter);
         $(this).remove();
+        SharkGame.wonGame = true;
         SharkGame.Main.endGame();
     },
 

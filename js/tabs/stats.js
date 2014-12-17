@@ -53,7 +53,9 @@ SharkGame.Stats = {
 
         statsContainer.append($('<div>').addClass("clear-fix"));
         var message = s.message;
-        message = "<img width=400 height=200 src='" + s.sceneImage + "' id='tabSceneImage'>" + message;
+        if(SharkGame.Settings.current.showTabImages) {
+            message = "<img width=400 height=200 src='" + s.sceneImage + "' id='tabSceneImage'>" + message;
+        }
         $('#tabMessage').html(message).css("background-image", "url('" + s.tabBg + "')");
 
         var disposeSel = $('#disposeResource');

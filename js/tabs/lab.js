@@ -44,7 +44,9 @@ SharkGame.Lab = {
         var allResearchDone = l.allResearchDone();
         var message = allResearchDone ? l.messageDone : l.message;
         var imgSrc = allResearchDone ? l.sceneDoneImage : l.sceneImage;
-        message = "<img width=400 height=200 src='" + imgSrc + "' id='tabSceneImage'>" + message;
+        if(SharkGame.Settings.current.showTabImages) {
+            message = "<img width=400 height=200 src='" + imgSrc + "' id='tabSceneImage'>" + message;
+        }
         content.append($('<div>').attr("id", "tabMessage").html(message));
         var buttonListContainer = $('<div>').attr("id", "buttonLeftContainer");
         buttonListContainer.append($('<div>').attr("id", "buttonList").append($("<h3>").html("Available Upgrades")));

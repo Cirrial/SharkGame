@@ -91,6 +91,11 @@ SharkGame.Home = {
 
     init: function() {
         var h = SharkGame.Home;
+
+        // rename home tab
+        var tabName = SharkGame.WorldTypes[SharkGame.World.worldType].name + " Ocean";
+        SharkGame.Home.tabName = tabName;
+
         // register tab
         SharkGame.Tabs[h.tabId] = {
             id: h.tabId,
@@ -103,9 +108,6 @@ SharkGame.Home = {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
         });
-
-        // rename home tab
-        SharkGame.Home.tabName = SharkGame.WorldTypes[SharkGame.World.worldType].name + " Ocean";
     },
 
     switchTo: function() {
@@ -243,9 +245,11 @@ SharkGame.Home = {
         if(h.currentExtraMessageIndex !== selectedIndex) {
             h.currentExtraMessageIndex = selectedIndex;
             var tabMessage = $('#tabMessage');
-            var sceneDiv = $('#tabSceneImage');
-            if(sceneDiv.size() === 0) {
-                sceneDiv = $('<div>').attr("id", "tabSceneImage");
+            if(SharkGame.Settings.current.showTabImages) {
+                var sceneDiv = $('#tabSceneImage');
+                if(sceneDiv.size() === 0) {
+                    sceneDiv = $('<div>').attr("id", "tabSceneImage");
+                }
             }
             var message = "You are a shark in a " + wi.shortDesc + " sea.";
             message += "<br/><span id='extraMessage' class='medDesc'>&nbsp<br/>&nbsp</span>";
@@ -259,12 +263,16 @@ SharkGame.Home = {
                 });
                 sceneDiv.animate({opacity: 0}, 500, function() {
                     var thisSel = $(this);
-                    SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
+                    if(SharkGame.Settings.current.showTabImages) {
+                        SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
+                    }
                     thisSel.animate({opacity: 1}, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
-                SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
+                if(SharkGame.Settings.current.showTabImages) {
+                    SharkGame.changeSprite("homesea-" + h.extraMessages[selectedIndex].imageIndex, sceneDiv);
+                }
             }
         }
     },

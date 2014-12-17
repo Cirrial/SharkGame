@@ -3,6 +3,7 @@ SharkGame.WorldTypes = {
         name: "Test",
         desc: "You REALLY shouldn't be seeing this.",
         shortDesc: "testing",
+        entry: "You enter a debug ocean.",
         absentResources: [],
         modifiers: [],
         gateCosts: {
@@ -18,6 +19,7 @@ SharkGame.WorldTypes = {
         name: "Home",
         desc: "You shouldn't be seeing this.",
         shortDesc: "strange blue",
+        entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
         absentResources: [
             "tar",
             "ice",
@@ -78,7 +80,9 @@ SharkGame.WorldTypes = {
         name: "Marine",
         desc: "A serene blue world. Peaceful, beautiful, so close to home.",
         shortDesc: "strange blue",
+        entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "shrimp",
@@ -101,16 +105,20 @@ SharkGame.WorldTypes = {
         name: "Chaotic",
         desc: "A frenetic world, torn by immaterial force.",
         shortDesc: "swirling cyan",
+        entry: "You enter a chaotic fray, with no recollection of your former journey. New creatures charge at you from all directions.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "eel",
-            "whale"
+            "whale",
+            "octopus",
+            "shrimp"
         ],
         modifiers: [
-            { modifier: "planetaryIncome", resource: "frenzy", amount: 0.1 },
-            { modifier: "planetaryIncome", resource: "animals", amount: -0.1 },
-            { modifier: "planetaryIncome", resource: "stuff", amount: -0.1 }
+            { modifier: "planetaryIncome", resource: "frenzy", amount: 0.0001 },
+            { modifier: "planetaryIncome", resource: "animals", amount: -0.0001 },
+            { modifier: "planetaryIncome", resource: "stuff", amount: -0.001 }
         ],
         gateCosts: {
             sponge: 1E8,
@@ -125,7 +133,9 @@ SharkGame.WorldTypes = {
         name: "Haven",
         desc: "An aquamarine world of plenty. So beautiful, yet so vulnerable.",
         shortDesc: "thriving aquamarine",
+        entry: "Remembering nothing, you find yourself in a beautiful atoll teeming with life. Life will be good here.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "chimaera",
@@ -134,8 +144,6 @@ SharkGame.WorldTypes = {
         modifiers: [
             { modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
             { modifier: "planetaryResourceBoost", resource: "animals", amount: 1 },
-            { modifier: "planetaryResourceBoost", resource: "tar", amount: 1 },
-            { modifier: "planetaryIncomeMultiplier", resource: "tar", amount: 2 }
         ],
         gateCosts: {
             fish: 1E10,
@@ -150,7 +158,9 @@ SharkGame.WorldTypes = {
         name: "Tempestuous",
         desc: "A swirling maelstrom of storms where nothing rests.",
         shortDesc: "stormy grey",
+        entry: "You recall nothing and know only the storms. The unrelenting, restless storms scattering your possessions and allies.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "sand",
@@ -158,8 +168,9 @@ SharkGame.WorldTypes = {
             "clam"
         ],
         modifiers: [
-            { modifier: "planetaryIncomeReciprocalMultiplier", resource: "tar", amount: 1 },
-            { modifier: "planetaryIncome", resource: "stuff", amount: -0.2 }
+            { modifier: "planetaryIncome", resource: "stuff", amount: -0.02 },
+            { modifier: "planetaryIncome", resource: "crystal", amount: -0.002 },
+            { modifier: "planetaryIncome", resource: "frenzy", amount: -0.0001 }
         ],
         gateCosts: {
             junk: 1E12,
@@ -174,7 +185,9 @@ SharkGame.WorldTypes = {
         name: "Violent",
         desc: "An ocean close to boiling and choking under sulphuric fumes.",
         shortDesc: "searing red",
+        entry: "The burning waters sear the last traces of your past experiences from you. From beneath, the vents spew forth a heavy cloud of sand.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "octopus",
@@ -184,15 +197,14 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
-            { modifier: "planetaryIncome", resource: "sand", amount: 1 },
-            { modifier: "planetaryIncome", resource: "kelp", amount: 1 },
-            { modifier: "planetaryIncome", resource: "coral", amount: 1 },
-            { modifier: "planetaryIncome", resource: "algae", amount: 1 },
-            { modifier: "planetaryIncome", resource: "sponge", amount: 1 }
+            { modifier: "planetaryIncome", resource: "sand", amount: 0.1 },
+            { modifier: "planetaryIncome", resource: "kelp", amount: 0.001 },
+            { modifier: "planetaryIncome", resource: "coral", amount: 0.00001 },
+            { modifier: "planetaryIncome", resource: "algae", amount: 0.0001 }
         ],
         gateCosts: {
-            sand: 1E12,
-            kelp: 1E12,
+            sand: 1E14,
+            kelp: 1E13,
             coral: 1E12,
             algae: 1E12,
             sponge: 1E12,
@@ -203,6 +215,7 @@ SharkGame.WorldTypes = {
         name: "Abandoned",
         desc: "A dying world filled with machinery.",
         shortDesc: "murky black",
+        entry: "You do not know who left this world so torn and empty. Was it some predecessor of yours? Was it you yourself?",
         absentResources: [
             "ice",
             "heater",
@@ -216,11 +229,11 @@ SharkGame.WorldTypes = {
             "whale"
         ],
         modifiers: [
-            { modifier: "planetaryIncome", resource: "tar", amount: 1 },
-            { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 2 },
-            { modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 5 },
-            { modifier: "planetaryStartingResources", resource: "sandDigger", amount: 5 },
-            { modifier: "planetaryStartingResources", resource: "skimmer", amount: 5 }
+            { modifier: "planetaryIncome", resource: "tar", amount: 0.1 },
+            { modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
+            { modifier: "planetaryStartingResources", resource: "sandDigger", amount: 1 },
+            { modifier: "planetaryStartingResources", resource: "fishMachine", amount: 1 },
+            { modifier: "planetaryStartingResources", resource: "silentArchivist", amount: 1 }
         ],
         gateCosts: {
             junk: 1E14,
@@ -235,7 +248,9 @@ SharkGame.WorldTypes = {
         name: "Shrouded",
         desc: "A dark, murky ocean of secrecy and danger.",
         shortDesc: "dark mysterious",
+        entry: "Blackness. You know only blindness in these dark forsaken waters. Foggy memory leads you to follow a stream of crystals.",
         absentResources: [
+            "tar",
             "ice",
             "heater",
             "lobster",
@@ -244,6 +259,7 @@ SharkGame.WorldTypes = {
             "sponge"
         ],
         modifiers: [
+            { modifier: "planetaryIncome", resource: "crystal", amount: 0.05 },
             { modifier: "planetaryResourceBoost", resource: "crystal", amount: 1 },
             { modifier: "planetaryResourceReciprocalBoost", resource: "animals", amount: 1 },
             { modifier: "planetaryResourceReciprocalBoost", resource: "kelp", amount: 1 },
@@ -263,7 +279,9 @@ SharkGame.WorldTypes = {
         name: "Frigid",
         desc: "A cold, chilling ocean freezing slowly to death.",
         shortDesc: "freezing white",
+        entry: "As you struggle with sudden amnesia, you notice crystals forming in front of you. So cold.",
         absentResources: [
+            "tar",
             "dolphin",
             "whale",
             "crab",
@@ -278,7 +296,7 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
             { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 1},
             { modifier: "planetaryResourceBoost", resource: "ice", amount: 5 },
-            { modifier: "planetaryIncome", resource: "ice", amount: 0.5 }
+            { modifier: "planetaryIncome", resource: "ice", amount: 0.001 }
         ],
         gateCosts: {
             sand: 1E9,

@@ -21,6 +21,7 @@ SharkGame.Gateway = {
 
     init: function() {
         // initialise artifact levels to 0 if they don't have a level
+        // OTHERWISE KEEP THE EXISTING LEVEL
         _.each(SharkGame.Artifacts, function(artifactData) {
             if(!artifactData.level) {
                 artifactData.level = 0;
@@ -43,7 +44,11 @@ SharkGame.Gateway = {
         // AWARD ESSENCE
         var essenceReward = 0;
         if(!dontAwardEssence) {
-            essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
+            if(SharkGame.wonGame) {
+                essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
+            } else {
+                essenceReward = 1;
+            }
             SharkGame.Resources.changeResource("essence", essenceReward);
         }
 
@@ -87,6 +92,7 @@ SharkGame.Gateway = {
         }
     },
 
+
     cleanUp: function() {
         var m = SharkGame.Main;
         // empty out the game stuff behind
@@ -108,10 +114,13 @@ SharkGame.Gateway = {
         // construct the gateway content
         var gatewayContent = $('<div>');
         gatewayContent.append($('<p>').html("You are a shark in the space between worlds."));
+        if(!SharkGame.wonGame) {
+            gatewayContent.append($('<p>').html("It is not clear how you have ended up here, but you remember a bitter defeat.").addClass("medDesc"));
+        }
         gatewayContent.append($('<p>').html("Something unseen says,").addClass("medDesc"));
         gatewayContent.append($('<em>').attr("id", "gatewayVoiceMessage").html(g.getVoiceMessage()));
         if(essenceRewarded > 0) {
-            gatewayContent.append($('<p>').html("Entering the gate has changed you, granting you <span id='essenceCount'>" + m.beautify(essenceRewarded) + "</span> essence."));
+            gatewayContent.append($('<p>').html("Entering this place has changed you, granting you <span class='essenceCount'>" + m.beautify(essenceRewarded) + "</span> essence."));
         }
         gatewayContent.append($('<p>').html("You have <span id='essenceHeldDisplay' class='essenceCount'>" + m.beautify(essenceHeld) + "</span> essence."));
         if(numenHeld > 0) {
@@ -119,6 +128,11 @@ SharkGame.Gateway = {
             gatewayContent.append($('<p>').html("You also have <span class='numenCount'>" + m.beautify(numenHeld) + "</span> " + numenName + ", and you radiate divinity."));
         }
         gatewayContent.append($('<p>').attr("id", "gatewayStatusMessage").addClass("medDesc"));
+
+        // show end time
+        var endRunInfoDiv = $('<div>');
+        g.showRunEndInfo(endRunInfoDiv);
+        gatewayContent.append(endRunInfoDiv);
 
         // add navigation buttons
         var navButtons = $('<div>').addClass("gatewayButtonList");
@@ -132,6 +146,11 @@ SharkGame.Gateway = {
 
         m.showPane("GATEWAY", gatewayContent, true, 500, true);
         g.transitioning = false;
+    },
+
+    showRunEndInfo: function(containerDiv) {
+        var m = SharkGame.Main;
+        containerDiv.append($('<p>').html("<em>Time spent within last ocean:</em><br/>").append(m.formatTime(SharkGame.timestampRunEnd - SharkGame.timestampRunStart)));
     },
 
     showArtifacts: function() {
@@ -231,7 +250,9 @@ SharkGame.Gateway = {
         var confirmButtonDiv = $('<div>');
         SharkGame.Button.makeButton("progress", "proceed", confirmButtonDiv, function() {
             // kick back to main to start up the game again
-            // TODO
+            SharkGame.World.worldType = g.selectedWorld;
+            SharkGame.World.planetLevel = planetLevel;
+            SharkGame.Main.loopGame();
         });
         gatewayContent.append(confirmButtonDiv);
 

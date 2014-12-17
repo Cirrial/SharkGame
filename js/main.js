@@ -38,6 +38,7 @@ $.extend(SharkGame, {
     timestampLastSave: new Date(),
     timestampGameStart: new Date(),
     timestampRunStart: new Date(),
+    timestampRunEnd: new Date(),
 
     worldsCompleted: 0,
 
@@ -46,6 +47,7 @@ $.extend(SharkGame, {
     paneGenerated: false,
 
     gameOver: false,
+    wonGame: false,
 
     credits: "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
     "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
@@ -131,7 +133,7 @@ $.extend(SharkGame, {
             imageDiv.width(spriteData.frame.w);
             imageDiv.height(spriteData.frame.h);
         } else {
-            imageDiv.css('background-image', 'url("http://placekitten.com/g/50/50")');
+            imageDiv.css('background-image', 'url("http://placehold.it/50x50")');
             imageDiv.width(50);
             imageDiv.height(50);
         }
@@ -339,8 +341,7 @@ SharkGame.Main = {
         SharkGame.timestampGameStart = SharkGame.timestampGameStart || currDate.getTime();
         SharkGame.timestampRunStart = SharkGame.timestampRunStart || currDate.getTime();
 
-        // reset settings
-        SharkGame.Settings.current = {};
+        // preserve settings or reset to defaults
         $.each(SharkGame.Settings, function(k, v) {
             if(k === "current") {
                 return;
@@ -765,6 +766,9 @@ SharkGame.Main = {
         // flag game as over
         SharkGame.gameOver = true;
 
+        // grab end game timestamp
+        SharkGame.timestampRunEnd = (new Date()).getTime();
+
         // kick over to passage
         SharkGame.Gateway.enterGate(dontAwardEssence);
     },
@@ -772,33 +776,32 @@ SharkGame.Main = {
     purgeGame: function() {
         // empty out all the containers!
         $('#status').empty();
-        $('#log').empty();
+        SharkGame.Log.clearMessages();
         $('#content').empty();
-    },
-
-    showEnding: function() {
-        var currTime = (new Date()).getTime();
-        var m = SharkGame.Main;
-
-        var endPane = $('<div>');
-        endPane.append($('<div>').append(SharkGame.ending).addClass("paneContentDiv"));
-        endPane.append($('<div>').html("Exploration time:<br/>").append(m.formatTime(currTime - SharkGame.timestampRunStart)).addClass("paneContentDiv"));
-        var buttonDiv = $('<div>').attr("id", "endButton").addClass("paneContentDiv");
-        endPane.append(buttonDiv);
-        SharkGame.Button.makeButton("closeEnding", "Enter the New Ocean", buttonDiv, SharkGame.Main.loopGame);
-        SharkGame.Main.showPane("The End", endPane, true, 4000, 0.8);
     },
 
     loopGame: function() {
         if(SharkGame.gameOver) {
             SharkGame.gameOver = false;
+            SharkGame.wonGame = false;
             SharkGame.Main.hidePane();
-            SharkGame.Save.deleteSave();
-            var essence = SharkGame.Resources.getResource("essence");
-            essence++;
+
+            // copy over all special category resources
+            // artifacts are preserved automatically within gateway file
+            var backup = {};
+            _.each(SharkGame.ResourceCategories.special.resources, function(resourceName) {
+                backup[resourceName] = SharkGame.Resources.getResource(resourceName);
+            });
+
+            SharkGame.Save.deleteSave(); // otherwise it will be loaded during main init and fuck up everything!!
             SharkGame.Main.init();
-            SharkGame.Log.addMessage("Something feels different about you. The gate feels as though it has changed you.");
-            SharkGame.Resources.changeResource("essence", essence);
+            SharkGame.Log.addMessage(SharkGame.World.getWorldEntryMessage());
+
+            // restore special resources
+            $.each(backup, function(resourceName, resourceData) {
+                SharkGame.Resources.changeResource(resourceName, resourceData);
+            });
+
             SharkGame.timestampRunStart = (new Date()).getTime();
             try {
                 SharkGame.Save.saveGame();

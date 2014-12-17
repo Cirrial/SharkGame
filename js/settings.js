@@ -150,5 +150,16 @@ SharkGame.Settings = {
             "side",
             "off"
         ]
+    },
+
+    showTabImages: {
+        defaultSetting: true,
+        name: "Show Tab Header Images",
+        desc: "Do you want the new header images or are they taking up precious screen real-estate?",
+        show: true,
+        options: [
+            true,
+            false
+        ]
     }
 };
