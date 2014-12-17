@@ -871,9 +871,6 @@ SharkGame.Upgrades = {
         required: {
             upgrades: [
                 "kelpHorticulture"
-            ],
-            resources: [
-                "crab"
             ]
         },
         effect: {
@@ -1017,7 +1014,7 @@ SharkGame.Upgrades = {
         researchedMessage: "A strange structure was found from clues within the chasms. The cost was great, but the discovery is greater!",
         effectDesc: "Something ancient lurked in the depths.",
         cost: {
-            science: 1E10,
+            science: 1E6,
             shark: 1000,
             fish: 50000
         },

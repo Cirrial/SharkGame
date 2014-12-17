@@ -401,7 +401,8 @@ SharkGame.ResourceTable = {
         color: '#473E21',
         income: {
             'sand': 0.2,
-            'crystal': 0.9
+            'crystal': 0.9,
+            'kelp': 0.5
         },
         value: 3000
     },

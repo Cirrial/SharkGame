@@ -965,7 +965,8 @@ SharkGame.Changelog = {
         "Newly added actions show up in highlights for your convenience.",
         "The way progress continues beyond the gate is now... a little tweaked.",
         "Options are no longer reset after completing a run.",
-        "Artifacts exist."
+        "Artifacts exist.",
+        "NOTE: FINAL TEXT NOT ADDED. THIS IS NOT THE TRUE 0.7. ONLY A DREAM THEREOF."
     ],
     "0.62": [
         "Fixed infinity resource requirement for gate.",

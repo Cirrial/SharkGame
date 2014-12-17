@@ -93,12 +93,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }
         ],
         gateCosts: {
-            fish: 1E9,
-            sand: 1E9,
-            crystal: 1E9,
-            kelp: 1E6,
-            seaApple: 1E6,
-            sharkonium: 1E8
+            fish: 1E6,
+            sand: 1E6,
+            crystal: 1E6,
+            kelp: 1E3,
+            seaApple: 1E3,
+            sharkonium: 1E5
         }
     },
     chaotic: {
@@ -121,12 +121,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "stuff", amount: -0.001 }
         ],
         gateCosts: {
-            sponge: 1E8,
-            clam: 1E8,
-            sand: 1E10,
-            crystal: 1E10,
-            purifier: 1E4,
-            sharkonium: 1E10
+            sponge: 1E5,
+            clam: 1E5,
+            sand: 1E7,
+            crystal: 1E7,
+            purifier: 1E2,
+            sharkonium: 1E7
         }
     },
     haven: {
@@ -146,12 +146,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryResourceBoost", resource: "animals", amount: 1 },
         ],
         gateCosts: {
-            fish: 1E10,
-            clam: 1E10,
-            sponge: 1E10,
-            kelp: 1E12,
-            coralglass: 1E7,
-            coral: 1E9
+            fish: 1E7,
+            clam: 1E7,
+            sponge: 1E7,
+            kelp: 1E9,
+            coralglass: 1E4,
+            coral: 1E6
         }
     },
     tempestuous: {
@@ -173,12 +173,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "frenzy", amount: -0.0001 }
         ],
         gateCosts: {
-            junk: 1E12,
-            coral: 1E9,
-            spronge: 1E9,
-            delphinium: 1E9,
-            sharkonium: 1E9,
-            crystal: 1E9
+            junk: 1E9,
+            coral: 1E6,
+            spronge: 1E6,
+            delphinium: 1E6,
+            sharkonium: 1E6,
+            crystal: 1E6
         }
     },
     violent: {
@@ -203,12 +203,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "algae", amount: 0.0001 }
         ],
         gateCosts: {
-            sand: 1E14,
-            kelp: 1E13,
-            coral: 1E12,
-            algae: 1E12,
-            sponge: 1E12,
-            junk: 1E12
+            sand: 1E10,
+            kelp: 1E9,
+            coral: 1E6,
+            algae: 1E6,
+            sponge: 1E6,
+            junk: 1E9
         }
     },
     abandoned: {
@@ -235,12 +235,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryStartingResources", resource: "silentArchivist", amount: 1 }
         ],
         gateCosts: {
-            junk: 1E14,
-            tar: 1E4,
-            coralglass: 1E6,
-            spronge: 1E6,
-            delphinium: 1E6,
-            sharkonium: 1E6
+            junk: 1E10,
+            tar: 1E3,
+            coralglass: 1E5,
+            spronge: 1E5,
+            delphinium: 1E5,
+            sharkonium: 1E5
         }
     },
     shrouded: {
@@ -266,12 +266,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "specialists", amount: 0.5 }
         ],
         gateCosts: {
-            jellyfish: 1E12,
-            clam: 1E9,
-            crystal: 1E11,
-            science: 1E14,
-            sharkonium: 1E10,
-            fish: 1E10
+            jellyfish: 1E8,
+            clam: 1E6,
+            crystal: 1E9,
+            science: 1E9,
+            sharkonium: 1E7,
+            fish: 1E8
         }
     },
     frigid: {
@@ -298,12 +298,12 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryIncome", resource: "ice", amount: 0.001 }
         ],
         gateCosts: {
-            sand: 1E9,
-            crystal: 1E6,
-            clam: 1E8,
-            ice: 1E4,
-            sharkonium: 1E9,
-            fish: 1E9
+            sand: 1E6,
+            crystal: 1E4,
+            clam: 1E6,
+            ice: 1E3,
+            sharkonium: 1E7,
+            fish: 1E7
         }
     }
 };
