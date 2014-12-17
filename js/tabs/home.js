@@ -129,7 +129,9 @@ SharkGame.Home = {
         // button list
         content.append($('<div>').attr("id", "buttonList"));
         // background art!
-        tabMessage.css("background-image", "url('" + h.tabBg + "')");
+        if(SharkGame.Settings.current.showTabImages) {
+            tabMessage.css("background-image", "url('" + h.tabBg + "')");
+        }
     },
 
     discoverActions: function() {

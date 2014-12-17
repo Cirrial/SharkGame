@@ -67,11 +67,12 @@ SharkGame.Gate = {
         }
 
         var message = g.shouldBeOpen() ? g.messageOpened : (amountOfSlots > 1 ? g.message : g.messageOneSlot);
-
+        var tabMessageSel = $('#tabMessage');
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+            tabMessageSel.css("background-image", "url('" + g.tabBg + "')");
         }
-        $('#tabMessage').html(message).css("background-image", "url('" + g.tabBg + "')");
+        tabMessageSel.html(message);
     },
 
     update: function() {

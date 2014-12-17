@@ -160,6 +160,9 @@ SharkGame.Settings = {
         options: [
             true,
             false
-        ]
+        ],
+        onChange: function() {
+            SharkGame.Main.changeTab(SharkGame.Tabs.current);
+        }
     }
 };

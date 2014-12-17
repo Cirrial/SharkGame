@@ -34,11 +34,12 @@ SharkGame.Reflection = {
         content.append($('<div>').attr("id", "tabMessage"));
         content.append($('<div>').attr("id", "artifactList"));
         var message = r.message;
-
+        var tabMessageSel = $('#tabMessage');
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + r.sceneImage + "' id='tabSceneImage'>" + message;
+            tabMessageSel.css("background-image", "url('" + r.tabBg + "')");
         }
-        $('#tabMessage').html(message).css("background-image", "url('" + r.tabBg + "')");
+        tabMessageSel.html(message);
 
         r.updateArtifactList();
     },

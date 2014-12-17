@@ -71,10 +71,12 @@ SharkGame.Recycler = {
         content.append(container);
         content.append($('<div>').addClass("clear-fix"));
         var message = y.message;
+        var tabMessageSel = $('#tabMessage');
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + y.sceneImage + "' id='tabSceneImageRed'>" + message;
+            tabMessageSel.css("background-image", "url('" + y.tabBg + "')");
         }
-        $('#tabMessage').html(message).css("background-image", "url('" + y.tabBg + "')");;
+        tabMessageSel.html(message);
 
         m.createBuyButtons("eat");
         y.createButtons();

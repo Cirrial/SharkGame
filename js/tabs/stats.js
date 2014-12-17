@@ -53,10 +53,12 @@ SharkGame.Stats = {
 
         statsContainer.append($('<div>').addClass("clear-fix"));
         var message = s.message;
+        var tabMessageSel = $('#tabMessage');
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + s.sceneImage + "' id='tabSceneImage'>" + message;
+            tabMessageSel.css("background-image", "url('" + s.tabBg + "')");
         }
-        $('#tabMessage').html(message).css("background-image", "url('" + s.tabBg + "')");
+        tabMessageSel.html(message);
 
         var disposeSel = $('#disposeResource');
         disposeSel.append($('<h3>').html("Dispose of Stuff"));
