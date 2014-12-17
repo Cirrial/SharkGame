@@ -639,7 +639,7 @@ SharkGame.Upgrades = {
         name: "Coral Halls",
         desc: "The demands don't stop! Now they want living spaces made of coral! Is this really necessary?",
         researchedMessage: "We begrudingly helped them establish new living spaces a little distant from the rest of our frenzy.",
-        effectDesc: "Dolphins are happier and twice as effective. Savants and treasurers are also twice as effective. Everyone wins, and all it cost us was our dignity and resolve. Sigh.",
+        effectDesc: "Dolphins are happier and twice as effective. Philosophers and treasurers are also twice as effective. Everyone wins, and all it cost us was our dignity and resolve. Sigh.",
         cost: {
             science: 10000,
             coral: 2000
@@ -655,7 +655,7 @@ SharkGame.Upgrades = {
         effect: {
             multiplier: {
                 dolphin: 2,
-                savant: 2,
+                philosopher: 2,
                 treasurer: 2
             }
         }
@@ -667,7 +667,7 @@ SharkGame.Upgrades = {
         researchedMessage: "We have determined the eternal song of the gates. We don't know what it does yet.",
         effectDesc: "A chorus of whales can be assembled to sing the eternal song, but we have no clue what it will do.",
         cost: {
-            science: 1E12
+            science: 1E9
         },
         required: {
             upgrades: [
@@ -924,7 +924,7 @@ SharkGame.Upgrades = {
     },
 
     industrialGradeSponge: {
-        name: "industrial-Grade Sponge",
+        name: "Industrial-Grade Sponge",
         desc: "Our octopus contacts inform us that sponge is highly useful with a little augmentation. Let's figure this out.",
         researchedMessage: "By infusing sponge with processed matter, we have devised spronge, a versatile super-material that kind of freaks us out!",
         effectDesc: "Enables creation of spronge, the backbone... uh... the core material in cephalopod technology.",

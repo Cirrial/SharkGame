@@ -24,7 +24,11 @@ SharkGame.ArtifactUtil = {
         var wr = SharkGame.World.worldResources;
         var multiplier = level + 1;
         _.each(resourceList, function(resourceName) {
-            wr[resourceName].artifactMultiplier *= multiplier;
+            if(wr[resourceName].artifactMultiplier) {
+                wr[resourceName].artifactMultiplier *= multiplier;
+            } else {
+                wr[resourceName].artifactMultiplier = multiplier;
+            }
         });
     }
 };
@@ -34,7 +38,7 @@ SharkGame.Artifacts = {
         name: "Permanent Multiplier",
         desc: "Todo",
         cost: function(level) {
-            return Math.floor(Math.pow(level + 2, 2));
+            return Math.floor(Math.pow(10, level + 1));
         },
         effect: function(level) {
             SharkGame.Resources.specialMultiplier *= (level + 1);

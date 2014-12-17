@@ -663,7 +663,7 @@ SharkGame.HomeActions = {
         max: "octopus",
         prereq: {
             resource: {
-                'clam': 60
+                'clam': 20
             }
         },
         outcomes: [

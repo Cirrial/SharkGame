@@ -27,8 +27,8 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.62,
-    VERSION_NAME: "Return of Shark",
+    VERSION: 0.7,
+    VERSION_NAME: "Stranger Oceans",
     EPSILON: 1E-6, // floating point comparison is a joy
 
     INTERVAL: (1000 / 10), // 20 FPS
@@ -199,14 +199,6 @@ SharkGame.TitleBar = {
         main: false,
         onClick: function() {
             SharkGame.Main.showPane("Donate", SharkGame.donate);
-        }
-    },
-
-    endLink: {
-        name: "end game",
-        main: true,
-        onClick: function() {
-            SharkGame.Main.endGame();
         }
     }
 };
@@ -965,6 +957,16 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
+    "0.7 - Stranger Oceans": [
+        "WHOLE BUNCH OF NEW STUFF ADDED.",
+        "Resource system slightly restructured for something in the future.",
+        "New worlds with some slight changes to availabilities, gate demands, and some other stuff.",
+        "Categories added to Home Sea tab for the benefit of trying to make sense of all the buttons.",
+        "Newly added actions show up in highlights for your convenience.",
+        "The way progress continues beyond the gate is now... a little tweaked.",
+        "Options are no longer reset after completing a run.",
+        "Artifacts exist."
+    ],
     "0.62": [
         "Fixed infinity resource requirement for gate.",
         "Attempted to fix resource table breaking in some browsers for some sidebar widths."

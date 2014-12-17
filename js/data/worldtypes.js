@@ -224,7 +224,6 @@ SharkGame.WorldTypes = {
             "lobster",
             "eel",
             "jellyfish",
-            "clam",
             "algae",
             "whale"
         ],
@@ -237,7 +236,7 @@ SharkGame.WorldTypes = {
         ],
         gateCosts: {
             junk: 1E14,
-            tar: 1E7,
+            tar: 1E4,
             coralglass: 1E6,
             spronge: 1E6,
             delphinium: 1E6,

@@ -57,7 +57,8 @@ SharkGame.ResourceTable = {
         //desc: "Dutiful, loyal crustaceans.",
         color: '#9C2424',
         income: {
-            'crystal': 0.01
+            'crystal': 0.01,
+            'coral': 0.02
         },
         jobs: [
             "planter",
