@@ -125,7 +125,7 @@ SharkGame.Save = {
 
         // if first letter of string was [, data was packed, unpack it
         if(saveDataString.charAt(0) === '[') {
-            try {
+            //try {
                 //check version
                 var currentVersion = SharkGame.Save.saveUpdaters.length - 1;
                 var saveVersion = saveData.shift();
@@ -139,7 +139,8 @@ SharkGame.Save = {
                     template = updater(template);
                 }
                 //unpack
-                saveData = SharkGame.Save.expandData(template, saveData);
+                var saveDataFlat = saveData;
+                saveData = SharkGame.Save.expandData(template, saveDataFlat);
                 saveData.saveVersion = saveVersion;
 
                 function checkTimes(data) {
@@ -150,16 +151,16 @@ SharkGame.Save = {
 
                 //check if the template was sorted wrong when saving
                 if (saveVersion <= 5 && !checkTimes(saveData)) {
-                    saveData = SharkGame.Save.expandData(template, saveData, true);
+                    saveData = SharkGame.Save.expandData(template, saveDataFlat, true);
                     saveData.saveVersion = saveVersion;
                 }
 
                 if (!checkTimes(saveData)) {
-                    throw new Error("Save order appears to be corrupt. Your save: " + saveDataString)
+                    throw new Error("Order appears to be corrupt.");
                 }
-            } catch(err) {
-                throw new Error("Couldn't unpack packed save data. Reason: " + err.message + ". Your save: " + saveDataString);
-            }
+            //} catch(err) {
+            //    throw new Error("Couldn't unpack packed save data. Reason: " + err.message + ". Your save: " + saveDataString);
+            //}
         }
 
         if(saveData) {
@@ -434,6 +435,7 @@ SharkGame.Save = {
             return out;
         }
 
+        data = data.slice(); // let's try and avoid horrible consequences
         var expanded = expandPart(SharkGame.Save.createBlueprint(template, sortWrong));
         if (data.length !== 0) throw new Error("Incorrect save length.");
         return expanded;
