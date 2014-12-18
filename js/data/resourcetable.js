@@ -166,8 +166,8 @@ SharkGame.ResourceTable = {
         singleName: 'eel',
         color: '#718D68',
         income: {
-            'fish': 0.5,
-            'sand': 0.5
+            'fish': 0.3,
+            'sand': 0.3
         },
         jobs: [
             "technician",
