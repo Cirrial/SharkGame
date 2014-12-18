@@ -124,7 +124,7 @@ SharkGame.Stats = {
                 if(amountToDispose < 0) {
                     var max = resourceAmount;
                     var divisor = Math.floor(amountToDispose) * -1;
-                    amountToDispose = (max / divisor);
+                    amountToDispose = Math.floor(max / divisor);
                 }
                 var forceSingular = amountToDispose === 1;
                 var disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);

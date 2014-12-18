@@ -236,7 +236,9 @@ SharkGame.HomeActions = {
         outcomes: [
             "Squishy porous science!",
             "The sponge has been breached and the science is leaking out!",
-            "TODO"
+            "This is the best use of a sponge. Teeth dissections are the best.",
+            "Sponge is now so many shreds. But so much was learned!",
+            "The sponge is apparently not a plant. Yet plants feel more sophisticated than these things."
         ],
         helpText: "Dissect sponges to learn their porous secrets. Science!"
     },
@@ -261,7 +263,11 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Eww eww gross it's so gloopy and fragile and OW IT STUNG ME",
+            "These things are like a bag of wonders. Weird, tasteless wonders.",
+            "Wow, sea apples seemed weird, but these things barely exist.",
+            "Well, they turned out just as fragile as they looked.",
+            "So interesting!"
         ],
         helpText: "Examine the goop inside the stinging jellies! Discovery!"
     },
@@ -286,7 +292,10 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Pearls to crystals! One day. One day, we will get this right and only use the pearl.",
+            "Welp, we somehow turned rocks to crystals. Oh. Nope, those were clams. Not rocks. It's so hard to tell sometimes.",
+            "Okay, we managed to only use the pearls this time, but we, uh, had to break the clams open pretty roughly.",
+            "Pearls to... nope. Clams to crystals. Science is hard."
         ],
         helpText: "Convert a pearl (and the clam around it) into crystal."
     },
@@ -344,7 +353,11 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Coralglass smelted!",
+            "Coralglass melted! No. Wait.",
+            "How does coral become part of glass? Well, you see, it's all very simple, or that's what the lobster told me.",
+            "The backbo-- the exoskeleton of the crustacean industry!",
+            "So fragile. Yet so useful."
         ],
         helpText: "Smelt resources into coralglass for use in crustacean machines!"
     },
@@ -367,7 +380,12 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Fusion confusion.",
+            "Fission's fishy.",
+            "Delphinium, something that, much like its inventors, just isn't quite as legitimate in the ocean.",
+            "Delphinium, a substance we tolerate!",
+            "Delphinium! It's a product!",
+            "Delphinium! It... uh, is a thing! That exists!"
         ],
         helpText: "Fuse valuable resources into delphinium, which is kinda like sharkonium. Except worse."
     },
@@ -390,7 +408,12 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "It pulses. That's unsettling.",
+            "It shakes and quivers and otherwise acts sort of like sharkonium which is kind of freaking me out uh help",
+            "Well, the octopuses know how to use this, I think.",
+            "What... what <em>is</em> that?!",
+            "Spronge. What a name. I don't think I could name it anything myself. Apart from 'horrifying'.",
+            "Sweet fishmas, it's glowing. It's glowing!"
         ],
         helpText: "Repurpose boring old sponge into spronge, building material of the future."
     },
@@ -644,7 +667,13 @@ SharkGame.HomeActions = {
             "A yellow shrimp joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "That's a lot of shrimp.",
+            "So many shrimp, it's like a cloud!",
+            "I can't cope with this many shrimp!",
+            "Shrimp, they're like bugs, except not bugs or anything related at all!",
+            "They're so tiny!",
+            "How can something so small take up so much space?",
+            "Sponge forever!"
         ],
         helpText: "Convince shrimp to assist you in the gathering of sponge."
     },
@@ -679,7 +708,11 @@ SharkGame.HomeActions = {
             "A crawdad joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "Lobsters lobsters lobsters lobsters.",
+            "But they weren't rocks...",
+            "The clam forecast is looking good!",
+            "They're all about the clams!",
+            "More lobsters, because why not?"
         ],
         helpText: "Lobster like clams. Will work for clams. Good work. Many clams."
     },
@@ -707,7 +740,6 @@ SharkGame.HomeActions = {
             "A pantropical dolphin joins you.",
             "A long-finned pilot whale joins you.",
             "A hourglass dolphin joins you.",
-            "A false killer whale joins you.",
             "A bottlenose dolphin joins you.",
             "A striped dolphin joins you.",
             "A pygmy killer whale joins you.",
@@ -723,13 +755,17 @@ SharkGame.HomeActions = {
             "A northern right-whale dolphin joins you.",
             "A long-snouted spinner dolphin joins you.",
             "A long-beaked common dolphin joins you.",
-            "A indo-pacific hump-back joins you.",
             "An atlantic white sided dolphin joins you.",
             "An atlantic hump-backed dolphin joins you.",
             "An atlantic spotted dolphin joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "A pod of dolphins!",
+            "More of them. Hm.",
+            "More of these squeaky chatterers.",
+            "More whiners.",
+            "Do we need these guys?",
+            "They have to be good for something."
         ],
         helpText: "Pay a dolphin to help us catch fish. Prepare to put up with whining."
     },
@@ -770,7 +806,11 @@ SharkGame.HomeActions = {
             "A dwarf sperm whale joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "A pod of whales!",
+            "Aloof, mysterious, big.",
+            "So majestic. Wait, no, we're looking at a boulder formation.",
+            "The songs are mesmerising.",
+            "They might not all eat fish, but they're great at rounding them up."
         ],
         helpText: "Persuade one of the great whales to help us out. They can round up entire schools."
     },
@@ -813,7 +853,14 @@ SharkGame.HomeActions = {
             "A short finned eel joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "Eels up inside here.",
+            "Eels finding an entrance where they can in the seafloor.",
+            "Eels combining elements of the sharks and the eels to create something not quite as good as either.",
+            "Eel nation arise!",
+            "That's a lot of eels.",
+            "So there's more eels. Whee.",
+            "The eels increase in number.",
+            "More eels happened. Yay."
         ],
         helpText: "Offer a new home and fish supply to an eel. They can round up fish and sand."
     },
@@ -867,7 +914,14 @@ SharkGame.HomeActions = {
             "A straightnose rabbitfish joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "Many chimaeras come from the deep.",
+            "Like ghosts, they come.",
+            "The chimaeras avert your gaze, but set to work quickly.",
+            "The jellyfish stocks shall climb ever higher!",
+            "Well, it saves you the effort of braving the stinging tentacles.",
+            "What have they seen, deep in the chasms?",
+            "They aren't sharks, but they feel so familiar.",
+            "The long-lost kindred return."
         ],
         helpText: "Convince a chimaera to hunt in the darker depths for us."
     },
@@ -931,7 +985,13 @@ SharkGame.HomeActions = {
             "An atlantic banded octopus joins you."
         ],
         multiOutcomes: [
-            "TODO"
+            "Efficiency increases with limb count.",
+            "Hard to understand, but hardworking nonetheless.",
+            "The minds of the octopuses are a frontier unbraved by many sharks.",
+            "They hardly seem to notice you. They take their payment and begin to harvest.",
+            "They say something about the schedule being on target.",
+            "One of the new batch tells you to find unity in efficiency.",
+            "You could have sworn you saw an octopus among the crowd glinting like metal."
         ],
         helpText: "Pay an octopus for their efficient clam retrieval services."
     },
@@ -1194,16 +1254,25 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Shrimp queen prepped for duty!",
+            "A royal shrimp is she!",
+            "More shrimp for the shrimp superorganism!",
+            "Give it time before they start singing about wanting to break free.",
+            "Long live the tiny tiny shrimp queen!"
         ],
         multiOutcomes: [
-            "Okay, so it's not exactly a royal role, but hey, they're gonna be making eggs for a long time. Humour them."
+            "Okay, so it's not exactly a royal role, but hey, they're gonna be making eggs for a long time. Humour them.",
+            "This is the weirdest monarchy in existence.",
+            "Welcome to the superorganisation!",
+            "They want to ride their bicycle.",
+            "Give it time before they start singing about wanting to break free.",
+            "Queens for the shrimp colony! Eggs for the egg throne!"
         ],
         helpText: "Create a shrimp queen to make more shrimp."
     },
 
     'getWorker': {
-        name: "Crown shrimp queen",
+        name: "Assign shrimp worker",
         effect: {
             resource: {
                 'worker': 1
@@ -1223,12 +1292,21 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "No more work for this shrimp! Of their particular variety! Now slightly different work! Go!",
+            "Consider this a promotion.",
+            "This shrimp is going to have to come in on weekends now, I'm afraid.",
+            "We sure love micromanaging these tiny guys on an individual basis, don't we.",
+            "This little shrimp is so happy to be picked out of the crowd."
         ],
         multiOutcomes: [
-            "TODO"
+            "These are some pretty fluid castes.",
+            "Promotions for everybody!",
+            "We're reorganising the superorganism.",
+            "The sponge must grow.",
+            "The sponge is the life.",
+            "Glory to the sponge. Glory to the shrimp mass."
         ],
-        helpText: "Dedicate a shrimp to collecting crystals instead of algae."
+        helpText: "Dedicate a shrimp to collecting stuff that isn't algae."
     },
 
     // LOBSTER JOBS ////////////////////////////////////////////////////////////////////////////////
@@ -1254,10 +1332,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "We didn't need to see the process behind this.",
+            "One lobster brimming with eggs to go.",
+            "It's like some weird counterpart to the planter crab. But with eggs.",
+            "Lobster with rocks ready to make a move. Oh, okay, eggs, whatever, see, they look like shiny pebbles from a distance and... oh, forget it."
         ],
         multiOutcomes: [
-            "TODO"
+            "Berrier isn't even a word!",
+            "Berries and eggs aren't even the same thing!",
+            "How do these things swim with this much weighing them down?",
+            "We aren't running out of volunteers any time soon.",
+            "Did you see them fight for this job? Claws everywhere, I tell you!"
         ],
         helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters."
     },
@@ -1284,12 +1369,18 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Yes, lobster, put these claws to better use.",
+            "It is time for this one to seek more interesting prey. Wait. Wait, no, it's just as stationary. Never mind. False alarm.",
+            "Lobster sticks to seabed!"
         ],
         multiOutcomes: [
-            "TODO"
+            "Cut down the kelp forests!",
+            "Rip the sponge and tear the kelp!",
+            "Harvest the seafloor!",
+            "The lobster tide shall claim the-- wait no you said harvesters. Okay. Adjusting that, then.",
+            "These guys are pretty unenthusiastic about everything they do, aren't they."
         ],
-        helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters."
+        helpText: "Train a lobster to cut down kelp faster than anything can plant it. Sustainable!"
     },
 
     // DOLPHIN JOBS ////////////////////////////////////////////////////////////////////////////////
@@ -1319,6 +1410,7 @@ SharkGame.HomeActions = {
             "TODO"
         ],
         multiOutcomes: [
+            "We begrudgingly acknowledge that working together is providing us with new insights.",
             "TODO"
         ],
         helpText: "Determine which of these dolphins is actually smart, and not just repeating empty phrases."
@@ -1406,7 +1498,12 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "The chorus is made.",
+            "The singers sing an immortal tune.",
+            "The song is indescribable.",
+            "Serenity, eternity.",
+            "What purpose does the song have?",
+            "Liquid infinity swirls around the grand chorus."
         ],
         helpText: "Form the singers of the eternal song. Let it flow through this world."
     },
@@ -1587,10 +1684,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "An octopus is a collector now.",
+            "Octopus, collector.",
+            "The role has been assigned. Collector.",
+            "The delegation has been made. Collector.",
+            "This individual now collects."
         ],
         multiOutcomes: [
-            "TODO"
+            "Collectors will retrieve that which has value to others.",
+            "Collectors will collect what they feel is required.",
+            "Collectors will begin their thankless harvest.",
+            "Collectors will act as instructed."
         ],
         helpText: "Delegate an octopus to collect crystal and coral."
     },
@@ -1616,10 +1720,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "An octopus is a scavenger now.",
+            "Octopus, scavenger.",
+            "The role has been assigned. Scavenger.",
+            "The delegation has been made. Scavenger.",
+            "This individual now scavenges."
         ],
         multiOutcomes: [
-            "TODO"
+            "Scavengers will retrieve that which has value to their kind.",
+            "Scavengers will scavenge what they can from below.",
+            "Scavengers will pry the substrate of future progress from the ocean floor.",
+            "Scavengers will act as instructed."
         ],
         helpText: "Delegate an octopus to scavenge sponge and sand."
     },
@@ -1658,8 +1769,7 @@ SharkGame.HomeActions = {
             "The machines rise.",
             "The miners dig.",
             "The crystal shall be harvested.",
-            "Crystal miners are complete.",
-            "Giant machines blot out our sun."
+            "Crystal miners are complete."
         ],
         helpText: "Construct a machine to automatically harvest crystals efficiently."
     },
@@ -1797,10 +1907,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Skimmer activated.",
+            "Skimmer constructed.",
+            "Residue producer online.",
+            "Construction complete.",
+            "Sacrifices must be made for progress."
         ],
         multiOutcomes: [
-            "TODO"
+            "The lesser resource becomes the greatest of all.",
+            "Transmutation is limited. The recycler is greater.",
+            "Consumption and production are two halves of the greater whole.",
+            "The creations of sharks emerge from a pattern as old as their species."
         ],
         helpText: "Construct a machine to automatically recycle kelp and sand into residue."
     },
@@ -1825,10 +1942,19 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Purifier activated.",
+            "Purifier constructed.",
+            "Machine gills online.",
+            "Construction complete.",
+            "Not all machines carry such weight."
         ],
         multiOutcomes: [
-            "TODO"
+            "We can almost hear these machines as they start. We can hear them speak. \"We will save you from your mistakes.\" No, I'm just, must be hearing things, ignore me.",
+            "The problems of old will be solved by the new.",
+            "The waters will return to clarity.",
+            "The machines may destroy, but so too can they heal and repair.",
+            "The end is not nearly so soon.",
+            "Hope."
         ],
         helpText: "Construct a machine to restore vitality to our increasingly murky waters."
     },
@@ -1854,10 +1980,19 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Heater activated.",
+            "Heater constructed.",
+            "Climate control online.",
+            "Construction complete.",
+            "The end of ice."
         ],
         multiOutcomes: [
-            "TODO"
+            "The ice age comes to a close.",
+            "Is this replacing one form of destruction for another?",
+            "Life becomes easier.",
+            "The warmth. The warmth we desired so much.",
+            "Life returns to the frozen sea.",
+            "This world awakens."
         ],
         helpText: "Construct a machine to combat the advancing ice shelf."
     },
@@ -1884,10 +2019,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Sponge farmer is active.",
+            "Sponge farmer capable.",
+            "This sponge farming machine clatters to life.",
+            "This automated caretaker gets to work."
         ],
         multiOutcomes: [
-            "TODO"
+            "Sponges are not hard to domesticate. It's harder to make them wild.",
+            "The shrimp will be happier.",
+            "There is something missing compared to our machines. Ours are slightly more menacing, but also more effective.",
+            "Who needs this much sponge?"
         ],
         helpText: "This crustacean machine automatically farms and harvests sponge."
     },
@@ -1913,10 +2054,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Berry sprayer is active.",
+            "Berry sprayer capable.",
+            "This egg spraying machine clatters to life.",
+            "This automated caretaker gets to work." // yeah, it's lazy, I know, but still just as appropriate
         ],
         multiOutcomes: [
-            "TODO"
+            "Automation of population? Is this the end goal of the shrimp?",
+            "The machine rears lobster eggs. Wouldn't the shrimp want something like this too?",
+            "There is an uneasiness about these machines that fills the sharks with concern.",
+            "Why was this machine invented? Are we helping to prepare an army?"
         ],
         helpText: "This crustacean machine distributes lobster eggs for optimal hatching conditions."
     },
@@ -1943,10 +2090,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Glass maker is active.",
+            "Glass maker capable.",
+            "This glass forging machine clatters to life.",
+            "The coralglass factory whirrs and boils."
         ],
         multiOutcomes: [
-            "TODO"
+            "Coralglass. The sharkonium of the shelled kind.",
+            "The raw heat from these things could boil the ocean dry. How they do it, we don't know.",
+            "Coralglass. So fragile, so beautiful, yet so durable. They make the machines in their own image.",
+            "The fine intricacies of these machines are lost on us, given how much of our technological development involves our mouths."
         ],
         helpText: "This crustacean machine automatically makes coralglass out of coral and sand through processes we don't fully understand."
     },
@@ -1974,10 +2127,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "I think the machine is mocking us. They automated mocking our works. Those crafty blighters!"
+            "Silent archivist watches on.",
+            "Silent archivist shows no bias.",
+            "Silent archivist makes a note.",
+            "Silent archivist views us with disdain."
         ],
         multiOutcomes: [
-            "More archivers of our grand works as a collective."
+            "More archivers of our grand works as a collective.",
+            "These machines share the same insights as their creators, but are much less painful to deal with.",
+            "The design for these machines seems strangely familiar.",
+            "These things are too silent. We aren't sure if they're even on.",
+            "Science is nothing without review."
         ],
         helpText: "This dolphin machine archives, critiques, and catalogues our science."
     },
@@ -2004,10 +2164,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Tireless crafter fuses the matter.",
+            "Tireless crafter never ceases.",
+            "Tireless crafter lays foundation for a future.",
+            "Tireless crafter is an accident waiting to happen."
         ],
         multiOutcomes: [
-            "TODO"
+            "Delphinium. The warped counterpart to sharkonium.",
+            "A silent, heatless process, much like the auto-transmuter's method of operation.",
+            "Delphinium. We don't understand it. It feels a lot like sharkonium, but warmer.",
+            "The complexity of these machines is unwarranted. The dolphins think themselves smarter, but we have simpler, more effective solutions."
         ],
         helpText: "This dolphin machine creates delphinium. What good that is to us is a mystery. Use it to make their useless machines, I guess?"
     },
@@ -2034,10 +2200,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Machine: clam collector. Operation: in progress.",
+            "Machine: clam collector. Operation: beginning.",
+            "Machine: clam collector. Result: clam collection.",
+            "Machine: clam collector. Result: food for the masses."
         ],
         multiOutcomes: [
-            "TODO"
+            "These machines feel strangely alive. They pulse and throb.",
+            "There exist more clam collectors now.",
+            "The biomachine expands.",
+            "The octopuses tell me, find unity in efficiency. Find peace in automation."
         ],
         helpText: "This octopus machine collects clams. Simple purpose, simple machine."
     },
@@ -2062,10 +2234,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Machine: spronge smelter. Operation: in progress.",
+            "Machine: spronge smelter. Operation: beginning.",
+            "Machine: spronge smelter. Result: spronge smelting.",
+            "Machine: spronge smelter. Result: further development."
         ],
         multiOutcomes: [
-            "TODO"
+            "These machines feel strangely alive. They pulse and throb.",
+            "There exist more spronge smelters now.",
+            "The biomachine expands.",
+            "The octopuses tell me, find unity in efficiency. Find peace in an assured future."
         ],
         helpText: "This octopus machine imbues sponge with industrial potential. Requires residue for function."
     },
@@ -2091,10 +2269,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Machine: sea scourer. Operation: in progress.",
+            "Machine: sea scourer. Operation: beginning.",
+            "Machine: sea scourer. Result: pollution conversion.",
+            "Machine: sea scourer. Result: appropriating inefficiency."
         ],
         multiOutcomes: [
-            "TODO"
+            "These machines feel strangely alive. They pulse and throb.",
+            "There exist more sea scourers now.",
+            "The biomachine expands.",
+            "The octopuses tell me, find unity in efficiency. Find peace in the impermanence of mistakes."
         ],
         helpText: "This octopus machine converts pollution into more useful resources."
     },
@@ -2121,10 +2305,16 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Machine: prosthetic polyp. Operation: in progress.",
+            "Machine: prosthetic polyp. Operation: beginning.",
+            "Machine: prosthetic polyp. Result: coral generation.",
+            "Machine: prosthetic polyp. Result: ecosystem restabilisation."
         ],
         multiOutcomes: [
-            "TODO"
+            "These machines feel strangely alive. They pulse and throb.",
+            "There exist more prosthetic polyps now.",
+            "The biomachine expands.",
+            "The octopuses tell me, find unity in efficiency. Find peace in creation."
         ],
         helpText: "This octopus machine synthesizes coral faster than an entire colony of polyps ever could."
     }

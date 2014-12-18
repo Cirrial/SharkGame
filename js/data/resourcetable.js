@@ -166,8 +166,8 @@ SharkGame.ResourceTable = {
         singleName: 'eel',
         color: '#718D68',
         income: {
-            'fish': 1,
-            'sand': 1
+            'fish': 0.5,
+            'sand': 0.5
         },
         jobs: [
             "technician",
@@ -294,7 +294,8 @@ SharkGame.ResourceTable = {
         singleName: 'worker shrimp',
         color: '#D83902',
         income: {
-            'crystal': 0.5
+            'coral': 0.1,
+            'sponge': 1
         },
         value: 3000
     },
@@ -304,7 +305,8 @@ SharkGame.ResourceTable = {
         singleName: 'harvester lobster',
         color: '#718493',
         income: {
-            'sponge': 2
+            'sponge': 0.3,
+            'kelp': 1
         },
         value: 3000
     },
@@ -522,7 +524,8 @@ SharkGame.ResourceTable = {
         income: {
             coralglass: 10,
             coral: -150,
-            sand: -150
+            sand: -150,
+            ice: -1
         },
         value: 50000
     },
@@ -570,7 +573,8 @@ SharkGame.ResourceTable = {
             spronge: 30,
             sponge: -50,
             junk: -150,
-            tar: 0.0001
+            tar: 0.0001,
+            ice: -0.5
         },
         value: 50000
     },
