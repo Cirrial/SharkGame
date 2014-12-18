@@ -460,8 +460,9 @@ SharkGame.Gateway = {
         // handle general effects
         // special effects are handled by horrible spaghetti code sprinkled between this, World, and Resources
         $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
-            if(artifactData.effect) {
+            if(artifactData.effect &&!artifactData.alreadyApplied) {
                 artifactData.effect(artifactData.level);
+                artifactData.alreadyApplied = true;
             }
         });
     },
@@ -474,35 +475,42 @@ SharkGame.Gateway = {
         var totalEssence = SharkGame.Resources.getTotalResource("essence");
         var lastPlanet = SharkGame.World.worldType;
 
-        // determine which essence based messages should go into the pool
-        _.each(allMessages.essenceBased, function(v) {
-            var min = 0;
-            if(v.min) {
-                min = v.min;
-            }
-            var max = Number.MAX_VALUE;
-            if(v.max) {
-                max = v.max;
-            }
-            if(totalEssence >= min && totalEssence <= max) {
-                _.each(v.messages, function(message) {
+        // if the game wasn't won, add loss messages
+        if(!SharkGame.wonGame) {
+            _.each(allMessages.loss, function(message) {
+                messagePool.push(message);
+            });
+        } else {
+            // determine which essence based messages should go into the pool
+            _.each(allMessages.essenceBased, function(v) {
+                var min = 0;
+                if(v.min) {
+                    min = v.min;
+                }
+                var max = Number.MAX_VALUE;
+                if(v.max) {
+                    max = v.max;
+                }
+                if(totalEssence >= min && totalEssence <= max) {
+                    _.each(v.messages, function(message) {
+                        messagePool.push(message);
+                    });
+                }
+            });
+
+            // determine which planet based messages should go into the pool
+            var planetPool = allMessages.lastPlanetBased[lastPlanet];
+            if(planetPool) {
+                _.each(planetPool, function(message) {
                     messagePool.push(message);
                 });
             }
-        });
 
-        // determine which planet based messages should go into the pool
-        var planetPool = allMessages.lastPlanetBased[lastPlanet];
-        if(planetPool) {
-            _.each(planetPool, function(message) {
+            // finally just add all the generics into the pool
+            _.each(allMessages.generic, function(message) {
                 messagePool.push(message);
             });
         }
-
-        // finally just add all the generics into the pool
-        _.each(allMessages.generic, function(message) {
-            messagePool.push(message);
-        });
 
         message = SharkGame.choose(messagePool);
         return "\"" + message + "\"";

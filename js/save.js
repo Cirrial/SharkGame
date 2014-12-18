@@ -13,7 +13,7 @@ SharkGame.Save = {
         saveData.gateCostsMet = {};
         saveData.world = { type: SharkGame.World.worldType, level: SharkGame.World.planetLevel };
         saveData.artifacts = {};
-        saveData.gateway = {betweenRuns: SharkGame.gameOver};
+        saveData.gateway = {betweenRuns: SharkGame.gameOver, wonGame: SharkGame.wonGame};
 
         $.each(SharkGame.PlayerResources, function(k, v) {
             saveData.resources[k] = {
@@ -259,6 +259,7 @@ SharkGame.Save = {
             if(saveData.gateway) {
                 if(saveData.gateway.betweenRuns) {
                     simulateOffline = false;
+                    SharkGame.wonGame = saveData.gateway.wonGame;
                     SharkGame.Main.endGame(true);
                 }
             }
@@ -486,12 +487,19 @@ SharkGame.Save = {
             return save;
         },
 
-        // a little tweak
+        // a little tweak here and there
         function(save) {
             save = $.extend(true, save, {
                 "settings": {"buttonDisplayType": "list"}
             });
             return save;
+        },
+        function(save) {
+            save = $.extend(true, save, {
+                "gateway": {"wonGame": false}
+            });
+            return save;
         }
+
     ]
 };

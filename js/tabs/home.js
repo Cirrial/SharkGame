@@ -357,13 +357,26 @@ SharkGame.Home = {
         if(!$.isEmptyObject(actionCost) && amount > 1) {
             label += " (" + SharkGame.Main.beautify(amount) + ")";
         }
-        var costText = r.resourceListToString(actionCost, !enableButton);
-        if(costText != "") {
-            label += "<br/>Cost: " + costText;
+
+        // check for any infinite quantities
+        var infinitePrice = false;
+        _.each(actionCost, function(num) {
+            if(num === Number.POSITIVE_INFINITY) {
+                infinitePrice = true;
+            }
+        });
+        if(infinitePrice) {
+            label += "<br>Maxed out";
+        } else {
+            var costText = r.resourceListToString(actionCost, !enableButton);
+            if(costText != "") {
+                label += "<br>Cost: " + costText;
+            }
         }
+
         if(SharkGame.Settings.current.showTabHelp) {
             if(actionData.helpText) {
-                label += "<br/><span class='medDesc'>" + actionData.helpText + "</span>";
+                label += "<br><span class='medDesc'>" + actionData.helpText + "</span>";
             }
         }
         button.prop("disabled", !enableButton)

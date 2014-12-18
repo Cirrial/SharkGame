@@ -189,16 +189,18 @@ SharkGame.Lab = {
         var u = SharkGame.Upgrades;
         var upgrade = u[upgradeId];
         if(upgrade) {
-            upgrade.purchased = true;
-            //l.updateResearchList();
+            if(!upgrade.purchased) {
+                upgrade.purchased = true;
+                //l.updateResearchList();
 
-            // if the upgrade has effects, do them
-            if(upgrade.effect) {
-                if(upgrade.effect.multiplier) {
-                    $.each(upgrade.effect.multiplier, function(k, v) {
-                        var newMultiplier = v * r.getMultiplier(k);
-                        r.setMultiplier(k, newMultiplier)
-                    });
+                // if the upgrade has effects, do them
+                if(upgrade.effect) {
+                    if(upgrade.effect.multiplier) {
+                        $.each(upgrade.effect.multiplier, function(k, v) {
+                            var newMultiplier = v * r.getMultiplier(k);
+                            r.setMultiplier(k, newMultiplier)
+                        });
+                    }
                 }
             }
         }

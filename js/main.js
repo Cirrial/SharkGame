@@ -192,6 +192,23 @@ SharkGame.TitleBar = {
         }
     },
 
+    skipLink: {
+        name: "skip",
+        main: true,
+        onClick: function() {
+            if(SharkGame.World.worldType === "start") {
+                if(confirm("Do you want to reset your current run? There is no prestige mechanic or anything involved in this.")) {
+                    // just reset
+                    SharkGame.Main.init();
+                }
+            } else {
+                if(confirm("Is this world causing you too much trouble? Want to go back to the gateway?")) {
+                    SharkGame.Main.endGame();
+                }
+            }
+        }
+    },
+
     creditsLink: {
         name: "credits",
         main: false,
@@ -377,6 +394,11 @@ SharkGame.Main = {
         if(SharkGame.Save.savedGameExists()) {
             SharkGame.Save.loadGame();
             SharkGame.Log.addMessage("Loaded game.");
+        }
+
+        // rename a game option if this is a first time run
+        if(SharkGame.World.worldType === "start") {
+            SharkGame.TitleBar.skipLink.name = "reset";
         }
 
         // discover actions that were present in last save
