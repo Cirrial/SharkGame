@@ -163,7 +163,6 @@ SharkGame.WorldTypes = {
             "tar",
             "ice",
             "heater",
-            "sand",
             "chimaera",
             "clam"
         ],
