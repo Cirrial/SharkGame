@@ -140,7 +140,7 @@ SharkGame.Save = {
             }
             //unpack
             var saveDataFlat = saveData;
-            saveData = SharkGame.Save.expandData(template, saveDataFlat);
+            saveData = SharkGame.Save.expandData(template, saveDataFlat.slice());
             saveData.saveVersion = saveVersion;
 
             function checkTimes(data) {
@@ -151,7 +151,7 @@ SharkGame.Save = {
 
             //check if the template was sorted wrong when saving
             if (saveVersion <= 5 && !checkTimes(saveData)) {
-                saveData = SharkGame.Save.expandData(template, saveDataFlat, true);
+                saveData = SharkGame.Save.expandData(template, saveDataFlat.slice(), true);
                 saveData.saveVersion = saveVersion;
             }
 
@@ -422,7 +422,6 @@ SharkGame.Save = {
     },
 
     expandData: function(template, data, sortWrong) {
-        data = data.slice()
         function expandPart(bp) {
             var out = {}; //todo: array support
             $.each(bp, function(_, slot) {
