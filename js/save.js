@@ -126,38 +126,38 @@ SharkGame.Save = {
         // if first letter of string was [, data was packed, unpack it
         if(saveDataString.charAt(0) === '[') {
             //try {
-                //check version
-                var currentVersion = SharkGame.Save.saveUpdaters.length - 1;
-                var saveVersion = saveData.shift();
-                if(typeof saveVersion !== "number" || saveVersion % 1 !== 0 || saveVersion < 0 || saveVersion > currentVersion) {
-                    throw new Error("Invalid save version!");
-                }
-                //create matching template
-                var template = {};
-                for(var i = 0; i <= saveVersion; i++) {
-                    var updater = SharkGame.Save.saveUpdaters[i];
-                    template = updater(template);
-                }
-                //unpack
-                var saveDataFlat = saveData;
-                saveData = SharkGame.Save.expandData(template, saveDataFlat);
+            //check version
+            var currentVersion = SharkGame.Save.saveUpdaters.length - 1;
+            var saveVersion = saveData.shift();
+            if(typeof saveVersion !== "number" || saveVersion % 1 !== 0 || saveVersion < 0 || saveVersion > currentVersion) {
+                throw new Error("Invalid save version!");
+            }
+            //create matching template
+            var template = {};
+            for(var i = 0; i <= saveVersion; i++) {
+                var updater = SharkGame.Save.saveUpdaters[i];
+                template = updater(template);
+            }
+            //unpack
+            var saveDataFlat = saveData;
+            saveData = SharkGame.Save.expandData(template, saveDataFlat);
+            saveData.saveVersion = saveVersion;
+
+            function checkTimes(data) {
+                return (data.timestampLastSave > 1e12 && data.timestampLastSave < 2e12 &&
+                data.timestampGameStart > 1e12 && data.timestampGameStart < 2e12 &&
+                data.timestampRunStart > 1e12 && data.timestampRunStart < 2e12)
+            }
+
+            //check if the template was sorted wrong when saving
+            if (saveVersion <= 5 && !checkTimes(saveData)) {
+                saveData = SharkGame.Save.expandData(template, saveDataFlat, true);
                 saveData.saveVersion = saveVersion;
+            }
 
-                function checkTimes(data) {
-                    return (saveData.timestampLastSave > 1e9 && saveData.timestampLastSave < 2e9 &&
-                    saveData.timestampGameStart > 1e9 && saveData.timestampGameStart < 2e9 &&
-                    saveData.timestampRunStart > 1e9 && saveData.timestampRunStart < 2e9)
-                }
-
-                //check if the template was sorted wrong when saving
-                if (saveVersion <= 5 && !checkTimes(saveData)) {
-                    saveData = SharkGame.Save.expandData(template, saveDataFlat, true);
-                    saveData.saveVersion = saveVersion;
-                }
-
-                if (!checkTimes(saveData)) {
-                    throw new Error("Order appears to be corrupt.");
-                }
+            if (!checkTimes(saveData)) {
+                throw new Error("Order appears to be corrupt.");
+            }
             //} catch(err) {
             //    throw new Error("Couldn't unpack packed save data. Reason: " + err.message + ". Your save: " + saveDataString);
             //}
@@ -409,7 +409,7 @@ SharkGame.Save = {
                     flattenPart(slot[1], src[slot[0]]);
                 } else {
                     var elem = src[slot];
-                    if(typeof elem === "number" && slot !== "timestampLastSave" && slot !== "timestampGameStart" && slot !== "timestampRunStart" && slot !== "timestampRunEnd") {
+                    if(typeof elem === "number" && slot.indexOf("timestamp") === -1) {
                         elem = Number(elem.toPrecision(5));
                     }
                     out.push(elem);
@@ -422,6 +422,7 @@ SharkGame.Save = {
     },
 
     expandData: function(template, data, sortWrong) {
+        data = data.slice()
         function expandPart(bp) {
             var out = {}; //todo: array support
             $.each(bp, function(_, slot) {
@@ -435,7 +436,6 @@ SharkGame.Save = {
             return out;
         }
 
-        data = data.slice(); // let's try and avoid horrible consequences
         var expanded = expandPart(SharkGame.Save.createBlueprint(template, sortWrong));
         if (data.length !== 0) throw new Error("Incorrect save length.");
         return expanded;
