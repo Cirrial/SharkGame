@@ -47,7 +47,6 @@ SharkGame.Resources = {
 
         var worldResources = w.worldResources;
 
-        // for each resource, add incomes
         $.each(SharkGame.ResourceTable, function(name, resource) {
 
             var worldResourceInfo = worldResources[name];
@@ -74,6 +73,9 @@ SharkGame.Resources = {
                             }
                         });
                     }
+
+                    // if the cost can't be taken, scale the cost and output down to possible levels
+                    // TODO
 
                     // if there is a cost and it can be taken (or if there is no cost)
                     // run over all resources to fill the income table

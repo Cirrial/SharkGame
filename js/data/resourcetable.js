@@ -524,8 +524,7 @@ SharkGame.ResourceTable = {
         income: {
             coralglass: 10,
             coral: -150,
-            sand: -150,
-            ice: -1
+            sand: -150
         },
         value: 50000
     },
@@ -573,8 +572,7 @@ SharkGame.ResourceTable = {
             spronge: 30,
             sponge: -50,
             junk: -150,
-            tar: 0.0001,
-            ice: -0.5
+            tar: 0.0001
         },
         value: 50000
     },

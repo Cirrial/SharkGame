@@ -1099,6 +1099,23 @@ SharkGame.Changelog = {
     ]
 };
 
+// ctrl+s saves
+$(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 's':
+                event.preventDefault();
+                SharkGame.Save.saveGame();
+                break;
+            case 'o':
+                event.preventDefault();
+                SharkGame.Main.showOptions();
+                break;
+        }
+    }
+});
+
+
 $(document).ready(function() {
     $('#game').show();
     SharkGame.Main.init();

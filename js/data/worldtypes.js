@@ -125,7 +125,7 @@ SharkGame.WorldTypes = {
             clam: 1E5,
             sand: 1E7,
             crystal: 1E7,
-            purifier: 1E2,
+            shark: 1E5,
             sharkonium: 1E7
         }
     },
@@ -299,7 +299,7 @@ SharkGame.WorldTypes = {
             sand: 1E6,
             crystal: 1E4,
             clam: 1E6,
-            ice: 1E3,
+            ice: 1E1,
             sharkonium: 1E7,
             fish: 1E7
         }
