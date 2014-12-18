@@ -61,27 +61,22 @@ SharkGame.Resources = {
                     }
 
 
-                    var canTakeCost = true;
-                    // run over all resources first to check if this is true
+                    var costScaling = 1;
+                    // run over all resources first to check if costs can be met
+                    // if the cost can't be taken, scale the cost and output down to feasible levels
                     if(!resource.forceIncome) {
                         $.each(resource.income, function(k, v) {
                             var change = r.getIncomeAmountTotal(name, k);
-                            if(change < 0 && r.getResource(k) <= 0) {
-                                canTakeCost = false;
-                            }
-                        });
-                    }
-
-                    // if the cost can't be taken, scale the cost and output down to possible levels
-                    var costScaling = 1;
-                    if(!canTakeCost) {
-                        // find the smallest 'multiple'
-                        $.each(resource.income, function(incomeName, incomeAmount) {
-                            var change = r.getIncomeAmountTotal(name, k);
-                            if(incomeAmount < 0) {
-                                var multiple = r.getResource(incomeName) / -incomeAmount;
-
-
+                            if(change < 0) {
+                                var resourceHeld = r.getResource(k);
+                                if(resourceHeld + change <= 0) {
+                                    var scaling = resourceHeld / -change;
+                                    if(scaling >= 0 && scaling < 1) { // sanity checking
+                                        costScaling = Math.min(costScaling, scaling);
+                                    } else {
+                                        costScaling = 0; // better to break this way than break explosively
+                                    }
+                                }
                             }
                         });
                     }
@@ -117,10 +112,10 @@ SharkGame.Resources = {
         if(worldResourceInfo) {
             worldMultiplier = worldResourceInfo.incomeMultiplier;
         }
-        if(!costScaling) {
+        if(typeof(costScaling) !== "number") {
             costScaling = 1;
         }
-        return generator.income[product] * playerResource.amount * costScaling *
+        return SharkGame.ResourceTable[generator].income[product] * playerResource.amount * costScaling *
             playerResource.incomeMultiplier * worldMultiplier *
             affectedResourceBoostMultiplier * w.getArtifactMultiplier(generator) *
             r.getSpecialMultiplier();
