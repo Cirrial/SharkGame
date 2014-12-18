@@ -282,7 +282,6 @@ SharkGame.WorldTypes = {
             "tar",
             "dolphin",
             "whale",
-            "crab",
             "lobster",
             "chimaera",
             "shrimp",

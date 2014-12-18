@@ -35,10 +35,10 @@ $.extend(SharkGame, {
     dt: (1 / 10),
     before: new Date(),
 
-    timestampLastSave: new Date(),
-    timestampGameStart: new Date(),
-    timestampRunStart: new Date(),
-    timestampRunEnd: new Date(),
+    timestampLastSave: false,
+    timestampGameStart: false,
+    timestampRunStart: false,
+    timestampRunEnd: false,
 
     worldsCompleted: 0,
 
@@ -728,6 +728,8 @@ SharkGame.Main = {
                     if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
                         SharkGame.Save.deleteSave();
                         SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
+                        SharkGame.World.worldType = "start"; // nothing else will reset this
+                        SharkGame.World.planetLevel = 1;
                         SharkGame.Main.init(); // reset
                     }
                 })

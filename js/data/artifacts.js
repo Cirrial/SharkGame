@@ -42,7 +42,7 @@ SharkGame.Artifacts = {
             return Math.floor(Math.pow(10, level + 1));
         },
         effect: function(level) {
-            SharkGame.Resources.specialMultiplier *= (2 * (level + 1));
+            SharkGame.Resources.specialMultiplier *= (2 * level);
         }
     },
     planetTerraformer: {
