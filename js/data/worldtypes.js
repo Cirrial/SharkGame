@@ -237,7 +237,7 @@ SharkGame.WorldTypes = {
         gateCosts: {
             junk: 1E10,
             tar: 1E3,
-            coralglass: 1E5,
+            sand: 1E6,
             spronge: 1E5,
             delphinium: 1E5,
             sharkonium: 1E5
