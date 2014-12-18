@@ -141,6 +141,22 @@ SharkGame.Save = {
                 //unpack
                 saveData = SharkGame.Save.expandData(template, saveData);
                 saveData.saveVersion = saveVersion;
+
+                function checkTimes(data) {
+                    return (saveData.timestampLastSave > 1e9 && saveData.timestampLastSave < 2e9 &&
+                    saveData.timestampGameStart > 1e9 && saveData.timestampGameStart < 2e9 &&
+                    saveData.timestampRunStart > 1e9 && saveData.timestampRunStart < 2e9)
+                }
+
+                //check if the template was sorted wrong when saving
+                if (saveVersion <= 5 && !checkTimes(saveData)) {
+                    saveData = SharkGame.Save.expandData(template, saveData, true);
+                    saveData.saveVersion = saveVersion;
+                }
+
+                if (!checkTimes(saveData)) {
+                    throw new Error("Save order appears to be corrupt. Your save: " + saveDataString)
+                }
             } catch(err) {
                 throw new Error("Couldn't unpack packed save data. Reason: " + err.message + ". Your save: " + saveDataString);
             }
@@ -226,10 +242,6 @@ SharkGame.Save = {
             if(saveData.settings) {
                 $.each(saveData.settings, function(k, v) {
                     if(SharkGame.Settings.current[k] !== undefined) {
-                        // check that the value is actually expected, otherwise set to default
-                        if(SharkGame.Settings[k].options.indexOf(v) === -1) {
-                            v = SharkGame.Settings[k].defaultSetting;
-                        }
                         SharkGame.Settings.current[k] = v;
                         // update anything tied to this setting right off the bat
                         (SharkGame.Settings[k].onChange || $.noop)();
@@ -362,7 +374,7 @@ SharkGame.Save = {
     },
 
     // Thanks to Dylan for managing to crush saves down to a much smaller size!
-    createBlueprint: function(template) {
+    createBlueprint: function(template, sortWrong) {
         function createPart(t) {
             var bp = [];
             $.each(t, function(k, v) {
@@ -375,7 +387,11 @@ SharkGame.Save = {
             bp.sort(function(a, b) {
                 a = typeof a === "object" ? a[0] : a;
                 b = typeof b === "object" ? b[0] : b;
-                return a > b;
+                if (sortWrong) {
+                    return a > b;  //mercy on my soul
+                } else {
+                    return a > b ? 1 : -1;
+                }
             });
             return bp;
         }
@@ -404,7 +420,7 @@ SharkGame.Save = {
         return out;
     },
 
-    expandData: function(template, data) {
+    expandData: function(template, data, sortWrong) {
         function expandPart(bp) {
             var out = {}; //todo: array support
             $.each(bp, function(_, slot) {
@@ -418,7 +434,7 @@ SharkGame.Save = {
             return out;
         }
 
-        var expanded = expandPart(SharkGame.Save.createBlueprint(template));
+        var expanded = expandPart(SharkGame.Save.createBlueprint(template, sortWrong));
         if (data.length !== 0) throw new Error("Incorrect save length.");
         return expanded;
     },
