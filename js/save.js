@@ -226,6 +226,10 @@ SharkGame.Save = {
             if(saveData.settings) {
                 $.each(saveData.settings, function(k, v) {
                     if(SharkGame.Settings.current[k] !== undefined) {
+                        // check that the value is actually expected, otherwise set to default
+                        if(SharkGame.Settings[k].options.indexOf(v) === -1) {
+                            v = SharkGame.Settings[k].defaultSetting;
+                        }
                         SharkGame.Settings.current[k] = v;
                         // update anything tied to this setting right off the bat
                         (SharkGame.Settings[k].onChange || $.noop)();
@@ -388,7 +392,7 @@ SharkGame.Save = {
                     flattenPart(slot[1], src[slot[0]]);
                 } else {
                     var elem = src[slot];
-                    if(typeof elem === "number" && slot !== "timestampLastSave" && slot !== "timestampGameStart" && slot !== "timestampRunStart") {
+                    if(typeof elem === "number" && slot !== "timestampLastSave" && slot !== "timestampGameStart" && slot !== "timestampRunStart" && slot !== "timestampRunEnd") {
                         elem = Number(elem.toPrecision(5));
                     }
                     out.push(elem);

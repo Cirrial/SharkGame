@@ -37,7 +37,8 @@ SharkGame.Recycler = {
     allowedCategories: {
         machines: "linear",
         stuff: "constant",
-        processed: "constant"
+        processed: "constant",
+        animals: "linear"
     },
 
     bannedResources: [
