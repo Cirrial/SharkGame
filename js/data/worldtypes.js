@@ -164,7 +164,7 @@ SharkGame.WorldTypes = {
             "ice",
             "heater",
             "chimaera",
-            "clam"
+            "jellyfish"
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "stuff", amount: -0.02 },
