@@ -44,11 +44,13 @@ SharkGame.Lab = {
         var allResearchDone = l.allResearchDone();
         var message = allResearchDone ? l.messageDone : l.message;
         var imgSrc = allResearchDone ? l.sceneDoneImage : l.sceneImage;
+        var tabMessageSel = $('<div>').attr("id", "tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + imgSrc + "' id='tabSceneImage'>" + message;
-            $('#tabMessage').css("background-image", "url('" + l.tabBg + "')");
+            tabMessageSel.css("background-image", "url('" + l.tabBg + "')");
         }
-        content.append($('<div>').attr("id", "tabMessage").html(message));
+        tabMessageSel.html(message);
+        content.append(tabMessageSel);
         var buttonListContainer = $('<div>').attr("id", "buttonLeftContainer");
         buttonListContainer.append($('<div>').attr("id", "buttonList").append($("<h3>").html("Available Upgrades")));
         content.append(buttonListContainer);
@@ -63,9 +65,8 @@ SharkGame.Lab = {
     },
 
     update: function() {
-        var r = SharkGame.Resources;
         var l = SharkGame.Lab;
-        var w = SharkGame.World;
+
 
         // cache a selector
         var buttonList = $('#buttonList');
@@ -95,7 +96,6 @@ SharkGame.Lab = {
                             }
                         });
                     }
-
                     // validate if upgrade is possible
                     prereqsMet = prereqsMet && l.isUpgradePossible(key);
                 }
@@ -103,6 +103,7 @@ SharkGame.Lab = {
                     // add button
                     var effects = SharkGame.Lab.getResearchEffects(value);
                     var buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
+                    l.updateLabButton(key);
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
                             .css("opacity", 0)
@@ -112,37 +113,44 @@ SharkGame.Lab = {
                 }
             } else {
                 // button exists
-                // disable or enable button based on cost being met
-                var upgradeCost = SharkGame.Upgrades[key].cost;
-
-                var enableButton;
-                if($.isEmptyObject(upgradeCost)) {
-                    enableButton = true; // always enable free buttons
-                } else {
-                    enableButton = r.checkResources(upgradeCost);
-                }
-
-                var effects = SharkGame.Lab.getResearchEffects(value, !enableButton);
-                var label = value.name + "<br/>" + value.desc + "<br/>" + effects;
-                var costText = r.resourceListToString(upgradeCost, !enableButton);
-                if(costText != "") {
-                    label += "<br/>Cost: " + costText;
-                }
-                button.prop("disabled", !enableButton).html(label);
-
-                var spritename = "technologies/" + key;
-                if(!enableButton) {
-                    spritename += "-disabled";
-                }
-                if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(spritename);
-                    if(iconDiv) {
-                        iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-                        button.prepend(iconDiv);
-                    }
-                }
+                l.updateLabButton(key);
             }
         });
+    },
+
+    updateLabButton: function(upgradeName) {
+        var r = SharkGame.Resources;
+        var button = $('#' + upgradeName);
+        var upgradeData = SharkGame.Upgrades[upgradeName];
+        var upgradeCost = upgradeData.cost;
+
+
+        var enableButton;
+        if($.isEmptyObject(upgradeCost)) {
+            enableButton = true; // always enable free buttons
+        } else {
+            enableButton = r.checkResources(upgradeCost);
+        }
+
+        var effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
+        var label = upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
+        var costText = r.resourceListToString(upgradeCost, !enableButton);
+        if(costText != "") {
+            label += "<br/>Cost: " + costText;
+        }
+        button.prop("disabled", !enableButton).html(label);
+
+        var spritename = "technologies/" + upgradeName;
+        if(!enableButton) {
+            spritename += "-disabled";
+        }
+        if(SharkGame.Settings.current.iconPositions !== "off") {
+            var iconDiv = SharkGame.changeSprite(spritename, null, (!enableButton) ? "general/missing-technology-disabled" : "general/missing-technology");
+            if(iconDiv) {
+                iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
+                button.prepend(iconDiv);
+            }
+        }
     },
 
     onLabButton: function() {

@@ -484,8 +484,14 @@ SharkGame.Save = {
             });
             save.gateway = {betweenRuns: false};
             return save;
+        },
+
+        // a little tweak
+        function(save) {
+            save = $.extend(true, save, {
+                "settings": {"buttonDisplayType": "list"}
+            });
+            return save;
         }
-
-
     ]
 };

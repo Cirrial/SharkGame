@@ -173,7 +173,7 @@ SharkGame.Gateway = {
         // show artifact pool
         if(_.size(g.artifactPool) === 0) {
             // we exhausted the pool (!!!)
-            gatewayContent.append($('<p>').append($('<em>').html("You may not have achieved perfection, but it would take a deity to improve your capabilities further.")));
+            gatewayContent.append($('<p>').append($('<em>').html("\"You may not have achieved perfection, but it would take a deity to improve your capabilities further.\"")));
         } else {
             // there's something to show
             var artifactPool = $('<div>').addClass("gatewayButtonList");
@@ -245,8 +245,9 @@ SharkGame.Gateway = {
 
         // add world image
         var spritename = "planets/" + g.selectedWorld;
-        var iconDiv = SharkGame.changeSprite(spritename);
+        var iconDiv = SharkGame.changeSprite(spritename, null, "planets/missing");
         if(iconDiv) {
+            iconDiv.addClass("planetDisplay");
             var containerDiv = $('<div>').attr("id", "planetContainer");
             containerDiv.append(iconDiv);
             gatewayContent.append(containerDiv);
@@ -385,7 +386,7 @@ SharkGame.Gateway = {
                     spritename += "-disabled";
                 }
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(spritename);
+                    var iconDiv = SharkGame.changeSprite(spritename, null, (disableButton) ? "general/missing-artifact-disabled" : "general/missing-artifact");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                         buttonSel.prepend(iconDiv);
@@ -445,7 +446,7 @@ SharkGame.Gateway = {
 
                 var spritename = "planets/" + planetData.type;
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(spritename);
+                    var iconDiv = SharkGame.changeSprite(spritename, null, "planets/missing");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                         buttonSel.prepend(iconDiv);
@@ -567,6 +568,12 @@ SharkGame.Gateway = {
     getMaxWorldQualitiesToShow: function() {
         var psLevel = SharkGame.Artifacts.planetScanner.level;
         return (psLevel > 0) ? psLevel + 1 : 0;
+    },
+
+    deleteArtifacts: function() {
+        _.each(SharkGame.Artifacts, function(artifactData) {
+            artifactData.level = 0;
+        });
     }
 
 };

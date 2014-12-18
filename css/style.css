@@ -315,6 +315,16 @@ pre {
   margin: 5px;
   padding: 1.0em;
 }
+.pileArrangement ul {
+  display: inline-block;
+}
+.pileArrangement li {
+  display: inline-block;
+}
+.pileArrangement button {
+  display: inline-block;
+  margin: 0.8em;
+}
 #homeTabs {
   margin-bottom: 1em;
 }
@@ -967,9 +977,6 @@ button.gateway:disabled div {
   margin: 0.5em auto;
   padding: 0.5em;
 }
-#planetContainer div {
-  margin: auto;
-}
 .gateway ::selection {
   background-color: #174636;
 }
@@ -996,16 +1003,37 @@ button.gateway:disabled div {
   -moz-box-shadow: 0 0 3px 3px #73d0b1;
   box-shadow: 0 0 3px 3px #73d0b1;
 }
+.planetDisplay {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  background-color: #73d0b1;
+  -webkit-box-shadow: 0 0 3px 3px #73d0b1;
+  -moz-box-shadow: 0 0 3px 3px #73d0b1;
+  box-shadow: 0 0 3px 3px #73d0b1;
+  margin: 0 auto;
+}
 button.planetButton {
   background-color: transparent;
   border: none;
   text-shadow: 0 0 0.5em #bfe9dc;
+  padding: 20px;
+}
+button.planetButton div {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
 }
 button.planetButton:hover {
   text-shadow: 0 0 0.3em #bfe9dc, 0 0 0.6em #d2f0e6, 0 0 0.9em #e5f6f1;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+button.planetButton:hover div {
+  -webkit-box-shadow: 0 0 0.4em 0.4em #ace3d1;
+  -moz-box-shadow: 0 0 0.4em 0.4em #ace3d1;
+  box-shadow: 0 0 0.4em 0.4em #ace3d1;
 }
 button.planetButton:active {
   -webkit-box-shadow: none;

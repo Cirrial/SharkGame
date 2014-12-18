@@ -5,7 +5,7 @@ SharkGame.Reflection = {
     tabName: "Reflection",
     tabBg: "img/bg/bg-gate.png",
 
-    sceneImage: "//placehold.it/400x200",
+    sceneImage: "img/events/misc/scene-reflection.png",
 
     discoverReq: {
         resource: {
@@ -36,7 +36,7 @@ SharkGame.Reflection = {
         var message = r.message;
         var tabMessageSel = $('#tabMessage');
         if(SharkGame.Settings.current.showTabImages) {
-            message = "<img width=400 height=200 src='" + r.sceneImage + "' id='tabSceneImage'>" + message;
+            message = "<img width=400 height=200 src='" + r.sceneImage + "' id='tabSceneImageEssence'>" + message;
             tabMessageSel.css("background-image", "url('" + r.tabBg + "')");
         }
         tabMessageSel.html(message);
@@ -53,10 +53,18 @@ SharkGame.Reflection = {
         var listSel = $('#artifactList');
         $.each(SharkGame.Artifacts, function(artifactKey, artifactData) {
             if(artifactData.level > 0) {
+                var maxedOut = artifactData.level >= artifactData.max;
                 var item = $('<div>').addClass("artifactDiv");
-                item.append("<em>" + artifactData.name + "</em>" +
-                "<br><span class='medDesc'>(Power: " + m.beautify(artifactData.level) + ")</span>" +
-                "<br>" + artifactData.desc);
+                var artifactLabel = "<em>" + artifactData.name + "</em>" +
+                    "<br><span class='medDesc'>";
+                if(maxedOut) {
+                    artifactLabel += "(Maximum Power)";
+                } else {
+                    artifactLabel += "(Power: " + m.beautify(artifactData.level) + ")";
+                }
+                artifactLabel += "</span><br>" + artifactData.desc;
+
+                item.append(artifactLabel);
                 listSel.append(item);
 
                 var spritename = "artifacts/" + artifactKey;

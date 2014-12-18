@@ -439,6 +439,21 @@ pre {
   padding: 1.0em;
 }
 
+.pileArrangement {
+  ul {
+    display: inline-block;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  button {
+    display: inline-block;
+    margin: 0.8em;
+  }
+}
+
 #homeTabs {
 
   margin-bottom: 1em;
@@ -1021,10 +1036,6 @@ button.gateway {
   text-align: center;
   margin: 0.5em auto;
   padding: 0.5em;
-
-  div {
-    margin: auto;
-  }
 }
 
 .gateway ::selection {
@@ -1053,14 +1064,30 @@ button.gateway {
   }
 }
 
+.planetDisplay {
+  .border-radius(50px);
+  background-color: @color-discovery-bg;
+  .box-shadow(0, 0, 3px, 3px, @color-discovery-bg);
+  margin: 0 auto;
+}
+
 button.planetButton {
   background-color: transparent;
   border: none;
   text-shadow: 0 0 0.5em lighten(@color-discovery, 5%);
+  padding: 20px;
+
+  div {
+    .border-radius(50px);
+  }
 
   &:hover {
     text-shadow: 0 0 0.3em lighten(@color-discovery, 5%), 0 0 0.6em lighten(@color-discovery, 10%), 0 0 0.9em lighten(@color-discovery, 15%);
     .clear-box-shadow();
+
+    div {
+      .box-shadow(0, 0, 0.4em, 0.4em, @color-discovery);
+    }
   }
 
   &:active {

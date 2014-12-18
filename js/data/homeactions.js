@@ -14,20 +14,45 @@ SharkGame.HomeActions = {
             // no prereqs
         },
         outcomes: [
-            "Ate a tuna.",
-            "Ate a mackerel.",
+            "Dropped the bass.",
             "Ate a kipper. Wait. Hang on.",
             "You eat a fish hooray!",
             "Fish.",
-            "Ate a cod.",
-            "Ate a bass.",
             "Ate a shark. Wait. No, it wasn't a shark.",
+            "Ate an anchovy.",
+            "Ate a catfish.",
+            "Ate a flounder.",
+            "Ate a haddock.",
+            "Ate a herring.",
+            "Ate a mackerel.",
+            "Ate a mullet.",
+            "Ate a perch.",
+            "Ate a pollock.",
             "Ate a salmon.",
+            "Ate a sardine.",
+            "Ate a sole.",
+            "Ate a tilapia.",
+            "Ate a trout.",
+            "Ate a whitefish.",
+            "Ate a bass.",
             "Ate a carp.",
-            "Ate an eel??",
-            "Ate a shrimp. Wait. That's not a fish.",
-            "Almost ate a remora.",
-            "Dropped the bass."
+            "Ate a cod.",
+            "Ate a halibut.",
+            "Ate a mahi mahi.",
+            "Ate a monkfish.",
+            "Ate a perch.",
+            "Ate a snapper.",
+            "Ate a bluefish.",
+            "Ate a grouper.",
+            "Ate a sea bass.",
+            "Ate a yellowfin tuna.",
+            "Ate a marlin.",
+            "Ate an orange roughy.",
+            "Ate a shark.",
+            "Ate a swordfish.",
+            "Ate a tilefish.",
+            "Ate a tuna."
+
         ],
         helpText: "Use your natural shark prowess to find and catch a fish."
     },
@@ -46,7 +71,28 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Pried an orange elephant ear sponge from the rocks.",
+            "Pried a brain sponge from the rocks.",
+            "Pried a branching tube sponge from the rocks.",
+            "Pried a brown volcano carpet from the rocks.",
+            "Pried a row pore rope sponge from the rocks.",
+            "Pried a branching vase sponge from the rocks.",
+            "Pried a chicken liver sponge from the rocks.",
+            "Pried a red boring sponge from the rocks.",
+            "Pried a heavenly sponge from the rocks.",
+            "Pried a brown encrusting octopus sponge from the rocks.",
+            "Pried a stinker sponge from the rocks.",
+            "Pried a black-ball sponge from the rocks.",
+            "Pried a strawberry vase sponge from the rocks.",
+            "Pried a convoluted orange sponge from the rocks.",
+            "Pried a touch-me-not sponge from the rocks. Ow.",
+            "Pried a lavender rope sponge from the rocks.",
+            "Pried a red-orange branching sponge from the rocks.",
+            "Pried a variable boring sponge from the rocks.",
+            "Pried a loggerhead sponge from the rocks.",
+            "Pried a yellow sponge from the rocks.",
+            "Pried an orange lumpy encrusting sponge from the rocks.",
+            "Pried a giant barrel sponge from the rocks."
         ],
         helpText: "Grab a sponge from the seabed for future use."
     },
@@ -65,13 +111,32 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Got a grooved carpet shell.",
+            "Got a hard clam.",
+            "Got a manila clam.",
+            "Got a soft clam.",
+            "Got an atlantic surf clam.",
+            "Got an ocean quahog.",
+            "Got a pacific razor clam.",
+            "Got a pismo clam.",
+            "Got a geoduck.",
+            "Got an atlantic jackknife clam.",
+            "Got a lyrate asiatic hard clam.",
+            "Got an ark clam.",
+            "Got a nut clam.",
+            "Got a duck clam.",
+            "Got a marsh clam.",
+            "Got a file clam.",
+            "Got a giant clam.",
+            "Got an asiatic clam.",
+            "Got a peppery furrow shell.",
+            "Got a pearl oyster."
         ],
         helpText: "Fetch a clam. Why do we need clams now? Who knows."
     },
 
     'getJellyfish': {
-        name: "Get jellyfish",
+        name: "Grab jellyfish",
         effect: {
             resource: {
                 'jellyfish': 1
@@ -84,7 +149,36 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Grabbed a mangrove jellyfish.",
+            "Grabbed a lagoon jellyfish.",
+            "Grabbed a nomuras jellyfish.",
+            "Grabbed a sea nettle jellyfish.",
+            "Grabbed an upside down jellyfish.",
+            "Grabbed a comb jellyfish.",
+            "Grabbed a sand jellyfish.",
+            "Grabbed a box jellyfish.",
+            "Grabbed a sea wasp jellyfish.",
+            "Grabbed a blue blubber.",
+            "Grabbed a white spotted jellyfish.",
+            "Grabbed an immortal jellyfish.",
+            "Grabbed a pelagia noctiluca.",
+            "Grabbed a moon light jellyfish.",
+            "Grabbed an iracongi irukandji jellyfish.",
+            "Grabbed an irukandji jellyfish.",
+            "Grabbed a moon jellyfish.",
+            "Grabbed an aurelia aurita.",
+            "Grabbed a ball jellyfish.",
+            "Grabbed a cannonball jellyfish.",
+            "Grabbed a man of war.",
+            "Grabbed a war jellyfish.",
+            "Grabbed a blue bottle jellyfish.",
+            "Grabbed a lion's mane jellyfish.",
+            "Grabbed a mane jellyfish.",
+            "Grabbed a sun jellyfish.",
+            "Grabbed a square jellyfish.",
+            "Grabbed a physalia jellyfish.",
+            "Grabbed a king jellyfish.",
+            "Grabbed a cassiopeia jellyfish."
         ],
         helpText: "Take a great risk in catching a jellyfish without being stung."
     },
@@ -140,6 +234,8 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
+            "Squishy porous science!",
+            "The sponge has been breached and the science is leaking out!",
             "TODO"
         ],
         helpText: "Dissect sponges to learn their porous secrets. Science!"
@@ -516,7 +612,36 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "An african filter shrimp joins you.",
+            "An amano shrimp joins you.",
+            "A bamboo shrimp joins you.",
+            "A bee shrimp joins you.",
+            "A black tiger shrimp joins you.",
+            "A blue bee shrimp joins you.",
+            "A blue pearl shrimp joins you.",
+            "A blue tiger shrimp joins you.",
+            "A brown camo shrimp joins you.",
+            "A cardinal shrimp joins you.",
+            "A crystal red shrimp joins you.",
+            "A dark green shrimp joins you.",
+            "A glass shrimp joins you.",
+            "A golden bee shrimp joins you.",
+            "A harlequin shrimp joins you.",
+            "A malaya shrimp joins you.",
+            "A neocaridina heteropoda joins you.",
+            "A ninja shrimp joins you.",
+            "An orange bee shrimp joins you.",
+            "An orange delight shrimp joins you.",
+            "A purple zebra shrimp joins you.",
+            "A red cherry shrimp joins you.",
+            "A red goldflake shrimp joins you.",
+            "A red tiger shrimp joins you.",
+            "A red tupfel shrimp joins you.",
+            "A snowball shrimp joins you.",
+            "A sulawesi shrimp joins you.",
+            "A tiger shrimp joins you.",
+            "A white bee shrimp joins you.",
+            "A yellow shrimp joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -541,7 +666,17 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A scampi joins you.",
+            "A crayfish joins you.",
+            "A clawed lobster joins you.",
+            "A spiny lobster joins you.",
+            "A slipper lobster joins you.",
+            "A hummer lobster joins you.",
+            "A crawfish joins you.",
+            "A rock lobster joins you.",
+            "A langouste joins you.",
+            "A shovel-nose lobster joins you.",
+            "A crawdad joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -567,7 +702,31 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A white beaked dolphin joins you.",
+            "A short finned pilot whale joins you.",
+            "A pantropical dolphin joins you.",
+            "A long-finned pilot whale joins you.",
+            "A hourglass dolphin joins you.",
+            "A false killer whale joins you.",
+            "A bottlenose dolphin joins you.",
+            "A striped dolphin joins you.",
+            "A pygmy killer whale joins you.",
+            "A melon-headed whale joins you.",
+            "An irrawaddy dolphin joins you.",
+            "A dusky dolphin joins you.",
+            "A clymene dolphin joins you.",
+            "A black dolphin joins you.",
+            "A southern right-whale dolphin joins you.",
+            "A rough toothed dolphin joins you.",
+            "A short beaked common dolphin joins you.",
+            "A pacific white-sided dolphin joins you.",
+            "A northern right-whale dolphin joins you.",
+            "A long-snouted spinner dolphin joins you.",
+            "A long-beaked common dolphin joins you.",
+            "A indo-pacific hump-back joins you.",
+            "An atlantic white sided dolphin joins you.",
+            "An atlantic hump-backed dolphin joins you.",
+            "An atlantic spotted dolphin joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -592,7 +751,23 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A blue whale joins you.",
+            "A pygmy blue whale joins you.",
+            "A bowhead whale joins you.",
+            "A fin whale joins you.",
+            "A gray whale joins you.",
+            "A humpback whale joins you.",
+            "A southern minke whale joins you.",
+            "A common minke whale  joins you.",
+            "A dwarf minke whale joins you.",
+            "A pygmy right whale joins you.",
+            "A north right whale  joins you.",
+            "A southern right whale joins you.",
+            "A sei whale joins you.",
+            "A beluga whale joins you.",
+            "A sperm whale joins you.",
+            "A pygmy sperm whale joins you.",
+            "A dwarf sperm whale joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -617,7 +792,25 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A false moray joins you.",
+            "A mud eel joins you.",
+            "A spaghetti eel joins you.",
+            "A moray eel joins you.",
+            "A thin eel joins you.",
+            "A worm eel joins you.",
+            "A conger joins you.",
+            "A longneck eel joins you.",
+            "A pike conger joins you.",
+            "A duckbill eel joins you.",
+            "A snake eel joins you.",
+            "A snipe eel joins you.",
+            "A sawtooth eel joins you.",
+            "A cutthroat eel joins you.",
+            "An electric eel joins you.",
+            "A bobtail snipe eel joins you.",
+            "A silver eel joins you.",
+            "A long finned eel joins you.",
+            "A short finned eel joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -642,7 +835,36 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A ploughnose chimaera joins you.",
+            "A cape elephantfish joins you.",
+            "An australian ghost shark joins you.",
+            "A whitefin chimaera joins you.",
+            "A bahamas ghost shark joins you.",
+            "A southern chimaera joins you.",
+            "A longspine chimaera joins you.",
+            "A cape chimaera joins you.",
+            "A shortspine chimaera joins you.",
+            "A leopard chimaera joins you.",
+            "A silver chimaera joins you.",
+            "A pale ghost shark joins you.",
+            "A spotted ratfish joins you.",
+            "A philippine chimaera joins you.",
+            "A black ghostshark joins you.",
+            "A blackfin ghostshark joins you.",
+            "A marbled ghostshark joins you.",
+            "A striped rabbitfish joins you.",
+            "A large-eyed rabbitfish joins you.",
+            "A spookfish joins you.",
+            "A dark ghostshark joins you.",
+            "A purple chimaera joins you.",
+            "A pointy-nosed blue chimaera joins you.",
+            "A giant black chimaera joins you.",
+            "A smallspine spookfish joins you.",
+            "A pacific longnose chimaera joins you.",
+            "A dwarf sicklefin chimaera joins you.",
+            "A sicklefin chimaera joins you.",
+            "A paddle-nose chimaera joins you.",
+            "A straightnose rabbitfish joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -667,7 +889,46 @@ SharkGame.HomeActions = {
             }
         },
         outcomes: [
-            "TODO"
+            "A capricorn night octopus joins you.",
+            "A plain-body night octopus joins you.",
+            "A hammer octopus joins you.",
+            "A southern keeled octopus joins you.",
+            "A two-spot octopus joins you.",
+            "A caribbean reef octopus joins you.",
+            "A southern white-spot octopus joins you.",
+            "A bigeye octopus joins you.",
+            "A carolinian octopus joins you.",
+            "A lesser pacific striped octopus joins you.",
+            "A chestnut octopus joins you.",
+            "A big blue octopus joins you.",
+            "A lilliput longarm octopus joins you.",
+            "A red-spot night octopus joins you.",
+            "A globe octopus joins you.",
+            "A scribbled night octopus joins you.",
+            "A bumblebee two-spot octopus joins you.",
+            "A southern sand octopus joins you.",
+            "A lobed octopus joins you.",
+            "A starry night octopus joins you.",
+            "A atlantic white-spotted octopus joins you.",
+            "A maori octopus joins you.",
+            "A mexican four-eyed octopus joins you.",
+            "A galapagos reef octopus joins you.",
+            "An ornate octopus joins you.",
+            "A white-striped octopus joins you.",
+            "A pale octopus joins you.",
+            "A japanese pygmy octopus joins you.",
+            "A east pacific red octopus joins you.",
+            "A spider octopus joins you.",
+            "A moon octopus joins you.",
+            "A frilled pygmy octopus joins you.",
+            "A tehuelche octopus joins you.",
+            "A gloomy octopus joins you.",
+            "A veiled octopus joins you.",
+            "A bighead octopus joins you.",
+            "A common octopus joins you.",
+            "A club pygmy octopus joins you.",
+            "A star-sucker pygmy octopus joins you.",
+            "An atlantic banded octopus joins you."
         ],
         multiOutcomes: [
             "TODO"
@@ -1878,12 +2139,18 @@ SharkGame.HomeActionCategories = {
     },
 
     basic: {
-        name: "Frenzy",
+        name: "Basic",
         actions: [
             "catchFish",
             "prySponge",
             "getClam",
-            "getJellyfish",
+            "getJellyfish"
+        ]
+    },
+
+    frenzy: {
+        name: "Frenzy",
+        actions: [
             "getShark",
             "getManta",
             "getCrab",

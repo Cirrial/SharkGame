@@ -122,11 +122,17 @@ $.extend(SharkGame, {
         }
         return imageHtml;
     },
-    changeSprite: function(imageName, imageDiv) {
+    changeSprite: function(imageName, imageDiv, backupImageName) {
         var spriteData = SharkGame.Sprites[imageName];
         if(!imageDiv) {
             imageDiv = $('<div>');
         }
+
+        // if the original sprite data is undefined, try loading the backup
+        if(!spriteData) {
+            spriteData = SharkGame.Sprites[backupImageName];
+        }
+
         if(spriteData) {
             imageDiv.css('background-image', 'url(' + SharkGame.spritePath + ')');
             imageDiv.css('background-position', "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
@@ -691,7 +697,7 @@ SharkGame.Main = {
         // add save wipe
         row = $('<tr>');
         row.append($('<td>')
-                .html("Wipe Save<br/><span class='smallDesc'>Completely wipe your save and reset the game. COMPLETELY. FOREVER.</span>")
+                .html("Wipe Save<br/><span class='smallDesc'>{Completely wipe your save and reset the game. COMPLETELY. FOREVER.)</span>")
         );
         row.append($('<td>').append($('<button>')
                 .html("wipe")
@@ -699,6 +705,7 @@ SharkGame.Main = {
                 .click(function() {
                     if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
                         SharkGame.Save.deleteSave();
+                        SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
                         SharkGame.Main.init(); // reset
                     }
                 })

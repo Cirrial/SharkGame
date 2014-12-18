@@ -38,7 +38,19 @@ SharkGame.Settings = {
         }
     },
 
-
+    buttonDisplayType: {
+        defaultSetting: "list",
+        name: "Home Sea Button Display",
+        desc: "Do you want a vertical list of buttons, or a more space-saving configuration?",
+        show: true,
+        options: [
+            "list",
+            "pile"
+        ],
+        onChange: function() {
+            SharkGame.Main.changeTab(SharkGame.Tabs.current);
+        }
+    },
 
     offlineModeActive: {
         defaultSetting: true,
@@ -165,4 +177,6 @@ SharkGame.Settings = {
             SharkGame.Main.changeTab(SharkGame.Tabs.current);
         }
     }
+
+
 };
