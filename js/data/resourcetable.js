@@ -468,7 +468,7 @@ SharkGame.ResourceTable = {
         income: {
             junk: 10,
             sand: -8,
-            kelp: -3,
+            fish: -3,
             tar: 0.00005
         },
         value: 50000

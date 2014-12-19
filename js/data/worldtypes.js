@@ -220,7 +220,6 @@ SharkGame.WorldTypes = {
             "heater",
             "shrimp",
             "chimaera",
-            "lobster",
             "eel",
             "jellyfish",
             "algae",
@@ -234,9 +233,9 @@ SharkGame.WorldTypes = {
             { modifier: "planetaryStartingResources", resource: "silentArchivist", amount: 1 }
         ],
         gateCosts: {
-            junk: 1E10,
-            tar: 1E3,
-            sand: 1E6,
+            junk: 1E8,
+            tar: 1E2,
+            coralglass: 1E5,
             spronge: 1E5,
             delphinium: 1E5,
             sharkonium: 1E5
