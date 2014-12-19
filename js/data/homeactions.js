@@ -276,11 +276,12 @@ SharkGame.HomeActions = {
         name: "Convert clam pearls",
         effect: {
             resource: {
-                crystal: 0.2
+                crystal: 1
             }
         },
         cost: [
-            {resource: "clam", costFunction: "constant", priceIncrease: 1}
+            {resource: "clam", costFunction: "constant", priceIncrease: 1},
+            {resource: "science", costFunction: "constant", priceIncrease: 5}
         ],
         max: "clam",
         prereq: {

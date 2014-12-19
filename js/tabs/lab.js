@@ -145,7 +145,7 @@ SharkGame.Lab = {
             spritename += "-disabled";
         }
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(spritename, null, (!enableButton) ? "general/missing-technology-disabled" : "general/missing-technology");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (!enableButton) ? "general/missing-technology-disabled" : "general/missing-technology");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 button.prepend(iconDiv);

@@ -324,6 +324,7 @@ pre {
 .pileArrangement button {
   display: inline-block;
   margin: 0.8em;
+  max-width: 5em;
 }
 #homeTabs {
   margin-bottom: 1em;

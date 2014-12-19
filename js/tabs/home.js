@@ -260,14 +260,14 @@ SharkGame.Home = {
                 sceneDiv.animate({opacity: 0}, 500, function() {
                     var thisSel = $(this);
                     if(SharkGame.Settings.current.showTabImages) {
-                        SharkGame.changeSprite("homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                        SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                     }
                     thisSel.animate({opacity: 1}, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
                 if(SharkGame.Settings.current.showTabImages) {
-                    SharkGame.changeSprite("homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                    SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                 }
             }
         }
@@ -376,7 +376,7 @@ SharkGame.Home = {
             spritename += "-disabled";
         }
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(spritename, null, (!enableButton) ? "general/missing-action-disabled" : "general/missing-action");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (!enableButton) ? "general/missing-action-disabled" : "general/missing-action");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 button.prepend(iconDiv);

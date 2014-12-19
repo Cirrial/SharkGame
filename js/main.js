@@ -122,7 +122,7 @@ $.extend(SharkGame, {
         }
         return imageHtml;
     },
-    changeSprite: function(imageName, imageDiv, backupImageName) {
+    changeSprite: function(spritePath, imageName, imageDiv, backupImageName) {
         var spriteData = SharkGame.Sprites[imageName];
         if(!imageDiv) {
             imageDiv = $('<div>');
@@ -134,7 +134,7 @@ $.extend(SharkGame, {
         }
 
         if(spriteData) {
-            imageDiv.css('background-image', 'url(' + SharkGame.spritePath + ')');
+            imageDiv.css('background-image', 'url(' + spritePath + ')');
             imageDiv.css('background-position', "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
             imageDiv.width(spriteData.frame.w);
             imageDiv.height(spriteData.frame.h);
@@ -392,8 +392,12 @@ SharkGame.Main = {
 
         // load save game data if present
         if(SharkGame.Save.savedGameExists()) {
-            SharkGame.Save.loadGame();
-            SharkGame.Log.addMessage("Loaded game.");
+            try{
+                SharkGame.Save.loadGame();
+                SharkGame.Log.addMessage("Loaded game.");
+            } catch(err) {
+                SharkGame.Log.addError(err.message);
+            }
         }
 
         // rename a game option if this is a first time run

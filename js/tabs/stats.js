@@ -208,72 +208,84 @@ SharkGame.Stats = {
 
         var formatCounter = 0;
 
-        $.each(SharkGame.ResourceTable, function(k, v) {
-            if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
-                var income = SharkGame.ResourceTable[k].income;
+        $.each(SharkGame.ResourceTable, function(generatorName, generatorData) {
+            if(r.getTotalResource(generatorName) > 0 && generatorData.income) {
+
+
+                // if the resource has an income requiring any costs
+                // and it isn't a forced income
+                // do not display the resource's income if it requires a non-existent resource (looking at you, sponge)
+                var validIncome = true;
+                var income = generatorData.income;
                 var row = $("<tr>");
 
                 var numIncomes = 0;
-                $.each(income, function(incomeResourceName, incomeResourceData) {
+                $.each(income, function(incomeResourceName, incomeResourceAmount) {
                     if(w.doesResourceExist(incomeResourceName)) {
                         numIncomes++;
+                    } else if(incomeResourceAmount < 0 && !generatorData.forceIncome) {
+                        // non-existent cost! abort! ABORT
+                        validIncome = false;
                     }
                 });
-                var counter = 0;
 
-                var rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
-                row.append($("<td>").html(r.getResourceName(k)).attr("rowspan", numIncomes).addClass(rowStyle));
+                if(validIncome) {
+                    var counter = 0;
 
-                $.each(income, function(incomeKey, incomeValue) {
-                    if(w.doesResourceExist(incomeKey)) {
-                        var changeChar = incomeValue > 0 ? "+" : "";
-                        row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
-                        row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
+                    var rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
+                    row.append($("<td>").html(r.getResourceName(generatorName)).attr("rowspan", numIncomes).addClass(rowStyle));
 
-                        // does this resource get a boost multiplier?
-                        var boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
-                        if(boostMultiplier !== 1) {
-                            row.append($("<td>").html("<span style='color: " + r.BOOST_MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
-                        } else {
-                            row.append($("<td>").addClass(rowStyle)); // empty cell
-                        }
+                    $.each(income, function(incomeKey, incomeValue) {
+                        if(w.doesResourceExist(incomeKey)) {
+                            var changeChar = incomeValue > 0 ? "+" : "";
+                            row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
+                            row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
 
-                        if(counter === 0) {
-                            row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.UPGRADE_MULTIPLIER_COLOR + "'>x" + r.getMultiplier(k) + "</span>").addClass(rowStyle));
-                            // does this income get a world multiplier?
-                            var worldMultiplier = w.getWorldIncomeMultiplier(k);
-                            if(worldMultiplier !== 1) {
-                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.WORLD_MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                            // does this resource get a boost multiplier?
+                            var boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
+                            if(boostMultiplier !== 1) {
+                                row.append($("<td>").html("<span style='color: " + r.BOOST_MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
                             } else {
-                                row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                                row.append($("<td>").addClass(rowStyle)); // empty cell
                             }
-                            // does this income get an artifact multiplier?
-                            var artifactMultiplier = w.getArtifactMultiplier(k);
-                            if(artifactMultiplier !== 1) {
-                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.ARTIFACT_MULTIPLIER_COLOR + "'>x" + m.beautify(artifactMultiplier) + "</span>").addClass(rowStyle));
-                            } else {
-                                row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+
+                            if(counter === 0) {
+                                row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.UPGRADE_MULTIPLIER_COLOR + "'>x" + r.getMultiplier(generatorName) + "</span>").addClass(rowStyle));
+                                // does this income get a world multiplier?
+                                var worldMultiplier = w.getWorldIncomeMultiplier(generatorName);
+                                if(worldMultiplier !== 1) {
+                                    row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.WORLD_MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
+                                } else {
+                                    row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                                }
+                                // does this income get an artifact multiplier?
+                                var artifactMultiplier = w.getArtifactMultiplier(generatorName);
+                                if(artifactMultiplier !== 1) {
+                                    row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.ARTIFACT_MULTIPLIER_COLOR + "'>x" + m.beautify(artifactMultiplier) + "</span>").addClass(rowStyle));
+                                } else {
+                                    row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                                }
                             }
+                            if(addSpecialMultiplier) {
+                                specialMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
+                                row.append(specialMultiplierCol);
+                                addSpecialMultiplier = false;
+                            }
+
+                            row.append($("<td>").attr("id", "income-" + generatorName + "-" + incomeKey)
+                                .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(generatorName, incomeKey)) + "/s</span>").addClass(rowStyle));
+
+                            counter++;
+                            incomesTable.append(row);
+                            row = $("<tr>");
                         }
-                        if(addSpecialMultiplier) {
-                            specialMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
-                            row.append(specialMultiplierCol);
-                            addSpecialMultiplier = false;
-                        }
 
-                        row.append($("<td>").attr("id", "income-" + k + "-" + incomeKey)
-                            .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>").addClass(rowStyle));
+                    });
 
-                        counter++;
-                        incomesTable.append(row);
-                        row = $("<tr>");
-                    }
-
-                });
-
-                // throw away dangling values
-                row = null;
-                formatCounter++;
+                    // throw away dangling values
+                    row = null;
+                    formatCounter++;
+                }
             }
         });
 
