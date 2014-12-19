@@ -10,7 +10,7 @@ SharkGame.Save = {
         saveData.tabs = {};
         saveData.settings = {};
         saveData.upgrades = {};
-        saveData.gateCostsMet = {};
+        saveData.gateCostsMet = [];
         saveData.world = { type: SharkGame.World.worldType, level: SharkGame.World.planetLevel };
         saveData.artifacts = {};
         saveData.gateway = {betweenRuns: SharkGame.gameOver, wonGame: SharkGame.wonGame};
@@ -35,7 +35,7 @@ SharkGame.Save = {
         });
 
         $.each(SharkGame.Gate.costsMet, function(k, v) {
-            saveData.gateCostsMet[k] = v;
+            saveData.gateCostsMet.push({type: k, paid: v});
         });
 
         $.each(SharkGame.Settings, function(k, v) {
@@ -232,10 +232,10 @@ SharkGame.Save = {
             }
 
             if(saveData.gateCostsMet) {
-                $.each(saveData.gateCostsMet, function(k, v) {
+                $.each(saveData.gateCostsMet, function(i, v) {
                     // only pay attention to valid costs
-                    if(SharkGame.Gate.costs[k]) {
-                        SharkGame.Gate.costsMet[k] = v;
+                    if(SharkGame.Gate.costs[v.type]) {
+                        SharkGame.Gate.costsMet[v.type] = v.paid;
                     }
                 });
             }
@@ -519,6 +519,18 @@ SharkGame.Save = {
             save = $.extend(true, save, {
                 "gateway": {"wonGame": false}
             });
+            return save;
+        },
+        function(save) {
+            // forgot to add numen to saved resources (which is understandable given it can't actually be legitimately achieved at this point)
+            save.resources["numen"] = {amount:0, totalAmount:0};
+            // completely change how gate slot status is saved
+            save.gateCostsMet = [];
+            for(var i=0; i<6; i++) {
+                save.gateCostsMet.push({type: "fish", paid: false});
+                // default to fish so as to prevent completely broken saves
+                // don't bother carrying over previous save stuff because it's broken
+            }
             return save;
         }
 
