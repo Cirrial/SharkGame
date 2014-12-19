@@ -197,7 +197,7 @@ SharkGame.TitleBar = {
         main: true,
         onClick: function() {
             if(SharkGame.World.worldType === "start") {
-                if(confirm("Do you want to reset your current run? There is no prestige mechanic or anything involved in this.")) {
+                if(confirm("Do you want to reset your game?")) {
                     // just reset
                     SharkGame.Main.init();
                 }
@@ -814,7 +814,7 @@ SharkGame.Main = {
             // artifacts are preserved automatically within gateway file
             var backup = {};
             _.each(SharkGame.ResourceCategories.special.resources, function(resourceName) {
-                backup[resourceName] = SharkGame.Resources.getResource(resourceName);
+                backup[resourceName] = {amount: SharkGame.Resources.getResource(resourceName), totalAmount: SharkGame.Resources.getTotalResource(resourceName)};
             });
 
             SharkGame.Save.deleteSave(); // otherwise it will be loaded during main init and fuck up everything!!
@@ -823,7 +823,8 @@ SharkGame.Main = {
 
             // restore special resources
             $.each(backup, function(resourceName, resourceData) {
-                SharkGame.Resources.changeResource(resourceName, resourceData);
+                SharkGame.Resources[resourceName].amount = resourceData.amount;
+                SharkGame.Resources[resourceName].totalAmount = resourceData.totalAmount;
             });
 
             SharkGame.timestampRunStart = (new Date()).getTime();
@@ -1099,24 +1100,23 @@ SharkGame.Changelog = {
     ]
 };
 
-// ctrl+s saves
-$(window).bind('keydown', function(event) {
-    if (event.ctrlKey || event.metaKey) {
-        switch (String.fromCharCode(event.which).toLowerCase()) {
-            case 's':
-                event.preventDefault();
-                SharkGame.Save.saveGame();
-                break;
-            case 'o':
-                event.preventDefault();
-                SharkGame.Main.showOptions();
-                break;
-        }
-    }
-});
-
-
 $(document).ready(function() {
     $('#game').show();
     SharkGame.Main.init();
+
+    // ctrl+s saves
+    $(window).bind('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+            switch (String.fromCharCode(event.which).toLowerCase()) {
+                case 's':
+                    event.preventDefault();
+                    SharkGame.Save.saveGame();
+                    break;
+                case 'o':
+                    event.preventDefault();
+                    SharkGame.Main.showOptions();
+                    break;
+            }
+        }
+    });
 });

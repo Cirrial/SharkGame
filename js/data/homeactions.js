@@ -478,7 +478,7 @@ SharkGame.HomeActions = {
             "A school of sharks!",
             "A shoal of sharks!",
             "A frenzy of sharks!",
-            "A gam of sharks! Yes, that's correct." ,
+            "A gam of sharks! Yes, that's correct.",
             "A college of sharks! They're a little smarter than a school."
         ],
         helpText: "Recruit a shark to help catch more fish."
@@ -551,7 +551,7 @@ SharkGame.HomeActions = {
             "A school of rays!",
             "A fever of rays! Yes, seriously. Look it up.",
             "A whole lotta rays!",
-            "The sand is just flying everywhere!" ,
+            "The sand is just flying everywhere!",
             "So many rays."
         ],
         helpText: "Hire a ray to help collect fish. They might kick up some sand from the seabed."
@@ -1407,11 +1407,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "We've given a dolphin free opportunity to ramble. WHY?!",
+            "Let's humour this dolphin's rambling.",
+            "This philosopher might have some insight.",
+            "Maybe this dolphin can answer the question of why we're even working with dolphins."
         ],
         multiOutcomes: [
             "We begrudgingly acknowledge that working together is providing us with new insights.",
-            "TODO"
+            "It's time to wax poetic and ponder.",
+            "These pretentious clicking jerks can sometimes raise a good point.",
+            "Oh joy. We're encouraging them to talk more.",
+            "What's wrong with shark science?!"
         ],
         helpText: "Determine which of these dolphins is actually smart, and not just repeating empty phrases."
     },
@@ -1438,10 +1444,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Treasurer of the dolphin treasures, go!",
+            "We are trusting this dolphin with a lot. Is that wise?",
+            "A dolphin is promoted to where it can do slightly more damage!",
+            "Dolphin treasurer ready to do... whatever it is they do."
         ],
         multiOutcomes: [
-            "TODO"
+            "Do we need this many treasurers?",
+            "Should we be encouraging this?",
+            "We require more crystals.",
+            "You're might be playing a dangerous game trusting these guys.",
+            "The treasury grows!"
         ],
         helpText: "Promote a dolphin to a harder job involving interest on precious coral and crystal or something like that."
     },
@@ -1468,10 +1481,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Dolphin biologist graduated!",
+            "Biologist trained.",
+            "Dolphin dedicated to dolphin duty.",
+            "Specialist dolphin ready for dolphin."
         ],
         multiOutcomes: [
-            "TODO"
+            "More of them. Eesh.",
+            "Dolphins proliferate.",
+            "Dolphin biologists ready for whatever passes for their 'research'.",
+            "Smug hedonists, the lot of them!",
+            "The dolphin population regretfully grows."
         ],
         helpText: "Train a dolphin to specialise in biology. Dolphin biology, specifically, and production, apparently."
     },
@@ -1532,10 +1552,18 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Why does it take three eels? Oh well. We don't really need to know.",
+            "Dig that pit. We can dig it.",
+            "Let's get digging.",
+            "Oh, hey, this hole's already empty. Well, isn't that something."
         ],
         multiOutcomes: [
-            "TODO"
+            "Let's get digging.",
+            "Eel tide rises.",
+            "More eels! They're handy to have.",
+            "Many eyes from the caves.",
+            "Secret homes!",
+            "The eels are content."
         ],
         helpText: "Find a suitable pit for eels to make more eels."
     },
@@ -1562,10 +1590,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "We have a technician!",
+            "Technical problems no more!",
+            "No, the eel won't fix your computer.",
+            "Eel technician!"
         ],
         multiOutcomes: [
-            "TODO"
+            "Let's get technical!",
+            "Qualified and certified!",
+            "Support squad on the rise!",
+            "Let us not question the nature of eel technical training.",
+            "Science progresses!"
         ],
         helpText: "Instruct an eel in the fine art of shark science."
     },
@@ -1591,10 +1626,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Eel sifter ready to find things!",
+            "Eel ready to sift through the sands!",
+            "Time to sift, eel. Time to seek, search and sift.",
+            "Time for this little guy to find some goodies."
         ],
         multiOutcomes: [
-            "TODO"
+            "Time to find the things!",
+            "Sift. It's a fun word. Siiiiffft.",
+            "Sifters scouring the seabed for some special stuff.",
+            "Shifters ready to shift! Wait. No. Hang on.",
+            "Sifting the seabed for scores of surprises!"
         ],
         helpText: "Specialise an eel in finding interesting things on the seabed."
     },
@@ -1623,10 +1665,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "Transmuter taught.",
+            "The chimaera's eyes flicker with power.",
+            "The water glows around the chimaera.",
+            "The chimaera forms the material of progress."
         ],
         multiOutcomes: [
-            "TODO"
+            "The chimaeras are now masters of matter.",
+            "The transmuters revel in our revealed secrets.",
+            "The process continues.",
+            "The matter matters.",
+            "The immaterial made material."
         ],
         helpText: "Reveal the mysteries of transmutation to a chimaera."
     },
@@ -1653,10 +1702,17 @@ SharkGame.HomeActions = {
             ]
         },
         outcomes: [
-            "TODO"
+            "A seeker of mysteries is prepared.",
+            "The chimaera explorer is ready for their journey.",
+            "Explorer ready for some answers!",
+            "The chimaera swims down to the ocean below."
         ],
         multiOutcomes: [
-            "TODO"
+            "The exploration party is ready.",
+            "Learn the secrets of the deeps!",
+            "More mysteries to uncover.",
+            "Ancient riddles for ancient creatures.",
+            "Find the truth beneath the waves!"
         ],
         helpText: "Help prepare a chimaera for exploration to parts unknown. Their efforts will be good for science."
     },
@@ -1894,13 +1950,13 @@ SharkGame.HomeActions = {
             }
         },
         cost: [
-            {resource: "residue", costFunction: "linear", priceIncrease: 300},
+            {resource: "junk", costFunction: "linear", priceIncrease: 300},
             {resource: "sharkonium", costFunction: "linear", priceIncrease: 200}
         ],
         max: "skimmer",
         prereq: {
             resource: {
-                'residue': 100
+                'junk': 100
             },
             upgrade: [
                 "engineering"
@@ -2060,7 +2116,7 @@ SharkGame.HomeActions = {
             "This automated caretaker gets to work." // yeah, it's lazy, I know, but still just as appropriate
         ],
         multiOutcomes: [
-            "Automation of population? Is this the end goal of the shrimp?",
+            "Automation of population? What a terrifying concept.",
             "The machine rears lobster eggs. Wouldn't the shrimp want something like this too?",
             "There is an uneasiness about these machines that fills the sharks with concern.",
             "Why was this machine invented? Are we helping to prepare an army?"

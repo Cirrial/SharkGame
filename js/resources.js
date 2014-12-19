@@ -9,7 +9,7 @@ SharkGame.Resources = {
     UPGRADE_MULTIPLIER_COLOR: '#606060',
     BOOST_MULTIPLIER_COLOR: '#60A060',
     WORLD_MULTIPLIER_COLOR: '#6060A0',
-    ARTIFACT_MULTIPLIER_COLOR: '#A06060',
+    ARTIFACT_MULTIPLIER_COLOR: '#6F968A',
 
     specialMultiplier: 1,
     rebuildTable: false,
