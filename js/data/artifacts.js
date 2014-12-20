@@ -350,14 +350,18 @@ SharkGame.Artifacts = {
         required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            if(level === 0) {
+            if(level < 1) {
                 return;
             }
             var resourceList = ["tar", "ice"];
             var wr = SharkGame.World.worldResources;
             var multiplier = 1 / (level + 1);
             _.each(resourceList, function(resourceName) {
-                wr[resourceName].artifactMultiplier *= multiplier;
+                if(wr[resourceName].artifactMultiplier) {
+                    wr[resourceName].artifactMultiplier *= multiplier;
+                } else {
+                    wr[resourceName].artifactMultiplier = multiplier;
+                }
             });
         }
     }
