@@ -35,8 +35,9 @@ SharkGame.ArtifactUtil = {
 
 SharkGame.Artifacts = {
     permanentMultiplier: {
-        name: "Permanent Multiplier",
-        desc: "TODO",
+        name: "Time Anemone",
+        desc: "Applies a multiplier to all income.",
+        flavour: "As creatures dwell within the sea, so too do creature dwell within causality.",
         max: 5,
         cost: function(level) {
             return Math.floor(Math.pow(10, level + 1));
@@ -46,8 +47,9 @@ SharkGame.Artifacts = {
         }
     },
     planetTerraformer: {
-        name: "World-Shaping Will",
-        desc: "Reduce the severity of planet features.",
+        name: "World Shaper",
+        desc: "Reduce the severity of planet climates.",
+        flavour: "Intelligence is not changing to fit an environment, but changing the environment to fit you.",
         max: 10,
         cost: function(level) {
             return Math.floor(Math.pow(4, level + 1));
@@ -56,8 +58,9 @@ SharkGame.Artifacts = {
         // check SharkGame.World.getTerraformMultiplier
     },
     gateCostReducer: {
-        name: "Gate Cost Reducer",
-        desc: "TODO",
+        name: "Gate Controller",
+        desc: "Reduces the cost requirements of gates.",
+        flavour: "Power over the unknown can only reach so far.",
         max: 10,
         cost: function(level) {
             return Math.floor(Math.pow(3, level + 1));
@@ -66,8 +69,9 @@ SharkGame.Artifacts = {
         // check SharkGame.World.getGateCostMultiplier
     },
     planetScanner: {
-        name: "Planet Scanner",
-        desc: "TODO",
+        name: "Distant Foresight",
+        desc: "Reveals properties of worlds before travelling to them.",
+        flavour: "Knowledge may not change destiny, but it may divert it.",
         max: 15,
         cost: function(level) {
             return Math.floor(Math.pow(1.5, level + 1));
@@ -77,7 +81,8 @@ SharkGame.Artifacts = {
     },
     sharkMigrator: {
         name: "Shark Migrator",
-        desc: "TODO",
+        desc: "Bring some sharks with you to the next world.",
+        flavour: "Essence forges a barrier. Sharks are fragile between worlds.",
         max: 10,
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -87,7 +92,8 @@ SharkGame.Artifacts = {
     },
     rayMigrator: {
         name: "Ray Migrator",
-        desc: "TODO",
+        desc: "Bring some rays with you to the next world.",
+        flavour: "The gateway has no sand to hide in.",
         max: 10,
         required: ["ray"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -97,7 +103,8 @@ SharkGame.Artifacts = {
     },
     crabMigrator: {
         name: "Crab Migrator",
-        desc: "TODO",
+        desc: "Bring some crabs with you to the next world.",
+        flavour: "Essence-refined shells to keep the crabs alive.",
         max: 10,
         required: ["crab"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -107,7 +114,8 @@ SharkGame.Artifacts = {
     },
     shrimpMigrator: {
         name: "Shrimp Migrator",
-        desc: "TODO",
+        desc: "Bring some shrimp with you to the next world.",
+        flavour: "The hive produces a new hive.",
         max: 10,
         required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -117,7 +125,8 @@ SharkGame.Artifacts = {
     },
     lobsterMigrator: {
         name: "Lobster Migrator",
-        desc: "TODO",
+        desc: "Bring some lobsters with you to the next world.",
+        flavour: "Relaxing in the astral seas.",
         max: 10,
         required: ["lobster"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -127,7 +136,8 @@ SharkGame.Artifacts = {
     },
     dolphinMigrator: {
         name: "Dolphin Migrator",
-        desc: "TODO",
+        desc: "Bring some dolphins with you to the next world.",
+        flavour: "They will find this transportation strangely familiar.",
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -137,7 +147,8 @@ SharkGame.Artifacts = {
     },
     whaleMigrator: {
         name: "Whale Migrator",
-        desc: "TODO",
+        desc: "Bring some whales with you to the next world.",
+        flavour: "They need no protection, only persuasion.",
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -147,7 +158,8 @@ SharkGame.Artifacts = {
     },
     eelMigrator: {
         name: "Eel Migrator",
-        desc: "TODO",
+        desc: "Bring some eels with you to the next world.",
+        flavour: "Essence tunnels for them to slide into a new domain.",
         max: 10,
         required: ["eel"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -157,7 +169,8 @@ SharkGame.Artifacts = {
     },
     chimaeraMigrator: {
         name: "Chimaera Migrator",
-        desc: "TODO",
+        desc: "Bring some chimaeras with you to the next world.",
+        flavour: "The light is unbearable. Essence dulls the brightness.",
         max: 10,
         required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -167,7 +180,8 @@ SharkGame.Artifacts = {
     },
     octopusMigrator: {
         name: "Octopus Migrator",
-        desc: "TODO",
+        desc: "Bring some octopuses with you to the next world.",
+        flavour: "The gateway defies reason. It is uncomfortable to the rational mind.",
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.migratorCost,
@@ -177,7 +191,8 @@ SharkGame.Artifacts = {
     },
     sharkTotem: {
         name: "Totem of Shark",
-        desc: "Increase the effectivness of sharks and their roles. ",
+        desc: "Increase the effectiveness of sharks and their roles.",
+        flavour: "To hunt. To catch. To win.",
         max: 10,
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -187,7 +202,8 @@ SharkGame.Artifacts = {
     },
     rayTotem: {
         name: "Totem of Ray",
-        desc: "TODO",
+        desc: "Increase the effectiveness of rays and their roles.",
+        flavour: "Flying across the ocean in grace and serenity.",
         max: 10,
         required: ["ray"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -197,7 +213,8 @@ SharkGame.Artifacts = {
     },
     crabTotem: {
         name: "Totem of Crab",
-        desc: "TODO",
+        desc: "Increase the effectiveness of crabs and their roles.",
+        flavour: "No stone left unturned.",
         max: 10,
         required: ["crab"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -207,7 +224,8 @@ SharkGame.Artifacts = {
     },
     shrimpTotem: {
         name: "Totem of Shrimp",
-        desc: "TODO",
+        desc: "Increase the effectiveness of shrimp and their roles.",
+        flavour: "The hive mind awakens.",
         max: 10,
         required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -217,7 +235,8 @@ SharkGame.Artifacts = {
     },
     lobsterTotem: {
         name: "Totem of Lobster",
-        desc: "TODO",
+        desc: "Increase the effectiveness of lobster and their roles.",
+        flavour: "The seabed is a priceless treasure.",
         max: 10,
         required: ["lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -227,7 +246,8 @@ SharkGame.Artifacts = {
     },
     dolphinTotem: {
         name: "Totem of Dolphin",
-        desc: "TODO",
+        desc: "Increase the effectiveness of dolphins and their roles.",
+        flavour: "Exiles of a greater threat.",
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -237,7 +257,8 @@ SharkGame.Artifacts = {
     },
     whaleTotem: {
         name: "Totem of Whale",
-        desc: "TODO",
+        desc: "Increase the effectiveness of whales and their roles.",
+        flavour: "Keepers of song and mystery.",
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -247,7 +268,8 @@ SharkGame.Artifacts = {
     },
     eelTotem: {
         name: "Totem of Eel",
-        desc: "TODO",
+        desc: "Increase the effectiveness of eels and their roles.",
+        flavour: "Snaking elegance, talented attendants.",
         max: 10,
         required: ["eel"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -257,7 +279,8 @@ SharkGame.Artifacts = {
     },
     chimaeraTotem: {
         name: "Totem of Chimaera",
-        desc: "TODO",
+        desc: "Increase the effectiveness of chimaeras and their roles.",
+        flavour: "The prodigal descendants return.",
         max: 10,
         required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -267,7 +290,8 @@ SharkGame.Artifacts = {
     },
     octopusTotem: {
         name: "Totem of Octopus",
-        desc: "TODO",
+        desc: "Increase the effectiveness of octopuses and their roles.",
+        flavour: "The cold, rational response is to maximise rewards.",
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -277,7 +301,8 @@ SharkGame.Artifacts = {
     },
     progressTotem: {
         name: "Totem of Progress",
-        desc: "TODO",
+        desc: "Increase the effectiveness of shark machines.",
+        flavour: "Progress can be slowed, but it can never be stopped.",
         max: 10,
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
@@ -286,7 +311,8 @@ SharkGame.Artifacts = {
     },
     carapaceTotem: {
         name: "Totem of Carapace",
-        desc: "TODO",
+        desc: "Increase the effectiveness of crustacean machines.",
+        flavour: "The shelled machines are slow, but clean.",
         max: 10,
         required: ["shrimp", "lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -296,7 +322,8 @@ SharkGame.Artifacts = {
     },
     inspirationTotem: {
         name: "Totem of Inspiration",
-        desc: "TODO",
+        desc: "Increase the effectiveness of cetacean machines.",
+        flavour: "Dreams of a former glory.",
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -306,7 +333,8 @@ SharkGame.Artifacts = {
     },
     industryTotem: {
         name: "Totem of Industry",
-        desc: "TODO",
+        desc: "Increase the effectiveness of cephalopod machines.",
+        flavour: "Find unity in efficiency. Seek octal rationalities.",
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
@@ -316,7 +344,8 @@ SharkGame.Artifacts = {
     },
     wardingTotem: {
         name: "Totem of Warding",
-        desc: "TODO",
+        desc: "Reduce the adverse effects of harmful materials.",
+        flavour: "The end is inevitable, but the wait can be lengthened.",
         max: 10,
         required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,

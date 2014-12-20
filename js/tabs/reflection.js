@@ -62,7 +62,7 @@ SharkGame.Reflection = {
                 } else {
                     artifactLabel += "(Power: " + m.beautify(artifactData.level) + ")";
                 }
-                artifactLabel += "</span><br>" + artifactData.desc;
+                artifactLabel += "</span><br>" + artifactData.flavour;
 
                 item.append(artifactLabel);
                 listSel.append(item);

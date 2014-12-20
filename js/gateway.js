@@ -375,7 +375,8 @@ SharkGame.Gateway = {
                 var purchaseLevel = maxedOut ? "Max" : (artifactData.level + 1);
                 var label = artifactData.name +
                     "<br><span class='medDesc'>( Pwr <span class='essenceCountBrighter'>" + purchaseLevel + "</span> )</span>" +
-                    "<br><span class='medDesc'>" + artifactData.desc;
+                    "<br>" + artifactData.desc +
+                    "<br><span class='medDesc'>" + artifactData.flavour + "</span>";
                 if(!maxedOut) {
                     label += "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
                 }

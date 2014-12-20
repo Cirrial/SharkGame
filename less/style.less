@@ -1,11 +1,8 @@
 /*------------------------------------------------------
   MIXINS
 -------------------------------------------------------*/
-
-
 // select palette
 @import "marine";
-
 
 @color-danger-lighter: #975F5F;
 @color-danger-light: #714141;
@@ -242,8 +239,8 @@ pre {
   clear: both;
   .section;
   background: linear-gradient(
-          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.5),
-          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.5)
+          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.2),
+          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.2)
   ),
   @color-med url("../img/sharklogo.png") no-repeat center;
   text-shadow: 2px 2px 3px @color-darker;
@@ -945,6 +942,7 @@ button {
   background-color: @color-discovery-bg-dark;
   border-color: @color-discovery;
   text-shadow: 0 0 0.5em lighten(@color-discovery, 5%);
+  max-width: 12em;
 
   div {
     background-color: @color-discovery-bg;
