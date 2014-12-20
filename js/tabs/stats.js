@@ -7,7 +7,7 @@ SharkGame.Stats = {
 
     sceneImage: "img/events/misc/scene-grotto.png",
 
-    recreateIncomeTable: true,
+    recreateIncomeTable: null,
 
     discoverReq: {
         upgrade: [

@@ -40,8 +40,6 @@ $.extend(SharkGame, {
     timestampRunStart: false,
     timestampRunEnd: false,
 
-    worldsCompleted: 0,
-
     sidebarHidden: true,
     titlebarGenerated: false,
     paneGenerated: false,
@@ -376,6 +374,7 @@ SharkGame.Main = {
         // initialise world
         // MAKE SURE GATE IS INITIALISED AFTER WORLD!!
         SharkGame.World.init();
+        SharkGame.World.apply();
 
         SharkGame.Gateway.init();
         SharkGame.Gateway.applyArtifacts(); // if there's any effects to carry over from a previous run
@@ -539,11 +538,6 @@ SharkGame.Main = {
 
         // set up tab specific stuff
         var tab = tabs[tabs.current];
-        if(!tab) {
-            // in case of error, default to home
-            SharkGame.Tabs.current = "home";
-            tab = tabs["home"];
-        }
         var tabCode = tab.code;
         tabCode.switchTo();
     },

@@ -3,7 +3,7 @@ SharkGame.Log = {
     initialised: false,
     messages: [],
 
-    init: function () {
+    init: function() {
         var l = SharkGame.Log;
         // create log
         $('#log').append("<button id='clearLog' class='min'></button><h3>Log<h3/><ul id='messageList'></ul>");
@@ -12,18 +12,18 @@ SharkGame.Log = {
         l.initialised = true;
     },
 
-    addMessage: function (message) {
+    addMessage: function(message) {
         var l = SharkGame.Log;
         var s = SharkGame.Settings.current;
         var showAnims = s.showAnimations;
 
-        if ( !l.initialised ) {
+        if(!l.initialised) {
             l.init();
         }
         var messageList = $('#messageList');
 
         var messageItem = $('<li>').html(message);
-        if (showAnims) {
+        if(showAnims) {
             messageItem.hide()
                 .css("opacity", 0)
                 .prependTo('#messageList')
@@ -39,7 +39,7 @@ SharkGame.Log = {
         return messageItem;
     },
 
-    addError: function (message) {
+    addError: function(message) {
         var l = SharkGame.Log;
         var messageItem = l.addMessage("Error: " + message);
         messageItem.addClass("error");
@@ -58,11 +58,11 @@ SharkGame.Log = {
         var showAnims = SharkGame.Settings.current.showAnimations;
         var logMax = SharkGame.Settings.current.logMessageMax;
 
-        if ( l.messages.length >= logMax) {
+        if(l.messages.length >= logMax) {
             while(l.messages.length > logMax) {
                 // remove oldest message
-                if (showAnims) {
-                    l.messages[0].animate({opacity: 0.0}, 100, "swing", function () {
+                if(showAnims) {
+                    l.messages[0].animate({opacity: 0.0}, 100, "swing", function() {
                         $(this).remove();
                     });
                 } else {
@@ -75,17 +75,17 @@ SharkGame.Log = {
         }
     },
 
-    clearMessages: function () {
+    clearMessages: function() {
         var l = SharkGame.Log;
         // remove each element from page
-        $.each(l.messages, function (_, v) {
+        $.each(l.messages, function(_, v) {
             v.remove();
         });
         // wipe array
         l.messages = [];
     },
 
-    haveAnyMessages: function () {
+    haveAnyMessages: function() {
         return SharkGame.Log.messages.length > 0;
     }
 };

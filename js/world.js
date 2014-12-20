@@ -48,15 +48,20 @@ SharkGame.WorldModifiers = {
 
 SharkGame.World = {
 
-    worldType: "start",
-    worldResources: {},
-    planetLevel: 1,
+    worldType: null,
+    worldResources: null,
+    planetLevel: null,
 
     init: function() {
         var w = SharkGame.World;
-        var g = SharkGame.Gateway;
-
+        w.worldType = "start";
+        w.planetLevel = 1;
+        w.worldResources = {};
         w.resetWorldProperties();
+    },
+
+    apply: function() {
+        var w = SharkGame.World;
         w.applyWorldProperties(w.planetLevel);
         w.applyGateCosts(w.planetLevel);
     },
@@ -123,9 +128,6 @@ SharkGame.World = {
     // does this resource exist on this planet?
     doesResourceExist: function(resourceName) {
         var info = SharkGame.World.worldResources[resourceName];
-        if(!info) {
-            return false;
-        }
         return info.exists;
     },
 

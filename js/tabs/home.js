@@ -5,8 +5,8 @@ SharkGame.Home = {
     tabName: "Home Sea",
     tabBg: "img/bg/bg-homesea.png",
 
-    currentButtonTab: "all",
-    currentExtraMessageIndex: -1,
+    currentButtonTab: null,
+    currentExtraMessageIndex: null,
 
     // Priority: later messages display if available, otherwise earlier ones.
     extraMessages: [
@@ -181,6 +181,9 @@ SharkGame.Home = {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
         });
+
+        h.currentExtraMessageIndex = -1;
+        h.currentButtonTab = "all";
     },
 
     switchTo: function() {

@@ -221,6 +221,7 @@ SharkGame.Save = {
                 SharkGame.World.worldType = saveData.world.type;
                 SharkGame.World.planetLevel = saveData.world.level;
                 SharkGame.World.init();
+                SharkGame.World.apply();
                 SharkGame.Home.init();
             }
 

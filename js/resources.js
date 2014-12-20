@@ -11,7 +11,7 @@ SharkGame.Resources = {
     WORLD_MULTIPLIER_COLOR: '#6060A0',
     ARTIFACT_MULTIPLIER_COLOR: '#6F968A',
 
-    specialMultiplier: 1,
+    specialMultiplier: null,
     rebuildTable: false,
 
     init: function() {
