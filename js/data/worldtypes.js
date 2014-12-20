@@ -113,7 +113,8 @@ SharkGame.WorldTypes = {
             "eel",
             "whale",
             "octopus",
-            "shrimp"
+            "shrimp",
+            "chimaera"
         ],
         modifiers: [
             { modifier: "planetaryIncome", resource: "frenzy", amount: 0.0001 },
@@ -143,7 +144,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
-            { modifier: "planetaryResourceBoost", resource: "animals", amount: 1 },
+            { modifier: "planetaryResourceBoost", resource: "animals", amount: 1 }
         ],
         gateCosts: {
             fish: 1E7,

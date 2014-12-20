@@ -2,11 +2,10 @@
   MIXINS
 -------------------------------------------------------*/
 
-@color-lighter: #7788AA;
-@color-light: #4E638E;
-@color-med: #2E4372;
-@color-dark: #152A55;
-@color-darker: #061639;
+
+// select palette
+@import "marine";
+
 
 @color-danger-lighter: #975F5F;
 @color-danger-light: #714141;
@@ -242,7 +241,11 @@ pre {
 #title {
   clear: both;
   .section;
-  background: @color-med url("../img/sharklogo.png") no-repeat center;
+  background: linear-gradient(
+          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.5),
+          rgba(red(@color-med), green(@color-med), blue(@color-med), 0.5)
+  ),
+  @color-med url("../img/sharklogo.png") no-repeat center;
   text-shadow: 2px 2px 3px @color-darker;
 
   h1 {
@@ -451,7 +454,7 @@ pre {
   button {
     display: inline-block;
     margin: 0.8em;
-    max-width: 5em;
+    max-width: 12em;
   }
 }
 
@@ -739,6 +742,22 @@ button {
   margin: 0em 0.4em 0.4em 0.4em;
 }
 
+.tint {
+  position: relative;
+}
+
+.tint:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(red(@color-darker),green(@color-darker),blue(@color-darker), 0.8);
+  pointer-events: none;
+}
+
 #tabSceneImage {
   vertical-align: middle;
   display: block;
@@ -768,7 +787,7 @@ button {
 }
 
 .smallDesc {
-  font-size: 60%;
+  font-size: 80%;
   color: @color-lighter;
   .click-passthrough;
 }
@@ -965,8 +984,13 @@ button {
     div {
       background-color: @color-discovery-bg-darkest;
       .clear-box-shadow();
+
     }
 
+  }
+
+  div.tint {
+    background: rgba(red(@color-discovery-bg-darkest),green(@color-discovery-bg-darkest),blue(@color-discovery-bg-darkest), 0.8);
   }
 }
 
@@ -1017,7 +1041,7 @@ button.gateway {
 
 .gatewayButtonList {
   list-style-type: none;
-  display: inline;
+  display: inline-block;
 
   button {
     display: inline-block;
@@ -1077,6 +1101,8 @@ button.planetButton {
   border: none;
   text-shadow: 0 0 0.5em lighten(@color-discovery, 5%);
   padding: 20px;
+  max-width: 14em;
+  margin: 0.8em;
 
   div {
     .border-radius(50px);

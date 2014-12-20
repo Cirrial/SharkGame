@@ -363,14 +363,14 @@ SharkGame.Gateway = {
         var m = SharkGame.Main;
         var essenceHeld = r.getResource("essence");
         _.each(g.artifactPool, function(artifactName) {
-            var buttonSel = $('#artifact-' + artifactName);
-            if(buttonSel.length > 0) {
+            var button = $('#artifact-' + artifactName);
+            if(button.length > 0) {
                 var artifactData = SharkGame.Artifacts[artifactName];
                 var cost = artifactData.cost(artifactData.level);
                 var maxedOut = (artifactData.level >= artifactData.max);
-                var disableButton = false;
+                var enableButton = true;
                 if(essenceHeld < cost || maxedOut) {
-                    disableButton = true;
+                    enableButton = false;
                 }
                 var purchaseLevel = maxedOut ? "Max" : (artifactData.level + 1);
                 var label = artifactData.name +
@@ -379,17 +379,18 @@ SharkGame.Gateway = {
                 if(!maxedOut) {
                     label += "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
                 }
-                buttonSel.prop("disabled", disableButton).html(label);
+                button.prop("disabled", !enableButton).html(label);
 
                 var spritename = "artifacts/" + artifactName;
-                if(disableButton) {
-                    spritename += "-disabled";
-                }
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (disableButton) ? "general/missing-artifact-disabled" : "general/missing-artifact");
+                    var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (enableButton) ? "general/missing-artifact-disabled" : "general/missing-artifact");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-                        buttonSel.prepend(iconDiv);
+                        if(!enableButton) {
+                            button.prepend($('<div>').append(iconDiv).addClass("tint"));
+                        } else {
+                            button.prepend(iconDiv);
+                        }
                     }
                 }
             }

@@ -345,11 +345,16 @@ SharkGame.Main = {
             document.title = SharkGame.ACTUAL_GAME_NAME + ": " + SharkGame.GAME_NAME;
         }
         $('#sidebar').hide();
-        $('#overlay').hide();
+        var overlay = $('#overlay');
+        overlay.hide();
         $('#gameName').html("- " + SharkGame.GAME_NAME + " -");
         $('#versionNumber').html("v " + SharkGame.VERSION + " — " + SharkGame.VERSION_NAME);
         SharkGame.sidebarHidden = true;
         SharkGame.gameOver = false;
+
+        // remove any errant classes
+        $('#pane').removeClass("gateway");
+        overlay.removeClass("gateway");
 
         // initialise timestamps to something sensible
         SharkGame.timestampLastSave = SharkGame.timestampLastSave || currDate.getTime();
@@ -723,7 +728,7 @@ SharkGame.Main = {
         // add save wipe
         row = $('<tr>');
         row.append($('<td>')
-                .html("Wipe Save<br/><span class='smallDesc'>{Completely wipe your save and reset the game. COMPLETELY. FOREVER.)</span>")
+                .html("Wipe Save<br/><span class='smallDesc'>(Completely wipe your save and reset the game. COMPLETELY. FOREVER.)</span>")
         );
         row.append($('<td>').append($('<button>')
                 .html("wipe")
@@ -839,10 +844,6 @@ SharkGame.Main = {
                 SharkGame.Log.addError(err.message);
                 console.log(err.trace);
             }
-
-            // remove any errant classes
-            $('#pane').removeClass("gateway");
-            $('#overlay').removeClass("gateway");
         }
     },
 
@@ -1002,7 +1003,8 @@ SharkGame.Changelog = {
         "The way progress continues beyond the gate is now... a little tweaked.",
         "Options are no longer reset after completing a run.",
         "Artifacts exist.",
-        "Images are a work in progress. Apologies for the placeholder graphics in these trying times."
+        "Images are a work in progress. Apologies for the placeholder graphics in these trying times.",
+        "Partial production when there's insufficient resources for things that take costs. Enjoy watching your incomes slow to a trickle!"
     ],
     "0.62": [
         "Fixed infinity resource requirement for gate.",

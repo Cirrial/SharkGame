@@ -72,6 +72,9 @@ SharkGame.Stats = {
 
         var genStats = $('#generalStats');
         genStats.append($('<h3>').html("General Stats"));
+        if(SharkGame.World.worldType !== "start") {
+            genStats.append($('<p>').html("<span class='medDesc'>Climate Level</span><br>" + SharkGame.Main.beautify(SharkGame.World.planetLevel)));
+        }
         genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
         if(SharkGame.Resources.getTotalResource("essence") > 0) {
             genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
