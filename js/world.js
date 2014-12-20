@@ -143,7 +143,6 @@ SharkGame.World = {
 
     getArtifactMultiplier: function(resourceName) {
         var artifactMultiplier = SharkGame.World.worldResources[resourceName].artifactMultiplier;
-        if(!artifactMultiplier) artifactMultiplier = 1;
         return artifactMultiplier;
     },
 

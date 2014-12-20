@@ -254,11 +254,11 @@ SharkGame.Upgrades = {
         researchedMessage: "Breakthrough! Machines can run alarmingly hot if we take out some of the safeguards!",
         effectDesc: "Heaters can be made to fight the freezing process. We don't want to become giant novelty ice cubes!",
         cost: {
-            science: 1000
+            science: 500
         },
         required: {
             upgrades: [
-                "environmentalism"
+                "automation"
             ],
             resources: [
                 "ice"

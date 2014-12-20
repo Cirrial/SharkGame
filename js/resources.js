@@ -27,6 +27,8 @@ SharkGame.Resources = {
         $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.PlayerIncomeTable[k] = 0;
         });
+
+        SharkGame.Resources.specialMultiplier = 1;
     },
 
     processIncomes: function(timeDelta) {

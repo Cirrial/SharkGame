@@ -43,7 +43,7 @@ SharkGame.Artifacts = {
             return Math.floor(Math.pow(10, level + 1));
         },
         effect: function(level) {
-            SharkGame.Resources.specialMultiplier *= Math.max((2 * level), 1);
+            SharkGame.Resources.specialMultiplier = Math.max((2 * level), 1);
         }
     },
     planetTerraformer: {
@@ -257,13 +257,13 @@ SharkGame.Artifacts = {
     },
     whaleTotem: {
         name: "Totem of Whale",
-        desc: "Increase the effectiveness of whales and their roles.",
+        desc: "Increase the effectiveness of whales.",
         flavour: "Keepers of song and mystery.",
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["whale", "chorus"]);
+            SharkGame.ArtifactUtil.totemEffect(level, ["whale"]);
         }
     },
     eelTotem: {
