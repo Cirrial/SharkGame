@@ -368,18 +368,42 @@ SharkGame.Upgrades = {
         }
     },
 
+    agriculture: {
+        name: "Agriculture",
+        desc: "The hunter-gatherer lifestyle will only work so well for us. Maybe we should gather these animals in one place and let them grow.",
+        researchedMessage: "It is so much easier to get things when they're all in one place. It's like the ocean is our grotto now!",
+        effectDesc: "Various roles are twice as effective thanks to farming regions for coral and sponge.",
+        cost: {
+            science: 500,
+            sand: 1000
+        },
+        required: {
+            upgrades: [
+                "seabedGeology"
+            ]
+        },
+        effect: {
+            multiplier: {
+                worker: 2,
+                harvester: 2,
+                treasurer: 2,
+                scavenger: 2
+            }
+        }
+    },
+
     kelpHorticulture: {
         name: "Kelp Horticulture",
         desc: "Determine what it takes to plant kelp all over the seabed. Maybe this is useful.",
         researchedMessage: "Crab-specific gear has been invented to allow for kelp farming! This is possibly useful.",
         effectDesc: "Crabs can become kelp farmers and grow a living carpet across the bottom of the sea.",
         cost: {
-            science: 500,
+            science: 1000,
             sand: 2000
         },
         required: {
             upgrades: [
-                "seabedGeology"
+                "agriculture"
             ],
             resources: [
                 "kelp"
@@ -397,7 +421,8 @@ SharkGame.Upgrades = {
         },
         required: {
             upgrades: [
-                "underwaterChemistry"
+                "underwaterChemistry",
+                "agriculture"
             ]
         },
         effect: {
@@ -417,8 +442,7 @@ SharkGame.Upgrades = {
         },
         required: {
             upgrades: [
-                "kelpHorticulture",
-                "biology"
+                "agriculture"
             ],
             resources: [
                 "seaApple",
@@ -466,7 +490,7 @@ SharkGame.Upgrades = {
         effectDesc: "Crabs and planter crabs are twice as effective. Crabs are alright but they are also sort of terrifying and weird. Good job they're on our side!",
         cost: {
             science: 500,
-            kelp: 1000
+            kelp: 100
         },
         required: {
             upgrades: [
@@ -491,12 +515,12 @@ SharkGame.Upgrades = {
         researchedMessage: "We've figured out how these shellfish function. There's far too many limbs involved.",
         effectDesc: "Shrimp and lobsters are twice as effective. Lobsters can now gather other things or cover themselves in shiny eggs, also called 'berries'. What's a berry?",
         cost: {
-            science: 1000,
-            clam: 500
+            science: 500,
+            clam: 100
         },
         required: {
             upgrades: [
-                "crabBiology"
+                "biology"
             ],
             resources: [
                 "shrimp",
@@ -517,7 +541,7 @@ SharkGame.Upgrades = {
         researchedMessage: "We have learned far more than we needed to about the duties of egg bearing queens in eusocial colonies.",
         effectDesc: "Shrimp are twice as effective. Shimp queens and dedicated shrimp workers are available, and we'll never sleep soundly again.",
         cost: {
-            science: 2000,
+            science: 1000,
             sponge: 500
         },
         required: {
@@ -753,7 +777,9 @@ SharkGame.Upgrades = {
                 fishMachine: 2,
                 sandDigger: 2,
                 autoTransmuter: 2,
-                skimmer: 2
+                skimmer: 2,
+                purifier: 2,
+                heater: 2
             }
         }
     },
@@ -778,6 +804,7 @@ SharkGame.Upgrades = {
         effect: {
             multiplier: {
                 clamCollector: 2,
+                eggBrooder: 2,
                 sprongeSmelter: 2,
                 seaScourer: 2,
                 prostheticPolyp: 2
@@ -805,6 +832,7 @@ SharkGame.Upgrades = {
         effect: {
             multiplier: {
                 clamCollector: 2,
+                eggBrooder: 2,
                 sprongeSmelter: 2,
                 seaScourer: 2,
                 prostheticPolyp: 2,
@@ -864,18 +892,19 @@ SharkGame.Upgrades = {
         name: "Sun Observation",
         desc: "We must determine what is with the weird glare on the surface of the water.",
         researchedMessage: "Shark science has discovered the sun! It has also discovered that looking directly into the sun hurts.",
-        effectDesc: "Planter crabs are twice as effective. Is a suns worth many fish? We can see a sun, but where is it really? And by what is it made of?",
+        effectDesc: "Planter crabs are twice as effective, and shrimp are four times as effective. Is a suns worth many fish? We can see a sun, but where is it really? And by what is it made of?",
         cost: {
             science: 5000
         },
         required: {
             upgrades: [
-                "kelpHorticulture"
+                "agriculture"
             ]
         },
         effect: {
             multiplier: {
-                planter: 2
+                planter: 2,
+                shrimp: 4
             }
         }
     },
@@ -1022,6 +1051,244 @@ SharkGame.Upgrades = {
             upgrades: [
                 "farExploration"
             ]
+        }
+    },
+
+    // SUPERSCIENCE
+
+    ancestralRecall: {
+        name: "Ancestral Recall",
+        desc: "The sharks and rays know we share some features among ourselves. Using the vague glimpses of dreams, let's piece together the puzzle.",
+        researchedMessage: "Our giant ancestors and the creatures of a long distant past have inspired us to become even greater!",
+        effectDesc: "Sharks, rays and chimaeras, and their roles, are all four times as effective. We have had a glorious past. Now, on to a glorious future.",
+        cost: {
+            science: 1E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery"
+            ],
+            resources: [
+                "shark",
+                "ray",
+                "chimaera"
+            ]
+        },
+        effect: {
+            multiplier: {
+                shark: 4,
+                diver: 4,
+                science: 4,
+                nurse: 4,
+                ray: 4,
+                maker: 4,
+                laser: 4,
+                chimaera: 4,
+                transmuter: 4,
+                explorer: 4
+            }
+        }
+    },
+
+    utilityCarapace: {
+        name: "Utility Carapace",
+        desc: "The exoskeleton is good enough, but with some adjustments, perhaps coralglass can improve it.",
+        researchedMessage: "Coralglass carapace augmentation is a go! The crustaceans now carry their protection and their tools everywhere they go.",
+        effectDesc: "Crabs, shrimp and lobsters, and their roles, are all four times as effective. A shell protects, and a shell interfaces.",
+        cost: {
+            science: 1E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "coralglassSmelting"
+            ],
+            resources: [
+                "crab",
+                "shrimp",
+                "lobster"
+            ]
+        },
+        effect: {
+            multiplier: {
+                crab: 4,
+                brood: 4,
+                planter: 4,
+                shrimp: 4,
+                worker: 4,
+                queen: 4,
+                lobster: 4,
+                berrier: 4,
+                harvester: 4
+            }
+        }
+    },
+
+    primordialSong: {
+        name: "Primordial Song",
+        desc: "Even the dolphins can remember an ancient song. The whales know more, but it stirs within both of them.",
+        researchedMessage: "The dolphins were shaken and moved by their collective realisation of something greater than them. They've been quieter since. The whales seemed indifferent.",
+        effectDesc: "Dolphins and whales, and their roles, are all four times as effective. The song of the ocean is older than life itself.",
+        cost: {
+            science: 1E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "cetaceanAwareness"
+            ],
+            resources: [
+                "dolphin",
+                "whale"
+            ]
+        },
+        effect: {
+            multiplier: {
+                dolphin: 4,
+                biologist: 4,
+                treasurer: 4,
+                philosopher: 4,
+                whale: 4
+            }
+        }
+    },
+
+    leviathanHeart: {
+        name: "Leviathan Heart",
+        desc: "The eels are meek and unassuming, but deep within them lies a greater potential. Let's unleash it.",
+        researchedMessage: "We have found the connection between the eels we know and the ancient giant serpents we knew only in legend. This has inspired every eel we know to do greater things.",
+        effectDesc: "Eels and their roles are all four times as effective. The power of determination can overcome many odds.",
+        cost: {
+            science: 1E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "bioelectricity"
+            ],
+            resources: [
+                "eel"
+            ]
+        },
+        effect: {
+            multiplier: {
+                eel: 4,
+                pit: 4,
+                sifter: 4,
+                technician: 4
+            }
+        }
+    },
+
+    eightfoldOptimisation: {
+        name: "Eightfold Optimisation",
+        desc: "Enhance productivity. Optimise. Improve. Improve.",
+        researchedMessage: "Peak productivity attained. Maintain course. Maintain efficiency.",
+        effectDesc: "Octopuses and their roles, as well as their machines, are all four times as effective. Optimised.",
+        cost: {
+            science: 8E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "octalEfficiency"
+            ],
+            resources: [
+                "octopus"
+            ]
+        },
+        effect: {
+            multiplier: {
+                octopus: 4,
+                collector: 4,
+                scavenger: 4,
+                clamCollector: 4,
+                eggBrooder: 4,
+                sprongeSmelter: 4,
+                seaScourer: 4,
+                prostheticPolyp: 4
+            }
+        }
+    },
+
+    mechanisedAlchemy: {
+        name: "Mechanised Alchemy",
+        desc: "Better engineering and transmutation processes lead to a refinement of our machines.",
+        researchedMessage: "We are blurring the line between science and magic more than ever before!",
+        effectDesc: "Shark machines are all four times as effective. We work better with the machines, not against them.",
+        cost: {
+            science: 1E10
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "engineering"
+            ],
+            resources: [
+                "sharkonium"
+            ]
+        },
+        effect: {
+            multiplier: {
+                fishMachine: 4,
+                crystalMiner: 4,
+                sandDigger: 4,
+                autoTransmuter: 4,
+                skimmer: 4,
+                purifier: 4,
+                heater: 4
+            }
+        }
+    },
+
+    mobiusShells: {
+        name: "Mobius Shells",
+        desc: "The intricate glasswork of crustacean technology can be made even finer for maximised performance.",
+        researchedMessage: "So beautiful. So impossible, but yet so effective. Is it impossible? What are we looking at here?",
+        effectDesc: "Crustacean machines are all four times as effective. Their glass shells defy all reason and geometry.",
+        cost: {
+            science: 1E9
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "coralCircuitry"
+            ],
+            resources: [
+                "coralglass"
+            ]
+        },
+        effect: {
+            multiplier: {
+                spongeFarmer: 4,
+                berrySprayer: 4,
+                glassMaker: 4
+            }
+        }
+    },
+
+    imperialDesigns: {
+        name: "Imperial Designs",
+        desc: "Some of the dolphins remember and have copies of plans for their machines from wherever they used to call home.",
+        researchedMessage: "These designs will never work. Look, let's show them-- oh. Oh, apparently they do. Huh.",
+        effectDesc: "Cetacean machines are all four times as effective. We begrudingly admit their quality is not entirely terrible.",
+        cost: {
+            science: 1E9
+        },
+        required: {
+            upgrades: [
+                "gateDiscovery",
+                "dolphinTechnology"
+            ],
+            resources: [
+                "delphinium"
+            ]
+        },
+        effect: {
+            multiplier: {
+                tirelessCrafter: 4,
+                silentArchivist: 4
+            }
         }
     }
 

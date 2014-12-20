@@ -27,7 +27,7 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.7,
+    VERSION: 0.71,
     VERSION_NAME: "Stranger Oceans",
     EPSILON: 1E-6, // floating point comparison is a joy
 
@@ -739,6 +739,7 @@ SharkGame.Main = {
                     if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
                         SharkGame.Save.deleteSave();
                         SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
+                        SharkGame.Resources.reconstructResourcesTable();
                         SharkGame.World.worldType = "start"; // nothing else will reset this
                         SharkGame.World.planetLevel = 1;
                         SharkGame.Main.init(); // reset
@@ -996,6 +997,15 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
+    "0.71": [
+        "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
+        "Made the recycler stop lying about what could be made.",
+        "Made the recycler not pay out so much for animals.",
+        "Options are no longer reset after completing a run for real this time.",
+        "Bunch of tweaked gate costs.",
+        "One new machine, and one new job.",
+        "Ten new post-chasm-exploration technologies to invest copious amounts of science into."
+    ],
     "0.7 - Stranger Oceans": [
         "WHOLE BUNCH OF NEW STUFF ADDED.",
         "Resource system slightly restructured for something in the future.",

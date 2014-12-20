@@ -106,7 +106,7 @@ SharkGame.Home = {
         },
         // BANKED ESSENCE
         {
-            unlock: {resource: {essence: 10}},
+            unlock: {resource: {essence: 20}},
             message: "The other sharks obey and respect you, but they seem to fear you.<br>It is not clear if you are truly a shark anymore, or something... else."
         },
         // NEW ANIMALS
@@ -491,6 +491,10 @@ SharkGame.Home = {
                 var costResource = v.resource;
                 prereqsMet = prereqsMet && w.doesResourceExist(costResource);
             })
+        }
+        // check special worldtype prereqs
+        if(action.prereq.world) {
+            prereqsMet = prereqsMet && w.worldType === action.prereq.world;
         }
         // check upgrade prerequisites
         if(action.prereq.upgrade) {

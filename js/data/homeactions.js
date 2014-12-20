@@ -713,7 +713,10 @@ SharkGame.HomeActions = {
             "But they weren't rocks...",
             "The clam forecast is looking good!",
             "They're all about the clams!",
-            "More lobsters, because why not?"
+            "More lobsters, because why not?",
+            "HEAVY LOBSTERS",
+            "More lobsters for the snipping and the cutting and the clam grab!",
+            "Clam patrol, here we go."
         ],
         helpText: "Lobster like clams. Will work for clams. Good work. Many clams."
     },
@@ -998,6 +1001,40 @@ SharkGame.HomeActions = {
     },
 
     // SHARK JOBS ////////////////////////////////////////////////////////////////////////////////
+
+    'getDiver': {
+        name: "Prepare diver shark",
+        effect: {
+            resource: {
+                'diver': 1
+            }
+        },
+        cost: [
+            {resource: "shark", costFunction: "constant", priceIncrease: 1},
+            {resource: "fish", costFunction: "linear", priceIncrease: 30}
+        ],
+        max: "diver",
+        prereq: {
+            resource: {
+                'shark': 1
+            },
+            world: "shrouded"
+        },
+        outcomes: [
+            "Well, better you than me.",
+            "Good luck down there!",
+            "You're doing good work for us, diver shark.",
+            "Fare well on your expeditions, shark!"
+        ],
+        multiOutcomes: [
+            "Follow the crystals!",
+            "We will find the secrets of the deep!",
+            "Brave the deep!",
+            "Find the crystals for science!",
+            "Deep, dark, scary waters. Good luck, all of you."
+        ],
+        helpText: "Let a shark go deep into the darkness for more crystals and whatever else they may find."
+    },
 
     'getScientist': {
         name: "Train science shark",
@@ -2271,6 +2308,43 @@ SharkGame.HomeActions = {
         helpText: "This octopus machine collects clams. Simple purpose, simple machine."
     },
 
+    'getEggBrooder': {
+        name: "Build egg brooder",
+        effect: {
+            resource: {
+                'eggBrooder': 1
+            }
+        },
+        cost: [
+            {resource: "spronge", costFunction: "linear", priceIncrease: 150},
+            {resource: "octopus", costFunction: "constant", priceIncrease: 1}
+        ],
+        max: "eggBrooder",
+        prereq: {
+            resource: {
+                'spronge': 150,
+                'octopus': 10
+            },
+            upgrade: [
+                "sprongeBiomimicry"
+            ]
+        },
+        outcomes: [
+            "Machine: egg brooder. Operation: in progress.",
+            "Machine: egg brooder. Operation: beginning.",
+            "Machine: egg brooder. Result: egg maintenance.",
+            "Machine: egg brooder. Result: population rises.",
+            "Machine: egg brooder. Cost: within acceptable parameters."
+        ],
+        multiOutcomes: [
+            "These machines feel strangely alive. They pulse and throb.",
+            "There exist more egg brooders now.",
+            "The biomachine expands.",
+            "The octopuses tell me, find unity in efficiency. Find peace in an optimised generation."
+        ],
+        helpText: "This octopus machine broods and incubates octopus eggs."
+    },
+
     'getSprongeSmelter': {
         name: "Build spronge smelter",
         effect: {
@@ -2414,6 +2488,7 @@ SharkGame.HomeActionCategories = {
     professions: {
         name: "Jobs",
         actions: [
+            "getDiver",
             "getScientist",
             "getLaser",
             "getPlanter",
@@ -2479,6 +2554,7 @@ SharkGame.HomeActionCategories = {
             "getSilentArchivist",
             "getTirelessCrafter",
             "getClamCollector",
+            "getEggBrooder",
             "getSprongeSmelter",
             "getSeaScourer",
             "getProstheticPolyp"

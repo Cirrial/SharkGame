@@ -197,7 +197,7 @@ SharkGame.Artifacts = {
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse"]);
+            SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse", "diver"]);
         }
     },
     rayTotem: {

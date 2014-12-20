@@ -224,7 +224,7 @@ SharkGame.Stats = {
 
                 var numIncomes = 0;
                 $.each(income, function(incomeResourceName, incomeResourceAmount) {
-                    if(w.doesResourceExist(incomeResourceName)) {
+                    if(w.doesResourceExist(incomeResourceName) && r.getTotalResource(incomeResourceName) > 0) {
                         numIncomes++;
                     } else if(incomeResourceAmount < 0 && !generatorData.forceIncome) {
                         // non-existent cost! abort! ABORT
@@ -239,7 +239,7 @@ SharkGame.Stats = {
                     row.append($("<td>").html(r.getResourceName(generatorName)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                     $.each(income, function(incomeKey, incomeValue) {
-                        if(w.doesResourceExist(incomeKey)) {
+                        if(w.doesResourceExist(incomeKey) && r.getTotalResource(incomeKey) > 0) {
                             var changeChar = incomeValue > 0 ? "+" : "";
                             row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
                             row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));

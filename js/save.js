@@ -567,7 +567,17 @@ SharkGame.Save = {
             // completely change how gate slot status is saved
             save.gateCostsMet = [false, false, false, false, false, false];
             return save;
-        }
+        },
 
+        // v 0.71
+        function(save) {
+            _.each(["eggBrooder", "diver"], function(v) {
+                save.resources[v] = {amount: 0, totalAmount: 0};
+            });
+            _.each(["agriculture", "ancestralRecall", "utilityCarapace", "primordialSong", "leviathanHeart", "eightfoldOptimisation", "mechanisedAlchemy", "mobiusShells", "imperialDesigns"], function(v) {
+                save.upgrades[v] = false;
+            });
+            return save;
+        }
     ]
 };

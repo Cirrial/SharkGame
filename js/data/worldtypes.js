@@ -206,7 +206,7 @@ SharkGame.WorldTypes = {
             sand: 1E10,
             kelp: 1E9,
             coral: 1E6,
-            algae: 1E6,
+            algae: 1E3,
             sponge: 1E6,
             junk: 1E9
         }
@@ -298,7 +298,7 @@ SharkGame.WorldTypes = {
         gateCosts: {
             sand: 1E6,
             crystal: 1E4,
-            clam: 1E4,
+            clam: 1E3,
             heater: 1E4,
             sharkonium: 1E7,
             fish: 1E7
