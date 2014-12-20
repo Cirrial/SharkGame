@@ -203,6 +203,7 @@ SharkGame.TitleBar = {
                 }
             } else {
                 if(confirm("Is this world causing you too much trouble? Want to go back to the gateway?")) {
+                    SharkGame.wonGame = false;
                     SharkGame.Main.endGame();
                 }
             }
