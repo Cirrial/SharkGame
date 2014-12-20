@@ -194,6 +194,10 @@ SharkGame.Resources = {
         SharkGame.Resources.recalculateIncomeTable();
     },
 
+    setTotalResource: function(resource, newValue) {
+        SharkGame.PlayerResources[resource].totalAmount = newValue;
+    },
+
     getResource: function(resource) {
         return SharkGame.PlayerResources[resource].amount;
     },

@@ -833,8 +833,8 @@ SharkGame.Main = {
 
             // restore special resources
             $.each(backup, function(resourceName, resourceData) {
-                SharkGame.Resources[resourceName].amount = resourceData.amount;
-                SharkGame.Resources[resourceName].totalAmount = resourceData.totalAmount;
+                SharkGame.Resources.setResource(resourceName, resourceData.amount);
+                SharkGame.Resources.setTotalResource(resourceName, resourceData.totalAmount);
             });
 
             SharkGame.timestampRunStart = (new Date()).getTime();
