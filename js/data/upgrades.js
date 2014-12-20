@@ -342,7 +342,7 @@ SharkGame.Upgrades = {
             ],
             resources: [
                 "sponge",
-                "residue"
+                "junk"
             ]
         }
     },

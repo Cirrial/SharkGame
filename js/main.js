@@ -194,7 +194,7 @@ SharkGame.TitleBar = {
         name: "skip",
         main: true,
         onClick: function() {
-            if(SharkGame.World.worldType === "start") {
+            if(SharkGame.World.worldType === "start" && !(SharkGame.Resources.getTotalResource("essence") > 0)) {  // save people stranded on home world
                 if(confirm("Do you want to reset your game?")) {
                     // just reset
                     SharkGame.Main.init();
@@ -409,6 +409,7 @@ SharkGame.Main = {
         // rename a game option if this is a first time run
         if(SharkGame.World.worldType === "start") {
             SharkGame.TitleBar.skipLink.name = "reset";
+            SharkGame.Main.setUpTitleBar();
         }
 
         // discover actions that were present in last save
@@ -513,6 +514,8 @@ SharkGame.Main = {
     setUpTitleBar: function() {
         var titleMenu = $('#titlemenu');
         var subTitleMenu = $('#subtitlemenu');
+        titleMenu.empty();
+        subTitleMenu.empty();
         $.each(SharkGame.TitleBar, function(k, v) {
             var option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
             if(v.main) {
