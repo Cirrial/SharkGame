@@ -826,7 +826,7 @@ SharkGame.HomeActions = {
         cost: [
             {resource: "fish", costFunction: "linear", priceIncrease: 15}
         ],
-        max: "octopus",
+        max: "eel",
         prereq: {
             resource: {
                 'fish': 50

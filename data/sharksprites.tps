@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.5.3</string>
+        <string>3.6.0</string>
         <key>fileName</key>
         <string>E:/Dropbox/Public/NewSharkGameDEV/data/sharksprites.tps</string>
         <key>autoSDSettings</key>

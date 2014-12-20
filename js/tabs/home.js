@@ -461,7 +461,7 @@ SharkGame.Home = {
 
         var spritename = "actions/" + actionName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (!enableButton) ? "general/missing-action-disabled" : "general/missing-action");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-action");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {

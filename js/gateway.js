@@ -384,7 +384,7 @@ SharkGame.Gateway = {
 
                 var spritename = "artifacts/" + artifactName;
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, (enableButton) ? "general/missing-artifact-disabled" : "general/missing-artifact");
+                    var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-artifact");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                         if(!enableButton) {
