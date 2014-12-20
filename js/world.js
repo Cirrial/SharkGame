@@ -48,15 +48,15 @@ SharkGame.WorldModifiers = {
 
 SharkGame.World = {
 
-    worldType: null,
-    worldResources: null,
-    planetLevel: null,
+    worldType: "start",
+    worldResources: {},
+    planetLevel: 1,
 
     init: function() {
         var w = SharkGame.World;
-        w.worldType = "start";
-        w.planetLevel = 1;
-        w.worldResources = {};
+        //w.worldType = "start";
+        //w.planetLevel = 1;
+        //w.worldResources = {};
         w.resetWorldProperties();
     },
 

@@ -298,8 +298,8 @@ SharkGame.WorldTypes = {
         gateCosts: {
             sand: 1E6,
             crystal: 1E4,
-            clam: 1E6,
-            ice: 1E1,
+            clam: 1E4,
+            heater: 1E4,
             sharkonium: 1E7,
             fish: 1E7
         }

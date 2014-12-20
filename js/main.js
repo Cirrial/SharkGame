@@ -360,12 +360,15 @@ SharkGame.Main = {
         SharkGame.timestampGameStart = SharkGame.timestampGameStart || currDate.getTime();
         SharkGame.timestampRunStart = SharkGame.timestampRunStart || currDate.getTime();
 
-        // preserve settings or reset to defaults
+        // preserve settings or set defaults
         $.each(SharkGame.Settings, function(k, v) {
             if(k === "current") {
                 return;
             }
-            SharkGame.Settings.current[k] = SharkGame.Settings.current[k] || v.defaultSetting;
+            var currentSetting = SharkGame.Settings.current[k];
+            if(typeof(currentSetting) === "undefined") {
+                SharkGame.Settings.current[k] = v.defaultSetting
+            }
         });
 
         // initialise and reset resources
@@ -666,7 +669,7 @@ SharkGame.Main = {
 
             // show setting name
             row.append($('<td>')
-                    .attr("id", "optionLabel")
+                    .addClass("optionLabel")
                     .html(value.name + ":" +
                     "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
             );

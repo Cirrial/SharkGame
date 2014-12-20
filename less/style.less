@@ -827,6 +827,7 @@ button {
   .translate(-50%, -50%);
   border: double @color-med;
   max-height: 90%;
+  max-width: 90%;
 
   z-index: 11;
 
@@ -871,7 +872,6 @@ button {
   table {
     margin: auto;
     text-align: left;
-    white-space: nowrap;
   }
 
   .option-button {
@@ -891,8 +891,9 @@ button {
     }
   }
 
-  #optionLabel {
-    width: 20em;
+  td.optionLabel {
+    min-width: 12em;
+    word-wrap: break-word;
   }
 
   #endCredits {
