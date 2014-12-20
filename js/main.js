@@ -41,7 +41,6 @@ $.extend(SharkGame, {
     timestampRunEnd: false,
 
     sidebarHidden: true,
-    titlebarGenerated: false,
     paneGenerated: false,
 
     gameOver: false,
@@ -194,7 +193,7 @@ SharkGame.TitleBar = {
         name: "skip",
         main: true,
         onClick: function() {
-            if(SharkGame.World.worldType === "start" && !(SharkGame.Resources.getTotalResource("essence") > 0)) {  // save people stranded on home world
+            if(SharkGame.Main.isFirstTime()) {  // save people stranded on home world
                 if(confirm("Do you want to reset your game?")) {
                     // just reset
                     SharkGame.Main.init();
@@ -335,7 +334,7 @@ SharkGame.Main = {
         });
     },
 
-    // also functions as a reset
+        // also functions as a reset
     init: function() {
         var currDate = new Date();
         SharkGame.before = currDate;
@@ -393,9 +392,7 @@ SharkGame.Main = {
         SharkGame.Gate.init();
         SharkGame.Reflection.init();
 
-        if(!SharkGame.titlebarGenerated) {
-            SharkGame.Main.setUpTitleBar();
-        }
+        SharkGame.Main.setUpTitleBar();
 
         SharkGame.Tabs.current = "home";
 
@@ -410,7 +407,7 @@ SharkGame.Main = {
         }
 
         // rename a game option if this is a first time run
-        if(SharkGame.World.worldType === "start") {
+        if(SharkGame.Main.isFirstTime()) {
             SharkGame.TitleBar.skipLink.name = "reset";
             SharkGame.Main.setUpTitleBar();
         }
@@ -528,8 +525,6 @@ SharkGame.Main = {
             }
             $('#' + k).click(v.onClick);
         });
-
-        SharkGame.titlebarGenerated = true;
     },
 
     setUpTab: function() {
@@ -945,6 +940,10 @@ SharkGame.Main = {
     hidePane: function() {
         $('#overlay').hide();
         $('#pane').hide();
+    },
+
+    isFirstTime: function() {
+        return SharkGame.World.worldType === "start" && !(SharkGame.Resources.getTotalResource("essence") > 0);
     },
 
     // DEBUG FUNCTIONS
