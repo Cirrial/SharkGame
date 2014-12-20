@@ -676,7 +676,7 @@ SharkGame.HomeActions = {
             "How can something so small take up so much space?",
             "Sponge forever!"
         ],
-        helpText: "Convince shrimp to assist you in the gathering of sponge."
+        helpText: "Convince shrimp to assist you in the gathering of algae, which helps boost sponge production."
     },
 
     'getLobster': {
