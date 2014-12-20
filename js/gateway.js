@@ -51,7 +51,7 @@ SharkGame.Gateway = {
             if(SharkGame.wonGame) {
                 essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
             } else {
-                essenceReward = 1;
+                essenceReward = 0;
             }
             SharkGame.Resources.changeResource("essence", essenceReward);
         }
