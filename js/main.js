@@ -378,6 +378,7 @@ SharkGame.Main = {
         SharkGame.World.init();
 
         SharkGame.Gateway.init();
+        SharkGame.Gateway.applyArtifacts(); // if there's any effects to carry over from a previous run
 
         // reset log
         SharkGame.Log.clearMessages();

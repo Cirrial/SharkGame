@@ -210,6 +210,7 @@ SharkGame.Save = {
 
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
+                SharkGame.Gateway.init();
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
@@ -225,7 +226,7 @@ SharkGame.Save = {
 
             // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
             if(saveData.artifacts) {
-                SharkGame.Gateway.applyArtifacts();
+                SharkGame.Gateway.applyArtifacts(true);
             }
 
             if(saveData.tabs) {

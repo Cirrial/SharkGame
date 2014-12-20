@@ -73,6 +73,7 @@ SharkGame.World = {
             wr[k].income = 0;
             wr[k].incomeMultiplier = 1;
             wr[k].boostMultiplier = 1;
+            wr[k].artifactMultiplier = 1;
         });
     },
 

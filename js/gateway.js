@@ -26,10 +26,8 @@ SharkGame.Gateway = {
             if(!artifactData.level) {
                 artifactData.level = 0;
             }
+            artifactData.alreadyApplied = false;
         });
-
-        // apply artifacts
-        SharkGame.Gateway.applyArtifacts();
     },
 
     update: function() {
@@ -458,11 +456,11 @@ SharkGame.Gateway = {
         });
     },
 
-    applyArtifacts: function() {
+    applyArtifacts: function(force) {
         // handle general effects
         // special effects are handled by horrible spaghetti code sprinkled between this, World, and Resources
         $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
-            if(artifactData.effect &&!artifactData.alreadyApplied) {
+            if(artifactData.effect && (!artifactData.alreadyApplied || force)) {
                 artifactData.effect(artifactData.level);
                 artifactData.alreadyApplied = true;
             }
