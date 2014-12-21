@@ -2393,7 +2393,8 @@ SharkGame.HomeActions = {
         max: "seaScourer",
         prereq: {
             resource: {
-                'spronge': 100
+                'spronge': 100,
+                'tar': 1
             },
             upgrade: [
                 "sprongeBiomimicry"

@@ -104,7 +104,7 @@ SharkGame.WorldTypes = {
     chaotic: {
         name: "Chaotic",
         desc: "A frenetic world, torn by immaterial force.",
-        shortDesc: "swirling cyan",
+        shortDesc: "swirling teal",
         entry: "You enter a chaotic fray, with no recollection of your former journey. New creatures charge at you from all directions.",
         absentResources: [
             "tar",

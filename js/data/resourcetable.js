@@ -228,7 +228,7 @@ SharkGame.ResourceTable = {
         singleName: 'lobster berrier',
         color: '#719188',
         income: {
-            'lobster': 0.5
+            'lobster': 0.05
         },
         value: 4000
     },
