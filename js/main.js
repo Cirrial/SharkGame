@@ -79,7 +79,8 @@ $.extend(SharkGame, {
     "target='_blank'>support the developer</a>" +
     " if you'd like.)</span></p>",
 
-    spritePath: "img/sharksprites.png",
+    spriteIconPath: "img/sharksprites.png",
+    spriteHomeEventPath: "img/sharkeventsprites.png",
 
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];

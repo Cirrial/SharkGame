@@ -124,7 +124,7 @@ SharkGame.Home = {
         },
         {
             unlock: {resource: {dolphin: 5}},
-            message: "The dolphin pods that work with us speak of an empire that spans the stars.<br>They left it and regret absolutely nothing."
+            message: "The dolphin pods that work with us speak of an star-spanning empire of their kind.<br>They ask where our empire is. And they smile."
         },
         {
             unlock: {resource: {octopus: 8}},
@@ -351,14 +351,14 @@ SharkGame.Home = {
                 sceneDiv.animate({opacity: 0}, 500, function() {
                     var thisSel = $(this);
                     if(SharkGame.Settings.current.showTabImages) {
-                        SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                        SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                     }
                     thisSel.animate({opacity: 1}, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
                 if(SharkGame.Settings.current.showTabImages) {
-                    SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                    SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                 }
             }
         }
@@ -464,7 +464,7 @@ SharkGame.Home = {
 
         var spritename = "actions/" + actionName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-action");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-action");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {

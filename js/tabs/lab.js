@@ -142,7 +142,7 @@ SharkGame.Lab = {
 
         var spritename = "technologies/" + upgradeName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-technology");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-technology");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {

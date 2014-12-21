@@ -2,7 +2,7 @@
 
 "actions/catchFish":
 {
-	"frame": {"x":1610,"y":308,"w":50,"h":50},
+	"frame": {"x":920,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -11,7 +11,7 @@
 },
 "actions/getAutoTransmuter":
 {
-	"frame": {"x":1662,"y":308,"w":50,"h":50},
+	"frame": {"x":920,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -20,7 +20,7 @@
 },
 "actions/getBrood":
 {
-	"frame": {"x":1714,"y":308,"w":50,"h":50},
+	"frame": {"x":972,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -29,7 +29,7 @@
 },
 "actions/getCrab":
 {
-	"frame": {"x":1766,"y":308,"w":50,"h":50},
+	"frame": {"x":972,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -38,7 +38,7 @@
 },
 "actions/getCrystalMiner":
 {
-	"frame": {"x":1818,"y":308,"w":50,"h":50},
+	"frame": {"x":1024,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -47,7 +47,7 @@
 },
 "actions/getFishMachine":
 {
-	"frame": {"x":1610,"y":360,"w":50,"h":50},
+	"frame": {"x":1024,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -56,7 +56,7 @@
 },
 "actions/getLaser":
 {
-	"frame": {"x":1662,"y":360,"w":50,"h":50},
+	"frame": {"x":1076,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -65,7 +65,7 @@
 },
 "actions/getMaker":
 {
-	"frame": {"x":1714,"y":360,"w":50,"h":50},
+	"frame": {"x":1076,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -74,7 +74,7 @@
 },
 "actions/getManta":
 {
-	"frame": {"x":1766,"y":360,"w":50,"h":50},
+	"frame": {"x":1128,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -83,7 +83,7 @@
 },
 "actions/getNurse":
 {
-	"frame": {"x":1818,"y":360,"w":50,"h":50},
+	"frame": {"x":1128,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -92,7 +92,7 @@
 },
 "actions/getPlanter":
 {
-	"frame": {"x":1610,"y":412,"w":50,"h":50},
+	"frame": {"x":1180,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -101,7 +101,7 @@
 },
 "actions/getSandDigger":
 {
-	"frame": {"x":1662,"y":412,"w":50,"h":50},
+	"frame": {"x":1180,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -110,7 +110,7 @@
 },
 "actions/getScientist":
 {
-	"frame": {"x":1714,"y":412,"w":50,"h":50},
+	"frame": {"x":1232,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -119,7 +119,7 @@
 },
 "actions/getShark":
 {
-	"frame": {"x":1766,"y":412,"w":50,"h":50},
+	"frame": {"x":1232,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -128,7 +128,7 @@
 },
 "actions/seaApplesToScience":
 {
-	"frame": {"x":1818,"y":412,"w":50,"h":50},
+	"frame": {"x":1284,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -137,7 +137,7 @@
 },
 "actions/transmuteSharkonium":
 {
-	"frame": {"x":1610,"y":464,"w":50,"h":50},
+	"frame": {"x":1284,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -146,7 +146,7 @@
 },
 "general/missing-action":
 {
-	"frame": {"x":1662,"y":464,"w":50,"h":50},
+	"frame": {"x":1336,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -155,7 +155,7 @@
 },
 "general/missing-artifact":
 {
-	"frame": {"x":1714,"y":464,"w":50,"h":50},
+	"frame": {"x":1336,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -164,160 +164,16 @@
 },
 "general/missing-technology":
 {
-	"frame": {"x":1766,"y":464,"w":50,"h":50},
+	"frame": {"x":1388,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
-"homesea-1":
-{
-	"frame": {"x":2,"y":2,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-10":
-{
-	"frame": {"x":2,"y":204,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-11":
-{
-	"frame": {"x":2,"y":406,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-12":
-{
-	"frame": {"x":2,"y":608,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-13":
-{
-	"frame": {"x":404,"y":2,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-14":
-{
-	"frame": {"x":404,"y":204,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-15":
-{
-	"frame": {"x":404,"y":406,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-2":
-{
-	"frame": {"x":404,"y":608,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-3":
-{
-	"frame": {"x":806,"y":2,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-4":
-{
-	"frame": {"x":1208,"y":2,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-5":
-{
-	"frame": {"x":806,"y":204,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-6":
-{
-	"frame": {"x":1208,"y":204,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-7":
-{
-	"frame": {"x":806,"y":406,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-8":
-{
-	"frame": {"x":806,"y":608,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-9":
-{
-	"frame": {"x":1208,"y":406,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
-"homesea-missing":
-{
-	"frame": {"x":1208,"y":608,"w":400,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
-	"sourceSize": {"w":400,"h":200},
-	"pivot": {"x":0,"y":0}
-},
 "planets/abandoned":
 {
-	"frame": {"x":1610,"y":2,"w":100,"h":100},
+	"frame": {"x":2,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -326,7 +182,7 @@
 },
 "planets/chaotic":
 {
-	"frame": {"x":1712,"y":2,"w":100,"h":100},
+	"frame": {"x":104,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -335,7 +191,7 @@
 },
 "planets/frigid":
 {
-	"frame": {"x":1814,"y":2,"w":100,"h":100},
+	"frame": {"x":206,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -344,7 +200,7 @@
 },
 "planets/haven":
 {
-	"frame": {"x":1610,"y":104,"w":100,"h":100},
+	"frame": {"x":308,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -353,7 +209,7 @@
 },
 "planets/marine":
 {
-	"frame": {"x":1712,"y":104,"w":100,"h":100},
+	"frame": {"x":410,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -362,7 +218,7 @@
 },
 "planets/missing":
 {
-	"frame": {"x":1814,"y":104,"w":100,"h":100},
+	"frame": {"x":512,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -371,7 +227,7 @@
 },
 "planets/shrouded":
 {
-	"frame": {"x":1610,"y":206,"w":100,"h":100},
+	"frame": {"x":614,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -380,7 +236,7 @@
 },
 "planets/tempestuous":
 {
-	"frame": {"x":1712,"y":206,"w":100,"h":100},
+	"frame": {"x":716,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -389,7 +245,7 @@
 },
 "planets/violent":
 {
-	"frame": {"x":1814,"y":206,"w":100,"h":100},
+	"frame": {"x":818,"y":2,"w":100,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
@@ -398,7 +254,7 @@
 },
 "technologies/automation":
 {
-	"frame": {"x":1818,"y":464,"w":50,"h":50},
+	"frame": {"x":1388,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -407,7 +263,7 @@
 },
 "technologies/biology":
 {
-	"frame": {"x":1610,"y":516,"w":50,"h":50},
+	"frame": {"x":1440,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -416,7 +272,7 @@
 },
 "technologies/crabBiology":
 {
-	"frame": {"x":1610,"y":568,"w":50,"h":50},
+	"frame": {"x":1440,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -425,7 +281,7 @@
 },
 "technologies/crystalBite":
 {
-	"frame": {"x":1610,"y":620,"w":50,"h":50},
+	"frame": {"x":1492,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -434,7 +290,7 @@
 },
 "technologies/crystalContainer":
 {
-	"frame": {"x":1610,"y":672,"w":50,"h":50},
+	"frame": {"x":1492,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -443,7 +299,7 @@
 },
 "technologies/crystalSpade":
 {
-	"frame": {"x":1610,"y":724,"w":50,"h":50},
+	"frame": {"x":1544,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -452,7 +308,7 @@
 },
 "technologies/engineering":
 {
-	"frame": {"x":1662,"y":516,"w":50,"h":50},
+	"frame": {"x":1544,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -461,7 +317,7 @@
 },
 "technologies/exploration":
 {
-	"frame": {"x":1714,"y":516,"w":50,"h":50},
+	"frame": {"x":1596,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -470,7 +326,7 @@
 },
 "technologies/farExploration":
 {
-	"frame": {"x":1766,"y":516,"w":50,"h":50},
+	"frame": {"x":1596,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -479,7 +335,7 @@
 },
 "technologies/gateDiscovery":
 {
-	"frame": {"x":1818,"y":516,"w":50,"h":50},
+	"frame": {"x":1648,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -488,7 +344,7 @@
 },
 "technologies/kelpHorticulture":
 {
-	"frame": {"x":1662,"y":568,"w":50,"h":50},
+	"frame": {"x":1648,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -497,7 +353,7 @@
 },
 "technologies/laserRays":
 {
-	"frame": {"x":1662,"y":620,"w":50,"h":50},
+	"frame": {"x":1700,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -506,7 +362,7 @@
 },
 "technologies/rayBiology":
 {
-	"frame": {"x":1662,"y":672,"w":50,"h":50},
+	"frame": {"x":1700,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -515,7 +371,7 @@
 },
 "technologies/recyclerDiscovery":
 {
-	"frame": {"x":1662,"y":724,"w":50,"h":50},
+	"frame": {"x":1752,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -524,7 +380,7 @@
 },
 "technologies/seabedGeology":
 {
-	"frame": {"x":1714,"y":568,"w":50,"h":50},
+	"frame": {"x":1752,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -533,7 +389,7 @@
 },
 "technologies/statsDiscovery":
 {
-	"frame": {"x":1766,"y":568,"w":50,"h":50},
+	"frame": {"x":1804,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -542,7 +398,7 @@
 },
 "technologies/sunObservation":
 {
-	"frame": {"x":1818,"y":568,"w":50,"h":50},
+	"frame": {"x":1804,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -551,7 +407,7 @@
 },
 "technologies/thermalVents":
 {
-	"frame": {"x":1714,"y":620,"w":50,"h":50},
+	"frame": {"x":1856,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -560,7 +416,7 @@
 },
 "technologies/transmutation":
 {
-	"frame": {"x":1714,"y":672,"w":50,"h":50},
+	"frame": {"x":1856,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -569,7 +425,7 @@
 },
 "technologies/underwaterChemistry":
 {
-	"frame": {"x":1714,"y":724,"w":50,"h":50},
+	"frame": {"x":1908,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -578,7 +434,7 @@
 },
 "technologies/xenobiology":
 {
-	"frame": {"x":1766,"y":620,"w":50,"h":50},
+	"frame": {"x":1908,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -590,8 +446,8 @@
 	"version": "1.0",
 	"image": "sharksprites.png",
 	"format": "RGBA8888",
-	"size": {"w":1916,"h":810},
+	"size": {"w":1960,"h":106},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c1bc77729df8ea9168ea34216fd0d293:fde2f3c75bda0c07a0039a1a1f1ee383:2f2abb5c9709e31e381278f40f4006d0$"
+	"smartupdate": "$TexturePacker:SmartUpdate:3fa3ad0f1c90f034b4ecee7ca43fcdf9:823dfeac8f5f0e4c3f49c5016ae06731:2f2abb5c9709e31e381278f40f4006d0$"
 }
 }

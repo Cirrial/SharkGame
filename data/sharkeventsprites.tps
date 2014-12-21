@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.6.0</string>
         <key>fileName</key>
-        <string>E:/Dropbox/Public/NewSharkGameDEV/data/sharksprites.tps</string>
+        <string>E:/Dropbox/Public/NewSharkGameDEV/data/sharkeventsprites.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>../img/sharksprites.png</filename>
+        <filename>../img/sharkeventsprites.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -145,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>rawspritedata.json</filename>
+                <filename>raweventspritedata.json</filename>
             </struct>
             <key>header</key>
             <struct type="DataFile">
@@ -198,7 +198,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../img/raw</filename>
+            <filename>../img/events/home</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
