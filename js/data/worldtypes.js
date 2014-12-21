@@ -214,7 +214,7 @@ SharkGame.WorldTypes = {
     abandoned: {
         name: "Abandoned",
         desc: "A dying world filled with machinery.",
-        shortDesc: "murky black",
+        shortDesc: "murky dark green",
         entry: "You do not know who left this world so torn and empty. Was it some predecessor of yours? Was it you yourself?",
         absentResources: [
             "ice",
@@ -299,7 +299,7 @@ SharkGame.WorldTypes = {
             sand: 1E6,
             crystal: 1E4,
             clam: 1E3,
-            heater: 1E4,
+            heater: 1E2,
             sharkonium: 1E7,
             fish: 1E7
         }

@@ -106,7 +106,7 @@ SharkGame.Home = {
         },
         // BANKED ESSENCE
         {
-            unlock: {resource: {essence: 20}},
+            unlock: {resource: {essence: 10}},
             message: "The other sharks obey and respect you, but they seem to fear you.<br>It is not clear if you are truly a shark anymore, or something... else."
         },
         // NEW ANIMALS
