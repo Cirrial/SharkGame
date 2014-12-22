@@ -199,7 +199,6 @@
         <key>fileList</key>
         <array>
             <filename>../img/raw</filename>
-            <filename>../img/events/home</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

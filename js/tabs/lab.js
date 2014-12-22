@@ -142,7 +142,7 @@ SharkGame.Lab = {
 
         var spritename = "technologies/" + upgradeName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-technology");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-technology");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {
@@ -221,6 +221,7 @@ SharkGame.Lab = {
 
     isUpgradePossible: function(upgradeName) {
         var w = SharkGame.World;
+        var l = SharkGame.Lab;
         var upgradeData = SharkGame.Upgrades[upgradeName];
         var isPossible = true;
 
@@ -229,10 +230,16 @@ SharkGame.Lab = {
                 // check if any related resources exist in the world for this to make sense
                 // unlike the costs where all resources in the cost must exist, this is an either/or scenario
                 var relatedResourcesExist = false;
-                $.each(upgradeData.required.resources, function(_, v) {
+                _.each(upgradeData.required.resources, function(v) {
                     relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
                 });
                 isPossible = isPossible && relatedResourcesExist;
+            }
+            if(upgradeData.required.upgrades) {
+                // RECURSIVE CHECK REQUISITE TECHS
+                _.each(upgradeData.required.upgrades, function(v) {
+                    isPossible = isPossible && l.isUpgradePossible(v);
+                });
             }
             // check existence of resource cost
             // this is the final check, everything that was permitted previously will be made false

@@ -55,21 +55,21 @@ SharkGame.Reflection = {
             if(artifactData.level > 0) {
                 var maxedOut = artifactData.level >= artifactData.max;
                 var item = $('<div>').addClass("artifactDiv");
-                var artifactLabel = "<em>" + artifactData.name + "</em>" +
+                var artifactLabel = artifactData.name +
                     "<br><span class='medDesc'>";
                 if(maxedOut) {
                     artifactLabel += "(Maximum Power)";
                 } else {
                     artifactLabel += "(Power: " + m.beautify(artifactData.level) + ")";
                 }
-                artifactLabel += "</span><br>" + artifactData.flavour;
+                artifactLabel += "</span><br><em>" + artifactData.flavour + "</em>";
 
                 item.append(artifactLabel);
                 listSel.append(item);
 
                 var spritename = "artifacts/" + artifactKey;
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-artifact");
+                    var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-artifact");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                         iconDiv.addClass("gatewayButton");

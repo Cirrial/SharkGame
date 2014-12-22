@@ -7,7 +7,7 @@ SharkGame.Stats = {
 
     sceneImage: "img/events/misc/scene-grotto.png",
 
-    recreateIncomeTable: true,
+    recreateIncomeTable: null,
 
     discoverReq: {
         upgrade: [
@@ -72,14 +72,18 @@ SharkGame.Stats = {
 
         var genStats = $('#generalStats');
         genStats.append($('<h3>').html("General Stats"));
-        if(SharkGame.World.worldType !== "start") {
+        var firstTime = SharkGame.Main.isFirstTime();
+        if(!firstTime) {
             genStats.append($('<p>').html("<span class='medDesc'>Climate Level</span><br>" + SharkGame.Main.beautify(SharkGame.World.planetLevel)));
         }
         genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
-        if(SharkGame.Resources.getTotalResource("essence") > 0) {
+        if(!firstTime) {
             genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
         }
         genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
+        if(!firstTime) {
+            genStats.append($('<p>').html("Essence given is the total acquired for the entire game and not just for this world.").addClass("medDesc"));
+        }
         genStats.append(s.createTotalAmountTable());
 
         SharkGame.Main.createBuyButtons("rid");
@@ -224,7 +228,7 @@ SharkGame.Stats = {
 
                 var numIncomes = 0;
                 $.each(income, function(incomeResourceName, incomeResourceAmount) {
-                    if(w.doesResourceExist(incomeResourceName)) {
+                    if(w.doesResourceExist(incomeResourceName) && r.getTotalResource(incomeResourceName) > 0) {
                         numIncomes++;
                     } else if(incomeResourceAmount < 0 && !generatorData.forceIncome) {
                         // non-existent cost! abort! ABORT
@@ -239,7 +243,7 @@ SharkGame.Stats = {
                     row.append($("<td>").html(r.getResourceName(generatorName)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                     $.each(income, function(incomeKey, incomeValue) {
-                        if(w.doesResourceExist(incomeKey)) {
+                        if(w.doesResourceExist(incomeKey) && r.getTotalResource(incomeKey) > 0) {
                             var changeChar = incomeValue > 0 ? "+" : "";
                             row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
                             row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));

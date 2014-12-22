@@ -4,6 +4,7 @@ SharkGame.WorldTypes = {
         desc: "You REALLY shouldn't be seeing this.",
         shortDesc: "testing",
         entry: "You enter a debug ocean.",
+        style: "default",
         absentResources: [],
         modifiers: [],
         gateCosts: {
@@ -20,6 +21,7 @@ SharkGame.WorldTypes = {
         desc: "You shouldn't be seeing this.",
         shortDesc: "strange blue",
         entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
+        style: "default",
         absentResources: [
             "tar",
             "ice",
@@ -81,6 +83,7 @@ SharkGame.WorldTypes = {
         desc: "A serene blue world. Peaceful, beautiful, so close to home.",
         shortDesc: "strange blue",
         entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
+        style: "default",
         absentResources: [
             "tar",
             "ice",
@@ -104,8 +107,9 @@ SharkGame.WorldTypes = {
     chaotic: {
         name: "Chaotic",
         desc: "A frenetic world, torn by immaterial force.",
-        shortDesc: "swirling cyan",
+        shortDesc: "swirling teal",
         entry: "You enter a chaotic fray, with no recollection of your former journey. New creatures charge at you from all directions.",
+        style: "chaotic",
         absentResources: [
             "tar",
             "ice",
@@ -135,6 +139,7 @@ SharkGame.WorldTypes = {
         desc: "An aquamarine world of plenty. So beautiful, yet so vulnerable.",
         shortDesc: "thriving aquamarine",
         entry: "Remembering nothing, you find yourself in a beautiful atoll teeming with life. Life will be good here.",
+        style: "haven",
         absentResources: [
             "tar",
             "ice",
@@ -160,6 +165,7 @@ SharkGame.WorldTypes = {
         desc: "A swirling maelstrom of storms where nothing rests.",
         shortDesc: "stormy grey",
         entry: "You recall nothing and know only the storms. The unrelenting, restless storms scattering your possessions and allies.",
+        style: "tempestuous",
         absentResources: [
             "tar",
             "ice",
@@ -186,6 +192,7 @@ SharkGame.WorldTypes = {
         desc: "An ocean close to boiling and choking under sulphuric fumes.",
         shortDesc: "searing red",
         entry: "The burning waters sear the last traces of your past experiences from you. From beneath, the vents spew forth a heavy cloud of sand.",
+        style: "violent",
         absentResources: [
             "tar",
             "ice",
@@ -206,7 +213,7 @@ SharkGame.WorldTypes = {
             sand: 1E10,
             kelp: 1E9,
             coral: 1E6,
-            algae: 1E6,
+            algae: 1E3,
             sponge: 1E6,
             junk: 1E9
         }
@@ -214,8 +221,9 @@ SharkGame.WorldTypes = {
     abandoned: {
         name: "Abandoned",
         desc: "A dying world filled with machinery.",
-        shortDesc: "murky black",
+        shortDesc: "murky dark green",
         entry: "You do not know who left this world so torn and empty. Was it some predecessor of yours? Was it you yourself?",
+        style: "abandoned",
         absentResources: [
             "ice",
             "heater",
@@ -247,6 +255,7 @@ SharkGame.WorldTypes = {
         desc: "A dark, murky ocean of secrecy and danger.",
         shortDesc: "dark mysterious",
         entry: "Blackness. You know only blindness in these dark forsaken waters. Foggy memory leads you to follow a stream of crystals.",
+        style: "shrouded",
         absentResources: [
             "tar",
             "ice",
@@ -278,6 +287,7 @@ SharkGame.WorldTypes = {
         desc: "A cold, chilling ocean freezing slowly to death.",
         shortDesc: "freezing white",
         entry: "As you struggle with sudden amnesia, you notice crystals forming in front of you. So cold.",
+        style: "frigid",
         absentResources: [
             "tar",
             "dolphin",
@@ -298,8 +308,8 @@ SharkGame.WorldTypes = {
         gateCosts: {
             sand: 1E6,
             crystal: 1E4,
-            clam: 1E6,
-            ice: 1E1,
+            clam: 1E3,
+            heater: 1E2,
             sharkonium: 1E7,
             fish: 1E7
         }

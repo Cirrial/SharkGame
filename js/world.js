@@ -54,9 +54,14 @@ SharkGame.World = {
 
     init: function() {
         var w = SharkGame.World;
-        var g = SharkGame.Gateway;
-
+        //w.worldType = "start";
+        //w.planetLevel = 1;
+        //w.worldResources = {};
         w.resetWorldProperties();
+    },
+
+    apply: function() {
+        var w = SharkGame.World;
         w.applyWorldProperties(w.planetLevel);
         w.applyGateCosts(w.planetLevel);
     },
@@ -73,6 +78,7 @@ SharkGame.World = {
             wr[k].income = 0;
             wr[k].incomeMultiplier = 1;
             wr[k].boostMultiplier = 1;
+            wr[k].artifactMultiplier = 1;
         });
     },
 
@@ -122,9 +128,6 @@ SharkGame.World = {
     // does this resource exist on this planet?
     doesResourceExist: function(resourceName) {
         var info = SharkGame.World.worldResources[resourceName];
-        if(!info) {
-            return false;
-        }
         return info.exists;
     },
 
@@ -142,7 +145,6 @@ SharkGame.World = {
 
     getArtifactMultiplier: function(resourceName) {
         var artifactMultiplier = SharkGame.World.worldResources[resourceName].artifactMultiplier;
-        if(!artifactMultiplier) artifactMultiplier = 1;
         return artifactMultiplier;
     },
 

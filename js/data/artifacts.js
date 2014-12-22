@@ -43,7 +43,7 @@ SharkGame.Artifacts = {
             return Math.floor(Math.pow(10, level + 1));
         },
         effect: function(level) {
-            SharkGame.Resources.specialMultiplier *= Math.max((2 * level), 1);
+            SharkGame.Resources.specialMultiplier = Math.max((2 * level), 1);
         }
     },
     planetTerraformer: {
@@ -197,7 +197,7 @@ SharkGame.Artifacts = {
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse"]);
+            SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse", "diver"]);
         }
     },
     rayTotem: {
@@ -257,13 +257,13 @@ SharkGame.Artifacts = {
     },
     whaleTotem: {
         name: "Totem of Whale",
-        desc: "Increase the effectiveness of whales and their roles.",
+        desc: "Increase the effectiveness of whales.",
         flavour: "Keepers of song and mystery.",
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["whale", "chorus"]);
+            SharkGame.ArtifactUtil.totemEffect(level, ["whale"]);
         }
     },
     eelTotem: {
@@ -350,14 +350,18 @@ SharkGame.Artifacts = {
         required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect: function(level) {
-            if(level === 0) {
+            if(level < 1) {
                 return;
             }
             var resourceList = ["tar", "ice"];
             var wr = SharkGame.World.worldResources;
             var multiplier = 1 / (level + 1);
             _.each(resourceList, function(resourceName) {
-                wr[resourceName].artifactMultiplier *= multiplier;
+                if(wr[resourceName].artifactMultiplier) {
+                    wr[resourceName].artifactMultiplier *= multiplier;
+                } else {
+                    wr[resourceName].artifactMultiplier = multiplier;
+                }
             });
         }
     }

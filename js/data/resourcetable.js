@@ -228,14 +228,14 @@ SharkGame.ResourceTable = {
         singleName: 'lobster berrier',
         color: '#719188',
         income: {
-            'lobster': 0.5
+            'lobster': 0.05
         },
         value: 4000
     },
 
     biologist: {
         name: 'dolphin biologists',
-        singleName: 'dolphin biologists',
+        singleName: 'dolphin biologist',
         color: '#5C9976',
         income: {
             'dolphin': 0.005
@@ -262,6 +262,17 @@ SharkGame.ResourceTable = {
         color: '#DCEBF5',
         income: {
             'science': 0.5
+        },
+        value: 3000
+    },
+
+    diver: {
+        name: 'diver sharks',
+        singleName: 'diver shark',
+        color: '#6A74AB',
+        income: {
+            'crystal': 0.5,
+            'jellyfish': 0.5
         },
         value: 3000
     },
@@ -510,7 +521,7 @@ SharkGame.ResourceTable = {
     berrySprayer: {
         name: 'berry sprayers',
         singleName: 'berry sprayer',
-        color: '#38296C',
+        color: '#9B92BB',
         income: {
             lobster: 6
         },
@@ -599,6 +610,17 @@ SharkGame.ResourceTable = {
         value: 50000
     },
 
+    eggBrooder: {
+        name: 'egg brooders',
+        singleName: 'egg brooder',
+        color: '836E5F',
+        income: {
+            octopus: 1,
+            tar: 0.0001
+        },
+        value: 50000
+    },
+
     // SCIENCE
 
     science: {
@@ -632,8 +654,8 @@ SharkGame.ResourceTable = {
         singleName: 'sponge',
         color: '#ED9847',
         income: {
-            sponge: 0.1,
-            algae: -1
+            sponge: 0.0001,
+            algae: -0.001
         },
         value: 3
     },
@@ -691,7 +713,7 @@ SharkGame.ResourceTable = {
     algae: {
         name: 'algae',
         singleName: 'algae',
-        color: '#136E2C',
+        color: '#549572',
         value: 3
     },
 
@@ -864,6 +886,7 @@ SharkGame.ResourceCategories = {
         ],
         resources: [
             "scientist",
+            "diver",
             "laser",
             "planter",
             "worker",
@@ -905,7 +928,8 @@ SharkGame.ResourceCategories = {
             "clamCollector",
             "sprongeSmelter",
             "seaScourer",
-            "prostheticPolyp"
+            "prostheticPolyp",
+            "eggBrooder"
         ]
     },
     science: {

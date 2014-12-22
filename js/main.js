@@ -27,7 +27,7 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.7,
+    VERSION: 0.71,
     VERSION_NAME: "Stranger Oceans",
     EPSILON: 1E-6, // floating point comparison is a joy
 
@@ -40,10 +40,7 @@ $.extend(SharkGame, {
     timestampRunStart: false,
     timestampRunEnd: false,
 
-    worldsCompleted: 0,
-
     sidebarHidden: true,
-    titlebarGenerated: false,
     paneGenerated: false,
 
     gameOver: false,
@@ -82,7 +79,8 @@ $.extend(SharkGame, {
     "target='_blank'>support the developer</a>" +
     " if you'd like.)</span></p>",
 
-    spritePath: "img/sharksprites.png",
+    spriteIconPath: "img/sharksprites.png",
+    spriteHomeEventPath: "img/sharkeventsprites.png",
 
     choose: function(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
@@ -196,7 +194,7 @@ SharkGame.TitleBar = {
         name: "skip",
         main: true,
         onClick: function() {
-            if(SharkGame.World.worldType === "start") {
+            if(SharkGame.Main.isFirstTime()) {  // save people stranded on home world
                 if(confirm("Do you want to reset your game?")) {
                     // just reset
                     SharkGame.Main.init();
@@ -337,7 +335,7 @@ SharkGame.Main = {
         });
     },
 
-    // also functions as a reset
+        // also functions as a reset
     init: function() {
         var currDate = new Date();
         SharkGame.before = currDate;
@@ -362,12 +360,15 @@ SharkGame.Main = {
         SharkGame.timestampGameStart = SharkGame.timestampGameStart || currDate.getTime();
         SharkGame.timestampRunStart = SharkGame.timestampRunStart || currDate.getTime();
 
-        // preserve settings or reset to defaults
+        // preserve settings or set defaults
         $.each(SharkGame.Settings, function(k, v) {
             if(k === "current") {
                 return;
             }
-            SharkGame.Settings.current[k] = SharkGame.Settings.current[k] || v.defaultSetting;
+            var currentSetting = SharkGame.Settings.current[k];
+            if(typeof(currentSetting) === "undefined") {
+                SharkGame.Settings.current[k] = v.defaultSetting
+            }
         });
 
         // initialise and reset resources
@@ -376,8 +377,10 @@ SharkGame.Main = {
         // initialise world
         // MAKE SURE GATE IS INITIALISED AFTER WORLD!!
         SharkGame.World.init();
+        SharkGame.World.apply();
 
         SharkGame.Gateway.init();
+        SharkGame.Gateway.applyArtifacts(); // if there's any effects to carry over from a previous run
 
         // reset log
         SharkGame.Log.clearMessages();
@@ -390,9 +393,7 @@ SharkGame.Main = {
         SharkGame.Gate.init();
         SharkGame.Reflection.init();
 
-        if(!SharkGame.titlebarGenerated) {
-            SharkGame.Main.setUpTitleBar();
-        }
+        SharkGame.Main.setUpTitleBar();
 
         SharkGame.Tabs.current = "home";
 
@@ -407,8 +408,9 @@ SharkGame.Main = {
         }
 
         // rename a game option if this is a first time run
-        if(SharkGame.World.worldType === "start") {
+        if(SharkGame.Main.isFirstTime()) {
             SharkGame.TitleBar.skipLink.name = "reset";
+            SharkGame.Main.setUpTitleBar();
         }
 
         // discover actions that were present in last save
@@ -513,6 +515,8 @@ SharkGame.Main = {
     setUpTitleBar: function() {
         var titleMenu = $('#titlemenu');
         var subTitleMenu = $('#subtitlemenu');
+        titleMenu.empty();
+        subTitleMenu.empty();
         $.each(SharkGame.TitleBar, function(k, v) {
             var option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
             if(v.main) {
@@ -522,8 +526,6 @@ SharkGame.Main = {
             }
             $('#' + k).click(v.onClick);
         });
-
-        SharkGame.titlebarGenerated = true;
     },
 
     setUpTab: function() {
@@ -538,11 +540,6 @@ SharkGame.Main = {
 
         // set up tab specific stuff
         var tab = tabs[tabs.current];
-        if(!tab) {
-            // in case of error, default to home
-            SharkGame.Tabs.current = "home";
-            tab = tabs["home"];
-        }
         var tabCode = tab.code;
         tabCode.switchTo();
     },
@@ -668,7 +665,7 @@ SharkGame.Main = {
 
             // show setting name
             row.append($('<td>')
-                    .attr("id", "optionLabel")
+                    .addClass("optionLabel")
                     .html(value.name + ":" +
                     "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
             );
@@ -738,6 +735,7 @@ SharkGame.Main = {
                     if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
                         SharkGame.Save.deleteSave();
                         SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
+                        SharkGame.Resources.reconstructResourcesTable();
                         SharkGame.World.worldType = "start"; // nothing else will reset this
                         SharkGame.World.planetLevel = 1;
                         SharkGame.Main.init(); // reset
@@ -833,8 +831,8 @@ SharkGame.Main = {
 
             // restore special resources
             $.each(backup, function(resourceName, resourceData) {
-                SharkGame.Resources[resourceName].amount = resourceData.amount;
-                SharkGame.Resources[resourceName].totalAmount = resourceData.totalAmount;
+                SharkGame.Resources.setResource(resourceName, resourceData.amount);
+                SharkGame.Resources.setTotalResource(resourceName, resourceData.totalAmount);
             });
 
             SharkGame.timestampRunStart = (new Date()).getTime();
@@ -945,6 +943,10 @@ SharkGame.Main = {
         $('#pane').hide();
     },
 
+    isFirstTime: function() {
+        return SharkGame.World.worldType === "start" && !(SharkGame.Resources.getTotalResource("essence") > 0);
+    },
+
     // DEBUG FUNCTIONS
     discoverAll: function() {
         $.each(SharkGame.Tabs, function(k, v) {
@@ -995,6 +997,15 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
+    "0.71": [
+        "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
+        "Made the recycler stop lying about what could be made.",
+        "Made the recycler not pay out so much for animals.",
+        "Options are no longer reset after completing a run for real this time.",
+        "Bunch of tweaked gate costs.",
+        "One new machine, and one new job.",
+        "Ten new post-chasm-exploration technologies to invest copious amounts of science into."
+    ],
     "0.7 - Stranger Oceans": [
         "WHOLE BUNCH OF NEW STUFF ADDED.",
         "Resource system slightly restructured for something in the future.",

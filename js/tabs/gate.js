@@ -23,8 +23,8 @@ SharkGame.Gate = {
     sceneAlmostOpenImage: "img/events/misc/scene-gate-one-slot.png",
     sceneOpenImage: "img/events/misc/scene-gate-open.png",
 
-    costsMet: {},
-    costs: {},
+    costsMet: null,
+    costs: null,
 
     init: function() {
         var g = SharkGame.Gate;

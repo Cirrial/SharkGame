@@ -11,7 +11,7 @@ SharkGame.Resources = {
     WORLD_MULTIPLIER_COLOR: '#6060A0',
     ARTIFACT_MULTIPLIER_COLOR: '#6F968A',
 
-    specialMultiplier: 1,
+    specialMultiplier: null,
     rebuildTable: false,
 
     init: function() {
@@ -27,6 +27,8 @@ SharkGame.Resources = {
         $.each(SharkGame.ResourceTable, function(k, v) {
             SharkGame.PlayerIncomeTable[k] = 0;
         });
+
+        SharkGame.Resources.specialMultiplier = 1;
     },
 
     processIncomes: function(timeDelta) {
@@ -192,6 +194,10 @@ SharkGame.Resources = {
             resourceTable.amount = 0;
         }
         SharkGame.Resources.recalculateIncomeTable();
+    },
+
+    setTotalResource: function(resource, newValue) {
+        SharkGame.PlayerResources[resource].totalAmount = newValue;
     },
 
     getResource: function(resource) {

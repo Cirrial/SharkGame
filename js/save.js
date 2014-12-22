@@ -210,6 +210,7 @@ SharkGame.Save = {
 
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
+                SharkGame.Gateway.init();
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
@@ -217,15 +218,16 @@ SharkGame.Save = {
 
             // load world type and level and apply world properties
             if(saveData.world) {
+                SharkGame.World.init();
                 SharkGame.World.worldType = saveData.world.type;
                 SharkGame.World.planetLevel = saveData.world.level;
-                SharkGame.World.init();
+                SharkGame.World.apply();
                 SharkGame.Home.init();
             }
 
             // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
             if(saveData.artifacts) {
-                SharkGame.Gateway.applyArtifacts();
+                SharkGame.Gateway.applyArtifacts(true);
             }
 
             if(saveData.tabs) {
@@ -565,7 +567,17 @@ SharkGame.Save = {
             // completely change how gate slot status is saved
             save.gateCostsMet = [false, false, false, false, false, false];
             return save;
-        }
+        },
 
+        // v 0.71
+        function(save) {
+            _.each(["eggBrooder", "diver"], function(v) {
+                save.resources[v] = {amount: 0, totalAmount: 0};
+            });
+            _.each(["agriculture", "ancestralRecall", "utilityCarapace", "primordialSong", "leviathanHeart", "eightfoldOptimisation", "mechanisedAlchemy", "mobiusShells", "imperialDesigns"], function(v) {
+                save.upgrades[v] = false;
+            });
+            return save;
+        }
     ]
 };

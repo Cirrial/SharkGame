@@ -38,7 +38,7 @@ SharkGame.Recycler = {
         machines: "linear",
         stuff: "constant",
         processed: "constant",
-        animals: "linear"
+        animals: "constant"
     },
 
     bannedResources: [
@@ -116,10 +116,11 @@ SharkGame.Recycler = {
                 var forceSingular = selectedAmount === 1;
                 var inputAmount = selectedAmount;
                 var outputAmount = selectedAmount;
+                var maxOutputAmount = y.getMaxToBuy(k);
                 if(selectedAmount < 0) {
                     var divisor = Math.floor(selectedAmount) * -1;
                     inputAmount = resourceAmount / divisor;
-                    outputAmount = y.getMaxToBuy(k) / divisor;
+                    outputAmount = maxOutputAmount / divisor;
 
                     inputAmount = Math.floor(inputAmount);
                     outputAmount = Math.floor(outputAmount);
@@ -135,7 +136,7 @@ SharkGame.Recycler = {
                 inputButton.html(label).prop("disabled", disableButton);
 
                 // update output button
-                disableButton = (outputAmount <= 0);
+                disableButton = (maxOutputAmount < outputAmount) || (outputAmount <= 0);
                 label = "Convert to ";
                 if(outputAmount > 0) {
                     label += m.beautify(outputAmount) + " ";

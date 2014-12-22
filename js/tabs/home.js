@@ -5,8 +5,8 @@ SharkGame.Home = {
     tabName: "Home Sea",
     tabBg: "img/bg/bg-homesea.png",
 
-    currentButtonTab: "all",
-    currentExtraMessageIndex: -1,
+    currentButtonTab: null,
+    currentExtraMessageIndex: null,
 
     // Priority: later messages display if available, otherwise earlier ones.
     extraMessages: [
@@ -124,7 +124,7 @@ SharkGame.Home = {
         },
         {
             unlock: {resource: {dolphin: 5}},
-            message: "The dolphin pods that work with us speak of an empire that spans the stars.<br>They left it and regret absolutely nothing."
+            message: "The dolphin pods that work with us speak of an star-spanning empire of their kind.<br>They ask where our empire is. And they smile."
         },
         {
             unlock: {resource: {octopus: 8}},
@@ -181,6 +181,9 @@ SharkGame.Home = {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
         });
+
+        h.currentExtraMessageIndex = -1;
+        h.currentButtonTab = "all";
     },
 
     switchTo: function() {
@@ -348,14 +351,14 @@ SharkGame.Home = {
                 sceneDiv.animate({opacity: 0}, 500, function() {
                     var thisSel = $(this);
                     if(SharkGame.Settings.current.showTabImages) {
-                        SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                        SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                     }
                     thisSel.animate({opacity: 1}, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
                 if(SharkGame.Settings.current.showTabImages) {
-                    SharkGame.changeSprite(SharkGame.spritePath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
+                    SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                 }
             }
         }
@@ -461,7 +464,7 @@ SharkGame.Home = {
 
         var spritename = "actions/" + actionName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spritePath, spritename, null, "general/missing-action");
+            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-action");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {
@@ -488,6 +491,10 @@ SharkGame.Home = {
                 var costResource = v.resource;
                 prereqsMet = prereqsMet && w.doesResourceExist(costResource);
             })
+        }
+        // check special worldtype prereqs
+        if(action.prereq.world) {
+            prereqsMet = prereqsMet && w.worldType === action.prereq.world;
         }
         // check upgrade prerequisites
         if(action.prereq.upgrade) {
@@ -518,7 +525,7 @@ SharkGame.Home = {
                 .animate({opacity: 1.0}, 50);
         }
         if(actionData.newlyDiscovered) {
-            buttonSelector.addClass("gateway");
+            buttonSelector.addClass("newlyDiscovered");
         }
     },
 
@@ -603,9 +610,9 @@ SharkGame.Home = {
                 SharkGame.Log.addMessage("You can't afford that!");
             }
         }
-        if(button.hasClass("gateway")) {
+        if(button.hasClass("newlyDiscovered")) {
             action.newlyDiscovered = false;
-            button.removeClass("gateway");
+            button.removeClass("newlyDiscovered");
         }
         // disable button until next frame
         button.prop("disabled", true);
