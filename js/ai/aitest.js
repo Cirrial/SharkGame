@@ -55,14 +55,15 @@ SGAI.getActionValue = function(actionName) {
                 var resourceIncome = rt[generatorName].income;
                 if(resourceIncome) {
                     $.each(resourceIncome, function(productionName, productionAmount) {
-                        var incomeAmount = r.getIncomeAmountTotal(generatorName, productionName);
+                        var incomeAmount = r.getProductAmountFromGeneratorResource(generatorName, productionName);
                         var productValue = !(typeof(SGAI.biasedFavourites[productionName]) === "undefined") ? SGAI.biasedFavourites[productionName] : rt[productionName].value;
                         incomeValue += max * incomeAmount * productValue;
                     })
                 }
             });
         }
-        totalValue = (resultValue + incomeValue) / costValue;
+        // todo: figure out how the hell result value factors into this
+        totalValue = incomeValue / costValue;
     }
     return totalValue;
 };
