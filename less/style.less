@@ -1,8 +1,15 @@
 /*------------------------------------------------------
   MIXINS
 -------------------------------------------------------*/
+// default colours i guess!
+@color-lighter: #7788AA;
+@color-light: #4E638E;
+@color-med: #2E4372;
+@color-dark: #152A55;
+@color-darker: #061639;
+
 // select palette
-@palette: "marine";
+@palette: "marine"; // default is marine
 @import "@{palette}";
 
 @color-danger-lighter: #975F5F;
@@ -459,7 +466,15 @@ pre {
     display: inline-block;
     margin: 0.8em;
     max-width: 12em;
+
+    &.newlyDiscovered {
+      max-width: 12em;
+    }
   }
+}
+
+button.newlyDiscovered {
+  .gatewayButton();
 }
 
 #homeTabs {
@@ -1001,12 +1016,13 @@ button {
 }
 
 .gateway button {
-  .gatewayButton;
+  .gatewayButton();
 }
 
 button.gateway {
-  .gatewayButton;
+  .gatewayButton();
 }
+
 
 #pane.gateway {
   .border-radius(3em);
