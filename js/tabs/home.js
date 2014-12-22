@@ -651,7 +651,7 @@ SharkGame.Home = {
 
 
     getMax: function(action) {
-        var max = -1;
+        var max = 1;
         if(action.max) {
             var resource = SharkGame.PlayerResources[action.max];
             var currAmount = resource.amount;

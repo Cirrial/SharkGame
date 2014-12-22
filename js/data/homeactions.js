@@ -633,7 +633,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'sponge': 5
-            }
+            },
+            upgrade: [
+                "seabedGeology"
+            ]
         },
         outcomes: [
             "An african filter shrimp joins you.",
@@ -693,7 +696,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'clam': 10
-            }
+            },
+            upgrade: [
+                "seabedGeology"
+            ]
         },
         outcomes: [
             "A scampi joins you.",
@@ -736,7 +742,10 @@ SharkGame.HomeActions = {
             resource: {
                 'fish': 10,
                 'shark': 50
-            }
+            },
+            upgrade: [
+                "cetaceanAwareness"
+            ]
         },
         outcomes: [
             "A white beaked dolphin joins you.",
@@ -788,7 +797,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'fish': 1e5
-            }
+            },
+            upgrade: [
+                "cetaceanAwareness"
+            ]
         },
         outcomes: [
             "A blue whale joins you.",
@@ -833,7 +845,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'fish': 50
-            }
+            },
+            upgrade: [
+                "seabedGeology"
+            ]
         },
         outcomes: [
             "A false moray joins you.",
@@ -857,9 +872,10 @@ SharkGame.HomeActions = {
             "A short finned eel joins you."
         ],
         multiOutcomes: [
-            "Eels up inside here.",
-            "Eels finding an entrance where they can in the seafloor.",
             "Eels combining elements of the sharks and the eels to create something not quite as good as either.",
+            "The seabed sways with the arrival of new eels.",
+            "Fish and sand go hand in hand with eels! Well, fin and fin.",
+            "Don't mess with the creatures with jaws inside their jaws.",
             "Eel nation arise!",
             "That's a lot of eels.",
             "So there's more eels. Whee.",
@@ -883,7 +899,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'jellyfish': 20
-            }
+            },
+            upgrade: [
+                "exploration"
+            ]
         },
         outcomes: [
             "A ploughnose chimaera joins you.",
@@ -944,7 +963,10 @@ SharkGame.HomeActions = {
         prereq: {
             resource: {
                 'clam': 20
-            }
+            },
+            upgrade: [
+                "exploration"
+            ]
         },
         outcomes: [
             "A capricorn night octopus joins you.",
