@@ -68,7 +68,7 @@ SharkGame.Resources = {
                     // if the cost can't be taken, scale the cost and output down to feasible levels
                     if(!resource.forceIncome) {
                         $.each(resource.income, function(k, v) {
-                            var change = r.getIncomeAmountTotal(name, k);
+                            var change = r.getProductAmountFromGeneratorResource(name, k);
                             if(change < 0) {
                                 var resourceHeld = r.getResource(k);
                                 if(resourceHeld + change <= 0) {
@@ -86,9 +86,9 @@ SharkGame.Resources = {
                     // if there is a cost and it can be taken (or if there is no cost)
                     // run over all resources to fill the income table
                     $.each(resource.income, function(k, v) {
-                        var incomeChange = r.getIncomeAmountTotal(name, k, costScaling);
+                        var incomeChange = r.getProductAmountFromGeneratorResource(name, k, costScaling);
                         if(SharkGame.World.doesResourceExist(k)) {
-                            SharkGame.PlayerIncomeTable[k] += incomeChange
+                            SharkGame.PlayerIncomeTable[k] += incomeChange;
                         }
                     });
                 }
@@ -103,40 +103,17 @@ SharkGame.Resources = {
         });
     },
 
-    getIncomeAmountTotal: function(generator, product, costScaling) {
+    getProductAmountFromGeneratorResource: function(generator, product, costScaling) {
         var r = SharkGame.Resources;
         var w = SharkGame.World;
-        var worldResources = w.worldResources;
-        var worldResourceInfo = worldResources[name];
         var playerResource = SharkGame.PlayerResources[generator];
-        var affectedResourceBoostMultiplier = worldResources[product].boostMultiplier;
-        var worldMultiplier = 1;
-        if(worldResourceInfo) {
-            worldMultiplier = worldResourceInfo.incomeMultiplier;
-        }
         if(typeof(costScaling) !== "number") {
             costScaling = 1;
         }
-        return SharkGame.ResourceTable[generator].income[product] * playerResource.amount * costScaling *
-            playerResource.incomeMultiplier * worldMultiplier *
-            affectedResourceBoostMultiplier * w.getArtifactMultiplier(generator) *
+        return SharkGame.ResourceTable[generator].income[product] * r.getResource(generator) * costScaling *
+            playerResource.incomeMultiplier * w.getWorldIncomeMultiplier(generator) *
+            w.getWorldBoostMultiplier(product) * w.getArtifactMultiplier(generator) *
             r.getSpecialMultiplier();
-    },
-
-    getIncomeFromResource: function(generator, output) {
-        var r = SharkGame.Resources;
-        var w = SharkGame.World;
-        var generatorResource = SharkGame.ResourceTable[generator];
-        var ownedResource = SharkGame.PlayerResources[generator]
-        var income = 0;
-        if(generatorResource.income) {
-            var outputResourceAmount = generatorResource.income[output];
-            if(outputResourceAmount) {
-                income = outputResourceAmount * ownedResource.amount * ownedResource.incomeMultiplier
-                * w.getWorldIncomeMultiplier(generator) * w.getWorldBoostMultiplier(output) * r.getSpecialMultiplier();
-            }
-        }
-        return income;
     },
 
     getSpecialMultiplier: function() {

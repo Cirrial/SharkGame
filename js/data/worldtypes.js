@@ -302,7 +302,6 @@ SharkGame.WorldTypes = {
         modifiers: [
             { modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
             { modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 1},
-            { modifier: "planetaryResourceBoost", resource: "ice", amount: 5 },
             { modifier: "planetaryIncome", resource: "ice", amount: 0.001 }
         ],
         gateCosts: {

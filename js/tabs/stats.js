@@ -178,7 +178,7 @@ SharkGame.Stats = {
                 $.each(income, function(incomeKey, incomeValue) {
                     var cell = $("#income-" + k + "-" + incomeKey);
                     var changeChar = incomeValue > 0 ? "+" : "";
-                    cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(k, incomeKey)) + "/s</span>");
+                    cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(k, incomeKey)) + "/s</span>");
                 });
             }
         });
@@ -280,7 +280,7 @@ SharkGame.Stats = {
                             }
 
                             row.append($("<td>").attr("id", "income-" + generatorName + "-" + incomeKey)
-                                .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getIncomeFromResource(generatorName, incomeKey)) + "/s</span>").addClass(rowStyle));
+                                .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(generatorName, incomeKey)) + "/s</span>").addClass(rowStyle));
 
                             counter++;
                             incomesTable.append(row);
