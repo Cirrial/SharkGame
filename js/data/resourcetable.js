@@ -886,6 +886,7 @@ SharkGame.ResourceCategories = {
         ],
         resources: [
             "scientist",
+            "diver",
             "laser",
             "planter",
             "worker",
@@ -927,7 +928,8 @@ SharkGame.ResourceCategories = {
             "clamCollector",
             "sprongeSmelter",
             "seaScourer",
-            "prostheticPolyp"
+            "prostheticPolyp",
+            "eggBrooder"
         ]
     },
     science: {

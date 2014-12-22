@@ -337,6 +337,7 @@ button.newlyDiscovered {
   border-color: #ace3d1;
   text-shadow: 0 0 0.5em #bfe9dc;
   max-width: 16em;
+  max-width: none;
 }
 button.newlyDiscovered div {
   background-color: #73d0b1;

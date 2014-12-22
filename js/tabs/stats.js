@@ -72,14 +72,18 @@ SharkGame.Stats = {
 
         var genStats = $('#generalStats');
         genStats.append($('<h3>').html("General Stats"));
-        if(SharkGame.World.worldType !== "start") {
+        var firstTime = SharkGame.Main.isFirstTime();
+        if(!firstTime) {
             genStats.append($('<p>').html("<span class='medDesc'>Climate Level</span><br>" + SharkGame.Main.beautify(SharkGame.World.planetLevel)));
         }
         genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
-        if(SharkGame.Resources.getTotalResource("essence") > 0) {
+        if(!firstTime) {
             genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
         }
         genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
+        if(!firstTime) {
+            genStats.append($('<p>').html("Essence given is the total acquired for the entire game and not just for this world.").addClass("medDesc"));
+        }
         genStats.append(s.createTotalAmountTable());
 
         SharkGame.Main.createBuyButtons("rid");

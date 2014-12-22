@@ -525,7 +525,7 @@ SharkGame.Home = {
                 .animate({opacity: 1.0}, 50);
         }
         if(actionData.newlyDiscovered) {
-            buttonSelector.addClass("gateway");
+            buttonSelector.addClass("newlyDiscovered");
         }
     },
 
@@ -610,9 +610,9 @@ SharkGame.Home = {
                 SharkGame.Log.addMessage("You can't afford that!");
             }
         }
-        if(button.hasClass("gateway")) {
+        if(button.hasClass("newlyDiscovered")) {
             action.newlyDiscovered = false;
-            button.removeClass("gateway");
+            button.removeClass("newlyDiscovered");
         }
         // disable button until next frame
         button.prop("disabled", true);
