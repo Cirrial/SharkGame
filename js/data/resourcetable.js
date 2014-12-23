@@ -714,7 +714,7 @@ SharkGame.ResourceTable = {
         name: 'algae',
         singleName: 'algae',
         color: '#549572',
-        value: 3
+        value: 0.5
     },
 
 
