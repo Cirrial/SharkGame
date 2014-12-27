@@ -348,7 +348,7 @@ SharkGame.ResourceTable = {
         singleName: 'whale chorus',
         color: '#85BBA9',
         income: {
-            'essence': 1e-7
+            'essence': 1e-6
         },
         value: 10000
     },
