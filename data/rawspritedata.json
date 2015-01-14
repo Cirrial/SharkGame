@@ -9,9 +9,36 @@
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
+"actions/forgeSpronge":
+{
+	"frame": {"x":972,"y":2,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/fuseDelphinium":
+{
+	"frame": {"x":1024,"y":2,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
 "actions/getAutoTransmuter":
 {
-	"frame": {"x":920,"y":54,"w":50,"h":50},
+	"frame": {"x":1076,"y":2,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getBerrier":
+{
+	"frame": {"x":1128,"y":2,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -20,7 +47,16 @@
 },
 "actions/getBrood":
 {
-	"frame": {"x":972,"y":2,"w":50,"h":50},
+	"frame": {"x":1180,"y":2,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getClam":
+{
+	"frame": {"x":920,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -38,15 +74,6 @@
 },
 "actions/getCrystalMiner":
 {
-	"frame": {"x":1024,"y":2,"w":50,"h":50},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
-	"sourceSize": {"w":50,"h":50},
-	"pivot": {"x":0,"y":0}
-},
-"actions/getFishMachine":
-{
 	"frame": {"x":1024,"y":54,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
@@ -54,16 +81,7 @@
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
-"actions/getLaser":
-{
-	"frame": {"x":1076,"y":2,"w":50,"h":50},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
-	"sourceSize": {"w":50,"h":50},
-	"pivot": {"x":0,"y":0}
-},
-"actions/getMaker":
+"actions/getDiver":
 {
 	"frame": {"x":1076,"y":54,"w":50,"h":50},
 	"rotated": false,
@@ -72,16 +90,7 @@
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
-"actions/getManta":
-{
-	"frame": {"x":1128,"y":2,"w":50,"h":50},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
-	"sourceSize": {"w":50,"h":50},
-	"pivot": {"x":0,"y":0}
-},
-"actions/getNurse":
+"actions/getDolphin":
 {
 	"frame": {"x":1128,"y":54,"w":50,"h":50},
 	"rotated": false,
@@ -90,16 +99,7 @@
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
-"actions/getPlanter":
-{
-	"frame": {"x":1180,"y":2,"w":50,"h":50},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
-	"sourceSize": {"w":50,"h":50},
-	"pivot": {"x":0,"y":0}
-},
-"actions/getSandDigger":
+"actions/getFishMachine":
 {
 	"frame": {"x":1180,"y":54,"w":50,"h":50},
 	"rotated": false,
@@ -108,9 +108,108 @@
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0,"y":0}
 },
+"actions/getHarvester":
+{
+	"frame": {"x":2,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getJellyfish":
+{
+	"frame": {"x":54,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getLaser":
+{
+	"frame": {"x":106,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getLobster":
+{
+	"frame": {"x":158,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getMaker":
+{
+	"frame": {"x":210,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getManta":
+{
+	"frame": {"x":262,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getNurse":
+{
+	"frame": {"x":314,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getPlanter":
+{
+	"frame": {"x":366,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getQueen":
+{
+	"frame": {"x":418,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getSandDigger":
+{
+	"frame": {"x":470,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
 "actions/getScientist":
 {
-	"frame": {"x":1232,"y":2,"w":50,"h":50},
+	"frame": {"x":522,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getSeaApple":
+{
+	"frame": {"x":574,"y":104,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -119,7 +218,52 @@
 },
 "actions/getShark":
 {
-	"frame": {"x":1232,"y":54,"w":50,"h":50},
+	"frame": {"x":626,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getShrimp":
+{
+	"frame": {"x":678,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/getWorker":
+{
+	"frame": {"x":730,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/jellyfishToScience":
+{
+	"frame": {"x":782,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/pearlConversion":
+{
+	"frame": {"x":834,"y":104,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/prySponge":
+{
+	"frame": {"x":886,"y":106,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -128,7 +272,25 @@
 },
 "actions/seaApplesToScience":
 {
-	"frame": {"x":1284,"y":2,"w":50,"h":50},
+	"frame": {"x":938,"y":106,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/smeltCoralglass":
+{
+	"frame": {"x":990,"y":106,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0,"y":0}
+},
+"actions/spongeToScience":
+{
+	"frame": {"x":1042,"y":106,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -137,7 +299,7 @@
 },
 "actions/transmuteSharkonium":
 {
-	"frame": {"x":1284,"y":54,"w":50,"h":50},
+	"frame": {"x":1094,"y":106,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -146,7 +308,7 @@
 },
 "general/missing-action":
 {
-	"frame": {"x":1336,"y":2,"w":50,"h":50},
+	"frame": {"x":1146,"y":106,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -155,7 +317,7 @@
 },
 "general/missing-artifact":
 {
-	"frame": {"x":1336,"y":54,"w":50,"h":50},
+	"frame": {"x":2,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -164,7 +326,7 @@
 },
 "general/missing-technology":
 {
-	"frame": {"x":1388,"y":2,"w":50,"h":50},
+	"frame": {"x":54,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -254,7 +416,7 @@
 },
 "technologies/automation":
 {
-	"frame": {"x":1388,"y":54,"w":50,"h":50},
+	"frame": {"x":106,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -263,7 +425,7 @@
 },
 "technologies/biology":
 {
-	"frame": {"x":1440,"y":2,"w":50,"h":50},
+	"frame": {"x":158,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -272,7 +434,7 @@
 },
 "technologies/crabBiology":
 {
-	"frame": {"x":1440,"y":54,"w":50,"h":50},
+	"frame": {"x":210,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -281,7 +443,7 @@
 },
 "technologies/crystalBite":
 {
-	"frame": {"x":1492,"y":2,"w":50,"h":50},
+	"frame": {"x":262,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -290,7 +452,7 @@
 },
 "technologies/crystalContainer":
 {
-	"frame": {"x":1492,"y":54,"w":50,"h":50},
+	"frame": {"x":314,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -299,7 +461,7 @@
 },
 "technologies/crystalSpade":
 {
-	"frame": {"x":1544,"y":2,"w":50,"h":50},
+	"frame": {"x":366,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -308,7 +470,7 @@
 },
 "technologies/engineering":
 {
-	"frame": {"x":1544,"y":54,"w":50,"h":50},
+	"frame": {"x":418,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -317,7 +479,7 @@
 },
 "technologies/exploration":
 {
-	"frame": {"x":1596,"y":2,"w":50,"h":50},
+	"frame": {"x":470,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -326,7 +488,7 @@
 },
 "technologies/farExploration":
 {
-	"frame": {"x":1596,"y":54,"w":50,"h":50},
+	"frame": {"x":522,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -335,7 +497,7 @@
 },
 "technologies/gateDiscovery":
 {
-	"frame": {"x":1648,"y":2,"w":50,"h":50},
+	"frame": {"x":574,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -344,7 +506,7 @@
 },
 "technologies/kelpHorticulture":
 {
-	"frame": {"x":1648,"y":54,"w":50,"h":50},
+	"frame": {"x":626,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -353,7 +515,7 @@
 },
 "technologies/laserRays":
 {
-	"frame": {"x":1700,"y":2,"w":50,"h":50},
+	"frame": {"x":678,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -362,7 +524,7 @@
 },
 "technologies/rayBiology":
 {
-	"frame": {"x":1700,"y":54,"w":50,"h":50},
+	"frame": {"x":730,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -371,7 +533,7 @@
 },
 "technologies/recyclerDiscovery":
 {
-	"frame": {"x":1752,"y":2,"w":50,"h":50},
+	"frame": {"x":782,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -380,7 +542,7 @@
 },
 "technologies/seabedGeology":
 {
-	"frame": {"x":1752,"y":54,"w":50,"h":50},
+	"frame": {"x":834,"y":156,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -389,7 +551,7 @@
 },
 "technologies/statsDiscovery":
 {
-	"frame": {"x":1804,"y":2,"w":50,"h":50},
+	"frame": {"x":886,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -398,7 +560,7 @@
 },
 "technologies/sunObservation":
 {
-	"frame": {"x":1804,"y":54,"w":50,"h":50},
+	"frame": {"x":938,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -407,7 +569,7 @@
 },
 "technologies/thermalVents":
 {
-	"frame": {"x":1856,"y":2,"w":50,"h":50},
+	"frame": {"x":990,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -416,7 +578,7 @@
 },
 "technologies/transmutation":
 {
-	"frame": {"x":1856,"y":54,"w":50,"h":50},
+	"frame": {"x":1042,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -425,7 +587,7 @@
 },
 "technologies/underwaterChemistry":
 {
-	"frame": {"x":1908,"y":2,"w":50,"h":50},
+	"frame": {"x":1094,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -434,7 +596,7 @@
 },
 "technologies/xenobiology":
 {
-	"frame": {"x":1908,"y":54,"w":50,"h":50},
+	"frame": {"x":1146,"y":158,"w":50,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
@@ -446,8 +608,8 @@
 	"version": "1.0",
 	"image": "sharksprites.png",
 	"format": "RGBA8888",
-	"size": {"w":1960,"h":106},
+	"size": {"w":1232,"h":210},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:3fa3ad0f1c90f034b4ecee7ca43fcdf9:823dfeac8f5f0e4c3f49c5016ae06731:2f2abb5c9709e31e381278f40f4006d0$"
+	"smartupdate": "$TexturePacker:SmartUpdate:af09437ba897aa00ed6fc30f9cbfd82f:c1f626e4e1a9cb015d01ad2bfc83052c:2f2abb5c9709e31e381278f40f4006d0$"
 }
 }
