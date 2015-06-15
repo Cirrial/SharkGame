@@ -479,7 +479,6 @@ SharkGame.HomeActions = {
             "A school of sharks!",
             "A shoal of sharks!",
             "A frenzy of sharks!",
-            "A gam of sharks! Yes, that's correct.",
             "A college of sharks! They're a little smarter than a school."
         ],
         helpText: "Recruit a shark to help catch more fish."
