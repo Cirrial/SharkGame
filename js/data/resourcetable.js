@@ -613,7 +613,7 @@ SharkGame.ResourceTable = {
     eggBrooder: {
         name: 'egg brooders',
         singleName: 'egg brooder',
-        color: '836E5F',
+        color: '#836E5F',
         income: {
             octopus: 1,
             tar: 0.0001
