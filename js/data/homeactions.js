@@ -51,8 +51,8 @@ SharkGame.HomeActions = {
             "Ate a shark.",
             "Ate a swordfish.",
             "Ate a tilefish.",
-            "Ate a tuna."
-
+            "Ate a tuna.",
+			"Ate a swedish fish...wait."
         ],
         helpText: "Use your natural shark prowess to find and catch a fish."
     },
@@ -84,60 +84,6 @@ SharkGame.HomeActions = {
 			"Not intended for actual gameplay."
         ],
         helpText: "Use your natural coding prowess to test the game."
-    },
-	
-	'catchMoreFish': {
-        name: "Catch 25 fish",
-        effect: {
-            resource: {
-                'fish': 25
-            }
-        },
-        cost: {},
-        prereq: {
-            upgrade: [
-				"chompers"
-			]
-        },
-        outcomes: [
-            "Many fish.",
-			"Ate fish.",
-			"Practiced pescatarianism.",
-			"Went fishing.",
-			"Ate a few fish.",
-			"Ate some red fish.",
-			"Ate some blue fish.",
-			"Ate a few anchovies.",
-            "Ate a few catfish.",
-            "Ate a few flounders.",
-            "Ate a few haddock.",
-            "Ate a few herring.",
-            "Ate a few mackerel.",
-            "Ate a few mullet.",
-            "Ate a few perch.",
-            "Ate a few pollock.",
-            "Ate a few salmon.",
-            "Ate a few sardines.",
-            "Ate a few sole.",
-            "Ate a few tilapia.",
-            "Ate a few trout.",
-            "Ate a few whitefish.",
-            "Ate a few bass.",
-            "Ate a few carp.",
-            "Ate a few cod.",
-            "Ate a few halibut.",
-            "Ate a few mahi mahi.",
-            "Ate a few monkfish.",
-            "Ate a few perch.",
-            "Ate a few snappers.",
-            "Ate a few groupers.",
-            "Ate a few sea bass.",
-            "Ate a few marlin.",
-            "Ate a few orange roughies.",
-			"Ate a couple of swedish fish...wait.",
-			"One fish, two fish..."
-        ],
-        helpText: "Use your natural shark prowess (with help from crystal gear) and catch more fish than ever before."
     },
 
     'prySponge': {
@@ -765,69 +711,6 @@ SharkGame.HomeActions = {
             },
             upgrade: [
                 "seabedGeology"
-            ]
-        },
-        outcomes: [
-            "An african filter shrimp joins you.",
-            "An amano shrimp joins you.",
-            "A bamboo shrimp joins you.",
-            "A bee shrimp joins you.",
-            "A black tiger shrimp joins you.",
-            "A blue bee shrimp joins you.",
-            "A blue pearl shrimp joins you.",
-            "A blue tiger shrimp joins you.",
-            "A brown camo shrimp joins you.",
-            "A cardinal shrimp joins you.",
-            "A crystal red shrimp joins you.",
-            "A dark green shrimp joins you.",
-            "A glass shrimp joins you.",
-            "A golden bee shrimp joins you.",
-            "A harlequin shrimp joins you.",
-            "A malaya shrimp joins you.",
-            "A neocaridina heteropoda joins you.",
-            "A ninja shrimp joins you.",
-            "An orange bee shrimp joins you.",
-            "An orange delight shrimp joins you.",
-            "A purple zebra shrimp joins you.",
-            "A red cherry shrimp joins you.",
-            "A red goldflake shrimp joins you.",
-            "A red tiger shrimp joins you.",
-            "A red tupfel shrimp joins you.",
-            "A snowball shrimp joins you.",
-            "A sulawesi shrimp joins you.",
-            "A tiger shrimp joins you.",
-            "A white bee shrimp joins you.",
-            "A yellow shrimp joins you."
-        ],
-        multiOutcomes: [
-            "That's a lot of shrimp.",
-            "So many shrimp, it's like a cloud!",
-            "I can't cope with this many shrimp!",
-            "Shrimp, they're like bugs, except not bugs or anything related at all!",
-            "They're so tiny!",
-            "How can something so small take up so much space?",
-            "Sponge forever!"
-        ],
-        helpText: "Convince shrimp to assist you in the gathering of algae, which helps boost sponge production."
-    },
-
-	'stoneGetShrimp': {
-        name: "Acquire shrimp",
-        effect: {
-            resource: {
-                'shrimp': 1
-            }
-        },
-        cost: [
-            {resource: "sponge", costFunction: "linear", priceIncrease: 5}
-        ],
-        max: "shrimp",
-        prereq: {
-            resource: {
-                'sponge': 5
-            },
-            upgrade: [
-                "stoneSpongeCollection"
             ]
         },
         outcomes: [
@@ -1790,7 +1673,7 @@ SharkGame.HomeActions = {
 			"Goodbye, schist.",
 			"Goodbye, diorite."
         ],
-        helpText: "Train a lobster to cut down kelp faster than anything can plant it. Sustainable!"
+        helpText: "Give a lobster the right gear to crack open stones in the name of gravel."
     },
 
     'getHarvester': {
@@ -2423,75 +2306,6 @@ SharkGame.HomeActions = {
         ],
         helpText: "Construct a machine to automatically recycle kelp and sand into residue."
     },
-	
-	'getCrusher': {
-        name: "Build crusher",
-        effect: {
-            resource: {
-                'crusher': 1
-            }
-        },
-        cost: [
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250}
-        ],
-        max: "crusher",
-        prereq: {
-            resource: {
-                'stone': 1
-            },
-            upgrade: [
-                "rockProcessing"
-            ]
-        },
-        outcomes: [
-            "Crusher activated.",
-            "Crusher constructed.",
-            "Crushing begins.",
-            "Construction complete.",
-        ],
-        multiOutcomes: [
-            "Stone wasn't very useful anyways.",
-            "Shoo, rocks!",
-            "We can never run out of rocks. The cycle is forever.",
-            "CRUSH. KILL. DESTORY. SMALL ROCKS IN PARTICULAR."
-        ],
-        helpText: "Construct a machine to break stone down into gravel."
-    },
-	
-	'getPulverizer': {
-        name: "Build pulverizer",
-        effect: {
-            resource: {
-                'pulverizer': 1
-            }
-        },
-        cost: [
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250},
-			{resource: "gravel", costFunction: "linear", priceIncrease: 250}
-        ],
-        max: "pulverizer",
-        prereq: {
-            resource: {
-                'gravel': 1
-            },
-            upgrade: [
-                "gravelPulverizing"
-            ]
-        },
-        outcomes: [
-            "Crusher activated.",
-            "Crusher constructed.",
-            "Crushing begins.",
-            "Construction complete.",
-        ],
-        multiOutcomes: [
-            "Stone wasn't very useful anyways.",
-            "Shoo, rocks!",
-            "We can never run out of rocks. The cycle is forever.",
-            "CRUSH. KILL. DESTORY. SMALL ROCKS IN PARTICULAR."
-        ],
-        helpText: "Construct a machine to break stone down into gravel."
-    },
 
     'getPurifier': {
         name: "Build purifier",
@@ -2605,6 +2419,76 @@ SharkGame.HomeActions = {
 			"The dolphins seem very, very pleased. I'm not sure that I like this anymore."
         ],
         helpText: "Create a strange structure to consistently siphon knowledge from its surroundings."
+    },
+	
+	'getCrusher': {
+        name: "Build crusher",
+        effect: {
+            resource: {
+                'crusher': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250}
+        ],
+        max: "crusher",
+        prereq: {
+            resource: {
+                'stone': 1
+            },
+            upgrade: [
+                "rockProcessing"
+            ]
+        },
+        outcomes: [
+            "Crusher activated.",
+            "Crusher constructed.",
+            "Crushing begins.",
+            "Construction complete.",
+        ],
+        multiOutcomes: [
+            "Stone wasn't very useful anyways.",
+            "Shoo, rocks!",
+            "We can never run out of rocks. The cycle is forever.",
+            "CRUSH. KILL. DESTORY. SMALL ROCKS IN PARTICULAR."
+        ],
+        helpText: "Construct a machine to break stone down into gravel."
+    },
+	
+	'getPulverizer': {
+        name: "Build pulverizer",
+        effect: {
+            resource: {
+                'pulverizer': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250},
+			{resource: "gravel", costFunction: "linear", priceIncrease: 250}
+        ],
+        max: "pulverizer",
+        prereq: {
+            resource: {
+                'gravel': 1
+            },
+            upgrade: [
+                "gravelPulverizing"
+            ]
+        },
+        outcomes: [
+            "Pulverizing begins in T-minus 3...",
+            "Flipping the swtich on, the tumblers churn out sand.",
+            "Pulverizer, activated.",
+            "Construction complete."
+        ],
+        multiOutcomes: [
+            "The sand. It flows.",
+            "The machines take over for the crabs.",
+            "Right now, sand is like gold...we can't find it anywhere.",
+            "Machines are better than crabs. They won't gravel- er, grovel.",
+			"Man, sand is expensive."
+        ],
+        helpText: "Construct a machine to break down gravel into sand."
     },
 
     // CRUSTACEAN MACHINES /////////////////////////////////////////////////////////
