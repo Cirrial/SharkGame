@@ -496,10 +496,12 @@ SharkGame.WorldTypes = {
 			"jellyfish"
         ],
         modifiers: [
-            { type: "multiplier", modifier: "planetaryResourceBoost", resource: "sponge", amount: 0.5 },
 			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "sponge", amount: 0.5 },
 			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "shrimp", amount: 0.5 },
 			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "worker", amount: 0.5 },
+			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "clamCollector", amount: 0.5 },
+			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "eggBrooder", amount: 0.5 },
+			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "sprongeSmelter", amount: 0.5 },
 			{ type: "multiplier", modifier: "planetaryConstantIncomeMultiplier", resource: "ray", amount: 5 },
 			{ type: "restriction", modifier: "planetaryGeneratorRestriction", resource: "ray", restriction: "sand" },
 			{ type: "restriction", modifier: "planetaryGeneratorRestriction", resource: "lobster", restriction: "sand" },

@@ -308,12 +308,12 @@ SharkGame.Upgrades = {
 			researchedMessage: "Well this thing is frankly terrifying. I wouldn't swim anywhere near the input holes if I were you. Maybe it'll help though!",
 			effectDesc: "Allows recycling of materials by virtue of a horrifying mechanical maw that consumes all that ventures near it. Future?",
 			cost: {
-				science: 20000,
-				sharkonium: 25000
+				science: 5000,
+				sharkonium: 5000
 			},
 			required: {
 				upgrades: [
-					"automation"
+					"engineering"
 				]
 			}
 		},
@@ -2066,7 +2066,7 @@ SharkGame.Upgrades = {
 		
 		sharkoniumMillingGear: {
 			name: "Sharkonium Milling Gear",
-			desc: "Sand grinding is really hard! The pulverizers have taught us that sharkonium makes it easier!",
+			desc: "Sand grinding is really hard! The pulverizers have taught us that sharkonium makes it easier.",
 			researchedMessage: "Yes, as it turns out, sharkonium does make it easier. Sharkonium grinding tools are way harder than any rock.",
 			effectDesc: "Miller crabs are four times as effective. Manual labor!",
 			cost: {

@@ -2864,7 +2864,6 @@ SharkGame.HomeActionCategories = {
         name: "Basic",
         actions: [
             "catchFish",
-			"catchMoreFish",
             "prySponge",
 			"stonePrySponge",
             "getClam",
@@ -2879,7 +2878,6 @@ SharkGame.HomeActionCategories = {
             "getManta",
             "getCrab",
             "getShrimp",
-			"stoneGetShrimp",
             "getLobster",
             "getDolphin",
             "getWhale",
@@ -2901,6 +2899,7 @@ SharkGame.HomeActionCategories = {
 			"getMiller",
             "getWorker",
             "getHarvester",
+			"getRockLobster",
             "getPhilosopher",
             "getTreasurer",
             "getTechnician",

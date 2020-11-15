@@ -392,7 +392,7 @@ SharkGame.ResourceTable = {
         singleName: 'whale chorus',
         color: '#85BBA9',
         income: {
-            'essence': 1e-5
+            'essence': 2e-6
         },
         value: 100000
     },
@@ -682,7 +682,8 @@ SharkGame.ResourceTable = {
             tar: -1,
             junk: 10
         },
-        value: 50000
+        value: 50000,
+		forceIncome: true
     },
 
     prostheticPolyp: {
@@ -936,10 +937,29 @@ SharkGame.ResourceTable = {
 SharkGame.GeneratorIncomeAffectors = {
 	// table of all the ways that various resources affect the production of others
 	// in the following structure:
-	// resource which affects the generation... {
+	// resource which affects the income... {
 	// 										...through this manner... {
-	//															...of this resource: by this degree
+	//															...of this generator: by this degree
 	// see SharkGame.Resources.buildIncomeNetwork, then see SharkGame.Resource.getNetworkIncomeModifier
+	//
+	// multiply multiplies the income of the specified generator by    degree * amount of resource
+	// exponentiate multiplies the income of a generator by            degree ^ amount
+	// reciprocal multiplies the income of a generator by              1  / (1 + degree * amount)
+	// polynomial multiplies the income of a generator by              amount ^ degree
+	//
+	// tip: use negative degree in multiply to soft cap things.
+	// e.g. if i set fish to multiply sharks' income by -0.01, then as the amount of fish approaches 100, shark income approaches 0.
+	// result: fish cannot go above 100 during gameplay.
+	//
+	// unsolved problem: offline progress is semi-incompatible with these calculations.
+	// because the growth is continuous, the math to predict these things would be difficult
+	// still possible for multiply and moreso for reciprocal, polynomial doesn't pose much of a problem
+	// exponentiate results in non-algebraic equations...which is really bad.
+	// additionally, differential equations are unreliable because this growth is not continuous.
+	// perhaps...simply calculate everything over the given number of steps the player is gone for
+	// but that could take a long time if the player leaves for too long. could take shortcut for long times.
+	// will solve later. for now, simply make some resource offline-immune.
+	
 	
 	knowledge: {
 		multiply: {
@@ -953,6 +973,13 @@ SharkGame.GeneratorIncomeAffectors = {
 	ice: {
 		multiply: {
 			heater: 0.01
+		}
+	},
+	tar: {
+		exponentiate: {
+			fishMachine: 0.99,
+			crystalMiner: 0.99,
+			sandDigger: 0.99
 		}
 	}
 }
