@@ -935,7 +935,7 @@ SharkGame.ResourceTable = {
 };
 
 SharkGame.GeneratorIncomeAffectors = {
-	// table of all the ways that various resources affect the production of others
+	// s: table of all the ways that various resources affect the production of others
 	// in the following structure:
 	// resource which affects the income... {
 	// 										...through this manner... {
