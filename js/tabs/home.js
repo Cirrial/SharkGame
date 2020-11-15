@@ -104,6 +104,7 @@ SharkGame.Home = {
             unlock: {world: "frigid"},
             message: "So cold. The food supplies freeze quickly here. Too hard to chew.<br>&nbsp"
         },
+		
         // BANKED ESSENCE
         {
             unlock: {resource: {essence: 10}},
@@ -159,6 +160,18 @@ SharkGame.Home = {
         {
             unlock: {world: "frigid", resource: {ice: 200}},
             message: "So cold. So hungry.<br><span class='smallDesc'>So hopeless.</span>"
+        },
+		{
+            unlock: {world: "ethereal"},
+            message: "The water glows strangely.<br>It feels familiar."
+        },
+		{
+            unlock: {world: "abyssal"},
+            message: "You can't tell up from down. It never ends.<br>Is this an ocean at all?"
+        },
+		{
+            unlock: {world: "stone"},
+            message: "The cold, jagged seafloor looks ancient, yet pristine.<br>Sponges thrive in great numbers on the rocks."
         }
     ],
 
@@ -303,7 +316,7 @@ SharkGame.Home = {
     updateMessage: function(suppressAnimation) {
         var h = SharkGame.Home;
         var r = SharkGame.Resources;
-        var u = SharkGame.Upgrades;
+        var u = SharkGame.Upgrades.getUpgradeTable();;
         var wi = SharkGame.WorldTypes[SharkGame.World.worldType];
         var selectedIndex = h.currentExtraMessageIndex;
         $.each(h.extraMessages, function(i, v) {
@@ -496,10 +509,22 @@ SharkGame.Home = {
         if(action.prereq.world) {
             prereqsMet = prereqsMet && w.worldType === action.prereq.world;
         }
+		
+		// check the special worldtype exclusions
+		if(action.prereq.notWorlds) {
+            prereqsMet = prereqsMet && !(action.prereq.notWorlds.includes(w.worldType));
+        }
+		
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+		
         // check upgrade prerequisites
         if(action.prereq.upgrade) {
             $.each(action.prereq.upgrade, function(_, v) {
-                prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
+				if(ups[v]) {
+					prereqsMet = prereqsMet && ups[v].purchased;
+				} else {
+					prereqsMet = false;
+				}
             });
         }
         // check if resulting resource exists

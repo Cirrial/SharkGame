@@ -208,10 +208,6 @@ SharkGame.Stats = {
         }
 
         var specialMultiplierCol = null;
-        var addSpecialMultiplier = false;
-        if(r.getSpecialMultiplier() > 1) {
-            addSpecialMultiplier = true;
-        }
 
         var formatCounter = 0;
 
@@ -272,11 +268,12 @@ SharkGame.Stats = {
                                 } else {
                                     row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
                                 }
-                            }
-                            if(addSpecialMultiplier) {
-                                specialMultiplierCol = $("<td>").html("<span class='essenceGlow'>x" + m.beautify(r.getSpecialMultiplier()) + "</span>").addClass("essenceGlow");
-                                row.append(specialMultiplierCol);
-                                addSpecialMultiplier = false;
+								var resourceAffectMultiplier = r.getResourceGeneratorMultiplier(generatorName);
+                                if(resourceAffectMultiplier !== 1) {
+                                    row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.RESOURCE_AFFECT_MULTIPLIER_COLOR + "'>x" + m.beautify(resourceAffectMultiplier) + "</span>").addClass(rowStyle));
+                                } else {
+                                    row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
+                                }
                             }
 
                             row.append($("<td>").attr("id", "income-" + generatorName + "-" + incomeKey)

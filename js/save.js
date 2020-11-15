@@ -22,8 +22,10 @@ SharkGame.Save = {
                 totalAmount: v.totalAmount
             };
         });
-
-        $.each(SharkGame.Upgrades, function(k, v) {
+		
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+		
+        $.each(ups, function(k, v) {
             saveData.upgrades[k] = v.purchased;
         });
 
@@ -113,7 +115,7 @@ SharkGame.Save = {
             // decompress string
             try {
                 saveDataString = pako.inflate(saveDataString, {to: 'string'});
-            } catch(err) {
+            } catch(err) { 
                 throw new Error("Saved data is compressed, but it can't be decompressed. Can't load. Your save: " + saveDataString);
             }
         }
@@ -197,6 +199,15 @@ SharkGame.Save = {
                 });
             }
 
+			// load world type and level and apply world properties
+			if(saveData.world) {
+                SharkGame.World.init();
+                SharkGame.World.worldType = saveData.world.type;
+                SharkGame.World.planetLevel = saveData.world.level;
+                SharkGame.World.apply();
+                SharkGame.Home.init();
+            }
+
             // hacky kludge: force table creation
             SharkGame.Resources.reconstructResourcesTable();
 
@@ -214,15 +225,6 @@ SharkGame.Save = {
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
-            }
-
-            // load world type and level and apply world properties
-            if(saveData.world) {
-                SharkGame.World.init();
-                SharkGame.World.worldType = saveData.world.type;
-                SharkGame.World.planetLevel = saveData.world.level;
-                SharkGame.World.apply();
-                SharkGame.Home.init();
             }
 
             // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
@@ -575,6 +577,17 @@ SharkGame.Save = {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
             _.each(["agriculture", "ancestralRecall", "utilityCarapace", "primordialSong", "leviathanHeart", "eightfoldOptimisation", "mechanisedAlchemy", "mobiusShells", "imperialDesigns"], function(v) {
+                save.upgrades[v] = false;
+            });
+            return save;
+        },
+		
+		// MODDED
+		function(save) {
+            _.each(["knowledge", "coalescer", "stone", "gravel", "prospector", "shoveler", "miller", "crusher", "pulverizer"], function(v) {
+                save.resources[v] = {amount: 0, totalAmount: 0};
+            });
+            _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear"], function(v) {
                 save.upgrades[v] = false;
             });
             return save;

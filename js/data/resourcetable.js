@@ -276,6 +276,17 @@ SharkGame.ResourceTable = {
         },
         value: 3000
     },
+	
+	prospector: {
+        name: 'prospector sharks',
+        singleName: 'prospector shark',
+        color: '#6A74AB',
+        income: {
+            'crystal': 0.5,
+            'stone': 0.5
+        },
+        value: 2500
+    },
 
     laser: {
         name: 'laser rays',
@@ -285,6 +296,16 @@ SharkGame.ResourceTable = {
         income: {
             'sand': -2,
             'crystal': 1
+        },
+        value: 3500
+    },
+	
+	shoveler: {
+        name: 'shoveler rays',
+        singleName: 'shoveler ray',
+        color: '#7792A3',
+        income: {
+            'gravel': 1
         },
         value: 3500
     },
@@ -298,6 +319,17 @@ SharkGame.ResourceTable = {
             'kelp': 0.3
         },
         value: 4000
+    },
+	
+	miller: {
+        name: 'miller crabs',
+        singleName: 'miller crab',
+        color: '#473E3B',
+        income: {
+			'gravel': -0.6,
+            'sand': 0.2
+        },
+        value: 2000
     },
 
     worker: {
@@ -321,14 +353,26 @@ SharkGame.ResourceTable = {
         },
         value: 3000
     },
+	
+	rockLobster: {
+        name: 'rock lobsters',
+        singleName: 'rock lobster',
+        color: '#9C706D',
+        income: {
+            'stone': -0.5,
+            'gravel': 1.5
+        },
+        value: 2000
+    },
 
     philosopher: {
         name: 'dolphin philosophers',
         singleName: 'dolphin philosopher',
         color: '#9FBCBF',
         income: {
-            'science': 1
+            'science': 1.5
         },
+		
         value: 3000
     },
 
@@ -348,9 +392,9 @@ SharkGame.ResourceTable = {
         singleName: 'whale chorus',
         color: '#85BBA9',
         income: {
-            'essence': 1e-6
+            'essence': 1e-5
         },
-        value: 10000
+        value: 100000
     },
 
     transmuter: {
@@ -373,6 +417,7 @@ SharkGame.ResourceTable = {
             'science': 5,
             'jellyfish': 0.5
         },
+		
         value: 3000
     },
 
@@ -393,8 +438,10 @@ SharkGame.ResourceTable = {
         color: '#B43B02',
         income: {
             'sand': 2,
-            'sponge': 2
+            'sponge': 2,
+			'gravel': 0.25
         },
+		
         value: 3000
     },
 
@@ -428,10 +475,11 @@ SharkGame.ResourceTable = {
         //desc: "Devourers of the lattice.",
         color: '#B2CFCB',
         income: {
-            crystal: 200,
+            crystal: 100,
+			stone: 10,
             tar: 0.00002
         },
-        value: 32000 //100 crystal 100 sand 20 sharkonium (3200)
+        value: 33500 //100 crystal 100 sand 25 sharkonium (3550)
     },
 
     sandDigger: {
@@ -440,7 +488,7 @@ SharkGame.ResourceTable = {
         //desc: "Consumers of the seabed.",
         color: '#D6CF9F',
         income: {
-            sand: 300,
+            sand: 200,
             tar: 0.00002
         },
         value: 120000 //500 sand 150 sharkonium (12000)
@@ -459,14 +507,14 @@ SharkGame.ResourceTable = {
         },
         value: 155000 //100 crystal 200 sharkonium (15500)
     },
-
-    fishMachine: {
+	
+	fishMachine: {
         name: 'fish machines',
         singleName: 'fish machine',
         //desc: "Indiscriminate hunter.",
         color: '#C9C7A7',
         income: {
-            fish: 1000,
+            fish: 500,
             tar: 0.00001
         },
         value: 70000 //100 sharkonium (7000)
@@ -477,10 +525,10 @@ SharkGame.ResourceTable = {
         singleName: 'skimmer',
         color: '#8D4863',
         income: {
-            junk: 10,
-            sand: -8,
-            fish: -3,
-            tar: 0.00005
+            junk: 60,
+            sand: -16,
+            fish: -6,
+            tar: 0.01
         },
         value: 50000
     },
@@ -501,11 +549,49 @@ SharkGame.ResourceTable = {
         singleName: 'heater',
         color: '#D13F32',
         income: {
-            ice: -10
+            ice: -0.01
         },
         value: 50000,
         forceIncome: true
     },
+	
+	// MODDED MACHINES
+	
+	coalescer: {
+		name: 'coalescers',
+        singleName: 'coalescer',
+        color: '#D2F9E9',
+        income: {
+            knowledge: 0.001
+        },
+        value: 200000,
+        forceIncome: true
+    },
+	
+	crusher: {
+        name: 'stone crushers',
+        singleName: 'stone crusher',
+        color: '#75677A',
+        income: {
+            stone: -5,
+            gravel: 15
+        },
+        value: 175000, // 250 sharkonium (17500)
+		forceIncome: true
+	},
+	
+	pulverizer: {
+        name: 'gravel pulverizers',
+        singleName: 'gravel pulverizer',
+        color: '#B1A5B5',
+        income: {
+            gravel: -15,
+            sand: 45
+        },
+        value: 180000 // 250 sharkonium, 250 gravel (18000)
+    },
+	
+	// OTHER MACHINES
 
     spongeFarmer: {
         name: 'sponge farmers',
@@ -545,7 +631,7 @@ SharkGame.ResourceTable = {
         singleName: 'silent archivist',
         color: '#608B8F',
         income: {
-            science: 10,
+            science: 15,
             tar: 0.000001
         },
         value: 50000
@@ -628,7 +714,19 @@ SharkGame.ResourceTable = {
         singleName: 'science',
         //desc: "Lifeblood of progress.",
         color: '#BBA4E0',
+		income: {
+			knowledge: 0.01
+		},
         value: 100
+    },
+	
+	// SCIENCE, MODDED
+	
+	knowledge: {
+        name: 'knowledge',
+        singleName: 'knowledge',
+        color: '#96FFD3',
+        value: 1000,
     },
 
     // ANIMALS
@@ -638,7 +736,7 @@ SharkGame.ResourceTable = {
         singleName: 'fish',
         //desc: "The hunted.",
         color: '#E3D85B',
-        value: 3
+        value: 2
     },
 
     seaApple: {
@@ -654,17 +752,17 @@ SharkGame.ResourceTable = {
         singleName: 'sponge',
         color: '#ED9847',
         income: {
-            sponge: 0.0001,
-            algae: -0.001
+            sponge: 0.001,
+            algae: -0.01
         },
-        value: 3
+        value: 6
     },
 
     jellyfish: {
         name: 'jellyfish',
         singleName: 'jellyfish',
         color: '#E3B8FF',
-        value: 3
+        value: 9
     },
 
     clam: {
@@ -714,7 +812,21 @@ SharkGame.ResourceTable = {
         name: 'algae',
         singleName: 'algae',
         color: '#549572',
-        value: 0.5
+        value: 0.4
+    },
+	
+	gravel: {
+        name: 'gravel',
+        singleName: 'gravel',
+        color: '#ABABAB',
+        value: 2
+    },
+	
+	stone: {
+        name: 'stones',
+        singleName: 'stone',
+        color: '#6B6B6B',
+        value: 3
     },
 
 
@@ -805,19 +917,71 @@ SharkGame.ResourceTable = {
         singleName: 'ice',
         color: '#E4F1FB',
         income: {
-            fish: -0.001,
-            jellyfish: -0.001,
-            clam: -0.001,
-            kelp: -0.001,
-            coral: -0.001,
-            algae: -0.001,
-            seaApple: -0.001,
-            sponge: -0.001
+            fish: -0.01,
+            jellyfish: -0.01,
+            clam: -0.01,
+            kelp: -0.01,
+            coral: -0.01,
+            algae: -0.01,
+            seaApple: -0.01,
+            sponge: -0.01,
+			ice: 0.001
         },
         value: -100,
         forceIncome: true
     }
 
+};
+
+SharkGame.GeneratorIncomeAffectors = {
+	// table of all the ways that various resources affect the production of others
+	// in the following structure:
+	// resource which affects the generation... {
+	// 										...through this manner... {
+	//															...of this resource: by this degree
+	// see SharkGame.Resources.buildIncomeNetwork, then see SharkGame.Resource.getNetworkIncomeModifier
+	
+	knowledge: {
+		multiply: {
+			frenzy: 1,
+			specialists: 1
+		},
+		exponentiate: {
+			science: 0.05
+		}
+	},
+	ice: {
+		multiply: {
+			heater: 0.01
+		}
+	}
+}
+
+SharkGame.GeneratorIncomeAffected = {
+	// This table automatically populates with the affects on every relevant resource
+	// see SharkGame.Resources.buildIncomeNetwork
+}
+
+SharkGame.ResourceIncomeAffectors = {
+	ice: {
+		multiply: {
+			ice: -0.001
+		}
+	}
+}
+
+SharkGame.ResourceIncomeAffected = {
+	// This table automatically populates with the affects on every relevant resource
+	// see SharkGame.Resources.buildIncomeNetwork
+}
+
+SharkGame.ResourceSpecialProperties = {
+	timeImmune: [
+		"knowledge"
+	],
+	incomeCap: {
+		knowledge: 10
+	}
 };
 
 SharkGame.ResourceCategories = {
@@ -891,6 +1055,7 @@ SharkGame.ResourceCategories = {
             "planter",
             "worker",
             "harvester",
+			"rockLobster",
             "philosopher",
             "treasurer",
             "chorus",
@@ -899,7 +1064,10 @@ SharkGame.ResourceCategories = {
             "collector",
             "scavenger",
             "technician",
-            "sifter"
+            "sifter",
+			"prospector",
+			"shoveler",
+			"miller"
         ]
     },
     machines: {
@@ -929,10 +1097,13 @@ SharkGame.ResourceCategories = {
             "sprongeSmelter",
             "seaScourer",
             "prostheticPolyp",
-            "eggBrooder"
+            "eggBrooder",
+			"coalescer",
+			"crusher",
+			"pulverizer"
         ]
     },
-    science: {
+    scientific: {
         name: "Science",
         disposeMessage: [
             "Thousands of sharkhours of research down the drain.",
@@ -940,10 +1111,12 @@ SharkGame.ResourceCategories = {
             "The shark academies will hear of this anti-intellectual act of barbarism!",
             "The science advisors frantically murmur among themselves while disposing of the science.",
             "We're getting rid of the science now! No more learning! No more progression! Just mindlessly clicking the exact same buttons we've been clicking for hours!!",
-            "Are you afraid of PROGRESS?"
+            "Are you afraid of PROGRESS?",
+			"Ignorance is bliss."
         ],
         resources: [
-            "science"
+            "science",
+			"knowledge"
         ]
     },
     animals: {
@@ -981,7 +1154,9 @@ SharkGame.ResourceCategories = {
             "crystal",
             "kelp",
             "coral",
-            "algae"
+            "algae",
+			"stone",
+			"gravel"
         ]
     },
     processed: {

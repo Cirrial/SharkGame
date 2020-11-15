@@ -30,10 +30,12 @@ SharkGame.Lab = {
             discoverReq: l.discoverReq,
             code: l
         };
-
+		
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+		
         // add default purchased state to each upgrade
-        $.each(SharkGame.Upgrades, function(k, v) {
-            SharkGame.Upgrades[k].purchased = false;
+        $.each(ups, function(k, v) {
+            ups[k].purchased = false;
         });
     },
 
@@ -70,9 +72,11 @@ SharkGame.Lab = {
 
         // cache a selector
         var buttonList = $('#buttonList');
-
+		
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+		
         // for each upgrade not yet bought
-        $.each(SharkGame.Upgrades, function(key, value) {
+        $.each(ups, function(key, value) {
             if(value.purchased) {
                 return; // skip this upgrade altogether
             }
@@ -89,8 +93,8 @@ SharkGame.Lab = {
                     if(value.required.upgrades) {
                         $.each(value.required.upgrades, function(_, v) {
                             // check previous upgrade research
-                            if(SharkGame.Upgrades[v]) {
-                                prereqsMet = prereqsMet && SharkGame.Upgrades[v].purchased;
+                            if(ups[v]) {
+                                prereqsMet = prereqsMet && ups[v].purchased;
                             } else {
                                 prereqsMet = false; // if the required upgrade doesn't exist, we definitely don't have it
                             }
@@ -121,7 +125,8 @@ SharkGame.Lab = {
     updateLabButton: function(upgradeName) {
         var r = SharkGame.Resources;
         var button = $('#' + upgradeName);
-        var upgradeData = SharkGame.Upgrades[upgradeName];
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+        var upgradeData = ups[upgradeName];
         var upgradeCost = upgradeData.cost;
 
 
@@ -157,7 +162,7 @@ SharkGame.Lab = {
     onLabButton: function() {
         var r = SharkGame.Resources;
         var l = SharkGame.Lab;
-        var u = SharkGame.Upgrades;
+        var u = SharkGame.Upgrades.getUpgradeTable();
 
         var upgradeId = $(this).attr("id");
         var upgrade = u[upgradeId];
@@ -187,7 +192,7 @@ SharkGame.Lab = {
     addUpgrade: function(upgradeId) {
         var l = SharkGame.Lab;
         var r = SharkGame.Resources;
-        var u = SharkGame.Upgrades;
+        var u = SharkGame.Upgrades.getUpgradeTable();
         var upgrade = u[upgradeId];
         if(upgrade) {
             if(!upgrade.purchased) {
@@ -208,7 +213,7 @@ SharkGame.Lab = {
     },
 
     allResearchDone: function() {
-        var u = SharkGame.Upgrades;
+        var u = SharkGame.Upgrades.getUpgradeTable();
         var l = SharkGame.Lab;
         var allDone = true;
         $.each(u, function(k, v) {
@@ -222,10 +227,24 @@ SharkGame.Lab = {
     isUpgradePossible: function(upgradeName) {
         var w = SharkGame.World;
         var l = SharkGame.Lab;
-        var upgradeData = SharkGame.Upgrades[upgradeName];
+		var ups = SharkGame.Upgrades.getUpgradeTable();
+        var upgradeData = ups[upgradeName];
         var isPossible = true;
+		
+		if(!upgradeData){
+			return false;
+		}
 
         if(upgradeData.required) {
+			// MODDED
+			// if this upgrade is restricted to certain worlds,
+			// check that the worldtype is acceptable for this upgrade to appear
+			if(upgradeData.required.worlds) {
+				isPossible = isPossible && (upgradeData.required.worlds.includes(SharkGame.World.worldType))
+			}
+			if(upgradeData.required.notWorlds) {
+				isPossible = isPossible && !(upgradeData.required.notWorlds.includes(SharkGame.World.worldType))
+			}
             if(upgradeData.required.resources) {
                 // check if any related resources exist in the world for this to make sense
                 // unlike the costs where all resources in the cost must exist, this is an either/or scenario
@@ -241,6 +260,7 @@ SharkGame.Lab = {
                     isPossible = isPossible && l.isUpgradePossible(v);
                 });
             }
+			
             // check existence of resource cost
             // this is the final check, everything that was permitted previously will be made false
             $.each(upgradeData.cost, function(k, v) {
@@ -271,7 +291,7 @@ SharkGame.Lab = {
     },
 
     updateUpgradeList: function() {
-        var u = SharkGame.Upgrades;
+        var u = SharkGame.Upgrades.getUpgradeTable();
         var upgradeList = $('#upgradeList');
         upgradeList.empty();
         upgradeList.append($("<h3>").html("Researched Upgrades"));

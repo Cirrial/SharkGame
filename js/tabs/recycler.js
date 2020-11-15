@@ -45,8 +45,11 @@ SharkGame.Recycler = {
         "essence",
         "junk",
         "science",
-        "seaApple"
+        "seaApple",
+		"coalescer"
     ],
+	
+	efficiency: "NA",
 
     init: function() {
         var y = SharkGame.Recycler;
@@ -98,7 +101,7 @@ SharkGame.Recycler = {
         var junkAmount = r.getResource("junk");
 
         var junkDisplay = $('#junkDisplay');
-        junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(junkAmount) + "<br/><br/>RESIDUE");
+        junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(junkAmount) + "<br/><br/>RESIDUE<br/><br/>" + y.getRecyclerEfficiencyString());
     },
 
     updateButtons: function() {
@@ -157,7 +160,7 @@ SharkGame.Recycler = {
             if(r.getTotalResource(k) > 0
                 && y.allowedCategories[r.getCategoryOfResource(k)]
                 && y.bannedResources.indexOf(k) === -1) {
-                SharkGame.Button.makeButton("input-" + k, "Recycle " + r.getResourceName(k), inputButtonDiv, y.onInput);
+                SharkGame.Button.makeHoverscriptButton("input-" + k, "Recycle " + r.getResourceName(k), inputButtonDiv, y.onInput, y.onInputHover, y.onInputUnhover);
                 SharkGame.Button.makeButton("output-" + k, "Convert to " + r.getResourceName(k), outputButtonDiv, y.onOutput);
             }
         });
@@ -182,15 +185,19 @@ SharkGame.Recycler = {
 
         if(resourceAmount >= amount) {
             r.changeResource(resourceName, -amount);
-            r.changeResource("junk", amount * junkPerResource);
+            r.changeResource("junk", amount * junkPerResource * SharkGame.Recycler.getEfficiency(resourceName,amount));
             r.changeResource("tar", amount * junkPerResource * 0.00001);
             l.addMessage(SharkGame.choose(y.recyclerInputMessages));
         } else {
             l.addMessage("You don't have enough for that!");
         }
-
+		
+		y.updateEfficiency(resourceName, r.getResource(resourceName));
+		
         // disable button until next frame
         button.prop("disabled", true);
+		
+		
     },
 
     onOutput: function() {
@@ -248,5 +255,58 @@ SharkGame.Recycler = {
             }
         }
         return Math.floor(max);
-    }
+    },
+	
+	onInputHover: function() {
+        var button = $(this);
+        var resource = button.attr("id").split("-")[1];
+        var amount = SharkGame.Resources.getResource(resource);
+		SharkGame.Recycler.updateEfficiency(resource, amount);
+	},
+	
+	onInputUnhover: function() {
+		SharkGame.Recycler.efficiency = "NA";
+	},
+	
+	getRecyclerEfficiencyString: function() {
+		var y = SharkGame.Recycler;
+		if(y.efficiency === "NA") {
+			return "<br/><br/>";
+		}
+		return ((y.getEfficiency()*100).toFixed(2)).toString().bold() + "<b>%<br/>EFFICIENY</b>";
+	},
+	
+	getEfficiency: function() {
+		var y = SharkGame.Recycler;
+		if(y.efficiency === "NA") {
+			return 1;
+		}
+		return y.efficiency.toFixed(4);
+	},
+	
+	updateEfficiency: function(resource, amount) {
+		var y = SharkGame.Recycler;
+		var buyN = SharkGame.Settings.current.buyAmount;
+		
+		// no efficiency change if only eating up to 100
+		if(buyN > 0) {
+			y.efficiency = 1;
+			return;
+		}
+		
+		if(amount) {
+			n = amount/(-buyN)
+			// check if the amount to eat is less than the threshold, currently 1 million
+			if(n < 1E6) {
+				y.efficiency = 1;
+			} else {
+				y.efficiency = 1/(SharkGame.log10(n) - 5); //otherwise, scale back based purely on the number to process
+				// 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
+				// the system is more sensible, and people can get a feel for it easier if i make this change
+				// the amount that this effects things isn't crazy high either, so
+			}
+		} else {
+			y.efficiency = 1;
+		}
+	}
 };

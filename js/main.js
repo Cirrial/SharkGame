@@ -234,7 +234,7 @@ SharkGame.Main = {
     tickHandler: -1,
     autosaveHandler: -1,
 
-    beautify: function(number, suppressDecimals) {
+    beautify: function(number, suppressDecimals, places) {
 
         var formatted;
 
@@ -427,6 +427,8 @@ SharkGame.Main = {
         if(SharkGame.Main.autosaveHandler === -1) {
             SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
         }
+		
+
     },
 
     tick: function() {
@@ -475,12 +477,16 @@ SharkGame.Main = {
             if(v.discoverReq.resource) {
                 reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource, true);
             }
-
+			
+			// discover which upgrade table is in use
+			
+			var ups = SharkGame.Upgrades.getUpgradeTable();
+			
             // check upgrades
             if(v.discoverReq.upgrade) {
                 $.each(v.discoverReq.upgrade, function(_, value) {
-                    if(SharkGame.Upgrades[value]) {
-                        reqsMet = reqsMet && SharkGame.Upgrades[value].purchased;
+                    if(ups[value]) {
+                        reqsMet = reqsMet && ups[value].purchased;
                     } else {
                         reqsMet = false; // can't have a nonexistent upgrade
                     }
@@ -958,6 +964,15 @@ SharkGame.Main = {
 };
 
 SharkGame.Button = {
+	makeHoverscriptButton: function(id, name, div, handler, hhandler, huhandler) {
+        return $("<button>").html(name)
+            .attr("id", id)
+            .appendTo(div)
+            .click(handler)
+			.hover(hhandler,huhandler);
+    },
+	
+	
     makeButton: function(id, name, div, handler) {
         return $("<button>").html(name)
             .attr("id", id)

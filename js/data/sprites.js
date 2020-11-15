@@ -343,6 +343,15 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
+	"actions/catchMoreFish":
+    {
+        "frame": {"x":2,"y":104,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
     "actions/forgeSpronge":
     {
         "frame": {"x":54,"y":104,"w":50,"h":50},
@@ -505,6 +514,15 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
+	"actions/stoneGetMaker":
+    {
+        "frame": {"x":920,"y":2,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
     "actions/getManta":
     {
         "frame": {"x":938,"y":54,"w":50,"h":50},
@@ -595,6 +613,15 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
+	"actions/stoneGetShrimp":
+    {
+        "frame": {"x":1094,"y":54,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
     "actions/getTreasurer":
     {
         "frame": {"x":1128,"y":2,"w":50,"h":50},
@@ -641,6 +668,15 @@ SharkGame.Sprites = {
         "pivot": {"x":0,"y":0}
     },
     "actions/prySponge":
+    {
+        "frame": {"x":1198,"y":54,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
+	"actions/stonePrySponge":
     {
         "frame": {"x":1198,"y":54,"w":50,"h":50},
         "rotated": false,
@@ -847,6 +883,15 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
+	"technologies/crystalShovel":
+    {
+        "frame": {"x":1440,"y":2,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
     "technologies/engineering":
     {
         "frame": {"x":1406,"y":106,"w":50,"h":50},
@@ -928,6 +973,15 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
+	"technologies/stoneSeabedGeology":
+    {
+        "frame": {"x":1596,"y":2,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
     "technologies/statsDiscovery":
     {
         "frame": {"x":1562,"y":106,"w":50,"h":50},
@@ -947,6 +1001,15 @@ SharkGame.Sprites = {
         "pivot": {"x":0,"y":0}
     },
     "technologies/thermalVents":
+    {
+        "frame": {"x":1614,"y":54,"w":50,"h":50},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+        "sourceSize": {"w":50,"h":50},
+        "pivot": {"x":0,"y":0}
+    },
+	"technologies/stoneThermalVents":
     {
         "frame": {"x":1614,"y":54,"w":50,"h":50},
         "rotated": false,

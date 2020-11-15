@@ -10,6 +10,7 @@ SharkGame.Resources = {
     BOOST_MULTIPLIER_COLOR: '#60A060',
     WORLD_MULTIPLIER_COLOR: '#6060A0',
     ARTIFACT_MULTIPLIER_COLOR: '#6F968A',
+	RESOURCE_AFFECT_MULTIPLIER_COLOR: '#BFBF5A',
 
     specialMultiplier: null,
     rebuildTable: false,
@@ -29,12 +30,26 @@ SharkGame.Resources = {
         });
 
         SharkGame.Resources.specialMultiplier = 1;
+		
+		// MODDED
+		// time to build the network of relationships between resources
+		SharkGame.Resources.buildIncomeNetwork();
     },
 
     processIncomes: function(timeDelta) {
-        $.each(SharkGame.PlayerIncomeTable, function(k, v) {
-            SharkGame.Resources.changeResource(k, v * timeDelta);
-        });
+		if(timeDelta > 1){
+			$.each(SharkGame.PlayerIncomeTable, function(k, v) {
+				if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+					SharkGame.Resources.changeResource(k, v * timeDelta);
+				} else {
+					SharkGame.Resources.changeResource(k, v);
+				}
+			});
+		} else {
+			$.each(SharkGame.PlayerIncomeTable, function(k, v) {
+				SharkGame.Resources.changeResource(k, v * timeDelta);
+			});
+		}
     },
 
     recalculateIncomeTable: function(resources) {
@@ -97,7 +112,7 @@ SharkGame.Resources = {
                 if(worldResourceInfo) {
                     var worldResourceIncome = worldResourceInfo.income;
                     var affectedResourceBoostMultiplier = worldResources[name].boostMultiplier;
-                    SharkGame.PlayerIncomeTable[name] += worldResourceIncome * affectedResourceBoostMultiplier * r.getSpecialMultiplier();
+                    SharkGame.PlayerIncomeTable[name] += worldResourceIncome * affectedResourceBoostMultiplier;
                 }
             }
         });
@@ -106,19 +121,73 @@ SharkGame.Resources = {
     getProductAmountFromGeneratorResource: function(generator, product, costScaling) {
         var r = SharkGame.Resources;
         var w = SharkGame.World;
+		var rp = SharkGame.ResourceSpecialProperties
         var playerResource = SharkGame.PlayerResources[generator];
+		if(!r.getResourceCombinationAllowed(generator, product)) {
+			return 0;
+		}
         if(typeof(costScaling) !== "number") {
             costScaling = 1;
         }
-        return SharkGame.ResourceTable[generator].income[product] * r.getResource(generator) * costScaling *
+        var generated = SharkGame.ResourceTable[generator].income[product] * r.getResource(generator) * costScaling *
             playerResource.incomeMultiplier * w.getWorldIncomeMultiplier(generator) *
             w.getWorldBoostMultiplier(product) * w.getArtifactMultiplier(generator) *
-            r.getSpecialMultiplier();
+            r.getResourceGeneratorMultiplier(generator) * r.getResourceIncomeMultiplier(product);
+		if(rp.incomeCap[product]) {
+			if(SharkGame.PlayerIncomeTable[product] + generated > rp.incomeCap[product]) {
+				return rp.incomeCap[product] - SharkGame.PlayerIncomeTable[product];
+			}
+		}
+		return generated;
     },
 
-    getSpecialMultiplier: function() {
-        return Math.max((SharkGame.Resources.getResource("numen") * 10), 1) * SharkGame.Resources.specialMultiplier;
+    getResourceGeneratorMultiplier: function(generator) {
+		return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.GeneratorIncomeAffected,generator);
     },
+
+	getResourceIncomeMultiplier: function(product) {
+		return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.ResourceIncomeAffected,product);
+	},
+	
+	getNetworkIncomeModifier: function(network, resource) {
+		var multiplier = 1;
+		var node = network[resource];
+		if(node) {
+			if(node.multiply){
+				$.each(node.multiply, function(k, v) {
+					multiplier = multiplier + v * SharkGame.Resources.getResource(k);
+				});
+			}
+			if(node.reciprocate){
+				$.each(node.reciprocate, function(k, v) {
+					multiplier = multiplier / (1 + v * SharkGame.Resources.getResource(k));
+				});
+			}
+			if(node.exponentiate){
+				$.each(node.exponentiate, function(k, v) {
+					multiplier = multiplier * Math.pow(v, SharkGame.Resources.getResource(k));
+				});
+			}
+			if(node.polynomial){
+				$.each(node.polynomial, function(k, v) {
+					multiplier = multiplier + Math.pow(SharkGame.Resources.getResource(k), v);
+				});
+			}
+		}
+		return multiplier;
+	},
+	
+	getResourceCombinationAllowed: function(generator, product) {
+		if(generator in SharkGame.World.worldRestrictedCombinations) {
+			return !(SharkGame.World.worldRestrictedCombinations[generator].includes(product));
+		} else {
+			return true;
+		}
+	},
+
+	getSpecialMultiplier: function(generator) {
+		return 1;
+	},
 
     getIncome: function(resource) {
         return SharkGame.PlayerIncomeTable[resource]
@@ -480,6 +549,88 @@ SharkGame.Resources = {
         });
         return sources;
     },
+
+	buildIncomeNetwork: function(specifically) {
+		// completes the network of resources whose incomes are affected by other resources
+		// takes the order of the gia and reverses it to get the rgad.
+		
+		var gia = SharkGame.GeneratorIncomeAffectors
+		var rgad = SharkGame.GeneratorIncomeAffected
+		var rc = SharkGame.ResourceCategories
+		if(specifically) {
+			null;
+		} else {
+			// recursively parse the gia
+			$.each(gia, function(resource) {
+				$.each(gia[resource], function(type) {
+					$.each(gia[resource][type], function(generator, value) {
+						// check for issues worth throwing over
+						if(SharkGame.ResourceTable[generator]) {
+							if(!SharkGame.ResourceTable[generator].income) {
+								throw new Error("Issue building income network, generator has no income, not actually a generator! Try changing resource table generators.");
+							}
+						}
+						
+						// is it a category or a generator?
+						if(SharkGame.Resources.isCategory(generator)) {
+							var nodes = rc[generator].resources
+						} else {
+							var nodes = [generator]
+						}
+						
+						// recursively reconstruct the table with the keys in the inverse order
+						$.each(nodes, function(k, v) {
+							if(!rgad[v]) {
+								rgad[v] = {};
+								rgad[v][type] = {};
+							} else {
+								if(!rgad[v][type]) {
+									rgad[v][type] = {};
+								}
+							}
+							rgad[v][type][resource] = value;
+						});
+					});
+				});
+			});
+		}
+		
+		// resources incomes below, generators above
+		
+		var ria = SharkGame.ResourceIncomeAffectors
+		var rad = SharkGame.ResourceIncomeAffected
+		var rc = SharkGame.ResourceCategories
+		if(specifically) {
+			null;
+		} else {
+			// recursively parse the ria
+			$.each(ria, function(affectorResource) {
+				$.each(ria[affectorResource], function(type) {
+					$.each(ria[affectorResource][type], function(affectedResource, value) {
+						// is it a category?
+						if(SharkGame.Resources.isCategory(affectedResource)) {
+							var nodes = rc[affectedResource].resources
+						} else {
+							var nodes = [affectedResource]
+						}
+						
+						// recursively reconstruct the table with the keys in the inverse order
+						$.each(nodes, function(k, v) {
+							if(!rad[v]) {
+								rad[v] = {};
+								rad[v][type] = {};
+							} else {
+								if(!rad[v][type]) {
+									rad[v][type] = {};
+								}
+							}
+							rad[v][type][affectorResource] = value;
+						});
+					});
+				});
+			});
+		}
+	},
 
     // TESTING FUNCTIONS
     giveMeSomeOfEverything: function(amount) {

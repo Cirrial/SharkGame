@@ -56,6 +56,89 @@ SharkGame.HomeActions = {
         ],
         helpText: "Use your natural shark prowess to find and catch a fish."
     },
+	
+	'debugbutton': {
+        name: "Catch stuff",
+        effect: {
+            resource: {
+                'fish': 100000000,
+				'crystal': 100000000,
+				'sharkonium': 1000000000,
+				'sand': 1000000000,
+				'kelp': 1000000000,
+				'science': 10000000000,
+				'shark': 10000
+            }
+        },
+        cost: {},
+        prereq: {
+            // no prereqs
+        },
+        outcomes: [
+            "Tested.",
+			"Debugged.",
+			"Ah, yes. This doesn't work as intended.",
+			"Very interesting results here.",
+			"A gift from the developer.",
+			"You better be testing something.",
+			"Not intended for actual gameplay."
+        ],
+        helpText: "Use your natural coding prowess to test the game."
+    },
+	
+	'catchMoreFish': {
+        name: "Catch 25 fish",
+        effect: {
+            resource: {
+                'fish': 25
+            }
+        },
+        cost: {},
+        prereq: {
+            upgrade: [
+				"chompers"
+			]
+        },
+        outcomes: [
+            "Many fish.",
+			"Ate fish.",
+			"Practiced pescatarianism.",
+			"Went fishing.",
+			"Ate a few fish.",
+			"Ate some red fish.",
+			"Ate some blue fish.",
+			"Ate a few anchovies.",
+            "Ate a few catfish.",
+            "Ate a few flounders.",
+            "Ate a few haddock.",
+            "Ate a few herring.",
+            "Ate a few mackerel.",
+            "Ate a few mullet.",
+            "Ate a few perch.",
+            "Ate a few pollock.",
+            "Ate a few salmon.",
+            "Ate a few sardines.",
+            "Ate a few sole.",
+            "Ate a few tilapia.",
+            "Ate a few trout.",
+            "Ate a few whitefish.",
+            "Ate a few bass.",
+            "Ate a few carp.",
+            "Ate a few cod.",
+            "Ate a few halibut.",
+            "Ate a few mahi mahi.",
+            "Ate a few monkfish.",
+            "Ate a few perch.",
+            "Ate a few snappers.",
+            "Ate a few groupers.",
+            "Ate a few sea bass.",
+            "Ate a few marlin.",
+            "Ate a few orange roughies.",
+			"Ate a couple of swedish fish...wait.",
+			"One fish, two fish..."
+        ],
+        helpText: "Use your natural shark prowess (with help from crystal gear) and catch more fish than ever before."
+    },
 
     'prySponge': {
         name: "Pry sponge",
@@ -68,7 +151,53 @@ SharkGame.HomeActions = {
         prereq: {
             upgrade: [
                 "spongeCollection"
-            ]
+            ],
+			notWorlds: [
+				"stone"
+			]
+        },
+        outcomes: [
+            "Pried an orange elephant ear sponge from the rocks.",
+            "Pried a brain sponge from the rocks.",
+            "Pried a branching tube sponge from the rocks.",
+            "Pried a brown volcano carpet from the rocks.",
+            "Pried a row pore rope sponge from the rocks.",
+            "Pried a branching vase sponge from the rocks.",
+            "Pried a chicken liver sponge from the rocks.",
+            "Pried a red boring sponge from the rocks.",
+            "Pried a heavenly sponge from the rocks.",
+            "Pried a brown encrusting octopus sponge from the rocks.",
+            "Pried a stinker sponge from the rocks.",
+            "Pried a black-ball sponge from the rocks.",
+            "Pried a strawberry vase sponge from the rocks.",
+            "Pried a convoluted orange sponge from the rocks.",
+            "Pried a touch-me-not sponge from the rocks. Ow.",
+            "Pried a lavender rope sponge from the rocks.",
+            "Pried a red-orange branching sponge from the rocks.",
+            "Pried a variable boring sponge from the rocks.",
+            "Pried a loggerhead sponge from the rocks.",
+            "Pried a yellow sponge from the rocks.",
+            "Pried an orange lumpy encrusting sponge from the rocks.",
+            "Pried a giant barrel sponge from the rocks."
+        ],
+        helpText: "Grab a sponge from the seabed for future use."
+    },
+	
+	// MODDED
+	
+	'stonePrySponge': {
+        name: "Pry sponges",
+        effect: {
+            resource: {
+                'sponge': 2
+            }
+        },
+        cost: {},
+        prereq: {
+            upgrade: [
+                "spongeCollection"
+            ],
+			world: "stone"
         },
         outcomes: [
             "Pried an orange elephant ear sponge from the rocks.",
@@ -189,7 +318,7 @@ SharkGame.HomeActions = {
         name: "Study sea apples",
         effect: {
             resource: {
-                science: 5
+                science: 4
             }
         },
         cost: [
@@ -218,7 +347,7 @@ SharkGame.HomeActions = {
         name: "Dissect sponge",
         effect: {
             resource: {
-                science: 5
+                science: 2
             }
         },
         cost: [
@@ -247,7 +376,7 @@ SharkGame.HomeActions = {
         name: "Dismantle jellyfish",
         effect: {
             resource: {
-                science: 5
+                science: 3
             }
         },
         cost: [
@@ -281,7 +410,7 @@ SharkGame.HomeActions = {
         },
         cost: [
             {resource: "clam", costFunction: "constant", priceIncrease: 1},
-            {resource: "science", costFunction: "constant", priceIncrease: 5}
+            {resource: "science", costFunction: "constant", priceIncrease: 4}
         ],
         max: "clam",
         prereq: {
@@ -479,6 +608,7 @@ SharkGame.HomeActions = {
             "A school of sharks!",
             "A shoal of sharks!",
             "A frenzy of sharks!",
+            "A gam of sharks! Yes, that's correct.",
             "A college of sharks! They're a little smarter than a school."
         ],
         helpText: "Recruit a shark to help catch more fish."
@@ -635,6 +765,69 @@ SharkGame.HomeActions = {
             },
             upgrade: [
                 "seabedGeology"
+            ]
+        },
+        outcomes: [
+            "An african filter shrimp joins you.",
+            "An amano shrimp joins you.",
+            "A bamboo shrimp joins you.",
+            "A bee shrimp joins you.",
+            "A black tiger shrimp joins you.",
+            "A blue bee shrimp joins you.",
+            "A blue pearl shrimp joins you.",
+            "A blue tiger shrimp joins you.",
+            "A brown camo shrimp joins you.",
+            "A cardinal shrimp joins you.",
+            "A crystal red shrimp joins you.",
+            "A dark green shrimp joins you.",
+            "A glass shrimp joins you.",
+            "A golden bee shrimp joins you.",
+            "A harlequin shrimp joins you.",
+            "A malaya shrimp joins you.",
+            "A neocaridina heteropoda joins you.",
+            "A ninja shrimp joins you.",
+            "An orange bee shrimp joins you.",
+            "An orange delight shrimp joins you.",
+            "A purple zebra shrimp joins you.",
+            "A red cherry shrimp joins you.",
+            "A red goldflake shrimp joins you.",
+            "A red tiger shrimp joins you.",
+            "A red tupfel shrimp joins you.",
+            "A snowball shrimp joins you.",
+            "A sulawesi shrimp joins you.",
+            "A tiger shrimp joins you.",
+            "A white bee shrimp joins you.",
+            "A yellow shrimp joins you."
+        ],
+        multiOutcomes: [
+            "That's a lot of shrimp.",
+            "So many shrimp, it's like a cloud!",
+            "I can't cope with this many shrimp!",
+            "Shrimp, they're like bugs, except not bugs or anything related at all!",
+            "They're so tiny!",
+            "How can something so small take up so much space?",
+            "Sponge forever!"
+        ],
+        helpText: "Convince shrimp to assist you in the gathering of algae, which helps boost sponge production."
+    },
+
+	'stoneGetShrimp': {
+        name: "Acquire shrimp",
+        effect: {
+            resource: {
+                'shrimp': 1
+            }
+        },
+        cost: [
+            {resource: "sponge", costFunction: "linear", priceIncrease: 5}
+        ],
+        max: "shrimp",
+        prereq: {
+            resource: {
+                'sponge': 5
+            },
+            upgrade: [
+                "stoneSpongeCollection"
             ]
         },
         outcomes: [
@@ -1094,6 +1287,40 @@ SharkGame.HomeActions = {
         ],
         helpText: "Train a shark in the fine art of research and the science of, well, science."
     },
+	
+    'getProspector': {
+        name: "Recruit prospector shark",
+        effect: {
+            resource: {
+                'prospector': 1
+            }
+        },
+        cost: [
+            {resource: "shark", costFunction: "constant", priceIncrease: 1},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 15}
+        ],
+        max: "prospector",
+        prereq: {
+            upgrade: [
+				"prospectorSharks"
+			]
+        },
+        outcomes: [
+            "Ready to mine!",
+            "Well, there are worse jobs.",
+            "Pickaxe? Check. Hard work? Check. Lack of proper safety regulations? Double check.",
+            "I'm not sure why sharks think this is a good job? It sucks??",
+            "Trained in the art of mine-fu. Ready to bust crystals."
+        ],
+        multiOutcomes: [
+            "How do you even get leverage underwater? Newton's third law? Anyone?",
+            "So, they're back in the mine.",
+            "Too bad there isn't something even better than crystal down there, like, diamonds or something.",
+            "Go! Collect resources! Give me stone!",
+            "No rock left unturned! Then, break the rocks you turn over, there might be goodies inside!"
+        ],
+        helpText: "Train and equip a shark to break crystals and mine stone in sub-ocean caverns."
+    },
 
     'getNurse': {
         name: "Train nurse shark",
@@ -1170,6 +1397,44 @@ SharkGame.HomeActions = {
         ],
         helpText: "Remove a ray from sand detail and let them fuse sand into raw crystal."
     },
+	
+	'getShoveler': {
+        name: "Equip shoveler ray",
+        effect: {
+            resource: {
+                'shoveler': 1
+            }
+        },
+        cost: [
+            {resource: "ray", costFunction: "constant", priceIncrease: 1},
+            {resource: "crystal", costFunction: "linear", priceIncrease: 15}
+        ],
+        max: "shoveler",
+        prereq: {
+            resource: {
+                'ray': 1
+            },
+            upgrade: [
+                "crystalShovel"
+            ]
+        },
+        outcomes: [
+            "Shovel ray, at your service!",
+            "For shovelry!",
+            "The ray is excited to get started.",
+            "Gravel is the future...I guess!",
+            "Strapped a shovel to a ray. That ray is now a professional. Go get 'em!"
+        ],
+        multiOutcomes: [
+            "Blue heroes with spades!",
+            "No sand, only coarse, heavy pebbles!",
+            "Let's get shoveling!",
+            "Dig in!",
+            "And they said shovelry was dead.",
+			"The rays seemed bleak before. Now, they're excited."
+        ],
+        helpText: "Remove a ray from fish detail and let them collect gravel instead."
+    },
 
     'getMaker': {
         name: "Instruct a ray maker",
@@ -1190,7 +1455,10 @@ SharkGame.HomeActions = {
             },
             upgrade: [
                 "rayBiology"
-            ]
+            ],
+			notWorlds: [
+				"stone"
+			]
         },
         outcomes: [
             "The application of kelp supplements has made a ray very productive.",
@@ -1209,6 +1477,45 @@ SharkGame.HomeActions = {
         ],
         helpText: "Remove a ray from sand business and let them concentrate on making more rays."
     },
+	
+	'stoneGetMaker': {
+        name: "Instruct a ray maker",
+        effect: {
+            resource: {
+                'maker': 1
+            }
+        },
+        cost: [
+            {resource: "ray", costFunction: "constant", priceIncrease: 2},
+            {resource: "fish", costFunction: "linear", priceIncrease: 350}
+        ],
+        max: "maker",
+        prereq: {
+            resource: {
+                'ray': 1
+            },
+            upgrade: [
+                "rayBiology"
+            ],
+			world: "stone"
+        },
+        outcomes: [
+            "More rays lets you get more rays which you can then use to get more rays.",
+            "The ray singularity begins!",
+            "A ray maker is ready.",
+            "Looks like you gave them quite the ray maker blow! 'Them' being the intangible enemy that is lacking in resources.",
+            "The ray seems concerned, but obliges. The mission has been given."
+        ],
+        multiOutcomes: [
+            "All these makers. What are they making? What is it for? Oh. It's rays, and it's probably for sand or something.",
+            "More ray makers means more rays. Do you understand what that means?! Do you?! It means more rays. Good. On the same page, then.",
+            "Rapidly breeding aquatic wildlife is probably a severe ecological hazard. Good thing this isn't Earth's oceans, probably!",
+            "Have you ever thought about what the rays wanted? Because this might have been what they wanted after all.",
+            "MORE LASER RAYS FOR THE LASER ARMY-- oh. Well, this is good too."
+        ],
+        helpText: "Remove a ray from fish business and let them concentrate on making more rays."
+    },
+
 
     // CRAB JOBS ////////////////////////////////////////////////////////////////////////////////
 
@@ -1248,6 +1555,44 @@ SharkGame.HomeActions = {
             "More kelp. The apples. They hunger. They hunger for kelp."
         ],
         helpText: "Equip a crab with the equipment and training to plant kelp across the ocean bottom."
+    },
+	
+	'getMiller': {
+        name: "Equip miller crab",
+        effect: {
+            resource: {
+                'miller': 1
+            }
+        },
+        cost: [
+            {resource: "crab", costFunction: "constant", priceIncrease: 1},
+            {resource: "gravel", costFunction: "linear", priceIncrease: 25},
+			{resource: "crystal", costFunction: "linear", priceIncrease: 20},
+        ],
+        max: "miller",
+        prereq: {
+            resource: {
+                'crab': 1
+            },
+            upgrade: [
+                "gravelMilling"
+            ]
+        },
+        outcomes: [
+            "Crab has milling gear.",
+            "Why is it milling, and not grinding?",
+            "Crab has been prepared for pebble disintegration.",
+            "How, you ask? With big, meaty claws, how else?",
+            "Making gravel flour, hopefully not for gravel bread."
+        ],
+        multiOutcomes: [
+            "Doing nature's job for it.",
+            "Millions of years of erosion become mere minutes in your hands...",
+            "Be gone, gravel!",
+            "Sand, come to this world!",
+            "Crush the pebbles! Crush them into what is technically just smaller pebbles!"
+        ],
+        helpText: "Equip a crab with the equipment and training to grind gravel directly into sand."
     },
 
     'getBrood': {
@@ -1404,6 +1749,48 @@ SharkGame.HomeActions = {
             "Did you see them fight for this job? Claws everywhere, I tell you!"
         ],
         helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters."
+    },
+	
+	'getRockLobster': {
+        name: "Train rock lobster",
+        effect: {
+            resource: {
+                'rockLobster': 1
+            }
+        },
+        cost: [
+            {resource: "lobster", costFunction: "constant", priceIncrease: 1},
+            {resource: "clam", costFunction: "linear", priceIncrease: 150}
+        ],
+        max: "rockLobster",
+        prereq: {
+            resource: {
+                'lobster': 1
+            },
+            upgrade: [
+                "rockBreaking"
+            ]
+        },
+        outcomes: [
+            "Break the rocks, lobster. Break them!",
+            "Deployed lobster with a giant crystal nutcracker.",
+            "Ready to rock.",
+			"Crushing rocks is exactly as difficult as it sounds. This lobster can verify."
+        ],
+        multiOutcomes: [
+            "Rocks, begone!",
+            "Stones? What stones?!",
+            "Goodbye, slate.",
+            "Goodbye, granite.",
+			"Goodbye, generic-looking stone.",
+			"Goodbye, pumice.",
+			"Goodbye, quartz.",
+			"Goodbye, basalt.",
+			"Goodbye, limestone.",
+			"Goodbye, schist.",
+			"Goodbye, diorite."
+        ],
+        helpText: "Train a lobster to cut down kelp faster than anything can plant it. Sustainable!"
     },
 
     'getHarvester': {
@@ -1862,12 +2249,12 @@ SharkGame.HomeActions = {
         cost: [
             {resource: "crystal", costFunction: "linear", priceIncrease: 100},
             {resource: "sand", costFunction: "linear", priceIncrease: 200},
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 20}
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 25}
         ],
         max: "crystalMiner",
         prereq: {
             resource: {
-                'sharkonium': 20
+                'sharkonium': 25
             },
             upgrade: [
                 "automation"
@@ -2009,8 +2396,8 @@ SharkGame.HomeActions = {
             }
         },
         cost: [
-            {resource: "junk", costFunction: "linear", priceIncrease: 300},
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 200}
+            {resource: "junk", costFunction: "linear", priceIncrease: 400},
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250}
         ],
         max: "skimmer",
         prereq: {
@@ -2035,6 +2422,75 @@ SharkGame.HomeActions = {
             "The creations of sharks emerge from a pattern as old as their species."
         ],
         helpText: "Construct a machine to automatically recycle kelp and sand into residue."
+    },
+	
+	'getCrusher': {
+        name: "Build crusher",
+        effect: {
+            resource: {
+                'crusher': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250}
+        ],
+        max: "crusher",
+        prereq: {
+            resource: {
+                'stone': 1
+            },
+            upgrade: [
+                "rockProcessing"
+            ]
+        },
+        outcomes: [
+            "Crusher activated.",
+            "Crusher constructed.",
+            "Crushing begins.",
+            "Construction complete.",
+        ],
+        multiOutcomes: [
+            "Stone wasn't very useful anyways.",
+            "Shoo, rocks!",
+            "We can never run out of rocks. The cycle is forever.",
+            "CRUSH. KILL. DESTORY. SMALL ROCKS IN PARTICULAR."
+        ],
+        helpText: "Construct a machine to break stone down into gravel."
+    },
+	
+	'getPulverizer': {
+        name: "Build pulverizer",
+        effect: {
+            resource: {
+                'pulverizer': 1
+            }
+        },
+        cost: [
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250},
+			{resource: "gravel", costFunction: "linear", priceIncrease: 250}
+        ],
+        max: "pulverizer",
+        prereq: {
+            resource: {
+                'gravel': 1
+            },
+            upgrade: [
+                "gravelPulverizing"
+            ]
+        },
+        outcomes: [
+            "Crusher activated.",
+            "Crusher constructed.",
+            "Crushing begins.",
+            "Construction complete.",
+        ],
+        multiOutcomes: [
+            "Stone wasn't very useful anyways.",
+            "Shoo, rocks!",
+            "We can never run out of rocks. The cycle is forever.",
+            "CRUSH. KILL. DESTORY. SMALL ROCKS IN PARTICULAR."
+        ],
+        helpText: "Construct a machine to break stone down into gravel."
     },
 
     'getPurifier': {
@@ -2064,7 +2520,7 @@ SharkGame.HomeActions = {
             "Not all machines carry such weight."
         ],
         multiOutcomes: [
-            "We can almost hear these machines as they start. We can hear them speak. \"We will save you from your mistakes.\" No, I'm just, must be hearing things, ignore me.",
+            "We can almost hear these machines as they start. We can hear them speak. \"We will save you from your mistakes.\" No, I'm just - must be hearing things, ignore me.",
             "The problems of old will be solved by the new.",
             "The waters will return to clarity.",
             "The machines may destroy, but so too can they heal and repair.",
@@ -2082,7 +2538,7 @@ SharkGame.HomeActions = {
             }
         },
         cost: [
-            {resource: "sharkonium", costFunction: "linear", priceIncrease: 300}
+            {resource: "sharkonium", costFunction: "linear", priceIncrease: 250}
         ],
         max: "heater",
         prereq: {
@@ -2110,6 +2566,45 @@ SharkGame.HomeActions = {
             "This world awakens."
         ],
         helpText: "Construct a machine to combat the advancing ice shelf."
+    },
+	
+	// MODDED MACHINES
+	
+	'getCoalescer': {
+        name: "Construct coalescer",
+        effect: {
+            resource: {
+                'coalescer': 1
+            }
+        },
+        cost: [
+            {resource: "knowledge", costFunction: "linear", priceIncrease: 1},
+			{resource: "science", costFunction: "linear", priceIncrease: 20000000},
+			{resource: "delphinium", costFunction: "linear", priceIncrease: 2500}
+        ],
+        max: "coalescer",
+        prereq: {
+            upgrade: [
+                "knowledgeCoalescers"
+            ]
+        },
+        outcomes: [
+            "Accuring thought energy.",
+			"Put together a coalescer.",
+			"Constructed a thought coalescer.",
+			"The structure begins sapping thoughts from the surroundings.",
+			"It's not really a machine...it's more like a ritual station.",
+			"For something made by dolphins, it might seem smart, but that's just because it's sapping your brainpower."
+        ],
+        multiOutcomes: [
+            "Now we're thinking with portals...maybe. I think it involves a portal.",
+            "Praise be to the brain gods!",
+			"Big brain time.",
+			"How do the dolphins know to do this?",
+			"Free our minds, oh great creations!",
+			"The dolphins seem very, very pleased. I'm not sure that I like this anymore."
+        ],
+        helpText: "Create a strange structure to consistently siphon knowledge from its surroundings."
     },
 
     // CRUSTACEAN MACHINES /////////////////////////////////////////////////////////
@@ -2485,7 +2980,9 @@ SharkGame.HomeActionCategories = {
         name: "Basic",
         actions: [
             "catchFish",
+			"catchMoreFish",
             "prySponge",
+			"stonePrySponge",
             "getClam",
             "getJellyfish"
         ]
@@ -2498,6 +2995,7 @@ SharkGame.HomeActionCategories = {
             "getManta",
             "getCrab",
             "getShrimp",
+			"stoneGetShrimp",
             "getLobster",
             "getDolphin",
             "getWhale",
@@ -2511,9 +3009,12 @@ SharkGame.HomeActionCategories = {
         name: "Jobs",
         actions: [
             "getDiver",
+			"getProspector",
             "getScientist",
             "getLaser",
+			"getShoveler",
             "getPlanter",
+			"getMiller",
             "getWorker",
             "getHarvester",
             "getPhilosopher",
@@ -2532,6 +3033,7 @@ SharkGame.HomeActionCategories = {
         actions: [
             "getNurse",
             "getMaker",
+			"stoneGetMaker",
             "getBrood",
             "getQueen",
             "getBerrier",
@@ -2562,6 +3064,8 @@ SharkGame.HomeActionCategories = {
             "getAutoTransmuter",
             "getFishMachine",
             "getSkimmer",
+			"getCrusher",
+			"getPulverizer",
             "getPurifier",
             "getHeater"
         ]
@@ -2579,7 +3083,8 @@ SharkGame.HomeActionCategories = {
             "getEggBrooder",
             "getSprongeSmelter",
             "getSeaScourer",
-            "getProstheticPolyp"
+            "getProstheticPolyp",
+			"getCoalescer"
         ]
     },
 
