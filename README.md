@@ -13,3 +13,13 @@ By modifying the base engine, behaviors which were previously impossible are mad
 where a single resource multiplies the production of both animals and specialists.
 
 Contributions welcome. I literally learned javascript by studying cirrial's code, I am not an expert, and I barely understand anything that isn't fully internal.
+
+## Progress ##
+
+Working on a balance sweep before adding new content. Progress is going well, thanks for asking.
+
+## How to Play this Mod? ##
+
+Well, that's simple. You can play it on your computer by downloading these files in a zip. Extract the zip into a folder, then open the "local_shark_game.html" file using your preferred web browser.
+
+Report any issues using the bug tracker. If the page doesn't load right, or a red message appears somewhere, then it's an error.
