@@ -57,6 +57,7 @@ SharkGame.HomeActions = {
         helpText: "Use your natural shark prowess to find and catch a fish."
     },
 	
+	/* 
 	'debugbutton': {
         name: "Catch stuff",
         effect: {
@@ -85,6 +86,8 @@ SharkGame.HomeActions = {
         ],
         helpText: "Use your natural coding prowess to test the game."
     },
+	
+	*/
 
     'prySponge': {
         name: "Pry sponge",
