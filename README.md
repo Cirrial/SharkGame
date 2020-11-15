@@ -4,4 +4,4 @@ Shark Game is a web game made entirely in HTML, CSS and JavaScript. It is a game
 
 ## Development Plan ##
 
-All development plans are in plans.txt. Suffice to say spoilers lurk within that file, and all plans are susceptible to change on a whim.
+Cirrial stopped working on this game about 5 years ago. I've decided to fork the project and pick up where he left off. Look forward to it.
