@@ -7,16 +7,14 @@ Shark Game is a web game made entirely in HTML, CSS and JavaScript by Cirrial. I
 Cirrial originally developed this game in about 2014 for a gamejam, but continued to develop it afterward. It quickly became a niche favorite among idle game enthusiasts. After a string of updates, Cirrial dropped development in mid-2015. The final version is v0.71.
 
 While the game is in a more-than-playable state, it remains unfinished. Digging into the codebase, Cirrial developed a relatively simple yet robust engine.
-This engine is the reason why this modification is coming to fruition in the first place. Development continues!
+Making use of that engine, new resources, upgrades, and worlds can be added on a whim, and the engine can be expanded to account for new ideas.
 
-By modifying the base engine, behaviors which were previously impossible are made possible. To exhibit this, a new world is already being added,
-where a single resource multiplies the production of both animals and specialists.
-
-Contributions welcome. I literally learned javascript by studying cirrial's code, I am not an expert, and I barely understand anything that isn't fully internal.
+Contributions welcome. I am not an expert, and I barely understand anything that isn't fully internal.
+Don't let that fool you into thinking that I'm completely helpless, though. I'm learning as I go, and it's really going!
 
 ## Progress ##
 
-Working on a balance sweep before adding new content. Progress is going well, thanks for asking.
+Working on a balance sweep before committing to new content. Simultaneously, adding missing sprites. Progress is going well, thanks for asking.
 
 ## How to Play this Mod? ##
 
