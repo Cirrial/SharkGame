@@ -23,7 +23,10 @@ $.extend(SharkGame, {
         "Alone in the Shark",
         "Sharkpocalypse",
         "Shark of Darkness",
-        "Strange Oceans"
+        "Strange Oceans",
+		"A New Frontier",
+		"Lobster's Paradise",
+		"Revenge of the Crabs"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
@@ -31,7 +34,7 @@ $.extend(SharkGame, {
     VERSION_NAME: "New Frontiers", // s: orginal version name is Stranger Oceans. might as well keep a record of that here.
     EPSILON: 1E-6, // floating point comparison is a joy
 				   // s: agreed, already had to deal with it on recycler revisions
-				   // did you know that reducing a float like 1.2512351261 to 1.25 and multiplying by 100 gives you something like 125.0000001?
+				   // did you know that reducing a float like 1.2512351261 to 1.25 by literally removing the decimal and multiplying by 100 gives you something like 125.0000001?
 
     INTERVAL: (1000 / 10), // 20 FPS
     dt: (1 / 10),
