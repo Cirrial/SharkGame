@@ -56,7 +56,7 @@ $.extend(SharkGame, {
     "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
     "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
     "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
-	"<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>", +
+	"<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
     "<p>Mod created by base4/spencers145,<br/>" +
 	"with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>.",
 
