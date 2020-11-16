@@ -57,6 +57,7 @@ SharkGame.HomeActions = {
         helpText: "Use your natural shark prowess to find and catch a fish."
     },
 	
+	/*
 	'debugbutton': {
         name: "Catch stuff",
         effect: {
@@ -84,8 +85,8 @@ SharkGame.HomeActions = {
 			"Not intended for actual gameplay."
         ],
         helpText: "Use your natural coding prowess to test the game."
-    },
-
+    }, */
+	
     'prySponge': {
         name: "Pry sponge",
         effect: {
@@ -1092,7 +1093,8 @@ SharkGame.HomeActions = {
             "They hardly seem to notice you. They take their payment and begin to harvest.",
             "They say something about the schedule being on target.",
             "One of the new batch tells you to find unity in efficiency.",
-            "You could have sworn you saw an octopus among the crowd glinting like metal."
+            "You could have sworn you saw an octopus among the crowd glinting like metal.",
+			"Octopi? No. Octopodes? Definitely not."
         ],
         helpText: "Pay an octopus for their efficient clam retrieval services."
     },

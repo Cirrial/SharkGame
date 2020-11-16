@@ -9,15 +9,6 @@ Cirrial originally developed this game in about 2014 for a gamejam, but continue
 While the game is in a more-than-playable state, it remains unfinished. Digging into the codebase, Cirrial developed a relatively simple yet robust engine.
 Making use of that engine, new resources, upgrades, and worlds can be added on a whim, and the engine can be expanded to account for new ideas.
 
-Contributions welcome. I am not an expert, and I barely understand anything that isn't fully internal.
-Don't let that fool you into thinking that I'm completely helpless, though. I'm learning as I go, and it's really going!
+This is the plan as of now: add, rebalance, and fill in gaps. More shark game.
 
-## Progress ##
-
-Working on a balance sweep before committing to new content. Simultaneously, adding missing sprites. Progress is going well, thanks for asking.
-
-## How to Play this Mod? ##
-
-Well, that's simple. You can play it on your computer by downloading these files in a zip. Extract the zip into a folder, then open the "local_shark_game.html" file using your preferred web browser.
-
-Report any issues using the bug tracker. If the page doesn't load right, or a red message appears somewhere, then it's an error.
+Contributions welcome.

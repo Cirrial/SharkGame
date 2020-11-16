@@ -275,13 +275,18 @@ SharkGame.Lab = {
         var effects = "<span class='medDesc' class='click-passthrough'>(Effects: ";
         if(upgrade.effect) {
             if(upgrade.effect.multiplier) {
+				var anyeffects = false;
                 $.each(upgrade.effect.multiplier, function(k, v) {
                     if(SharkGame.World.doesResourceExist(k)) {
                         effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
+						anyeffects = true;
                     }
                 });
-                // remove trailing suffix
-                effects = effects.slice(0, -2);
+				if(anyeffects) {
+					effects = effects.slice(0, -2); // remove trailing suffix
+				} else {
+					effects += "???"
+				}
             }
         } else {
             effects += "???";

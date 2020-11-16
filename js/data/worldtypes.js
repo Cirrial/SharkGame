@@ -304,7 +304,7 @@ SharkGame.WorldTypes = {
             "whale"
         ],
         modifiers: [
-            { type: "multiplier", modifier: "planetaryIncome", resource: "tar", amount: 0.05 },
+            { type: "multiplier", modifier: "planetaryIncome", resource: "tar", amount: 0.02 },
 			{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "tar", amount: 0.1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "sandDigger", amount: 1 },
@@ -387,8 +387,6 @@ SharkGame.WorldTypes = {
             "algae"
         ],
         modifiers: [
-            { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
-			{ type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "frenzy", amount: 0.2 },
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5},
             { type: "multiplier", modifier: "planetaryIncome", resource: "ice", amount: 0.001 },
 			{ type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "ice", amount: 0.1}
@@ -407,7 +405,7 @@ SharkGame.WorldTypes = {
         desc: "A strange, glowing ocean, where thought escapes into reality.",
         shortDesc: "radiant teal",
         entry: "As you arrive, you feel woozy, and you black out. When you wake up, you feel clear-headed and focused.",
-        style: "haven",
+        style: "default",
         absentResources: [
 			"stone",
 			"gravel",
@@ -443,7 +441,7 @@ SharkGame.WorldTypes = {
     },
 	template: {
         name: "",
-        desc: "description in gateway i think",
+        desc: "description in gateway",
         shortDesc: "status",
         entry: "enter world",
         style: "default",
