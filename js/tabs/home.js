@@ -707,6 +707,9 @@ SharkGame.Home = {
                         subMax = SharkGame.MathUtil.uniqueMax(currAmount, costResource.amount, k) - currAmount;
                         break;
                 }
+				if(Math.abs(subMax - Math.round(subMax)) < SharkGame.EPSILON) {
+					subMax = Math.round(subMax);
+				}
                 max = Math.min(max, subMax);
             });
         }
