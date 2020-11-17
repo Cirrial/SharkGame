@@ -25,7 +25,7 @@ SharkGame.Stats = {
         "</br>Disposing specialists returns them to their normal, previous lives.",
 
     init: function() {
-        var s = SharkGame.Stats;
+        const s = SharkGame.Stats;
         // register tab
         SharkGame.Tabs[s.tabId] = {
             id: s.tabId,
@@ -38,51 +38,51 @@ SharkGame.Stats = {
     },
 
     switchTo: function() {
-        var s = SharkGame.Stats;
-        var content = $('#content');
-        content.append($('<div>').attr("id", "tabMessage"));
-        var statsContainer = $('<div>').attr("id", "statsContainer");
+        const s = SharkGame.Stats;
+        const content = $("#content");
+        content.append($("<div>").attr("id", "tabMessage"));
+        const statsContainer = $("<div>").attr("id", "statsContainer");
         content.append(statsContainer);
-        statsContainer.append($('<div>').attr("id", "statsLeftContainer")
-                .append($('<div>').attr("id", "incomeData"))
-                .append($('<div>').attr("id", "disposeResource"))
+        statsContainer.append($("<div>").attr("id", "statsLeftContainer")
+            .append($("<div>").attr("id", "incomeData"))
+            .append($("<div>").attr("id", "disposeResource"))
         );
-        statsContainer.append($('<div>').attr("id", "statsRightContainer")
-                .append($('<div>').attr("id", "generalStats"))
+        statsContainer.append($("<div>").attr("id", "statsRightContainer")
+            .append($("<div>").attr("id", "generalStats"))
         );
 
-        statsContainer.append($('<div>').addClass("clear-fix"));
-        var message = s.message;
-        var tabMessageSel = $('#tabMessage');
+        statsContainer.append($("<div>").addClass("clear-fix"));
+        let message = s.message;
+        const tabMessageSel = $("#tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + s.sceneImage + "' id='tabSceneImage'>" + message;
             tabMessageSel.css("background-image", "url('" + s.tabBg + "')");
         }
         tabMessageSel.html(message);
 
-        var disposeSel = $('#disposeResource');
-        disposeSel.append($('<h3>').html("Dispose of Stuff"));
+        const disposeSel = $("#disposeResource");
+        disposeSel.append($("<h3>").html("Dispose of Stuff"));
         s.createDisposeButtons();
 
-        var table = s.createIncomeTable();
-        var incomeDataSel = $('#incomeData');
-        incomeDataSel.append($('<h3>').html("Income Details"));
-        incomeDataSel.append($('<p>').html("(Listed below are resources, the income each resource gives you, and the total income you're getting from each thing.)").addClass("medDesc"));
+        const table = s.createIncomeTable();
+        const incomeDataSel = $("#incomeData");
+        incomeDataSel.append($("<h3>").html("Income Details"));
+        incomeDataSel.append($("<p>").html("(Listed below are resources, the income each resource gives you, and the total income you're getting from each thing.)").addClass("medDesc"));
         incomeDataSel.append(table);
 
-        var genStats = $('#generalStats');
-        genStats.append($('<h3>').html("General Stats"));
-        var firstTime = SharkGame.Main.isFirstTime();
+        const genStats = $("#generalStats");
+        genStats.append($("<h3>").html("General Stats"));
+        const firstTime = SharkGame.Main.isFirstTime();
         if(!firstTime) {
-            genStats.append($('<p>').html("<span class='medDesc'>Climate Level</span><br>" + SharkGame.Main.beautify(SharkGame.World.planetLevel)));
+            genStats.append($("<p>").html("<span class='medDesc'>Climate Level</span><br>" + SharkGame.Main.beautify(SharkGame.World.planetLevel)));
         }
-        genStats.append($('<p>').html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
+        genStats.append($("<p>").html("Time since you began:<br/><span id='gameTime' class='timeDisplay'></span>").addClass("medDesc"));
         if(!firstTime) {
-            genStats.append($('<p>').html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
+            genStats.append($("<p>").html("Time since you came through the gate:<br/><span id='runTime' class='timeDisplay'></span>").addClass("medDesc"));
         }
-        genStats.append($('<h3>').html("Total Ocean Resources Acquired"));
+        genStats.append($("<h3>").html("Total Ocean Resources Acquired"));
         if(!firstTime) {
-            genStats.append($('<p>').html("Essence given is the total acquired for the entire game and not just for this world.").addClass("medDesc"));
+            genStats.append($("<p>").html("Essence given is the total acquired for the entire game and not just for this world.").addClass("medDesc"));
         }
         genStats.append(s.createTotalAmountTable());
 
@@ -90,8 +90,8 @@ SharkGame.Stats = {
     },
 
     update: function() {
-        var m = SharkGame.Main;
-        var s = SharkGame.Stats;
+        const m = SharkGame.Main;
+        const s = SharkGame.Stats;
 
         s.updateDisposeButtons();
         s.updateIncomeTable();
@@ -103,16 +103,16 @@ SharkGame.Stats = {
         }
 
         // update run times
-        var currTime = (new Date()).getTime();
-        $('#gameTime').html(m.formatTime(currTime - SharkGame.timestampGameStart));
-        $('#runTime').html(m.formatTime(currTime - SharkGame.timestampRunStart));
+        const currTime = (new Date()).getTime();
+        $("#gameTime").html(m.formatTime(currTime - SharkGame.timestampGameStart));
+        $("#runTime").html(m.formatTime(currTime - SharkGame.timestampRunStart));
     },
 
     createDisposeButtons: function() {
-        var r = SharkGame.Resources;
-        var s = SharkGame.Stats;
-        var m = SharkGame.Main;
-        var buttonDiv = $('#disposeResource');
+        const r = SharkGame.Resources;
+        const s = SharkGame.Stats;
+        const m = SharkGame.Main;
+        const buttonDiv = $("#disposeResource");
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0 && s.bannedDisposeCategories.indexOf(r.getCategoryOfResource(k)) === -1) {
                 SharkGame.Button.makeButton("dispose-" + k, "Dispose of " + r.getResourceName(k), buttonDiv, SharkGame.Stats.onDispose);
@@ -121,21 +121,21 @@ SharkGame.Stats = {
     },
 
     updateDisposeButtons: function() {
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        const m = SharkGame.Main;
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0) {
-                var button = $('#dispose-' + k);
-                var resourceAmount = r.getResource(k);
-                var amountToDispose = SharkGame.Settings.current.buyAmount;
+                const button = $("#dispose-" + k);
+                const resourceAmount = r.getResource(k);
+                let amountToDispose = SharkGame.Settings.current.buyAmount;
                 if(amountToDispose < 0) {
-                    var max = resourceAmount;
-                    var divisor = Math.floor(amountToDispose) * -1;
+                    const max = resourceAmount;
+                    const divisor = Math.floor(amountToDispose) * -1;
                     amountToDispose = Math.floor(max / divisor);
                 }
-                var forceSingular = amountToDispose === 1;
-                var disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);
-                var label = "Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular);
+                const forceSingular = amountToDispose === 1;
+                const disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);
+                let label = "Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular);
                 if(amountToDispose <= 0) {
                     label = "Can't dispose any more " + r.getResourceName(k, disableButton, forceSingular);
                 }
@@ -146,20 +146,20 @@ SharkGame.Stats = {
     },
 
     onDispose: function() {
-        var r = SharkGame.Resources;
-        var l = SharkGame.Log;
-        var resourceName = ($(this).attr("id")).split("-")[1];
-        var resourceAmount = r.getResource(resourceName);
-        var amountToDispose = SharkGame.Settings.current.buyAmount;
+        const r = SharkGame.Resources;
+        const l = SharkGame.Log;
+        const resourceName = ($(this).attr("id")).split("-")[1];
+        const resourceAmount = r.getResource(resourceName);
+        let amountToDispose = SharkGame.Settings.current.buyAmount;
         if(amountToDispose < 0) {
-            var max = resourceAmount;
-            var divisor = Math.floor(amountToDispose) * -1;
+            const max = resourceAmount;
+            const divisor = Math.floor(amountToDispose) * -1;
             amountToDispose = (max / divisor);
         }
         if(resourceAmount >= amountToDispose) {
             r.changeResource(resourceName, -amountToDispose);
-            var category = SharkGame.ResourceCategories[r.getCategoryOfResource(resourceName)];
-            var employmentPool = r.getBaseOfResource(resourceName);
+            const category = SharkGame.ResourceCategories[r.getCategoryOfResource(resourceName)];
+            const employmentPool = r.getBaseOfResource(resourceName);
             if(employmentPool) {
                 r.changeResource(employmentPool, amountToDispose);
             }
@@ -170,14 +170,14 @@ SharkGame.Stats = {
     },
 
     updateIncomeTable: function() {
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        const m = SharkGame.Main;
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
-                var income = SharkGame.ResourceTable[k].income;
+                const income = SharkGame.ResourceTable[k].income;
                 $.each(income, function(incomeKey, incomeValue) {
-                    var cell = $("#income-" + k + "-" + incomeKey);
-                    var changeChar = incomeValue > 0 ? "+" : "";
+                    const cell = $("#income-" + k + "-" + incomeKey);
+                    const changeChar = incomeValue > 0 ? "+" : "";
                     cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(k, incomeKey)) + "/s</span>");
                 });
             }
@@ -185,31 +185,31 @@ SharkGame.Stats = {
     },
 
     updateTotalAmountTable: function() {
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        const m = SharkGame.Main;
         $.each(SharkGame.ResourceTable, function(k,v) {
-            var totalResource = r.getTotalResource(k);
+            const totalResource = r.getTotalResource(k);
             if(totalResource > 0) {
-                var cell = $("#totalAmount-" + k);
+                const cell = $("#totalAmount-" + k);
                 cell.html(m.beautify(totalResource));
             }
         });
     },
 
     createIncomeTable: function() {
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
-        var w = SharkGame.World;
-        var incomesTable = $("#incomeTable");
+        const r = SharkGame.Resources;
+        const m = SharkGame.Main;
+        const w = SharkGame.World;
+        let incomesTable = $("#incomeTable");
         if(incomesTable.length === 0) {
             incomesTable = $("<table>").attr("id", "incomeTable");
         } else {
             incomesTable.empty();
         }
 
-        var specialMultiplierCol = null;
+        const specialMultiplierCol = null;
 
-        var formatCounter = 0;
+        let formatCounter = 0;
 
         $.each(SharkGame.ResourceTable, function(generatorName, generatorData) {
             if(r.getTotalResource(generatorName) > 0 && generatorData.income) {
@@ -218,11 +218,11 @@ SharkGame.Stats = {
                 // if the resource has an income requiring any costs
                 // and it isn't a forced income
                 // do not display the resource's income if it requires a non-existent resource (looking at you, sponge)
-                var validIncome = true;
-                var income = generatorData.income;
-                var row = $("<tr>");
+                let validIncome = true;
+                const income = generatorData.income;
+                let row = $("<tr>");
 
-                var numIncomes = 0;
+                let numIncomes = 0;
                 $.each(income, function(incomeResourceName, incomeResourceAmount) {
                     if(w.doesResourceExist(incomeResourceName) && r.getTotalResource(incomeResourceName) > 0) {
                         numIncomes++;
@@ -233,19 +233,19 @@ SharkGame.Stats = {
                 });
 
                 if(validIncome) {
-                    var counter = 0;
+                    let counter = 0;
 
-                    var rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
+                    const rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
                     row.append($("<td>").html(r.getResourceName(generatorName)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                     $.each(income, function(incomeKey, incomeValue) {
                         if(w.doesResourceExist(incomeKey) && r.getTotalResource(incomeKey) > 0) {
-                            var changeChar = incomeValue > 0 ? "+" : "";
+                            const changeChar = incomeValue > 0 ? "+" : "";
                             row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
                             row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
 
                             // does this resource get a boost multiplier?
-                            var boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
+                            const boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
                             if(boostMultiplier !== 1) {
                                 row.append($("<td>").html("<span style='color: " + r.BOOST_MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
                             } else {
@@ -255,20 +255,20 @@ SharkGame.Stats = {
                             if(counter === 0) {
                                 row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.UPGRADE_MULTIPLIER_COLOR + "'>x" + r.getMultiplier(generatorName) + "</span>").addClass(rowStyle));
                                 // does this income get a world multiplier?
-                                var worldMultiplier = w.getWorldIncomeMultiplier(generatorName);
+                                const worldMultiplier = w.getWorldIncomeMultiplier(generatorName);
                                 if(worldMultiplier !== 1) {
                                     row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.WORLD_MULTIPLIER_COLOR + "'>x" + m.beautify(worldMultiplier) + "</span>").addClass(rowStyle));
                                 } else {
                                     row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
                                 }
                                 // does this income get an artifact multiplier?
-                                var artifactMultiplier = w.getArtifactMultiplier(generatorName);
+                                const artifactMultiplier = w.getArtifactMultiplier(generatorName);
                                 if(artifactMultiplier !== 1) {
                                     row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.ARTIFACT_MULTIPLIER_COLOR + "'>x" + m.beautify(artifactMultiplier) + "</span>").addClass(rowStyle));
                                 } else {
                                     row.append($("<td>").attr("rowspan", numIncomes).addClass(rowStyle));
                                 }
-								var resourceAffectMultiplier = r.getResourceGeneratorMultiplier(generatorName);
+                                const resourceAffectMultiplier = r.getResourceGeneratorMultiplier(generatorName);
                                 if(resourceAffectMultiplier !== 1) {
                                     row.append($("<td>").attr("rowspan", numIncomes).html("<span style='color: " + r.RESOURCE_AFFECT_MULTIPLIER_COLOR + "'>x" + m.beautify(resourceAffectMultiplier) + "</span>").addClass(rowStyle));
                                 } else {
@@ -294,7 +294,7 @@ SharkGame.Stats = {
         });
 
         if(specialMultiplierCol) {
-            var rowCount = incomesTable.find("tr").length;
+            const rowCount = incomesTable.find("tr").length;
             specialMultiplierCol.attr("rowspan", rowCount);
         }
 
@@ -302,9 +302,9 @@ SharkGame.Stats = {
     },
 
     createTotalAmountTable: function() {
-        var r = SharkGame.Resources;
-        var m = SharkGame.Main;
-        var totalAmountTable = $("#totalAmountTable");
+        const r = SharkGame.Resources;
+        const m = SharkGame.Main;
+        let totalAmountTable = $("#totalAmountTable");
         if(totalAmountTable.length === 0) {
             totalAmountTable = $("<table>").attr("id", "totalAmountTable");
         } else {
@@ -313,10 +313,10 @@ SharkGame.Stats = {
 
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0) {
-                var row = $('<tr>');
+                const row = $("<tr>");
 
-                row.append($('<td>').html(r.getResourceName(k)));
-                row.append($('<td>').html(m.beautify(r.getTotalResource(k))).attr("id", "totalAmount-" + k));
+                row.append($("<td>").html(r.getResourceName(k)));
+                row.append($("<td>").html(m.beautify(r.getTotalResource(k))).attr("id", "totalAmount-" + k));
 
                 totalAmountTable.append(row);
             }

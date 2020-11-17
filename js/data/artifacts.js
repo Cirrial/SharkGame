@@ -6,10 +6,10 @@ SharkGame.ArtifactUtil = {
         if(level < 1) {
             return;
         }
-        var amount = Math.pow(5, level);
+        const amount = Math.pow(5, level);
         // force existence
         SharkGame.World.forceExistence(resourceName);
-        var res = SharkGame.Resources.getTotalResource(resourceName);
+        const res = SharkGame.Resources.getTotalResource(resourceName);
         if(res < amount) {
             SharkGame.Resources.changeResource(resourceName, amount);
         }
@@ -21,8 +21,8 @@ SharkGame.ArtifactUtil = {
         if(level < 1) {
             return;
         }
-        var wr = SharkGame.World.worldResources;
-        var multiplier = level + 1;
+        const wr = SharkGame.World.worldResources;
+        const multiplier = level + 1;
         _.each(resourceList, function(resourceName) {
             if(wr[resourceName].artifactMultiplier) {
                 wr[resourceName].artifactMultiplier *= multiplier;
@@ -353,9 +353,9 @@ SharkGame.Artifacts = {
             if(level < 1) {
                 return;
             }
-            var resourceList = ["tar", "ice"];
-            var wr = SharkGame.World.worldResources;
-            var multiplier = 1 / (level + 1);
+            const resourceList = ["tar", "ice"];
+            const wr = SharkGame.World.worldResources;
+            const multiplier = 1 / (level + 1);
             _.each(resourceList, function(resourceName) {
                 if(wr[resourceName].artifactMultiplier) {
                     wr[resourceName].artifactMultiplier *= multiplier;

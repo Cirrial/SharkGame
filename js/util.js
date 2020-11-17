@@ -37,13 +37,13 @@ SharkGame.MathUtil = {
 
     // these need to be adapted probably?
     // will anything ever use these
-//    exponentialCost: function(a, b, k) {
-//        return (k * Math.pow()) - ();
-//    },
-//
-//    exponentialMax: function(a, b, k) {
-//        return Math.floor(Math.log(Math.pow(b,a) + (b-1) * b / k) / Math.log(a));
-//    }
+    // exponentialCost: function(a, b, k) {
+    //     return (k * Math.pow()) - ();
+    // },
+    //
+    // exponentialMax: function(a, b, k) {
+    //     return Math.floor(Math.log(Math.pow(b,a) + (b-1) * b / k) / Math.log(a));
+    // }
 
     // artificial limit - whatever has these functions for cost/max can only have one of)
     uniqueCost: function(a, b, k) {

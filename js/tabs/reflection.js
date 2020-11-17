@@ -17,7 +17,7 @@ SharkGame.Reflection = {
     "</br><span='medDesc'>Reflect upon the changes in yourself and reality you have made here.</span>",
 
     init: function() {
-        var r = SharkGame.Reflection;
+        const r = SharkGame.Reflection;
         // register tab
         SharkGame.Tabs[r.tabId] = {
             id: r.tabId,
@@ -29,12 +29,12 @@ SharkGame.Reflection = {
     },
 
     switchTo: function() {
-        var r = SharkGame.Reflection;
-        var content = $('#content');
-        content.append($('<div>').attr("id", "tabMessage"));
-        content.append($('<div>').attr("id", "artifactList"));
-        var message = r.message;
-        var tabMessageSel = $('#tabMessage');
+        const r = SharkGame.Reflection;
+        const content = $("#content");
+        content.append($("<div>").attr("id", "tabMessage"));
+        content.append($("<div>").attr("id", "artifactList"));
+        let message = r.message;
+        const tabMessageSel = $("#tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + r.sceneImage + "' id='tabSceneImageEssence'>" + message;
             tabMessageSel.css("background-image", "url('" + r.tabBg + "')");
@@ -49,13 +49,13 @@ SharkGame.Reflection = {
     },
 
     updateArtifactList: function() {
-        var m = SharkGame.Main;
-        var listSel = $('#artifactList');
+        const m = SharkGame.Main;
+        const listSel = $("#artifactList");
         $.each(SharkGame.Artifacts, function(artifactKey, artifactData) {
             if(artifactData.level > 0) {
-                var maxedOut = artifactData.level >= artifactData.max;
-                var item = $('<div>').addClass("artifactDiv");
-                var artifactLabel = artifactData.name +
+                const maxedOut = artifactData.level >= artifactData.max;
+                const item = $("<div>").addClass("artifactDiv");
+                let artifactLabel = artifactData.name +
                     "<br><span class='medDesc'>";
                 if(maxedOut) {
                     artifactLabel += "(Maximum Power)";
@@ -67,9 +67,9 @@ SharkGame.Reflection = {
                 item.append(artifactLabel);
                 listSel.append(item);
 
-                var spritename = "artifacts/" + artifactKey;
+                const spritename = "artifacts/" + artifactKey;
                 if(SharkGame.Settings.current.iconPositions !== "off") {
-                    var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-artifact");
+                    const iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-artifact");
                     if(iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                         iconDiv.addClass("gatewayButton");
@@ -78,7 +78,7 @@ SharkGame.Reflection = {
                 }
             }
         });
-        if($('#artifactList > div').length === 0) {
+        if($("#artifactList > div").length === 0) {
             listSel.append("<p><em>You have no artifacts to show.</em></p>");
         }
     }

@@ -104,7 +104,7 @@ SharkGame.Home = {
             unlock: {world: "frigid"},
             message: "So cold. The food supplies freeze quickly here. Too hard to chew.<br>&nbsp"
         },
-		
+
         // BANKED ESSENCE
         {
             unlock: {resource: {essence: 10}},
@@ -161,25 +161,25 @@ SharkGame.Home = {
             unlock: {world: "frigid", resource: {ice: 200}},
             message: "So cold. So hungry.<br><span class='smallDesc'>So hopeless.</span>"
         },
-		{
+        {
             unlock: {world: "ethereal"},
             message: "The water glows strangely.<br>It feels familiar."
         },
-		{
+        {
             unlock: {world: "abyssal"},
             message: "You can't tell up from down. It never ends.<br>Is this an ocean at all?"
         },
-		{
+        {
             unlock: {world: "stone"},
             message: "The cold, jagged seafloor looks ancient, yet pristine.<br>Sponges thrive in great numbers on the rocks."
         }
     ],
 
     init: function() {
-        var h = SharkGame.Home;
+        const h = SharkGame.Home;
 
         // rename home tab
-        var tabName = SharkGame.WorldTypes[SharkGame.World.worldType].name + " Ocean";
+        const tabName = SharkGame.WorldTypes[SharkGame.World.worldType].name + " Ocean";
         SharkGame.Home.tabName = tabName;
 
         // register tab
@@ -200,23 +200,23 @@ SharkGame.Home = {
     },
 
     switchTo: function() {
-        var h = SharkGame.Home;
-        var content = $('#content');
-        var tabMessage = $('<div>').attr("id", "tabMessage");
+        const h = SharkGame.Home;
+        const content = $("#content");
+        const tabMessage = $("<div>").attr("id", "tabMessage");
         content.append(tabMessage);
         h.currentExtraMessageIndex = -1;
         h.updateMessage(true);
         // button tabs
-        var buttonTabDiv = $('<div>').attr("id", "homeTabs");
+        const buttonTabDiv = $("<div>").attr("id", "homeTabs");
         content.append(buttonTabDiv);
         h.createButtonTabs();
         // help button
-        var helpButtonDiv = $('<div>');
+        const helpButtonDiv = $("<div>");
         helpButtonDiv.css({margin: "auto", clear: "both"});
         SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
         content.append(helpButtonDiv);
         // button list
-        var buttonList = $('<div>').attr("id", "buttonList");
+        const buttonList = $("<div>").attr("id", "buttonList");
         content.append(buttonList);
         if(SharkGame.Settings.current.buttonDisplayType === "pile") {
             buttonList.addClass("pileArrangement");
@@ -230,7 +230,7 @@ SharkGame.Home = {
     },
 
     discoverActions: function() {
-        var h = SharkGame.Home;
+        const h = SharkGame.Home;
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
             actionData.discovered = h.areActionPrereqsMet(actionName);
             actionData.newlyDiscovered = false;
@@ -238,17 +238,17 @@ SharkGame.Home = {
     },
 
     createButtonTabs: function() {
-        var buttonTabDiv = $('#homeTabs');
-        var buttonTabList = $('<ul>').attr("id", "homeTabsList");
+        const buttonTabDiv = $("#homeTabs");
+        const buttonTabList = $("<ul>").attr("id", "homeTabsList");
         buttonTabDiv.empty();
-        var tabAmount = 0;
+        let tabAmount = 0;
 
         // add a header for each discovered category
         // make it a link if it's not the current tab
         $.each(SharkGame.HomeActionCategories, function(k, v) {
-            var onThisTab = (SharkGame.Home.currentButtonTab === k);
+            const onThisTab = (SharkGame.Home.currentButtonTab === k);
 
-            var categoryDiscovered = false;
+            let categoryDiscovered = false;
             if(k === "all") {
                 categoryDiscovered = true;
             } else {
@@ -258,18 +258,18 @@ SharkGame.Home = {
             }
 
             if(categoryDiscovered) {
-                var tabListItem = $('<li>');
+                const tabListItem = $("<li>");
                 if(onThisTab) {
                     tabListItem.html(v.name);
                 } else {
-                    tabListItem.append($('<a>')
-                            .attr("id", "buttonTab-" + k)
-                            .attr("href", "javascript:;")
-                            .html(v.name)
-                            .click(function() {
-                                var tab = ($(this).attr("id")).split("-")[1];
-                                SharkGame.Home.changeButtonTab(tab);
-                            })
+                    tabListItem.append($("<a>")
+                        .attr("id", "buttonTab-" + k)
+                        .attr("href", "javascript:;")
+                        .html(v.name)
+                        .click(function() {
+                            const tab = ($(this).attr("id")).split("-")[1];
+                            SharkGame.Home.changeButtonTab(tab);
+                        })
                     );
                     if(v.hasNewItem) {
                         tabListItem.addClass("newItemAdded");
@@ -292,7 +292,7 @@ SharkGame.Home = {
             return;
         }
         SharkGame.HomeActionCategories[tabToUpdate].hasNewItem = true;
-        var tabItem = $('#buttonTab-' + tabToUpdate);
+        const tabItem = $("#buttonTab-" + tabToUpdate);
         if(tabItem.length > 0) {
             tabItem.parent().addClass("newItemAdded");
         } else {
@@ -301,7 +301,7 @@ SharkGame.Home = {
     },
 
     changeButtonTab: function(tabToChangeTo) {
-        var h = SharkGame.Home;
+        const h = SharkGame.Home;
         SharkGame.HomeActionCategories[tabToChangeTo].hasNewItem = false;
         if(tabToChangeTo === "all") {
             $.each(SharkGame.HomeActionCategories, function(k, v) {
@@ -309,18 +309,18 @@ SharkGame.Home = {
             })
         }
         h.currentButtonTab = tabToChangeTo;
-        $('#buttonList').empty();
+        $("#buttonList").empty();
         h.createButtonTabs();
     },
 
     updateMessage: function(suppressAnimation) {
-        var h = SharkGame.Home;
-        var r = SharkGame.Resources;
-        var u = SharkGame.Upgrades.getUpgradeTable();;
-        var wi = SharkGame.WorldTypes[SharkGame.World.worldType];
-        var selectedIndex = h.currentExtraMessageIndex;
+        const h = SharkGame.Home;
+        const r = SharkGame.Resources;
+        const u = SharkGame.Upgrades.getUpgradeTable();
+        const wi = SharkGame.WorldTypes[SharkGame.World.worldType];
+        let selectedIndex = h.currentExtraMessageIndex;
         $.each(h.extraMessages, function(i, v) {
-            var showThisMessage = true;
+            let showThisMessage = true;
             // check if should show this message
             if(v.unlock) {
                 if(v.unlock.resource) {
@@ -344,25 +344,26 @@ SharkGame.Home = {
         // only edit DOM if necessary
         if(h.currentExtraMessageIndex !== selectedIndex) {
             h.currentExtraMessageIndex = selectedIndex;
-            var tabMessage = $('#tabMessage');
+            const tabMessage = $("#tabMessage");
+            let sceneDiv;
             if(SharkGame.Settings.current.showTabImages) {
-                var sceneDiv = $('#tabSceneImage');
+                sceneDiv = $("#tabSceneImage");
                 if(sceneDiv.size() === 0) {
-                    sceneDiv = $('<div>').attr("id", "tabSceneImage");
+                    sceneDiv = $("<div>").attr("id", "tabSceneImage");
                 }
             }
-            var message = "You are a shark in a " + wi.shortDesc + " sea.";
+            let message = "You are a shark in a " + wi.shortDesc + " sea.";
             message += "<br><span id='extraMessage' class='medDesc'>&nbsp<br>&nbsp</span>";
             tabMessage.html(message).prepend(sceneDiv);
 
-            var extraMessageSel = $('#extraMessage');
+            const extraMessageSel = $("#extraMessage");
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
                 extraMessageSel.animate({opacity: 0}, 200, function() {
-                    var thisSel = $(this);
+                    const thisSel = $(this);
                     thisSel.animate({opacity: 1}, 200).html(h.extraMessages[selectedIndex].message);
                 });
                 sceneDiv.animate({opacity: 0}, 500, function() {
-                    var thisSel = $(this);
+                    const thisSel = $(this);
                     if(SharkGame.Settings.current.showTabImages) {
                         SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
                     }
@@ -378,17 +379,17 @@ SharkGame.Home = {
     },
 
     update: function() {
-        var h = SharkGame.Home;
-        var r = SharkGame.Resources;
-        var w = SharkGame.World;
+        const h = SharkGame.Home;
+        const r = SharkGame.Resources;
+        const w = SharkGame.World;
 
 
         // for each button entry in the home tab,
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
-            var actionTab = h.getActionCategory(actionName);
-            var onTab = (actionTab === h.currentButtonTab) || (h.currentButtonTab === "all");
+            const actionTab = h.getActionCategory(actionName);
+            const onTab = (actionTab === h.currentButtonTab) || (h.currentButtonTab === "all");
             if(onTab) {
-                var button = $('#' + actionName);
+                const button = $("#" + actionName);
                 if(button.length === 0) {
                     if(actionData.discovered || h.areActionPrereqsMet(actionName)) {
                         if(!actionData.discovered) {
@@ -417,19 +418,19 @@ SharkGame.Home = {
     },
 
     updateButton: function(actionName) {
-        var h = SharkGame.Home;
-        var r = SharkGame.Resources;
-        var amountToBuy = SharkGame.Settings.current.buyAmount;
+        const h = SharkGame.Home;
+        const r = SharkGame.Resources;
+        const amountToBuy = SharkGame.Settings.current.buyAmount;
 
-        var button = $('#' + actionName);
-        var actionData = SharkGame.HomeActions[actionName];
+        const button = $("#" + actionName);
+        const actionData = SharkGame.HomeActions[actionName];
 
-        var amount = amountToBuy;
-        var actionCost;
+        let amount = amountToBuy;
+        let actionCost;
         if(amountToBuy < 0) {
-            var max = Math.floor(h.getMax(actionData));
+            const max = Math.floor(h.getMax(actionData));
             // convert divisor from a negative number to a positive fraction
-            var divisor = 1 / (Math.floor((amountToBuy)) * -1);
+            const divisor = 1 / (Math.floor((amountToBuy)) * -1);
             amount = max * divisor;
             amount = Math.floor(amount);
             if(amount < 1) amount = 1;
@@ -438,20 +439,20 @@ SharkGame.Home = {
             actionCost = h.getCost(actionData, amountToBuy);
         }
         // disable button if resources can't be met
-        var enableButton;
+        let enableButton;
         if($.isEmptyObject(actionCost)) {
             enableButton = true; // always enable free buttons
         } else {
             enableButton = r.checkResources(actionCost);
         }
 
-        var label = actionData.name;
+        let label = actionData.name;
         if(!$.isEmptyObject(actionCost) && amount > 1) {
             label += " (" + SharkGame.Main.beautify(amount) + ")";
         }
 
         // check for any infinite quantities
-        var infinitePrice = false;
+        let infinitePrice = false;
         _.each(actionCost, function(num) {
             if(num === Number.POSITIVE_INFINITY) {
                 infinitePrice = true;
@@ -460,7 +461,7 @@ SharkGame.Home = {
         if(infinitePrice) {
             label += "<br>Maxed out";
         } else {
-            var costText = r.resourceListToString(actionCost, !enableButton);
+            const costText = r.resourceListToString(actionCost, !enableButton);
             if(costText != "") {
                 label += "<br>Cost: " + costText;
             }
@@ -475,13 +476,13 @@ SharkGame.Home = {
         button.html(label);
 
 
-        var spritename = "actions/" + actionName;
+        const spritename = "actions/" + actionName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-action");
+            const iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-action");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {
-                    button.prepend($('<div>').append(iconDiv).addClass("tint"));
+                    button.prepend($("<div>").append(iconDiv).addClass("tint"));
                 } else {
                     button.prepend(iconDiv);
                 }
@@ -490,10 +491,10 @@ SharkGame.Home = {
     },
 
     areActionPrereqsMet: function(actionName) {
-        var r = SharkGame.Resources;
-        var w = SharkGame.World;
-        var prereqsMet = true; // assume true until proven false
-        var action = SharkGame.HomeActions[actionName];
+        const r = SharkGame.Resources;
+        const w = SharkGame.World;
+        let prereqsMet = true; // assume true until proven false
+        const action = SharkGame.HomeActions[actionName];
         // check resource prerequisites
         if(action.prereq.resource) {
             prereqsMet = prereqsMet && r.checkResources(action.prereq.resource, true);
@@ -501,7 +502,7 @@ SharkGame.Home = {
         // check if resource cost exists
         if(action.cost) {
             $.each(action.cost, function(i, v) {
-                var costResource = v.resource;
+                const costResource = v.resource;
                 prereqsMet = prereqsMet && w.doesResourceExist(costResource);
             })
         }
@@ -509,22 +510,22 @@ SharkGame.Home = {
         if(action.prereq.world) {
             prereqsMet = prereqsMet && w.worldType === action.prereq.world;
         }
-		
-		// check the special worldtype exclusions
-		if(action.prereq.notWorlds) {
+
+        // check the special worldtype exclusions
+        if(action.prereq.notWorlds) {
             prereqsMet = prereqsMet && !(action.prereq.notWorlds.includes(w.worldType));
         }
-		
-		var ups = SharkGame.Upgrades.getUpgradeTable();
-		
+
+        const ups = SharkGame.Upgrades.getUpgradeTable();
+
         // check upgrade prerequisites
         if(action.prereq.upgrade) {
             $.each(action.prereq.upgrade, function(_, v) {
-				if(ups[v]) {
-					prereqsMet = prereqsMet && ups[v].purchased;
-				} else {
-					prereqsMet = false;
-				}
+                if(ups[v]) {
+                    prereqsMet = prereqsMet && ups[v].purchased;
+                } else {
+                    prereqsMet = false;
+                }
             });
         }
         // check if resulting resource exists
@@ -537,11 +538,11 @@ SharkGame.Home = {
     },
 
     addButton: function(actionName) {
-        var h = SharkGame.Home;
-        var buttonListSel = $('#buttonList');
-        var actionData = SharkGame.HomeActions[actionName];
+        const h = SharkGame.Home;
+        const buttonListSel = $("#buttonList");
+        const actionData = SharkGame.HomeActions[actionName];
 
-        var buttonSelector = SharkGame.Button.makeButton(actionName, actionData.name, buttonListSel, h.onHomeButton);
+        const buttonSelector = SharkGame.Button.makeButton(actionName, actionData.name, buttonListSel, h.onHomeButton);
         h.updateButton(actionName);
         if(SharkGame.Settings.current.showAnimations) {
             buttonSelector.hide()
@@ -555,7 +556,7 @@ SharkGame.Home = {
     },
 
     getActionCategory: function(actionName) {
-        var categoryName = "";
+        let categoryName = "";
         $.each(SharkGame.HomeActionCategories, function(categoryKey, categoryValue) {
             if(categoryName !== "") {
                 return;
@@ -573,23 +574,23 @@ SharkGame.Home = {
     },
 
     onHomeButton: function() {
-        var h = SharkGame.Home;
-        var r = SharkGame.Resources;
-        var amountToBuy = SharkGame.Settings.current.buyAmount;
+        const h = SharkGame.Home;
+        const r = SharkGame.Resources;
+        const amountToBuy = SharkGame.Settings.current.buyAmount;
         // get related entry in home button table
-        var button = $(this);
-        var buttonName = button.attr("id");
-        var action = SharkGame.HomeActions[buttonName];
-        var actionCost = {};
-        var amount = 0;
+        const button = $(this);
+        const buttonName = button.attr("id");
+        const action = SharkGame.HomeActions[buttonName];
+        let actionCost = {};
+        let amount = 0;
         if(amountToBuy < 0) {
             // unlimited mode, calculate the highest we can go
-            var max = h.getMax(action);
+            let max = h.getMax(action);
             // floor max
             max = Math.floor(max);
             if(max > 0) {
                 // convert divisor from a negative number to a positive fraction
-                var divisor = 1 / (Math.floor((amountToBuy)) * -1);
+                const divisor = 1 / (Math.floor((amountToBuy)) * -1);
                 amount = max * divisor;
                 // floor amount
                 amount = Math.floor(amount);
@@ -617,7 +618,7 @@ SharkGame.Home = {
                 r.changeManyResources(actionCost, true);
                 // execute effects
                 if(action.effect.resource) {
-                    var resourceChange;
+                    let resourceChange;
                     if(amount !== 1) {
                         resourceChange = r.scaleResourceList(action.effect.resource, amount);
                     } else {
@@ -644,34 +645,34 @@ SharkGame.Home = {
     },
 
     getCost: function(action, amount) {
-        var calcCost = {};
-        var rawCost = action.cost;
+        const calcCost = {};
+        const rawCost = action.cost;
 
         $.each(rawCost, function(i, v) {
-            var resource = SharkGame.PlayerResources[action.max];
-            var currAmount = resource.amount;
+            const resource = SharkGame.PlayerResources[action.max];
+            let currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, function(_, v) {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
-            var costFunction = v.costFunction;
-            var k = v.priceIncrease;
-            var cost = 0;
+            const costFunction = v.costFunction;
+            const k = v.priceIncrease;
+            let cost = 0;
             switch(costFunction) {
-                case "constant":
-                    cost = SharkGame.MathUtil.constantCost(currAmount, currAmount + amount, k);
-                    break;
-                case "linear":
-                    cost = SharkGame.MathUtil.linearCost(currAmount, currAmount + amount, k);
-                    break;
-                case "unique":
-                    cost = SharkGame.MathUtil.uniqueCost(currAmount, currAmount + amount, k);
-                    break;
+            case "constant":
+                cost = SharkGame.MathUtil.constantCost(currAmount, currAmount + amount, k);
+                break;
+            case "linear":
+                cost = SharkGame.MathUtil.linearCost(currAmount, currAmount + amount, k);
+                break;
+            case "unique":
+                cost = SharkGame.MathUtil.uniqueCost(currAmount, currAmount + amount, k);
+                break;
             }
-			if(Math.abs(cost - Math.round(cost)) < SharkGame.EPSILON) {
-				cost = Math.round(cost);
-			}
+            if(Math.abs(cost - Math.round(cost)) < SharkGame.EPSILON) {
+                cost = Math.round(cost);
+            }
             calcCost[v.resource] = cost;
         });
         return calcCost;
@@ -679,37 +680,37 @@ SharkGame.Home = {
 
 
     getMax: function(action) {
-        var max = 1;
+        let max = 1;
         if(action.max) {
-            var resource = SharkGame.PlayerResources[action.max];
-            var currAmount = resource.amount;
+            const resource = SharkGame.PlayerResources[action.max];
+            let currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, function(_, v) {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
             max = Number.MAX_VALUE;
-            var rawCost = action.cost;
+            const rawCost = action.cost;
             $.each(rawCost, function(_, v) {
-                var costResource = SharkGame.PlayerResources[v.resource];
+                const costResource = SharkGame.PlayerResources[v.resource];
 
-                var costFunction = v.costFunction;
-                var k = v.priceIncrease;
-                var subMax = -1;
+                const costFunction = v.costFunction;
+                const k = v.priceIncrease;
+                let subMax = -1;
                 switch(costFunction) {
-                    case "constant":
-                        subMax = SharkGame.MathUtil.constantMax(currAmount, costResource.amount, k) - currAmount;
-                        break;
-                    case "linear":
-                        subMax = SharkGame.MathUtil.linearMax(currAmount, costResource.amount, k) - currAmount;
-                        break;
-                    case "unique":
-                        subMax = SharkGame.MathUtil.uniqueMax(currAmount, costResource.amount, k) - currAmount;
-                        break;
+                case "constant":
+                    subMax = SharkGame.MathUtil.constantMax(currAmount, costResource.amount, k) - currAmount;
+                    break;
+                case "linear":
+                    subMax = SharkGame.MathUtil.linearMax(currAmount, costResource.amount, k) - currAmount;
+                    break;
+                case "unique":
+                    subMax = SharkGame.MathUtil.uniqueMax(currAmount, costResource.amount, k) - currAmount;
+                    break;
                 }
-				if(Math.abs(subMax - Math.round(subMax)) < SharkGame.EPSILON) {
-					subMax = Math.round(subMax);
-				}
+                if(Math.abs(subMax - Math.round(subMax)) < SharkGame.EPSILON) {
+                    subMax = Math.round(subMax);
+                }
                 max = Math.min(max, subMax);
             });
         }
