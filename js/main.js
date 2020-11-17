@@ -242,7 +242,7 @@ SharkGame.Main = {
     tickHandler: -1,
     autosaveHandler: -1,
 
-    beautify: function(number, suppressDecimals, debug) {
+    beautify: function(number, suppressDecimals, toPlaces) {
 
         let formatted;
 
@@ -279,10 +279,6 @@ SharkGame.Main = {
             // in case the highest supported suffix is not specified
             precision = Math.max(0, precision);
             const suffixIndex = Math.floor(digits / 3);
-            if(debug) {
-                alert(digits + " digits");
-                alert(precision + " precision");
-            }
 
             let suffix;
             if(suffixIndex >= suffixes.length) {
@@ -293,15 +289,22 @@ SharkGame.Main = {
                 if(suffixIndex > 0) {
                     number /= Math.pow(1000, suffixIndex);
                 }
+				let formattedNumber;
                 if(suffixIndex === 0) {
-                    formatted = (negative ? "-" : "") + Math.floor(number) + suffix;
+					if(toPlaces && (toPlaces - digits) > 0) {
+						formattedNumber = number.toFixed(toPlaces - digits);
+					} else {
+						formattedNumber = Math.floor(number);
+					}
                 } else if(suffixIndex > 0) {
-                    formatted = (negative ? "-" : "") + number.toFixed(precision) + suffix;
+                    formattedNumber = number.toFixed(precision) + suffix;
                 } else {
-                    formatted = (negative ? "-" : "") + number.toFixed(precision);
+                    formattedNumber = number.toFixed(precision);
                 }
+				formatted = (negative ? "-" : "") + formattedNumber;
             }
         }
+		
         return formatted;
     },
 

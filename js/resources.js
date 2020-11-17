@@ -390,7 +390,7 @@ SharkGame.Resources = {
                 const income = r.getIncome(k);
                 if(Math.abs(income) > SharkGame.EPSILON) {
                     const changeChar = income > 0 ? "+" : "";
-                    $("#income-" + k).html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
+                    $("#income-" + k).html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income,false,2) + "/s</span>");
                 } else {
                     $("#income-" + k).html("");
                 }
@@ -486,7 +486,7 @@ SharkGame.Resources = {
 
             if(Math.abs(income) > SharkGame.EPSILON) {
                 const changeChar = income > 0 ? "+" : "";
-                incomeId.html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income) + "/s</span>");
+                incomeId.html("<span style='color:" + r.INCOME_COLOR + "'>" + changeChar + m.beautify(income,false,2) + "/s</span>");
             }
         }
         return row;

@@ -59,7 +59,7 @@ SharkGame.WorldModifiers = {
         }
     },
     planetaryGeneratorRestriction: {
-        name: "Constant Planetary Income Multiplier",
+        name: "Restricted Generator-Income Combination",
         apply: function(resourceName, restriction) {
             const wrst = SharkGame.World.worldRestrictedCombinations;
             if(!wrst[resourceName]) {
