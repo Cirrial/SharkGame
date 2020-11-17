@@ -287,6 +287,7 @@ SharkGame.Recycler = {
 	updateEfficiency: function(resource, amount) {
 		var y = SharkGame.Recycler;
 		var buyN = SharkGame.Settings.current.buyAmount;
+		var evalue = 6;
 		
 		// no efficiency change if only eating up to 100
 		if(buyN > 0) {
@@ -294,13 +295,19 @@ SharkGame.Recycler = {
 			return;
 		}
 		
+		if(SharkGame.Upgrades.getUpgradeTable().superprocessing) {
+			if(SharkGame.Upgrades.getUpgradeTable().superprocessing.purchased) {
+				evalue = 8;
+			}
+		}
+		
 		if(amount) {
 			n = amount/(-buyN)
 			// check if the amount to eat is less than the threshold, currently 1 million
-			if(n < 1E6) {
+			if(n < Math.pow(10,evalue)) {
 				y.efficiency = 1;
 			} else {
-				y.efficiency = 1/(SharkGame.log10(n) - 5); //otherwise, scale back based purely on the number to process
+				y.efficiency = 1/(SharkGame.log10(n) - evalue + 1); //otherwise, scale back based purely on the number to process
 				// 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
 				// the system is more sensible, and people can get a feel for it easier if i make this change
 				// the amount that this effects things isn't crazy high either, so

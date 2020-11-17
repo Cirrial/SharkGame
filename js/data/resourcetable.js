@@ -477,7 +477,7 @@ SharkGame.ResourceTable = {
         income: {
             crystal: 100,
 			stone: 10,
-            tar: 0.00002
+            tar: 0.0002
         },
         value: 33500 //100 crystal 100 sand 25 sharkonium (3550)
     },
@@ -489,7 +489,7 @@ SharkGame.ResourceTable = {
         color: '#D6CF9F',
         income: {
             sand: 200,
-            tar: 0.00002
+            tar: 0.0002
         },
         value: 120000 //500 sand 150 sharkonium (12000)
     },
@@ -503,7 +503,7 @@ SharkGame.ResourceTable = {
             crystal: -50,
             sand: -150,
             sharkonium: 20,
-            tar: 0.00001
+            tar: 0.0001
         },
         value: 155000 //100 crystal 200 sharkonium (15500)
     },
@@ -515,7 +515,7 @@ SharkGame.ResourceTable = {
         color: '#C9C7A7',
         income: {
             fish: 500,
-            tar: 0.00001
+            tar: 0.0001
         },
         value: 70000 //100 sharkonium (7000)
     },
@@ -632,7 +632,7 @@ SharkGame.ResourceTable = {
         color: '#608B8F',
         income: {
             science: 15,
-            tar: 0.000001
+            tar: 0.00001
         },
         value: 50000
     },
@@ -645,7 +645,7 @@ SharkGame.ResourceTable = {
             delphinium: 10,
             coral: -150,
             crystal: -50,
-            tar: 0.000001
+            tar: 0.00001
         },
         value: 50000
     },
@@ -656,7 +656,7 @@ SharkGame.ResourceTable = {
         color: '#727887',
         income: {
             clam: 10,
-            tar: 0.0001
+            tar: 0.0008
         },
         value: 50000
     },
@@ -669,7 +669,7 @@ SharkGame.ResourceTable = {
             spronge: 30,
             sponge: -50,
             junk: -150,
-            tar: 0.0001
+            tar: 0.0008
         },
         value: 50000
     },
@@ -692,7 +692,7 @@ SharkGame.ResourceTable = {
         color: '#A39497',
         income: {
             coral: 30,
-            tar: 0.0001
+            tar: 0.0008
         },
         value: 50000
     },
@@ -703,7 +703,7 @@ SharkGame.ResourceTable = {
         color: '#836E5F',
         income: {
             octopus: 1,
-            tar: 0.0001
+            tar: 0.0008
         },
         value: 50000
     },

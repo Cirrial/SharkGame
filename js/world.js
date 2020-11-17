@@ -6,6 +6,13 @@ SharkGame.WorldModifiers = {
             wr[resourceName].income = level * amount;
         }
     },
+	planetaryConstantIncome: {
+        name: "Planetary Constant Income",
+        apply: function(level, resourceName, amount) {
+            var wr = SharkGame.World.worldResources;
+            wr[resourceName].income = amount;
+        }
+    },
     planetaryIncomeMultiplier: {
         name: "Planetary Income Multiplier",
         apply: function(level, resourceName, amount) {

@@ -587,7 +587,7 @@ SharkGame.Save = {
             _.each(["knowledge", "coalescer", "stone", "gravel", "prospector", "shoveler", "miller", "crusher", "pulverizer"], function(v) {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
-            _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear"], function(v) {
+            _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear", "superprocessing"], function(v) {
                 save.upgrades[v] = false;
             });
             return save;

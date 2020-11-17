@@ -151,6 +151,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: 0.01 },
+			{ type: "multiplier", modifier: "planetaryIncome", resource: "crab", amount: 0.01 },
 			{ type: "multiplier", modifier: "planetaryIncome", resource: "breeders", amount: 0.0005 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "animals", amount: -0.2 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "stuff", amount: -0.2 },
@@ -226,7 +227,7 @@ SharkGame.WorldTypes = {
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "stuff", amount: -0.1 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "crystal", amount: -0.02 },
-            { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: -0.005 },
+            { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: -0.001 },
 			{ type: "multiplier", modifier: "planetaryIncome", resource: "breeders", amount: -0.0005 },
 			{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "stuff", amount: 0.5 }
         ],
@@ -304,8 +305,8 @@ SharkGame.WorldTypes = {
             "whale"
         ],
         modifiers: [
-            { type: "multiplier", modifier: "planetaryIncome", resource: "tar", amount: 0.02 },
-			{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "tar", amount: 0.1 },
+            { type: "multiplier", modifier: "planetaryConstantIncome", resource: "tar", amount: 0.01 },
+			{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "tar", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "sandDigger", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "fishMachine", amount: 1 },
