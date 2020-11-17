@@ -471,7 +471,8 @@ SharkGame.HomeActions = {
         name: "Forge sponge into spronge",
         effect: {
             resource: {
-                spronge: 1
+                spronge: 1,
+				tar: 0.001
             }
         },
         cost: [

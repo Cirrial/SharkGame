@@ -669,6 +669,9 @@ SharkGame.Home = {
                     cost = SharkGame.MathUtil.uniqueCost(currAmount, currAmount + amount, k);
                     break;
             }
+			if(Math.abs(cost - Math.round(cost)) < SharkGame.EPSILON) {
+				cost = Math.round(cost);
+			}
             calcCost[v.resource] = cost;
         });
         return calcCost;

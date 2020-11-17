@@ -241,9 +241,15 @@ SharkGame.Main = {
     tickHandler: -1,
     autosaveHandler: -1,
 
-    beautify: function(number, suppressDecimals, places) {
+    beautify: function(number, suppressDecimals, debug) {
 
         var formatted;
+		
+		var negative = false;
+        if(number < 0) {
+			negative = true;
+            number *= -1;
+        }
 
         if(number === Number.POSITIVE_INFINITY) {
             formatted = "infinite";
@@ -251,29 +257,38 @@ SharkGame.Main = {
             if(suppressDecimals) {
                 formatted = "0";
             } else {
-                if(number > 0.001) {
-                    formatted = number.toFixed(2) + "";
-                } else {
-                    if(number > 0.0001) {
-                        formatted = number.toFixed(3) + "";
-                    } else {
-                        formatted = 0;
-                    }
-                }
+				if(number >= 0.01) {
+					formatted = number.toFixed(2) + "";
+				} else {
+					if(number >= 0.001) {
+						formatted = number.toFixed(3) + "";
+					} else {
+						if(number >= 0.0001) {
+							formatted = number.toFixed(4) + "";
+						} else {
+							if(number > 0.00001 && negative) {
+								formatted = number.toFixed(5) + "";
+							} else {
+								formatted = 0;
+							}
+						}
+					}
+				}
             }
+			if(negative) {
+				formatted = "-" + formatted;
+			}
         } else {
-            var negative = false;
-            if(number < 0) {
-                negative = true;
-                number *= -1;
-            }
             var suffixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc"];
             var digits = Math.floor(SharkGame.log10(number));
-            var precision = 2 - (Math.floor(SharkGame.log10(number)) % 3);
+            var precision = 2 - (digits % 3);
             // in case the highest supported suffix is not specified
             precision = Math.max(0, precision);
             var suffixIndex = Math.floor(digits / 3);
-
+			if(debug) {
+				alert(digits + " digits");
+				alert(precision + " precision");
+			}
 
             var suffix;
             if(suffixIndex >= suffixes.length) {
