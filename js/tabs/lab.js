@@ -21,7 +21,7 @@ SharkGame.Lab = {
 
 
     init: function() {
-        var l = SharkGame.Lab;
+        const l = SharkGame.Lab;
         // register tab
         SharkGame.Tabs[l.tabId] = {
             id: l.tabId,
@@ -30,9 +30,9 @@ SharkGame.Lab = {
             discoverReq: l.discoverReq,
             code: l
         };
-		
-		var ups = SharkGame.Upgrades.getUpgradeTable();
-		
+
+        const ups = SharkGame.Upgrades.getUpgradeTable();
+
         // add default purchased state to each upgrade
         $.each(ups, function(k, v) {
             ups[k].purchased = false;
@@ -40,41 +40,41 @@ SharkGame.Lab = {
     },
 
     switchTo: function() {
-        var l = SharkGame.Lab;
-        var content = $('#content');
+        const l = SharkGame.Lab;
+        const content = $("#content");
 
-        var allResearchDone = l.allResearchDone();
-        var message = allResearchDone ? l.messageDone : l.message;
-        var imgSrc = allResearchDone ? l.sceneDoneImage : l.sceneImage;
-        var tabMessageSel = $('<div>').attr("id", "tabMessage");
+        const allResearchDone = l.allResearchDone();
+        let message = allResearchDone ? l.messageDone : l.message;
+        const imgSrc = allResearchDone ? l.sceneDoneImage : l.sceneImage;
+        const tabMessageSel = $("<div>").attr("id", "tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + imgSrc + "' id='tabSceneImage'>" + message;
             tabMessageSel.css("background-image", "url('" + l.tabBg + "')");
         }
         tabMessageSel.html(message);
         content.append(tabMessageSel);
-        var buttonListContainer = $('<div>').attr("id", "buttonLeftContainer");
-        buttonListContainer.append($('<div>').attr("id", "buttonList").append($("<h3>").html("Available Upgrades")));
+        const buttonListContainer = $("<div>").attr("id", "buttonLeftContainer");
+        buttonListContainer.append($("<div>").attr("id", "buttonList").append($("<h3>").html("Available Upgrades")));
         content.append(buttonListContainer);
-        content.append($('<div>').attr("id", "upgradeList"));
-        content.append($('<div>').addClass("clear-fix"));
+        content.append($("<div>").attr("id", "upgradeList"));
+        content.append($("<div>").addClass("clear-fix"));
 
 
         l.updateUpgradeList();
         if(allResearchDone) {
-            $('#buttonList').append($('<p>').html("All clear here!"));
+            $("#buttonList").append($("<p>").html("All clear here!"));
         }
     },
 
     update: function() {
-        var l = SharkGame.Lab;
+        const l = SharkGame.Lab;
 
 
         // cache a selector
-        var buttonList = $('#buttonList');
-		
-		var ups = SharkGame.Upgrades.getUpgradeTable();
-		
+        const buttonList = $("#buttonList");
+
+        const ups = SharkGame.Upgrades.getUpgradeTable();
+
         // for each upgrade not yet bought
         $.each(ups, function(key, value) {
             if(value.purchased) {
@@ -82,10 +82,10 @@ SharkGame.Lab = {
             }
 
             // check if a button exists
-            var button = $('#' + key);
+            const button = $("#" + key);
             if(button.length === 0) {
                 // add it if prequisite upgrades have been completed
-                var prereqsMet = true; // assume true until proven false
+                let prereqsMet = true; // assume true until proven false
 
                 // check upgrade prerequisites
                 if(value.required) {
@@ -105,8 +105,8 @@ SharkGame.Lab = {
                 }
                 if(prereqsMet) {
                     // add button
-                    var effects = SharkGame.Lab.getResearchEffects(value);
-                    var buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
+                    const effects = SharkGame.Lab.getResearchEffects(value);
+                    const buttonSelector = SharkGame.Button.makeButton(key, value.name + "<br/>" + value.desc + "<br/>" + effects, buttonList, l.onLabButton);
                     l.updateLabButton(key);
                     if(SharkGame.Settings.current.showAnimations) {
                         buttonSelector.hide()
@@ -123,35 +123,35 @@ SharkGame.Lab = {
     },
 
     updateLabButton: function(upgradeName) {
-        var r = SharkGame.Resources;
-        var button = $('#' + upgradeName);
-		var ups = SharkGame.Upgrades.getUpgradeTable();
-        var upgradeData = ups[upgradeName];
-        var upgradeCost = upgradeData.cost;
+        const r = SharkGame.Resources;
+        const button = $("#" + upgradeName);
+        const ups = SharkGame.Upgrades.getUpgradeTable();
+        const upgradeData = ups[upgradeName];
+        const upgradeCost = upgradeData.cost;
 
 
-        var enableButton;
+        let enableButton;
         if($.isEmptyObject(upgradeCost)) {
             enableButton = true; // always enable free buttons
         } else {
             enableButton = r.checkResources(upgradeCost);
         }
 
-        var effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
-        var label = upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
-        var costText = r.resourceListToString(upgradeCost, !enableButton);
+        const effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
+        let label = upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
+        const costText = r.resourceListToString(upgradeCost, !enableButton);
         if(costText != "") {
             label += "<br/>Cost: " + costText;
         }
         button.prop("disabled", !enableButton).html(label);
 
-        var spritename = "technologies/" + upgradeName;
+        const spritename = "technologies/" + upgradeName;
         if(SharkGame.Settings.current.iconPositions !== "off") {
-            var iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-technology");
+            const iconDiv = SharkGame.changeSprite(SharkGame.spriteIconPath, spritename, null, "general/missing-technology");
             if(iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
                 if(!enableButton) {
-                    button.prepend($('<div>').append(iconDiv).addClass("tint"));
+                    button.prepend($("<div>").append(iconDiv).addClass("tint"));
                 } else {
                     button.prepend(iconDiv);
                 }
@@ -160,18 +160,18 @@ SharkGame.Lab = {
     },
 
     onLabButton: function() {
-        var r = SharkGame.Resources;
-        var l = SharkGame.Lab;
-        var u = SharkGame.Upgrades.getUpgradeTable();
+        const r = SharkGame.Resources;
+        const l = SharkGame.Lab;
+        const u = SharkGame.Upgrades.getUpgradeTable();
 
-        var upgradeId = $(this).attr("id");
-        var upgrade = u[upgradeId];
+        const upgradeId = $(this).attr("id");
+        const upgrade = u[upgradeId];
         if(upgrade.purchased) {
             $(this).remove();
             return; // something went wrong don't even pay attention to this function
         }
 
-        var upgradeCost = u[upgradeId].cost;
+        const upgradeCost = u[upgradeId].cost;
 
         if(r.checkResources(upgradeCost)) {
             // kill button
@@ -190,10 +190,10 @@ SharkGame.Lab = {
     },
 
     addUpgrade: function(upgradeId) {
-        var l = SharkGame.Lab;
-        var r = SharkGame.Resources;
-        var u = SharkGame.Upgrades.getUpgradeTable();
-        var upgrade = u[upgradeId];
+        const l = SharkGame.Lab;
+        const r = SharkGame.Resources;
+        const u = SharkGame.Upgrades.getUpgradeTable();
+        const upgrade = u[upgradeId];
         if(upgrade) {
             if(!upgrade.purchased) {
                 upgrade.purchased = true;
@@ -203,7 +203,7 @@ SharkGame.Lab = {
                 if(upgrade.effect) {
                     if(upgrade.effect.multiplier) {
                         $.each(upgrade.effect.multiplier, function(k, v) {
-                            var newMultiplier = v * r.getMultiplier(k);
+                            const newMultiplier = v * r.getMultiplier(k);
                             r.setMultiplier(k, newMultiplier)
                         });
                     }
@@ -213,9 +213,9 @@ SharkGame.Lab = {
     },
 
     allResearchDone: function() {
-        var u = SharkGame.Upgrades.getUpgradeTable();
-        var l = SharkGame.Lab;
-        var allDone = true;
+        const u = SharkGame.Upgrades.getUpgradeTable();
+        const l = SharkGame.Lab;
+        let allDone = true;
         $.each(u, function(k, v) {
             if(l.isUpgradePossible(k)) {
                 allDone = allDone && v.purchased;
@@ -225,30 +225,30 @@ SharkGame.Lab = {
     },
 
     isUpgradePossible: function(upgradeName) {
-        var w = SharkGame.World;
-        var l = SharkGame.Lab;
-		var ups = SharkGame.Upgrades.getUpgradeTable();
-        var upgradeData = ups[upgradeName];
-        var isPossible = true;
-		
-		if(!upgradeData){
-			return false;
-		}
+        const w = SharkGame.World;
+        const l = SharkGame.Lab;
+        const ups = SharkGame.Upgrades.getUpgradeTable();
+        const upgradeData = ups[upgradeName];
+        let isPossible = true;
+
+        if(!upgradeData){
+            return false;
+        }
 
         if(upgradeData.required) {
-			// MODDED
-			// if this upgrade is restricted to certain worlds,
-			// check that the worldtype is acceptable for this upgrade to appear
-			if(upgradeData.required.worlds) {
-				isPossible = isPossible && (upgradeData.required.worlds.includes(SharkGame.World.worldType))
-			}
-			if(upgradeData.required.notWorlds) {
-				isPossible = isPossible && !(upgradeData.required.notWorlds.includes(SharkGame.World.worldType))
-			}
+            // MODDED
+            // if this upgrade is restricted to certain worlds,
+            // check that the worldtype is acceptable for this upgrade to appear
+            if(upgradeData.required.worlds) {
+                isPossible = isPossible && (upgradeData.required.worlds.includes(SharkGame.World.worldType))
+            }
+            if(upgradeData.required.notWorlds) {
+                isPossible = isPossible && !(upgradeData.required.notWorlds.includes(SharkGame.World.worldType))
+            }
             if(upgradeData.required.resources) {
                 // check if any related resources exist in the world for this to make sense
                 // unlike the costs where all resources in the cost must exist, this is an either/or scenario
-                var relatedResourcesExist = false;
+                let relatedResourcesExist = false;
                 _.each(upgradeData.required.resources, function(v) {
                     relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
                 });
@@ -260,7 +260,7 @@ SharkGame.Lab = {
                     isPossible = isPossible && l.isUpgradePossible(v);
                 });
             }
-			
+
             // check existence of resource cost
             // this is the final check, everything that was permitted previously will be made false
             $.each(upgradeData.cost, function(k, v) {
@@ -272,21 +272,21 @@ SharkGame.Lab = {
     },
 
     getResearchEffects: function(upgrade, darken) {
-        var effects = "<span class='medDesc' class='click-passthrough'>(Effects: ";
+        let effects = "<span class='medDesc' class='click-passthrough'>(Effects: ";
         if(upgrade.effect) {
             if(upgrade.effect.multiplier) {
-				var anyeffects = false;
+                let anyeffects = false;
                 $.each(upgrade.effect.multiplier, function(k, v) {
                     if(SharkGame.World.doesResourceExist(k)) {
                         effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
-						anyeffects = true;
+                        anyeffects = true;
                     }
                 });
-				if(anyeffects) {
-					effects = effects.slice(0, -2); // remove trailing suffix
-				} else {
-					effects += "???"
-				}
+                if(anyeffects) {
+                    effects = effects.slice(0, -2); // remove trailing suffix
+                } else {
+                    effects += "???"
+                }
             }
         } else {
             effects += "???";
@@ -296,15 +296,15 @@ SharkGame.Lab = {
     },
 
     updateUpgradeList: function() {
-        var u = SharkGame.Upgrades.getUpgradeTable();
-        var upgradeList = $('#upgradeList');
+        const u = SharkGame.Upgrades.getUpgradeTable();
+        const upgradeList = $("#upgradeList");
         upgradeList.empty();
         upgradeList.append($("<h3>").html("Researched Upgrades"));
-        var list = $('<ul>');
+        const list = $("<ul>");
         $.each(u, function(k, v) {
             if(v.purchased) {
                 list.append($("<li>")
-                        .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")
+                    .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")
                 );
             }
         });

@@ -343,7 +343,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"actions/catchMoreFish":
+    "actions/catchMoreFish":
     {
         "frame": {"x":2,"y":104,"w":50,"h":50},
         "rotated": false,
@@ -460,7 +460,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"actions/getEel":
+    "actions/getEel":
     {
         "frame": {"x":1718,"y":50,"w":50,"h":50},
         "rotated": false,
@@ -523,7 +523,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"actions/stoneGetMaker":
+    "actions/stoneGetMaker":
     {
         "frame": {"x":920,"y":2,"w":50,"h":50},
         "rotated": false,
@@ -550,7 +550,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"actions/getOctopus":
+    "actions/getOctopus":
     {
         "frame": {"x":1718,"y":0,"w":50,"h":50},
         "rotated": false,
@@ -685,7 +685,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"actions/stonePrySponge":
+    "actions/stonePrySponge":
     {
         "frame": {"x":1198,"y":54,"w":50,"h":50},
         "rotated": false,
@@ -892,7 +892,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-	"technologies/crystalShovel":
+    "technologies/crystalShovel":
     {
         "frame": {"x":1440,"y":2,"w":50,"h":50},
         "rotated": false,

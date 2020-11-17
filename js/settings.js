@@ -117,7 +117,7 @@ SharkGame.Settings = {
             "50%"
         ],
         onChange: function() {
-            var sidebar = $('#sidebar');
+            const sidebar = $("#sidebar");
             if(SharkGame.Settings.current.showAnimations) {
                 sidebar.animate({width: SharkGame.Settings.current.sidebarWidth}, "100");
             } else {

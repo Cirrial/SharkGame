@@ -46,13 +46,13 @@ SharkGame.Recycler = {
         "junk",
         "science",
         "seaApple",
-		"coalescer"
+        "coalescer"
     ],
-	
-	efficiency: "NA",
+
+    efficiency: "NA",
 
     init: function() {
-        var y = SharkGame.Recycler;
+        const y = SharkGame.Recycler;
         // register tab
         SharkGame.Tabs[y.tabId] = {
             id: y.tabId,
@@ -64,18 +64,18 @@ SharkGame.Recycler = {
     },
 
     switchTo: function() {
-        var y = SharkGame.Recycler;
-        var m = SharkGame.Main;
-        var content = $('#content');
-        content.append($('<div>').attr("id", "tabMessage"));
-        var container = $('<div>').attr("id", "recyclerContainer");
-        container.append($('<div>').attr("id", "inputButtons"));
-        container.append($('<div>').attr("id", "junkDisplay"));
-        container.append($('<div>').attr("id", "outputButtons"));
+        const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
+        const content = $("#content");
+        content.append($("<div>").attr("id", "tabMessage"));
+        const container = $("<div>").attr("id", "recyclerContainer");
+        container.append($("<div>").attr("id", "inputButtons"));
+        container.append($("<div>").attr("id", "junkDisplay"));
+        container.append($("<div>").attr("id", "outputButtons"));
         content.append(container);
-        content.append($('<div>').addClass("clear-fix"));
-        var message = y.message;
-        var tabMessageSel = $('#tabMessage');
+        content.append($("<div>").addClass("clear-fix"));
+        let message = y.message;
+        const tabMessageSel = $("#tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + y.sceneImage + "' id='tabSceneImageRed'>" + message;
             tabMessageSel.css("background-image", "url('" + y.tabBg + "')");
@@ -87,41 +87,41 @@ SharkGame.Recycler = {
     },
 
     update: function() {
-        var y = SharkGame.Recycler;
+        const y = SharkGame.Recycler;
 
         y.updateJunkDisplay();
         y.updateButtons();
     },
 
     updateJunkDisplay: function() {
-        var r = SharkGame.Resources;
-        var y = SharkGame.Recycler;
-        var m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
 
-        var junkAmount = r.getResource("junk");
+        const junkAmount = r.getResource("junk");
 
-        var junkDisplay = $('#junkDisplay');
+        const junkDisplay = $("#junkDisplay");
         junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(junkAmount) + "<br/><br/>RESIDUE<br/><br/>" + y.getRecyclerEfficiencyString());
     },
 
     updateButtons: function() {
-        var r = SharkGame.Resources;
-        var y = SharkGame.Recycler;
-        var m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0) {
-                var inputButton = $('#input-' + k);
-                var outputButton = $('#output-' + k);
-                var resourceAmount = r.getResource(k);
+                const inputButton = $("#input-" + k);
+                const outputButton = $("#output-" + k);
+                const resourceAmount = r.getResource(k);
 
                 // determine amounts for input and what would be retrieved from output
-                var selectedAmount = SharkGame.Settings.current.buyAmount;
-                var forceSingular = selectedAmount === 1;
-                var inputAmount = selectedAmount;
-                var outputAmount = selectedAmount;
-                var maxOutputAmount = y.getMaxToBuy(k);
+                const selectedAmount = SharkGame.Settings.current.buyAmount;
+                const forceSingular = selectedAmount === 1;
+                let inputAmount = selectedAmount;
+                let outputAmount = selectedAmount;
+                const maxOutputAmount = y.getMaxToBuy(k);
                 if(selectedAmount < 0) {
-                    var divisor = Math.floor(selectedAmount) * -1;
+                    const divisor = Math.floor(selectedAmount) * -1;
                     inputAmount = resourceAmount / divisor;
                     outputAmount = maxOutputAmount / divisor;
 
@@ -130,8 +130,8 @@ SharkGame.Recycler = {
                 }
 
                 // update input button
-                var disableButton = (resourceAmount < inputAmount) || (inputAmount <= 0);
-                var label = "Recycle ";
+                let disableButton = (resourceAmount < inputAmount) || (inputAmount <= 0);
+                let label = "Recycle ";
                 if(inputAmount > 0) {
                     label += m.beautify(inputAmount) + " ";
                 }
@@ -151,11 +151,11 @@ SharkGame.Recycler = {
     },
 
     createButtons: function() {
-        var r = SharkGame.Resources;
-        var y = SharkGame.Recycler;
-        var m = SharkGame.Main;
-        var inputButtonDiv = $('#inputButtons');
-        var outputButtonDiv = $('#outputButtons');
+        const r = SharkGame.Resources;
+        const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
+        const inputButtonDiv = $("#inputButtons");
+        const outputButtonDiv = $("#outputButtons");
         $.each(SharkGame.ResourceTable, function(k, v) {
             if(r.getTotalResource(k) > 0
                 && y.allowedCategories[r.getCategoryOfResource(k)]
@@ -167,18 +167,18 @@ SharkGame.Recycler = {
     },
 
     onInput: function() {
-        var r = SharkGame.Resources;
-        var l = SharkGame.Log;
-        var y = SharkGame.Recycler;
-        var button = $(this);
-        var resourceName = button.attr("id").split("-")[1];
-        var resourceAmount = r.getResource(resourceName);
-        var junkPerResource = SharkGame.ResourceTable[resourceName].value;
+        const r = SharkGame.Resources;
+        const l = SharkGame.Log;
+        const y = SharkGame.Recycler;
+        const button = $(this);
+        const resourceName = button.attr("id").split("-")[1];
+        const resourceAmount = r.getResource(resourceName);
+        const junkPerResource = SharkGame.ResourceTable[resourceName].value;
 
-        var selectedAmount = SharkGame.Settings.current.buyAmount;
-        var amount = selectedAmount;
+        const selectedAmount = SharkGame.Settings.current.buyAmount;
+        let amount = selectedAmount;
         if(selectedAmount < 0) {
-            var divisor = Math.floor(selectedAmount) * -1;
+            const divisor = Math.floor(selectedAmount) * -1;
             amount = resourceAmount / divisor;
             amount = Math.floor(amount);
         }
@@ -191,35 +191,35 @@ SharkGame.Recycler = {
         } else {
             l.addMessage("You don't have enough for that!");
         }
-		
-		y.updateEfficiency(resourceName, r.getResource(resourceName));
-		
+
+        y.updateEfficiency(resourceName, r.getResource(resourceName));
+
         // disable button until next frame
         button.prop("disabled", true);
-		
-		
+
+
     },
 
     onOutput: function() {
-        var r = SharkGame.Resources;
-        var l = SharkGame.Log;
-        var y = SharkGame.Recycler;
-        var button = $(this);
-        var resourceName = button.attr("id").split("-")[1];
-        var junkAmount = r.getResource("junk");
-        var junkPerResource = SharkGame.ResourceTable[resourceName].value;
+        const r = SharkGame.Resources;
+        const l = SharkGame.Log;
+        const y = SharkGame.Recycler;
+        const button = $(this);
+        const resourceName = button.attr("id").split("-")[1];
+        const junkAmount = r.getResource("junk");
+        const junkPerResource = SharkGame.ResourceTable[resourceName].value;
 
-        var selectedAmount = SharkGame.Settings.current.buyAmount;
-        var amount = selectedAmount;
+        const selectedAmount = SharkGame.Settings.current.buyAmount;
+        let amount = selectedAmount;
         if(selectedAmount < 0) {
-            var divisor = Math.floor(selectedAmount) * -1;
+            const divisor = Math.floor(selectedAmount) * -1;
             amount = y.getMaxToBuy(resourceName) / divisor;
         }
 
-        var currentResourceAmount = r.getResource(resourceName);
-        var junkNeeded;
+        const currentResourceAmount = r.getResource(resourceName);
+        let junkNeeded;
 
-        var costFunction = y.allowedCategories[r.getCategoryOfResource(resourceName)];
+        const costFunction = y.allowedCategories[r.getCategoryOfResource(resourceName)];
         if(costFunction === "linear") {
             junkNeeded = SharkGame.MathUtil.linearCost(currentResourceAmount, currentResourceAmount + amount, junkPerResource);
         } else if(costFunction === "constant") {
@@ -239,15 +239,15 @@ SharkGame.Recycler = {
     },
 
     getMaxToBuy: function(resource) {
-        var r = SharkGame.Resources;
-        var y = SharkGame.Recycler;
-        var resourceAmount = SharkGame.Resources.getResource(resource);
-        var junkAmount = SharkGame.Resources.getResource("junk");
-        var junkPricePerResource = SharkGame.ResourceTable[resource].value;
-        var category = r.getCategoryOfResource(resource);
-        var max = 0;
+        const r = SharkGame.Resources;
+        const y = SharkGame.Recycler;
+        const resourceAmount = SharkGame.Resources.getResource(resource);
+        const junkAmount = SharkGame.Resources.getResource("junk");
+        const junkPricePerResource = SharkGame.ResourceTable[resource].value;
+        const category = r.getCategoryOfResource(resource);
+        let max = 0;
         if(y.allowedCategories[category]) {
-            var costFunction = y.allowedCategories[category];
+            const costFunction = y.allowedCategories[category];
             if(costFunction === "linear") {
                 max = SharkGame.MathUtil.linearMax(resourceAmount, junkAmount, junkPricePerResource) - resourceAmount;
             } else if(costFunction === "constant") {
@@ -256,64 +256,64 @@ SharkGame.Recycler = {
         }
         return Math.floor(max);
     },
-	
-	onInputHover: function() {
-        var button = $(this);
-        var resource = button.attr("id").split("-")[1];
-        var amount = SharkGame.Resources.getResource(resource);
-		SharkGame.Recycler.updateEfficiency(resource, amount);
-	},
-	
-	onInputUnhover: function() {
-		SharkGame.Recycler.efficiency = "NA";
-	},
-	
-	getRecyclerEfficiencyString: function() {
-		var y = SharkGame.Recycler;
-		if(y.efficiency === "NA") {
-			return "<br/><br/>";
-		}
-		return ((y.getEfficiency()*100).toFixed(2)).toString().bold() + "<b>%<br/>EFFICIENY</b>";
-	},
-	
-	getEfficiency: function() {
-		var y = SharkGame.Recycler;
-		if(y.efficiency === "NA") {
-			return 1;
-		}
-		return y.efficiency.toFixed(4);
-	},
-	
-	updateEfficiency: function(resource, amount) {
-		var y = SharkGame.Recycler;
-		var buyN = SharkGame.Settings.current.buyAmount;
-		var evalue = 6;
-		
-		// no efficiency change if only eating up to 100
-		if(buyN > 0) {
-			y.efficiency = 1;
-			return;
-		}
-		
-		if(SharkGame.Upgrades.getUpgradeTable().superprocessing) {
-			if(SharkGame.Upgrades.getUpgradeTable().superprocessing.purchased) {
-				evalue = 8;
-			}
-		}
-		
-		if(amount) {
-			n = amount/(-buyN)
-			// check if the amount to eat is less than the threshold, currently 1 million
-			if(n < Math.pow(10,evalue)) {
-				y.efficiency = 1;
-			} else {
-				y.efficiency = 1/(SharkGame.log10(n) - evalue + 1); //otherwise, scale back based purely on the number to process
-				// 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
-				// the system is more sensible, and people can get a feel for it easier if i make this change
-				// the amount that this effects things isn't crazy high either, so
-			}
-		} else {
-			y.efficiency = 1;
-		}
-	}
+
+    onInputHover: function() {
+        const button = $(this);
+        const resource = button.attr("id").split("-")[1];
+        const amount = SharkGame.Resources.getResource(resource);
+        SharkGame.Recycler.updateEfficiency(resource, amount);
+    },
+
+    onInputUnhover: function() {
+        SharkGame.Recycler.efficiency = "NA";
+    },
+
+    getRecyclerEfficiencyString: function() {
+        const y = SharkGame.Recycler;
+        if(y.efficiency === "NA") {
+            return "<br/><br/>";
+        }
+        return ((y.getEfficiency()*100).toFixed(2)).toString().bold() + "<b>%<br/>EFFICIENY</b>";
+    },
+
+    getEfficiency: function() {
+        const y = SharkGame.Recycler;
+        if(y.efficiency === "NA") {
+            return 1;
+        }
+        return y.efficiency.toFixed(4);
+    },
+
+    updateEfficiency: function(resource, amount) {
+        const y = SharkGame.Recycler;
+        const buyN = SharkGame.Settings.current.buyAmount;
+        let evalue = 6;
+
+        // no efficiency change if only eating up to 100
+        if(buyN > 0) {
+            y.efficiency = 1;
+            return;
+        }
+
+        if(SharkGame.Upgrades.getUpgradeTable().superprocessing) {
+            if(SharkGame.Upgrades.getUpgradeTable().superprocessing.purchased) {
+                evalue = 8;
+            }
+        }
+
+        if(amount) {
+            const n = amount/(-buyN)
+            // check if the amount to eat is less than the threshold, currently 1 million
+            if(n < Math.pow(10,evalue)) {
+                y.efficiency = 1;
+            } else {
+                y.efficiency = 1/(SharkGame.log10(n) - evalue + 1); //otherwise, scale back based purely on the number to process
+                // 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
+                // the system is more sensible, and people can get a feel for it easier if i make this change
+                // the amount that this effects things isn't crazy high either, so
+            }
+        } else {
+            y.efficiency = 1;
+        }
+    }
 };
