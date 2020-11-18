@@ -27,7 +27,9 @@ $.extend(SharkGame, {
         "Strange Oceans",
         "A New Frontier",
         "Lobster's Paradise",
-        "Revenge of the Crabs"
+        "Revenge of the Crabs",
+		"Shark Box",
+		"Dolphin Heroes"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
@@ -291,7 +293,7 @@ SharkGame.Main = {
                 }
 				let formattedNumber;
                 if(suffixIndex === 0) {
-					if(toPlaces && (toPlaces - digits) > 0) {
+					if(toPlaces && (toPlaces - digits) > 0 && number !== Math.floor(number)) {
 						formattedNumber = number.toFixed(toPlaces - digits);
 					} else {
 						formattedNumber = Math.floor(number);

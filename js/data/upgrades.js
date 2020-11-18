@@ -774,8 +774,8 @@ SharkGame.Upgrades = {
             researchedMessage: "The technically inclined electric eels practically jumped out of the water at the chance to work with the machines. Should we be concerned?",
             effectDesc: "Eel technicians are twice as effective. So are our machines. Convenient!",
             cost: {
-                science: 1600,
-                clam: 400
+                science: 3200,
+                clam: 800
             },
             required: {
                 upgrades: [

@@ -178,7 +178,7 @@ SharkGame.Stats = {
                 $.each(income, function(incomeKey, incomeValue) {
                     const cell = $("#income-" + k + "-" + incomeKey);
                     const changeChar = incomeValue > 0 ? "+" : "";
-                    cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(k, incomeKey)) + "/s</span>");
+                    cell.html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(k, incomeKey),false,2) + "/s</span>");
                 });
             }
         });
@@ -242,7 +242,7 @@ SharkGame.Stats = {
                         if(w.doesResourceExist(incomeKey) && r.getTotalResource(incomeKey) > 0) {
                             const changeChar = incomeValue > 0 ? "+" : "";
                             row.append($("<td>").html(r.getResourceName(incomeKey)).addClass(rowStyle));
-                            row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue) + "/s</span>").addClass(rowStyle));
+                            row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue,false,2) + "/s</span>").addClass(rowStyle));
 
                             // does this resource get a boost multiplier?
                             const boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
@@ -277,7 +277,7 @@ SharkGame.Stats = {
                             }
 
                             row.append($("<td>").attr("id", "income-" + generatorName + "-" + incomeKey)
-                                .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(generatorName, incomeKey)) + "/s</span>").addClass(rowStyle));
+                                .html("<span style='color: " + r.TOTAL_INCOME_COLOR + "'>" + changeChar + m.beautify(r.getProductAmountFromGeneratorResource(generatorName, incomeKey),false,2) + "/s</span>").addClass(rowStyle));
 
                             counter++;
                             incomesTable.append(row);
