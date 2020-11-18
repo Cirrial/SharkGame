@@ -28,8 +28,8 @@ $.extend(SharkGame, {
         "A New Frontier",
         "Lobster's Paradise",
         "Revenge of the Crabs",
-		"Shark Box",
-		"Dolphin Heroes"
+        "Shark Box",
+        "Dolphin Heroes"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
@@ -291,22 +291,22 @@ SharkGame.Main = {
                 if(suffixIndex > 0) {
                     number /= Math.pow(1000, suffixIndex);
                 }
-				let formattedNumber;
+                let formattedNumber;
                 if(suffixIndex === 0) {
-					if(toPlaces && (toPlaces - digits) > 0 && number !== Math.floor(number)) {
-						formattedNumber = number.toFixed(toPlaces - digits);
-					} else {
-						formattedNumber = Math.floor(number);
-					}
+                    if(toPlaces && (toPlaces - digits) > 0 && number !== Math.floor(number)) {
+                        formattedNumber = number.toFixed(toPlaces - digits);
+                    } else {
+                        formattedNumber = Math.floor(number);
+                    }
                 } else if(suffixIndex > 0) {
                     formattedNumber = number.toFixed(precision) + suffix;
                 } else {
                     formattedNumber = number.toFixed(precision);
                 }
-				formatted = (negative ? "-" : "") + formattedNumber;
+                formatted = (negative ? "-" : "") + formattedNumber;
             }
         }
-		
+
         return formatted;
     },
 
