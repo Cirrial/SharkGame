@@ -34,18 +34,15 @@ SharkGame.Resources = {
     },
 
     processIncomes: function(timeDelta) {
-        $.each(SharkGame.PlayerIncomeTable, function(k, v) {
-            if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
-                SharkGame.Resources.changeResource(k, v * timeDelta);
-            } else {
-                SharkGame.Resources.changeResource(k, v);
-            }
-        });
-
-        /* EXPERIMENTAL ATTEMPT AT ACCOUNTING FOR NON-LINEAR RELATIONSHIPS WHILE OFFLINE (works well, but slow, needs optimizations).
-        loading can take up to 10 seconds while using this algorithm, but in general it returns in just a few seconds
-        probably has much worse performance on other machines.
-            while(timeDelta > 2) {
+        if(timeDelta > 2000) {
+            timeDelta = SharkGame.Resources.doRKMethod(timeDelta,30);
+        }
+        
+        if(timeDelta > 50) {
+            timeDelta = SharkGame.Resources.doRKMethod(timeDelta,15);
+        }
+        
+        while(timeDelta > 2) {
             $.each(SharkGame.PlayerIncomeTable, function(k, v) {
                 if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
                     SharkGame.Resources.changeResource(k, v);
@@ -57,11 +54,70 @@ SharkGame.Resources = {
             timeDelta -= 1;
         }
         $.each(SharkGame.PlayerIncomeTable, function(k, v) {
-            SharkGame.Resources.changeResource(k, v * timeDelta);
-        }); */
+            if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+                SharkGame.Resources.changeResource(k, v*timeDelta);
+            } else {
+                SharkGame.Resources.changeResource(k, v);
+            }
+        });
+    },
+    
+    doRKMethod: function(time, h) {
+        const r = SharkGame.Resources
+        const w = SharkGame.World
+        const pr = SharkGame.PlayerResources
+        const it = SharkGame.PlayerIncomeTable
+
+        let originalResources
+        let originalIncomes
+        let stepTwoIncomes
+        let stepThreeIncomes
+        let stepFourIncomes
+
+        while(time >= h) {
+            originalResources = Object.assign({},SharkGame.PlayerResources);
+            originalIncomes = Object.assign({},SharkGame.PlayerIncomeTable);
+            
+            $.each(SharkGame.PlayerIncomeTable, function(k, v) {
+                if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+                    SharkGame.Resources.changeResource(k, v*h/2);
+                }
+            });
+
+            r.recalculateIncomeTable();
+
+            stepTwoIncomes = Object.assign({},SharkGame.PlayerIncomeTable);
+            $.each(SharkGame.PlayerIncomeTable, function(k, v) {
+                if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+                    SharkGame.Resources.changeResource(k, v*h/2);
+                }
+            });
+
+            r.recalculateIncomeTable();
+
+            stepThreeIncomes = Object.assign({},SharkGame.PlayerIncomeTable);
+            $.each(SharkGame.PlayerIncomeTable, function(k, v) {
+                if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+                    SharkGame.Resources.changeResource(k, v*h);
+                }
+            });
+
+            r.recalculateIncomeTable();
+
+            stepFourIncomes = Object.assign({},SharkGame.PlayerIncomeTable);
+
+            SharkGame.PlayerResources = Object.assign(originalResources,SharkGame.PlayerResources);
+            
+            $.each(originalIncomes, function(resource, object) {
+                SharkGame.Resources.changeResource(resource,h*(originalIncomes[resource]+2*stepTwoIncomes[resource]+2*stepThreeIncomes[resource]+stepFourIncomes[resource])/6);
+            });
+            r.recalculateIncomeTable();
+            time -= h;
+        }
+        return time;
     },
 
-    recalculateIncomeTable: function(resources) {
+    recalculateIncomeTable: function() {
         const r = SharkGame.Resources;
         const w = SharkGame.World;
 
