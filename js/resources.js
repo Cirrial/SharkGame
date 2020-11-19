@@ -30,26 +30,35 @@ SharkGame.Resources = {
         });
 
         SharkGame.Resources.specialMultiplier = 1;
-
-        // MODDED
-        // time to build the network of relationships between resources
         SharkGame.Resources.buildIncomeNetwork();
     },
 
     processIncomes: function(timeDelta) {
-        if(timeDelta > 1){
+        $.each(SharkGame.PlayerIncomeTable, function(k, v) {
+            if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
+                SharkGame.Resources.changeResource(k, v * timeDelta);
+            } else {
+                SharkGame.Resources.changeResource(k, v);
+            }
+        });
+
+        /* EXPERIMENTAL ATTEMPT AT ACCOUNTING FOR NON-LINEAR RELATIONSHIPS WHILE OFFLINE (works well, but slow, needs optimizations).
+        loading can take up to 10 seconds while using this algorithm, but in general it returns in just a few seconds
+        probably has much worse performance on other machines.
+            while(timeDelta > 2) {
             $.each(SharkGame.PlayerIncomeTable, function(k, v) {
                 if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
-                    SharkGame.Resources.changeResource(k, v * timeDelta);
+                    SharkGame.Resources.changeResource(k, v);
                 } else {
                     SharkGame.Resources.changeResource(k, v);
                 }
             });
-        } else {
-            $.each(SharkGame.PlayerIncomeTable, function(k, v) {
-                SharkGame.Resources.changeResource(k, v * timeDelta);
-            });
+            SharkGame.Resources.recalculateIncomeTable();
+            timeDelta -= 1;
         }
+        $.each(SharkGame.PlayerIncomeTable, function(k, v) {
+            SharkGame.Resources.changeResource(k, v * timeDelta);
+        }); */
     },
 
     recalculateIncomeTable: function(resources) {
@@ -68,42 +77,28 @@ SharkGame.Resources = {
 
             const worldResourceInfo = worldResources[name];
             if(worldResourceInfo.exists) {
-                const playerResource = SharkGame.PlayerResources[name];
                 // for this resource, calculate the income it generates
                 if(resource.income) {
-
-                    let worldMultiplier = 1;
-                    if(worldResourceInfo) {
-                        worldMultiplier = worldResourceInfo.incomeMultiplier;
-                    }
-
-
-                    let costScaling = 1;
-                    // run over all resources first to check if costs can be met
-                    // if the cost can't be taken, scale the cost and output down to feasible levels
-                    if(!resource.forceIncome) {
-                        $.each(resource.income, function(k, v) {
+                    $.each(resource.income, function(k, v) {
+                        // run over all resources first to check if costs can be met
+                        // if the cost can't be taken, scale the cost and output down to feasible levels
+                        if(SharkGame.World.doesResourceExist(k)) {
+                            let costScaling = 1;
                             const change = r.getProductAmountFromGeneratorResource(name, k);
-                            if(change < 0) {
-                                const resourceHeld = r.getResource(k);
-                                if(resourceHeld + change <= 0) {
-                                    const scaling = resourceHeld / -change;
-                                    if(scaling >= 0 && scaling < 1) { // sanity checking
-                                        costScaling = Math.min(costScaling, scaling);
-                                    } else {
-                                        costScaling = 0; // better to break this way than break explosively
+                            if(!resource.forceIncome) {
+                                if(change < 0) {
+                                    const resourceHeld = r.getResource(k);
+                                    if(resourceHeld + change <= 0) {
+                                        const scaling = resourceHeld / -change;
+                                        if(scaling >= 0 && scaling < 1) { // sanity checking
+                                            costScaling = Math.min(costScaling, scaling);
+                                        } else {
+                                            costScaling = 0; // better to break this way than break explosively
+                                        }
                                     }
                                 }
                             }
-                        });
-                    }
-
-                    // if there is a cost and it can be taken (or if there is no cost)
-                    // run over all resources to fill the income table
-                    $.each(resource.income, function(k, v) {
-                        const incomeChange = r.getProductAmountFromGeneratorResource(name, k, costScaling);
-                        if(SharkGame.World.doesResourceExist(k)) {
-                            SharkGame.PlayerIncomeTable[k] += incomeChange;
+                            SharkGame.PlayerIncomeTable[k] += change * costScaling;
                         }
                     });
                 }
@@ -142,16 +137,23 @@ SharkGame.Resources = {
     },
 
     getResourceGeneratorMultiplier: function(generator) {
-        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.GeneratorIncomeAffected,generator);
+        return SharkGame.Resources.getNetworkIncomeModifier(2,generator);
     },
 
     getResourceIncomeMultiplier: function(product) {
-        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.ResourceIncomeAffected,product);
+        return SharkGame.Resources.getNetworkIncomeModifier(1,product);
     },
 
     getNetworkIncomeModifier: function(network, resource) {
+        let node;
+        if(network === 1) {
+            node = SharkGame.ResourceIncomeAffectedApplicable[resource]
+        } else if(network === 2) {
+            node = SharkGame.GeneratorIncomeAffectedApplicable[resource]
+        } else {
+            return 1;
+        }
         let multiplier = 1;
-        const node = network[resource];
         if(node) {
             if(node.multiply){
                 $.each(node.multiply, function(k, v) {
@@ -595,15 +597,14 @@ SharkGame.Resources = {
 
         const ria = SharkGame.ResourceIncomeAffectors
         const rad = SharkGame.ResourceIncomeAffected
-        // const rc = SharkGame.ResourceCategories
         if(specifically) {
             null;
         } else {
             // recursively parse the ria
             $.each(ria, function(affectorResource) {
                 $.each(ria[affectorResource], function(type) {
-                    $.each(ria[affectorResource][type], function(affectedResource, value) {
-                        // is it a category?
+                    $.each(ria[affectorResource][type], function(affectedResource, degree) {
+                        // s: is it a category?
                         const nodes = SharkGame.Resources.isCategory(affectedResource) ? rc[affectedResource].resources : [affectedResource]
 
                         // recursively reconstruct the table with the keys in the inverse order
@@ -616,12 +617,51 @@ SharkGame.Resources = {
                                     rad[v][type] = {};
                                 }
                             }
-                            rad[v][type][affectorResource] = value;
+                            rad[v][type][affectorResource] = degree;
                         });
                     });
                 });
             });
         }
+    },
+    
+    buildApplicableNetworks: function() {
+        // this function builds two networks that contain all actually relevant relationships for a given world
+        const w = SharkGame.World
+        const apprgad = SharkGame.GeneratorIncomeAffectedApplicable
+        const apprad = SharkGame.ResourceIncomeAffectedApplicable
+        const rgad = SharkGame.GeneratorIncomeAffected
+        const rad = SharkGame.ResourceIncomeAffected
+        $.each(rgad, function(generator) {
+            $.each(rgad[generator], function(type) {
+                $.each(rgad[generator][type], function(affector, degree) {
+                    if(w.worldResources[generator].exists && w.worldResources[affector].exists) {
+                        if(!apprgad[generator]) {
+                            apprgad[generator] = {};
+                            apprgad[generator][type] = {};
+                        } else if(!apprgad[generator][type]) {
+                            apprgad[generator][type] = {};
+                        }
+                        apprgad[generator][type][affector] = degree;
+                    }
+                });
+            });
+        });
+        $.each(rgad, function(resource) {
+            $.each(rgad[resource], function(type) {
+                $.each(rgad[resource][type], function(affector, degree) {
+                    if(w.worldResources[resource].exists && w.worldResources[affector].exists) {
+                        if(!apprad[resource]) {
+                            apprad[resource] = {};
+                            apprad[resource][type] = {};
+                        } else if(!apprad[resource][type]) {
+                            apprad[resource][type] = {};
+                        }
+                        apprad[resource][type][affector] = degree;
+                    }
+                });
+            });
+        });
     },
 
     // TESTING FUNCTIONS

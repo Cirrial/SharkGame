@@ -149,6 +149,7 @@ SharkGame.World = {
                 });
             }
         });
+        SharkGame.Resources.buildApplicableNetworks();
     },
 
     applyGateCosts: function(level) {

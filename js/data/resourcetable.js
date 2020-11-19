@@ -989,6 +989,11 @@ SharkGame.GeneratorIncomeAffected = {
     // see SharkGame.Resources.buildIncomeNetwork
 }
 
+SharkGame.GeneratorIncomeAffectedApplicable = {
+    // This table automatically populates with the affects on every resource which exists in the world
+    // see SharkGame.Resources.buildApplicableNetworks
+}
+
 SharkGame.ResourceIncomeAffectors = {
     ice: {
         multiply: {
@@ -1000,6 +1005,11 @@ SharkGame.ResourceIncomeAffectors = {
 SharkGame.ResourceIncomeAffected = {
     // This table automatically populates with the affects on every relevant resource
     // see SharkGame.Resources.buildIncomeNetwork
+}
+
+SharkGame.ResourceIncomeAffectedApplicable = {
+    // This table automatically populates with the affects on every resource which exists in the world
+    // see SharkGame.Resources.buildApplicableNetworks
 }
 
 SharkGame.ResourceSpecialProperties = {
