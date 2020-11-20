@@ -60,7 +60,7 @@ $.extend(SharkGame, {
     "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
     "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
     "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
-    "<p>Mod created by base4/spencers145,<br/>" +
+    "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
     "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>.",
 
 
@@ -1027,8 +1027,9 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
-    "0.8 - New Frontiers (202?/??/??)" :[
-        "Went back over the git repo history and added dates to changelog histories. No hiding my having dropped this for over half a year now! <span class='medDesc'>(it has been a while)</span> -Cirral, 2015"
+    "0.1 - <a href='https://github.com/spencers145/SharkGame'>Cirrial's Shark Game: New Frontiers</a> (202?/??/??) indev" :[
+        "lot of things",
+        "will fill in later"
     ],
     "0.71 (2014/12/20)": [
         "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
