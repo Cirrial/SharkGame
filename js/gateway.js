@@ -16,6 +16,8 @@ SharkGame.Gateway = {
         "frigid"
     ],
 
+    completedWorlds: [],
+
     artifactPool: [],
     planetPool: [],
 
@@ -43,11 +45,13 @@ SharkGame.Gateway = {
         const m = SharkGame.Main;
         const g = SharkGame.Gateway;
 
-        // AWARD ESSENCE
+
+        // AWARD ESSENCE (and mark world completion)
         let essenceReward = 0;
         if(!loadingFromSave) {
             if(SharkGame.wonGame) {
                 essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
+                g.markWorldCompleted(SharkGame.World.worldType);
             } else {
                 essenceReward = 0;
             }
@@ -519,6 +523,8 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
+    
+    // jesus christ you better be sorry what the hell is this
     showPlanetAttributes: function(worldData, planetLevel, contentDiv) {
         // add known attributes
         const knownAttributeMax = SharkGame.Gateway.getMaxWorldQualitiesToShow();
@@ -582,8 +588,13 @@ SharkGame.Gateway = {
         _.each(SharkGame.Artifacts, function(artifactData) {
             artifactData.level = 0;
         });
-    }
+    },
 
+    markWorldCompleted: function(world) {
+        if(!SharkGame.Gateway.completedWorlds.includes(world)) {
+            SharkGame.Gateway.completedWorlds.push(world);
+        }
+    }
 };
 
 

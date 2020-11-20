@@ -14,7 +14,8 @@ SharkGame.Save = {
             "gateCostsMet": [],
             "world": {type: SharkGame.World.worldType, level: SharkGame.World.planetLevel},
             "artifacts": {},
-            "gateway": {betweenRuns: SharkGame.gameOver, wonGame: SharkGame.wonGame}
+            "gateway": {betweenRuns: SharkGame.gameOver, wonGame: SharkGame.wonGame},
+            "completedWorlds": {}
         };
 
         $.each(SharkGame.PlayerResources, function(k, v) {
@@ -57,7 +58,14 @@ SharkGame.Save = {
         $.each(SharkGame.Artifacts, function(k, v) {
             saveData.artifacts[k] = v.level;
         });
-
+        $.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(k, v) {
+            saveData.completedWorlds[v] = false;
+        });
+        thingy = $.extend(true,{},saveData.completedWorlds);
+        $.each(SharkGame.Gateway.completedWorlds, function(k, v) {
+            saveData.completedWorlds[v] = true;
+        });
+        thingy2 = $.extend(true,{},saveData.completedWorlds);
         // add timestamp
         //saveData.timestamp = (new Date()).getTime();
         saveData.timestampLastSave = (new Date()).getTime();
@@ -208,7 +216,7 @@ SharkGame.Save = {
                 SharkGame.World.apply();
                 SharkGame.Home.init();
             }
-
+            
             // hacky kludge: force table creation
             SharkGame.Resources.reconstructResourcesTable();
 
@@ -219,17 +227,22 @@ SharkGame.Save = {
                     }
                 });
             }
-
+            
+            SharkGame.Gateway.init();
+            if(saveData.completedWorlds) {
+                $.each(saveData.completedWorlds, function(k, v) {
+                    if(v) {
+                        SharkGame.Gateway.markWorldCompleted(k);
+                    }
+                });
+            }
+            
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
-                SharkGame.Gateway.init();
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
-            }
-
             // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
-            if(saveData.artifacts) {
                 SharkGame.Gateway.applyArtifacts(true);
             }
 
@@ -585,11 +598,17 @@ SharkGame.Save = {
 
         // MODDED
         function(save) {
+            save = $.extend(true, save, {
+                "completedWorlds": {}
+            });
             _.each(["knowledge", "coalescer", "stone", "gravel", "prospector", "shoveler", "miller", "crusher", "pulverizer"], function(v) {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
             _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear", "superprocessing"], function(v) {
                 save.upgrades[v] = false;
+            });
+            _.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(v) {
+                save.completedWorlds[v] = false;
             });
             return save;
         }

@@ -1040,7 +1040,7 @@ SharkGame.Upgrades = {
         superprocessing: {
             name: "Superprocessing",
             desc: "Ack! The recycler really wasn't meant for this much junk. The scientists have an idea, though.",
-            researchedMessage: "The supermaterial that the recycler produces now...it's scary. It's hard and soft, hot and cold, wet and - well, it's underwater, so, it's just wet.",
+            researchedMessage: "Residue has become something of an amorphous supermaterial! It's hard and soft, hot and cold, wet and - well, it's underwater, so, it's just wet, but you get the point.",
             effectDesc: "The recycler's efficiency only starts dropping at 100 million material inserted at once, instead of 1 million.",
             cost: {
                 science: 1E6,
