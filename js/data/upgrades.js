@@ -831,7 +831,7 @@ SharkGame.Upgrades = {
             name: "Octal Efficiency",
             desc: "The octopuses wish to further enhance their productivity for collective gain.",
             researchedMessage: "The instructions constructed and disseminated by the octopuses are complex and only understood to other octopuses. Head hurts. Something about the number eight.",
-            effectDesc: "Octopuses and their specialists are twice as effective, as our their machines. Find unity in efficiency.",
+            effectDesc: "Octopuses and their specialists are twice as effective, as are their machines. Find unity in efficiency.",
             cost: {
                 science: 88888,
                 clam: 888
@@ -2389,8 +2389,6 @@ SharkGame.Upgrades = {
                     sandDigger: 4,
                     autoTransmuter: 4,
                     skimmer: 4,
-                    purifier: 4,
-                    heater: 4,
                     crusher: 4,
                     pulverizer: 4
                 }

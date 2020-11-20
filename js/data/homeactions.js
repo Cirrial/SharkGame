@@ -1175,7 +1175,7 @@ SharkGame.HomeActions = {
     },
 
     "getProspector": {
-        name: "Recruit prospector shark",
+        name: "Recruit shark prospector",
         effect: {
             resource: {
                 "prospector": 1
