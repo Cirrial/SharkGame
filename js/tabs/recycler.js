@@ -46,7 +46,8 @@ SharkGame.Recycler = {
         "junk",
         "science",
         "seaApple",
-        "coalescer"
+        "coalescer",
+        "jellyfish"
     ],
 
     efficiency: "NA",
@@ -287,7 +288,7 @@ SharkGame.Recycler = {
     updateEfficiency: function(resource, amount) {
         const y = SharkGame.Recycler;
         const buyN = SharkGame.Settings.current.buyAmount;
-        let evalue = 6;
+        let evalue = 5;
 
         // no efficiency change if only eating up to 100
         if(buyN > 0) {
@@ -297,7 +298,7 @@ SharkGame.Recycler = {
 
         if(SharkGame.Upgrades.getUpgradeTable().superprocessing) {
             if(SharkGame.Upgrades.getUpgradeTable().superprocessing.purchased) {
-                evalue = 8;
+                evalue = 7;
             }
         }
 

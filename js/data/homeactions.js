@@ -290,6 +290,7 @@ SharkGame.HomeActions = {
         helpText: "Dissect sea apples to gain additional science. Research!"
     },
 
+/*
     "spongeToScience": {
         name: "Dissect sponge",
         effect: {
@@ -318,7 +319,7 @@ SharkGame.HomeActions = {
         ],
         helpText: "Dissect sponges to learn their porous secrets. Science!"
     },
-
+*/
     "jellyfishToScience": {
         name: "Dismantle jellyfish",
         effect: {
@@ -347,7 +348,7 @@ SharkGame.HomeActions = {
         ],
         helpText: "Examine the goop inside the stinging jellies! Discovery!"
     },
-
+    
     "pearlConversion": {
         name: "Convert clam pearls",
         effect: {
@@ -2932,7 +2933,7 @@ SharkGame.HomeActionCategories = {
         name: "Processing",
         actions: [
             "seaApplesToScience",
-            "spongeToScience",
+            //"spongeToScience",
             "jellyfishToScience",
             "pearlConversion",
             "transmuteSharkonium",

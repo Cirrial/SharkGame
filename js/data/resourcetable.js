@@ -280,7 +280,7 @@ SharkGame.ResourceTable = {
     prospector: {
         name: "prospector sharks",
         singleName: "prospector shark",
-        color: "#6A74AB",
+        color: "#7C819C",
         income: {
             "crystal": 0.5,
             "stone": 0.5

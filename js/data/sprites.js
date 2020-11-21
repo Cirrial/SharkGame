@@ -721,7 +721,7 @@ SharkGame.Sprites = {
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
     },
-    "actions/spongeToScience":
+    /* "actions/spongeToScience":
     {
         "frame": {"x":1250,"y":54,"w":50,"h":50},
         "rotated": false,
@@ -729,7 +729,7 @@ SharkGame.Sprites = {
         "spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
         "sourceSize": {"w":50,"h":50},
         "pivot": {"x":0,"y":0}
-    },
+    }, */
     "actions/transmuteSharkonium":
     {
         "frame": {"x":1284,"y":2,"w":50,"h":50},

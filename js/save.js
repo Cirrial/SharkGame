@@ -471,6 +471,7 @@ SharkGame.Save = {
 
     saveUpdaters: [ //used to update saves and to make templates
         function(save) {
+            alert("v1");
             //no one is converting a real save to version 0, so it doesn't need real values
             save.version = null;
             save.timestamp = null;

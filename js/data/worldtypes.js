@@ -28,6 +28,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -98,15 +99,19 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
             "tar",
             "ice",
             "heater",
-            "shrimp",
             "chimaera",
-            "eel"
+            "eel",
+            "dolphin",
+            "whale",
+            "octopus",
+            "jellyfish"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }
@@ -132,6 +137,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -139,15 +145,16 @@ SharkGame.WorldTypes = {
             "ice",
             "heater",
             "eel",
-            "whale",
             "octopus",
             "shrimp",
             "jellyfish",
             "chimaera",
-            "dolphin",
-            "biologist",
             "queen",
-            "pit"
+            "pit",
+            "lobster",
+            "berrier",
+            "algae",
+            "sponge"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: 0.01 },
@@ -179,6 +186,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -186,7 +194,10 @@ SharkGame.WorldTypes = {
             "ice",
             "heater",
             "chimaera",
-            "whale"
+            "whale",
+            "lobster",
+            "eel",
+            "shrimp"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
@@ -213,6 +224,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -221,8 +233,11 @@ SharkGame.WorldTypes = {
             "heater",
             "chimaera",
             "jellyfish",
-            "eel",
-            "dolphin"
+            "dolphin",
+            "whale",
+            "octopus",
+            "shrimp",
+            "algae"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "stuff", amount: -0.1 },
@@ -252,15 +267,19 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
             "tar",
             "ice",
             "heater",
-            "octopus",
-            "eel",
             "chimaera",
+            "whale",
+            "shrimp",
+            "coral",
+            "dolphin",
+            "lobster",
             "whale"
         ],
         modifiers: [
@@ -292,6 +311,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -333,6 +353,7 @@ SharkGame.WorldTypes = {
             "prospector",
             "shoveler",
             "miller",
+            "rockLobster",
             "crusher",
             "pulverizer",
             "knowledge",
@@ -380,12 +401,12 @@ SharkGame.WorldTypes = {
             "tar",
             "dolphin",
             "whale",
-            "lobster",
             "chimaera",
             "shrimp",
             "seaApple",
             "coral",
-            "algae"
+            "algae",
+            "octopus"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5},

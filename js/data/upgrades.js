@@ -450,7 +450,7 @@ SharkGame.Upgrades = {
             name: "Xenobiology",
             desc: "Determine what is with these weird faceless creatures we keep finding.",
             researchedMessage: "Results inconclusive! Further research required. It could be such a benefit for science!",
-            effectDesc: "Kelp produces sea apples twice as fast. Also, sea apple isn't a fruit. We can also dissect sea apples, jellyfish and sponge for science.",
+            effectDesc: "Kelp produces sea apples twice as fast. Also, sea apple isn't a fruit. We can also dissect sea apples and jellyfish for science.",
             cost: {
                 science: 600
             },
@@ -1041,11 +1041,11 @@ SharkGame.Upgrades = {
             name: "Superprocessing",
             desc: "Ack! The recycler really wasn't meant for this much junk. The scientists have an idea, though.",
             researchedMessage: "Residue has become something of an amorphous supermaterial! It's hard and soft, hot and cold, wet and - well, it's underwater, so, it's just wet, but you get the point.",
-            effectDesc: "The recycler's efficiency only starts dropping at 100 million material inserted at once, instead of 1 million.",
+            effectDesc: "The recycler's efficiency only starts dropping at 10 million material inserted at once, instead of 100 thousand.",
             cost: {
                 science: 1E6,
                 sharkonium: 1E6,
-                junk: 1E7
+                junk: 1E6
             },
             required: {
                 upgrades: [
@@ -1771,25 +1771,6 @@ SharkGame.Upgrades = {
             }
         },
 
-        xenobiology: {
-            name: "Xenobiology",
-            desc: "Determine what is with these weird faceless creatures we keep finding.",
-            researchedMessage: "Results inconclusive! Further research required. It could be such a benefit for science!",
-            effectDesc: "We can dissect jellyfish and sponge for science.",
-            cost: {
-                science: 600
-            },
-            required: {
-                upgrades: [
-                    "agriculture"
-                ],
-                resources: [
-                    "jellyfish",
-                    "sponge"
-                ]
-            }
-        },
-
         rayBiology: {
             name: "Ray Biology",
             desc: "Though kindred to the sharks, we know so little about the rays. If only we could fix this. We need to bait a sand trap.",
@@ -2056,8 +2037,6 @@ SharkGame.Upgrades = {
                 ]
             }
         },
-
-
 
         industrialGradeSponge: {
             name: "Industrial-Grade Sponge",
