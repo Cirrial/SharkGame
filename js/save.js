@@ -58,14 +58,15 @@ SharkGame.Save = {
         $.each(SharkGame.Artifacts, function(k, v) {
             saveData.artifacts[k] = v.level;
         });
+
         $.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(k, v) {
             saveData.completedWorlds[v] = false;
         });
-        thingy = $.extend(true,{},saveData.completedWorlds);
+
         $.each(SharkGame.Gateway.completedWorlds, function(k, v) {
             saveData.completedWorlds[v] = true;
         });
-        thingy2 = $.extend(true,{},saveData.completedWorlds);
+
         // add timestamp
         //saveData.timestamp = (new Date()).getTime();
         saveData.timestampLastSave = (new Date()).getTime();
@@ -471,7 +472,6 @@ SharkGame.Save = {
 
     saveUpdaters: [ //used to update saves and to make templates
         function(save) {
-            alert("v1");
             //no one is converting a real save to version 0, so it doesn't need real values
             save.version = null;
             save.timestamp = null;

@@ -245,7 +245,7 @@ SharkGame.Stats = {
                             row.append($("<td>").html("<span style='color: " + r.INCOME_COLOR + "'>" + changeChar + m.beautify(incomeValue,false,2) + "/s</span>").addClass(rowStyle));
 
                             // does this resource get a boost multiplier?
-                            const boostMultiplier = w.worldResources[incomeKey].boostMultiplier;
+                            const boostMultiplier = w.worldResources.get(incomeKey).boostMultiplier;
                             if(boostMultiplier !== 1) {
                                 row.append($("<td>").html("<span style='color: " + r.BOOST_MULTIPLIER_COLOR + "'>x" + m.beautify(boostMultiplier) + "</span>").addClass(rowStyle));
                             } else {

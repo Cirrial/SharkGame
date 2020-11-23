@@ -24,10 +24,10 @@ SharkGame.ArtifactUtil = {
         const wr = SharkGame.World.worldResources;
         const multiplier = level + 1;
         _.each(resourceList, function(resourceName) {
-            if(wr[resourceName].artifactMultiplier) {
-                wr[resourceName].artifactMultiplier *= multiplier;
+            if(wr.get(resourceName).artifactMultiplier) {
+                wr.get(resourceName).artifactMultiplier *= multiplier;
             } else {
-                wr[resourceName].artifactMultiplier = multiplier;
+                wr.get(resourceName).artifactMultiplier = multiplier;
             }
         });
     }
@@ -357,10 +357,10 @@ SharkGame.Artifacts = {
             const wr = SharkGame.World.worldResources;
             const multiplier = 1 / (level + 1);
             _.each(resourceList, function(resourceName) {
-                if(wr[resourceName].artifactMultiplier) {
-                    wr[resourceName].artifactMultiplier *= multiplier;
+                if(wr.get(resourceName).artifactMultiplier) {
+                    wr.get(resourceName).artifactMultiplier *= multiplier;
                 } else {
-                    wr[resourceName].artifactMultiplier = multiplier;
+                    wr.get(resourceName).artifactMultiplier = multiplier;
                 }
             });
         }
