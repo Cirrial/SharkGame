@@ -22,7 +22,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: cost to get to b from a
     linearCost: function(a, b, k) {
-        return ((k / 2) * (b * b + b)) - ((k / 2) * (a * a + a));
+        return k / 2 * (b * b + b) - k / 2 * (a * a + a);
     },
 
     // a = current amount
@@ -31,7 +31,7 @@ SharkGame.MathUtil = {
     // returns: absolute max items that can be held with invested and current resources
     linearMax: function(a, b, k) {
         b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
-        return Math.sqrt((a * a) + a + (2 * b / k) + 0.25) - 0.5;
+        return Math.sqrt(a * a + a + 2 * b / k + 0.25) - 0.5;
     },
 
 
@@ -47,8 +47,8 @@ SharkGame.MathUtil = {
 
     // artificial limit - whatever has these functions for cost/max can only have one of)
     uniqueCost: function(a, b, k) {
-        if(a < 1 && (b - 1) <= 1) {
-            return k
+        if(a < 1 && b - 1 <= 1) {
+            return k;
         } else {
             return Number.POSITIVE_INFINITY; // be careful this doesn't fuck things up
         }

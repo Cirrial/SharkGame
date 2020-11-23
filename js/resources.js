@@ -88,14 +88,14 @@ SharkGame.Resources = {
     },
 
     doRKMethod: function(time, h, stop) {
-        const r = SharkGame.Resources
-        const w = SharkGame.World
+        const r = SharkGame.Resources;
+        const w = SharkGame.World;
 
-        let originalResources
-        let originalIncomes
-        let stepTwoIncomes
-        let stepThreeIncomes
-        let stepFourIncomes
+        let originalResources;
+        let originalIncomes;
+        let stepTwoIncomes;
+        let stepThreeIncomes;
+        let stepFourIncomes;
 
         while(time > stop) {
             originalResources = $.extend(true,{},SharkGame.PlayerResources);
@@ -195,12 +195,12 @@ SharkGame.Resources = {
     getProductAmountFromGeneratorResource: function(generator, product, costScaling) {
         const r = SharkGame.Resources;
         const w = SharkGame.World;
-        const rp = SharkGame.ResourceSpecialProperties
+        const rp = SharkGame.ResourceSpecialProperties;
         const playerResource = SharkGame.PlayerResources[generator];
         if(!r.getResourceCombinationAllowed(generator, product)) {
             return 0;
         }
-        if(typeof(costScaling) !== "number") {
+        if(typeof costScaling !== "number") {
             costScaling = 1;
         }
         const generated = SharkGame.ResourceTable[generator].income[product] * r.getResource(generator) * costScaling *
@@ -226,9 +226,9 @@ SharkGame.Resources = {
     getNetworkIncomeModifier: function(network, resource) {
         let node;
         if(network === 1) {
-            node = SharkGame.ResourceIncomeAffectedApplicable[resource]
+            node = SharkGame.ResourceIncomeAffectedApplicable[resource];
         } else if(network === 2) {
-            node = SharkGame.GeneratorIncomeAffectedApplicable[resource]
+            node = SharkGame.GeneratorIncomeAffectedApplicable[resource];
         } else {
             return 1;
         }
@@ -260,7 +260,7 @@ SharkGame.Resources = {
 
     getResourceCombinationAllowed: function(generator, product) {
         if(generator in SharkGame.World.worldRestrictedCombinations) {
-            return !(SharkGame.World.worldRestrictedCombinations[generator].includes(product));
+            return !SharkGame.World.worldRestrictedCombinations[generator].includes(product);
         } else {
             return true;
         }
@@ -271,7 +271,7 @@ SharkGame.Resources = {
     },
 
     getIncome: function(resource) {
-        return SharkGame.PlayerIncomeTable[resource]
+        return SharkGame.PlayerIncomeTable[resource];
     },
 
     getMultiplier: function(resource) {
@@ -338,7 +338,7 @@ SharkGame.Resources = {
     isCategoryVisible: function(category) {
         let visible = false;
         $.each(category.resources, function(_, v) {
-            visible = visible || ((SharkGame.PlayerResources[v].totalAmount > 0) && SharkGame.World.doesResourceExist(v));
+            visible = visible || SharkGame.PlayerResources[v].totalAmount > 0 && SharkGame.World.doesResourceExist(v);
         });
         return visible;
     },
@@ -350,10 +350,7 @@ SharkGame.Resources = {
                 return;
             }
             $.each(categoryValue.resources, function(k, v) {
-                if(categoryName !== "") {
-                    return;
-                }
-                if(resourceName == v) {
+                if(resourceName === v) {
                     categoryName = categoryKey;
                 }
             });
@@ -370,7 +367,7 @@ SharkGame.Resources = {
     },
 
     isCategory: function(name) {
-        return !(typeof(SharkGame.ResourceCategories[name]) === "undefined")
+        return !(typeof SharkGame.ResourceCategories[name] === "undefined");
     },
 
     isInCategory: function(resource, category) {
@@ -575,7 +572,7 @@ SharkGame.Resources = {
 
     getResourceName: function(resourceName, darken, forceSingle) {
         const resource = SharkGame.ResourceTable[resourceName];
-        let name = (((Math.floor(SharkGame.PlayerResources[resourceName].amount) - 1) < SharkGame.EPSILON) || forceSingle) ? resource.singleName : resource.name;
+        let name = Math.floor(SharkGame.PlayerResources[resourceName].amount) - 1 < SharkGame.EPSILON || forceSingle ? resource.singleName : resource.name;
 
         if(SharkGame.Settings.current.colorCosts) {
             let color = resource.color;
@@ -598,7 +595,7 @@ SharkGame.Resources = {
             const listResource = resourceList[k];
             // amend for unspecified resources (assume zero)
             if(listResource > 0 && SharkGame.World.doesResourceExist(k)) {
-                const isSingular = (Math.floor(listResource) - 1) < SharkGame.EPSILON;
+                const isSingular = Math.floor(listResource) - 1 < SharkGame.EPSILON;
                 formattedResourceList += SharkGame.Main.beautify(listResource);
                 formattedResourceList += " " + SharkGame.Resources.getResourceName(k, darken, isSingular) + ", ";
             }
@@ -635,12 +632,10 @@ SharkGame.Resources = {
         // completes the network of resources whose incomes are affected by other resources
         // takes the order of the gia and reverses it to get the rgad.
 
-        const gia = SharkGame.GeneratorIncomeAffectors
-        const rgad = SharkGame.GeneratorIncomeAffected
-        const rc = SharkGame.ResourceCategories
-        if(specifically) {
-            null;
-        } else {
+        const gia = SharkGame.GeneratorIncomeAffectors;
+        const rgad = SharkGame.GeneratorIncomeAffected;
+        const rc = SharkGame.ResourceCategories;
+        if(!specifically) {
             // recursively parse the gia
             $.each(gia, function(resource) {
                 $.each(gia[resource], function(type) {
@@ -653,7 +648,7 @@ SharkGame.Resources = {
                         }
 
                         // is it a category or a generator?
-                        const nodes = SharkGame.Resources.isCategory(generator) ? rc[generator].resources : [generator]
+                        const nodes = SharkGame.Resources.isCategory(generator) ? rc[generator].resources : [generator];
 
                         // recursively reconstruct the table with the keys in the inverse order
                         $.each(nodes, function(k, v) {
@@ -674,17 +669,15 @@ SharkGame.Resources = {
 
         // resources incomes below, generators above
 
-        const ria = SharkGame.ResourceIncomeAffectors
-        const rad = SharkGame.ResourceIncomeAffected
-        if(specifically) {
-            null;
-        } else {
+        const ria = SharkGame.ResourceIncomeAffectors;
+        const rad = SharkGame.ResourceIncomeAffected;
+        if(!specifically) {
             // recursively parse the ria
             $.each(ria, function(affectorResource) {
                 $.each(ria[affectorResource], function(type) {
                     $.each(ria[affectorResource][type], function(affectedResource, degree) {
                         // s: is it a category?
-                        const nodes = SharkGame.Resources.isCategory(affectedResource) ? rc[affectedResource].resources : [affectedResource]
+                        const nodes = SharkGame.Resources.isCategory(affectedResource) ? rc[affectedResource].resources : [affectedResource];
 
                         // recursively reconstruct the table with the keys in the inverse order
                         $.each(nodes, function(k, v) {
@@ -706,11 +699,11 @@ SharkGame.Resources = {
 
     buildApplicableNetworks: function() {
         // this function builds two networks that contain all actually relevant relationships for a given world
-        const w = SharkGame.World
-        const apprgad = SharkGame.GeneratorIncomeAffectedApplicable
-        const apprad = SharkGame.ResourceIncomeAffectedApplicable
-        const rgad = SharkGame.GeneratorIncomeAffected
-        const rad = SharkGame.ResourceIncomeAffected
+        const w = SharkGame.World;
+        const apprgad = SharkGame.GeneratorIncomeAffectedApplicable;
+        const apprad = SharkGame.ResourceIncomeAffectedApplicable;
+        const rgad = SharkGame.GeneratorIncomeAffected;
+        const rad = SharkGame.ResourceIncomeAffected;
         $.each(rgad, function(generator) {
             $.each(rgad[generator], function(type) {
                 $.each(rgad[generator][type], function(affector, degree) {
@@ -773,7 +766,7 @@ SharkGame.Resources = {
                     dependencies.push(resource);
                     alreadyKnownList.push(resource);
                 }
-            })
+            });
         });
 
         // get dependencies for income resources

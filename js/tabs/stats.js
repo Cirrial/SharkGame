@@ -103,7 +103,7 @@ SharkGame.Stats = {
         }
 
         // update run times
-        const currTime = (new Date()).getTime();
+        const currTime = _.now();
         $("#gameTime").html(m.formatTime(currTime - SharkGame.timestampGameStart));
         $("#runTime").html(m.formatTime(currTime - SharkGame.timestampRunStart));
     },
@@ -134,7 +134,7 @@ SharkGame.Stats = {
                     amountToDispose = Math.floor(max / divisor);
                 }
                 const forceSingular = amountToDispose === 1;
-                const disableButton = (resourceAmount < amountToDispose) || (amountToDispose <= 0);
+                const disableButton = resourceAmount < amountToDispose || amountToDispose <= 0;
                 let label = "Dispose of " + m.beautify(amountToDispose) + " " + r.getResourceName(k, disableButton, forceSingular);
                 if(amountToDispose <= 0) {
                     label = "Can't dispose any more " + r.getResourceName(k, disableButton, forceSingular);
@@ -148,13 +148,13 @@ SharkGame.Stats = {
     onDispose: function() {
         const r = SharkGame.Resources;
         const l = SharkGame.Log;
-        const resourceName = ($(this).attr("id")).split("-")[1];
+        const resourceName = $(this).attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
         let amountToDispose = SharkGame.Settings.current.buyAmount;
         if(amountToDispose < 0) {
             const max = resourceAmount;
             const divisor = Math.floor(amountToDispose) * -1;
-            amountToDispose = (max / divisor);
+            amountToDispose = max / divisor;
         }
         if(resourceAmount >= amountToDispose) {
             r.changeResource(resourceName, -amountToDispose);
@@ -235,7 +235,7 @@ SharkGame.Stats = {
                 if(validIncome) {
                     let counter = 0;
 
-                    const rowStyle = (formatCounter % 2 === 0) ? "evenRow" : "oddRow";
+                    const rowStyle = formatCounter % 2 === 0 ? "evenRow" : "oddRow";
                     row.append($("<td>").html(r.getResourceName(generatorName)).attr("rowspan", numIncomes).addClass(rowStyle));
 
                     $.each(income, function(incomeKey, incomeValue) {

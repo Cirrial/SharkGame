@@ -1,4 +1,4 @@
-/* eslint-disable-next-line no-var */
+/* eslint-disable-next-line no-var, no-use-before-define */
 var SharkGame = SharkGame || {};
 
 
@@ -39,8 +39,8 @@ $.extend(SharkGame, {
     // s: agreed, already had to deal with it on recycler revisions
     // did you know that reducing a float like 1.2512351261 to 1.25 by literally removing the decimal and multiplying by 100 gives you something like 125.0000001?
 
-    INTERVAL: (1000 / 10), // 20 FPS
-    dt: (1 / 10),
+    INTERVAL: 1000 / 10, // 20 FPS // I'm pretty sure 1000 / 10 comes out to 10 FPS
+    dt: 1 / 10,
     before: new Date(),
 
     timestampLastSave: false,
@@ -61,7 +61,8 @@ $.extend(SharkGame, {
     "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
     "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
     "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
-    "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>.",
+    "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>." +
+    '<br/><span style="color: rgba(0,0,0,0);">With some help by <a href="https://github.com/Toby222" style="color: rgba(0,0,0,0);">Toby</a></span>',
 
 
     ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
@@ -99,7 +100,7 @@ $.extend(SharkGame, {
         return Math.log(val) / Math.LN10;
     },
     plural: function(number) {
-        return (number === 1) ? "" : "s";
+        return number === 1 ? "" : "s";
     },
     colorLum: function(hex, lum) {
 
@@ -111,10 +112,10 @@ $.extend(SharkGame, {
         lum = lum || 0;
 
         // convert to decimal and change luminosity
-        let rgb = "#", c, i;
-        for(i = 0; i < 3; i++) {
-            c = parseInt(hex.substr(i * 2, 2), 16);
-            c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+        let rgb = "#";
+        for(let i = 0; i < 3; i++) {
+            let c = parseInt(hex.substr(i * 2, 2), 16);
+            c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
             rgb += ("00" + c).substr(c.length);
         }
 
@@ -277,7 +278,7 @@ SharkGame.Main = {
         } else {
             const suffixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc"];
             const digits = Math.floor(SharkGame.log10(number));
-            let precision = 2 - (digits % 3);
+            let precision = 2 - digits % 3;
             // in case the highest supported suffix is not specified
             precision = Math.max(0, precision);
             const suffixIndex = Math.floor(digits / 3);
@@ -293,7 +294,7 @@ SharkGame.Main = {
                 }
                 let formattedNumber;
                 if(suffixIndex === 0) {
-                    if(toPlaces && (toPlaces - digits) > 0 && number !== Math.floor(number)) {
+                    if(toPlaces && toPlaces - digits > 0 && number !== Math.floor(number)) {
                         formattedNumber = number.toFixed(toPlaces - digits);
                     } else {
                         formattedNumber = Math.floor(number);
@@ -311,36 +312,23 @@ SharkGame.Main = {
     },
 
     formatTime: function(milliseconds) {
-        let numSeconds = milliseconds / 1000;
-        let formatted = "";
-        if(numSeconds > 60) {
-            let numMinutes = Math.floor(numSeconds / 60);
-            if(numMinutes > 60) {
-                const numHours = Math.floor(numMinutes / 60);
-                if(numHours > 24) {
-                    const numDays = Math.floor(numHours / 24);
-                    if(numDays > 7) {
-                        const numWeeks = Math.floor(numDays / 7);
-                        if(numWeeks > 4) {
-                            const numMonths = Math.floor(numWeeks / 4);
-                            if(numMonths > 12) {
-                                const numYears = Math.floor(numMonths / 12);
-                                formatted += numYears + "Y, ";
-                            }
-                            formatted += (numMonths % 12) + "M, ";
-                        }
-                        formatted += (numWeeks % 4) + "W, ";
-                    }
-                    formatted += (numDays % 7) + "D, ";
-                }
-                formatted += (numHours % 24) + ":";
-            }
-            numMinutes %= 60;
-            formatted += (numMinutes < 10 ? ("0" + numMinutes) : numMinutes) + ":";
-        }
-        numSeconds = Math.floor(numSeconds % 60);
-        formatted += (numSeconds < 10 ? ("0" + numSeconds) : numSeconds);
-        return formatted;
+        const numSeconds = Math.floor(milliseconds / 1000);
+        const numMinutes = Math.floor(numSeconds / 60);
+        const numHours = Math.floor(numMinutes / 60);
+        const numDays = Math.floor(numHours / 24);
+        const numWeeks = Math.floor(numDays / 7);
+        const numMonths = Math.floor(numWeeks / 4);
+        const numYears = Math.floor(numMonths / 12);
+
+        const formatSeconds = (numSeconds % 60).toString(10).padStart(2, "0");
+        const formatMinutes = numMinutes > 0 ? (numMinutes % 60).toString(10).padStart(2, "0") + ":" : "";
+        const formatHours = numHours > 0 ? (numHours % 24).toString() + ":" : "";
+        const formatDays = numDays > 0 ? (numDays % 7).toString() + "D, " : "";
+        const formatWeeks = numWeeks > 0 ? (numWeeks % 4).toString() + "W, " : "";
+        const formatMonths = numMonths > 0 ? (numMonths % 12).toString() + "M, " : "";
+        const formatYears = numYears > 0 ? numYears.toString() + "Y, " : "";
+
+        return formatYears + formatMonths + formatWeeks + formatDays + formatHours + formatMinutes + formatSeconds;
     },
 
     // credit where it's due, i didn't write this (regexes fill me with fear), pulled from
@@ -353,8 +341,8 @@ SharkGame.Main = {
 
     // also functions as a reset
     init: function() {
-        const currDate = new Date();
-        SharkGame.before = currDate;
+        const now = _.now();
+        SharkGame.before = now;
         if(SharkGame.GAME_NAME === null) {
             SharkGame.GAME_NAME = SharkGame.choose(SharkGame.GAME_NAMES);
             document.title = SharkGame.ACTUAL_GAME_NAME + ": " + SharkGame.GAME_NAME;
@@ -372,9 +360,9 @@ SharkGame.Main = {
         overlay.removeClass("gateway");
 
         // initialise timestamps to something sensible
-        SharkGame.timestampLastSave = SharkGame.timestampLastSave || currDate.getTime();
-        SharkGame.timestampGameStart = SharkGame.timestampGameStart || currDate.getTime();
-        SharkGame.timestampRunStart = SharkGame.timestampRunStart || currDate.getTime();
+        SharkGame.timestampLastSave = SharkGame.timestampLastSave || now;
+        SharkGame.timestampGameStart = SharkGame.timestampGameStart || now;
+        SharkGame.timestampRunStart = SharkGame.timestampRunStart || now;
 
         // preserve settings or set defaults
         $.each(SharkGame.Settings, function(k, v) {
@@ -382,8 +370,8 @@ SharkGame.Main = {
                 return;
             }
             const currentSetting = SharkGame.Settings.current[k];
-            if(typeof(currentSetting) === "undefined") {
-                SharkGame.Settings.current[k] = v.defaultSetting
+            if(typeof currentSetting === "undefined") {
+                SharkGame.Settings.current[k] = v.defaultSetting;
             }
         });
 
@@ -453,8 +441,8 @@ SharkGame.Main = {
             SharkGame.Gateway.update();
         } else {
             // tick main game stuff
-            const now = new Date();
-            const elapsedTime = (now.getTime() - SharkGame.before.getTime());
+            const now = _.now();
+            const elapsedTime = now - SharkGame.before;
 
             const r = SharkGame.Resources;
             const m = SharkGame.Main;
@@ -478,7 +466,7 @@ SharkGame.Main = {
 
             m.checkTabUnlocks();
 
-            SharkGame.before = new Date();
+            SharkGame.before = now;
         }
     },
 
@@ -587,7 +575,7 @@ SharkGame.Main = {
             // add a header for each discovered tab
             // make it a link if it's not the current tab
             $.each(tabs, function(k, v) {
-                const onThisTab = (SharkGame.Tabs.current === k);
+                const onThisTab = SharkGame.Tabs.current === k;
                 if(v.discovered) {
                     const tabListItem = $("<li>");
                     if(onThisTab) {
@@ -598,14 +586,14 @@ SharkGame.Main = {
                             .attr("href", "javascript:;")
                             .html(v.name)
                             .click(function() {
-                                const tab = ($(this).attr("id")).split("-")[1];
+                                const tab = $(this).attr("id").split("-")[1];
                                 SharkGame.Main.changeTab(tab);
                             })
                         );
                     }
                     tabList.append(tabListItem);
                 }
-            })
+            });
         }
     },
 
@@ -615,7 +603,7 @@ SharkGame.Main = {
         buttonList.empty();
         $.each(SharkGame.Settings.buyAmount.options, function(_, v) {
             const amount = v;
-            const disableButton = (v === SharkGame.Settings.current.buyAmount);
+            const disableButton = v === SharkGame.Settings.current.buyAmount;
             buttonList.prepend($("<li>")
                 .append($("<button>")
                     .addClass("min")
@@ -625,11 +613,11 @@ SharkGame.Main = {
             let label = customLabel ? customLabel + " " : "buy ";
             if(amount < 0) {
                 if(amount < -2) {
-                    label += "1/3 max"
+                    label += "1/3 max";
                 } else if(amount < -1) {
-                    label += "1/2 max"
+                    label += "1/2 max";
                 } else if(amount < 0) {
-                    label += "max"
+                    label += "max";
                 }
             } else {
                 label += SharkGame.Main.beautify(amount);
@@ -689,20 +677,20 @@ SharkGame.Main = {
             row.append($("<td>")
                 .addClass("optionLabel")
                 .html(value.name + ":" +
-                    "<br/><span class='smallDesc'>" + "(" + value.desc + ")" + "</span>")
+                    "<br/><span class='smallDesc'>(" + value.desc + ")</span>")
             );
 
             const currentSetting = SharkGame.Settings.current[key];
 
             // show setting adjustment buttons
             $.each(value.options, function(k, v) {
-                const isCurrentSetting = (k == value.options.indexOf(currentSetting));
+                const isCurrentSetting = k === value.options.indexOf(currentSetting);
                 row.append($("<td>").append($("<button>")
                     .attr("id", "optionButton-" + key + "-" + k)
                     .addClass("option-button")
                     .prop("disabled", isCurrentSetting)
-                    .html((typeof v === "boolean") ? (v ? "on" : "off") : v)
-                    .click(SharkGame.Main.onOptionClick)
+                    .html(typeof v === "boolean" ? v ? "on" : "off" : v)
+                    .on("click", SharkGame.Main.onOptionClick)
                 ));
             });
 
@@ -821,7 +809,7 @@ SharkGame.Main = {
         SharkGame.gameOver = true;
 
         // grab end game timestamp
-        SharkGame.timestampRunEnd = (new Date()).getTime();
+        SharkGame.timestampRunEnd = _.now();
 
         // kick over to passage
         SharkGame.Gateway.enterGate(loadingFromSave);
@@ -857,7 +845,7 @@ SharkGame.Main = {
                 SharkGame.Resources.setTotalResource(resourceName, resourceData.totalAmount);
             });
 
-            SharkGame.timestampRunStart = (new Date()).getTime();
+            SharkGame.timestampRunStart = _.now();
             try {
                 SharkGame.Save.saveGame();
                 SharkGame.Log.addMessage("Game saved.");
