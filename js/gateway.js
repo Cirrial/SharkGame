@@ -523,28 +523,25 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
-
+    
     // jesus christ you better be sorry what the hell is this
     showPlanetAttributes: function(worldData, planetLevel, contentDiv) {
         // add known attributes
         const knownAttributeMax = SharkGame.Gateway.getMaxWorldQualitiesToShow();
         if(knownAttributeMax > 0) {
             const totalAttributes = _.size(worldData.modifiers);
-            const ratio = (totalAttributes === 0) ? 1 : Math.min(1, knownAttributeMax / totalAttributes);
-            contentDiv.append($("<p>").html("Known modifiers (" + (Math.floor(ratio * 100)) + "%):"));
+            contentDiv.append($("<p>").html("Known modifiers (" + (Math.floor((totalAttributes === 0) ? 1 : Math.min(1, knownAttributeMax / totalAttributes) * 100)) + "%):"));
             const modifierList = $("<ul>").addClass("gatewayPropertyList");
-            const upperLimit = Math.min(knownAttributeMax, totalAttributes);
-            for(let i = 0; i < upperLimit; i++) {
+            for(let i = 0; i < Math.min(knownAttributeMax, totalAttributes); i++) {
                 const modifier = worldData.modifiers[i];
-                const modifierDescription = SharkGame.WorldModifiers[modifier.modifier].name;
                 const target = modifier.resource;
                 let resourceName = "";
                 if(SharkGame.Resources.isCategory(target)) {
                     resourceName = SharkGame.ResourceCategories[target].name;
                 } else {
-                    resourceName = SharkGame.Main.toTitleCase(SharkGame.ResourceTable[target].name);
+                    resourceName = SharkGame.Main.toTitleCase(SharkGame.ResourceMap.get(target).name);
                 }
-                modifierList.append($("<li>").html(modifierDescription + " - " + resourceName + " (" + modifier.amount + ")").addClass("medDesc"));
+                modifierList.append($("<li>").html(SharkGame.WorldModifiers[modifier.modifier].name + " - " + resourceName + " (" + modifier.amount + ")").addClass("medDesc"));
             }
             contentDiv.append(modifierList);
 
@@ -552,26 +549,22 @@ SharkGame.Gateway = {
             const bonusPoints = knownAttributeMax - totalAttributes;
             if(bonusPoints > 0) {
                 const gateSlots = _.size(worldData.gateCosts);
-                const gateRatio = Math.min(1, bonusPoints / gateSlots);
-                contentDiv.append($("<p>").html("Known gate requirements (" + (Math.floor(gateRatio * 100)) + "%):"));
-                const slotLimit = Math.min(bonusPoints, gateSlots);
+                contentDiv.append($("<p>").html("Known gate requirements (" + (Math.floor(Math.min(1, bonusPoints / gateSlots) * 100)) + "%):"));
                 const gateList = $("<ul>").addClass("gatewayPropertyList");
                 const gateKeySet = _.keys(worldData.gateCosts);
-                for(let i = 0; i < slotLimit; i++) {
+                for(let i = 0; i < Math.min(bonusPoints, gateSlots); i++) {
                     const gateSlot = gateKeySet[i];
                     const gateCost = Math.floor(worldData.gateCosts[gateSlot] * planetLevel * SharkGame.World.getGateCostMultiplier());
-                    const resourceName = SharkGame.Main.toTitleCase(SharkGame.ResourceTable[gateSlot].singleName);
+                    const resourceName = SharkGame.Main.toTitleCase(SharkGame.ResourceMap.get(gateSlot).singleName);
                     gateList.append($("<li>").html(resourceName + ": " + SharkGame.Main.beautify(gateCost)).addClass("medDesc"));
                 }
                 contentDiv.append(gateList);
                 const totalBannedResources = _.size(worldData.absentResources);
-                const bannedRatio = Math.min(1, bonusPoints / totalBannedResources);
-                contentDiv.append($("<p>").html("Known absences (" + (Math.floor(bannedRatio * 100)) + "%):"));
-                const bannedLimit = Math.min(bonusPoints, totalBannedResources);
+                contentDiv.append($("<p>").html("Known absences (" + (Math.floor(Math.min(1, bonusPoints / totalBannedResources) * 100)) + "%):"));
                 const bannedList = $("<ul>").addClass("gatewayPropertyList");
-                for(let i = 0; i < bannedLimit; i++) {
+                for(let i = 0; i < Math.min(bonusPoints, totalBannedResources); i++) {
                     const bannedResource = worldData.absentResources[i];
-                    const resourceName = SharkGame.ResourceTable[bannedResource].singleName;
+                    const resourceName = SharkGame.ResourceMap.get(bannedResource).singleName;
                     bannedList.append($("<li>").html(resourceName).addClass("smallDesc"));
                 }
                 contentDiv.append(bannedList);

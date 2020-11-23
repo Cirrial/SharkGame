@@ -61,11 +61,11 @@ SharkGame.Save = {
         $.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(k, v) {
             saveData.completedWorlds[v] = false;
         });
-        const thingy = $.extend(true,{},saveData.completedWorlds);
+        thingy = $.extend(true,{},saveData.completedWorlds);
         $.each(SharkGame.Gateway.completedWorlds, function(k, v) {
             saveData.completedWorlds[v] = true;
         });
-        const thingy2 = $.extend(true,{},saveData.completedWorlds);
+        thingy2 = $.extend(true,{},saveData.completedWorlds);
         // add timestamp
         //saveData.timestamp = (new Date()).getTime();
         saveData.timestampLastSave = (new Date()).getTime();
@@ -216,7 +216,7 @@ SharkGame.Save = {
                 SharkGame.World.apply();
                 SharkGame.Home.init();
             }
-
+            
             // hacky kludge: force table creation
             SharkGame.Resources.reconstructResourcesTable();
 
@@ -227,7 +227,7 @@ SharkGame.Save = {
                     }
                 });
             }
-
+            
             SharkGame.Gateway.init();
             if(saveData.completedWorlds) {
                 $.each(saveData.completedWorlds, function(k, v) {
@@ -236,13 +236,13 @@ SharkGame.Save = {
                     }
                 });
             }
-
+            
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
-                // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
+            // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
                 SharkGame.Gateway.applyArtifacts(true);
             }
 
@@ -471,6 +471,7 @@ SharkGame.Save = {
 
     saveUpdaters: [ //used to update saves and to make templates
         function(save) {
+            alert("v1");
             //no one is converting a real save to version 0, so it doesn't need real values
             save.version = null;
             save.timestamp = null;

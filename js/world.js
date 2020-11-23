@@ -94,11 +94,10 @@ SharkGame.World = {
     resetWorldProperties: function() {
         const w = SharkGame.World;
         const wr = w.worldResources;
-        const rt = SharkGame.ResourceTable;
         w.worldRestrictedCombinations = {}
 
         // set up defaults
-        $.each(rt, function(k, v) {
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
             wr[k] = {};
             wr[k].exists = true;
             wr[k].income = 0;

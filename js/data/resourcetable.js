@@ -960,6 +960,8 @@ SharkGame.GeneratorIncomeAffectors = {
     // will solve later. for now, simply make some resource offline-immune.
 
 
+    // note to self: look into hashmaps
+
     knowledge: {
         multiply: {
             frenzy: 1,
@@ -1018,7 +1020,7 @@ SharkGame.ResourceSpecialProperties = {
     incomeCap: {
         knowledge: 10
     }
-};
+}
 
 SharkGame.ResourceCategories = {
     special: {
@@ -1221,6 +1223,139 @@ SharkGame.ResourceCategories = {
         resources: [
             "tar",
             "ice"
+        ]
+    }
+};
+
+SharkGame.InternalCategories = {
+    sharks: {
+        name: "Sharks",
+        resources: [
+            "shark",
+            "scientist",
+            "nurse"
+        ]
+    },
+    rays: {
+        name: "Rays",
+        resources: [
+            "ray",
+            "laser",
+            "maker"
+        ]
+    },
+    crabs: {
+        name: "Crabs",
+        resources: [
+            "crab",
+            "planter",
+            "brood"
+        ]
+    },
+    lobsters: {
+        name: "Lobsters",
+        resources: [
+            "lobster",
+            "harvester",
+            "rockLobster",
+            "berrier"
+        ]
+    },
+    shrimp: {
+        name: "Shrimp",
+        resources: [
+            "shrimp",
+            "worker",
+            "queen"
+        ]
+    },
+    dolphins: {
+        name: "Dolphins",
+        resources: [
+            "dolphin",
+            "philosopher",
+            "treasurer",
+            "biologist"
+        ]
+    },
+    whales: {
+        name: "Whales",
+        resources: [
+            "whale",
+            "chorus"
+        ]
+    },
+    octopuses: {
+        name: "Octopuses",
+        resources: [
+            "octopus",
+            "scavenger",
+            "collector"
+        ]
+    },
+    eels: {
+        name: "Eels",
+        resources: [
+            "eel",
+            "technician",
+            "sifter",
+            "pit"
+        ]
+    },
+    chimaeras: {
+        name: "Chimaeras",
+        resources: [
+            "chimaera",
+            "explorer",
+            "transmuter"
+        ]
+    },
+    sharkmachines: {
+        name: "Shark Machines",
+        resources: [
+            "sharkonium",
+            "fishMachine",
+            "sandDigger",
+            "crystalMiner",
+            "skimmer",
+            "autoTransmuter"
+        ]
+    },
+    dolphinmachines: {
+        name: "Dolphin Machines",
+        resources: [
+            "delphinium",
+            "silentArchivist",
+            "tirelessCrafter"
+        ]
+    },
+    crustaceanmachines: {
+        name: "Crustacean Machines",
+        resources: [
+            "coralglass",
+            "spongeFarmer",
+            "berrySprayer",
+            "glassMaker"
+        ]
+    },
+    octopusmachines: {
+        name: "Octopus Machines",
+        resources: [
+            "spronge",
+            "seaScourer",
+            "prostheticPolyp",
+            "clamCollector",
+            "sprongeSmelter",
+            "eggBrooder"
+        ]
+    },
+    basicmaterials: {
+        resources: [
+            "fish",
+            "sand",
+            "crystal",
+            "science",
+            "junk"
         ]
     }
 };

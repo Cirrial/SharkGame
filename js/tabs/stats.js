@@ -113,7 +113,7 @@ SharkGame.Stats = {
         const s = SharkGame.Stats;
         const m = SharkGame.Main;
         const buttonDiv = $("#disposeResource");
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
             if(r.getTotalResource(k) > 0 && s.bannedDisposeCategories.indexOf(r.getCategoryOfResource(k)) === -1) {
                 SharkGame.Button.makeButton("dispose-" + k, "Dispose of " + r.getResourceName(k), buttonDiv, SharkGame.Stats.onDispose);
             }
@@ -123,7 +123,7 @@ SharkGame.Stats = {
     updateDisposeButtons: function() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
             if(r.getTotalResource(k) > 0) {
                 const button = $("#dispose-" + k);
                 const resourceAmount = r.getResource(k);
@@ -172,9 +172,9 @@ SharkGame.Stats = {
     updateIncomeTable: function() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        $.each(SharkGame.ResourceTable, function(k, v) {
-            if(r.getTotalResource(k) > 0 && SharkGame.ResourceTable[k].income) {
-                const income = SharkGame.ResourceTable[k].income;
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
+            if(r.getTotalResource(k) > 0 && SharkGame.ResourceMap.get(k).income) {
+                const income = SharkGame.ResourceMap.get(k).income;
                 $.each(income, function(incomeKey, incomeValue) {
                     const cell = $("#income-" + k + "-" + incomeKey);
                     const changeChar = incomeValue > 0 ? "+" : "";
@@ -187,7 +187,7 @@ SharkGame.Stats = {
     updateTotalAmountTable: function() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        $.each(SharkGame.ResourceTable, function(k,v) {
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
             const totalResource = r.getTotalResource(k);
             if(totalResource > 0) {
                 const cell = $("#totalAmount-" + k);
@@ -211,7 +211,7 @@ SharkGame.Stats = {
 
         let formatCounter = 0;
 
-        $.each(SharkGame.ResourceTable, function(generatorName, generatorData) {
+        SharkGame.ResourceMap.forEach(function(generatorData, generatorName, m) {
             if(r.getTotalResource(generatorName) > 0 && generatorData.income) {
 
 
@@ -311,7 +311,7 @@ SharkGame.Stats = {
             totalAmountTable.empty();
         }
 
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        SharkGame.ResourceMap.forEach(function(v, k, m) {
             if(r.getTotalResource(k) > 0) {
                 const row = $("<tr>");
 
