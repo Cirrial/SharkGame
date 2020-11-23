@@ -523,7 +523,7 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
-    
+
     // jesus christ you better be sorry what the hell is this
     showPlanetAttributes: function(worldData, planetLevel, contentDiv) {
         // add known attributes

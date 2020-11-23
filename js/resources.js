@@ -35,7 +35,7 @@ SharkGame.Resources = {
 
     processIncomes: function(timeDelta) {
         if(timeDelta > 51) {
-            for(i = 0;i < 50;i++) {
+            for(let i = 0;i < 50;i++) {
                 $.each(SharkGame.PlayerIncomeTable, function(k, v) {
                     if(!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
                         SharkGame.Resources.changeResource(k, v);
@@ -46,23 +46,23 @@ SharkGame.Resources = {
                 SharkGame.Resources.recalculateIncomeTable();
                 timeDelta -= 1;
             }
-            
+
             if(timeDelta > 172800) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta,timeDelta/1000,50000);
             }
-            
+
             if(timeDelta > 43200) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta,200,8000);
             }
-            
+
             if(timeDelta > 7200) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta,125,2250);
             }
-            
+
             if(timeDelta > 2000) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta,50,500);
             }
-            
+
             if(timeDelta > 50) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta,20,50);
             }
@@ -86,7 +86,7 @@ SharkGame.Resources = {
             }
         });
     },
-    
+
     doRKMethod: function(time, h, stop) {
         const r = SharkGame.Resources
         const w = SharkGame.World
@@ -703,7 +703,7 @@ SharkGame.Resources = {
             });
         }
     },
-    
+
     buildApplicableNetworks: function() {
         // this function builds two networks that contain all actually relevant relationships for a given world
         const w = SharkGame.World

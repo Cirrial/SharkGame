@@ -290,7 +290,7 @@ SharkGame.HomeActions = {
         helpText: "Dissect sea apples to gain additional science. Research!"
     },
 
-/*
+    /*
     "spongeToScience": {
         name: "Dissect sponge",
         effect: {
@@ -348,7 +348,7 @@ SharkGame.HomeActions = {
         ],
         helpText: "Examine the goop inside the stinging jellies! Discovery!"
     },
-    
+
     "pearlConversion": {
         name: "Convert clam pearls",
         effect: {
