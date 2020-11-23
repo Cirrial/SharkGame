@@ -534,7 +534,7 @@ SharkGame.Main = {
             } else {
                 subTitleMenu.append(option);
             }
-            $("#" + k).click(v.onClick);
+            $("#" + k).on("click", v.onClick);
         });
     },
 
@@ -585,7 +585,7 @@ SharkGame.Main = {
                             .attr("id", "tab-" + k)
                             .attr("href", "javascript:;")
                             .html(v.name)
-                            .click(function() {
+                            .on("click", function() {
                                 const tab = $(this).attr("id").split("-")[1];
                                 SharkGame.Main.changeTab(tab);
                             })
@@ -623,7 +623,7 @@ SharkGame.Main = {
                 label += SharkGame.Main.beautify(amount);
             }
             $("#buy-" + v).html(label)
-                .click(function() {
+                .on("click", function() {
                     const thisButton = $(this);
                     SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
                     $("button[id^='buy-']").prop("disabled", false);
@@ -706,7 +706,7 @@ SharkGame.Main = {
         row.append($("<td>").append($("<button>")
             .html("import")
             .addClass("option-button")
-            .click(function() {
+            .on("click", function() {
                 const importText = $("#importExportField").val();
                 if(importText === "") {
                     SharkGame.hidePane();
@@ -719,7 +719,7 @@ SharkGame.Main = {
         row.append($("<td>").append($("<button>")
             .html("export")
             .addClass("option-button")
-            .click(function() {
+            .on("click", function() {
                 $("#importExportField").val(SharkGame.Save.exportData());
             })
         ));
@@ -741,7 +741,7 @@ SharkGame.Main = {
         row.append($("<td>").append($("<button>")
             .html("wipe")
             .addClass("option-button")
-            .click(function() {
+            .on("click", function() {
                 if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
                     SharkGame.Save.deleteSave();
                     SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
@@ -869,7 +869,7 @@ SharkGame.Main = {
                 .attr("id", "paneHeaderCloseButton")
                 .addClass("min")
                 .html("&nbsp x &nbsp")
-                .click(SharkGame.Main.hidePane)
+                .on("click", SharkGame.Main.hidePane)
             ));
         pane.append(titleDiv);
         pane.append($("<div>").attr("id", "paneHeaderEnd").addClass("clear-fix"));
@@ -971,8 +971,9 @@ SharkGame.Button = {
         return $("<button>").html(name)
             .attr("id", id)
             .appendTo(div)
-            .click(handler)
-            .hover(hhandler,huhandler);
+            .on("click", handler)
+            .on("mouseenter", hhandler)
+            .on("mouseleave", huhandler);
     },
 
 
@@ -980,13 +981,13 @@ SharkGame.Button = {
         return $("<button>").html(name)
             .attr("id", id)
             .appendTo(div)
-            .click(handler);
+            .on("click", handler);
     },
 
     replaceButton: function(id, name, handler) {
         return $("#" + id).html(name)
-            .unbind("click")
-            .click(handler);
+            .off("click")
+            .on("click", handler);
     }
 };
 

@@ -266,7 +266,7 @@ SharkGame.Home = {
                         .attr("id", "buttonTab-" + k)
                         .attr("href", "javascript:;")
                         .html(v.name)
-                        .click(function() {
+                        .on("click", function() {
                             const tab = $(this).attr("id").split("-")[1];
                             SharkGame.Home.changeButtonTab(tab);
                         })
