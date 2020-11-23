@@ -6,9 +6,6 @@ Shark Game is a web game made entirely in HTML, CSS and JavaScript by Cirrial. I
 
 Cirrial originally developed this game in about 2014 for a gamejam, but continued to develop it afterward. It quickly became a niche favorite among idle game enthusiasts. After a string of updates, Cirrial dropped development in mid-2015. The final version is v0.71.
 
-While the game is in a more-than-playable state, it remains unfinished. Digging into the codebase, Cirrial developed a relatively simple yet robust engine.
-Making use of that engine, new resources, upgrades, and worlds can be added on a whim, and the engine can be expanded to account for new ideas.
-
-This is the plan as of now: add, rebalance, and fill in gaps. More shark game.
+While the game is in a more-than-playable state, it remains unfinished. This is the plan as of now: add, rebalance, and fill in gaps. More shark game. Better shark game.
 
 Contributions welcome.
