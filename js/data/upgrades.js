@@ -7,6 +7,8 @@ SharkGame.Upgrades = {
         }
         return SharkGame.Upgrades.standardUpgrades;
     },
+    
+    buildUpgradeNetwork: function(
 
     standardUpgrades: {
         crystalBite: {
@@ -729,8 +731,7 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "biology",
-                    "seabedGeology"
+                    "biology"
                 ],
                 resources: [
                     "eel"
@@ -1066,7 +1067,6 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "seabedGeology",
                     "sunObservation"
                 ]
             },
@@ -1305,7 +1305,7 @@ SharkGame.Upgrades = {
             required: {
                 upgrades: [
                     "gateDiscovery",
-                    "engineering"
+                    "iterativeDesign"
                 ],
                 resources: [
                     "sharkonium"
@@ -2191,7 +2191,6 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "seabedGeology",
                     "sunObservation"
                 ]
             },
