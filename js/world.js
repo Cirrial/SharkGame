@@ -60,12 +60,8 @@ SharkGame.WorldModifiers = {
     },
     planetaryGeneratorRestriction: {
         name: "Restricted Generator-Income Combination",
-        apply: function(resourceName, restriction) {
-            const wrst = SharkGame.World.worldRestrictedCombinations;
-            if(!wrst[resourceName]) {
-                wrst[resourceName] = [];
-            }
-            wrst[resourceName].push(restriction);
+        apply: function(generator, restrictedResource) {
+            SharkGame.World.worldRestrictedCombinations.set(generator, restrictedResource);
         }
     }
 };
@@ -74,7 +70,7 @@ SharkGame.World = {
 
     worldType: "start",
     worldResources: new Map(),
-    worldRestrictedCombinations: {},
+    worldRestrictedCombinations: new Map(),
     planetLevel: 1,
 
     init: function() {
@@ -94,7 +90,7 @@ SharkGame.World = {
     resetWorldProperties: function() {
         const w = SharkGame.World;
         const wr = w.worldResources;
-        w.worldRestrictedCombinations = {}
+        w.worldRestrictedCombinations.clear();
 
         // set up defaults
         SharkGame.ResourceMap.forEach(function(v, k, m) {

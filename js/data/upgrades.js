@@ -7,8 +7,6 @@ SharkGame.Upgrades = {
         }
         return SharkGame.Upgrades.standardUpgrades;
     },
-    
-    buildUpgradeNetwork: function(
 
     standardUpgrades: {
         crystalBite: {
