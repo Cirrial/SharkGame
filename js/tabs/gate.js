@@ -74,7 +74,7 @@ SharkGame.Gate = {
             SharkGame.Button.makeButton("gateEnter", "Enter gate", $("#buttonList"), g.onEnterButton);
         }
 
-        let message = g.shouldBeOpen() ? g.messageOpened : (amountOfSlots > 1 ? g.message : g.messageOneSlot);
+        let message = g.shouldBeOpen() ? g.messageOpened : amountOfSlots > 1 ? g.message : g.messageOneSlot;
         const tabMessageSel = $("#tabMessage");
         if(SharkGame.Settings.current.showTabImages) {
             message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
@@ -89,7 +89,7 @@ SharkGame.Gate = {
     onGateButton: function() {
         const g = SharkGame.Gate;
         const r= SharkGame.Resources;
-        const resourceId = ($(this).attr("id")).split("-")[1];
+        const resourceId = $(this).attr("id").split("-")[1];
 
         let message = "";
         const cost = g.costs[resourceId] * (SharkGame.Resources.getResource("numen") + 1);
@@ -138,7 +138,7 @@ SharkGame.Gate = {
             if(v) amountOfSlots++;
         });
         amountOfSlots = _.size(g.costs) - amountOfSlots;
-        const sceneImagePath = g.shouldBeOpen() ? g.sceneOpenImage : (amountOfSlots > 1 ? g.sceneClosedImage : g.sceneAlmostOpenImage);
+        const sceneImagePath = g.shouldBeOpen() ? g.sceneOpenImage : amountOfSlots > 1 ? g.sceneClosedImage : g.sceneAlmostOpenImage;
         return sceneImagePath;
     }
 };

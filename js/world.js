@@ -17,35 +17,35 @@ SharkGame.WorldModifiers = {
         name: "Planetary Income Multiplier",
         apply: function(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr.get(resourceName).incomeMultiplier = 1 + level * (amount);
+            wr.get(resourceName).incomeMultiplier = 1 + level * amount;
         }
     },
     planetaryConstantIncomeMultiplier: {
         name: "Constant Planetary Income Multiplier",
         apply: function(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr.get(resourceName).incomeMultiplier = (amount);
+            wr.get(resourceName).incomeMultiplier = amount;
         }
     },
     planetaryIncomeReciprocalMultiplier: {
         name: "Planetary Income Reciprocal Multiplier",
         apply: function(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr.get(resourceName).incomeMultiplier = (1 / (1 + level * amount));
+            wr.get(resourceName).incomeMultiplier = 1 / (1 + level * amount);
         }
     },
     planetaryResourceBoost: {
         name: "Planetary Boost",
         apply: function(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr.get(resourceName).boostMultiplier = 1 + level * (amount);
+            wr.get(resourceName).boostMultiplier = 1 + level * amount;
         }
     },
     planetaryResourceReciprocalBoost: {
         name: "Planetary Reciprocal Boost",
         apply: function(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr.get(resourceName).boostMultiplier = (1 / (1 + level * amount));
+            wr.get(resourceName).boostMultiplier = 1 / (1 + level * amount);
         }
     },
     planetaryStartingResources: {
@@ -188,11 +188,11 @@ SharkGame.World = {
 
     getTerraformMultiplier: function() {
         const ptLevel = SharkGame.Artifacts.planetTerraformer.level;
-        return (ptLevel > 0) ? Math.pow(0.9, ptLevel) : 1;
+        return ptLevel > 0 ? Math.pow(0.9, ptLevel) : 1;
     },
 
     getGateCostMultiplier: function() {
         const gcrLevel = SharkGame.Artifacts.gateCostReducer.level;
-        return (gcrLevel > 0) ? Math.pow(0.9, gcrLevel) : 1;
+        return gcrLevel > 0 ? Math.pow(0.9, gcrLevel) : 1;
     }
 };

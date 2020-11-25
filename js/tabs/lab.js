@@ -140,7 +140,7 @@ SharkGame.Lab = {
         const effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
         let label = upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
         const costText = r.resourceListToString(upgradeCost, !enableButton);
-        if(costText != "") {
+        if(costText !== "") {
             label += "<br/>Cost: " + costText;
         }
         button.prop("disabled", !enableButton).html(label);
@@ -204,7 +204,7 @@ SharkGame.Lab = {
                     if(upgrade.effect.multiplier) {
                         $.each(upgrade.effect.multiplier, function(k, v) {
                             const newMultiplier = v * r.getMultiplier(k);
-                            r.setMultiplier(k, newMultiplier)
+                            r.setMultiplier(k, newMultiplier);
                         });
                     }
                 }
@@ -240,10 +240,10 @@ SharkGame.Lab = {
             // if this upgrade is restricted to certain worlds,
             // check that the worldtype is acceptable for this upgrade to appear
             if(upgradeData.required.worlds) {
-                isPossible = isPossible && (upgradeData.required.worlds.includes(SharkGame.World.worldType))
+                isPossible = isPossible && upgradeData.required.worlds.includes(SharkGame.World.worldType);
             }
             if(upgradeData.required.notWorlds) {
-                isPossible = isPossible && !(upgradeData.required.notWorlds.includes(SharkGame.World.worldType))
+                isPossible = isPossible && !upgradeData.required.notWorlds.includes(SharkGame.World.worldType);
             }
             if(upgradeData.required.resources) {
                 // check if any related resources exist in the world for this to make sense
@@ -285,7 +285,7 @@ SharkGame.Lab = {
                 if(anyeffects) {
                     effects = effects.slice(0, -2); // remove trailing suffix
                 } else {
-                    effects += "???"
+                    effects += "???";
                 }
             }
         } else {

@@ -246,7 +246,7 @@ SharkGame.Home = {
         // add a header for each discovered category
         // make it a link if it's not the current tab
         $.each(SharkGame.HomeActionCategories, function(k, v) {
-            const onThisTab = (SharkGame.Home.currentButtonTab === k);
+            const onThisTab = SharkGame.Home.currentButtonTab === k;
 
             let categoryDiscovered = false;
             if(k === "all") {
@@ -266,8 +266,8 @@ SharkGame.Home = {
                         .attr("id", "buttonTab-" + k)
                         .attr("href", "javascript:;")
                         .html(v.name)
-                        .click(function() {
-                            const tab = ($(this).attr("id")).split("-")[1];
+                        .on("click", function() {
+                            const tab = $(this).attr("id").split("-")[1];
                             SharkGame.Home.changeButtonTab(tab);
                         })
                     );
@@ -306,7 +306,7 @@ SharkGame.Home = {
         if(tabToChangeTo === "all") {
             $.each(SharkGame.HomeActionCategories, function(k, v) {
                 v.hasNewItem = false;
-            })
+            });
         }
         h.currentButtonTab = tabToChangeTo;
         $("#buttonList").empty();
@@ -325,7 +325,7 @@ SharkGame.Home = {
             if(v.unlock) {
                 if(v.unlock.resource) {
                     $.each(v.unlock.resource, function(k, v) {
-                        showThisMessage = showThisMessage && (r.getResource(k) >= v);
+                        showThisMessage = showThisMessage && r.getResource(k) >= v;
                     });
                 }
                 if(v.unlock.upgrade) {
@@ -387,7 +387,7 @@ SharkGame.Home = {
         // for each button entry in the home tab,
         $.each(SharkGame.HomeActions, function(actionName, actionData) {
             const actionTab = h.getActionCategory(actionName);
-            const onTab = (actionTab === h.currentButtonTab) || (h.currentButtonTab === "all");
+            const onTab = actionTab === h.currentButtonTab || h.currentButtonTab === "all";
             if(onTab) {
                 const button = $("#" + actionName);
                 if(button.length === 0) {
@@ -430,7 +430,7 @@ SharkGame.Home = {
         if(amountToBuy < 0) {
             const max = Math.floor(h.getMax(actionData));
             // convert divisor from a negative number to a positive fraction
-            const divisor = 1 / (Math.floor((amountToBuy)) * -1);
+            const divisor = 1 / (Math.floor(amountToBuy) * -1);
             amount = max * divisor;
             amount = Math.floor(amount);
             if(amount < 1) amount = 1;
@@ -462,7 +462,7 @@ SharkGame.Home = {
             label += "<br>Maxed out";
         } else {
             const costText = r.resourceListToString(actionCost, !enableButton);
-            if(costText != "") {
+            if(costText !== "") {
                 label += "<br>Cost: " + costText;
             }
         }
@@ -472,7 +472,7 @@ SharkGame.Home = {
                 label += "<br><span class='medDesc'>" + actionData.helpText + "</span>";
             }
         }
-        button.prop("disabled", !enableButton)
+        button.prop("disabled", !enableButton);
         button.html(label);
 
 
@@ -504,7 +504,7 @@ SharkGame.Home = {
             $.each(action.cost, function(i, v) {
                 const costResource = v.resource;
                 prereqsMet = prereqsMet && w.doesResourceExist(costResource);
-            })
+            });
         }
         // check special worldtype prereqs
         if(action.prereq.world) {
@@ -513,7 +513,7 @@ SharkGame.Home = {
 
         // check the special worldtype exclusions
         if(action.prereq.notWorlds) {
-            prereqsMet = prereqsMet && !(action.prereq.notWorlds.includes(w.worldType));
+            prereqsMet = prereqsMet && !action.prereq.notWorlds.includes(w.worldType);
         }
 
         const ups = SharkGame.Upgrades.getUpgradeTable();
@@ -532,7 +532,7 @@ SharkGame.Home = {
         if(action.effect.resource) {
             $.each(action.effect.resource, function(k, v) {
                 prereqsMet = prereqsMet && w.doesResourceExist(k);
-            })
+            });
         }
         return prereqsMet;
     },
@@ -565,7 +565,7 @@ SharkGame.Home = {
                 if(categoryName !== "") {
                     return;
                 }
-                if(actionName == v) {
+                if(actionName === v) {
                     categoryName = categoryKey;
                 }
             });
@@ -590,7 +590,7 @@ SharkGame.Home = {
             max = Math.floor(max);
             if(max > 0) {
                 // convert divisor from a negative number to a positive fraction
-                const divisor = 1 / (Math.floor((amountToBuy)) * -1);
+                const divisor = 1 / (Math.floor(amountToBuy) * -1);
                 amount = max * divisor;
                 // floor amount
                 amount = Math.floor(amount);
@@ -627,7 +627,7 @@ SharkGame.Home = {
                     r.changeManyResources(resourceChange);
                 }
                 // print outcome to log
-                if(!(action.multiOutcomes) || (amount == 1)) {
+                if(!action.multiOutcomes || amount === 1) {
                     SharkGame.Log.addMessage(SharkGame.choose(action.outcomes));
                 } else {
                     SharkGame.Log.addMessage(SharkGame.choose(action.multiOutcomes));

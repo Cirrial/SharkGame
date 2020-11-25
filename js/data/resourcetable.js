@@ -983,17 +983,17 @@ SharkGame.GeneratorIncomeAffectors = {
             sandDigger: 0.99
         }
     }
-}
+};
 
 SharkGame.GeneratorIncomeAffected = {
     // This table automatically populates with the affects on every relevant resource
     // see SharkGame.Resources.buildIncomeNetwork
-}
+};
 
 SharkGame.GeneratorIncomeAffectedApplicable = {
     // This table automatically populates with the affects on every resource which exists in the world
     // see SharkGame.Resources.buildApplicableNetworks
-}
+};
 
 SharkGame.ResourceIncomeAffectors = {
     ice: {
@@ -1001,17 +1001,17 @@ SharkGame.ResourceIncomeAffectors = {
             ice: -0.001
         }
     }
-}
+};
 
 SharkGame.ResourceIncomeAffected = {
     // This table automatically populates with the affects on every relevant resource
     // see SharkGame.Resources.buildIncomeNetwork
-}
+};
 
 SharkGame.ResourceIncomeAffectedApplicable = {
     // This table automatically populates with the affects on every resource which exists in the world
     // see SharkGame.Resources.buildApplicableNetworks
-}
+};
 
 SharkGame.ResourceSpecialProperties = {
     timeImmune: [
@@ -1020,7 +1020,7 @@ SharkGame.ResourceSpecialProperties = {
     incomeCap: {
         knowledge: 10
     }
-}
+};
 
 SharkGame.ResourceCategories = {
     special: {
