@@ -4,7 +4,7 @@ SharkGame.MathUtil = {
     // b = desired amount
     // k = constant price
     // returns: cost to get to b from a
-    constantCost: function(a, b, k) {
+    constantCost(a, b, k) {
         return (b - a) * k;
     },
 
@@ -12,7 +12,7 @@ SharkGame.MathUtil = {
     // b = available price amount
     // k = constant price
     // returns: absolute max items that can be held with invested and current resources
-    constantMax: function(a, b, k) {
+    constantMax(a, b, k) {
         b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
         return b / k + a;
     },
@@ -21,7 +21,7 @@ SharkGame.MathUtil = {
     // b = desired amount
     // k = cost increase per item
     // returns: cost to get to b from a
-    linearCost: function(a, b, k) {
+    linearCost(a, b, k) {
         return k / 2 * (b * b + b) - k / 2 * (a * a + a);
     },
 
@@ -29,7 +29,7 @@ SharkGame.MathUtil = {
     // b = available price amount
     // k = cost increase per item
     // returns: absolute max items that can be held with invested and current resources
-    linearMax: function(a, b, k) {
+    linearMax(a, b, k) {
         b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
         return Math.sqrt(a * a + a + 2 * b / k + 0.25) - 0.5;
     },
@@ -37,16 +37,16 @@ SharkGame.MathUtil = {
 
     // these need to be adapted probably?
     // will anything ever use these
-    // exponentialCost: function(a, b, k) {
+    // exponentialCost(a, b, k) {
     //     return (k * Math.pow()) - ();
     // },
     //
-    // exponentialMax: function(a, b, k) {
+    // exponentialMax(a, b, k) {
     //     return Math.floor(Math.log(Math.pow(b,a) + (b-1) * b / k) / Math.log(a));
     // }
 
     // artificial limit - whatever has these functions for cost/max can only have one of)
-    uniqueCost: function(a, b, k) {
+    uniqueCost(a, b, k) {
         if(a < 1 && b - 1 <= 1) {
             return k;
         } else {
@@ -54,7 +54,7 @@ SharkGame.MathUtil = {
         }
     },
 
-    uniqueMax: function(a, b, k) {
+    uniqueMax(a, b, k) {
         return 1;
     }
 };

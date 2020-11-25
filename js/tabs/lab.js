@@ -20,7 +20,7 @@ SharkGame.Lab = {
 
 
 
-    init: function() {
+    init() {
         const l = SharkGame.Lab;
         // register tab
         SharkGame.Tabs[l.tabId] = {
@@ -34,12 +34,12 @@ SharkGame.Lab = {
         const ups = SharkGame.Upgrades.getUpgradeTable();
 
         // add default purchased state to each upgrade
-        $.each(ups, function(k, v) {
+        $.each(ups, (k, v) => {
             ups[k].purchased = false;
         });
     },
 
-    switchTo: function() {
+    switchTo() {
         const l = SharkGame.Lab;
         const content = $("#content");
 
@@ -66,7 +66,7 @@ SharkGame.Lab = {
         }
     },
 
-    update: function() {
+    update() {
         const l = SharkGame.Lab;
 
 
@@ -76,7 +76,7 @@ SharkGame.Lab = {
         const ups = SharkGame.Upgrades.getUpgradeTable();
 
         // for each upgrade not yet bought
-        $.each(ups, function(key, value) {
+        $.each(ups, (key, value) => {
             if(value.purchased) {
                 return; // skip this upgrade altogether
             }
@@ -91,7 +91,7 @@ SharkGame.Lab = {
                 if(value.required) {
                     // check previous upgrades
                     if(value.required.upgrades) {
-                        $.each(value.required.upgrades, function(_, v) {
+                        $.each(value.required.upgrades, (_, v) => {
                             // check previous upgrade research
                             if(ups[v]) {
                                 prereqsMet = prereqsMet && ups[v].purchased;
@@ -122,7 +122,7 @@ SharkGame.Lab = {
         });
     },
 
-    updateLabButton: function(upgradeName) {
+    updateLabButton(upgradeName) {
         const r = SharkGame.Resources;
         const button = $("#" + upgradeName);
         const ups = SharkGame.Upgrades.getUpgradeTable();
@@ -159,7 +159,7 @@ SharkGame.Lab = {
         }
     },
 
-    onLabButton: function() {
+    onLabButton() {
         const r = SharkGame.Resources;
         const l = SharkGame.Lab;
         const u = SharkGame.Upgrades.getUpgradeTable();
@@ -189,7 +189,7 @@ SharkGame.Lab = {
         }
     },
 
-    addUpgrade: function(upgradeId) {
+    addUpgrade(upgradeId) {
         const l = SharkGame.Lab;
         const r = SharkGame.Resources;
         const u = SharkGame.Upgrades.getUpgradeTable();
@@ -202,7 +202,7 @@ SharkGame.Lab = {
                 // if the upgrade has effects, do them
                 if(upgrade.effect) {
                     if(upgrade.effect.multiplier) {
-                        $.each(upgrade.effect.multiplier, function(k, v) {
+                        $.each(upgrade.effect.multiplier, (k, v) => {
                             const newMultiplier = v * r.getMultiplier(k);
                             r.setMultiplier(k, newMultiplier);
                         });
@@ -212,11 +212,11 @@ SharkGame.Lab = {
         }
     },
 
-    allResearchDone: function() {
+    allResearchDone() {
         const u = SharkGame.Upgrades.getUpgradeTable();
         const l = SharkGame.Lab;
         let allDone = true;
-        $.each(u, function(k, v) {
+        $.each(u, (k, v) => {
             if(l.isUpgradePossible(k)) {
                 allDone = allDone && v.purchased;
             }
@@ -224,7 +224,7 @@ SharkGame.Lab = {
         return allDone;
     },
 
-    isUpgradePossible: function(upgradeName) {
+    isUpgradePossible(upgradeName) {
         const w = SharkGame.World;
         const l = SharkGame.Lab;
         const ups = SharkGame.Upgrades.getUpgradeTable();
@@ -249,21 +249,21 @@ SharkGame.Lab = {
                 // check if any related resources exist in the world for this to make sense
                 // unlike the costs where all resources in the cost must exist, this is an either/or scenario
                 let relatedResourcesExist = false;
-                _.each(upgradeData.required.resources, function(v) {
+                _.each(upgradeData.required.resources, (v) => {
                     relatedResourcesExist = relatedResourcesExist || w.doesResourceExist(v);
                 });
                 isPossible = isPossible && relatedResourcesExist;
             }
             if(upgradeData.required.upgrades) {
                 // RECURSIVE CHECK REQUISITE TECHS
-                _.each(upgradeData.required.upgrades, function(v) {
+                _.each(upgradeData.required.upgrades, (v) => {
                     isPossible = isPossible && l.isUpgradePossible(v);
                 });
             }
 
             // check existence of resource cost
             // this is the final check, everything that was permitted previously will be made false
-            $.each(upgradeData.cost, function(k, v) {
+            $.each(upgradeData.cost, (k, v) => {
                 isPossible = isPossible && w.doesResourceExist(k);
             });
         }
@@ -271,12 +271,12 @@ SharkGame.Lab = {
         return isPossible;
     },
 
-    getResearchEffects: function(upgrade, darken) {
+    getResearchEffects(upgrade, darken) {
         let effects = "<span class='medDesc' class='click-passthrough'>(Effects: ";
         if(upgrade.effect) {
             if(upgrade.effect.multiplier) {
                 let anyeffects = false;
-                $.each(upgrade.effect.multiplier, function(k, v) {
+                $.each(upgrade.effect.multiplier, (k, v) => {
                     if(SharkGame.World.doesResourceExist(k)) {
                         effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
                         anyeffects = true;
@@ -295,13 +295,13 @@ SharkGame.Lab = {
         return effects;
     },
 
-    updateUpgradeList: function() {
+    updateUpgradeList() {
         const u = SharkGame.Upgrades.getUpgradeTable();
         const upgradeList = $("#upgradeList");
         upgradeList.empty();
         upgradeList.append($("<h3>").html("Researched Upgrades"));
         const list = $("<ul>");
-        $.each(u, function(k, v) {
+        $.each(u, (k, v) => {
             if(v.purchased) {
                 list.append($("<li>")
                     .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")

@@ -2,7 +2,7 @@ SharkGame.Save = {
 
     saveFileName: "sharkGameSave",
 
-    saveGame: function(suppressSavingToStorage, dontFlat) {
+    saveGame(suppressSavingToStorage, dontFlat) {
         // populate save data object
         let saveString = "";
         const saveData = {
@@ -18,7 +18,7 @@ SharkGame.Save = {
             "completedWorlds": {}
         };
 
-        $.each(SharkGame.PlayerResources, function(k, v) {
+        $.each(SharkGame.PlayerResources, (k, v) => {
             saveData.resources[k] = {
                 amount: v.amount,
                 totalAmount: v.totalAmount
@@ -27,11 +27,11 @@ SharkGame.Save = {
 
         const ups = SharkGame.Upgrades.getUpgradeTable();
 
-        $.each(ups, function(k, v) {
+        $.each(ups, (k, v) => {
             saveData.upgrades[k] = v.purchased;
         });
 
-        $.each(SharkGame.Tabs, function(k, v) {
+        $.each(SharkGame.Tabs, (k, v) => {
             if(k !== "current") {
                 saveData.tabs[k] = v.discovered;
             } else {
@@ -40,29 +40,29 @@ SharkGame.Save = {
         });
 
         const gateCostTypes = [];
-        $.each(SharkGame.Gate.costsMet, function(name, met) {
+        $.each(SharkGame.Gate.costsMet, (name, _met) => {
             gateCostTypes.push(name);
         });
         gateCostTypes.sort();
 
-        $.each(gateCostTypes, function(i, name) {
+        $.each(gateCostTypes, (i, name) => {
             saveData.gateCostsMet[i] = SharkGame.Gate.costsMet[name];
         });
 
-        $.each(SharkGame.Settings, function(k, v) {
+        $.each(SharkGame.Settings, (k, v) => {
             if(k !== "current") {
                 saveData.settings[k] = SharkGame.Settings.current[k];
             }
         });
 
-        $.each(SharkGame.Artifacts, function(k, v) {
+        $.each(SharkGame.Artifacts, (k, v) => {
             saveData.artifacts[k] = v.level;
         });
-        $.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(k, v) {
+        $.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], (k, v) => {
             saveData.completedWorlds[v] = false;
         });
         const thingy = $.extend(true,{},saveData.completedWorlds);
-        $.each(SharkGame.Gateway.completedWorlds, function(k, v) {
+        $.each(SharkGame.Gateway.completedWorlds, (k, v) => {
             saveData.completedWorlds[v] = true;
         });
         const thingy2 = $.extend(true,{},saveData.completedWorlds);
@@ -102,7 +102,7 @@ SharkGame.Save = {
         return saveString;
     },
 
-    loadGame: function(importSaveData) {
+    loadGame(importSaveData) {
         let saveData;
         let saveDataString = importSaveData || localStorage.getItem(SharkGame.Save.saveFileName);
 
@@ -199,7 +199,7 @@ SharkGame.Save = {
             }
 
             if(saveData.resources) {
-                $.each(saveData.resources, function(k, v) {
+                $.each(saveData.resources, (k, v) => {
                     // check that this isn't an old resource that's been removed from the game for whatever reason
                     if(SharkGame.PlayerResources[k]) {
                         SharkGame.PlayerResources[k].amount = isNaN(v.amount) ? 0 : v.amount;
@@ -221,7 +221,7 @@ SharkGame.Save = {
             SharkGame.Resources.reconstructResourcesTable();
 
             if(saveData.upgrades) {
-                $.each(saveData.upgrades, function(k, v) {
+                $.each(saveData.upgrades, (k, v) => {
                     if(saveData.upgrades[k]) {
                         SharkGame.Lab.addUpgrade(k);
                     }
@@ -230,7 +230,7 @@ SharkGame.Save = {
 
             SharkGame.Gateway.init();
             if(saveData.completedWorlds) {
-                $.each(saveData.completedWorlds, function(k, v) {
+                $.each(saveData.completedWorlds, (k, v) => {
                     if(v) {
                         SharkGame.Gateway.markWorldCompleted(k);
                     }
@@ -239,7 +239,7 @@ SharkGame.Save = {
 
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
-                $.each(saveData.artifacts, function(k, v) {
+                $.each(saveData.artifacts, (k, v) => {
                     SharkGame.Artifacts[k].level = v;
                 });
                 // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
@@ -247,7 +247,7 @@ SharkGame.Save = {
             }
 
             if(saveData.tabs) {
-                $.each(saveData.tabs, function(k, v) {
+                $.each(saveData.tabs, (k, v) => {
                     if(SharkGame.Tabs[k]) {
                         SharkGame.Tabs[k].discovered = v;
                     }
@@ -258,19 +258,19 @@ SharkGame.Save = {
             }
 
             const gateCostTypes = [];
-            $.each(SharkGame.Gate.costsMet, function(name, met) {
+            $.each(SharkGame.Gate.costsMet, (name, _met) => {
                 gateCostTypes.push(name);
             });
             gateCostTypes.sort();
 
             if(gateCostTypes) {
-                $.each(gateCostTypes, function(i, name) {
+                $.each(gateCostTypes, (i, name) => {
                     SharkGame.Gate.costsMet[name] = saveData.gateCostsMet[i];
                 });
             }
 
             if(saveData.settings) {
-                $.each(saveData.settings, function(k, v) {
+                $.each(saveData.settings, (k, v) => {
                     if(SharkGame.Settings.current[k] !== undefined) {
                         SharkGame.Settings.current[k] = v;
                         // update anything tied to this setting right off the bat
@@ -357,7 +357,7 @@ SharkGame.Save = {
         }
     },
 
-    importData: function(data) {
+    importData(data) {
         // decode from ascii85
         let saveData;
         try {
@@ -376,7 +376,7 @@ SharkGame.Save = {
         SharkGame.Main.setUpTab();
     },
 
-    exportData: function() {
+    exportData() {
         // get save
         let saveData = localStorage.getItem(SharkGame.Save.saveFileName);
         if(saveData === null) {
@@ -395,26 +395,26 @@ SharkGame.Save = {
         return saveData;
     },
 
-    savedGameExists: function() {
+    savedGameExists() {
         return localStorage.getItem(SharkGame.Save.saveFileName) !== null;
     },
 
-    deleteSave: function() {
+    deleteSave() {
         localStorage.removeItem(SharkGame.Save.saveFileName);
     },
 
     // Thanks to Dylan for managing to crush saves down to a much smaller size!
-    createBlueprint: function(template, sortWrong) {
+    createBlueprint(template, sortWrong) {
         function createPart(t) {
             const bp = [];
-            $.each(t, function(k, v) {
+            $.each(t, (k, v) => {
                 if(typeof v === "object" && v !== null) {
                     bp.push([k, createPart(v)]);
                 } else {
                     bp.push(k);
                 }
             });
-            bp.sort(function(a, b) {
+            bp.sort((a, b) => {
                 a = typeof a === "object" ? a[0] : a;
                 b = typeof b === "object" ? b[0] : b;
                 if(sortWrong) {
@@ -429,11 +429,11 @@ SharkGame.Save = {
         return createPart(template);
     },
 
-    flattenData: function(template, source) {
+    flattenData(template, source) {
         const out = [];
 
         function flattenPart(bp, src) {
-            $.each(bp, function(_, slot) {
+            $.each(bp, (_, slot) => {
                 if(typeof slot === "object") {
                     flattenPart(slot[1], src[slot[0]]);
                 } else {
@@ -450,10 +450,10 @@ SharkGame.Save = {
         return out;
     },
 
-    expandData: function(template, data, sortWrong) {
+    expandData(template, data, sortWrong) {
         function expandPart(bp) {
             const out = {}; //todo: array support
-            $.each(bp, function(_, slot) {
+            $.each(bp, (_, slot) => {
                 if(typeof slot === "object") {
                     out[slot[0]] = expandPart(slot[1]);
                 } else {
@@ -470,16 +470,16 @@ SharkGame.Save = {
     },
 
     saveUpdaters: [ //used to update saves and to make templates
-        function(save) {
+        function update(save) {
             //no one is converting a real save to version 0, so it doesn't need real values
             save.version = null;
             save.timestamp = null;
             save.resources = {};
-            $.each(["essence", "shark", "ray", "crab", "scientist", "nurse", "laser", "maker", "planter", "brood", "crystalMiner", "autoTransmuter", "fishMachine", "science", "fish", "sand", "crystal", "kelp", "seaApple", "sharkonium"], function(i, v) {
+            $.each(["essence", "shark", "ray", "crab", "scientist", "nurse", "laser", "maker", "planter", "brood", "crystalMiner", "autoTransmuter", "fishMachine", "science", "fish", "sand", "crystal", "kelp", "seaApple", "sharkonium"], (i, v) => {
                 save.resources[v] = {amount: null, totalAmount: null};
             });
             save.upgrades = {};
-            $.each(["crystalBite", "crystalSpade", "crystalContainer", "underwaterChemistry", "seabedGeology", "thermalVents", "laserRays", "automation", "engineering", "kelpHorticulture", "xenobiology", "biology", "rayBiology", "crabBiology", "sunObservation", "transmutation", "exploration", "farExploration", "gateDiscovery"], function(i, v) {
+            $.each(["crystalBite", "crystalSpade", "crystalContainer", "underwaterChemistry", "seabedGeology", "thermalVents", "laserRays", "automation", "engineering", "kelpHorticulture", "xenobiology", "biology", "rayBiology", "crabBiology", "sunObservation", "transmutation", "exploration", "farExploration", "gateDiscovery"], (i, v) => {
                 save.upgrades[v] = null;
             });
             save.tabs = {
@@ -511,7 +511,7 @@ SharkGame.Save = {
         // future updaters for save versions beyond the base:
         // they get passed the result of the previous updater and it continues in a chain
         // and they start based on the version they were saved
-        function(save) {
+        function update(save) {
             save = $.extend(true, save, {
                 "resources": {"sandDigger": {"amount": 0, "totalAmount": 0}, "junk": {"amount": 0, "totalAmount": 0}},
                 "upgrades": {statsDiscovery: null, recyclerDiscovery: null},
@@ -534,7 +534,7 @@ SharkGame.Save = {
         },
 
         // v0.6
-        function(save) {
+        function update(save) {
             // add new setting to list of saves
             save = $.extend(true, save, {
                 "settings": {"iconPositions": "top"}
@@ -543,21 +543,21 @@ SharkGame.Save = {
         },
 
         // v0.7
-        function(save) {
+        function update(save) {
             save = $.extend(true, save, {
                 "settings": {"showTabImages": true},
                 "tabs": {"reflection": false},
                 "timestampRunEnd": null
             });
-            _.each(["shrimp", "lobster", "dolphin", "whale", "chimaera", "octopus", "eel", "queen", "berrier", "biologist", "pit", "worker", "harvester", "philosopher", "treasurer", "chorus", "transmuter", "explorer", "collector", "scavenger", "technician", "sifter", "skimmer", "purifier", "heater", "spongeFarmer", "berrySprayer", "glassMaker", "silentArchivist", "tirelessCrafter", "clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp", "sponge", "jellyfish", "clam", "coral", "algae", "coralglass", "delphinium", "spronge", "tar", "ice"], function(v) {
+            _.each(["shrimp", "lobster", "dolphin", "whale", "chimaera", "octopus", "eel", "queen", "berrier", "biologist", "pit", "worker", "harvester", "philosopher", "treasurer", "chorus", "transmuter", "explorer", "collector", "scavenger", "technician", "sifter", "skimmer", "purifier", "heater", "spongeFarmer", "berrySprayer", "glassMaker", "silentArchivist", "tirelessCrafter", "clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp", "sponge", "jellyfish", "clam", "coral", "algae", "coralglass", "delphinium", "spronge", "tar", "ice"], (v) => {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
-            _.each(["environmentalism", "thermalConditioning", "coralglassSmelting", "industrialGradeSponge", "aquamarineFusion", "coralCircuitry", "sprongeBiomimicry", "dolphinTechnology", "spongeCollection", "jellyfishHunting", "clamScooping", "pearlConversion", "crustaceanBiology", "eusociality", "wormWarriors", "cetaceanAwareness", "dolphinBiology", "delphinePhilosophy", "coralHalls", "eternalSong", "eelHabitats", "creviceCreches", "bioelectricity", "chimaeraMysticism", "abyssalEnigmas", "octopusMethodology", "octalEfficiency"], function(v) {
+            _.each(["environmentalism", "thermalConditioning", "coralglassSmelting", "industrialGradeSponge", "aquamarineFusion", "coralCircuitry", "sprongeBiomimicry", "dolphinTechnology", "spongeCollection", "jellyfishHunting", "clamScooping", "pearlConversion", "crustaceanBiology", "eusociality", "wormWarriors", "cetaceanAwareness", "dolphinBiology", "delphinePhilosophy", "coralHalls", "eternalSong", "eelHabitats", "creviceCreches", "bioelectricity", "chimaeraMysticism", "abyssalEnigmas", "octopusMethodology", "octalEfficiency"], (v) => {
                 save.upgrades[v] = false;
             });
             save.world = {type: "start", level: 1};
             save.artifacts = {};
-            _.each(["permanentMultiplier", "planetTerraformer", "gateCostReducer", "planetScanner", "sharkMigrator", "rayMigrator", "crabMigrator", "shrimpMigrator", "lobsterMigrator", "dolphinMigrator", "whaleMigrator", "eelMigrator", "chimaeraMigrator", "octopusMigrator", "sharkTotem", "rayTotem", "crabTotem", "shrimpTotem", "lobsterTotem", "dolphinTotem", "whaleTotem", "eelTotem", "chimaeraTotem", "octopusTotem", "progressTotem", "carapaceTotem", "inspirationTotem", "industryTotem", "wardingTotem"], function(v) {
+            _.each(["permanentMultiplier", "planetTerraformer", "gateCostReducer", "planetScanner", "sharkMigrator", "rayMigrator", "crabMigrator", "shrimpMigrator", "lobsterMigrator", "dolphinMigrator", "whaleMigrator", "eelMigrator", "chimaeraMigrator", "octopusMigrator", "sharkTotem", "rayTotem", "crabTotem", "shrimpTotem", "lobsterTotem", "dolphinTotem", "whaleTotem", "eelTotem", "chimaeraTotem", "octopusTotem", "progressTotem", "carapaceTotem", "inspirationTotem", "industryTotem", "wardingTotem"], (v) => {
                 save.artifacts[v] = 0;
             });
             save.gateway = {betweenRuns: false};
@@ -565,19 +565,19 @@ SharkGame.Save = {
         },
 
         // a little tweak here and there
-        function(save) {
+        function update(save) {
             save = $.extend(true, save, {
                 "settings": {"buttonDisplayType": "list"}
             });
             return save;
         },
-        function(save) {
+        function update(save) {
             save = $.extend(true, save, {
                 "gateway": {"wonGame": false}
             });
             return save;
         },
-        function(save) {
+        function update(save) {
             // forgot to add numen to saved resources (which is understandable given it can't actually be legitimately achieved at this point)
             save.resources["numen"] = {amount: 0, totalAmount: 0};
             // completely change how gate slot status is saved
@@ -586,28 +586,28 @@ SharkGame.Save = {
         },
 
         // v 0.71
-        function(save) {
-            _.each(["eggBrooder", "diver"], function(v) {
+        function update(save) {
+            _.each(["eggBrooder", "diver"], (v) => {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
-            _.each(["agriculture", "ancestralRecall", "utilityCarapace", "primordialSong", "leviathanHeart", "eightfoldOptimisation", "mechanisedAlchemy", "mobiusShells", "imperialDesigns"], function(v) {
+            _.each(["agriculture", "ancestralRecall", "utilityCarapace", "primordialSong", "leviathanHeart", "eightfoldOptimisation", "mechanisedAlchemy", "mobiusShells", "imperialDesigns"], (v) => {
                 save.upgrades[v] = false;
             });
             return save;
         },
 
         // MODDED
-        function(save) {
+        function update(save) {
             save = $.extend(true, save, {
                 "completedWorlds": {}
             });
-            _.each(["knowledge", "coalescer", "stone", "gravel", "prospector", "shoveler", "miller", "crusher", "pulverizer"], function(v) {
+            _.each(["knowledge", "coalescer", "stone", "gravel", "prospector", "shoveler", "miller", "crusher", "pulverizer"], (v) => {
                 save.resources[v] = {amount: 0, totalAmount: 0};
             });
-            _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear", "superprocessing"], function(v) {
+            _.each(["iterativeDesign", "knowledgeCoalescers", "crystalScoop", "crystalShovel", "gravelMilling", "prospectorSharks", "sharkoniumPickaxes", "miningLights", "rockBreaking", "rockProcessing", "gravelPulverizing", "sharkoniumMillingGear", "superprocessing"], (v) => {
                 save.upgrades[v] = false;
             });
-            _.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], function(v) {
+            _.each(["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid", "stone"], (v) => {
                 save.completedWorlds[v] = false;
             });
             return save;

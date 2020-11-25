@@ -16,7 +16,7 @@ SharkGame.Reflection = {
     message: "You may not remember everything, but you are something more than a shark now." +
     "</br><span='medDesc'>Reflect upon the changes in yourself and reality you have made here.</span>",
 
-    init: function() {
+    init() {
         const r = SharkGame.Reflection;
         // register tab
         SharkGame.Tabs[r.tabId] = {
@@ -28,7 +28,7 @@ SharkGame.Reflection = {
         };
     },
 
-    switchTo: function() {
+    switchTo() {
         const r = SharkGame.Reflection;
         const content = $("#content");
         content.append($("<div>").attr("id", "tabMessage"));
@@ -44,14 +44,14 @@ SharkGame.Reflection = {
         r.updateArtifactList();
     },
 
-    update: function() {
+    update() {
 
     },
 
-    updateArtifactList: function() {
+    updateArtifactList() {
         const m = SharkGame.Main;
         const listSel = $("#artifactList");
-        $.each(SharkGame.Artifacts, function(artifactKey, artifactData) {
+        $.each(SharkGame.Artifacts, (artifactKey, artifactData) => {
             if(artifactData.level > 0) {
                 const maxedOut = artifactData.level >= artifactData.max;
                 const item = $("<div>").addClass("artifactDiv");

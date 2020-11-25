@@ -175,7 +175,7 @@ SharkGame.Home = {
         }
     ],
 
-    init: function() {
+    init() {
         const h = SharkGame.Home;
 
         // rename home tab
@@ -190,7 +190,7 @@ SharkGame.Home = {
             code: h
         };
         // populate action discoveries
-        $.each(SharkGame.HomeActions, function(actionName, actionData) {
+        $.each(SharkGame.HomeActions, (actionName, actionData) => {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
         });
@@ -199,7 +199,7 @@ SharkGame.Home = {
         h.currentButtonTab = "all";
     },
 
-    switchTo: function() {
+    switchTo() {
         const h = SharkGame.Home;
         const content = $("#content");
         const tabMessage = $("<div>").attr("id", "tabMessage");
@@ -229,15 +229,15 @@ SharkGame.Home = {
         }
     },
 
-    discoverActions: function() {
+    discoverActions() {
         const h = SharkGame.Home;
-        $.each(SharkGame.HomeActions, function(actionName, actionData) {
+        $.each(SharkGame.HomeActions, (actionName, actionData) => {
             actionData.discovered = h.areActionPrereqsMet(actionName);
             actionData.newlyDiscovered = false;
         });
     },
 
-    createButtonTabs: function() {
+    createButtonTabs() {
         const buttonTabDiv = $("#homeTabs");
         const buttonTabList = $("<ul>").attr("id", "homeTabsList");
         buttonTabDiv.empty();
@@ -245,14 +245,14 @@ SharkGame.Home = {
 
         // add a header for each discovered category
         // make it a link if it's not the current tab
-        $.each(SharkGame.HomeActionCategories, function(k, v) {
+        $.each(SharkGame.HomeActionCategories, (k, v) => {
             const onThisTab = SharkGame.Home.currentButtonTab === k;
 
             let categoryDiscovered = false;
             if(k === "all") {
                 categoryDiscovered = true;
             } else {
-                $.each(v.actions, function(_, actionName) {
+                $.each(v.actions, (_, actionName) => {
                     categoryDiscovered = categoryDiscovered || SharkGame.HomeActions[actionName].discovered;
                 });
             }
@@ -266,7 +266,7 @@ SharkGame.Home = {
                         .attr("id", "buttonTab-" + k)
                         .attr("href", "javascript:;")
                         .html(v.name)
-                        .on("click", function() {
+                        .on("click", function callback() {
                             const tab = $(this).attr("id").split("-")[1];
                             SharkGame.Home.changeButtonTab(tab);
                         })
@@ -286,7 +286,7 @@ SharkGame.Home = {
         }
     },
 
-    updateTab: function(tabToUpdate) {
+    updateTab(tabToUpdate) {
         // return if we're looking at all buttons, no change there
         if(SharkGame.Home.currentButtonTab === "all") {
             return;
@@ -300,11 +300,11 @@ SharkGame.Home = {
         }
     },
 
-    changeButtonTab: function(tabToChangeTo) {
+    changeButtonTab(tabToChangeTo) {
         const h = SharkGame.Home;
         SharkGame.HomeActionCategories[tabToChangeTo].hasNewItem = false;
         if(tabToChangeTo === "all") {
-            $.each(SharkGame.HomeActionCategories, function(k, v) {
+            $.each(SharkGame.HomeActionCategories, (k, v) => {
                 v.hasNewItem = false;
             });
         }
@@ -313,23 +313,23 @@ SharkGame.Home = {
         h.createButtonTabs();
     },
 
-    updateMessage: function(suppressAnimation) {
+    updateMessage(suppressAnimation) {
         const h = SharkGame.Home;
         const r = SharkGame.Resources;
         const u = SharkGame.Upgrades.getUpgradeTable();
         const wi = SharkGame.WorldTypes[SharkGame.World.worldType];
         let selectedIndex = h.currentExtraMessageIndex;
-        $.each(h.extraMessages, function(i, v) {
+        $.each(h.extraMessages, (i, v) => {
             let showThisMessage = true;
             // check if should show this message
             if(v.unlock) {
                 if(v.unlock.resource) {
-                    $.each(v.unlock.resource, function(k, v) {
+                    $.each(v.unlock.resource, (k, v) => {
                         showThisMessage = showThisMessage && r.getResource(k) >= v;
                     });
                 }
                 if(v.unlock.upgrade) {
-                    $.each(v.unlock.upgrade, function(i, v) {
+                    $.each(v.unlock.upgrade, (i, v) => {
                         showThisMessage = showThisMessage && u[v].purchased;
                     });
                 }
@@ -358,11 +358,11 @@ SharkGame.Home = {
 
             const extraMessageSel = $("#extraMessage");
             if(!suppressAnimation && SharkGame.Settings.current.showAnimations) {
-                extraMessageSel.animate({opacity: 0}, 200, function() {
+                extraMessageSel.animate({opacity: 0}, 200, () => {
                     const thisSel = $(this);
                     thisSel.animate({opacity: 1}, 200).html(h.extraMessages[selectedIndex].message);
                 });
-                sceneDiv.animate({opacity: 0}, 500, function() {
+                sceneDiv.animate({opacity: 0}, 500, () => {
                     const thisSel = $(this);
                     if(SharkGame.Settings.current.showTabImages) {
                         SharkGame.changeSprite(SharkGame.spriteHomeEventPath, "homesea-" + (selectedIndex + 1), sceneDiv, "homesea-missing");
@@ -378,14 +378,14 @@ SharkGame.Home = {
         }
     },
 
-    update: function() {
+    update() {
         const h = SharkGame.Home;
         const r = SharkGame.Resources;
         const w = SharkGame.World;
 
 
         // for each button entry in the home tab,
-        $.each(SharkGame.HomeActions, function(actionName, actionData) {
+        $.each(SharkGame.HomeActions, (actionName, actionData) => {
             const actionTab = h.getActionCategory(actionName);
             const onTab = actionTab === h.currentButtonTab || h.currentButtonTab === "all";
             if(onTab) {
@@ -417,7 +417,7 @@ SharkGame.Home = {
         h.updateMessage();
     },
 
-    updateButton: function(actionName) {
+    updateButton(actionName) {
         const h = SharkGame.Home;
         const r = SharkGame.Resources;
         const amountToBuy = SharkGame.Settings.current.buyAmount;
@@ -453,7 +453,7 @@ SharkGame.Home = {
 
         // check for any infinite quantities
         let infinitePrice = false;
-        _.each(actionCost, function(num) {
+        _.each(actionCost, (num) => {
             if(num === Number.POSITIVE_INFINITY) {
                 infinitePrice = true;
             }
@@ -490,7 +490,7 @@ SharkGame.Home = {
         }
     },
 
-    areActionPrereqsMet: function(actionName) {
+    areActionPrereqsMet(actionName) {
         const r = SharkGame.Resources;
         const w = SharkGame.World;
         let prereqsMet = true; // assume true until proven false
@@ -501,7 +501,7 @@ SharkGame.Home = {
         }
         // check if resource cost exists
         if(action.cost) {
-            $.each(action.cost, function(i, v) {
+            $.each(action.cost, (i, v) => {
                 const costResource = v.resource;
                 prereqsMet = prereqsMet && w.doesResourceExist(costResource);
             });
@@ -520,7 +520,7 @@ SharkGame.Home = {
 
         // check upgrade prerequisites
         if(action.prereq.upgrade) {
-            $.each(action.prereq.upgrade, function(_, v) {
+            $.each(action.prereq.upgrade, (_, v) => {
                 if(ups[v]) {
                     prereqsMet = prereqsMet && ups[v].purchased;
                 } else {
@@ -530,14 +530,14 @@ SharkGame.Home = {
         }
         // check if resulting resource exists
         if(action.effect.resource) {
-            $.each(action.effect.resource, function(k, v) {
+            $.each(action.effect.resource, (k, v) => {
                 prereqsMet = prereqsMet && w.doesResourceExist(k);
             });
         }
         return prereqsMet;
     },
 
-    addButton: function(actionName) {
+    addButton(actionName) {
         const h = SharkGame.Home;
         const buttonListSel = $("#buttonList");
         const actionData = SharkGame.HomeActions[actionName];
@@ -555,13 +555,13 @@ SharkGame.Home = {
         }
     },
 
-    getActionCategory: function(actionName) {
+    getActionCategory(actionName) {
         let categoryName = "";
-        $.each(SharkGame.HomeActionCategories, function(categoryKey, categoryValue) {
+        $.each(SharkGame.HomeActionCategories, (categoryKey, categoryValue) => {
             if(categoryName !== "") {
                 return;
             }
-            $.each(categoryValue.actions, function(k, v) {
+            $.each(categoryValue.actions, (k, v) => {
                 if(categoryName !== "") {
                     return;
                 }
@@ -573,7 +573,7 @@ SharkGame.Home = {
         return categoryName;
     },
 
-    onHomeButton: function() {
+    onHomeButton() {
         const h = SharkGame.Home;
         const r = SharkGame.Resources;
         const amountToBuy = SharkGame.Settings.current.buyAmount;
@@ -644,15 +644,15 @@ SharkGame.Home = {
         button.prop("disabled", true);
     },
 
-    getCost: function(action, amount) {
+    getCost(action, amount) {
         const calcCost = {};
         const rawCost = action.cost;
 
-        $.each(rawCost, function(i, v) {
+        $.each(rawCost, (i, v) => {
             const resource = SharkGame.PlayerResources[action.max];
             let currAmount = resource.amount;
             if(resource.jobs) {
-                $.each(resource.jobs, function(_, v) {
+                $.each(resource.jobs, (_, v) => {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
@@ -679,19 +679,19 @@ SharkGame.Home = {
     },
 
 
-    getMax: function(action) {
+    getMax(action) {
         let max = 1;
         if(action.max) {
             const resource = SharkGame.PlayerResources[action.max];
             let currAmount = resource.amount;
             if(resource.jobs) {
-                $.each(resource.jobs, function(_, v) {
+                $.each(resource.jobs, (_, v) => {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
             max = Number.MAX_VALUE;
             const rawCost = action.cost;
-            $.each(rawCost, function(_, v) {
+            $.each(rawCost, (_, v) => {
                 const costResource = SharkGame.PlayerResources[v.resource];
 
                 const costFunction = v.costFunction;
@@ -717,7 +717,7 @@ SharkGame.Home = {
         return Math.floor(max);
     },
 
-    toggleHelp: function() {
+    toggleHelp() {
         SharkGame.Settings.current.showTabHelp = !SharkGame.Settings.current.showTabHelp;
     }
 };

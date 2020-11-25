@@ -21,10 +21,10 @@ SharkGame.Gateway = {
     artifactPool: [],
     planetPool: [],
 
-    init: function() {
+    init() {
         // initialise artifact levels to 0 if they don't have a level
         // OTHERWISE KEEP THE EXISTING LEVEL
-        _.each(SharkGame.Artifacts, function(artifactData) {
+        _.each(SharkGame.Artifacts, (artifactData) => {
             if(!artifactData.level) {
                 artifactData.level = 0;
             }
@@ -32,7 +32,7 @@ SharkGame.Gateway = {
         });
     },
 
-    update: function() {
+    update() {
         const g = SharkGame.Gateway;
         g.updateArtifactButtons();
 
@@ -41,7 +41,7 @@ SharkGame.Gateway = {
         overlay.height(docHeight);
     },
 
-    enterGate: function(loadingFromSave) {
+    enterGate(loadingFromSave) {
         const m = SharkGame.Main;
         const g = SharkGame.Gateway;
 
@@ -86,7 +86,7 @@ SharkGame.Gateway = {
         if(SharkGame.Settings.current.showAnimations) {
             overlay.show()
                 .css("opacity", 0)
-                .animate({opacity: 1.0}, 1000, "swing", function() {  // put back to 4000
+                .animate({opacity: 1.0}, 1000, "swing", () => {  // put back to 4000
                     g.cleanUp();
                     g.showGateway(essenceReward);
                 });
@@ -99,7 +99,7 @@ SharkGame.Gateway = {
     },
 
 
-    cleanUp: function() {
+    cleanUp() {
         const m = SharkGame.Main;
         // empty out the game stuff behind
         m.purgeGame();
@@ -108,7 +108,7 @@ SharkGame.Gateway = {
         $("#overlay").height(docHeight);
     },
 
-    showGateway: function(essenceRewarded) {
+    showGateway(essenceRewarded) {
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
         const g = SharkGame.Gateway;
@@ -142,10 +142,10 @@ SharkGame.Gateway = {
 
         // add navigation buttons
         const navButtons = $("<div>").addClass("gatewayButtonList");
-        SharkGame.Button.makeButton("backToGateway", "artifacts", navButtons, function() {
+        SharkGame.Button.makeButton("backToGateway", "artifacts", navButtons, () => {
             g.switchViews(g.showArtifacts);
         });
-        SharkGame.Button.makeButton("backToGateway", "worlds", navButtons, function() {
+        SharkGame.Button.makeButton("backToGateway", "worlds", navButtons, () => {
             g.switchViews(g.showPlanets);
         });
         gatewayContent.append(navButtons);
@@ -154,12 +154,12 @@ SharkGame.Gateway = {
         g.transitioning = false;
     },
 
-    showRunEndInfo: function(containerDiv) {
+    showRunEndInfo(containerDiv) {
         const m = SharkGame.Main;
         containerDiv.append($("<p>").html("<em>Time spent within last ocean:</em><br/>").append(m.formatTime(SharkGame.timestampRunEnd - SharkGame.timestampRunStart)));
     },
 
-    showArtifacts: function() {
+    showArtifacts() {
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
         const g = SharkGame.Gateway;
@@ -179,7 +179,7 @@ SharkGame.Gateway = {
         } else {
             // there's something to show
             const artifactPool = $("<div>").addClass("gatewayButtonList");
-            _.each(g.artifactPool, function(artifactName) {
+            _.each(g.artifactPool, (artifactName) => {
                 SharkGame.Button.makeButton("artifact-" + artifactName, artifactName, artifactPool, g.onArtifactButton);
             });
             gatewayContent.append(artifactPool);
@@ -188,7 +188,7 @@ SharkGame.Gateway = {
 
         // add return to gateway button
         const returnButtonDiv = $("<div>");
-        SharkGame.Button.makeButton("backToGateway", "return to gateway", returnButtonDiv, function() {
+        SharkGame.Button.makeButton("backToGateway", "return to gateway", returnButtonDiv, () => {
             g.switchViews(g.showGateway);
         });
         gatewayContent.append(returnButtonDiv);
@@ -197,7 +197,7 @@ SharkGame.Gateway = {
         g.transitioning = false;
     },
 
-    showPlanets: function() {
+    showPlanets() {
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
         const g = SharkGame.Gateway;
@@ -208,8 +208,8 @@ SharkGame.Gateway = {
 
         // show planet pool
         const planetPool = $("<div>").addClass("gatewayButtonList");
-        _.each(g.planetPool, function(planetInfo) {
-            SharkGame.Button.makeButton("planet-" + planetInfo.type, planetInfo.type + " " + planetInfo.level, planetPool, function() {
+        _.each(g.planetPool, function callback(planetInfo) {
+            SharkGame.Button.makeButton("planet-" + planetInfo.type, planetInfo.type + " " + planetInfo.level, planetPool, function callback() {
                 g.selectedWorld = $(this).attr("id").split("-")[1];
                 g.switchViews(g.confirmWorld);
             }).addClass("planetButton");
@@ -218,7 +218,7 @@ SharkGame.Gateway = {
 
         // add return to gateway button
         const returnButtonDiv = $("<div>");
-        SharkGame.Button.makeButton("backToGateway", "return to gateway", returnButtonDiv, function() {
+        SharkGame.Button.makeButton("backToGateway", "return to gateway", returnButtonDiv, () => {
             g.switchViews(g.showGateway);
         });
         gatewayContent.append(returnButtonDiv);
@@ -228,14 +228,14 @@ SharkGame.Gateway = {
         g.updatePlanetButtons();
     },
 
-    confirmWorld: function() {
+    confirmWorld() {
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
         const g = SharkGame.Gateway;
 
         const selectedWorldData = SharkGame.WorldTypes[g.selectedWorld];
         let planetLevel = 1;
-        _.each(g.planetPool, function(generatedWorld) {
+        _.each(g.planetPool, (generatedWorld) => {
             if(generatedWorld.type === g.selectedWorld) {
                 planetLevel = generatedWorld.level;
             }
@@ -261,7 +261,7 @@ SharkGame.Gateway = {
 
         // add confirm button
         const confirmButtonDiv = $("<div>");
-        SharkGame.Button.makeButton("progress", "proceed", confirmButtonDiv, function() {
+        SharkGame.Button.makeButton("progress", "proceed", confirmButtonDiv, () => {
             // kick back to main to start up the game again
             SharkGame.World.worldType = g.selectedWorld;
             SharkGame.World.planetLevel = planetLevel;
@@ -272,7 +272,7 @@ SharkGame.Gateway = {
 
         // add return to planets button
         const returnButtonDiv = $("<div>");
-        SharkGame.Button.makeButton("backToGateway", "reconsider", returnButtonDiv, function() {
+        SharkGame.Button.makeButton("backToGateway", "reconsider", returnButtonDiv, () => {
             g.switchViews(g.showPlanets);
         });
         gatewayContent.append(returnButtonDiv);
@@ -281,31 +281,29 @@ SharkGame.Gateway = {
         g.transitioning = false;
     },
 
-    switchViews: function(callback) {
+    switchViews(callback) {
         const g = SharkGame.Gateway;
         if(!g.transitioning) {
             g.transitioning = true;
             if(SharkGame.Settings.current.showAnimations) {
-                $("#pane").animate({opacity: 0.0}, 500, "swing", function() {
-                    callback();
-                });
+                $("#pane").animate({opacity: 0.0}, 500, "swing", callback);
             } else {
                 callback();
             }
         }
     },
 
-    prepareArtifactSelection: function(numArtifacts) {
+    prepareArtifactSelection(numArtifacts) {
         const g = SharkGame.Gateway;
         // empty existing pool
         g.artifactPool = [];
 
         // create pool of qualified artifacts
         const qualifiedArtifactPool = [];
-        $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
+        $.each(SharkGame.Artifacts, (artifactName, artifactData) => {
             let qualified = false;
             if(artifactData.required) {
-                _.each(artifactData.required, function(resourceName) {
+                _.each(artifactData.required, (resourceName) => {
                     qualified = qualified || SharkGame.World.doesResourceExist(resourceName);
                 });
             } else {
@@ -337,7 +335,7 @@ SharkGame.Gateway = {
         }
     },
 
-    onArtifactButton: function() {
+    onArtifactButton() {
         const button = $(this);
         const buttonName = button.attr("id");
         const artifactName = buttonName.split("-")[1];
@@ -359,12 +357,12 @@ SharkGame.Gateway = {
         button.prop("disabled", true);
     },
 
-    updateArtifactButtons: function() {
+    updateArtifactButtons() {
         const g = SharkGame.Gateway;
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
         const essenceHeld = r.getResource("essence");
-        _.each(g.artifactPool, function(artifactName) {
+        _.each(g.artifactPool, (artifactName) => {
             const button = $("#artifact-" + artifactName);
             if(button.length > 0) {
                 const artifactData = SharkGame.Artifacts[artifactName];
@@ -400,7 +398,7 @@ SharkGame.Gateway = {
         });
     },
 
-    preparePlanetSelection: function(numPlanets) {
+    preparePlanetSelection(numPlanets) {
         const g = SharkGame.Gateway;
         // empty existing pool
         g.planetPool = [];
@@ -428,15 +426,15 @@ SharkGame.Gateway = {
         }
     },
 
-    updatePlanetButtons: function() {
+    updatePlanetButtons() {
         const g = SharkGame.Gateway;
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        _.each(g.planetPool, function(planetData) {
+        _.each(g.planetPool, (planetData) => {
             const buttonSel = $("#planet-" + planetData.type);
             if(buttonSel.length > 0) {
                 let planetLevel = 1;
-                _.each(g.planetPool, function(generatedWorld) {
+                _.each(g.planetPool, (generatedWorld) => {
                     if(generatedWorld.type === planetData.type) {
                         planetLevel = generatedWorld.level;
                     }
@@ -460,10 +458,10 @@ SharkGame.Gateway = {
         });
     },
 
-    applyArtifacts: function(force) {
+    applyArtifacts(force) {
         // handle general effects
         // special effects are handled by horrible spaghetti code sprinkled between this, World, and Resources
-        $.each(SharkGame.Artifacts, function(artifactName, artifactData) {
+        $.each(SharkGame.Artifacts, (artifactName, artifactData) => {
             if(artifactData.effect && (!artifactData.alreadyApplied || force)) {
                 artifactData.effect(artifactData.level);
                 artifactData.alreadyApplied = true;
@@ -471,7 +469,7 @@ SharkGame.Gateway = {
         });
     },
 
-    getVoiceMessage: function() {
+    getVoiceMessage() {
         let message = "";
         const messagePool = [];
         const allMessages = SharkGame.Gateway.Messages;
@@ -481,12 +479,12 @@ SharkGame.Gateway = {
 
         // if the game wasn't won, add loss messages
         if(!SharkGame.wonGame) {
-            _.each(allMessages.loss, function(message) {
+            _.each(allMessages.loss, (message) => {
                 messagePool.push(message);
             });
         } else {
             // determine which essence based messages should go into the pool
-            _.each(allMessages.essenceBased, function(v) {
+            _.each(allMessages.essenceBased, (v) => {
                 let min = 0;
                 if(v.min) {
                     min = v.min;
@@ -496,7 +494,7 @@ SharkGame.Gateway = {
                     max = v.max;
                 }
                 if(totalEssence >= min && totalEssence <= max) {
-                    _.each(v.messages, function(message) {
+                    _.each(v.messages, (message) => {
                         messagePool.push(message);
                     });
                 }
@@ -505,13 +503,13 @@ SharkGame.Gateway = {
             // determine which planet based messages should go into the pool
             const planetPool = allMessages.lastPlanetBased[lastPlanet];
             if(planetPool) {
-                _.each(planetPool, function(message) {
+                _.each(planetPool, (message) => {
                     messagePool.push(message);
                 });
             }
 
             // finally just add all the generics into the pool
-            _.each(allMessages.generic, function(message) {
+            _.each(allMessages.generic, (message) => {
                 messagePool.push(message);
             });
         }
@@ -525,7 +523,7 @@ SharkGame.Gateway = {
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
 
     // jesus christ you better be sorry what the hell is this
-    showPlanetAttributes: function(worldData, planetLevel, contentDiv) {
+    showPlanetAttributes(worldData, planetLevel, contentDiv) {
         // add known attributes
         const knownAttributeMax = SharkGame.Gateway.getMaxWorldQualitiesToShow();
         if(knownAttributeMax > 0) {
@@ -579,18 +577,18 @@ SharkGame.Gateway = {
         }
     },
 
-    getMaxWorldQualitiesToShow: function() {
+    getMaxWorldQualitiesToShow() {
         const psLevel = SharkGame.Artifacts.planetScanner.level;
         return psLevel > 0 ? psLevel + 1 : 0;
     },
 
-    deleteArtifacts: function() {
-        _.each(SharkGame.Artifacts, function(artifactData) {
+    deleteArtifacts() {
+        _.each(SharkGame.Artifacts, (artifactData) => {
             artifactData.level = 0;
         });
     },
 
-    markWorldCompleted: function(world) {
+    markWorldCompleted(world) {
         if(!SharkGame.Gateway.completedWorlds.includes(world)) {
             SharkGame.Gateway.completedWorlds.push(world);
         }

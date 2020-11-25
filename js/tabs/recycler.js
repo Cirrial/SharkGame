@@ -52,7 +52,7 @@ SharkGame.Recycler = {
 
     efficiency: "NA",
 
-    init: function() {
+    init() {
         const y = SharkGame.Recycler;
         // register tab
         SharkGame.Tabs[y.tabId] = {
@@ -64,7 +64,7 @@ SharkGame.Recycler = {
         };
     },
 
-    switchTo: function() {
+    switchTo() {
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
         const content = $("#content");
@@ -87,14 +87,14 @@ SharkGame.Recycler = {
         y.createButtons();
     },
 
-    update: function() {
+    update() {
         const y = SharkGame.Recycler;
 
         y.updateJunkDisplay();
         y.updateButtons();
     },
 
-    updateJunkDisplay: function() {
+    updateJunkDisplay() {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
@@ -105,11 +105,11 @@ SharkGame.Recycler = {
         junkDisplay.html("CONTENTS:<br/><br/>" + m.beautify(junkAmount) + "<br/><br/>RESIDUE<br/><br/>" + y.getRecyclerEfficiencyString());
     },
 
-    updateButtons: function() {
+    updateButtons() {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        $.each(SharkGame.ResourceTable, (k, v) => {
             if(r.getTotalResource(k) > 0) {
                 const inputButton = $("#input-" + k);
                 const outputButton = $("#output-" + k);
@@ -151,13 +151,13 @@ SharkGame.Recycler = {
         });
     },
 
-    createButtons: function() {
+    createButtons() {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
         const inputButtonDiv = $("#inputButtons");
         const outputButtonDiv = $("#outputButtons");
-        $.each(SharkGame.ResourceTable, function(k, v) {
+        $.each(SharkGame.ResourceTable, (k, v) => {
             if(r.getTotalResource(k) > 0
                 && y.allowedCategories[r.getCategoryOfResource(k)]
                 && y.bannedResources.indexOf(k) === -1) {
@@ -167,7 +167,7 @@ SharkGame.Recycler = {
         });
     },
 
-    onInput: function() {
+    onInput() {
         const r = SharkGame.Resources;
         const l = SharkGame.Log;
         const y = SharkGame.Recycler;
@@ -201,7 +201,7 @@ SharkGame.Recycler = {
 
     },
 
-    onOutput: function() {
+    onOutput() {
         const r = SharkGame.Resources;
         const l = SharkGame.Log;
         const y = SharkGame.Recycler;
@@ -239,7 +239,7 @@ SharkGame.Recycler = {
         button.prop("disabled", true);
     },
 
-    getMaxToBuy: function(resource) {
+    getMaxToBuy(resource) {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const resourceAmount = SharkGame.Resources.getResource(resource);
@@ -258,18 +258,18 @@ SharkGame.Recycler = {
         return Math.floor(max);
     },
 
-    onInputHover: function() {
+    onInputHover() {
         const button = $(this);
         const resource = button.attr("id").split("-")[1];
         const amount = SharkGame.Resources.getResource(resource);
         SharkGame.Recycler.updateEfficiency(resource, amount);
     },
 
-    onInputUnhover: function() {
+    onInputUnhover() {
         SharkGame.Recycler.efficiency = "NA";
     },
 
-    getRecyclerEfficiencyString: function() {
+    getRecyclerEfficiencyString() {
         const y = SharkGame.Recycler;
         if(y.efficiency === "NA") {
             return "<br/><br/>";
@@ -277,7 +277,7 @@ SharkGame.Recycler = {
         return (y.getEfficiency()*100).toFixed(2).toString().bold() + "<b>%<br/>EFFICIENY</b>";
     },
 
-    getEfficiency: function() {
+    getEfficiency() {
         const y = SharkGame.Recycler;
         if(y.efficiency === "NA") {
             return 1;
@@ -285,7 +285,7 @@ SharkGame.Recycler = {
         return y.efficiency.toFixed(4);
     },
 
-    updateEfficiency: function(resource, amount) {
+    updateEfficiency(resource, amount) {
         const y = SharkGame.Recycler;
         const buyN = SharkGame.Settings.current.buyAmount;
         let evalue = 5;

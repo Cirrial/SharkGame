@@ -1,8 +1,8 @@
 SharkGame.ArtifactUtil = {
-    migratorCost: function(level) {
+    migratorCost(level) {
         return Math.floor(Math.pow(2, level + 1));
     },
-    migratorEffect: function(level, resourceName) {
+    migratorEffect(level, resourceName) {
         if(level < 1) {
             return;
         }
@@ -14,16 +14,16 @@ SharkGame.ArtifactUtil = {
             SharkGame.Resources.changeResource(resourceName, amount);
         }
     },
-    totemCost: function(level) {
+    totemCost(level) {
         return Math.floor(Math.pow(2.5, level + 1));
     },
-    totemEffect: function(level, resourceList) {
+    totemEffect(level, resourceList) {
         if(level < 1) {
             return;
         }
         const wr = SharkGame.World.worldResources;
         const multiplier = level + 1;
-        _.each(resourceList, function(resourceName) {
+        _.each(resourceList, (resourceName) => {
             if(wr[resourceName].artifactMultiplier) {
                 wr[resourceName].artifactMultiplier *= multiplier;
             } else {
@@ -39,10 +39,10 @@ SharkGame.Artifacts = {
         desc: "Applies a multiplier to all income.",
         flavour: "As creatures dwell within the sea, so too do creature dwell within causality.",
         max: 5,
-        cost: function(level) {
+        cost(level) {
             return Math.floor(Math.pow(10, level + 1));
         },
-        effect: function(level) {
+        effect(level) {
             SharkGame.Resources.specialMultiplier = Math.max(2 * level, 1);
         }
     },
@@ -51,7 +51,7 @@ SharkGame.Artifacts = {
         desc: "Reduce the severity of planet climates.",
         flavour: "Intelligence is not changing to fit an environment, but changing the environment to fit you.",
         max: 10,
-        cost: function(level) {
+        cost(level) {
             return Math.floor(Math.pow(4, level + 1));
         }
         // effect is handled specially
@@ -62,7 +62,7 @@ SharkGame.Artifacts = {
         desc: "Reduces the cost requirements of gates.",
         flavour: "Power over the unknown can only reach so far.",
         max: 10,
-        cost: function(level) {
+        cost(level) {
             return Math.floor(Math.pow(3, level + 1));
         }
         // effect is handled specially
@@ -73,7 +73,7 @@ SharkGame.Artifacts = {
         desc: "Reveals properties of worlds before travelling to them.",
         flavour: "Knowledge may not change destiny, but it may divert it.",
         max: 15,
-        cost: function(level) {
+        cost(level) {
             return Math.floor(Math.pow(1.5, level + 1));
         }
         // effect is handled specially
@@ -86,7 +86,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shark");
         }
     },
@@ -97,7 +97,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["ray"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "ray");
         }
     },
@@ -108,7 +108,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["crab"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "crab");
         }
     },
@@ -119,7 +119,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shrimp");
         }
     },
@@ -130,7 +130,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["lobster"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "lobster");
         }
     },
@@ -141,7 +141,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "dolphin");
         }
     },
@@ -152,7 +152,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "whale");
         }
     },
@@ -163,7 +163,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["eel"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "eel");
         }
     },
@@ -174,7 +174,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "chimaera");
         }
     },
@@ -185,7 +185,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.migratorCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "octopus");
         }
     },
@@ -196,7 +196,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["shark"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse", "diver"]);
         }
     },
@@ -207,7 +207,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["ray"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["ray", "laser", "maker"]);
         }
     },
@@ -218,7 +218,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["crab"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["crab", "planter", "brood"]);
         }
     },
@@ -229,7 +229,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["shrimp"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shrimp", "worker", "queen"]);
         }
     },
@@ -240,7 +240,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["lobster", "berrier", "harvester"]);
         }
     },
@@ -251,7 +251,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["dolphin", "philosopher", "biologist", "treasurer"]);
         }
     },
@@ -262,7 +262,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["whale"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["whale"]);
         }
     },
@@ -273,7 +273,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["eel"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["eel", "sifter", "pit", "technician"]);
         }
     },
@@ -284,7 +284,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["chimaera"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["chimaera", "transmuter", "explorer"]);
         }
     },
@@ -295,7 +295,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["octopus", "collector", "scavenger"]);
         }
     },
@@ -305,7 +305,7 @@ SharkGame.Artifacts = {
         flavour: "Progress can be slowed, but it can never be stopped.",
         max: 10,
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["fishMachine", "sandDigger", "autoTransmuter", "crystalMiner", "skimmer", "purifier", "heater"]);
         }
     },
@@ -316,7 +316,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["shrimp", "lobster"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["spongeFarmer", "berrySprayer", "glassMaker"]);
         }
     },
@@ -327,7 +327,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["dolphin"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["silentArchivist", "tirelessCrafter"]);
         }
     },
@@ -338,7 +338,7 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp"]);
         }
     },
@@ -349,14 +349,14 @@ SharkGame.Artifacts = {
         max: 10,
         required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,
-        effect: function(level) {
+        effect(level) {
             if(level < 1) {
                 return;
             }
             const resourceList = ["tar", "ice"];
             const wr = SharkGame.World.worldResources;
             const multiplier = 1 / (level + 1);
-            _.each(resourceList, function(resourceName) {
+            _.each(resourceList, (resourceName) => {
                 if(wr[resourceName].artifactMultiplier) {
                     wr[resourceName].artifactMultiplier *= multiplier;
                 } else {

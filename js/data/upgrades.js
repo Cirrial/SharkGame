@@ -1,6 +1,6 @@
 SharkGame.Upgrades = {
 
-    getUpgradeTable: function() {
+    getUpgradeTable() {
         const worldType = SharkGame.World.worldType;
         if(worldType === "stone") {
             return SharkGame.Upgrades.stoneUpgrades;

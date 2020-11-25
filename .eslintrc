@@ -20,7 +20,7 @@
     "no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "(?:^__)|(?:^.$)",
+        "varsIgnorePattern": "(?:^__)|(?:[^$_]$)",
         "argsIgnorePattern": "(?:^_)|(?:^.$)"
       }
     ],

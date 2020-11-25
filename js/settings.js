@@ -33,7 +33,7 @@ SharkGame.Settings = {
             true,
             false
         ],
-        onChange: function() {
+        onChange() {
             SharkGame.Resources.rebuildTable = true;
         }
     },
@@ -47,7 +47,7 @@ SharkGame.Settings = {
             "list",
             "pile"
         ],
-        onChange: function() {
+        onChange() {
             SharkGame.Main.changeTab(SharkGame.Tabs.current);
         }
     },
@@ -76,7 +76,7 @@ SharkGame.Settings = {
             10,
             30
         ],
-        onChange: function() {
+        onChange() {
             clearInterval(SharkGame.Main.autosaveHandler);
             SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
             SharkGame.Log.addMessage("Now autosaving every " + SharkGame.Settings.current.autosaveFrequency + " minute" + SharkGame.plural(SharkGame.Settings.current.autosaveFrequency) + ".");
@@ -97,7 +97,7 @@ SharkGame.Settings = {
             30,
             50
         ],
-        onChange: function() {
+        onChange() {
             SharkGame.Log.correctLogLength();
         }
     },
@@ -116,7 +116,7 @@ SharkGame.Settings = {
             "45%",
             "50%"
         ],
-        onChange: function() {
+        onChange() {
             const sidebar = $("#sidebar");
             if(SharkGame.Settings.current.showAnimations) {
                 sidebar.animate({width: SharkGame.Settings.current.sidebarWidth}, "100");
@@ -146,7 +146,7 @@ SharkGame.Settings = {
             true,
             false
         ],
-        onChange: function() {
+        onChange() {
             SharkGame.Resources.rebuildTable = true;
             SharkGame.Stats.recreateIncomeTable = true;
         }
@@ -173,7 +173,7 @@ SharkGame.Settings = {
             true,
             false
         ],
-        onChange: function() {
+        onChange() {
             SharkGame.Main.changeTab(SharkGame.Tabs.current);
         }
     }
