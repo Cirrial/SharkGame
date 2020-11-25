@@ -1148,7 +1148,7 @@ $(function() {
     // ctrl+s saves
     $(window).on("keydown", function(event) {
         if (event.ctrlKey || event.metaKey) {
-            switch (String.fromCharCode(event.which).toLowerCase()) {
+            switch (String.fromCharCode(event.key).toLowerCase()) {
             case "s":
                 event.preventDefault();
                 SharkGame.Save.saveGame();
