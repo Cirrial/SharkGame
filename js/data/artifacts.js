@@ -3,14 +3,14 @@ SharkGame.ArtifactUtil = {
         return Math.floor(Math.pow(2, level + 1));
     },
     migratorEffect(level, resourceName) {
-        if(level < 1) {
+        if (level < 1) {
             return;
         }
         const amount = Math.pow(5, level);
         // force existence
         SharkGame.World.forceExistence(resourceName);
         const res = SharkGame.Resources.getTotalResource(resourceName);
-        if(res < amount) {
+        if (res < amount) {
             SharkGame.Resources.changeResource(resourceName, amount);
         }
     },
@@ -18,19 +18,19 @@ SharkGame.ArtifactUtil = {
         return Math.floor(Math.pow(2.5, level + 1));
     },
     totemEffect(level, resourceList) {
-        if(level < 1) {
+        if (level < 1) {
             return;
         }
         const wr = SharkGame.World.worldResources;
         const multiplier = level + 1;
         _.each(resourceList, (resourceName) => {
-            if(wr.get(resourceName).artifactMultiplier) {
+            if (wr.get(resourceName).artifactMultiplier) {
                 wr.get(resourceName).artifactMultiplier *= multiplier;
             } else {
                 wr.get(resourceName).artifactMultiplier = multiplier;
             }
         });
-    }
+    },
 };
 
 SharkGame.Artifacts = {
@@ -44,7 +44,7 @@ SharkGame.Artifacts = {
         },
         effect(level) {
             SharkGame.Resources.specialMultiplier = Math.max(2 * level, 1);
-        }
+        },
     },
     planetTerraformer: {
         name: "World Shaper",
@@ -53,7 +53,7 @@ SharkGame.Artifacts = {
         max: 10,
         cost(level) {
             return Math.floor(Math.pow(4, level + 1));
-        }
+        },
         // effect is handled specially
         // check SharkGame.World.getTerraformMultiplier
     },
@@ -64,7 +64,7 @@ SharkGame.Artifacts = {
         max: 10,
         cost(level) {
             return Math.floor(Math.pow(3, level + 1));
-        }
+        },
         // effect is handled specially
         // check SharkGame.World.getGateCostMultiplier
     },
@@ -75,7 +75,7 @@ SharkGame.Artifacts = {
         max: 15,
         cost(level) {
             return Math.floor(Math.pow(1.5, level + 1));
-        }
+        },
         // effect is handled specially
         // check SharkGame.Gateway.getMaxWorldQualitiesToShow
     },
@@ -88,7 +88,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shark");
-        }
+        },
     },
     rayMigrator: {
         name: "Ray Migrator",
@@ -99,7 +99,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "ray");
-        }
+        },
     },
     crabMigrator: {
         name: "Crab Migrator",
@@ -110,7 +110,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "crab");
-        }
+        },
     },
     shrimpMigrator: {
         name: "Shrimp Migrator",
@@ -121,7 +121,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "shrimp");
-        }
+        },
     },
     lobsterMigrator: {
         name: "Lobster Migrator",
@@ -132,7 +132,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "lobster");
-        }
+        },
     },
     dolphinMigrator: {
         name: "Dolphin Migrator",
@@ -143,7 +143,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "dolphin");
-        }
+        },
     },
     whaleMigrator: {
         name: "Whale Migrator",
@@ -154,7 +154,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "whale");
-        }
+        },
     },
     eelMigrator: {
         name: "Eel Migrator",
@@ -165,7 +165,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "eel");
-        }
+        },
     },
     chimaeraMigrator: {
         name: "Chimaera Migrator",
@@ -176,7 +176,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "chimaera");
-        }
+        },
     },
     octopusMigrator: {
         name: "Octopus Migrator",
@@ -187,7 +187,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.migratorCost,
         effect(level) {
             SharkGame.ArtifactUtil.migratorEffect(level, "octopus");
-        }
+        },
     },
     sharkTotem: {
         name: "Totem of Shark",
@@ -198,7 +198,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shark", "scientist", "nurse", "diver"]);
-        }
+        },
     },
     rayTotem: {
         name: "Totem of Ray",
@@ -209,7 +209,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["ray", "laser", "maker"]);
-        }
+        },
     },
     crabTotem: {
         name: "Totem of Crab",
@@ -220,7 +220,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["crab", "planter", "brood"]);
-        }
+        },
     },
     shrimpTotem: {
         name: "Totem of Shrimp",
@@ -231,7 +231,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["shrimp", "worker", "queen"]);
-        }
+        },
     },
     lobsterTotem: {
         name: "Totem of Lobster",
@@ -242,7 +242,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["lobster", "berrier", "harvester"]);
-        }
+        },
     },
     dolphinTotem: {
         name: "Totem of Dolphin",
@@ -253,7 +253,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["dolphin", "philosopher", "biologist", "treasurer"]);
-        }
+        },
     },
     whaleTotem: {
         name: "Totem of Whale",
@@ -264,7 +264,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["whale"]);
-        }
+        },
     },
     eelTotem: {
         name: "Totem of Eel",
@@ -275,7 +275,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["eel", "sifter", "pit", "technician"]);
-        }
+        },
     },
     chimaeraTotem: {
         name: "Totem of Chimaera",
@@ -286,7 +286,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["chimaera", "transmuter", "explorer"]);
-        }
+        },
     },
     octopusTotem: {
         name: "Totem of Octopus",
@@ -297,7 +297,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["octopus", "collector", "scavenger"]);
-        }
+        },
     },
     progressTotem: {
         name: "Totem of Progress",
@@ -306,8 +306,16 @@ SharkGame.Artifacts = {
         max: 10,
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["fishMachine", "sandDigger", "autoTransmuter", "crystalMiner", "skimmer", "purifier", "heater"]);
-        }
+            SharkGame.ArtifactUtil.totemEffect(level, [
+                "fishMachine",
+                "sandDigger",
+                "autoTransmuter",
+                "crystalMiner",
+                "skimmer",
+                "purifier",
+                "heater",
+            ]);
+        },
     },
     carapaceTotem: {
         name: "Totem of Carapace",
@@ -318,7 +326,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["spongeFarmer", "berrySprayer", "glassMaker"]);
-        }
+        },
     },
     inspirationTotem: {
         name: "Totem of Inspiration",
@@ -329,7 +337,7 @@ SharkGame.Artifacts = {
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
             SharkGame.ArtifactUtil.totemEffect(level, ["silentArchivist", "tirelessCrafter"]);
-        }
+        },
     },
     industryTotem: {
         name: "Totem of Industry",
@@ -339,8 +347,13 @@ SharkGame.Artifacts = {
         required: ["octopus"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
-            SharkGame.ArtifactUtil.totemEffect(level, ["clamCollector", "sprongeSmelter", "seaScourer", "prostheticPolyp"]);
-        }
+            SharkGame.ArtifactUtil.totemEffect(level, [
+                "clamCollector",
+                "sprongeSmelter",
+                "seaScourer",
+                "prostheticPolyp",
+            ]);
+        },
     },
     wardingTotem: {
         name: "Totem of Warding",
@@ -350,19 +363,19 @@ SharkGame.Artifacts = {
         required: ["tar", "ice"],
         cost: SharkGame.ArtifactUtil.totemCost,
         effect(level) {
-            if(level < 1) {
+            if (level < 1) {
                 return;
             }
             const resourceList = ["tar", "ice"];
             const wr = SharkGame.World.worldResources;
             const multiplier = 1 / (level + 1);
             _.each(resourceList, (resourceName) => {
-                if(wr.get(resourceName).artifactMultiplier) {
+                if (wr.get(resourceName).artifactMultiplier) {
                     wr.get(resourceName).artifactMultiplier *= multiplier;
                 } else {
                     wr.get(resourceName).artifactMultiplier = multiplier;
                 }
             });
-        }
-    }
+        },
+    },
 };

@@ -1,5 +1,4 @@
 SharkGame.Log = {
-
     initialised: false,
     messages: [],
 
@@ -17,18 +16,14 @@ SharkGame.Log = {
         const s = SharkGame.Settings.current;
         const showAnims = s.showAnimations;
 
-        if(!l.initialised) {
+        if (!l.initialised) {
             l.init();
         }
         const messageList = $("#messageList");
 
         const messageItem = $("<li>").html(message);
-        if(showAnims) {
-            messageItem.hide()
-                .css("opacity", 0)
-                .prependTo("#messageList")
-                .slideDown(50)
-                .animate({opacity: 1.0}, 100);
+        if (showAnims) {
+            messageItem.hide().css("opacity", 0).prependTo("#messageList").slideDown(50).animate({ opacity: 1.0 }, 100);
         } else {
             messageItem.prependTo("#messageList");
         }
@@ -59,14 +54,14 @@ SharkGame.Log = {
         const logMax = SharkGame.Settings.current.logMessageMax;
 
         // Cuts off messages below rendering limit to significantly cut down on jittering
-        $("#messageList").css("max-height", logMax * ($(l.messages[0]).innerHeight()) || 100);
+        $("#messageList").css("max-height", logMax * $(l.messages[0]).innerHeight() || 100);
 
-        if(l.messages.length >= logMax) {
-            while(l.messages.length > logMax) {
-                let oldestMessage = l.messages[0]
+        if (l.messages.length >= logMax) {
+            while (l.messages.length > logMax) {
+                let oldestMessage = l.messages[0];
                 // remove oldest message
-                if(showAnims) {
-                    l.messages[0].animate({opacity: 0}, 100, "swing", function remove() {
+                if (showAnims) {
+                    l.messages[0].animate({ opacity: 0 }, 100, "swing", function remove() {
                         $(oldestMessage).remove();
                     });
                 } else {
@@ -91,5 +86,5 @@ SharkGame.Log = {
 
     haveAnyMessages() {
         return SharkGame.Log.messages.length > 0;
-    }
+    },
 };

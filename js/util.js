@@ -1,5 +1,4 @@
 SharkGame.MathUtil = {
-
     // a = current amount
     // b = desired amount
     // k = constant price
@@ -13,7 +12,7 @@ SharkGame.MathUtil = {
     // k = constant price
     // returns: absolute max items that can be held with invested and current resources
     constantMax(a, b, k) {
-        b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
+        b = Math.floor(Math.floor(b) * (1 - 1e-9) + 0.1); //safety margin
         return b / k + a;
     },
 
@@ -22,7 +21,7 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: cost to get to b from a
     linearCost(a, b, k) {
-        return k / 2 * (b * b + b) - k / 2 * (a * a + a);
+        return (k / 2) * (b * b + b) - (k / 2) * (a * a + a);
     },
 
     // a = current amount
@@ -30,10 +29,9 @@ SharkGame.MathUtil = {
     // k = cost increase per item
     // returns: absolute max items that can be held with invested and current resources
     linearMax(a, b, k) {
-        b = Math.floor(Math.floor(b) * (1 - 1e-9) + .1); //safety margin
-        return Math.sqrt(a * a + a + 2 * b / k + 0.25) - 0.5;
+        b = Math.floor(Math.floor(b) * (1 - 1e-9) + 0.1); //safety margin
+        return Math.sqrt(a * a + a + (2 * b) / k + 0.25) - 0.5;
     },
-
 
     // these need to be adapted probably?
     // will anything ever use these
@@ -47,7 +45,7 @@ SharkGame.MathUtil = {
 
     // artificial limit - whatever has these functions for cost/max can only have one of)
     uniqueCost(a, b, k) {
-        if(a < 1 && b - 1 <= 1) {
+        if (a < 1 && b - 1 <= 1) {
             return k;
         } else {
             return Number.POSITIVE_INFINITY; // be careful this doesn't fuck things up
@@ -56,7 +54,7 @@ SharkGame.MathUtil = {
 
     uniqueMax(a, b, k) {
         return 1;
-    }
+    },
 };
 
 //linear floor(sqrt(current^2 + current + 2 * price/k + 1/4) - 1/2)
