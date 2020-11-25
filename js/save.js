@@ -68,8 +68,8 @@ SharkGame.Save = {
         });
 
         // add timestamp
-        //saveData.timestamp = (new Date()).getTime();
-        saveData.timestampLastSave = (new Date()).getTime();
+        //saveData.timestamp = _.now();
+        saveData.timestampLastSave = _.now();
         saveData.timestampGameStart = SharkGame.timestampGameStart;
         saveData.timestampRunStart = SharkGame.timestampRunStart;
         saveData.timestampRunEnd = SharkGame.timestampRunEnd;
@@ -116,7 +116,7 @@ SharkGame.Save = {
             try {
                 saveDataString = ascii85.decode(saveDataString);
             } catch(err) {
-                throw new Error("Saved data looked like it was encoded in ascii85, but it couldn't be decoded. Can't load. Your save: " + saveDataString)
+                throw new Error("Saved data looked like it was encoded in ascii85, but it couldn't be decoded. Can't load. Your save: " + saveDataString);
             }
         }
 
@@ -163,10 +163,10 @@ SharkGame.Save = {
                 saveData = SharkGame.Save.expandData(template, saveDataFlat.slice());
                 saveData.saveVersion = saveVersion;
 
-                const checkTimes = function (data) {
-                    return (data.timestampLastSave > 1e12 && data.timestampLastSave < 2e12 &&
+                function checkTimes(data) {
+                    return data.timestampLastSave > 1e12 && data.timestampLastSave < 2e12 &&
                     data.timestampGameStart > 1e12 && data.timestampGameStart < 2e12 &&
-                    data.timestampRunStart > 1e12 && data.timestampRunStart < 2e12)
+                    data.timestampRunStart > 1e12 && data.timestampRunStart < 2e12;
                 }
 
                 //check if the template was sorted wrong when saving
@@ -217,7 +217,7 @@ SharkGame.Save = {
                 SharkGame.World.apply();
                 SharkGame.Home.init();
             }
-            
+
             // hacky kludge: force table creation
             SharkGame.Resources.reconstructResourcesTable();
 
@@ -228,7 +228,7 @@ SharkGame.Save = {
                     }
                 });
             }
-            
+
             SharkGame.Gateway.init();
             if(saveData.completedWorlds) {
                 $.each(saveData.completedWorlds, function(k, v) {
@@ -237,13 +237,13 @@ SharkGame.Save = {
                     }
                 });
             }
-            
+
             // load artifacts (need to have the terraformer and cost reducer loaded before world init)
             if(saveData.artifacts) {
                 $.each(saveData.artifacts, function(k, v) {
                     SharkGame.Artifacts[k].level = v;
                 });
-            // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
+                // apply artifacts (world needs to be init first before applying other artifacts, but special ones need to be _loaded_ first)
                 SharkGame.Gateway.applyArtifacts(true);
             }
 
@@ -280,18 +280,18 @@ SharkGame.Save = {
                 });
             }
 
-            const currTimestamp = (new Date()).getTime();
+            const currTimestamp = _.now();
             // create surrogate timestamps if necessary
-            if((typeof saveData.timestampLastSave !== "number")) {
+            if(typeof saveData.timestampLastSave !== "number") {
                 saveData.timestampLastSave = currTimestamp;
             }
-            if((typeof saveData.timestampGameStart !== "number")) {
+            if(typeof saveData.timestampGameStart !== "number") {
                 saveData.timestampGameStart = currTimestamp;
             }
-            if((typeof saveData.timestampRunStart !== "number")) {
+            if(typeof saveData.timestampRunStart !== "number") {
                 saveData.timestampRunStart = currTimestamp;
             }
-            if((typeof saveData.timestampRunEnd !== "number")) {
+            if(typeof saveData.timestampRunEnd !== "number") {
                 saveData.timestampRunEnd = currTimestamp;
             }
 
@@ -314,7 +314,7 @@ SharkGame.Save = {
             // if offline mode is enabled
             if(simulateOffline) {
                 // get times elapsed since last save game
-                const now = (new Date()).getTime();
+                const now = _.now();
                 let secondsElapsed = (now - saveData.timestampLastSave) / 1000;
                 if(secondsElapsed < 0) {
                     // something went hideously wrong or someone abused a system clock somewhere
@@ -337,7 +337,7 @@ SharkGame.Save = {
                                 const numMonths = Math.floor(numWeeks / 4);
                                 if(numMonths > 12) {
                                     const numYears = Math.floor(numMonths / 12);
-                                    notification += "almost " + ( numYears === 1 ? "a" : numYears ) + " year" + SharkGame.plural(numYears) + ", thanks for remembering this exists!"
+                                    notification += "almost " + ( numYears === 1 ? "a" : numYears ) + " year" + SharkGame.plural(numYears) + ", thanks for remembering this exists!";
                                 } else {
                                     notification += "like " + (numMonths === 1 ? "a" : numMonths ) + " month" + SharkGame.plural(numMonths) + ", it's getting kinda crowded.";
                                 }
@@ -397,7 +397,7 @@ SharkGame.Save = {
     },
 
     savedGameExists: function() {
-        return (localStorage.getItem(SharkGame.Save.saveFileName) !== null);
+        return localStorage.getItem(SharkGame.Save.saveFileName) !== null;
     },
 
     deleteSave: function() {

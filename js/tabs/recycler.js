@@ -131,7 +131,7 @@ SharkGame.Recycler = {
                 }
 
                 // update input button
-                let disableButton = (resourceAmount < inputAmount) || (inputAmount <= 0);
+                let disableButton = resourceAmount < inputAmount || inputAmount <= 0;
                 let label = "Recycle ";
                 if(inputAmount > 0) {
                     label += m.beautify(inputAmount) + " ";
@@ -140,7 +140,7 @@ SharkGame.Recycler = {
                 inputButton.html(label).prop("disabled", disableButton);
 
                 // update output button
-                disableButton = (maxOutputAmount < outputAmount) || (outputAmount <= 0);
+                disableButton = maxOutputAmount < outputAmount || outputAmount <= 0;
                 label = "Convert to ";
                 if(outputAmount > 0) {
                     label += m.beautify(outputAmount) + " ";
@@ -274,7 +274,7 @@ SharkGame.Recycler = {
         if(y.efficiency === "NA") {
             return "<br/><br/>";
         }
-        return ((y.getEfficiency()*100).toFixed(2)).toString().bold() + "<b>%<br/>EFFICIENY</b>";
+        return (y.getEfficiency()*100).toFixed(2).toString().bold() + "<b>%<br/>EFFICIENY</b>";
     },
 
     getEfficiency: function() {
@@ -303,7 +303,7 @@ SharkGame.Recycler = {
         }
 
         if(amount) {
-            const n = amount/(-buyN)
+            const n = amount/-buyN;
             // check if the amount to eat is less than the threshold, currently 1 million
             if(n < Math.pow(10,evalue)) {
                 y.efficiency = 1;

@@ -130,7 +130,7 @@ SharkGame.Gateway = {
         }
         gatewayContent.append($("<p>").html("You have <span id='essenceHeldDisplay' class='essenceCount'>" + m.beautify(essenceHeld) + "</span> essence."));
         if(numenHeld > 0) {
-            const numenName = (numenHeld > 1) ? "numina" : "numen";
+            const numenName = numenHeld > 1 ? "numina" : "numen";
             gatewayContent.append($("<p>").html("You also have <span class='numenCount'>" + m.beautify(numenHeld) + "</span> " + numenName + ", and you radiate divinity."));
         }
         gatewayContent.append($("<p>").attr("id", "gatewayStatusMessage").addClass("medDesc"));
@@ -307,7 +307,7 @@ SharkGame.Gateway = {
             if(artifactData.required) {
                 _.each(artifactData.required, function(resourceName) {
                     qualified = qualified || SharkGame.World.doesResourceExist(resourceName);
-                })
+                });
             } else {
                 qualified = true;
             }
@@ -369,12 +369,12 @@ SharkGame.Gateway = {
             if(button.length > 0) {
                 const artifactData = SharkGame.Artifacts[artifactName];
                 const cost = artifactData.cost(artifactData.level);
-                const maxedOut = (artifactData.level >= artifactData.max);
+                const maxedOut = artifactData.level >= artifactData.max;
                 let enableButton = true;
                 if(essenceHeld < cost || maxedOut) {
                     enableButton = false;
                 }
-                const purchaseLevel = maxedOut ? "Max" : (artifactData.level + 1);
+                const purchaseLevel = maxedOut ? "Max" : artifactData.level + 1;
                 let label = artifactData.name +
                     "<br><span class='medDesc'>( Pwr <span class='essenceCountBrighter'>" + purchaseLevel + "</span> )</span>" +
                     "<br>" + artifactData.desc +
@@ -523,14 +523,14 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
-    
+
     // jesus christ you better be sorry what the hell is this
     showPlanetAttributes: function(worldData, planetLevel, contentDiv) {
         // add known attributes
         const knownAttributeMax = SharkGame.Gateway.getMaxWorldQualitiesToShow();
         if(knownAttributeMax > 0) {
             const totalAttributes = _.size(worldData.modifiers);
-            contentDiv.append($("<p>").html("Known modifiers (" + (Math.floor((totalAttributes === 0) ? 1 : Math.min(1, knownAttributeMax / totalAttributes) * 100)) + "%):"));
+            contentDiv.append($("<p>").html("Known modifiers (" + Math.floor(totalAttributes === 0 ? 1 : Math.min(1, knownAttributeMax / totalAttributes) * 100) + "%):"));
             const modifierList = $("<ul>").addClass("gatewayPropertyList");
             for(let i = 0; i < Math.min(knownAttributeMax, totalAttributes); i++) {
                 const modifier = worldData.modifiers[i];
@@ -549,7 +549,7 @@ SharkGame.Gateway = {
             const bonusPoints = knownAttributeMax - totalAttributes;
             if(bonusPoints > 0) {
                 const gateSlots = _.size(worldData.gateCosts);
-                contentDiv.append($("<p>").html("Known gate requirements (" + (Math.floor(Math.min(1, bonusPoints / gateSlots) * 100)) + "%):"));
+                contentDiv.append($("<p>").html("Known gate requirements (" + Math.floor(Math.min(1, bonusPoints / gateSlots) * 100) + "%):"));
                 const gateList = $("<ul>").addClass("gatewayPropertyList");
                 const gateKeySet = _.keys(worldData.gateCosts);
                 for(let i = 0; i < Math.min(bonusPoints, gateSlots); i++) {
@@ -560,7 +560,7 @@ SharkGame.Gateway = {
                 }
                 contentDiv.append(gateList);
                 const totalBannedResources = _.size(worldData.absentResources);
-                contentDiv.append($("<p>").html("Known absences (" + (Math.floor(Math.min(1, bonusPoints / totalBannedResources) * 100)) + "%):"));
+                contentDiv.append($("<p>").html("Known absences (" + Math.floor(Math.min(1, bonusPoints / totalBannedResources) * 100) + "%):"));
                 const bannedList = $("<ul>").addClass("gatewayPropertyList");
                 for(let i = 0; i < Math.min(bonusPoints, totalBannedResources); i++) {
                     const bannedResource = worldData.absentResources[i];
@@ -574,7 +574,7 @@ SharkGame.Gateway = {
 
     getMaxWorldQualitiesToShow: function() {
         const psLevel = SharkGame.Artifacts.planetScanner.level;
-        return (psLevel > 0) ? psLevel + 1 : 0;
+        return psLevel > 0 ? psLevel + 1 : 0;
     },
 
     deleteArtifacts: function() {

@@ -25,7 +25,7 @@ SharkGame.Upgrades = {
             "ancestralRecall"
         ]
     },
-    
+
     rays: {
         upgrades: [
             "crystalSpade",
@@ -33,13 +33,13 @@ SharkGame.Upgrades = {
             "rayBiology"
         ]
     },
-    
+
     crabs: {
         upgrades: [
             "crabBiology"
         ]
     },
-    
+
     lobsters: {
         upgrades: [
             "clamScooping"
@@ -48,7 +48,7 @@ SharkGame.Upgrades = {
             "crustaceans"
         ]
     },
-    
+
     shrimp: {
         upgrades: [
             "eusociality",
@@ -58,7 +58,7 @@ SharkGame.Upgrades = {
             "crustaceans"
         ]
     },
-    
+
     crustaceans: {
         upgrades: [
             "crustaceanBiology"
@@ -70,7 +70,7 @@ SharkGame.Upgrades = {
         ],
         category: true
     },
-    
+
     dolphins: {
         upgrades: [
             "dolphinBiology",
