@@ -3,49 +3,49 @@ SharkGame.WorldModifiers = {
         name: "Planetary Income",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].income = level * amount;
+            wr.get(resourceName).income = level * amount;
         }
     },
     planetaryConstantIncome: {
         name: "Planetary Constant Income",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].income = amount;
+            wr.get(resourceName).income = amount;
         }
     },
     planetaryIncomeMultiplier: {
         name: "Planetary Income Multiplier",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].incomeMultiplier = 1 + level * amount;
+            wr.get(resourceName).incomeMultiplier = 1 + level * amount;
         }
     },
     planetaryConstantIncomeMultiplier: {
         name: "Constant Planetary Income Multiplier",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].incomeMultiplier = amount;
+            wr.get(resourceName).incomeMultiplier = amount;
         }
     },
     planetaryIncomeReciprocalMultiplier: {
         name: "Planetary Income Reciprocal Multiplier",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].incomeMultiplier = 1 / (1 + level * amount);
+            wr.get(resourceName).incomeMultiplier = 1 / (1 + level * amount);
         }
     },
     planetaryResourceBoost: {
         name: "Planetary Boost",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].boostMultiplier = 1 + level * amount;
+            wr.get(resourceName).boostMultiplier = 1 + level * amount;
         }
     },
     planetaryResourceReciprocalBoost: {
         name: "Planetary Reciprocal Boost",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
-            wr[resourceName].boostMultiplier = 1 / (1 + level * amount);
+            wr.get(resourceName).boostMultiplier = 1 / (1 + level * amount);
         }
     },
     planetaryStartingResources: {
@@ -60,12 +60,8 @@ SharkGame.WorldModifiers = {
     },
     planetaryGeneratorRestriction: {
         name: "Restricted Generator-Income Combination",
-        apply(resourceName, restriction) {
-            const wrst = SharkGame.World.worldRestrictedCombinations;
-            if(!wrst[resourceName]) {
-                wrst[resourceName] = [];
-            }
-            wrst[resourceName].push(restriction);
+        apply(generator, restrictedResource) {
+            SharkGame.World.worldRestrictedCombinations.set(generator, restrictedResource);
         }
     }
 };
@@ -73,8 +69,8 @@ SharkGame.WorldModifiers = {
 SharkGame.World = {
 
     worldType: "start",
-    worldResources: {},
-    worldRestrictedCombinations: {},
+    worldResources: new Map(),
+    worldRestrictedCombinations: new Map(),
     planetLevel: 1,
 
     init() {
@@ -94,17 +90,16 @@ SharkGame.World = {
     resetWorldProperties() {
         const w = SharkGame.World;
         const wr = w.worldResources;
-        const rt = SharkGame.ResourceTable;
-        w.worldRestrictedCombinations = {};
+        w.worldRestrictedCombinations.clear();
 
         // set up defaults
-        $.each(rt, (k, v) => {
-            wr[k] = {};
-            wr[k].exists = true;
-            wr[k].income = 0;
-            wr[k].incomeMultiplier = 1;
-            wr[k].boostMultiplier = 1;
-            wr[k].artifactMultiplier = 1;
+        SharkGame.ResourceMap.forEach((v, k, m) => {
+            wr.set(k,{});
+            wr.get(k).exists = true;
+            wr.get(k).income = 0;
+            wr.get(k).incomeMultiplier = 1;
+            wr.get(k).boostMultiplier = 1;
+            wr.get(k).artifactMultiplier = 1;
         });
     },
 
@@ -119,7 +114,7 @@ SharkGame.World = {
 
         // disable resources not allowed on planet
         $.each(worldInfo.absentResources, (i, v) => {
-            wr[v].exists = false;
+            wr.get(v).exists = false;
         });
 
         // apply world modifiers
@@ -169,24 +164,23 @@ SharkGame.World = {
 
     // does this resource exist on this planet?
     doesResourceExist(resourceName) {
-        const info = SharkGame.World.worldResources[resourceName];
-        return info.exists;
+        return SharkGame.World.worldResources.get(resourceName).exists;
     },
 
     forceExistence(resourceName) {
-        SharkGame.World.worldResources[resourceName].exists = true;
+        SharkGame.World.worldResources.get(resourceName).exists = true;
     },
 
     getWorldIncomeMultiplier(resourceName) {
-        return SharkGame.World.worldResources[resourceName].incomeMultiplier;
+        return SharkGame.World.worldResources.get(resourceName).incomeMultiplier;
     },
 
     getWorldBoostMultiplier(resourceName) {
-        return SharkGame.World.worldResources[resourceName].boostMultiplier;
+        return SharkGame.World.worldResources.get(resourceName).boostMultiplier;
     },
 
     getArtifactMultiplier(resourceName) {
-        const artifactMultiplier = SharkGame.World.worldResources[resourceName].artifactMultiplier;
+        const artifactMultiplier = SharkGame.World.worldResources.get(resourceName).artifactMultiplier;
         return artifactMultiplier;
     },
 

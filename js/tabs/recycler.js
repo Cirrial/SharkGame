@@ -109,7 +109,7 @@ SharkGame.Recycler = {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
-        $.each(SharkGame.ResourceTable, (k, v) => {
+        SharkGame.ResourceMap.forEach((v, k, m) => {
             if(r.getTotalResource(k) > 0) {
                 const inputButton = $("#input-" + k);
                 const outputButton = $("#output-" + k);
@@ -157,7 +157,7 @@ SharkGame.Recycler = {
         const m = SharkGame.Main;
         const inputButtonDiv = $("#inputButtons");
         const outputButtonDiv = $("#outputButtons");
-        $.each(SharkGame.ResourceTable, (k, v) => {
+        SharkGame.ResourceMap.forEach((v, k, m) => {
             if(r.getTotalResource(k) > 0
                 && y.allowedCategories[r.getCategoryOfResource(k)]
                 && y.bannedResources.indexOf(k) === -1) {
@@ -174,7 +174,7 @@ SharkGame.Recycler = {
         const button = $(this);
         const resourceName = button.attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
-        const junkPerResource = SharkGame.ResourceTable[resourceName].value;
+        const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
 
         const selectedAmount = SharkGame.Settings.current.buyAmount;
         let amount = selectedAmount;
@@ -208,7 +208,7 @@ SharkGame.Recycler = {
         const button = $(this);
         const resourceName = button.attr("id").split("-")[1];
         const junkAmount = r.getResource("junk");
-        const junkPerResource = SharkGame.ResourceTable[resourceName].value;
+        const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
 
         const selectedAmount = SharkGame.Settings.current.buyAmount;
         let amount = selectedAmount;
@@ -244,7 +244,7 @@ SharkGame.Recycler = {
         const y = SharkGame.Recycler;
         const resourceAmount = SharkGame.Resources.getResource(resource);
         const junkAmount = SharkGame.Resources.getResource("junk");
-        const junkPricePerResource = SharkGame.ResourceTable[resource].value;
+        const junkPricePerResource = SharkGame.ResourceMap.get(resource).value;
         const category = r.getCategoryOfResource(resource);
         let max = 0;
         if(y.allowedCategories[category]) {
@@ -308,7 +308,8 @@ SharkGame.Recycler = {
             if(n < Math.pow(10,evalue)) {
                 y.efficiency = 1;
             } else {
-                y.efficiency = 1/(SharkGame.log10(n) - evalue + 1); //otherwise, scale back based purely on the number to process
+                y.efficiency = 1/(SharkGame.log10(n) - evalue + 1);
+                //otherwise, scale back based purely on the number to process
                 // 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
                 // the system is more sensible, and people can get a feel for it easier if i make this change
                 // the amount that this effects things isn't crazy high either, so

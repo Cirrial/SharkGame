@@ -649,7 +649,7 @@ SharkGame.Home = {
         const rawCost = action.cost;
 
         $.each(rawCost, (i, v) => {
-            const resource = SharkGame.PlayerResources[action.max];
+            const resource = SharkGame.PlayerResources.get(action.max);
             let currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, (_, v) => {
@@ -682,7 +682,7 @@ SharkGame.Home = {
     getMax(action) {
         let max = 1;
         if(action.max) {
-            const resource = SharkGame.PlayerResources[action.max];
+            const resource = SharkGame.PlayerResources.get(action.max);
             let currAmount = resource.amount;
             if(resource.jobs) {
                 $.each(resource.jobs, (_, v) => {
@@ -692,7 +692,7 @@ SharkGame.Home = {
             max = Number.MAX_VALUE;
             const rawCost = action.cost;
             $.each(rawCost, (_, v) => {
-                const costResource = SharkGame.PlayerResources[v.resource];
+                const costResource = SharkGame.PlayerResources.get(v.resource);
 
                 const costFunction = v.costFunction;
                 const k = v.priceIncrease;

@@ -7,7 +7,87 @@ SharkGame.Upgrades = {
         }
         return SharkGame.Upgrades.standardUpgrades;
     },
+    
+    sharks: {
+        upgrades: [
+            
+        ]
+    },
+    
+    sharks: {
+        upgrades: [
+            "crystalBite",
+            "engineering",
+            "recyclerDiscovery",
+            "iterativeDesign",
+            "superprocessing",
+            "mechanisedAlchemy",
+            "ancestralRecall"
+        ]
+    },
 
+    rays: {
+        upgrades: [
+            "crystalSpade",
+            "laserRays",
+            "rayBiology"
+        ]
+    },
+
+    crabs: {
+        upgrades: [
+            "crabBiology"
+        ]
+    },
+
+    lobsters: {
+        upgrades: [
+            "clamScooping"
+        ],
+        implies: [
+            "crustaceans"
+        ]
+    },
+
+    shrimp: {
+        upgrades: [
+            "eusociality",
+            "wormWarriors"
+        ],
+        implies: [
+            "crustaceans"
+        ]
+    },
+
+    crustaceans: {
+        upgrades: [
+            "crustaceanBiology"
+        ],
+        suggests: [
+            "crustaceanMachines",
+            "shrimp",
+            "lobsters"
+        ],
+        category: true
+    },
+
+    dolphins: {
+        upgrades: [
+            "dolphinBiology",
+            "delphinePhilosophy",
+            "coralHalls"
+        ],
+        implies: [
+            "cephalopods"
+        ]
+    },
+    
+    sharks: {
+        upgrades: [
+            
+        ]
+    },
+    
     standardUpgrades: {
         crystalBite: {
             name: "Crystal Bite-Gear",
@@ -729,8 +809,7 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "biology",
-                    "seabedGeology"
+                    "biology"
                 ],
                 resources: [
                     "eel"
@@ -1066,7 +1145,6 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "seabedGeology",
                     "sunObservation"
                 ]
             },
@@ -1305,7 +1383,7 @@ SharkGame.Upgrades = {
             required: {
                 upgrades: [
                     "gateDiscovery",
-                    "engineering"
+                    "iterativeDesign"
                 ],
                 resources: [
                     "sharkonium"
@@ -2191,7 +2269,6 @@ SharkGame.Upgrades = {
             },
             required: {
                 upgrades: [
-                    "seabedGeology",
                     "sunObservation"
                 ]
             },
