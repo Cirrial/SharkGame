@@ -58,11 +58,14 @@ SharkGame.Log = {
         const showAnims = SharkGame.Settings.current.showAnimations;
         const logMax = SharkGame.Settings.current.logMessageMax;
 
+        // Cuts off messages below rendering limit to significantly cut down on jittering
+        $("#messageList").css("max-height", logMax * ($(l.messages[0]).innerHeight()) || 100);
+
         if(l.messages.length >= logMax) {
             while(l.messages.length > logMax) {
                 // remove oldest message
                 if(showAnims) {
-                    l.messages[0].animate({opacity: 0.0}, 100, "swing", function() {
+                    l.messages[0].animate({opacity: 0}, 100, "swing", function remove() {
                         $(this).remove();
                     });
                 } else {
