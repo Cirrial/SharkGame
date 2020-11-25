@@ -62,7 +62,7 @@ $.extend(SharkGame, {
     "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
     "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
     "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>." +
-    '<br/><span style="color: rgba(0,0,0,0);">With some help by <a href="https://github.com/Toby222" style="color: rgba(0,0,0,0);">Toby</a></span>',
+    "<br/><span style=\"color: rgba(0,0,0,0);\">With some help by <a href=\"https://github.com/Toby222\" style=\"color: rgba(0,0,0,0);\">Toby</a></span>",
 
 
     ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
