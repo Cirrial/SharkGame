@@ -5,8 +5,8 @@
   "author": "spencers145 <smartypantsspencer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint .",
-    "fix": "eslint . --fix",
+    "lint": "eslint . && prettier . --check",
+    "fix": "eslint . --fix && prettier . --write",
     "less-win": "cmd.exe /c less\\compile_styles.bat"
   },
   "devDependencies": {
