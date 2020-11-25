@@ -667,6 +667,7 @@ SharkGame.Main = {
             }
             // flag sidebar as shown
             SharkGame.sidebarHidden = false;
+            SharkGame.Log.adjustLogMaxHeight();
         }
     },
 
