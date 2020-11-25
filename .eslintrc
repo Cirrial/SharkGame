@@ -25,6 +25,9 @@
             }
         ],
         "func-names": ["error", "always"],
-        "no-inner-declarations": "off"
+        "func-style": ["error", "declaration"],
+        "no-inner-declarations": "off",
+        "prefer-const": "error",
+        "no-var": "error"
     }
 }
