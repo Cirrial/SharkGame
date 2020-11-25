@@ -1141,12 +1141,12 @@ SharkGame.Changelog = {
     ]
 };
 
-$(document).ready(function() {
+$(function() {
     $("#game").show();
     SharkGame.Main.init();
 
     // ctrl+s saves
-    $(window).bind("keydown", function(event) {
+    $(window).on("keydown", function(event) {
         if (event.ctrlKey || event.metaKey) {
             switch (String.fromCharCode(event.which).toLowerCase()) {
             case "s":
