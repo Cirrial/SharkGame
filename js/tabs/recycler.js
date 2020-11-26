@@ -105,7 +105,7 @@ SharkGame.Recycler = {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, map) => {
             if (r.getTotalResource(k) > 0) {
                 const inputButton = $("#input-" + k);
                 const outputButton = $("#output-" + k);
