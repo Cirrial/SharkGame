@@ -370,11 +370,9 @@ SharkGame.Home = {
             const extraMessageSel = $("#extraMessage");
             if (!suppressAnimation && SharkGame.Settings.current.showAnimations) {
                 extraMessageSel.animate({ opacity: 0 }, 200, () => {
-                    const thisSel = $(this);
-                    thisSel.animate({ opacity: 1 }, 200).html(h.extraMessages[selectedIndex].message);
+                    $(extraMessageSel).animate({ opacity: 1 }, 200).html(h.extraMessages[selectedIndex].message);
                 });
                 sceneDiv.animate({ opacity: 0 }, 500, () => {
-                    const thisSel = $(this);
                     if (SharkGame.Settings.current.showTabImages) {
                         SharkGame.changeSprite(
                             SharkGame.spriteHomeEventPath,
@@ -383,7 +381,7 @@ SharkGame.Home = {
                             "homesea-missing"
                         );
                     }
-                    thisSel.animate({ opacity: 1 }, 500);
+                    $(sceneDiv).animate({ opacity: 1 }, 500);
                 });
             } else {
                 extraMessageSel.html(h.extraMessages[selectedIndex].message);
