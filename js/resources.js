@@ -540,9 +540,9 @@ SharkGame.Resources = {
             });
         } else {
             // iterate through data, if total amount > 0 add a row
-            SharkGame.ResourceMap.forEach((v, k, m) => {
-                if (r.getTotalResource(k) > 0 && w.doesResourceExist(k)) {
-                    const row = r.constructResourceTableRow(k);
+            SharkGame.ResourceMap.forEach((v, key, _map) => {
+                if (r.getTotalResource(key) > 0 && w.doesResourceExist(key)) {
+                    const row = r.constructResourceTableRow(key);
                     rTable.append(row);
                     anyResourcesInTable = true;
                 }
@@ -789,13 +789,13 @@ SharkGame.Resources = {
         const sources = r.getResourceSources(resource);
         // get resource costs for actions that directly get this
         // only care about the resource types required
-        $.each(sources.actions, (_, v) => {
-            const actionCost = SharkGame.HomeActions[v].cost;
-            $.each(actionCost, (_, w) => {
-                const resource = w.resource;
-                if (l.doesResourceExist(resource)) {
-                    dependencies.push(resource);
-                    alreadyKnownList.push(resource);
+        $.each(sources.actions, (_key, action) => {
+            const actionCost = SharkGame.HomeActions[action].cost;
+            $.each(actionCost, (k, costProp) => {
+                const costResource = costProp.resource;
+                if (l.doesResourceExist(costResource)) {
+                    dependencies.push(costResource);
+                    alreadyKnownList.push(costResource);
                 }
             });
         });

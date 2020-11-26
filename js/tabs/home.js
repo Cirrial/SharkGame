@@ -330,26 +330,26 @@ SharkGame.Home = {
         const u = SharkGame.Upgrades.getUpgradeTable();
         const wi = SharkGame.WorldTypes[SharkGame.World.worldType];
         let selectedIndex = h.currentExtraMessageIndex;
-        $.each(h.extraMessages, (i, v) => {
+        $.each(h.extraMessages, (messageIndex, extraMessage) => {
             let showThisMessage = true;
             // check if should show this message
-            if (v.unlock) {
-                if (v.unlock.resource) {
-                    $.each(v.unlock.resource, (k, v) => {
-                        showThisMessage = showThisMessage && r.getResource(k) >= v;
+            if (extraMessage.unlock) {
+                if (extraMessage.unlock.resource) {
+                    $.each(extraMessage.unlock.resource, (key, resource) => {
+                        showThisMessage = showThisMessage && r.getResource(key) >= resource;
                     });
                 }
-                if (v.unlock.upgrade) {
-                    $.each(v.unlock.upgrade, (i, v) => {
-                        showThisMessage = showThisMessage && u[v].purchased;
+                if (extraMessage.unlock.upgrade) {
+                    $.each(extraMessage.unlock.upgrade, (i, upgrade) => {
+                        showThisMessage = showThisMessage && u[upgrade].purchased;
                     });
                 }
-                if (v.unlock.world) {
-                    showThisMessage = showThisMessage && SharkGame.World.worldType === v.unlock.world;
+                if (extraMessage.unlock.world) {
+                    showThisMessage = showThisMessage && SharkGame.World.worldType === extraMessage.unlock.world;
                 }
             }
             if (showThisMessage) {
-                selectedIndex = i;
+                selectedIndex = messageIndex;
             }
         });
         // only edit DOM if necessary
@@ -667,7 +667,7 @@ SharkGame.Home = {
         const calcCost = {};
         const rawCost = action.cost;
 
-        $.each(rawCost, (i, v) => {
+        $.each(rawCost, (costIndex, costObj) => {
             const resource = SharkGame.PlayerResources.get(action.max);
             let currAmount = resource.amount;
             if (resource.jobs) {
@@ -675,8 +675,8 @@ SharkGame.Home = {
                     currAmount += SharkGame.Resources.getResource(v);
                 });
             }
-            const costFunction = v.costFunction;
-            const k = v.priceIncrease;
+            const costFunction = costObj.costFunction;
+            const k = costObj.priceIncrease;
             let cost = 0;
             switch (costFunction) {
                 case "constant":
@@ -692,7 +692,7 @@ SharkGame.Home = {
             if (Math.abs(cost - Math.round(cost)) < SharkGame.EPSILON) {
                 cost = Math.round(cost);
             }
-            calcCost[v.resource] = cost;
+            calcCost[costObj.resource] = cost;
         });
         return calcCost;
     },

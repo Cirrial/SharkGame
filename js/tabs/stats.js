@@ -133,7 +133,7 @@ SharkGame.Stats = {
         const s = SharkGame.Stats;
         const m = SharkGame.Main;
         const buttonDiv = $("#disposeResource");
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0 && s.bannedDisposeCategories.indexOf(r.getCategoryOfResource(k)) === -1) {
                 SharkGame.Button.makeButton(
                     "dispose-" + k,
@@ -148,7 +148,7 @@ SharkGame.Stats = {
     updateDisposeButtons() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0) {
                 const button = $("#dispose-" + k);
                 const resourceAmount = r.getResource(k);
@@ -201,7 +201,7 @@ SharkGame.Stats = {
     updateIncomeTable() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0 && SharkGame.ResourceMap.get(k).income) {
                 const income = SharkGame.ResourceMap.get(k).income;
                 $.each(income, (incomeKey, incomeValue) => {
@@ -223,7 +223,7 @@ SharkGame.Stats = {
     updateTotalAmountTable() {
         const r = SharkGame.Resources;
         const m = SharkGame.Main;
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, _map) => {
             const totalResource = r.getTotalResource(k);
             if (totalResource > 0) {
                 const cell = $("#totalAmount-" + k);
@@ -247,7 +247,7 @@ SharkGame.Stats = {
 
         let formatCounter = 0;
 
-        SharkGame.ResourceMap.forEach((generatorData, generatorName, m) => {
+        SharkGame.ResourceMap.forEach((generatorData, generatorName, _map) => {
             if (r.getTotalResource(generatorName) > 0 && generatorData.income) {
                 // if the resource has an income requiring any costs
                 // and it isn't a forced income
@@ -426,7 +426,7 @@ SharkGame.Stats = {
             totalAmountTable.empty();
         }
 
-        SharkGame.ResourceMap.forEach((v, k, m) => {
+        SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0) {
                 const row = $("<tr>");
 

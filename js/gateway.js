@@ -242,7 +242,7 @@ SharkGame.Gateway = {
                 "planet-" + planetInfo.type,
                 planetInfo.type + " " + planetInfo.level,
                 planetPool,
-                function callback() {
+                function onClick() {
                     g.selectedWorld = $(this).attr("id").split("-")[1];
                     g.switchViews(g.confirmWorld);
                 }
@@ -537,8 +537,8 @@ SharkGame.Gateway = {
 
         // if the game wasn't won, add loss messages
         if (!SharkGame.wonGame) {
-            _.each(allMessages.loss, (message) => {
-                messagePool.push(message);
+            _.each(allMessages.loss, (msg) => {
+                messagePool.push(msg);
             });
         } else {
             // determine which essence based messages should go into the pool
@@ -552,8 +552,8 @@ SharkGame.Gateway = {
                     max = v.max;
                 }
                 if (totalEssence >= min && totalEssence <= max) {
-                    _.each(v.messages, (message) => {
-                        messagePool.push(message);
+                    _.each(v.messages, (msg) => {
+                        messagePool.push(msg);
                     });
                 }
             });
@@ -561,14 +561,14 @@ SharkGame.Gateway = {
             // determine which planet based messages should go into the pool
             const planetPool = allMessages.lastPlanetBased[lastPlanet];
             if (planetPool) {
-                _.each(planetPool, (message) => {
-                    messagePool.push(message);
+                _.each(planetPool, (msg) => {
+                    messagePool.push(msg);
                 });
             }
 
             // finally just add all the generics into the pool
-            _.each(allMessages.generic, (message) => {
-                messagePool.push(message);
+            _.each(allMessages.generic, (msg) => {
+                messagePool.push(msg);
             });
         }
 

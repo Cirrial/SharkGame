@@ -70,12 +70,15 @@ SharkGame.Log = {
             }
         }
 
-        l.adjustLogMaxHeight()
+        l.adjustLogMaxHeight();
     },
 
     adjustLogMaxHeight() {
         // Cuts off messages below rendering limit to significantly cut down on jittering
-        $("#messageList").css("max-height", SharkGame.Log.messages.reduce((totalHeight, message) => totalHeight + message.innerHeight(), 0) || "100%");
+        $("#messageList").css(
+            "max-height",
+            SharkGame.Log.messages.reduce((totalHeight, message) => totalHeight + message.innerHeight(), 0) || "100%"
+        );
     },
 
     clearMessages() {

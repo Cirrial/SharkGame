@@ -20,14 +20,15 @@
         "no-unused-vars": [
             "error",
             {
-                "varsIgnorePattern": "(?:^__)|(?:[^$_]$)",
-                "argsIgnorePattern": "(?:^_)|(?:^.$)"
+                "varsIgnorePattern": "(?:^__.{1,})|(?:[^$_]$)",
+                "argsIgnorePattern": "(?:^_.{1,})|(?:^.$)"
             }
         ],
         "func-names": ["error", "always"],
         "func-style": ["error", "declaration"],
         "no-inner-declarations": "off",
         "prefer-const": "error",
-        "no-var": "error"
+        "no-var": "error",
+        "no-shadow": "error"
     }
 }
