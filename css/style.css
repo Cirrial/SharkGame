@@ -20,7 +20,7 @@ html {
   min-height: 100%;
 }
 body {
-  color: #ffffff;
+  color: white;
   background-color: #061639;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 105%;
@@ -235,7 +235,7 @@ pre {
   text-align: left;
 }
 #sidebar table h3 {
-  padding: .2em;
+  padding: 0.2em;
   width: auto;
   margin: auto;
   text-align: center;
@@ -316,7 +316,7 @@ pre {
 #buttonList {
   padding: 5px;
   margin: 5px;
-  padding: 1.0em;
+  padding: 1em;
 }
 .pileArrangement ul {
   display: inline-block;
@@ -424,7 +424,7 @@ button.newlyDiscovered div.tint:before {
 #statsContainer {
   padding: 5px;
   margin: 5px;
-  padding: 1.0em;
+  padding: 1em;
 }
 .statsInnerContainer table {
   text-align: left;
@@ -530,7 +530,7 @@ button.newlyDiscovered div.tint:before {
   float: left;
   margin: auto;
   width: 10em;
-  background: #450808 url('../img/recyclerbg.png') center;
+  background: #450808 url("../img/recyclerbg.png") center;
   color: #d4bbbb;
   border: 0.1em solid #975f5f;
   -webkit-box-shadow: 0 0 15px 15px #450808 inset;
@@ -549,7 +549,7 @@ button.newlyDiscovered div.tint:before {
 }
 button {
   background-color: #4e638e;
-  color: #ffffff;
+  color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;

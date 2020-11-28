@@ -1,27 +1,16 @@
 SharkGame.Settings = {
-
     current: {},
 
     buyAmount: {
         defaultSetting: 1,
         show: false,
-        options: [
-            1,
-            10,
-            100,
-            -3,
-            -2,
-            -1
-        ]
+        options: [1, 10, 100, -3, -2, -1],
     },
 
     showTabHelp: {
         defaultSetting: false,
         show: false,
-        options: [
-            true,
-            false
-        ]
+        options: [true, false],
     },
 
     groupResources: {
@@ -29,13 +18,10 @@ SharkGame.Settings = {
         name: "Group Resources",
         desc: "Group resources in the table into categories for legibility.",
         show: true,
-        options: [
-            true,
-            false
-        ],
-        onChange: function() {
+        options: [true, false],
+        onChange() {
             SharkGame.Resources.rebuildTable = true;
-        }
+        },
     },
 
     buttonDisplayType: {
@@ -43,13 +29,10 @@ SharkGame.Settings = {
         name: "Home Sea Button Display",
         desc: "Do you want a vertical list of buttons, or a more space-saving configuration?",
         show: true,
-        options: [
-            "list",
-            "pile"
-        ],
-        onChange: function() {
+        options: ["list", "pile"],
+        onChange() {
             SharkGame.Main.changeTab(SharkGame.Tabs.current);
-        }
+        },
     },
 
     offlineModeActive: {
@@ -57,10 +40,7 @@ SharkGame.Settings = {
         name: "Offline Mode",
         desc: "Let your numbers increase even with the game closed!",
         show: true,
-        options: [
-            true,
-            false
-        ]
+        options: [true, false],
     },
 
     autosaveFrequency: {
@@ -69,18 +49,21 @@ SharkGame.Settings = {
         name: "Autosave Frequency",
         desc: "Number of minutes between autosaves.",
         show: true,
-        options: [
-            1,
-            2,
-            5,
-            10,
-            30
-        ],
-        onChange: function() {
+        options: [1, 2, 5, 10, 30],
+        onChange() {
             clearInterval(SharkGame.Main.autosaveHandler);
-            SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
-            SharkGame.Log.addMessage("Now autosaving every " + SharkGame.Settings.current.autosaveFrequency + " minute" + SharkGame.plural(SharkGame.Settings.current.autosaveFrequency) + ".");
-        }
+            SharkGame.Main.autosaveHandler = setInterval(
+                SharkGame.Main.autosave,
+                SharkGame.Settings.current.autosaveFrequency * 60000
+            );
+            SharkGame.Log.addMessage(
+                "Now autosaving every " +
+                    SharkGame.Settings.current.autosaveFrequency +
+                    " minute" +
+                    SharkGame.plural(SharkGame.Settings.current.autosaveFrequency) +
+                    "."
+            );
+        },
     },
 
     logMessageMax: {
@@ -88,18 +71,10 @@ SharkGame.Settings = {
         name: "Max Log Messages",
         desc: "How many messages to show before removing old ones.",
         show: true,
-        options: [
-            5,
-            10,
-            15,
-            20,
-            25,
-            30,
-            50
-        ],
-        onChange: function() {
+        options: [5, 10, 15, 20, 25, 30, 50],
+        onChange() {
             SharkGame.Log.correctLogLength();
-        }
+        },
     },
 
     sidebarWidth: {
@@ -107,23 +82,16 @@ SharkGame.Settings = {
         name: "Sidebar Width",
         desc: "How much screen estate the sidebar should take.",
         show: true,
-        options: [
-            "20%",
-            "25%",
-            "30%",
-            "35%",
-            "40%",
-            "45%",
-            "50%"
-        ],
-        onChange: function() {
+        options: ["20%", "25%", "30%", "35%", "40%", "45%", "50%"],
+        onChange() {
             const sidebar = $("#sidebar");
-            if(SharkGame.Settings.current.showAnimations) {
-                sidebar.animate({width: SharkGame.Settings.current.sidebarWidth}, "100");
+            if (SharkGame.Settings.current.showAnimations) {
+                sidebar.animate({ width: SharkGame.Settings.current.sidebarWidth }, "100");
+                SharkGame.Log.correctLogLength();
             } else {
                 sidebar.width(SharkGame.Settings.current.sidebarWidth);
             }
-        }
+        },
     },
 
     showAnimations: {
@@ -131,10 +99,7 @@ SharkGame.Settings = {
         name: "Show Animations",
         desc: "Show animations or don't. YOU DECIDE.",
         show: true,
-        options: [
-            true,
-            false
-        ]
+        options: [true, false],
     },
 
     colorCosts: {
@@ -142,14 +107,11 @@ SharkGame.Settings = {
         name: "Color Resource Names",
         desc: "When displaying costs, color names of stuff.",
         show: true,
-        options: [
-            true,
-            false
-        ],
-        onChange: function() {
+        options: [true, false],
+        onChange() {
             SharkGame.Resources.rebuildTable = true;
             SharkGame.Stats.recreateIncomeTable = true;
-        }
+        },
     },
 
     iconPositions: {
@@ -157,11 +119,7 @@ SharkGame.Settings = {
         name: "Icon Positions",
         desc: "Where should icons go on the buttons?",
         show: true,
-        options: [
-            "top",
-            "side",
-            "off"
-        ]
+        options: ["top", "side", "off"],
     },
 
     showTabImages: {
@@ -169,14 +127,9 @@ SharkGame.Settings = {
         name: "Show Tab Header Images",
         desc: "Do you want the new header images or are they taking up precious screen real-estate?",
         show: true,
-        options: [
-            true,
-            false
-        ],
-        onChange: function() {
+        options: [true, false],
+        onChange() {
             SharkGame.Main.changeTab(SharkGame.Tabs.current);
-        }
-    }
-
-
+        },
+    },
 };

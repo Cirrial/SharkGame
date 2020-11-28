@@ -235,7 +235,7 @@ pre {
   text-align: left;
 }
 #sidebar table h3 {
-  padding: .2em;
+  padding: 0.2em;
   width: auto;
   margin: auto;
   text-align: center;
@@ -316,7 +316,7 @@ pre {
 #buttonList {
   padding: 5px;
   margin: 5px;
-  padding: 1.0em;
+  padding: 1em;
 }
 .pileArrangement ul {
   display: inline-block;
@@ -328,6 +328,60 @@ pre {
   display: inline-block;
   margin: 0.8em;
   max-width: 12em;
+}
+.pileArrangement button.newlyDiscovered {
+  max-width: 12em;
+}
+button.newlyDiscovered {
+  background-color: #3eb890;
+  border-color: #ace3d1;
+  text-shadow: 0 0 0.5em #bfe9dc;
+  max-width: 16em;
+  max-width: none;
+}
+button.newlyDiscovered div {
+  background-color: #73d0b1;
+  -webkit-box-shadow: 0 0 3px 3px #73d0b1;
+  -moz-box-shadow: 0 0 3px 3px #73d0b1;
+  box-shadow: 0 0 3px 3px #73d0b1;
+}
+button.newlyDiscovered:hover {
+  -webkit-box-shadow: 0px 0px 2px 2px #ace3d1;
+  -moz-box-shadow: 0px 0px 2px 2px #ace3d1;
+  box-shadow: 0px 0px 2px 2px #ace3d1;
+}
+button.newlyDiscovered:active {
+  background-color: #2b7f63;
+  color: #73d0b1;
+  -webkit-box-shadow: 0px 3px 7px 7px #2b7f63 inset;
+  -moz-box-shadow: 0px 3px 7px 7px #2b7f63 inset;
+  box-shadow: 0px 3px 7px 7px #2b7f63 inset;
+}
+button.newlyDiscovered:active .medDesc {
+  color: #86d6bc;
+}
+button.newlyDiscovered:active div {
+  background-color: #2b7f63;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+button.newlyDiscovered:disabled {
+  background-color: #174636;
+  color: #38a581;
+  border-color: #38a581;
+}
+button.newlyDiscovered:disabled .medDesc {
+  color: #3eb890;
+}
+button.newlyDiscovered:disabled div {
+  background-color: #174636;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+button.newlyDiscovered div.tint:before {
+  background: rgba(23, 70, 54, 0.8);
 }
 #homeTabs {
   margin-bottom: 1em;
@@ -370,7 +424,7 @@ pre {
 #statsContainer {
   padding: 5px;
   margin: 5px;
-  padding: 1.0em;
+  padding: 1em;
 }
 .statsInnerContainer table {
   text-align: left;
@@ -476,7 +530,7 @@ pre {
   float: left;
   margin: auto;
   width: 10em;
-  background: #450808 url('../img/recyclerbg.png') center;
+  background: #450808 url("../img/recyclerbg.png") center;
   color: #d4bbbb;
   border: 0.1em solid #975f5f;
   -webkit-box-shadow: 0 0 15px 15px #450808 inset;

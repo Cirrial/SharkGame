@@ -1,10 +1,10 @@
 /* eslint-disable-next-line no-var, no-use-before-define */
 var SharkGame = SharkGame || {};
 
-
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
-    GAME_NAMES: ["Five Seconds A Shark",
+    GAME_NAMES: [
+        "Five Seconds A Shark",
         "Next Shark Game",
         "Next Shark Game: Barkfest",
         "Sharky Clicker",
@@ -29,13 +29,13 @@ $.extend(SharkGame, {
         "Lobster's Paradise",
         "Revenge of the Crabs",
         "Shark Box",
-        "Dolphin Heroes"
+        "Dolphin Heroes",
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
     VERSION: 0.71,
     VERSION_NAME: "New Frontiers", // s: orginal version name is Stranger Oceans. might as well keep a record of that here.
-    EPSILON: 1E-6, // floating point comparison is a joy
+    EPSILON: 1e-6, // floating point comparison is a joy
     // s: agreed, already had to deal with it on recycler revisions
     // did you know that reducing a float like 1.2512351261 to 1.25 by literally removing the decimal and multiplying by 100 gives you something like 125.0000001?
 
@@ -54,66 +54,68 @@ $.extend(SharkGame, {
     gameOver: false,
     wonGame: false,
 
-    credits: "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
-    "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
-    "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
-    "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
-    "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
-    "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
-    "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
-    "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>." +
-    "<br/><span style=\"color: rgba(0,0,0,0);\">With some help by <a href=\"https://github.com/Toby222\" style=\"color: rgba(0,0,0,0);\">Toby</a></span>",
+    credits:
+        "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
+        "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
+        "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
+        "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
+        "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
+        "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
+        "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
+        "with sprites by <a href='https://twitter.com/vhs_static'>@vhs_static</a>." +
+        '<br/><span style="color: rgba(0,0,0,0);">With some help by <a href="https://github.com/Toby222" style="color: rgba(0,0,0,0);">Toby</a></span>',
 
+    ending:
+        "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
+        "<p>The gate leads away from this strange ocean...</p>" +
+        "<p>Back home to the oceans you came from!</p>" +
+        "<h3>Or are they?</h3>",
 
-    ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
-    "<p>The gate leads away from this strange ocean...</p>" +
-    "<p>Back home to the oceans you came from!</p>" +
-    "<h3>Or are they?</h3>",
+    help:
+        "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
+        "You are free to pay as much attention to the game as you want. " +
+        "It will happily run in the background, and works even while closed.</p>" +
+        "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
+        'If you have no idea what these actions do, click the "Toggle descriptions" button for more information.</p>' +
+        "<p>If you are ever stuck, try actions you haven't yet tried. " +
+        "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
 
-    help: "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
-    "You are free to pay as much attention to the game as you want. " +
-    "It will happily run in the background, and works even while closed.</p>" +
-    "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
-    "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
-    "<p>If you are ever stuck, try actions you haven't yet tried. " +
-    "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
-
-    donate: "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
-    "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
-    "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
-    "<a href='https://www.paypal.com/cgi-bin/" +
-    "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
-    "item_name=Shark%20Game%20Developer%20Support&" +
-    "item_number=Shark%20Game%20Support&no_note=1&" +
-    "no_shipping=1&currency_code=USD&" +
-    "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
-    "target='_blank'>support the developer</a>" +
-    " if you'd like.)</span></p>",
+    donate:
+        "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
+        "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
+        "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
+        "<a href='https://www.paypal.com/cgi-bin/" +
+        "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
+        "item_name=Shark%20Game%20Developer%20Support&" +
+        "item_number=Shark%20Game%20Support&no_note=1&" +
+        "no_shipping=1&currency_code=USD&" +
+        "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
+        "target='_blank'>support the developer</a>" +
+        " if you'd like.)</span></p>",
 
     spriteIconPath: "img/sharksprites.png",
     spriteHomeEventPath: "img/sharkeventsprites.png",
 
-    choose: function(choices) {
+    choose(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
     },
-    log10: function(val) {
+    log10(val) {
         return Math.log(val) / Math.LN10;
     },
-    plural: function(number) {
+    plural(number) {
         return number === 1 ? "" : "s";
     },
-    colorLum: function(hex, lum) {
-
+    colorLum(hex, lum) {
         // validate hex string
         hex = String(hex).replace(/[^0-9a-f]/gi, "");
-        if(hex.length < 6) {
+        if (hex.length < 6) {
             hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
         }
         lum = lum || 0;
 
         // convert to decimal and change luminosity
         let rgb = "#";
-        for(let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             let c = parseInt(hex.substr(i * 2, 2), 16);
             c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
             rgb += ("00" + c).substr(c.length);
@@ -121,185 +123,192 @@ $.extend(SharkGame, {
 
         return rgb;
     },
-    getImageIconHTML: function(imagePath, width, height) {
-        if(!imagePath) {
+    getImageIconHTML(imagePath, width, height) {
+        if (!imagePath) {
             imagePath = "http://placekitten.com/g/" + Math.floor(width) + "/" + Math.floor(height);
         }
         let imageHtml = "";
-        if(SharkGame.Settings.current.iconPositions !== "off") {
-            imageHtml += "<img width=" + width + " height=" + height + " src='" + imagePath + "' class='button-icon-" + SharkGame.Settings.current.iconPositions + "'>";
+        if (SharkGame.Settings.current.iconPositions !== "off") {
+            imageHtml +=
+                "<img width=" +
+                width +
+                " height=" +
+                height +
+                " src='" +
+                imagePath +
+                "' class='button-icon-" +
+                SharkGame.Settings.current.iconPositions +
+                "'>";
         }
         return imageHtml;
     },
-    changeSprite: function(spritePath, imageName, imageDiv, backupImageName) {
+    changeSprite(spritePath, imageName, imageDiv, backupImageName) {
         let spriteData = SharkGame.Sprites[imageName];
-        if(!imageDiv) {
+        if (!imageDiv) {
             imageDiv = $("<div>");
         }
 
         // if the original sprite data is undefined, try loading the backup
-        if(!spriteData) {
+        if (!spriteData) {
             spriteData = SharkGame.Sprites[backupImageName];
         }
 
-        if(spriteData) {
+        if (spriteData) {
             imageDiv.css("background-image", "url(" + spritePath + ")");
             imageDiv.css("background-position", "-" + spriteData.frame.x + "px -" + spriteData.frame.y + "px");
             imageDiv.width(spriteData.frame.w);
             imageDiv.height(spriteData.frame.h);
         } else {
-            imageDiv.css("background-image", "url(\"//placehold.it/50x50\")");
+            imageDiv.css("background-image", 'url("//placehold.it/50x50")');
             imageDiv.width(50);
             imageDiv.height(50);
         }
         return imageDiv;
-    }
-
+    },
 });
 
 SharkGame.TitleBar = {
     saveLink: {
         name: "save",
         main: true,
-        onClick: function() {
+        onClick() {
             try {
                 try {
                     SharkGame.Save.saveGame();
-                } catch(err) {
+                } catch (err) {
                     SharkGame.Log.addError(err);
                     console.log(err);
                 }
                 SharkGame.Log.addMessage("Saved game.");
-            } catch(err) {
+            } catch (err) {
                 SharkGame.Log.addError(err.message);
             }
-
-        }
+        },
     },
 
     optionsLink: {
         name: "options",
         main: true,
-        onClick: function() {
+        onClick() {
             SharkGame.Main.showOptions();
-        }
+        },
     },
 
     changelogLink: {
         name: "changelog",
         main: false,
-        onClick: function() {
+        onClick() {
             SharkGame.Main.showChangelog();
-        }
+        },
     },
 
     helpLink: {
         name: "help",
         main: true,
-        onClick: function() {
+        onClick() {
             SharkGame.Main.showHelp();
-        }
+        },
     },
 
     skipLink: {
         name: "skip",
         main: true,
-        onClick: function() {
-            if(SharkGame.Main.isFirstTime()) {  // save people stranded on home world
-                if(confirm("Do you want to reset your game?")) {
+        onClick() {
+            if (SharkGame.Main.isFirstTime()) {
+                // save people stranded on home world
+                if (confirm("Do you want to reset your game?")) {
                     // just reset
                     SharkGame.Main.init();
                 }
             } else {
-                if(confirm("Is this world causing you too much trouble? Want to go back to the gateway?")) {
+                if (confirm("Is this world causing you too much trouble? Want to go back to the gateway?")) {
                     SharkGame.wonGame = false;
                     SharkGame.Main.endGame();
                 }
             }
-        }
+        },
     },
 
     creditsLink: {
         name: "credits",
         main: false,
-        onClick: function() {
+        onClick() {
             SharkGame.Main.showPane("Credits", SharkGame.credits);
-        }
+        },
     },
 
     donateLink: {
         name: "donate",
         main: false,
-        onClick: function() {
+        onClick() {
             SharkGame.Main.showPane("Donate", SharkGame.donate);
-        }
-    }
+        },
+    },
 };
 
 SharkGame.Tabs = {
-    current: "home"
+    current: "home",
 };
 
 SharkGame.Main = {
-
     tickHandler: -1,
     autosaveHandler: -1,
 
-    beautify: function(number, suppressDecimals, toPlaces) {
-
+    beautify(number, suppressDecimals, toPlaces) {
         let formatted;
 
         let negative = false;
-        if(number < 0) {
+        if (number < 0) {
             negative = true;
             number *= -1;
         }
 
-        if(number === Number.POSITIVE_INFINITY) {
+        if (number === Number.POSITIVE_INFINITY) {
             formatted = "infinite";
-        } else if(number < 1 && number >= 0) {
-            if(suppressDecimals) {
+        } else if (number < 1 && number >= 0) {
+            if (suppressDecimals) {
                 formatted = "0";
-            } else if(number >= 0.01) {
+            } else if (number >= 0.01) {
                 formatted = number.toFixed(2) + "";
-            } else if(number >= 0.001) {
+            } else if (number >= 0.001) {
                 formatted = number.toFixed(3) + "";
-            } else if(number >= 0.0001) {
+            } else if (number >= 0.0001) {
                 formatted = number.toFixed(4) + "";
-            } else if(number >= 0.00001) { // number > 0.00001 && negative -> number > 0.00001 && number < 0 -> false
+            } else if (number >= 0.00001) {
+                // number > 0.00001 && negative -> number > 0.00001 && number < 0 -> false
                 formatted = number.toFixed(5) + "";
             } else {
                 formatted = 0;
             }
 
-            if(negative) {
+            if (negative) {
                 formatted = "-" + formatted;
             }
         } else {
             const suffixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc"];
             const digits = Math.floor(SharkGame.log10(number));
-            let precision = 2 - digits % 3;
+            let precision = 2 - (digits % 3);
             // in case the highest supported suffix is not specified
             precision = Math.max(0, precision);
             const suffixIndex = Math.floor(digits / 3);
 
             let suffix;
-            if(suffixIndex >= suffixes.length) {
+            if (suffixIndex >= suffixes.length) {
                 formatted = "lots";
             } else {
                 suffix = suffixes[suffixIndex];
                 // fix number to be compliant with suffix
-                if(suffixIndex > 0) {
+                if (suffixIndex > 0) {
                     number /= Math.pow(1000, suffixIndex);
                 }
                 let formattedNumber;
-                if(suffixIndex === 0) {
-                    if(toPlaces && toPlaces - digits > 0 && number !== Math.floor(number)) {
+                if (suffixIndex === 0) {
+                    if (toPlaces && toPlaces - digits > 0 && number !== Math.floor(number)) {
                         formattedNumber = number.toFixed(toPlaces - digits);
                     } else {
                         formattedNumber = Math.floor(number);
                     }
-                } else if(suffixIndex > 0) {
+                } else if (suffixIndex > 0) {
                     formattedNumber = number.toFixed(precision) + suffix;
                 } else {
                     formattedNumber = number.toFixed(precision);
@@ -311,7 +320,7 @@ SharkGame.Main = {
         return formatted;
     },
 
-    formatTime: function(milliseconds) {
+    formatTime(milliseconds) {
         const numSeconds = Math.floor(milliseconds / 1000);
         const numMinutes = Math.floor(numSeconds / 60);
         const numHours = Math.floor(numMinutes / 60);
@@ -333,17 +342,15 @@ SharkGame.Main = {
 
     // credit where it's due, i didn't write this (regexes fill me with fear), pulled from
     // http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript/196991#196991
-    toTitleCase: function(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
     },
 
     // also functions as a reset
-    init: function() {
+    init() {
         const now = _.now();
         SharkGame.before = now;
-        if(SharkGame.GAME_NAME === null) {
+        if (SharkGame.GAME_NAME === null) {
             SharkGame.GAME_NAME = SharkGame.choose(SharkGame.GAME_NAMES);
             document.title = SharkGame.ACTUAL_GAME_NAME + ": " + SharkGame.GAME_NAME;
         }
@@ -365,12 +372,12 @@ SharkGame.Main = {
         SharkGame.timestampRunStart = SharkGame.timestampRunStart || now;
 
         // preserve settings or set defaults
-        $.each(SharkGame.Settings, function(k, v) {
-            if(k === "current") {
+        $.each(SharkGame.Settings, (k, v) => {
+            if (k === "current") {
                 return;
             }
             const currentSetting = SharkGame.Settings.current[k];
-            if(typeof currentSetting === "undefined") {
+            if (typeof currentSetting === "undefined") {
                 SharkGame.Settings.current[k] = v.defaultSetting;
             }
         });
@@ -402,17 +409,17 @@ SharkGame.Main = {
         SharkGame.Tabs.current = "home";
 
         // load save game data if present
-        if(SharkGame.Save.savedGameExists()) {
-            try{
+        if (SharkGame.Save.savedGameExists()) {
+            try {
                 SharkGame.Save.loadGame();
                 SharkGame.Log.addMessage("Loaded game.");
-            } catch(err) {
+            } catch (err) {
                 SharkGame.Log.addError(err.message);
             }
         }
 
         // rename a game option if this is a first time run
-        if(SharkGame.Main.isFirstTime()) {
+        if (SharkGame.Main.isFirstTime()) {
             SharkGame.TitleBar.skipLink.name = "reset";
             SharkGame.Main.setUpTitleBar();
         }
@@ -423,20 +430,20 @@ SharkGame.Main = {
         // set up tab after load
         SharkGame.Main.setUpTab();
 
-
-        if(SharkGame.Main.tickHandler === -1) {
+        if (SharkGame.Main.tickHandler === -1) {
             SharkGame.Main.tickHandler = setInterval(SharkGame.Main.tick, SharkGame.INTERVAL);
         }
 
-        if(SharkGame.Main.autosaveHandler === -1) {
-            SharkGame.Main.autosaveHandler = setInterval(SharkGame.Main.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
+        if (SharkGame.Main.autosaveHandler === -1) {
+            SharkGame.Main.autosaveHandler = setInterval(
+                SharkGame.Main.autosave,
+                SharkGame.Settings.current.autosaveFrequency * 60000
+            );
         }
-
-
     },
 
-    tick: function() {
-        if(SharkGame.gameOver) {
+    tick() {
+        if (SharkGame.gameOver) {
             // tick gateway stuff
             SharkGame.Gateway.update();
         } else {
@@ -448,14 +455,13 @@ SharkGame.Main = {
             const m = SharkGame.Main;
 
             // check if the sidebar needs to come back
-            if(SharkGame.sidebarHidden) {
+            if (SharkGame.sidebarHidden) {
                 m.showSidebarIfNeeded();
             }
 
-            if(elapsedTime > SharkGame.INTERVAL) {
+            if (elapsedTime > SharkGame.INTERVAL) {
                 // Compensate for lost time.
                 m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
-
             } else {
                 m.processSimTime(SharkGame.dt);
             }
@@ -470,15 +476,15 @@ SharkGame.Main = {
         }
     },
 
-    checkTabUnlocks: function() {
-        $.each(SharkGame.Tabs, function(k, v) {
-            if(k === "current" || v.discovered) {
+    checkTabUnlocks() {
+        $.each(SharkGame.Tabs, (k, v) => {
+            if (k === "current" || v.discovered) {
                 return;
             }
             let reqsMet = true;
 
             // check resources
-            if(v.discoverReq.resource) {
+            if (v.discoverReq.resource) {
                 reqsMet = reqsMet && SharkGame.Resources.checkResources(v.discoverReq.resource, true);
             }
 
@@ -487,9 +493,9 @@ SharkGame.Main = {
             const ups = SharkGame.Upgrades.getUpgradeTable();
 
             // check upgrades
-            if(v.discoverReq.upgrade) {
-                $.each(v.discoverReq.upgrade, function(_, value) {
-                    if(ups[value]) {
+            if (v.discoverReq.upgrade) {
+                $.each(v.discoverReq.upgrade, (_, value) => {
+                    if (ups[value]) {
                         reqsMet = reqsMet && ups[value].purchased;
                     } else {
                         reqsMet = false; // can't have a nonexistent upgrade
@@ -497,7 +503,7 @@ SharkGame.Main = {
                 });
             }
 
-            if(reqsMet) {
+            if (reqsMet) {
                 // unlock tab!
                 SharkGame.Main.discoverTab(k);
                 SharkGame.Log.addDiscovery("Discovered " + v.name + "!");
@@ -505,31 +511,31 @@ SharkGame.Main = {
         });
     },
 
-    processSimTime: function(numberOfSeconds) {
+    processSimTime(numberOfSeconds) {
         const r = SharkGame.Resources;
 
         // income calculation
         r.processIncomes(numberOfSeconds);
     },
 
-    autosave: function() {
+    autosave() {
         try {
             SharkGame.Save.saveGame();
             SharkGame.Log.addMessage("Autosaved.");
-        } catch(err) {
+        } catch (err) {
             SharkGame.Log.addError(err.message);
             console.log(err.trace);
         }
     },
 
-    setUpTitleBar: function() {
+    setUpTitleBar() {
         const titleMenu = $("#titlemenu");
         const subTitleMenu = $("#subtitlemenu");
         titleMenu.empty();
         subTitleMenu.empty();
-        $.each(SharkGame.TitleBar, function(k, v) {
+        $.each(SharkGame.TitleBar, (k, v) => {
             const option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
-            if(v.main) {
+            if (v.main) {
                 titleMenu.append(option);
             } else {
                 subTitleMenu.append(option);
@@ -538,12 +544,14 @@ SharkGame.Main = {
         });
     },
 
-    setUpTab: function() {
+    setUpTab() {
         const tabs = SharkGame.Tabs;
         // empty out content div
         const content = $("#content");
         content.empty();
-        content.append("<div id=\"contentMenu\"><ul id=\"tabList\"></ul><ul id=\"tabButtons\"></ul></div><div id=\"tabBorder\" class=\"clear-fix\"></div>");
+        content.append(
+            '<div id="contentMenu"><ul id="tabList"></ul><ul id="tabButtons"></ul></div><div id="tabBorder" class="clear-fix"></div>'
+        );
 
         SharkGame.Main.createTabNavigation();
         SharkGame.Main.createBuyButtons();
@@ -554,41 +562,42 @@ SharkGame.Main = {
         tabCode.switchTo();
     },
 
-    createTabMenu: function() {
+    createTabMenu() {
         SharkGame.Main.createTabNavigation();
         SharkGame.Main.createBuyButtons();
     },
 
-    createTabNavigation: function() {
+    createTabNavigation() {
         const tabs = SharkGame.Tabs;
         const tabList = $("#tabList");
         tabList.empty();
         // add navigation
         // check if we have more than one discovered tab, else bypass this
         let numTabsDiscovered = 0;
-        $.each(tabs, function(k, v) {
-            if(v.discovered) {
+        $.each(tabs, (k, v) => {
+            if (v.discovered) {
                 numTabsDiscovered++;
             }
         });
-        if(numTabsDiscovered > 1) {
+        if (numTabsDiscovered > 1) {
             // add a header for each discovered tab
             // make it a link if it's not the current tab
-            $.each(tabs, function(k, v) {
+            $.each(tabs, (k, v) => {
                 const onThisTab = SharkGame.Tabs.current === k;
-                if(v.discovered) {
+                if (v.discovered) {
                     const tabListItem = $("<li>");
-                    if(onThisTab) {
+                    if (onThisTab) {
                         tabListItem.html(v.name);
                     } else {
-                        tabListItem.append($("<a>")
-                            .attr("id", "tab-" + k)
-                            .attr("href", "javascript:;")
-                            .html(v.name)
-                            .on("click", function() {
-                                const tab = $(this).attr("id").split("-")[1];
-                                SharkGame.Main.changeTab(tab);
-                            })
+                        tabListItem.append(
+                            $("<a>")
+                                .attr("id", "tab-" + k)
+                                .attr("href", "javascript:;")
+                                .html(v.name)
+                                .on("click", function callback() {
+                                    const tab = $(this).attr("id").split("-")[1];
+                                    SharkGame.Main.changeTab(tab);
+                                })
                         );
                     }
                     tabList.append(tabListItem);
@@ -597,33 +606,36 @@ SharkGame.Main = {
         }
     },
 
-    createBuyButtons: function(customLabel) {
+    createBuyButtons(customLabel) {
         // add buy buttons
         const buttonList = $("#tabButtons");
         buttonList.empty();
-        $.each(SharkGame.Settings.buyAmount.options, function(_, v) {
+        $.each(SharkGame.Settings.buyAmount.options, (_, v) => {
             const amount = v;
             const disableButton = v === SharkGame.Settings.current.buyAmount;
-            buttonList.prepend($("<li>")
-                .append($("<button>")
-                    .addClass("min")
-                    .attr("id", "buy-" + v)
-                    .prop("disabled", disableButton)
-                ));
+            buttonList.prepend(
+                $("<li>").append(
+                    $("<button>")
+                        .addClass("min")
+                        .attr("id", "buy-" + v)
+                        .prop("disabled", disableButton)
+                )
+            );
             let label = customLabel ? customLabel + " " : "buy ";
-            if(amount < 0) {
-                if(amount < -2) {
+            if (amount < 0) {
+                if (amount < -2) {
                     label += "1/3 max";
-                } else if(amount < -1) {
+                } else if (amount < -1) {
                     label += "1/2 max";
-                } else if(amount < 0) {
+                } else if (amount < 0) {
                     label += "max";
                 }
             } else {
                 label += SharkGame.Main.beautify(amount);
             }
-            $("#buy-" + v).html(label)
-                .on("click", function() {
+            $("#buy-" + v)
+                .html(label)
+                .on("click", function callback() {
                     const thisButton = $(this);
                     SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
                     $("button[id^='buy-']").prop("disabled", false);
@@ -632,66 +644,69 @@ SharkGame.Main = {
         });
     },
 
-    changeTab: function(tab) {
+    changeTab(tab) {
         SharkGame.Tabs.current = tab;
         SharkGame.Main.setUpTab();
     },
 
-    discoverTab: function(tab) {
+    discoverTab(tab) {
         SharkGame.Tabs[tab].discovered = true;
         // force a total redraw of the navigation
         SharkGame.Main.createTabMenu();
     },
 
-
-    showSidebarIfNeeded: function() {
+    showSidebarIfNeeded() {
         // if we have any non-zero resources, show sidebar
         // if we have any log entries, show sidebar
-        if(SharkGame.Resources.haveAnyResources() || SharkGame.Log.haveAnyMessages()) {
+        if (SharkGame.Resources.haveAnyResources() || SharkGame.Log.haveAnyMessages()) {
             // show sidebar
-            if(SharkGame.Settings.current.showAnimations) {
+            if (SharkGame.Settings.current.showAnimations) {
                 $("#sidebar").show("500");
             } else {
                 $("#sidebar").show();
             }
             // flag sidebar as shown
             SharkGame.sidebarHidden = false;
+            SharkGame.Log.adjustLogMaxHeight();
         }
     },
 
-    showOptions: function() {
+    showOptions() {
         const optionsContent = SharkGame.Main.setUpOptions();
         SharkGame.Main.showPane("Options", optionsContent);
     },
 
-    setUpOptions: function() {
+    setUpOptions() {
         const optionsTable = $("<table>").attr("id", "optionTable");
         // add settings specified in settings.js
-        $.each(SharkGame.Settings, function(key, value) {
-            if(key === "current" || !value.show) {
+        $.each(SharkGame.Settings, (key, value) => {
+            if (key === "current" || !value.show) {
                 return;
             }
             const row = $("<tr>");
 
             // show setting name
-            row.append($("<td>")
-                .addClass("optionLabel")
-                .html(value.name + ":" +
-                    "<br/><span class='smallDesc'>(" + value.desc + ")</span>")
+            row.append(
+                $("<td>")
+                    .addClass("optionLabel")
+                    .html(value.name + ":" + "<br/><span class='smallDesc'>(" + value.desc + ")</span>")
             );
 
             const currentSetting = SharkGame.Settings.current[key];
 
             // show setting adjustment buttons
-            $.each(value.options, function(k, v) {
+            $.each(value.options, (k, v) => {
                 const isCurrentSetting = k === value.options.indexOf(currentSetting);
-                row.append($("<td>").append($("<button>")
-                    .attr("id", "optionButton-" + key + "-" + k)
-                    .addClass("option-button")
-                    .prop("disabled", isCurrentSetting)
-                    .html(typeof v === "boolean" ? v ? "on" : "off" : v)
-                    .on("click", SharkGame.Main.onOptionClick)
-                ));
+                row.append(
+                    $("<td>").append(
+                        $("<button>")
+                            .attr("id", "optionButton-" + key + "-" + k)
+                            .addClass("option-button")
+                            .prop("disabled", isCurrentSetting)
+                            .html(typeof v === "boolean" ? (v ? "on" : "off") : v)
+                            .on("click", SharkGame.Main.onOptionClick)
+                    )
+                );
             });
 
             optionsTable.append(row);
@@ -700,63 +715,73 @@ SharkGame.Main = {
         // SAVE IMPORT/EXPORT
         // add save import/export
         let row = $("<tr>");
-        row.append($("<td>")
-            .html("Import/Export Save:<br/><span class='smallDesc'>(You should probably save first!) Import or export save as text. Keep it safe!</span>")
+        row.append(
+            $("<td>").html(
+                "Import/Export Save:<br/><span class='smallDesc'>(You should probably save first!) Import or export save as text. Keep it safe!</span>"
+            )
         );
-        row.append($("<td>").append($("<button>")
-            .html("import")
-            .addClass("option-button")
-            .on("click", function() {
-                const importText = $("#importExportField").val();
-                if(importText === "") {
-                    SharkGame.hidePane();
-                    SharkGame.Log.addError("You need to paste something in first!");
-                } else if(confirm("Are you absolutely sure? This will override your current save.")) {
-                    SharkGame.Save.importData(importText);
-                }
-            })
-        ));
-        row.append($("<td>").append($("<button>")
-            .html("export")
-            .addClass("option-button")
-            .on("click", function() {
-                $("#importExportField").val(SharkGame.Save.exportData());
-            })
-        ));
+        row.append(
+            $("<td>").append(
+                $("<button>")
+                    .html("import")
+                    .addClass("option-button")
+                    .on("click", function callback() {
+                        const importText = $("#importExportField").val();
+                        if (importText === "") {
+                            SharkGame.hidePane();
+                            SharkGame.Log.addError("You need to paste something in first!");
+                        } else if (confirm("Are you absolutely sure? This will override your current save.")) {
+                            SharkGame.Save.importData(importText);
+                        }
+                    })
+            )
+        );
+        row.append(
+            $("<td>").append(
+                $("<button>")
+                    .html("export")
+                    .addClass("option-button")
+                    .on("click", function callback() {
+                        $("#importExportField").val(SharkGame.Save.exportData());
+                    })
+            )
+        );
         // add the actual text box
-        row.append($("<td>").attr("colSpan", 4)
-            .append($("<input>")
-                .attr("type", "text")
-                .attr("id", "importExportField")
-            ));
+        row.append(
+            $("<td>").attr("colSpan", 4).append($("<input>").attr("type", "text").attr("id", "importExportField"))
+        );
         optionsTable.append(row);
-
 
         // SAVE WIPE
         // add save wipe
         row = $("<tr>");
-        row.append($("<td>")
-            .html("Wipe Save<br/><span class='smallDesc'>(Completely wipe your save and reset the game. COMPLETELY. FOREVER.)</span>")
+        row.append(
+            $("<td>").html(
+                "Wipe Save<br/><span class='smallDesc'>(Completely wipe your save and reset the game. COMPLETELY. FOREVER.)</span>"
+            )
         );
-        row.append($("<td>").append($("<button>")
-            .html("wipe")
-            .addClass("option-button")
-            .on("click", function() {
-                if(confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
-                    SharkGame.Save.deleteSave();
-                    SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
-                    SharkGame.Resources.reconstructResourcesTable();
-                    SharkGame.World.worldType = "start"; // nothing else will reset this
-                    SharkGame.World.planetLevel = 1;
-                    SharkGame.Main.init(); // reset
-                }
-            })
-        ));
+        row.append(
+            $("<td>").append(
+                $("<button>")
+                    .html("wipe")
+                    .addClass("option-button")
+                    .on("click", () => {
+                        if (confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
+                            SharkGame.Save.deleteSave();
+                            SharkGame.Gateway.deleteArtifacts(); // they're out of the save data, but not the working game memory!
+                            SharkGame.Resources.reconstructResourcesTable();
+                            SharkGame.World.worldType = "start"; // nothing else will reset this
+                            SharkGame.World.planetLevel = 1;
+                            SharkGame.Main.init(); // reset
+                        }
+                    })
+            )
+        );
         optionsTable.append(row);
         return optionsTable;
     },
 
-    onOptionClick: function() {
+    onOptionClick() {
         const buttonLabel = $(this).attr("id");
         const settingInfo = buttonLabel.split("-");
         const settingName = settingInfo[1];
@@ -770,7 +795,7 @@ SharkGame.Main = {
         //     .html("(" + ((typeof newSetting === "boolean") ? (newSetting ? "on" : "off") : newSetting) + ")");
 
         // enable all buttons
-        $("button[id^=\"optionButton-" + settingName + "\"]").prop("disabled", false);
+        $('button[id^="optionButton-' + settingName + '"]').prop("disabled", false);
 
         // disable this button
         $(this).attr("disabled", "true");
@@ -779,13 +804,13 @@ SharkGame.Main = {
         (SharkGame.Settings[settingName].onChange || $.noop)();
     },
 
-    showChangelog: function() {
+    showChangelog() {
         const changelogContent = $("<div>").attr("id", "changelogDiv");
-        $.each(SharkGame.Changelog, function(version, changes) {
+        $.each(SharkGame.Changelog, (version, changes) => {
             const segment = $("<div>").addClass("paneContentDiv");
             segment.append($("<h3>").html(version + ": "));
             const changeList = $("<ul>");
-            $.each(changes, function(_, v) {
+            $.each(changes, (_, v) => {
                 changeList.append($("<li>").html(v));
             });
             segment.append(changeList);
@@ -794,13 +819,13 @@ SharkGame.Main = {
         SharkGame.Main.showPane("Changelog", changelogContent);
     },
 
-    showHelp: function() {
+    showHelp() {
         const helpDiv = $("<div>");
         helpDiv.append($("<div>").append(SharkGame.help).addClass("paneContentDiv"));
         SharkGame.Main.showPane("Help", helpDiv);
     },
 
-    endGame: function(loadingFromSave) {
+    endGame(loadingFromSave) {
         // stop autosaving
         clearInterval(SharkGame.Main.autosaveHandler);
         SharkGame.Main.autosaveHandler = -1;
@@ -815,15 +840,15 @@ SharkGame.Main = {
         SharkGame.Gateway.enterGate(loadingFromSave);
     },
 
-    purgeGame: function() {
+    purgeGame() {
         // empty out all the containers!
         $("#status").empty();
         SharkGame.Log.clearMessages();
         $("#content").empty();
     },
 
-    loopGame: function() {
-        if(SharkGame.gameOver) {
+    loopGame() {
+        if (SharkGame.gameOver) {
             SharkGame.gameOver = false;
             SharkGame.wonGame = false;
             SharkGame.Main.hidePane();
@@ -831,8 +856,11 @@ SharkGame.Main = {
             // copy over all special category resources
             // artifacts are preserved automatically within gateway file
             const backup = {};
-            _.each(SharkGame.ResourceCategories.special.resources, function(resourceName) {
-                backup[resourceName] = {amount: SharkGame.Resources.getResource(resourceName), totalAmount: SharkGame.Resources.getTotalResource(resourceName)};
+            _.each(SharkGame.ResourceCategories.special.resources, (resourceName) => {
+                backup[resourceName] = {
+                    amount: SharkGame.Resources.getResource(resourceName),
+                    totalAmount: SharkGame.Resources.getTotalResource(resourceName),
+                };
             });
 
             SharkGame.Save.deleteSave(); // otherwise it will be loaded during main init and fuck up everything!!
@@ -840,7 +868,7 @@ SharkGame.Main = {
             SharkGame.Log.addMessage(SharkGame.World.getWorldEntryMessage());
 
             // restore special resources
-            $.each(backup, function(resourceName, resourceData) {
+            $.each(backup, (resourceName, resourceData) => {
                 SharkGame.Resources.setResource(resourceName, resourceData.amount);
                 SharkGame.Resources.setTotalResource(resourceName, resourceData.totalAmount);
             });
@@ -849,28 +877,31 @@ SharkGame.Main = {
             try {
                 SharkGame.Save.saveGame();
                 SharkGame.Log.addMessage("Game saved.");
-            } catch(err) {
+            } catch (err) {
                 SharkGame.Log.addError(err.message);
                 console.log(err.trace);
             }
         }
     },
 
-    buildPane: function() {
+    buildPane() {
         const pane = $("<div>").attr("id", "pane");
         $("body").append(pane);
 
         // set up structure of pane
         const titleDiv = $("<div>").attr("id", "paneHeader");
         titleDiv.append($("<div>").attr("id", "paneHeaderTitleDiv"));
-        titleDiv.append($("<div>")
-            .attr("id", "paneHeaderCloseButtonDiv")
-            .append($("<button>")
-                .attr("id", "paneHeaderCloseButton")
-                .addClass("min")
-                .html("&nbsp x &nbsp")
-                .on("click", SharkGame.Main.hidePane)
-            ));
+        titleDiv.append(
+            $("<div>")
+                .attr("id", "paneHeaderCloseButtonDiv")
+                .append(
+                    $("<button>")
+                        .attr("id", "paneHeaderCloseButton")
+                        .addClass("min")
+                        .html("&nbsp x &nbsp")
+                        .on("click", SharkGame.Main.hidePane)
+                )
+        );
         pane.append(titleDiv);
         pane.append($("<div>").attr("id", "paneHeaderEnd").addClass("clear-fix"));
         pane.append($("<div>").attr("id", "paneContent"));
@@ -880,11 +911,11 @@ SharkGame.Main = {
         return pane;
     },
 
-    showPane: function(title, contents, hideCloseButton, fadeInTime, customOpacity) {
+    showPane(title, contents, hideCloseButton, fadeInTime, customOpacity) {
         let pane;
 
         // GENERATE PANE IF THIS IS THE FIRST TIME
-        if(!SharkGame.paneGenerated) {
+        if (!SharkGame.paneGenerated) {
             pane = SharkGame.Main.buildPane();
         } else {
             pane = $("#pane");
@@ -894,16 +925,13 @@ SharkGame.Main = {
         const overlay = $("#overlay");
         // is it already up?
         fadeInTime = fadeInTime || 600;
-        if(overlay.is(":hidden")) {
+        if (overlay.is(":hidden")) {
             // nope, show overlay
             const overlayOpacity = customOpacity || 0.5;
-            if(SharkGame.Settings.current.showAnimations) {
-                overlay.show()
-                    .css("opacity", 0)
-                    .animate({opacity: overlayOpacity}, fadeInTime);
+            if (SharkGame.Settings.current.showAnimations) {
+                overlay.show().css("opacity", 0).animate({ opacity: overlayOpacity }, fadeInTime);
             } else {
-                overlay.show()
-                    .css("opacity", overlayOpacity);
+                overlay.show().css("opacity", overlayOpacity);
             }
             // adjust overlay height
             overlay.height($(document).height());
@@ -913,21 +941,21 @@ SharkGame.Main = {
         const titleDiv = $("#paneHeaderTitleDiv");
         const closeButtonDiv = $("#paneHeaderCloseButtonDiv");
 
-        if(!title || title === "") {
+        if (!title || title === "") {
             titleDiv.hide();
         } else {
             titleDiv.show();
-            if(!hideCloseButton) {
+            if (!hideCloseButton) {
                 // put back to left
-                titleDiv.css({"float": "left", "text-align": "left", "clear": "none"});
+                titleDiv.css({ float: "left", "text-align": "left", clear: "none" });
                 titleDiv.html("<h3>" + title + "</h3>");
             } else {
                 // center
-                titleDiv.css({"float": "none", "text-align": "center", "clear": "both"});
+                titleDiv.css({ float: "none", "text-align": "center", clear: "both" });
                 titleDiv.html("<h2>" + title + "</h2>");
             }
         }
-        if(hideCloseButton) {
+        if (hideCloseButton) {
             closeButtonDiv.hide();
         } else {
             closeButtonDiv.show();
@@ -938,37 +966,36 @@ SharkGame.Main = {
         paneContent.empty();
 
         paneContent.append(contents);
-        if(SharkGame.Settings.current.showAnimations && customOpacity) {
-            pane.show()
-                .css("opacity", 0)
-                .animate({opacity: 1.0}, fadeInTime);
+        if (SharkGame.Settings.current.showAnimations && customOpacity) {
+            pane.show().css("opacity", 0).animate({ opacity: 1.0 }, fadeInTime);
         } else {
             pane.show();
         }
     },
 
-    hidePane: function() {
+    hidePane() {
         $("#overlay").hide();
         $("#pane").hide();
     },
 
-    isFirstTime: function() {
+    isFirstTime() {
         return SharkGame.World.worldType === "start" && !(SharkGame.Resources.getTotalResource("essence") > 0);
     },
 
     // DEBUG FUNCTIONS
-    discoverAll: function() {
-        $.each(SharkGame.Tabs, function(k, v) {
-            if(k !== "current") {
+    discoverAll() {
+        $.each(SharkGame.Tabs, (k, v) => {
+            if (k !== "current") {
                 SharkGame.Main.discoverTab(k);
             }
         });
-    }
+    },
 };
 
 SharkGame.Button = {
-    makeHoverscriptButton: function(id, name, div, handler, hhandler, huhandler) {
-        return $("<button>").html(name)
+    makeHoverscriptButton(id, name, div, handler, hhandler, huhandler) {
+        return $("<button>")
+            .html(name)
             .attr("id", id)
             .appendTo(div)
             .on("click", handler)
@@ -976,19 +1003,16 @@ SharkGame.Button = {
             .on("mouseleave", huhandler);
     },
 
-
-    makeButton: function(id, name, div, handler) {
-        return $("<button>").html(name)
-            .attr("id", id)
-            .appendTo(div)
-            .on("click", handler);
+    makeButton(id, name, div, handler) {
+        return $("<button>").html(name).attr("id", id).appendTo(div).on("click", handler);
     },
 
-    replaceButton: function(id, name, handler) {
-        return $("#" + id).html(name)
+    replaceButton(id, name, handler) {
+        return $("#" + id)
+            .html(name)
             .off("click")
             .on("click", handler);
-    }
+    },
 };
 
 SharkGame.FunFacts = [
@@ -1012,13 +1036,13 @@ SharkGame.FunFacts = [
     "There is a surprising deficit of cookie in this game.",
     "Remoras were banished from the oceans in the long bygone eras. The sharks hope they never come back.",
     "A kiss from a shark can make you immortal. But only if they want you to be immortal.",
-    "A shark is worth one in the bush, and a bunch in the sea water. Don't put sharks in bushes."
+    "A shark is worth one in the bush, and a bunch in the sea water. Don't put sharks in bushes.",
 ];
 
 SharkGame.Changelog = {
-    "0.1 - <a href='https://github.com/spencers145/SharkGame'>Cirrial's Shark Game: New Frontiers</a> (202?/??/??) indev" :[
+    "0.1 - <a href='https://github.com/spencers145/SharkGame'>Cirrial's Shark Game: New Frontiers</a> (202?/??/??) indev": [
         "lot of things",
-        "will fill in later"
+        "will fill in later",
     ],
     "0.71 (2014/12/20)": [
         "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
@@ -1027,7 +1051,7 @@ SharkGame.Changelog = {
         "Options are no longer reset after completing a run for real this time.",
         "Bunch of tweaked gate costs.",
         "One new machine, and one new job.",
-        "Ten new post-chasm-exploration technologies to invest copious amounts of science into."
+        "Ten new post-chasm-exploration technologies to invest copious amounts of science into.",
     ],
     "0.7 - Stranger Oceans (2014/12/19)": [
         "WHOLE BUNCH OF NEW STUFF ADDED.",
@@ -1039,47 +1063,47 @@ SharkGame.Changelog = {
         "Options are no longer reset after completing a run.",
         "Artifacts exist.",
         "Images are a work in progress. Apologies for the placeholder graphics in these trying times.",
-        "Partial production when there's insufficient resources for things that take costs. Enjoy watching your incomes slow to a trickle!"
+        "Partial production when there's insufficient resources for things that take costs. Enjoy watching your incomes slow to a trickle!",
     ],
     "0.62 (2014/12/12)": [
         "Fixed infinity resource requirement for gate.",
-        "Attempted to fix resource table breaking in some browsers for some sidebar widths."
+        "Attempted to fix resource table breaking in some browsers for some sidebar widths.",
     ],
     "0.61 (2014/12/12)": [
         "Added categories for buttons in the home sea, because there are going to be so many buttons.",
         "Miscellaneous shuffling of files.",
-        "Some groundwork laid for v0.7, which will be the actual official release."
+        "Some groundwork laid for v0.7, which will be the actual official release.",
     ],
     "0.6 - Return of Shark (2014/12/8)": [
         "Major graphical update!",
         "Now features graphics sort of!",
         "Some UI rearrangements:" +
-        "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
-        "<li>General stats now on right of grotto instead of left.</li>" +
-        "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
+            "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
+            "<li>General stats now on right of grotto instead of left.</li>" +
+            "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
         "Pointless version subtitle!",
-        "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>"
+        "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>",
     ],
     "0.59 (2014/09/30)": [
         "Bunch of small fixes and tweaks!",
         "End of run time now shown at the end of a run.",
         "A couple of fixes for issues only found in IE11.",
         "Fixed a bug that could let people buy hundreds of things for cheap by overwhelming the game's capacity for input. Hopefully fixed, anyway.",
-        "Gaudy social media share menu shoehorned in below the game title. Enjoy!"
+        "Gaudy social media share menu shoehorned in below the game title. Enjoy!",
     ],
     "0.531 (2014/08/20)": [
-        "Banned sea apples from the recycler because the feedback loop is actually far more crazy powerful than I was expecting. Whoops!"
+        "Banned sea apples from the recycler because the feedback loop is actually far more crazy powerful than I was expecting. Whoops!",
     ],
     "0.53 (2014/08/18)": [
-        "Changed Recycler so that residue into new machines is linear, but into new resources is constant."
+        "Changed Recycler so that residue into new machines is linear, but into new resources is constant.",
     ],
     "0.52 (2014/08/18)": [
         "Emergency bug-fixes.",
-        "Cost to assemble residue into new things is now LINEAR (gets more expensive as you have more things) instead of CONSTANT."
+        "Cost to assemble residue into new things is now LINEAR (gets more expensive as you have more things) instead of CONSTANT.",
     ],
     "0.51 (2014/08/18)": [
         "Edited the wording of import/export saving.",
-        "Made machine recycling less HORRIBLY BROKEN in terms of how much a machine is worth."
+        "Made machine recycling less HORRIBLY BROKEN in terms of how much a machine is worth.",
     ],
     "0.5 (2014/08/18)": [
         "Added the Grotto - a way to better understand what you've accomplished so far.",
@@ -1096,7 +1120,7 @@ SharkGame.Changelog = {
         "Made crab broods less ridiculously explosive.",
         "Adjusted some resource colours.",
         "Added a favicon, probably.",
-        "<span class='medDesc'>Added an overdue copyright notice I guess.</span>"
+        "<span class='medDesc'>Added an overdue copyright notice I guess.</span>",
     ],
     "0.48 (2014/08-ish)": [
         "Saves are now compressed both in local storage and in exported strings.",
@@ -1104,59 +1128,40 @@ SharkGame.Changelog = {
         "Buy 10, Buy 1/3 max and Buy 1/2 max buttons added.",
         "Research impact now displayed on research buttons.",
         "Resource effectiveness multipliers now displayed in table." +
-        "<ul><li>These are not multipliers for how much of that resource you are getting.</li></ul>",
+            "<ul><li>These are not multipliers for how much of that resource you are getting.</li></ul>",
         "Some dumb behind the scenes things to make the code look nicer.",
         "Added this changelog!",
         "Removed upgrades list on the left. It'll come back in a future version.",
-        "Added ray and crab generating resources, and unlocking techs."
+        "Added ray and crab generating resources, and unlocking techs.",
     ],
-    "0.47 (2014/08-ish)": [
-        "Bulk of game content added.",
-        "Last update for Seamergency 2014!"
-    ],
-    "0.4 (2014/08-ish)": [
-        "Added Laboratory tab.",
-        "Added the end of the game tab."
-    ],
-    "0.3 (2014/08-ish)": [
-        "Added description to options.",
-        "Added save import/export.",
-        "Added the ending panel."
-    ],
-    "0.23 (2014/08-ish)": [
-        "Added autosave.",
-        "Income system overhauled.",
-        "Added options panel."
-    ],
+    "0.47 (2014/08-ish)": ["Bulk of game content added.", "Last update for Seamergency 2014!"],
+    "0.4 (2014/08-ish)": ["Added Laboratory tab.", "Added the end of the game tab."],
+    "0.3 (2014/08-ish)": ["Added description to options.", "Added save import/export.", "Added the ending panel."],
+    "0.23 (2014/08-ish)": ["Added autosave.", "Income system overhauled.", "Added options panel."],
     "0.22 (2014/08-ish)": [
         "Offline mode added. Resources will increase even with the game off!",
-        "(Resource income not guaranteed to be 100% accurate.)"
+        "(Resource income not guaranteed to be 100% accurate.)",
     ],
-    "0.21 (2014/08-ish)": [
-        "Save and load added."
-    ],
-    "<0.21 (2014/08-ish)": [
-        "A whole bunch of stuff.",
-        "Resource table, log, initial buttons, the works."
-    ]
+    "0.21 (2014/08-ish)": ["Save and load added."],
+    "<0.21 (2014/08-ish)": ["A whole bunch of stuff.", "Resource table, log, initial buttons, the works."],
 };
 
-$(function() {
+$(() => {
     $("#game").show();
     SharkGame.Main.init();
 
     // ctrl+s saves
-    $(window).on("keydown", function(event) {
+    $(window).on("keydown", (event) => {
         if (event.ctrlKey || event.metaKey) {
             switch (String.fromCharCode(event.key).toLowerCase()) {
-            case "s":
-                event.preventDefault();
-                SharkGame.Save.saveGame();
-                break;
-            case "o":
-                event.preventDefault();
-                SharkGame.Main.showOptions();
-                break;
+                case "s":
+                    event.preventDefault();
+                    SharkGame.Save.saveGame();
+                    break;
+                case "o":
+                    event.preventDefault();
+                    SharkGame.Main.showOptions();
+                    break;
             }
         }
     });
