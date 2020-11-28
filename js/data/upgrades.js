@@ -44,9 +44,67 @@ SharkGame.Upgrades = {
     },
 
     dolphins: {
-        upgrades: ["dolphinBiology", "delphinePhilosophy", "coralHalls"],
-        implies: ["cephalopods"],
+        upgrades: [
+            "dolphinBiology",
+            "delphinePhilosophy",
+            "coralHalls"
+        ],
+        implies: [
+            "cetaceans"
+        ]
     },
+    
+    whales: {
+        upgrades: [
+            "eternalSong"
+        ],
+        implies: [
+            "cetaceans"
+        ]
+    },
+    
+    cetaceans: {
+        upgrades: [
+            "cetaceanAwareness",
+            "primordialSong"
+        ],
+        suggests: [
+            "dolphinTechnology",
+            "dolphins",
+            "whales"
+        ],
+        category: true
+    },
+    
+    octopuses: {
+        upgrades: [
+            "octopusMethodology",
+            "octalEfficiency",
+            "eightfoldOptimisation"
+        ],
+        suggests: [
+            "industrialGradeSponge",
+            "sprongeBiomimicry"
+        ]
+    },
+    
+    eels: {
+        upgrades: [
+            "eelHabitats",
+            "creviceCreches",
+            "bioelectricity",
+            "leviathanHeart"
+        ]
+    },
+    
+    chimaera: {
+        upgrades: [
+            "chimaeraMysticism",
+            "abyssalEnigmas"
+        ]
+    },
+    
+    
 
     standardUpgrades: {
         crystalBite: {
