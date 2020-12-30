@@ -30,6 +30,8 @@ $.extend(SharkGame, {
         "Revenge of the Crabs",
         "Shark Box",
         "Dolphin Heroes",
+        "Maws",
+        "Sharky's Awkward Escapade: Part 6"
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",

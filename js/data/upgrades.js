@@ -10,13 +10,11 @@ SharkGame.Upgrades = {
     sharks: {
         upgrades: [
             "crystalBite",
-            "engineering",
-            "recyclerDiscovery",
-            "iterativeDesign",
-            "superprocessing",
-            "mechanisedAlchemy",
-            "ancestralRecall",
+            "ancestralRecall"
         ],
+        suggests: [
+            "sharkmachines"
+        ]
     },
 
     rays: {
@@ -29,18 +27,18 @@ SharkGame.Upgrades = {
 
     lobsters: {
         upgrades: ["clamScooping"],
-        implies: ["crustaceans"],
+        implies: ["crustaceans"]
     },
 
     shrimp: {
         upgrades: ["eusociality", "wormWarriors"],
-        implies: ["crustaceans"],
+        implies: ["crustaceans"]
     },
 
     crustaceans: {
         upgrades: ["crustaceanBiology"],
-        suggests: ["crustaceanMachines", "shrimp", "lobsters"],
-        category: true,
+        suggests: ["crustaceanmachines", "shrimp", "lobsters"],
+        category: true
     },
 
     dolphins: {
@@ -69,7 +67,7 @@ SharkGame.Upgrades = {
             "primordialSong"
         ],
         suggests: [
-            "dolphinTechnology",
+            "cetaceantechnology",
             "dolphins",
             "whales"
         ],
@@ -83,8 +81,7 @@ SharkGame.Upgrades = {
             "eightfoldOptimisation"
         ],
         suggests: [
-            "industrialGradeSponge",
-            "sprongeBiomimicry"
+            "octopusmachines"
         ]
     },
     
@@ -104,7 +101,44 @@ SharkGame.Upgrades = {
         ]
     },
     
+    sharkmachines: {
+        upgrades: [
+            "engineering",
+            "recyclerDiscovery",
+            "iterativeDesign",
+            "superprocessing",
+            "mechanisedAlchemy"
+        ]
+    },
     
+    octopusmachines: {
+        upgrades: [
+            "industrialGradeSponge",
+            "sprongeBiomimicry"
+        ]
+    },
+    
+    crustaceanmachines: {
+        upgrades: [
+            "coralglassSmelting",
+            "coralCircuitry",
+            "mobiusShells"
+        ]
+    },
+    
+    cetaceanmachines: {
+        upgrades: [
+            "dolphinTechnology",
+            "imperialDesigns"
+        ]
+    },
+
+    recycler: {
+        upgrades: [
+            "recyclerDiscovery",
+            "superprocessing"
+        ]
+    },
 
     standardUpgrades: {
         crystalBite: {
@@ -1049,11 +1083,11 @@ SharkGame.Upgrades = {
 
         superprocessing: {
             name: "Superprocessing",
-            desc: "Ack! The recycler really wasn't meant for this much junk. The scientists have an idea, though.",
+            desc: "The recycler really isn't all that efficient, but our scientists are on the verge of solving that issue.",
             researchedMessage:
                 "Residue has become something of an amorphous supermaterial! It's hard and soft, hot and cold, wet and - well, it's underwater, so, it's just wet, but you get the point.",
             effectDesc:
-                "The recycler's efficiency only starts dropping at 10 million material inserted at once, instead of 100 thousand.",
+                "The recycler's efficiency only starts dropping at 10 million material inserted at once, instead of 100 thousand. The base efficiency is now 100%.",
             cost: {
                 science: 1e6,
                 sharkonium: 1e6,

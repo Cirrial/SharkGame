@@ -766,7 +766,7 @@ SharkGame.ResourceTable = {
         income: {
             seaApple: 0.001,
         },
-        value: 3,
+        value: 9,
     },
 
     coral: {
@@ -1152,7 +1152,7 @@ SharkGame.InternalCategories = {
     },
     lobsters: {
         name: "Lobsters",
-        resources: ["lobster", "harvester", "rockLobster", "berrier"],
+        resources: ["lobster", "harvester", "berrier"],
     },
     shrimp: {
         name: "Shrimp",
@@ -1197,4 +1197,7 @@ SharkGame.InternalCategories = {
     basicmaterials: {
         resources: ["fish", "sand", "crystal", "science", "junk"],
     },
+    kelpstuff: {
+        resources: ["kelp", "seaApple"],
+    }
 };

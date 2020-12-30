@@ -111,10 +111,29 @@ SharkGame.World = {
         const terraformMultiplier = w.getTerraformMultiplier();
         const effectiveLevel = Math.max(Math.floor(level * terraformMultiplier), 1);
 
+        // enable resources allowed on the planet
+        if (worldInfo.includedResources) {
+            SharkGame.ResourceMap.forEach((v, k, m) => {
+                wr.get(k).exists = false;
+            });
+            $.each(worldInfo.includedResources, (ident, group) => {
+                if (SharkGame.InternalCategories[group]) {
+                    $.each(SharkGame.InternalCategories[group].resources, (identwo, resource) => {
+                        wr.get(resource).exists = true;
+                    });
+                } else {
+                    wr.get(group).exists = true;
+                }
+            });
+        }
+
+
         // disable resources not allowed on planet
-        $.each(worldInfo.absentResources, (i, v) => {
-            wr.get(v).exists = false;
-        });
+        if (worldInfo.absentResources) {
+            $.each(worldInfo.absentResources, (i, v) => {
+                wr.get(v).exists = false;
+            });
+        }
 
         // apply world modifiers
         _.each(worldInfo.modifiers, (modifierData) => {
