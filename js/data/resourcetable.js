@@ -1031,7 +1031,6 @@ SharkGame.ResourceCategories = {
             "planter",
             "worker",
             "harvester",
-            "rockLobster",
             "philosopher",
             "treasurer",
             "chorus",
@@ -1041,9 +1040,10 @@ SharkGame.ResourceCategories = {
             "scavenger",
             "technician",
             "sifter",
-            "prospector",
-            "shoveler",
-            "miller",
+            //"prospector",
+            //"shoveler",
+            //"miller",
+            //"rockLobster",
         ],
     },
     machines: {
@@ -1074,9 +1074,9 @@ SharkGame.ResourceCategories = {
             "seaScourer",
             "prostheticPolyp",
             "eggBrooder",
-            "coalescer",
-            "crusher",
-            "pulverizer",
+            //"coalescer",
+            //"crusher",
+            //"pulverizer",
         ],
     },
     scientific: {
@@ -1090,8 +1090,11 @@ SharkGame.ResourceCategories = {
             "Are you afraid of PROGRESS?",
             "Ignorance is bliss.",
         ],
-        resources: ["science", "knowledge"],
-    },
+        resources: [
+            "science",
+            //"knowledge",
+        ],
+    }, 
     animals: {
         name: "Animals",
         disposeMessage: [
@@ -1116,7 +1119,15 @@ SharkGame.ResourceCategories = {
             "Do you think the aim of the game is to make the numbers go DOWN?!",
             "Well I hope you know what you're doing.",
         ],
-        resources: ["sand", "crystal", "kelp", "coral", "algae", "stone", "gravel"],
+        resources: [
+            "sand",
+            "crystal", 
+            "kelp",
+            "coral",
+            "algae",
+            //"stone", 
+            //"gravel",
+        ],
     },
     processed: {
         name: "Processed",
@@ -1154,7 +1165,7 @@ SharkGame.InternalCategories = {
         name: "Lobsters",
         resources: ["lobster", "harvester", "berrier"],
     },
-    shrimp: {
+    shrimps: {
         name: "Shrimp",
         resources: ["shrimp", "worker", "queen"],
     },

@@ -1,3 +1,41 @@
+// SECRET PLANS
+// SECRET PLANS
+//
+// secret plans for v0.2, please do not read if you don't wanna be spoiled:
+// marine: lobsters, clams
+// haven: dolphins, whales, and coral
+// chaotic: ??? possibly just throw in things as a chaotic mish-mash
+// tempestuous: swordfish, some new resource?
+// violent: shrimp, coral, sponge, algae, crustacean machines
+// abandoned: octopuses, sponge and clams?
+// shrouded: eels, chimaera, and jellyfish, no crabs
+// frigid: squid and urchins, squids replace rays, maybe sponge or clams? or new resource?
+//
+// it would be interesting to have clams as a resource in one world but as a frenzy member in another
+//
+// marine justification: lobsters are often found in coastal regions and hunt clams. they are well-suited to a temperate sea
+//
+// haven justification: while various species of whale appear everywhere, they are closely tied to dolphins,
+// who live primarily in warm environments. coral is also very cleanly tied into dolphin progression
+//
+// chaotic: idk yet lol
+//
+// tempestuous justification: swordfish are fast predators, and are likely to survive well in such an environment.
+//
+// violent justification: shrimp are capable of living in a wide, wide variety of environments.
+// so is algae, and coral, and especially sponge. these factors make them more likely to adapt to the heat,
+// more specifically, to have a particular species that is adapted to the heat.
+//
+// abandoned justification: octopuses are sensitive to pollution, but the game establishes that they have dirty machinery and such.
+// caring only about efficiency, they fit the bill thematically.
+//
+// shrouded justification: eels and chimaeras are both arguably mysterious creatures, and the eel pallete somewhat matches the theme.
+//
+// frigid justification: squids and sea urchin live in arctic seas. urchins eat kelp, giving kelp another use.
+// 
+// SECRET PLANS
+// SECRET PLANS
+
 SharkGame.WorldTypes = {
     test: {
         name: "Test",
@@ -47,25 +85,26 @@ SharkGame.WorldTypes = {
         shortDesc: "strange blue",
         entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
         style: "default",
+        /* includedResources: [
+            "sharks",
+            "rays",
+            "crabs",
+            "lobsters",
+            "shrimps",
+            "basicmaterials",
+            "kelpstuff",
+            "sharkmachines",
+            "crustaceanmachines",
+            "coral",
+            "
+        ], */
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
+            "shrimp",
             "chimaera",
-            "eel",
-            "dolphin",
-            "whale",
-            "octopus",
-            "jellyfish",
+            "eel"
         ],
         modifiers: [{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }],
         gateCosts: {
@@ -85,29 +124,14 @@ SharkGame.WorldTypes = {
             "You enter a chaotic fray, with no recollection of your former journey. New creatures charge at you from all directions.",
         style: "chaotic",
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
             "eel",
+            "whale",
             "octopus",
             "shrimp",
-            "jellyfish",
-            "chimaera",
-            "queen",
-            "pit",
-            "lobster",
-            "berrier",
-            "algae",
-            "sponge",
+            "chimaera"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: 0.01 },
@@ -133,24 +157,24 @@ SharkGame.WorldTypes = {
         shortDesc: "thriving aquamarine",
         entry: "Remembering nothing, you find yourself in a beautiful atoll teeming with life. Life will be good here.",
         style: "haven",
+        /* includedResources: [
+            "sharks",
+            "rays",
+            "crabs",
+            "dolphins",
+            "whales",
+            "basicmaterials",
+            "kelpstuff",
+            "sharkmachines",
+            "dolphinmachines",
+            "coral"
+        ], */
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
             "chimaera",
-            "whale",
-            "lobster",
-            "eel",
-            "shrimp",
+            "eel"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
@@ -172,26 +196,26 @@ SharkGame.WorldTypes = {
         entry:
             "You recall nothing and know only the storms. The unrelenting, restless storms scattering your possessions and allies.",
         style: "tempestuous",
+        /* includedResources: [
+            "sharks",
+            "rays",
+            "crabs",
+            "shrimps",
+            "octopuses",
+            "basicmaterials",
+            "kelpstuff",
+            "sharkmachines",
+            "octopusmachines",
+            "sponge",
+            "clam",
+            "algae",
+        ], */
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
             "chimaera",
-            "jellyfish",
-            "dolphin",
-            "whale",
-            "octopus",
-            "shrimp",
-            "algae",
+            "jellyfish"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "stuff", amount: -0.1 },
@@ -216,26 +240,28 @@ SharkGame.WorldTypes = {
         entry:
             "The burning waters sear the last traces of your past experiences from you. From beneath, the vents spew forth a heavy cloud of sand.",
         style: "violent",
+        /* includedResources: [
+            "sharks",
+            "rays",
+            "crabs",
+            "shrimps",
+            "",
+            "whales",
+            "basicmaterials",
+            "kelpstuff",
+            "sharkmachines",
+            "sponge",
+            "algae",
+            "coral",
+        ], */
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
+            "octopus",
+            "eel",
             "chimaera",
-            "whale",
-            "shrimp",
-            "coral",
-            "dolphin",
-            "lobster",
-            "whale",
+            "whale"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
@@ -262,15 +288,6 @@ SharkGame.WorldTypes = {
             "You do not know who left this world so torn and empty. Was it some predecessor of yours? Was it you yourself?",
         style: "abandoned",
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "ice",
             "heater",
             "shrimp",
@@ -278,7 +295,7 @@ SharkGame.WorldTypes = {
             "eel",
             "jellyfish",
             "algae",
-            "whale",
+            "whale"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryConstantIncome", resource: "tar", amount: 0.01 },
@@ -304,24 +321,23 @@ SharkGame.WorldTypes = {
         entry:
             "Blackness. You know only blindness in these dark forsaken waters. Foggy memory leads you to follow a stream of crystals.",
         style: "shrouded",
+        /* includedResources: [
+            "sharks",
+            "diver",
+            "rays",
+            "eels",
+            "chimaeras",
+            "basicmaterials",
+            "sharkmachines"
+        ], */
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "rockLobster",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "ice",
             "heater",
             "lobster",
             "crab",
             "shrimp",
-            "sponge",
-            "dolphin",
+            "sponge"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "crystal", amount: 0.05 },
@@ -352,23 +368,15 @@ SharkGame.WorldTypes = {
         entry: "As you struggle with sudden amnesia, you notice crystals forming in front of you. So cold.",
         style: "frigid",
         absentResources: [
-            "stone",
-            "gravel",
-            "prospector",
-            "shoveler",
-            "miller",
-            "crusher",
-            "pulverizer",
-            "knowledge",
             "tar",
             "dolphin",
             "whale",
+            "lobster",
             "chimaera",
             "shrimp",
             "seaApple",
             "coral",
-            "algae",
-            "octopus",
+            "algae"
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5 },
@@ -458,7 +466,7 @@ SharkGame.WorldTypes = {
         desc: "A world unweathered by ocean currents. It has no natural sand.",
         shortDesc: "rock-bottom",
         entry:
-            "As you enter, the usual shades of green and yellow are nowhere to be found. You look down, and realize there's no sand: just cold, hard slate.",
+            "As you enter, the usual shades of green and yellow are nowhere to be found. You look down, and there's no sand: just cold, hard slate.",
         style: "default",
         absentResources: [
             "knowledge",

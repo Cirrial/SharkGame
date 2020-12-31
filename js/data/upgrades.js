@@ -1,3 +1,12 @@
+// TODO: separate upgrades?
+// NAMES, EFFECTS, DESCRIPTIONS, IF THEY EXIST, COSTS, PREREQUISITES
+// names will remain constant
+// effects vary with what is or isn't in the world
+// this is hard
+// i cant tell if i'll need to just make separate, independent lists
+// i probably will
+// but that's for later
+
 SharkGame.Upgrades = {
     getUpgradeTable() {
         const worldType = SharkGame.World.worldType;
@@ -7,7 +16,7 @@ SharkGame.Upgrades = {
         return SharkGame.Upgrades.standardUpgrades;
     },
 
-    sharks: {
+    /* sharks: {
         upgrades: [
             "crystalBite",
             "ancestralRecall"
@@ -138,7 +147,7 @@ SharkGame.Upgrades = {
             "recyclerDiscovery",
             "superprocessing"
         ]
-    },
+    }, */
 
     standardUpgrades: {
         crystalBite: {

@@ -239,11 +239,11 @@ SharkGame.Resources = {
     },
 
     getResourceGeneratorMultiplier(generator) {
-        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.ResourceIncomeAffectedApplicable, generator);
+        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.GeneratorIncomeAffectedApplicable, generator);
     },
 
     getResourceIncomeMultiplier(product) {
-        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.GeneratorIncomeAffectedApplicable, product);
+        return SharkGame.Resources.getNetworkIncomeModifier(SharkGame.ResourceIncomeAffectedApplicable, product);
     },
 
     getNetworkIncomeModifier(network, resource) {

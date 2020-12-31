@@ -56,7 +56,6 @@ SharkGame.HomeActions = {
         helpText: "Use your natural shark prowess to find and catch a fish.",
     },
 
-    /*
     'debugbutton': {
         name: "Catch stuff",
         effect: {
@@ -84,7 +83,7 @@ SharkGame.HomeActions = {
             "Not intended for actual gameplay."
         ],
         helpText: "Use your natural coding prowess to test the game."
-    }, */
+    },
 
     prySponge: {
         name: "Pry sponge",
@@ -127,7 +126,7 @@ SharkGame.HomeActions = {
 
     // MODDED
 
-    stonePrySponge: {
+    /* stonePrySponge: {
         name: "Pry sponges",
         effect: {
             resource: {
@@ -164,7 +163,7 @@ SharkGame.HomeActions = {
             "Pried a giant barrel sponge from the rocks.",
         ],
         helpText: "Grab a sponge from the seabed for future use.",
-    },
+    }, */
 
     getClam: {
         name: "Get clam",
@@ -1111,7 +1110,7 @@ SharkGame.HomeActions = {
         helpText: "Train a shark in the fine art of research and the science of, well, science.",
     },
 
-    getProspector: {
+    /* getProspector: {
         name: "Recruit shark prospector",
         effect: {
             resource: {
@@ -1141,7 +1140,7 @@ SharkGame.HomeActions = {
             "No rock left unturned! Then, break the rocks you turn over, there might be goodies inside!",
         ],
         helpText: "Train and equip a shark to break crystals and mine stone in sub-ocean caverns.",
-    },
+    }, */
 
     getNurse: {
         name: "Train nurse shark",
@@ -1215,7 +1214,7 @@ SharkGame.HomeActions = {
         helpText: "Remove a ray from sand detail and let them fuse sand into raw crystal.",
     },
 
-    getShoveler: {
+    /* getShoveler: {
         name: "Equip shoveler ray",
         effect: {
             resource: {
@@ -1249,7 +1248,7 @@ SharkGame.HomeActions = {
             "The rays seemed bleak before. Now, they're excited.",
         ],
         helpText: "Remove a ray from fish detail and let them collect gravel instead.",
-    },
+    }, */
 
     getMaker: {
         name: "Instruct a ray maker",
@@ -1289,7 +1288,7 @@ SharkGame.HomeActions = {
         helpText: "Remove a ray from sand business and let them concentrate on making more rays.",
     },
 
-    stoneGetMaker: {
+    /* stoneGetMaker: {
         name: "Instruct a ray maker",
         effect: {
             resource: {
@@ -1323,7 +1322,7 @@ SharkGame.HomeActions = {
             "MORE LASER RAYS FOR THE LASER ARMY-- oh. Well, this is good too.",
         ],
         helpText: "Remove a ray from fish business and let them concentrate on making more rays.",
-    },
+    }, */
 
     // CRAB JOBS ////////////////////////////////////////////////////////////////////////////////
 
@@ -1363,7 +1362,7 @@ SharkGame.HomeActions = {
         helpText: "Equip a crab with the equipment and training to plant kelp across the ocean bottom.",
     },
 
-    getMiller: {
+    /* getMiller: {
         name: "Equip miller crab",
         effect: {
             resource: {
@@ -1397,7 +1396,7 @@ SharkGame.HomeActions = {
             "Crush the pebbles! Crush them into what is technically just smaller pebbles!",
         ],
         helpText: "Equip a crab with the equipment and training to grind gravel directly into sand.",
-    },
+    }, */
 
     getBrood: {
         name: "Form crab brood",
@@ -1547,7 +1546,7 @@ SharkGame.HomeActions = {
         helpText: "Dedicate a lobster to egg production. We don't know how it works. Ask the lobsters.",
     },
 
-    getRockLobster: {
+    /* getRockLobster: {
         name: "Train rock lobster",
         effect: {
             resource: {
@@ -1585,7 +1584,7 @@ SharkGame.HomeActions = {
             "Goodbye, diorite.",
         ],
         helpText: "Give a lobster the right gear to crack open stones in the name of gravel.",
-    },
+    }, */
 
     getHarvester: {
         name: "Train lobster harvester",
@@ -2251,7 +2250,7 @@ SharkGame.HomeActions = {
 
     // MODDED MACHINES
 
-    getCoalescer: {
+    /* getCoalescer: {
         name: "Construct coalescer",
         effect: {
             resource: {
@@ -2343,7 +2342,7 @@ SharkGame.HomeActions = {
             "Man, sand is expensive.",
         ],
         helpText: "Construct a machine to break down gravel into sand.",
-    },
+    }, */
 
     // CRUSTACEAN MACHINES /////////////////////////////////////////////////////////
 
@@ -2689,7 +2688,13 @@ SharkGame.HomeActionCategories = {
 
     basic: {
         name: "Basic",
-        actions: ["catchFish", "prySponge", "stonePrySponge", "getClam", "getJellyfish"],
+        actions: [
+            "catchFish",
+            "prySponge",
+            //"stonePrySponge", 
+            "getClam",
+            "getJellyfish",
+            ],
     },
 
     frenzy: {
@@ -2712,15 +2717,15 @@ SharkGame.HomeActionCategories = {
         name: "Jobs",
         actions: [
             "getDiver",
-            "getProspector",
+            //"getProspector",
             "getScientist",
             "getLaser",
-            "getShoveler",
+            //getShoveler",
             "getPlanter",
-            "getMiller",
+            //"getMiller",
             "getWorker",
             "getHarvester",
-            "getRockLobster",
+            //"getRockLobster",
             "getPhilosopher",
             "getTreasurer",
             "getTechnician",
@@ -2737,7 +2742,7 @@ SharkGame.HomeActionCategories = {
         actions: [
             "getNurse",
             "getMaker",
-            "stoneGetMaker",
+            //"stoneGetMaker",
             "getBrood",
             "getQueen",
             "getBerrier",
@@ -2768,8 +2773,8 @@ SharkGame.HomeActionCategories = {
             "getAutoTransmuter",
             "getFishMachine",
             "getSkimmer",
-            "getCrusher",
-            "getPulverizer",
+            //"getCrusher",
+            //"getPulverizer",
             "getPurifier",
             "getHeater",
         ],
@@ -2788,7 +2793,7 @@ SharkGame.HomeActionCategories = {
             "getSprongeSmelter",
             "getSeaScourer",
             "getProstheticPolyp",
-            "getCoalescer",
+            //"getCoalescer",
         ],
     },
 

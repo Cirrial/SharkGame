@@ -280,7 +280,7 @@ SharkGame.Main = {
                 // number > 0.00001 && negative -> number > 0.00001 && number < 0 -> false
                 formatted = number.toFixed(5) + "";
             } else {
-                formatted = 0;
+                formatted = "0";
             }
 
             if (negative) {

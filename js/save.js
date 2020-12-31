@@ -835,34 +835,7 @@ SharkGame.Save = {
             });
             _.each(
                 [
-                    "knowledge",
-                    "coalescer",
-                    "stone",
-                    "gravel",
-                    "prospector",
-                    "shoveler",
-                    "miller",
-                    "crusher",
-                    "pulverizer",
-                ],
-                (v) => {
-                    save.resources[v] = { amount: 0, totalAmount: 0 };
-                }
-            );
-            _.each(
-                [
                     "iterativeDesign",
-                    "knowledgeCoalescers",
-                    "crystalScoop",
-                    "crystalShovel",
-                    "gravelMilling",
-                    "prospectorSharks",
-                    "sharkoniumPickaxes",
-                    "miningLights",
-                    "rockBreaking",
-                    "rockProcessing",
-                    "gravelPulverizing",
-                    "sharkoniumMillingGear",
                     "superprocessing",
                 ],
                 (v) => {
@@ -880,7 +853,6 @@ SharkGame.Save = {
                     "abandoned",
                     "shrouded",
                     "frigid",
-                    "stone",
                 ],
                 (v) => {
                     save.completedWorlds[v] = false;
@@ -890,3 +862,35 @@ SharkGame.Save = {
         },
     ],
 };
+
+/*                    "knowledgeCoalescers",
+                    "crystalScoop",
+                    "crystalShovel",
+                    "gravelMilling",
+                    "prospectorSharks",
+                    "sharkoniumPickaxes",
+                    "miningLights",
+                    "rockBreaking",
+                    "rockProcessing",
+                    "gravelPulverizing",
+                    "sharkoniumMillingGear",
+                   
+                   _.each(
+                [
+                    "knowledge",
+                    "coalescer",
+                    "stone",
+                    "gravel",
+                    "prospector",
+                    "shoveler",
+                    "miller",
+                    "crusher",
+                    "pulverizer",
+                ],
+                (v) => {
+                    save.resources[v] = { amount: 0, totalAmount: 0 };
+                }
+            );
+            
+                                "stone",
+                   */

@@ -165,19 +165,15 @@ SharkGame.Home = {
             unlock: { world: "frigid", resource: { ice: 200 } },
             message: "So cold. So hungry.<br><span class='smallDesc'>So hopeless.</span>",
         },
-        {
+        /* {
             unlock: { world: "ethereal" },
             message: "The water glows strangely.<br>It feels familiar.",
-        },
-        {
-            unlock: { world: "abyssal" },
-            message: "You can't tell up from down. It never ends.<br>Is this an ocean at all?",
         },
         {
             unlock: { world: "stone" },
             message:
                 "The cold, jagged seafloor looks ancient, yet pristine.<br>Sponges thrive in great numbers on the rocks.",
-        },
+        }, */
     ],
 
     init() {

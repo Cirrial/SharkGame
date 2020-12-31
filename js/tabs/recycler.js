@@ -39,9 +39,10 @@ SharkGame.Recycler = {
         animals: "constant",
     },
 
-    bannedResources: ["essence", "junk", "science", "seaApple", "coalescer", "jellyfish"],
+    bannedResources: ["essence", "junk", "science", "seaApple", "coalescer"],
 
     efficiency: "NA",
+    hoveredResource: "NA",
 
     init() {
         const y = SharkGame.Recycler;
@@ -94,9 +95,9 @@ SharkGame.Recycler = {
 
         const junkDisplay = $("#junkDisplay");
         junkDisplay.html(
-            "CONTENTS:<br/><br/>" +
-                m.beautify(junkAmount) +
-                "<br/><br/>RESIDUE<br/><br/>" +
+            "CONTAINS:<br/>" +
+                m.beautify(junkAmount).bold() +
+                " RESIDUE<br/><br/>" +
                 y.getRecyclerEfficiencyString()
         );
     },
@@ -278,19 +279,35 @@ SharkGame.Recycler = {
         const button = $(this);
         const resource = button.attr("id").split("-")[1];
         const amount = SharkGame.Resources.getResource(resource);
+        SharkGame.Recycler.hoveredResource = resource;
         SharkGame.Recycler.updateEfficiency(resource, amount);
     },
 
     onInputUnhover() {
         SharkGame.Recycler.efficiency = "NA";
+        SharkGame.Recycler.hoveredResource = "NA";
     },
 
     getRecyclerEfficiencyString() {
         const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
+        const r = SharkGame.Resources;
+        
         if (y.efficiency === "NA") {
-            return "<br/><br/>";
+            return "<br/><br/><br/><br/><br/>";
         }
-        return (y.getEfficiency() * 100).toFixed(2).toString().bold() + "<b>%<br/>EFFICIENY</b>";
+
+        if(SharkGame.Settings.current.buyAmount > 0){
+            amountstring = m.beautify(y.efficiency * SharkGame.Settings.current.buyAmount);
+        } else {
+            amountstring = m.beautify(y.efficiency * r.getResource(y.hoveredResource) / -SharkGame.Settings.current.buyAmount);
+        }
+
+        return (y.getEfficiency() * 100).toFixed(2).toString().bold() +
+        "<b>%<br/>EFFICIENY</b><br/><br/>EQUIVALENT TO:<br/>" +
+        amountstring +
+        " " +
+        r.getResourceName(y.hoveredResource);
     },
 
     getEfficiency() {
@@ -298,6 +315,7 @@ SharkGame.Recycler = {
         if (y.efficiency === "NA") {
             return 1;
         }
+        y.updateEfficiency(y.hoveredResource,SharkGame.Resources.getResource(y.hoveredResource));
         return y.efficiency.toFixed(4);
     },
 
