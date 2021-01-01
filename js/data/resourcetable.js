@@ -245,7 +245,7 @@ SharkGame.ResourceTable = {
         value: 3000,
     },
 
-    prospector: {
+    /* prospector: {
         name: "prospector sharks",
         singleName: "prospector shark",
         color: "#7C819C",
@@ -254,7 +254,7 @@ SharkGame.ResourceTable = {
             stone: 0.5,
         },
         value: 2500,
-    },
+    }, */
 
     laser: {
         name: "laser rays",
@@ -268,7 +268,7 @@ SharkGame.ResourceTable = {
         value: 3500,
     },
 
-    shoveler: {
+    /* shoveler: {
         name: "shoveler rays",
         singleName: "shoveler ray",
         color: "#7792A3",
@@ -276,7 +276,7 @@ SharkGame.ResourceTable = {
             gravel: 1,
         },
         value: 3500,
-    },
+    }, */
 
     planter: {
         name: "planter crabs",
@@ -289,7 +289,7 @@ SharkGame.ResourceTable = {
         value: 4000,
     },
 
-    miller: {
+    /* miller: {
         name: "miller crabs",
         singleName: "miller crab",
         color: "#473E3B",
@@ -298,7 +298,7 @@ SharkGame.ResourceTable = {
             sand: 0.2,
         },
         value: 2000,
-    },
+    }, */
 
     worker: {
         name: "worker shrimp",
@@ -322,7 +322,7 @@ SharkGame.ResourceTable = {
         value: 3000,
     },
 
-    rockLobster: {
+   /*  rockLobster: {
         name: "rock lobsters",
         singleName: "rock lobster",
         color: "#9C706D",
@@ -331,7 +331,7 @@ SharkGame.ResourceTable = {
             gravel: 1.5,
         },
         value: 2000,
-    },
+    }, */
 
     philosopher: {
         name: "dolphin philosophers",
@@ -443,8 +443,8 @@ SharkGame.ResourceTable = {
         color: "#B2CFCB",
         income: {
             crystal: 100,
-            stone: 10,
-            tar: 0.002,
+            //stone: 10,
+            tar: 0.02,
         },
         value: 33500, //100 crystal 100 sand 25 sharkonium (3550)
     },
@@ -456,7 +456,7 @@ SharkGame.ResourceTable = {
         color: "#D6CF9F",
         income: {
             sand: 200,
-            tar: 0.002,
+            tar: 0.01,
         },
         value: 120000, //500 sand 150 sharkonium (12000)
     },
@@ -470,7 +470,7 @@ SharkGame.ResourceTable = {
             crystal: -50,
             sand: -150,
             sharkonium: 20,
-            tar: 0.001,
+            tar: 0.01,
         },
         value: 155000, //100 crystal 200 sharkonium (15500)
     },
@@ -482,7 +482,7 @@ SharkGame.ResourceTable = {
         color: "#C9C7A7",
         income: {
             fish: 500,
-            tar: 0.001,
+            tar: 0.005,
         },
         value: 70000, //100 sharkonium (7000)
     },
@@ -524,7 +524,7 @@ SharkGame.ResourceTable = {
 
     // MODDED MACHINES
 
-    coalescer: {
+    /* coalescer: {
         name: "coalescers",
         singleName: "coalescer",
         color: "#D2F9E9",
@@ -556,7 +556,7 @@ SharkGame.ResourceTable = {
             sand: 45,
         },
         value: 180000, // 250 sharkonium, 250 gravel (18000)
-    },
+    }, */
 
     // OTHER MACHINES
 
@@ -623,7 +623,7 @@ SharkGame.ResourceTable = {
         color: "#727887",
         income: {
             clam: 10,
-            tar: 0.01,
+            tar: 0.05,
         },
         value: 50000,
     },
@@ -633,10 +633,10 @@ SharkGame.ResourceTable = {
         singleName: "spronge smelter",
         color: "#76614C",
         income: {
-            spronge: 30,
-            sponge: -50,
-            junk: -150,
-            tar: 0.01,
+            spronge: 45,
+            sponge: -75,
+            junk: -225,
+            tar: 0.1,
         },
         value: 50000,
     },
@@ -646,7 +646,7 @@ SharkGame.ResourceTable = {
         singleName: "sea scourer",
         color: "#8E8F91",
         income: {
-            tar: -1,
+            tar: -0.2,
             junk: 40,
         },
         value: 50000,
@@ -659,7 +659,7 @@ SharkGame.ResourceTable = {
         color: "#A39497",
         income: {
             coral: 30,
-            tar: 0.01,
+            tar: 0.05,
         },
         value: 50000,
     },
@@ -670,7 +670,7 @@ SharkGame.ResourceTable = {
         color: "#836E5F",
         income: {
             octopus: 1,
-            tar: 0.01,
+            tar: 0.05,
         },
         value: 50000,
     },
@@ -682,20 +682,20 @@ SharkGame.ResourceTable = {
         singleName: "science",
         //desc: "Lifeblood of progress.",
         color: "#BBA4E0",
-        income: {
+        /* income: {
             knowledge: 0.01,
-        },
+        }, */
         value: 100,
     },
 
     // SCIENCE, MODDED
 
-    knowledge: {
+    /* knowledge: {
         name: "knowledge",
         singleName: "knowledge",
         color: "#96FFD3",
         value: 1000,
-    },
+    }, */
 
     // ANIMALS
 
@@ -783,7 +783,7 @@ SharkGame.ResourceTable = {
         value: 0.4,
     },
 
-    gravel: {
+    /* gravel: {
         name: "gravel",
         singleName: "gravel",
         color: "#ABABAB",
@@ -795,7 +795,7 @@ SharkGame.ResourceTable = {
         singleName: "stone",
         color: "#6B6B6B",
         value: 3,
-    },
+    }, */
 
     // PROCESSED
 
@@ -843,36 +843,36 @@ SharkGame.ResourceTable = {
         singleName: "tar",
         color: "#3B3B3B",
         income: {
-            shark: -0.0001,
-            ray: -0.0001,
-            crab: -0.0001,
-            shrimp: -0.0001,
-            lobster: -0.0001,
-            dolphin: -0.0001,
-            whale: -0.0001,
-            chimaera: -0.0001,
-            octopus: -0.0001,
-            eel: -0.0001,
-            nurse: -0.0001,
-            maker: -0.0001,
-            brood: -0.0001,
-            queen: -0.0001,
-            berrier: -0.0001,
-            biologist: -0.0001,
-            pit: -0.0001,
-            scientist: -0.0001,
-            laser: -0.0001,
-            planter: -0.0001,
-            worker: -0.0001,
-            harvester: -0.0001,
-            philosopher: -0.0001,
-            treasurer: -0.0001,
-            transmuter: -0.0001,
-            explorer: -0.0001,
-            collector: -0.0001,
-            scavenger: -0.0001,
-            technician: -0.0001,
-            sifter: -0.0001,
+            shark: -0.001,
+            ray: -0.001,
+            crab: -0.001,
+            shrimp: -0.001,
+            lobster: -0.001,
+            dolphin: -0.001,
+            whale: -0.001,
+            chimaera: -0.001,
+            octopus: -0.001,
+            eel: -0.001,
+            nurse: -0.003,
+            maker: -0.003,
+            brood: -0.003,
+            queen: -0.003,
+            berrier: -0.003,
+            biologist: -0.003,
+            pit: -0.003,
+            scientist: -0.001,
+            laser: -0.001,
+            planter: -0.001,
+            worker: -0.001,
+            harvester: -0.001,
+            philosopher: -0.001,
+            treasurer: -0.001,
+            transmuter: -0.001,
+            explorer: -0.001,
+            collector: -0.001,
+            scavenger: -0.001,
+            technician: -0.001,
+            sifter: -0.001,
         },
         value: -100,
         forceIncome: true,
@@ -923,10 +923,11 @@ SharkGame.GeneratorIncomeAffectors = {
     // perhaps...simply calculate everything over the given number of steps the player is gone for
     // but that could take a long time if the player leaves for too long. could take shortcut for long times.
     // will solve later. for now, simply make some resource offline-immune.
+    
+    // problem has since been solved
+    // introduced RK4 method, added income caps to stop over-zealous growth.
 
-    // note to self: look into hashmaps
-
-    knowledge: {
+    /* knowledge: {
         multiply: {
             frenzy: 1,
             specialists: 1,
@@ -934,7 +935,7 @@ SharkGame.GeneratorIncomeAffectors = {
         exponentiate: {
             science: 0.05,
         },
-    },
+    }, */
     ice: {
         multiply: {
             heater: 0.01,
@@ -978,9 +979,11 @@ SharkGame.ResourceIncomeAffectedApplicable = {
 };
 
 SharkGame.ResourceSpecialProperties = {
-    timeImmune: ["knowledge"],
+    timeImmune: [
+        //"knowledge"
+    ],
     incomeCap: {
-        knowledge: 10,
+        //knowledge: 10,
     },
 };
 

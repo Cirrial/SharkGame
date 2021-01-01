@@ -8,14 +8,14 @@
 // but that's for later
 
 SharkGame.Upgrades = {
-    getUpgradeTable() {
+        getUpgradeTable() {
         const worldType = SharkGame.World.worldType;
         if (worldType === "stone") {
             return SharkGame.Upgrades.stoneUpgrades;
         }
         return SharkGame.Upgrades.standardUpgrades;
     },
-
+    
     /* sharks: {
         upgrades: [
             "crystalBite",
@@ -1082,8 +1082,6 @@ SharkGame.Upgrades = {
                     sandDigger: 2,
                     autoTransmuter: 2,
                     skimmer: 2,
-                    crusher: 2,
-                    pulverizer: 2,
                     heater: 2,
                     purifier: 2,
                 },
@@ -1144,7 +1142,6 @@ SharkGame.Upgrades = {
             effect: {
                 multiplier: {
                     crab: 4,
-                    prospector: 2,
                 },
             },
         },
@@ -1165,7 +1162,7 @@ SharkGame.Upgrades = {
             },
         },
 
-        knowledgeCoalescers: {
+        /* knowledgeCoalescers: {
             name: "Knowledge Coalescers",
             desc:
                 "The dolphins say they have a design to accrue knowledge directly from the ocean. Maybe we should hear them out.",
@@ -1180,7 +1177,7 @@ SharkGame.Upgrades = {
                 upgrades: ["gateDiscovery", "dolphinTechnology"],
                 worlds: ["ethereal"],
             },
-        },
+        }, */
 
         // SUPERSCIENCE
 

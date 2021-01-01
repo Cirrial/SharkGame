@@ -441,6 +441,14 @@ SharkGame.Sprites = {
         sourceSize: { w: 50, h: 50 },
         pivot: { x: 0, y: 0 },
     },
+    "actions/getHeater": {
+        frame: { x: 1918, y: 0, w: 50, h: 50 },
+        rotated: false,
+        trimmed: false,
+        spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
+        sourceSize: { w: 50, h: 50 },
+        pivot: { x: 0, y: 0 },
+    },
     "actions/getJellyfish": {
         frame: { x: 782, y: 104, w: 50, h: 50 },
         rotated: false,
@@ -515,6 +523,14 @@ SharkGame.Sprites = {
     },
     "actions/getPlanter": {
         frame: { x: 990, y: 54, w: 50, h: 50 },
+        rotated: false,
+        trimmed: false,
+        spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
+        sourceSize: { w: 50, h: 50 },
+        pivot: { x: 0, y: 0 },
+    },
+    "actions/getPurifier": {
+        frame: { x: 1868, y: 100, w: 50, h: 50 },
         rotated: false,
         trimmed: false,
         spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
@@ -754,6 +770,14 @@ SharkGame.Sprites = {
         sourceSize: { w: 100, h: 100 },
         pivot: { x: 0, y: 0 },
     },
+    "technologies/agriculture": {
+        frame: { x: 1768, y: 50, w: 50, h: 50 },
+        rotated: false,
+        trimmed: false,
+        spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
+        sourceSize: { w: 50, h: 50 },
+        pivot: { x: 0, y: 0 },
+    },
     "technologies/automation": {
         frame: { x: 1302, y: 106, w: 50, h: 50 },
         rotated: false,
@@ -842,6 +866,14 @@ SharkGame.Sprites = {
         sourceSize: { w: 50, h: 50 },
         pivot: { x: 0, y: 0 },
     },
+    "technologies/jellyfishHunting": {
+        frame: { x: 1768, y: 100, w: 50, h: 50 },
+        rotated: false,
+        trimmed: false,
+        spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
+        sourceSize: { w: 50, h: 50 },
+        pivot: { x: 0, y: 0 },
+    },
     "technologies/kelpHorticulture": {
         frame: { x: 1510, y: 54, w: 50, h: 50 },
         rotated: false,
@@ -900,6 +932,14 @@ SharkGame.Sprites = {
     },
     "technologies/superprocessing": {
         frame: { x: 1768, y: 0, w: 50, h: 50 },
+        rotated: false,
+        trimmed: false,
+        spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },
+        sourceSize: { w: 50, h: 50 },
+        pivot: { x: 0, y: 0 },
+    },
+    "technologies/thermalConditioning": {
+        frame: { x: 1818, y: 100, w: 50, h: 50 },
         rotated: false,
         trimmed: false,
         spriteSourceSize: { x: 0, y: 0, w: 50, h: 50 },

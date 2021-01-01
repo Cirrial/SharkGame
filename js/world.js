@@ -20,8 +20,8 @@ SharkGame.WorldModifiers = {
             wr.get(resourceName).incomeMultiplier = 1 + level * amount;
         },
     },
-    planetaryConstantIncomeMultiplier: {
-        name: "Constant Planetary Income Multiplier",
+    planetaryFixedIncomeMultiplier: {
+        name: "Fixed Planetary Income Multiplier",
         apply(level, resourceName, amount) {
             const wr = SharkGame.World.worldResources;
             wr.get(resourceName).incomeMultiplier = amount;

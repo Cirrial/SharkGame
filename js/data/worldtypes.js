@@ -299,7 +299,6 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryConstantIncome", resource: "tar", amount: 0.01 },
-            { type: "multiplier", modifier: "planetaryResourceBoost", resource: "tar", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "sandDigger", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "fishMachine", amount: 1 },
@@ -356,9 +355,9 @@ SharkGame.WorldTypes = {
             jellyfish: 1e8,
             clam: 1e6,
             crystal: 1e9,
-            science: 1e9,
+            science: 1e7,
             sharkonium: 1e7,
-            fish: 1e8,
+            fish: 1e7,
         },
     },
     frigid: {
@@ -385,7 +384,7 @@ SharkGame.WorldTypes = {
         ],
         gateCosts: {
             sand: 1e6,
-            crystal: 1e4,
+            crystal: 1e6,
             clam: 1e3,
             heater: 5,
             sharkonium: 1e7,
@@ -490,7 +489,7 @@ SharkGame.WorldTypes = {
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "clamCollector", amount: 0.5 },
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "eggBrooder", amount: 0.5 },
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "sprongeSmelter", amount: 0.5 },
-            { type: "multiplier", modifier: "planetaryConstantIncomeMultiplier", resource: "ray", amount: 5 },
+            { type: "multiplier", modifier: "planetaryFixedIncomeMultiplier", resource: "ray", amount: 5 },
             { type: "restriction", modifier: "planetaryGeneratorRestriction", resource: "ray", restriction: "sand" },
             {
                 type: "restriction",

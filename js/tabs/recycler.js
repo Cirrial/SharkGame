@@ -98,7 +98,8 @@ SharkGame.Recycler = {
             "CONTAINS:<br/>" +
                 m.beautify(junkAmount).bold() +
                 " RESIDUE<br/><br/>" +
-                y.getRecyclerEfficiencyString()
+                y.getRecyclerEfficiencyString() +
+                y.getTarString()
         );
     },
 
@@ -286,6 +287,25 @@ SharkGame.Recycler = {
     onInputUnhover() {
         SharkGame.Recycler.efficiency = "NA";
         SharkGame.Recycler.hoveredResource = "NA";
+    },
+
+    getTarString() {
+        const y = SharkGame.Recycler;
+        const m = SharkGame.Main;
+        const r = SharkGame.Resources;
+
+        if(SharkGame.World.worldType === "abandoned") {
+            if (y.efficiency === "NA") {
+                return "<br/><br/>";
+            }
+            if(SharkGame.Settings.current.buyAmount > 0){
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * SharkGame.Settings.current.buyAmount);
+            } else {
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * r.getResource(y.hoveredResource) / -SharkGame.Settings.current.buyAmount);
+            }
+            return "<br/><br/>AND " + amountstring.bold() + " " + r.getResourceName("tar");
+        }
+        return "";
     },
 
     getRecyclerEfficiencyString() {
