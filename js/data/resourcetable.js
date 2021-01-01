@@ -723,14 +723,14 @@ SharkGame.ResourceTable = {
             sponge: 0.001,
             algae: -0.01,
         },
-        value: 6,
+        value: 9,
     },
 
     jellyfish: {
         name: "jellyfish",
         singleName: "jellyfish",
         color: "#E3B8FF",
-        value: 9,
+        value: 10,
     },
 
     clam: {

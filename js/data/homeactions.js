@@ -56,7 +56,7 @@ SharkGame.HomeActions = {
         helpText: "Use your natural shark prowess to find and catch a fish.",
     },
 
-    'debugbutton': {
+    /* 'debugbutton': {
         name: "Catch stuff",
         effect: {
             resource: {
@@ -83,7 +83,7 @@ SharkGame.HomeActions = {
             "Not intended for actual gameplay."
         ],
         helpText: "Use your natural coding prowess to test the game."
-    },
+    }, */
 
     prySponge: {
         name: "Pry sponge",
@@ -279,7 +279,7 @@ SharkGame.HomeActions = {
         name: "Dissect sponge",
         effect: {
             resource: {
-                science: 2
+                science: 1
             }
         },
         cost: [
