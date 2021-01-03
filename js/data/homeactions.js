@@ -2452,13 +2452,13 @@ SharkGame.HomeActions = {
             },
         },
         cost: [
-            { resource: "delphinium", costFunction: "linear", priceIncrease: 300 },
+            { resource: "delphinium", costFunction: "linear", priceIncrease: 250 },
             { resource: "science", costFunction: "linear", priceIncrease: 200 },
         ],
         max: "silentArchivist",
         prereq: {
             resource: {
-                delphinium: 300,
+                delphinium: 250,
             },
             upgrade: ["dolphinTechnology"],
         },

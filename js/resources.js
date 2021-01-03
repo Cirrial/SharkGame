@@ -163,40 +163,48 @@ SharkGame.Resources = {
 
         const worldResources = w.worldResources;
 
-        SharkGame.ResourceMap.forEach((resource, name, m) => {
+        SharkGame.ResourceMap.forEach((properties, name, m) => {
             const worldResourceInfo = worldResources.get(name);
             if (worldResourceInfo.exists) {
                 // for this resource, calculate the income it generates
-                if (resource.income) {
-                    $.each(resource.income, (k, v) => {
+                if (properties.income) {
+                    let costScaling = 1;
+                    let changeMap = new Map();
+
+                    $.each(properties.income, (k, v) => {
+                        if (SharkGame.World.doesResourceExist(k)) {
+                            changeMap.set(k, r.getProductAmountFromGeneratorResource(name, k))
+                        }
+                    });
+
+                    changeMap.forEach((change, k, map) => {
                         // run over all resources first to check if costs can be met
                         // if the cost can't be taken, scale the cost and output down to feasible levels
-                        if (SharkGame.World.doesResourceExist(k)) {
-                            let costScaling = 1;
-                            const change = r.getProductAmountFromGeneratorResource(name, k);
-                            if (!resource.forceIncome) {
-                                if (change < 0) {
-                                    const resourceHeld = r.getResource(k);
-                                    if (resourceHeld + change <= 0) {
-                                        const scaling = resourceHeld / -change;
-                                        if (scaling >= 0 && scaling < 1) {
-                                            // sanity checking
-                                            costScaling = Math.min(costScaling, scaling);
-                                        } else {
-                                            costScaling = 0; // better to break this way than break explosively
-                                        }
+                        if (!properties.forceIncome) {
+                            if (change < 0) {
+                                const resourceHeld = r.getResource(k);
+                                if (resourceHeld + change <= 0) {
+                                    const scaling = resourceHeld / -change;
+                                    if (scaling >= 0 && scaling < 1) {
+                                        // sanity checking
+                                        costScaling = Math.min(costScaling, scaling);
+                                    } else {
+                                        costScaling = 0; // better to break this way than break explosively
                                     }
                                 }
                             }
-                            SharkGame.PlayerIncomeTable.set(
-                                k,
-                                SharkGame.PlayerIncomeTable.get(k) + change * costScaling
-                            );
                         }
+                    });
+
+                    changeMap.forEach((change, k, map) => {
+                        SharkGame.PlayerIncomeTable.set(
+                            k,
+                            SharkGame.PlayerIncomeTable.get(k) + change * costScaling
+                        );
                     });
                 }
 
-                // calculate the income that should be added to this resource
+                // calculate any world income that should be added to this resource
                 if (worldResourceInfo) {
                     const worldResourceIncome = worldResourceInfo.income;
                     const affectedResourceBoostMultiplier = worldResources.get(name).boostMultiplier;
@@ -209,7 +217,7 @@ SharkGame.Resources = {
         });
     },
 
-    getProductAmountFromGeneratorResource(generator, product, costScaling) {
+    getProductAmountFromGeneratorResource(generator, product) {
         const r = SharkGame.Resources;
         const w = SharkGame.World;
         const rp = SharkGame.ResourceSpecialProperties;
@@ -217,13 +225,9 @@ SharkGame.Resources = {
         if (!r.getResourceCombinationAllowed(generator, product)) {
             return 0;
         }
-        if (typeof costScaling !== "number") {
-            costScaling = 1;
-        }
         const generated =
             SharkGame.ResourceMap.get(generator).income[product] *
             r.getResource(generator) *
-            costScaling *
             playerResource.incomeMultiplier *
             w.getWorldIncomeMultiplier(generator) *
             w.getWorldBoostMultiplier(product) *

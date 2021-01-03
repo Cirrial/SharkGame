@@ -36,7 +36,8 @@ $.extend(SharkGame, {
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
     VERSION: 0.71,
-    VERSION_NAME: "New Frontiers", // s: orginal version name is Stranger Oceans. might as well keep a record of that here.
+    SUB_VERSION: 0.1,
+    VERSION_NAME: "New is Old", // s: orginal version name is Stranger Oceans. might as well keep a record of that here.
     EPSILON: 1e-6, // floating point comparison is a joy
     // s: agreed, already had to deal with it on recycler revisions
     // did you know that reducing a float like 1.2512351261 to 1.25 by literally removing the decimal and multiplying by 100 gives you something like 125.0000001?
@@ -360,7 +361,7 @@ SharkGame.Main = {
         const overlay = $("#overlay");
         overlay.hide();
         $("#gameName").html("- " + SharkGame.GAME_NAME + " -");
-        $("#versionNumber").html("MODDED v " + SharkGame.VERSION + " — " + SharkGame.VERSION_NAME);
+        $("#versionNumber").html("MODDED v " + SharkGame.VERSION + "<br/> New Frontiers v " + SharkGame.SUB_VERSION + " - " + SharkGame.VERSION_NAME);
         SharkGame.sidebarHidden = true;
         SharkGame.gameOver = false;
 

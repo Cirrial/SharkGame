@@ -586,9 +586,9 @@ SharkGame.ResourceTable = {
         singleName: "glass maker",
         color: "#E39E66",
         income: {
-            coralglass: 10,
-            coral: -150,
-            sand: -150,
+            coralglass: 20,
+            coral: -300,
+            sand: -300,
         },
         value: 50000,
     },
@@ -609,9 +609,9 @@ SharkGame.ResourceTable = {
         singleName: "tireless crafter",
         color: "#9AEBCF",
         income: {
-            delphinium: 10,
-            coral: -150,
-            crystal: -50,
+            delphinium: 20,
+            coral: -300,
+            crystal: -100,
             tar: 0.001,
         },
         value: 50000,
@@ -883,14 +883,6 @@ SharkGame.ResourceTable = {
         singleName: "ice",
         color: "#E4F1FB",
         income: {
-            fish: -0.01,
-            jellyfish: -0.01,
-            clam: -0.01,
-            kelp: -0.01,
-            coral: -0.01,
-            algae: -0.01,
-            seaApple: -0.01,
-            sponge: -0.01,
             ice: 0.001,
         },
         value: -100,
@@ -939,6 +931,9 @@ SharkGame.GeneratorIncomeAffectors = {
     ice: {
         multiply: {
             heater: 0.01,
+        },
+        exponentiate: {
+            frenzy: 0.99
         },
     },
     tar: {
