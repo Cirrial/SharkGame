@@ -98,8 +98,8 @@ SharkGame.Recycler = {
             "CONTAINS:<br/>" +
                 m.beautify(junkAmount).bold() +
                 " RESIDUE<br/><br/>" +
-                y.getRecyclerEfficiencyString() +
-                y.getTarString()
+                y.getRecyclerEfficiencyString().bold() +
+                y.getTarString().bold()
         );
     },
 
@@ -197,8 +197,8 @@ SharkGame.Recycler = {
         }
 
         if (resourceAmount >= amount) {
-            r.changeResource(resourceName, -amount);
             r.changeResource("junk", amount * junkPerResource * SharkGame.Recycler.getEfficiency(resourceName, amount));
+            r.changeResource(resourceName, -amount);
             r.changeResource("tar", amount * junkPerResource * 0.00001);
             l.addMessage(SharkGame.choose(y.recyclerInputMessages));
         } else {

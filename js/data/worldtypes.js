@@ -105,7 +105,8 @@ SharkGame.WorldTypes = {
             "purifier",
             "shrimp",
             "chimaera",
-            "eel"
+            "eel",
+            "jellyfish",
         ],
         modifiers: [{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }],
         gateCosts: {
@@ -136,6 +137,7 @@ SharkGame.WorldTypes = {
             "chimaera",
             "pit",
             "queen",
+            "jellyfish",
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "frenzy", amount: 0.01 },
@@ -178,6 +180,7 @@ SharkGame.WorldTypes = {
             "purifier",
             "chimaera",
             "eel",
+            "jellyfish",
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
@@ -219,7 +222,7 @@ SharkGame.WorldTypes = {
             "heater",
             "purifier",
             "chimaera",
-            "jellyfish"
+            "jellyfish",
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "sand", amount: -0.5 },
@@ -269,7 +272,8 @@ SharkGame.WorldTypes = {
             "octopus",
             "eel",
             "chimaera",
-            "whale"
+            "whale",
+            "jellyfish",
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
@@ -385,7 +389,8 @@ SharkGame.WorldTypes = {
             "shrimp",
             "seaApple",
             "coral",
-            "algae"
+            "algae",
+            "jellyfish",
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5 },

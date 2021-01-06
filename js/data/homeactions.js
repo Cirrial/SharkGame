@@ -80,9 +80,13 @@ SharkGame.HomeActions = {
             "Very interesting results here.",
             "A gift from the developer.",
             "You better be testing something.",
-            "Not intended for actual gameplay."
+            "Not intended for actual gameplay.",
+            "Cheater.",
         ],
-        helpText: "Use your natural coding prowess to test the game."
+        helpText: "Use your natural coding prowess to test the game.",
+        removedBy: {
+            upgrades: ["crystalContainer"],
+        },
     }, */
 
     prySponge: {

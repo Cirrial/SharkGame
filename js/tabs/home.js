@@ -190,10 +190,11 @@ SharkGame.Home = {
             discovered: h.tabDiscovered,
             code: h,
         };
-        // populate action discoveries
+        // populate action discoveries (and reset removals)
         $.each(SharkGame.HomeActions, (actionName, actionData) => {
             actionData.discovered = false;
             actionData.newlyDiscovered = false;
+            actionData.isRemoved = false;
         });
 
         h.currentExtraMessageIndex = -1;
@@ -402,7 +403,7 @@ SharkGame.Home = {
         $.each(SharkGame.HomeActions, (actionName, actionData) => {
             const actionTab = h.getActionCategory(actionName);
             const onTab = actionTab === h.currentButtonTab || h.currentButtonTab === "all";
-            if (onTab) {
+            if (onTab && !actionData.isRemoved) {
                 const button = $("#" + actionName);
                 if (button.length === 0) {
                     if (actionData.discovered || h.areActionPrereqsMet(actionName)) {
@@ -439,6 +440,14 @@ SharkGame.Home = {
         const button = $("#" + actionName);
         const actionData = SharkGame.HomeActions[actionName];
 
+        if (actionData.removedBy) {
+            if (SharkGame.Home.shouldRemoveHomeButton(actionData)) {
+                button.remove();
+                actionData.isRemoved = true;
+                actionData.discovered = true;
+                return;
+            }
+        }
         let amount = amountToBuy;
         let actionCost;
         if (amountToBuy < 0) {
@@ -513,6 +522,10 @@ SharkGame.Home = {
         const w = SharkGame.World;
         let prereqsMet = true; // assume true until proven false
         const action = SharkGame.HomeActions[actionName];
+        // check to see if this action should be forcibly removed
+        if (action.removedBy) {
+            prereqsMet = !SharkGame.Home.shouldRemoveHomeButton(action);
+        }
         // check resource prerequisites
         if (action.prereq.resource) {
             prereqsMet = prereqsMet && r.checkResources(action.prereq.resource, true);
@@ -553,6 +566,25 @@ SharkGame.Home = {
             });
         }
         return prereqsMet;
+    },
+    
+    shouldRemoveHomeButton(action){
+        let disable = false;
+        $.each(action.removedBy, (kind, by) => {
+            switch (kind) {
+                case "otherActions":
+                    $.each(by, (k, v) => {
+                        disable = disable || areActionPrereqsMet(v);
+                    });
+                    break;
+                case "upgrades":
+                    $.each(by, (k, v) => {
+                        disable = disable || SharkGame.Upgrades.getUpgradeTable()[v].purchased;
+                    });
+                    break;
+            }
+        });
+        return disable;
     },
 
     addButton(actionName) {

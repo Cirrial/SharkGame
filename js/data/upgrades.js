@@ -7,6 +7,11 @@
 // i probably will
 // but that's for later
 
+// my end conclusion is that I will certainly be putting upgrades into individual lists,
+// separated by world type. therefore every world gets its own upgrade progression individually,
+// so I can closely monitor and control the progression in every world, have individual and unique
+// descriptions and names and effects, and have the progression of each species vary by world.
+
 SharkGame.Upgrades = {
         getUpgradeTable() {
         const worldType = SharkGame.World.worldType;
