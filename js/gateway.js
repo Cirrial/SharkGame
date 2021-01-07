@@ -349,6 +349,10 @@ SharkGame.Gateway = {
                     qualified = false;
                 }
             }
+            
+            if (artifactData.ignore) {
+                qualified = false;
+            }
 
             if (qualified) {
                 qualifiedArtifactPool.push(artifactName);
@@ -578,22 +582,29 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
-
-    // jesus christ you better be sorry what the hell is this
+    
+    // i partially cleaned it up for you
     showPlanetAttributes(worldData, planetLevel, contentDiv) {
         // add known attributes
-        const knownAttributeMax = SharkGame.Gateway.getMaxWorldQualitiesToShow();
-        if (knownAttributeMax > 0) {
-            const totalAttributes = _.size(worldData.modifiers);
+        const pslevel = SharkGame.Artifacts.planetScanner.level;
+        if (pslevel > 0) {
+            const modifiers = _.size(worldData.modifiers);
+            const gateSlots = _.size(worldData.gateCosts);
+            const bannedResources = _.size(worldData.absentResources);
+            const totalAttributes = modifiers + gateSlots + bannedResources;
+            const numberKnown = Math.floor(totalAttributes * pslevel / 5);
+            let numberLeft = numberKnown;
+
             contentDiv.append(
                 $("<p>").html(
                     "Known modifiers (" +
-                        Math.floor(totalAttributes === 0 ? 1 : Math.min(1, knownAttributeMax / totalAttributes) * 100) +
+                        Math.floor(modifiers === 0 ? 100 : Math.min(1, numberKnown / modifiers) * 100) +
                         "%):"
                 )
             );
+
             const modifierList = $("<ul>").addClass("gatewayPropertyList");
-            for (let i = 0; i < Math.min(knownAttributeMax, totalAttributes); i++) {
+            for (let i = 0; i < Math.min(numberKnown, modifiers); i++) {
                 const modifier = worldData.modifiers[i];
                 const target = modifier.resource;
                 let resourceName = "";
@@ -616,19 +627,18 @@ SharkGame.Gateway = {
                 );
             }
             contentDiv.append(modifierList);
+            numberLeft = numberLeft - modifiers
 
             // if all modifiers are revealed, carry over to the gate requirements and abandoned resources
-            const bonusPoints = knownAttributeMax - totalAttributes;
-            if (bonusPoints > 0) {
-                const gateSlots = _.size(worldData.gateCosts);
+            if (numberLeft > 0) {
                 contentDiv.append(
                     $("<p>").html(
-                        "Known gate requirements (" + Math.floor(Math.min(1, bonusPoints / gateSlots) * 100) + "%):"
+                        "Known gate requirements (" + Math.floor(Math.min(1, numberLeft / gateSlots) * 100) + "%):"
                     )
                 );
                 const gateList = $("<ul>").addClass("gatewayPropertyList");
                 const gateKeySet = _.keys(worldData.gateCosts);
-                for (let i = 0; i < Math.min(bonusPoints, gateSlots); i++) {
+                for (let i = 0; i < Math.min(numberLeft, gateSlots); i++) {
                     const gateSlot = gateKeySet[i];
                     const gateCost = Math.floor(
                         worldData.gateCosts[gateSlot] * planetLevel * SharkGame.World.getGateCostMultiplier()
@@ -641,14 +651,17 @@ SharkGame.Gateway = {
                     );
                 }
                 contentDiv.append(gateList);
-                const totalBannedResources = _.size(worldData.absentResources);
+            }
+
+            numberLeft = numberLeft - gateSlots
+            if (numberLeft > 0) {
                 contentDiv.append(
                     $("<p>").html(
-                        "Known absences (" + Math.floor(Math.min(1, bonusPoints / totalBannedResources) * 100) + "%):"
+                        "Known absences (" + Math.floor(Math.min(1, numberLeft / bannedResources) * 100) + "%):"
                     )
                 );
                 const bannedList = $("<ul>").addClass("gatewayPropertyList");
-                for (let i = 0; i < Math.min(bonusPoints, totalBannedResources); i++) {
+                for (let i = 0; i < Math.min(numberLeft, bannedResources); i++) {
                     const bannedResource = worldData.absentResources[i];
                     const resourceName = SharkGame.ResourceMap.get(bannedResource).singleName;
                     bannedList.append($("<li>").html(resourceName).addClass("smallDesc"));
@@ -656,11 +669,6 @@ SharkGame.Gateway = {
                 contentDiv.append(bannedList);
             }
         }
-    },
-
-    getMaxWorldQualitiesToShow() {
-        const psLevel = SharkGame.Artifacts.planetScanner.level;
-        return psLevel > 0 ? psLevel + 1 : 0;
     },
 
     deleteArtifacts() {
@@ -723,7 +731,6 @@ SharkGame.Gateway.Messages = {
             min: 51,
             max: 200,
             messages: [
-                "What do you seek?",
                 "Have you found your home yet?",
                 "Surely your home lies but a jump or two away?",
                 "Have you ever returned to one of the worlds you've been before?",

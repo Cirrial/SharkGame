@@ -50,7 +50,7 @@ SharkGame.Reflection = {
         const m = SharkGame.Main;
         const listSel = $("#artifactList");
         $.each(SharkGame.Artifacts, (artifactKey, artifactData) => {
-            if (artifactData.level > 0) {
+            if (artifactData.level > 0 && !artifactData.ignore) {
                 const maxedOut = artifactData.level >= artifactData.max;
                 const item = $("<div>").addClass("artifactDiv");
                 let artifactLabel = artifactData.name + "<br><span class='medDesc'>";

@@ -213,8 +213,11 @@ SharkGame.World = {
     // these things are only impacted by artifacts so far
 
     getTerraformMultiplier() {
-        const ptLevel = SharkGame.Artifacts.planetTerraformer.level;
-        return ptLevel > 0 ? Math.pow(0.9, ptLevel) : 1;
+        // temporarily disabled the terraformer because it might screw with game balance down the line.
+        //
+        // const ptLevel = SharkGame.Artifacts.planetTerraformer.level;
+        // return ptLevel > 0 ? Math.pow(0.9, ptLevel) : 1;
+        return 1;
     },
 
     getGateCostMultiplier() {

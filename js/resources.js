@@ -50,23 +50,18 @@ SharkGame.Resources = {
                 SharkGame.Resources.recalculateIncomeTable();
                 timeDelta -= 1;
             }
-
             if (timeDelta > 172800) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta, timeDelta / 1728, 50000);
             }
-
             if (timeDelta > 43200) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta, 100, 8000);
             }
-
             if (timeDelta > 7200) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta, 75, 2250);
             }
-
             if (timeDelta > 2000) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta, 40, 500);
             }
-
             if (timeDelta > 50) {
                 timeDelta = SharkGame.Resources.doRKMethod(timeDelta, 20, 50);
             }

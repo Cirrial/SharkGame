@@ -81,7 +81,6 @@ SharkGame.Recycler = {
 
     update() {
         const y = SharkGame.Recycler;
-
         y.updateJunkDisplay();
         y.updateButtons();
     },
@@ -293,15 +292,17 @@ SharkGame.Recycler = {
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
+        
+        const buy = SharkGame.Settings.current.buyAmount
 
         if(SharkGame.World.worldType === "abandoned") {
             if (y.efficiency === "NA") {
                 return "<br/><br/>";
             }
-            if(SharkGame.Settings.current.buyAmount > 0){
-                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * SharkGame.Settings.current.buyAmount);
+            if(buy > 0){
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * buy);
             } else {
-                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * r.getResource(y.hoveredResource) / -SharkGame.Settings.current.buyAmount);
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * r.getResource(y.hoveredResource) / -buy);
             }
             return "<br/><br/>AND " + amountstring.bold() + " " + r.getResourceName("tar");
         }
@@ -312,7 +313,7 @@ SharkGame.Recycler = {
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
         const r = SharkGame.Resources;
-        
+
         if (y.efficiency === "NA") {
             return "<br/><br/><br/><br/><br/>";
         }
@@ -341,7 +342,7 @@ SharkGame.Recycler = {
 
     updateEfficiency(resource, amount) {
         const y = SharkGame.Recycler;
-        const buyN = SharkGame.Settings.current.buyAmount;
+        const buy = SharkGame.Settings.current.buyAmount;
         let evalue = 5;
         let baseEfficiency = 0.5;
         
@@ -353,13 +354,13 @@ SharkGame.Recycler = {
         }
 
         // no efficiency change if only eating up to 100
-        if (buyN > 0) {
+        if (buy > 0) {
             y.efficiency = baseEfficiency;
             return;
         }
 
         if (amount) {
-            const n = amount / -buyN;
+            const n = amount / -buy;
             // check if the amount to eat is less than the threshold, currently 100K
             if (n < Math.pow(10, evalue)) {
                 y.efficiency = baseEfficiency;

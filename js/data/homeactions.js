@@ -2195,9 +2195,6 @@ SharkGame.HomeActions = {
         cost: [{ resource: "sharkonium", costFunction: "linear", priceIncrease: 500 }],
         max: "purifier",
         prereq: {
-            resource: {
-                sharkonium: 500,
-            },
             upgrade: ["environmentalism"],
         },
         outcomes: [
@@ -2228,10 +2225,6 @@ SharkGame.HomeActions = {
         cost: [{ resource: "sharkonium", costFunction: "linear", priceIncrease: 250 }],
         max: "heater",
         prereq: {
-            resource: {
-                ice: 1,
-                sharkonium: 300,
-            },
             upgrade: ["thermalConditioning"],
         },
         outcomes: [

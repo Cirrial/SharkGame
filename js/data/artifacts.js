@@ -56,6 +56,7 @@ SharkGame.Artifacts = {
         },
         // effect is handled specially
         // check SharkGame.World.getTerraformMultiplier
+        ignore: true,
     },
     gateCostReducer: {
         name: "Gate Controller",
@@ -72,12 +73,11 @@ SharkGame.Artifacts = {
         name: "Distant Foresight",
         desc: "Reveals properties of worlds before travelling to them.",
         flavour: "Knowledge may not change destiny, but it may divert it.",
-        max: 15,
+        max: 5,
         cost(level) {
-            return Math.floor(Math.pow(1.5, level + 1));
+            return Math.floor(Math.pow(2, level + 1));
         },
         // effect is handled specially
-        // check SharkGame.Gateway.getMaxWorldQualitiesToShow
     },
     sharkMigrator: {
         name: "Shark Migrator",
