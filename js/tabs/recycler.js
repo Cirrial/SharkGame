@@ -43,6 +43,7 @@ SharkGame.Recycler = {
 
     efficiency: "NA",
     hoveredResource: "NA",
+    expectedOutput: "NA",
 
     init() {
         const y = SharkGame.Recycler;
@@ -89,13 +90,18 @@ SharkGame.Recycler = {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
         const m = SharkGame.Main;
-
         const junkAmount = r.getResource("junk");
-
         const junkDisplay = $("#junkDisplay");
+
+        if (y.expectedOutput !== "NA") {
+            junkString = "<span class='click-passthrough' style='color:#FFE436'>" + m.beautify(junkAmount + y.expectedOutput) + "</span> ";
+        } else {
+            junkString = m.beautify(junkAmount);
+        }
+
         junkDisplay.html(
             "CONTAINS:<br/>" +
-                m.beautify(junkAmount).bold() +
+                junkString.bold() +
                 " RESIDUE<br/><br/>" +
                 y.getRecyclerEfficiencyString().bold() +
                 y.getTarString().bold()
@@ -113,18 +119,15 @@ SharkGame.Recycler = {
                 const resourceAmount = r.getResource(k);
 
                 // determine amounts for input and what would be retrieved from output
-                const selectedAmount = SharkGame.Settings.current.buyAmount;
-                const forceSingular = selectedAmount === 1;
-                let inputAmount = selectedAmount;
-                let outputAmount = selectedAmount;
+                const buy = SharkGame.Settings.current.buyAmount;
+                const forceSingular = buy === 1;
+                let inputAmount = buy;
+                let outputAmount = buy;
                 const maxOutputAmount = y.getMaxToBuy(k);
-                if (selectedAmount < 0) {
-                    const divisor = Math.floor(selectedAmount) * -1;
-                    inputAmount = resourceAmount / divisor;
-                    outputAmount = maxOutputAmount / divisor;
-
-                    inputAmount = Math.floor(inputAmount);
-                    outputAmount = Math.floor(outputAmount);
+                if (buy < 0) {
+                    const divisor = Math.floor(buy) * -1;
+                    inputAmount = Math.floor(resourceAmount / divisor);
+                    outputAmount = Math.floor(maxOutputAmount / divisor);
                 }
 
                 // update input button
@@ -140,8 +143,13 @@ SharkGame.Recycler = {
                 disableButton = maxOutputAmount < outputAmount || outputAmount <= 0;
                 label = "Convert to ";
                 if (outputAmount > 0) {
-                    label += m.beautify(outputAmount) + " ";
+                    if (y.expectedOutput !== "NA" && !disableButton) {
+                        label += "<span class='click-passthrough' style='color:#FFDE0A'>" + m.beautify(outputAmount) + "</span> ";
+                    } else {
+                        label += m.beautify(outputAmount) + " ";
+                    }
                 }
+                
                 label += r.getResourceName(k, disableButton, forceSingular);
                 outputButton.html(label).prop("disabled", disableButton);
             }
@@ -186,19 +194,12 @@ SharkGame.Recycler = {
         const resourceName = button.attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
-
-        const selectedAmount = SharkGame.Settings.current.buyAmount;
-        let amount = selectedAmount;
-        if (selectedAmount < 0) {
-            const divisor = Math.floor(selectedAmount) * -1;
-            amount = resourceAmount / divisor;
-            amount = Math.floor(amount);
-        }
+        const amount = r.getPurchaseAmount(resourceName);
 
         if (resourceAmount >= amount) {
-            r.changeResource("junk", amount * junkPerResource * SharkGame.Recycler.getEfficiency(resourceName, amount));
+            r.changeResource("junk", amount * junkPerResource * y.getEfficiency(resourceName, amount));
             r.changeResource(resourceName, -amount);
-            r.changeResource("tar", amount * junkPerResource * 0.00001);
+            r.changeResource("tar", amount * junkPerResource * 0.00001 * (SharkGame.World.planetLevel / 16 + 0.9375));
             l.addMessage(SharkGame.choose(y.recyclerInputMessages));
         } else {
             l.addMessage("You don't have enough for that!");
@@ -218,6 +219,10 @@ SharkGame.Recycler = {
         const resourceName = button.attr("id").split("-")[1];
         const junkAmount = r.getResource("junk");
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
+        
+        if (y.expectedOutput !== "NA") {
+            return;
+        }
 
         const selectedAmount = SharkGame.Settings.current.buyAmount;
         let amount = selectedAmount;
@@ -259,10 +264,14 @@ SharkGame.Recycler = {
     getMaxToBuy(resource) {
         const r = SharkGame.Resources;
         const y = SharkGame.Recycler;
-        const resourceAmount = SharkGame.Resources.getResource(resource);
-        const junkAmount = SharkGame.Resources.getResource("junk");
+        const resourceAmount = r.getResource(resource);
         const junkPricePerResource = SharkGame.ResourceMap.get(resource).value;
         const category = r.getCategoryOfResource(resource);
+        let junkAmount = r.getResource("junk");
+        if (y.expectedOutput !== "NA") {
+            junkAmount += y.expectedOutput;
+        }
+
         let max = 0;
         if (y.allowedCategories[category]) {
             const costFunction = y.allowedCategories[category];
@@ -276,16 +285,29 @@ SharkGame.Recycler = {
     },
 
     onInputHover() {
+        const y = SharkGame.Recycler;
         const button = $(this);
         const resource = button.attr("id").split("-")[1];
         const amount = SharkGame.Resources.getResource(resource);
-        SharkGame.Recycler.hoveredResource = resource;
-        SharkGame.Recycler.updateEfficiency(resource, amount);
+        const buy = SharkGame.Settings.current.buyAmount;
+
+        if (button.is(':disabled')) {
+            return;
+        }
+
+        y.hoveredResource = resource;
+        y.updateEfficiency(resource, amount);
+        if (buy > 0) {
+            y.expectedOutput = buy * y.getEfficiency() * SharkGame.ResourceMap.get(resource).value;
+        } else {
+            y.expectedOutput = amount * y.getEfficiency() * SharkGame.ResourceMap.get(resource).value / -buy;
+        }
     },
 
     onInputUnhover() {
         SharkGame.Recycler.efficiency = "NA";
         SharkGame.Recycler.hoveredResource = "NA";
+        SharkGame.Recycler.expectedOutput = "NA";
     },
 
     getTarString() {
@@ -300,9 +322,9 @@ SharkGame.Recycler = {
                 return "<br/><br/>";
             }
             if(buy > 0){
-                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * buy);
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * buy * (SharkGame.World.planetLevel / 16 + 0.9375));
             } else {
-                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * r.getResource(y.hoveredResource) / -buy);
+                amountstring = m.beautify(SharkGame.ResourceMap.get(y.hoveredResource).value * 0.00001 * (SharkGame.World.planetLevel / 16 + 0.9375) * r.getResource(y.hoveredResource) / -buy);
             }
             return "<br/><br/>AND " + amountstring.bold() + " " + r.getResourceName("tar");
         }

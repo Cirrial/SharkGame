@@ -766,6 +766,17 @@ SharkGame.Resources = {
             });
         });
     },
+    
+    getPurchaseAmount(resource) {
+        const buy = SharkGame.Settings.current.buyAmount;
+        const owned = SharkGame.Resources.getResource(resource);
+
+        if (buy > 0) {
+            return buy;
+        } else {
+            return Math.floor(owned / (-buy));
+        }
+    },
 
     // TESTING FUNCTIONS
     giveMeSomeOfEverything(amount) {

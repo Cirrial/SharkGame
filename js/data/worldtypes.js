@@ -310,19 +310,20 @@ SharkGame.WorldTypes = {
             "whale"
         ],
         modifiers: [
-            { type: "multiplier", modifier: "planetaryConstantIncome", resource: "tar", amount: 0.01 },
+            { type: "multiplier", modifier: "planetaryIncome", resource: "tar", amount: 0.01 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "sandDigger", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "fishMachine", amount: 1 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "silentArchivist", amount: 1 },
+            { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "tar", amount: 0.1 },
         ],
         gateCosts: {
             junk: 1e8,
             purifier: 5,
-            coralglass: 1e5,
-            spronge: 1e5,
-            delphinium: 1e5,
-            sharkonium: 1e5,
+            coralglass: 1e6,
+            spronge: 1e6,
+            delphinium: 1e6,
+            sharkonium: 1e6,
         },
     },
     shrouded: {
@@ -353,7 +354,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "crystal", amount: 0.05 },
-            { type: "multiplier", modifier: "planetaryResourceBoost", resource: "crystal", amount: 1 },
+            { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "crystal", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "animals", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "kelp", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "coral", amount: 1 },
@@ -394,6 +395,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5 },
+            { type: "multiplier", modifier: "planetaryFixedIncomeReciprocalMultiplier", resource: "sponge", amount: 100 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "ice", amount: 0.002 },
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "ice", amount: 0.1 },
         ],

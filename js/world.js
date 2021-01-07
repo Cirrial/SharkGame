@@ -34,6 +34,13 @@ SharkGame.WorldModifiers = {
             wr.get(resourceName).incomeMultiplier = 1 / (1 + level * amount);
         },
     },
+    planetaryFixedIncomeReciprocalMultiplier: {
+        name: "Fixed Planetary Income Reciprocal Multiplier",
+        apply(level, resourceName, amount) {
+            const wr = SharkGame.World.worldResources;
+            wr.get(resourceName).incomeMultiplier = 1 / amount;
+        },
+    },
     planetaryResourceBoost: {
         name: "Planetary Boost",
         apply(level, resourceName, amount) {

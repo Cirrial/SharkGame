@@ -1069,9 +1069,9 @@ SharkGame.Upgrades = {
         iterativeDesign: {
             name: "Iterative Design",
             desc:
-                "The machines are good, but they could totally be better. Let's build them over and over until they're better!",
+                "The machines are useful, but they could be better. Maybe it's time we started over?",
             researchedMessage:
-                "After hundreds of hours of testing, the final product has our machines running way fast! Dangerously fast, maybe!",
+                "A couple hundred new and hours of scrutinization later, we've managed to surpass the limits of our old designs! As it turns out, science is about learning from our mistakes, or so the scientists tell me.",
             effectDesc: "All shark machines run twice as fast. Finally!",
             cost: {
                 science: 15000,
@@ -1095,11 +1095,11 @@ SharkGame.Upgrades = {
 
         superprocessing: {
             name: "Superprocessing",
-            desc: "The recycler really isn't all that efficient, but our scientists are on the verge of solving that issue.",
+            desc: "The recycler wasn't really meant for 1 million fish at once. Seeing as that transaction is now fairly common, we should probably do something about it.",
             researchedMessage:
-                "Residue has become something of an amorphous supermaterial! It's hard and soft, hot and cold, wet and - well, it's underwater, so, it's just wet, but you get the point.",
+                "Eureka! If we make the big things bigger, and the grinders grindier, we can process way more material at once!",
             effectDesc:
-                "The recycler's efficiency only starts dropping at 10 million material inserted at once, instead of 100 thousand. The base efficiency is now 100%.",
+                "The recycler's efficiency only starts dropping at 1 million material inserted at once, instead of 100 thousand. The base efficiency is now 100%.",
             cost: {
                 science: 1e6,
                 sharkonium: 1e6,
