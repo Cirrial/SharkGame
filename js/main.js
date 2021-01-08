@@ -65,7 +65,7 @@ $.extend(SharkGame, {
         "<p>Additional code and credit help provided by Dylan and Sam Red.<br/>" +
         "<span class='smallDesc'>Dylan is also graciously hosting the original game.</span></p>" +
         "<p><a href='https://github.com/spencers145/SharkGame'>Mod</a> created by base4/spencers145,<br/>" +
-        "with help with sprites from <a href='https://twitter.com/vhs_static'>@vhs_static</a> and friends." +
+        "with sprite help from <a href='https://twitter.com/vhs_static'>@vhs_static</a> and friends." +
         '<br/><span style="color: rgba(0,0,0,0);">With some help by <a href="https://github.com/Toby222" style="color: rgba(0,0,0,0);">Toby</a></span>',
 
     ending:
@@ -246,6 +246,12 @@ SharkGame.TitleBar = {
         onClick() {
             SharkGame.Main.showPane("Donate", SharkGame.donate);
         },
+    },
+    
+    discordLink: {
+        name: "discord",
+        main: false,
+        link: "https://discord.gg/nN7BQDJR2G",
     },
 };
 
@@ -537,7 +543,12 @@ SharkGame.Main = {
         titleMenu.empty();
         subTitleMenu.empty();
         $.each(SharkGame.TitleBar, (k, v) => {
-            const option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
+            let option;
+            if (v.link) {
+                option = "<li><a id='" + k + "' href='" + v.link + "' target='_blank'>" + v.name + "</a></li>";
+            } else {
+                option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
+            }
             if (v.main) {
                 titleMenu.append(option);
             } else {
