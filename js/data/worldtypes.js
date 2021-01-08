@@ -191,7 +191,7 @@ SharkGame.WorldTypes = {
             fish: 1e8,
             clam: 1e7,
             sponge: 1e8,
-            kelp: 1e9,
+            kelp: 1e8,
             coralglass: 1e6,
             coral: 1e7,
         },

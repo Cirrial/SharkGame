@@ -103,7 +103,7 @@ SharkGame.Recycler = {
             "CONTAINS:<br/>" +
                 junkString.bold() +
                 " RESIDUE<br/><br/>" +
-                y.getRecyclerEfficiencyString().bold() +
+                y.getRecyclerEfficiencyString() +
                 y.getTarString().bold()
         );
     },
@@ -337,7 +337,7 @@ SharkGame.Recycler = {
         const r = SharkGame.Resources;
 
         if (y.efficiency === "NA") {
-            return "<br/><br/><br/><br/><br/>";
+            return "<br/><br/><br/><br/><br/><br/><br/>";
         }
 
         if(SharkGame.Settings.current.buyAmount > 0){
@@ -348,9 +348,10 @@ SharkGame.Recycler = {
 
         return (y.getEfficiency() * 100).toFixed(2).toString().bold() +
         "<b>%<br/>EFFICIENY</b><br/><br/>EQUIVALENT TO:<br/>" +
-        amountstring +
+        amountstring.bold() +
         " " +
-        r.getResourceName(y.hoveredResource);
+        r.getResourceName(y.hoveredResource).bold() +
+        "<br/>WORTH OF RESIDUE";
     },
 
     getEfficiency() {

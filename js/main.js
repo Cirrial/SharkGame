@@ -35,8 +35,8 @@ $.extend(SharkGame, {
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: 0.71,
-    SUB_VERSION: 0.1,
+    VERSION: 0.1,
+    ORIGINAL_VERSION: 0.71,
     VERSION_NAME: "New is Old",
     EPSILON: 1e-6, // floating point comparison is a joy
     // agreed, already had to deal with it on recycler revisions
@@ -368,7 +368,7 @@ SharkGame.Main = {
         const overlay = $("#overlay");
         overlay.hide();
         $("#gameName").html("- " + SharkGame.GAME_NAME + " -");
-        $("#versionNumber").html("MODDED v " + SharkGame.VERSION + "<br/> New Frontiers v " + SharkGame.SUB_VERSION + " - " + SharkGame.VERSION_NAME);
+        $("#versionNumber").html("New Frontiers v " + SharkGame.VERSION + " - " + SharkGame.VERSION_NAME + "<br/> " + "Mod of v " + SharkGame.ORIGINAL_VERSION);
         SharkGame.sidebarHidden = true;
         SharkGame.gameOver = false;
 

@@ -2182,7 +2182,7 @@ SharkGame.HomeActions = {
             "Consumption and production are two halves of the greater whole.",
             "The creations of sharks emerge from a pattern as old as their species.",
         ],
-        helpText: "Construct a machine to automatically recycle kelp and sand into residue.",
+        helpText: "Construct a machine to automatically recycle fish and sand into residue.",
     },
 
     getPurifier: {
