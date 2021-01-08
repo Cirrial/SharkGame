@@ -1054,9 +1054,20 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
-    "0.1 - <a href='https://github.com/spencers145/SharkGame'>Cirrial's Shark Game: New Frontiers</a> (202?/??/??) indev": [
-        "lot of things",
-        "will fill in later",
+    "<a href='https://github.com/spencers145/SharkGame'>New Frontiers</a> 0.1 - New is Old (2021/01/??)": [
+        "22 NEW SPRITES! More are coming but we couldn't finish all the sprites in time!",
+        "TRUE OFFLINE PROGRESS! Days are compressed to mere seconds with RK4 calculation.",
+        "Attempted to rebalance worlds, especially frigid and abandoned, by making hazardous materials more threatening and meaningful.",
+        "Halved the effectiveness of the 3 basic shark machines (except sand digger, which is 2/3 as productive), but added a new upgrade to counterbalance it.",
+        "Added recycler efficiency system. The more you recycle at once, the more you lose in the process. Added an upgrade which makes the mechanic less harsh.",
+        "Added new UI elements to the Recycler to make it less of a guessing game and more of a cost-benefit analysis.",
+        "Increased the effectiveness of many machines.",
+        "Greatly improved number formatting.",
+        "World shaper has been disabled because it will probably break plans for future game balance.",
+        "Distant foresight now has a max level of 5, and reveals 20% of world properties per level, up to 100% at level 5.",
+        "Fixed exploits, bugs, and buggy exploits and exploitable bugs. No more crystals -> clams & sponges -> science & clams -> crystals loop.",
+        "No more science from sponges.",
+        "Removed jellyfish from a bunch of worlds where the resource was a dead end.",
     ],
     "0.71 (2014/12/20)": [
         "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
