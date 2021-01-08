@@ -37,9 +37,9 @@ $.extend(SharkGame, {
     ACTUAL_GAME_NAME: "Shark Game",
     VERSION: 0.71,
     SUB_VERSION: 0.1,
-    VERSION_NAME: "New is Old", // s: orginal version name is Stranger Oceans. might as well keep a record of that here.
+    VERSION_NAME: "New is Old",
     EPSILON: 1e-6, // floating point comparison is a joy
-    // s: agreed, already had to deal with it on recycler revisions
+    // agreed, already had to deal with it on recycler revisions
     // did you know that reducing a float like 1.2512351261 to 1.25 by literally removing the decimal and multiplying by 100 gives you something like 125.0000001?
 
     INTERVAL: 1000 / 10, // 20 FPS // I'm pretty sure 1000 / 10 comes out to 10 FPS
@@ -81,7 +81,8 @@ $.extend(SharkGame, {
         "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
         'If you have no idea what these actions do, click the "Toggle descriptions" button for more information.</p>' +
         "<p>If you are ever stuck, try actions you haven't yet tried. " +
-        "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
+        "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>" +
+        "<p>If you are here because you think you have encountered a bug of some kind, report it on the <a href='https://discord.gg/nN7BQDJR2G' target='blank_'>discord</a>.</p>",
 
     donate:
         "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
@@ -93,7 +94,7 @@ $.extend(SharkGame, {
         "item_number=Shark%20Game%20Support&no_note=1&" +
         "no_shipping=1&currency_code=USD&" +
         "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
-        "target='_blank'>support the developer</a>" +
+        "target='_blank'>support the original developer</a>" +
         " if you'd like.)</span></p>",
 
     spriteIconPath: "img/sharksprites.png",

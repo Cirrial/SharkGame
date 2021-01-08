@@ -129,9 +129,6 @@ SharkGame.Resources = {
             SharkGame.PlayerResources = _.cloneDeep(originalResources);
 
             SharkGame.PlayerIncomeTable.forEach((_object, resource, m) => {
-                /* if (resource === "fish") {
-                    alert(h * (originalIncomes.get(resource) + 2 * stepTwoIncomes.get(resource) + 2 * stepThreeIncomes.get(resource) + stepFourIncomes.get(resource)) / 6);
-                } */
                 SharkGame.Resources.changeResource(
                     resource,
                     (h *
