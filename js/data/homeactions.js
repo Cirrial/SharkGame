@@ -449,7 +449,7 @@ SharkGame.HomeActions = {
         effect: {
             resource: {
                 spronge: 1,
-                tar: 0.001,
+                //tar: 0.001,
             },
         },
         cost: [
