@@ -97,8 +97,8 @@ SharkGame.Resources = {
         let stepFourIncomes;
 
         while (time > stop) {
-            originalResources = new Map(SharkGame.PlayerResources);
-            originalIncomes = new Map(SharkGame.PlayerIncomeTable);
+            originalResources = _.cloneDeep(SharkGame.PlayerResources);
+            originalIncomes = _.cloneDeep(SharkGame.PlayerIncomeTable);
 
             SharkGame.PlayerIncomeTable.forEach((v, k, m) => {
                 if (!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
@@ -107,7 +107,7 @@ SharkGame.Resources = {
             });
 
             r.recalculateIncomeTable();
-            stepTwoIncomes = new Map(SharkGame.PlayerIncomeTable);
+            stepTwoIncomes = _.cloneDeep(SharkGame.PlayerIncomeTable);
 
             SharkGame.PlayerIncomeTable.forEach((v, k, m) => {
                 if (!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
@@ -116,7 +116,7 @@ SharkGame.Resources = {
             });
 
             r.recalculateIncomeTable();
-            stepThreeIncomes = new Map(SharkGame.PlayerIncomeTable);
+            stepThreeIncomes = _.cloneDeep(SharkGame.PlayerIncomeTable);
 
             SharkGame.PlayerIncomeTable.forEach((v, k, m) => {
                 if (!SharkGame.ResourceSpecialProperties.timeImmune.includes(k)) {
@@ -125,10 +125,13 @@ SharkGame.Resources = {
             });
 
             r.recalculateIncomeTable();
-            stepFourIncomes = new Map(SharkGame.PlayerIncomeTable);
-            SharkGame.PlayerResources = new Map(originalResources);
+            stepFourIncomes = _.cloneDeep(SharkGame.PlayerIncomeTable);
+            SharkGame.PlayerResources = _.cloneDeep(originalResources);
 
             SharkGame.PlayerIncomeTable.forEach((_object, resource, m) => {
+                /* if (resource === "fish") {
+                    alert(h * (originalIncomes.get(resource) + 2 * stepTwoIncomes.get(resource) + 2 * stepThreeIncomes.get(resource) + stepFourIncomes.get(resource)) / 6);
+                } */
                 SharkGame.Resources.changeResource(
                     resource,
                     (h *
