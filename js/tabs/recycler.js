@@ -44,6 +44,7 @@ SharkGame.Recycler = {
     efficiency: "NA",
     hoveredResource: "NA",
     expectedOutput: "NA",
+    expectedJunkSpent: "NA",
 
     init() {
         const y = SharkGame.Recycler;
@@ -83,6 +84,7 @@ SharkGame.Recycler = {
     update() {
         const y = SharkGame.Recycler;
         y.updateExpectedOutput();
+        y.updateExpectedJunkSpent();
         y.updateJunkDisplay();
         y.updateButtons();
     },
@@ -96,6 +98,8 @@ SharkGame.Recycler = {
 
         if (y.expectedOutput !== "NA") {
             junkString = "<span class='click-passthrough' style='color:#FFE436'>" + m.beautify(junkAmount + y.expectedOutput) + "</span> ";
+        } else if (y.expectedJunkSpent !== "NA") {
+            junkString = "<span class='click-passthrough' style='color:#FFE436'>" + m.beautify(junkAmount - y.expectedJunkSpent) + "</span> ";
         } else {
             junkString = m.beautify(junkAmount);
         }
@@ -135,7 +139,15 @@ SharkGame.Recycler = {
                 let disableButton = resourceAmount < inputAmount || inputAmount <= 0;
                 let label = "Recycle ";
                 if (inputAmount > 0) {
-                    label += m.beautify(inputAmount) + " ";
+                    if (y.expectedJunkSpent !== "NA" && !disableButton && k === y.hoveredResource) {
+                        if (buy < 0) {
+                            label += "<span class='click-passthrough' style='color:#FFDE0A'>" + m.beautify(inputAmount + outputAmount / -buy) + "</span> ";
+                        } else {
+                            label += "<span class='click-passthrough' style='color:#FFDE0A'>" + m.beautify(inputAmount) + "</span> ";
+                        }
+                    } else {
+                        label += m.beautify(inputAmount) + " ";
+                    }
                 }
                 label += r.getResourceName(k, disableButton, forceSingular);
                 inputButton.html(label).prop("disabled", disableButton);
@@ -150,7 +162,7 @@ SharkGame.Recycler = {
                         label += m.beautify(outputAmount) + " ";
                     }
                 }
-                
+
                 label += r.getResourceName(k, disableButton, forceSingular);
                 outputButton.html(label).prop("disabled", disableButton);
             }
@@ -177,11 +189,13 @@ SharkGame.Recycler = {
                     y.onInputHover,
                     y.onInputUnhover
                 );
-                SharkGame.Button.makeButton(
+                SharkGame.Button.makeHoverscriptButton(
                     "output-" + k,
                     "Convert to " + r.getResourceName(k),
                     outputButtonDiv,
-                    y.onOutput
+                    y.onOutput,
+                    y.onOutputHover,
+                    y.onOutputUnhover
                 );
             }
         });
@@ -290,7 +304,6 @@ SharkGame.Recycler = {
         const button = $(this);
         const resource = button.attr("id").split("-")[1];
         const amount = SharkGame.Resources.getResource(resource);
-        const buy = SharkGame.Settings.current.buyAmount;
 
         if (button.is(':disabled')) {
             return;
@@ -305,6 +318,25 @@ SharkGame.Recycler = {
         SharkGame.Recycler.efficiency = "NA";
         SharkGame.Recycler.hoveredResource = "NA";
         SharkGame.Recycler.expectedOutput = "NA";
+    },
+    
+    onOutputHover() {
+        const y = SharkGame.Recycler;
+        const button = $(this);
+        const resource = button.attr("id").split("-")[1];
+
+        if (button.is(':disabled')) {
+            return;
+        }
+
+        y.efficiency = "NA";
+        y.hoveredResource = resource;
+        y.updateExpectedJunkSpent();
+    },
+
+    onOutputUnhover() {
+        SharkGame.Recycler.hoveredResource = "NA";
+        SharkGame.Recycler.expectedJunkSpent = "NA";
     },
 
     getTarString() {
@@ -354,7 +386,7 @@ SharkGame.Recycler = {
     updateExpectedOutput() {
         const y = SharkGame.Recycler;
         const resource = y.hoveredResource;
-        if (resource === "NA") {
+        if (resource === "NA" || y.expectedJunkSpent !== "NA") {
             y.expectedOutput = "NA";
             return;
         }
@@ -365,6 +397,23 @@ SharkGame.Recycler = {
             y.expectedOutput = buy * y.getEfficiency() * SharkGame.ResourceMap.get(resource).value;
         } else {
             y.expectedOutput = amount * y.getEfficiency() * SharkGame.ResourceMap.get(resource).value / -buy;
+        }
+    },
+    
+    updateExpectedJunkSpent() {
+        const y = SharkGame.Recycler;
+        const resource = y.hoveredResource;
+        if (resource === "NA" || y.expectedOutput !== "NA") {
+            y.expectedJunkSpent = "NA";
+            return;
+        }
+        const junkAmount = SharkGame.Resources.getResource("junk");
+        const buy = SharkGame.Settings.current.buyAmount;
+
+        if (buy > 0) {
+            y.expectedJunkSpent = buy * SharkGame.ResourceMap.get(resource).value;
+        } else {
+            y.expectedJunkSpent = junkAmount / -buy;
         }
     },
 
@@ -385,7 +434,7 @@ SharkGame.Recycler = {
         
         if (SharkGame.Upgrades.getUpgradeTable().superprocessing) {
             if (SharkGame.Upgrades.getUpgradeTable().superprocessing.purchased) {
-                evalue = 7;
+                evalue = 8;
                 baseEfficiency = 1;
             }
         }

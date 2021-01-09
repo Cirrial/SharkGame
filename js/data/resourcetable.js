@@ -598,7 +598,7 @@ SharkGame.ResourceTable = {
         singleName: "silent archivist",
         color: "#608B8F",
         income: {
-            science: 15,
+            science: 20,
             tar: 0.001,
         },
         value: 50000,
@@ -622,7 +622,7 @@ SharkGame.ResourceTable = {
         singleName: "clam collector",
         color: "#727887",
         income: {
-            clam: 10,
+            clam: 15,
             tar: 0.05,
         },
         value: 50000,

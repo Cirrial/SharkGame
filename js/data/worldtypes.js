@@ -113,7 +113,7 @@ SharkGame.WorldTypes = {
         gateCosts: {
             fish: 1e9,
             sand: 1e7,
-            crystal: 1e6,
+            crystal: 1e7,
             kelp: 1e7,
             seaApple: 1e6,
             sharkonium: 1e6,
@@ -193,7 +193,7 @@ SharkGame.WorldTypes = {
             sponge: 1e8,
             kelp: 1e8,
             coralglass: 1e6,
-            coral: 1e7,
+            coral: 2e7,
         },
     },
     tempestuous: {
@@ -237,11 +237,11 @@ SharkGame.WorldTypes = {
         ],
         gateCosts: {
             junk: 1e9,
-            coral: 1e6,
+            coral: 5e7,
             spronge: 1e6,
             delphinium: 1e6,
             sharkonium: 1e6,
-            crystal: 1e6,
+            crystal: 5e7,
         },
     },
     violent: {
@@ -285,9 +285,9 @@ SharkGame.WorldTypes = {
             { type: "multiplier", modifier: "planetaryResourceBoost", resource: "sand", amount: 1 },
         ],
         gateCosts: {
-            sand: 1e9,
+            sand: 2e8,
             kelp: 1e7,
-            coral: 1e6,
+            coral: 1e7,
             algae: 1e8,
             sponge: 1e6,
             junk: 1e9,
@@ -324,7 +324,7 @@ SharkGame.WorldTypes = {
             coralglass: 1e6,
             spronge: 1e6,
             delphinium: 1e6,
-            sharkonium: 1e6,
+            sharkonium: 1e7,
         },
     },
     shrouded: {
@@ -369,7 +369,7 @@ SharkGame.WorldTypes = {
         gateCosts: {
             jellyfish: 1e8,
             clam: 1e6,
-            crystal: 1e9,
+            crystal: 1e8,
             science: 1e7,
             sharkonium: 1e7,
             fish: 1e7,
@@ -401,12 +401,12 @@ SharkGame.WorldTypes = {
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "ice", amount: 0.1 },
         ],
         gateCosts: {
-            sand: 1e6,
-            crystal: 1e6,
+            sand: 1e7,
+            crystal: 1e7,
             clam: 1e6,
             heater: 5,
-            sharkonium: 1e7,
-            fish: 1e7,
+            sharkonium: 1e8,
+            fish: 1e8,
         },
     },
     ethereal: {

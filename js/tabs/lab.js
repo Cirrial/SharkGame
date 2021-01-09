@@ -263,6 +263,13 @@ SharkGame.Lab = {
                     isPossible = isPossible && l.isUpgradePossible(v);
                 });
             }
+            if (upgradeData.required.seen) {
+                let seenOne = false;
+                _.each(upgradeData.required.seen, (v) => {
+                    seenOne = seenOne || SharkGame.Resources.getTotalResource(v) > 0;
+                });
+                isPossible = isPossible && seenOne;
+            }
 
             // check existence of resource cost
             // this is the final check, everything that was permitted previously will be made false

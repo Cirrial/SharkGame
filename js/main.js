@@ -432,6 +432,10 @@ SharkGame.Main = {
         if (SharkGame.Main.isFirstTime()) {
             SharkGame.TitleBar.skipLink.name = "reset";
             SharkGame.Main.setUpTitleBar();
+        } else {
+            // and then remember to actually set it back once it's not
+            SharkGame.TitleBar.skipLink.name = "skip";
+            SharkGame.Main.setUpTitleBar();
         }
 
         // discover actions that were present in last save

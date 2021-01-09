@@ -14,7 +14,7 @@ SharkGame.Settings = {
     },
 
     groupResources: {
-        defaultSetting: false,
+        defaultSetting: true,
         name: "Group Resources",
         desc: "Group resources in the table into categories for legibility.",
         show: true,
@@ -25,7 +25,7 @@ SharkGame.Settings = {
     },
 
     buttonDisplayType: {
-        defaultSetting: "list",
+        defaultSetting: "pile",
         name: "Home Sea Button Display",
         desc: "Do you want a vertical list of buttons, or a more space-saving configuration?",
         show: true,
@@ -67,7 +67,7 @@ SharkGame.Settings = {
     },
 
     logMessageMax: {
-        defaultSetting: 20,
+        defaultSetting: 15,
         name: "Max Log Messages",
         desc: "How many messages to show before removing old ones.",
         show: true,
