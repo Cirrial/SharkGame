@@ -344,7 +344,7 @@ SharkGame.Recycler = {
         }
 
         return (y.getEfficiency() * 100).toFixed(2).toString().bold() +
-        "<b>%<br/>EFFICIENY</b><br/><br/>EQUIVALENT TO:<br/>" +
+        "<b>%<br/>EFFICIENCY</b><br/><br/>EQUIVALENT TO:<br/>" +
         amountstring.bold() +
         " " +
         r.getResourceName(y.hoveredResource).bold() +
