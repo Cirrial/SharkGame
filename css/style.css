@@ -267,6 +267,9 @@ pre {
   padding: 5px;
   margin: 5px;
   overflow: hidden;
+  /* overflow anchor fixes jittering! 
+  It disables scroll anchoring where chrome tries to help by scrolling the page */
+  overflow-anchor: none;
 }
 #log h3 {
   display: inline;
