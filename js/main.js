@@ -1087,7 +1087,7 @@ SharkGame.FunFacts = [
 ];
 
 SharkGame.Changelog = {
-    "<a href='https://github.com/spencers145/SharkGame'>New Frontiers</a> 0.1 - New is Old (2021/01/??)": [
+    "<a href='https://github.com/spencers145/SharkGame'>New Frontiers</a> 0.1 - New is Old (2021/1/7)": [
         "22 NEW SPRITES! More are coming but we couldn't finish all the sprites in time!",
         "TRUE OFFLINE PROGRESS! Days are compressed to mere seconds with RK4 calculation.",
         "Attempted to rebalance worlds, especially frigid and abandoned, by making hazardous materials more threatening and meaningful.",
