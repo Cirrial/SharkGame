@@ -1,6 +1,13 @@
 /* eslint-disable-next-line no-var, no-use-before-define */
 var SharkGame = SharkGame || {};
 
+window.onmousemove = function (e) {
+    const x = e.clientX;
+    const y = e.clientY;
+    document.getElementById('tooltipbox').style.top = (y - 20) + 'px';
+    document.getElementById('tooltipbox').style.left = (x + 15) + 'px';
+};
+
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
     GAME_NAMES: [
@@ -391,6 +398,9 @@ SharkGame.Main = {
                 SharkGame.Settings.current[k] = v.defaultSetting;
             }
         });
+        
+        // create the tooltip box
+        
 
         // initialise and reset resources
         SharkGame.Resources.init();

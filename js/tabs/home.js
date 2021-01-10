@@ -217,7 +217,7 @@ SharkGame.Home = {
         helpButtonDiv.css({ margin: "auto", clear: "both" });
         SharkGame.Button.makeButton(
             "helpButton",
-            "&nbsp Toggle descriptions &nbsp",
+            "&nbsp Toggle hover descriptions &nbsp",
             helpButtonDiv,
             h.toggleHelp
         ).addClass("min-block");
@@ -490,11 +490,6 @@ SharkGame.Home = {
             }
         }
 
-        if (SharkGame.Settings.current.showTabHelp) {
-            if (actionData.helpText) {
-                label += "<br><span class='medDesc'>" + actionData.helpText + "</span>";
-            }
-        }
         button.prop("disabled", !enableButton);
         button.html(label);
 
@@ -592,7 +587,7 @@ SharkGame.Home = {
         const buttonListSel = $("#buttonList");
         const actionData = SharkGame.HomeActions[actionName];
 
-        const buttonSelector = SharkGame.Button.makeButton(actionName, actionData.name, buttonListSel, h.onHomeButton);
+        const buttonSelector = SharkGame.Button.makeHoverscriptButton(actionName, actionData.name, buttonListSel, h.onHomeButton, h.onHomeHover, h.onHomeUnhover);
         h.updateButton(actionName);
         if (SharkGame.Settings.current.showAnimations) {
             buttonSelector.hide().css("opacity", 0).slideDown(50).animate({ opacity: 1.0 }, 50);
@@ -689,6 +684,70 @@ SharkGame.Home = {
         }
         // disable button until next frame
         button.prop("disabled", true);
+    },
+    
+    onHomeHover() {
+        if (!SharkGame.Settings.current.showTabHelp) {
+            return;
+        }
+        const button = $(this);
+        const actionName = button.attr("id");
+        const effects = SharkGame.HomeActions[actionName].effect;
+        let validGenerators = {};
+        if (effects.resource) {
+            $.each(effects.resource, (resource, amount) => {
+                if (SharkGame.ResourceMap.get(resource).income) {
+                    $.each(SharkGame.ResourceMap.get(resource).income, (incomeResource, income) => {
+                        const generatedAmount = SharkGame.Resources.arbitraryProductAmountFromGeneratorResource(resource, incomeResource, 1);
+                        if (generatedAmount !== 0 && SharkGame.World.doesResourceExist(incomeResource)) {
+                            validGenerators[incomeResource] = generatedAmount;
+                        }
+                    });
+                }
+            });
+        }
+
+        let appendedProduce = false;
+        let appendedConsume = false;
+        let text = "";
+
+        $.each(validGenerators, (incomeResource, amount) => {
+            if (amount > 0) {
+                if (!appendedProduce) {
+                    appendedProduce = true;
+                    text += "<span class='littleTooltipText'>PRODUCES</span>";
+                }
+                text += "<br/>" + SharkGame.Main.beautify(amount).bold() + " " + SharkGame.Resources.getResourceName(incomeResource).bold() + "/s".bold();
+            }
+        });
+
+        $.each(validGenerators, (incomeResource, amount) => {
+            if (amount < 0) {
+                if (!appendedConsume) {
+                    appendedConsume = true;
+                    text += "<br/> <span class='littleTooltipText'>CONSUMES</span>";
+                }
+                text += "<br/>" + (SharkGame.Main.beautify(-amount)).bold() + " " + SharkGame.Resources.getResourceName(incomeResource).bold() + "/s".bold();
+            }
+        });
+
+        if (SharkGame.HomeActions[actionName].helpText) {
+            if (text !== "") {
+                text += "<br><span class='medDesc'>" + SharkGame.HomeActions[actionName].helpText + "</span>";
+            } else {
+                text += "<span class='medDesc'>" + SharkGame.HomeActions[actionName].helpText + "</span>";
+            }
+        }
+
+        if (text !== "") {
+            document.getElementById('tooltipbox').style.display = 'block';
+            document.getElementById('tooltipbox').innerHTML = text;
+        }
+    },
+    
+    onHomeUnhover() {
+        document.getElementById('tooltipbox').style.display = 'none';
+        document.getElementById("tooltipbox").innerHTML = "";
     },
 
     getCost(action, amount) {

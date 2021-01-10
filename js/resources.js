@@ -211,6 +211,31 @@ SharkGame.Resources = {
             }
         });
     },
+    
+    arbitraryProductAmountFromGeneratorResource(generator, product, numGenerator) {
+        const r = SharkGame.Resources;
+        const w = SharkGame.World;
+        const rp = SharkGame.ResourceSpecialProperties;
+        const playerResource = SharkGame.PlayerResources.get(generator);
+        if (!r.getResourceCombinationAllowed(generator, product)) {
+            return 0;
+        }
+        const generated =
+            SharkGame.ResourceMap.get(generator).income[product] *
+            numGenerator *
+            playerResource.incomeMultiplier *
+            w.getWorldIncomeMultiplier(generator) *
+            w.getWorldBoostMultiplier(product) *
+            w.getArtifactMultiplier(generator) *
+            r.getResourceGeneratorMultiplier(generator) *
+            r.getResourceIncomeMultiplier(product);
+        if (rp.incomeCap[product]) {
+            if (SharkGame.PlayerIncomeTable.get(product) + generated > rp.incomeCap[product]) {
+                return rp.incomeCap[product] - SharkGame.PlayerIncomeTable.get(product);
+            }
+        }
+        return generated;
+    },
 
     getProductAmountFromGeneratorResource(generator, product) {
         const r = SharkGame.Resources;

@@ -1129,3 +1129,25 @@ button.planetButton:active {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+.tooltip {
+  display: none;
+  background-color: #4e638e;
+  color: #fff;
+  text-align: center;
+  border-style: solid;
+  border-color: #7788aa;
+  border-width: 5px;
+  border-radius: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  max-width: 200px;
+  position: fixed;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+littleTooltipText {
+    font-size: 10px;
+}

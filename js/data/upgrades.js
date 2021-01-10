@@ -445,7 +445,7 @@ SharkGame.Upgrades = {
                 sharkonium: 250,
             },
             required: {
-                upgrades: ["thermalVents", "transmutation"],
+                upgrades: ["transmutation"],
             },
         },
 
