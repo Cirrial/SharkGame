@@ -523,7 +523,7 @@ SharkGame.Upgrades = {
             desc:
                 "The machines are useful, but they could be better. Maybe it's time we started over?",
             researchedMessage:
-                "A couple hundred new designs and hours of scrutinization later, we've managed to surpass the limits of our old machines! As it turns out, science is about learning from mistakes, or so the scientists say. About their own mistakes.",
+                "As it turns out, science is about learning from mistakes, or so the scientists say. About their own mistakes.",
             effectDesc: "All shark machines run twice as fast. Again!",
             cost: {
                 science: 15000,
@@ -541,6 +541,7 @@ SharkGame.Upgrades = {
                     skimmer: 2,
                     heater: 2,
                     purifier: 2,
+                    scientist: 2,
                 },
             },
         },
@@ -1271,7 +1272,7 @@ SharkGame.Upgrades = {
                 science: 1e10,
             },
             required: {
-                upgrades: ["gateDiscovery", "cetaceanAwareness"],
+                upgrades: ["gateDiscovery", "eternalSong"],
                 resources: ["dolphin", "whale"],
                 seen: ["dolphin", "whale"],
             },

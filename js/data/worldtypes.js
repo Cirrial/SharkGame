@@ -355,7 +355,7 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "crystal", amount: 0.05 },
-            { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "crystal", amount: 1 },
+            { type: "multiplier", modifier: "planetaryResourceBoost", resource: "crystal", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "animals", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "kelp", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceReciprocalBoost", resource: "coral", amount: 1 },

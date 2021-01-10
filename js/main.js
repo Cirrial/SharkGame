@@ -336,6 +336,25 @@ SharkGame.Main = {
 
         return formatted;
     },
+    
+    beautifyIncome(number, also) {
+        if (!also) {
+            also = "";
+        }
+        if (number < 0.001 && number > 0.000001) {
+            number *= 3600;
+            number = number.toFixed(3);
+            number += also;
+            number += "/h";
+        } else if (number > 0.001) {
+            number = SharkGame.Main.beautify(number, false, 2);
+            number += also;
+            number += "/s"
+        } else {
+            return 0;
+        }
+        return number;
+    },
 
     formatTime(milliseconds) {
         const numSeconds = Math.floor(milliseconds / 1000);

@@ -360,7 +360,7 @@ SharkGame.ResourceTable = {
         singleName: "whale chorus",
         color: "#85BBA9",
         income: {
-            essence: 2e-6,
+            essence: 4e-4,
         },
         value: 100000,
     },
@@ -481,7 +481,7 @@ SharkGame.ResourceTable = {
         //desc: "Indiscriminate hunter.",
         color: "#C9C7A7",
         income: {
-            fish: 500,
+            fish: 400,
             tar: 0.005,
         },
         value: 70000, //100 sharkonium (7000)

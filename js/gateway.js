@@ -39,7 +39,7 @@ SharkGame.Gateway = {
         let essenceReward = 0;
         if (!loadingFromSave) {
             if (SharkGame.wonGame) {
-                essenceReward = 1 + Math.floor(SharkGame.World.planetLevel / 5);
+                essenceReward = 4 + Math.floor(SharkGame.World.planetLevel / 4);
                 g.markWorldCompleted(SharkGame.World.worldType);
             } else {
                 essenceReward = 0;
@@ -469,7 +469,7 @@ SharkGame.Gateway = {
             qualifiedPlanetTypes.splice(index, 1);
 
             // generate random level
-            const newLevel = Math.floor(Math.max(SharkGame.World.planetLevel + (Math.random() * 10 - 5), 1));
+            const newLevel = Math.floor(Math.max(SharkGame.World.planetLevel + (Math.random() * 10 - 4), 1));
 
             // add choice to pool
             g.planetPool.push({

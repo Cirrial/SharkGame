@@ -717,7 +717,7 @@ SharkGame.Home = {
                     appendedProduce = true;
                     text += "<span class='littleTooltipText'>PRODUCES</span>";
                 }
-                text += "<br/>" + SharkGame.Main.beautify(amount).bold() + " " + SharkGame.Resources.getResourceName(incomeResource).bold() + "/s".bold();
+                text += "<br/>" + SharkGame.Main.beautifyIncome(amount, " " + SharkGame.Resources.getResourceName(incomeResource)).bold();
             }
         });
 
@@ -727,7 +727,7 @@ SharkGame.Home = {
                     appendedConsume = true;
                     text += "<br/> <span class='littleTooltipText'>CONSUMES</span>";
                 }
-                text += "<br/>" + (SharkGame.Main.beautify(-amount)).bold() + " " + SharkGame.Resources.getResourceName(incomeResource).bold() + "/s".bold();
+                text += "<br/>" + SharkGame.Main.beautifyIncome(-amount, " " + SharkGame.Resources.getResourceName(incomeResource)).bold();
             }
         });
 

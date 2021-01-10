@@ -189,6 +189,9 @@ SharkGame.Resources = {
                                 }
                             }
                         }
+                        if (change > 0) {
+                            SharkGame.PlayerResources.get(k).discovered = true;
+                        }
                     });
 
                     changeMap.forEach((change, k, map) => {
@@ -211,7 +214,7 @@ SharkGame.Resources = {
             }
         });
     },
-    
+
     arbitraryProductAmountFromGeneratorResource(generator, product, numGenerator) {
         const r = SharkGame.Resources;
         const w = SharkGame.World;
@@ -379,7 +382,7 @@ SharkGame.Resources = {
         let visible = false;
         $.each(category.resources, (_, v) => {
             visible =
-                visible || (SharkGame.PlayerResources.get(v).totalAmount > 0 && SharkGame.World.doesResourceExist(v));
+                visible || ((SharkGame.PlayerResources.get(v).totalAmount > 0 || SharkGame.PlayerResources.get(v).discovered) && SharkGame.World.doesResourceExist(v));
         });
         return visible;
     },
@@ -514,8 +517,8 @@ SharkGame.Resources = {
                             r.INCOME_COLOR +
                             "'>" +
                             changeChar +
-                            main.beautify(income, false, 2) +
-                            "/s</span>"
+                            main.beautifyIncome(income) +
+                            "</span>"
                     );
                 } else {
                     $("#income-" + k).html("");
@@ -554,7 +557,7 @@ SharkGame.Resources = {
                     );
                     rTable.append(headerRow);
                     $.each(category.resources, (k, v) => {
-                        if (r.getTotalResource(v) > 0) {
+                        if (r.getTotalResource(v) > 0 || SharkGame.PlayerResources.get(v).discovered) {
                             const row = r.constructResourceTableRow(v);
                             rTable.append(row);
                             anyResourcesInTable = true;
@@ -565,7 +568,7 @@ SharkGame.Resources = {
         } else {
             // iterate through data, if total amount > 0 add a row
             SharkGame.ResourceMap.forEach((v, key, _map) => {
-                if (r.getTotalResource(key) > 0 && w.doesResourceExist(key)) {
+                if ((r.getTotalResource(key) > 0 || SharkGame.PlayerResources.get(v).discovered) && w.doesResourceExist(key)) {
                     const row = r.constructResourceTableRow(key);
                     rTable.append(row);
                     anyResourcesInTable = true;
@@ -592,7 +595,7 @@ SharkGame.Resources = {
         const pr = SharkGame.PlayerResources.get(k);
         const income = r.getIncome(k);
         const row = $("<tr>");
-        if (pr.totalAmount > 0) {
+        if (pr.totalAmount > 0 || SharkGame.PlayerResources.get(k).discovered) {
             row.append(
                 $("<td>")
                     .attr("id", "resource-" + k)

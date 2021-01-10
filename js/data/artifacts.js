@@ -1,6 +1,6 @@
 SharkGame.ArtifactUtil = {
     migratorCost(level) {
-        return Math.floor(Math.pow(2, level + 1));
+        return Math.floor(Math.pow(2, level));
     },
     migratorEffect(level, resourceName) {
         if (level < 1) {
@@ -75,7 +75,7 @@ SharkGame.Artifacts = {
         flavour: "Knowledge may not change destiny, but it may divert it.",
         max: 5,
         cost(level) {
-            return Math.floor(Math.pow(2, level + 1));
+            return Math.floor(Math.pow(2, level));
         },
         // effect is handled specially
     },
