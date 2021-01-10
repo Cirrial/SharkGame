@@ -27,64 +27,64 @@ SharkGame.Gate = {
     costs: null,
 
     init() {
-        const g = SharkGame.Gate;
+        const gt = SharkGame.Gate;
         // register tab
-        SharkGame.Tabs[g.tabId] = {
-            id: g.tabId,
-            name: g.tabName,
-            discovered: g.tabDiscovered,
-            discoverReq: g.discoverReq,
-            code: g,
+        SharkGame.Tabs[gt.tabId] = {
+            id: gt.tabId,
+            name: gt.tabName,
+            discovered: gt.tabDiscovered,
+            discoverReq: gt.discoverReq,
+            code: gt,
         };
-        g.opened = false;
+        gt.opened = false;
     },
 
     createSlots(gateSlots, planetLevel, gateCostMultiplier) {
-        const g = SharkGame.Gate;
+        const gt = SharkGame.Gate;
         // create costs
-        g.costs = {};
+        gt.costs = {};
         $.each(gateSlots, (k, v) => {
-            g.costs[k] = Math.floor(v * planetLevel * gateCostMultiplier);
+            gt.costs[k] = Math.floor(v * planetLevel * gateCostMultiplier);
         });
 
         // create costsMet
-        g.costsMet = {};
-        $.each(g.costs, (k, v) => {
-            g.costsMet[k] = false;
+        gt.costsMet = {};
+        $.each(gt.costs, (k, v) => {
+            gt.costsMet[k] = false;
         });
     },
 
     switchTo() {
-        const g = SharkGame.Gate;
+        const gt = SharkGame.Gate;
         const content = $("#content");
         content.append($("<div>").attr("id", "tabMessage"));
         content.append($("<div>").attr("id", "buttonList"));
 
         let amountOfSlots = 0;
-        if (!g.shouldBeOpen()) {
+        if (!gt.shouldBeOpen()) {
             const buttonList = $("#buttonList");
             $.each(g.costs, (k, v) => {
-                if (!g.costsMet[k]) {
-                    const resourceName = SharkGame.Resources.getResourceName(k);
+                if (!gt.costsMet[k]) {
+                    const resourceName = r.getResourceName(k);
                     SharkGame.Button.makeButton(
                         "gateCost-" + k,
                         "Insert " + resourceName + " into " + resourceName + " slot",
                         buttonList,
-                        SharkGame.Gate.onGateButton
+                        gt.onGateButton
                     );
                     amountOfSlots++;
                 }
             });
         } else {
-            SharkGame.Button.makeButton("gateEnter", "Enter gate", $("#buttonList"), g.onEnterButton);
+            SharkGame.Button.makeButton("gateEnter", "Enter gate", $("#buttonList"), gt.onEnterButton);
         }
 
-        let message = g.shouldBeOpen() ? g.messageOpened : amountOfSlots > 1 ? g.message : g.messageOneSlot;
+        let message = gt.shouldBeOpen() ? gt.messageOpened : amountOfSlots > 1 ? gt.message : gt.messageOneSlot;
         const tabMessageSel = $("#tabMessage");
         if (SharkGame.Settings.current.showTabImages) {
             message =
-                "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
-            tabMessageSel.css("background-image", "url('" + g.tabBg + "')");
+                "<img width=400 height=200 src='" + gt.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+            tabMessageSel.css("background-image", "url('" + gt.tabBg + "')");
         }
         tabMessageSel.html(message);
     },
@@ -92,31 +92,30 @@ SharkGame.Gate = {
     update() {},
 
     onGateButton() {
-        const g = SharkGame.Gate;
-        const r = SharkGame.Resources;
+        const gt = SharkGame.Gate;
         const resourceId = $(this).attr("id").split("-")[1];
 
         let message = "";
-        const cost = g.costs[resourceId] * (SharkGame.Resources.getResource("numen") + 1);
+        const cost = gt.costs[resourceId] * (r.getResource("numen") + 1);
         if (r.getResource(resourceId) >= cost) {
-            SharkGame.Gate.costsMet[resourceId] = true;
-            SharkGame.Resources.changeResource(resourceId, -cost);
+            gt.costsMet[resourceId] = true;
+            r.changeResource(resourceId, -cost);
             $(this).remove();
-            if (g.shouldBeOpen()) {
-                message = g.messageAllPaid;
+            if (gt.shouldBeOpen()) {
+                message = gt.messageAllPaid;
                 // add enter gate button
-                SharkGame.Button.makeButton("gateEnter", "Enter gate", $("#buttonList"), g.onEnterButton);
+                SharkGame.Button.makeButton("gateEnter", "Enter gate", $("#buttonList"), gt.onEnterButton);
             } else {
-                message = g.messagePaid;
+                message = gt.messagePaid;
             }
         } else {
-            message = g.messageCantPay + "<br/>";
+            message = gt.messageCantPay + "<br/>";
             const diff = cost - r.getResource(resourceId);
-            message += SharkGame.Main.beautify(diff) + " more.";
+            message += m.beautify(diff) + " more.";
         }
         if (SharkGame.Settings.current.showTabImages) {
             message =
-                "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
+                "<img width=400 height=200 src='" + gt.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
         }
         $("#tabMessage").html(message);
     },
@@ -125,30 +124,30 @@ SharkGame.Gate = {
         $("#tabMessage").html(SharkGame.Gate.messageEnter);
         $(this).remove();
         SharkGame.wonGame = true;
-        SharkGame.Main.endGame();
+        m.endGame();
     },
 
     shouldBeOpen() {
-        const g = SharkGame.Gate;
+        const gt = SharkGame.Gate;
         let won = true;
-        $.each(g.costsMet, (_, v) => {
+        $.each(gt.costsMet, (_, v) => {
             won = won && v;
         });
         return won;
     },
 
     getSceneImagePath() {
-        const g = SharkGame.Gate;
+        const gt = SharkGame.Gate;
         let amountOfSlots = 0;
-        $.each(g.costsMet, (k, v) => {
+        $.each(gt.costsMet, (k, v) => {
             if (v) amountOfSlots++;
         });
-        amountOfSlots = _.size(g.costs) - amountOfSlots;
-        const sceneImagePath = g.shouldBeOpen()
-            ? g.sceneOpenImage
+        amountOfSlots = _.size(gt.costs) - amountOfSlots;
+        const sceneImagePath = gt.shouldBeOpen()
+            ? gt.sceneOpenImage
             : amountOfSlots > 1
-            ? g.sceneClosedImage
-            : g.sceneAlmostOpenImage;
+            ? gt.sceneClosedImage
+            : gt.sceneAlmostOpenImage;
         return sceneImagePath;
     },
 };

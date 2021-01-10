@@ -2,56 +2,56 @@ SharkGame.WorldModifiers = {
     planetaryIncome: {
         name: "Planetary Income",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).income = level * amount;
         },
     },
     planetaryConstantIncome: {
         name: "Planetary Constant Income",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).income = amount;
         },
     },
     planetaryIncomeMultiplier: {
         name: "Planetary Income Multiplier",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).incomeMultiplier = 1 + level * amount;
         },
     },
     planetaryFixedIncomeMultiplier: {
         name: "Fixed Planetary Income Multiplier",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).incomeMultiplier = amount;
         },
     },
     planetaryIncomeReciprocalMultiplier: {
         name: "Planetary Income Reciprocal Multiplier",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).incomeMultiplier = 1 / (1 + level * amount);
         },
     },
     planetaryFixedIncomeReciprocalMultiplier: {
         name: "Fixed Planetary Income Reciprocal Multiplier",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).incomeMultiplier = 1 / amount;
         },
     },
     planetaryResourceBoost: {
         name: "Planetary Boost",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).boostMultiplier = 1 + level * amount;
         },
     },
     planetaryResourceReciprocalBoost: {
         name: "Planetary Reciprocal Boost",
         apply(level, resourceName, amount) {
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             wr.get(resourceName).boostMultiplier = 1 / (1 + level * amount);
         },
     },
@@ -59,16 +59,16 @@ SharkGame.WorldModifiers = {
         name: "Planetary Starting Resources",
         apply(level, resourceName, amount) {
             const bonus = level * amount;
-            const res = SharkGame.Resources.getTotalResource(resourceName);
+            const res = r.getTotalResource(resourceName);
             if (res < bonus) {
-                SharkGame.Resources.changeResource(resourceName, bonus);
+                r.changeResource(resourceName, bonus);
             }
         },
     },
     planetaryGeneratorRestriction: {
         name: "Restricted Generator-Income Combination",
         apply(generator, restrictedResource) {
-            SharkGame.World.worldRestrictedCombinations.set(generator, restrictedResource);
+            w.worldRestrictedCombinations.set(generator, restrictedResource);
         },
     },
 };
@@ -80,7 +80,6 @@ SharkGame.World = {
     planetLevel: 1,
 
     init() {
-        const w = SharkGame.World;
         //w.worldType = "start";
         //w.planetLevel = 1;
         //w.worldResources = {};
@@ -88,13 +87,11 @@ SharkGame.World = {
     },
 
     apply() {
-        const w = SharkGame.World;
         w.applyWorldProperties(w.planetLevel);
         w.applyGateCosts(w.planetLevel);
     },
 
     resetWorldProperties() {
-        const w = SharkGame.World;
         const wr = w.worldResources;
         w.worldRestrictedCombinations.clear();
 
@@ -110,7 +107,6 @@ SharkGame.World = {
     },
 
     applyWorldProperties(level) {
-        const w = SharkGame.World;
         const wr = w.worldResources;
         const worldInfo = SharkGame.WorldTypes[w.worldType];
 
@@ -145,8 +141,8 @@ SharkGame.World = {
         // apply world modifiers
         _.each(worldInfo.modifiers, (modifierData) => {
             if (modifierData.type === "multiplier") {
-                if (SharkGame.Resources.isCategory(modifierData.resource)) {
-                    const resourceList = SharkGame.Resources.getResourcesInCategory(modifierData.resource);
+                if (r.isCategory(modifierData.resource)) {
+                    const resourceList = r.getResourcesInCategory(modifierData.resource);
                     _.each(resourceList, (resourceName) => {
                         SharkGame.WorldModifiers[modifierData.modifier].apply(
                             effectiveLevel,
@@ -164,11 +160,11 @@ SharkGame.World = {
             } else {
                 let resourceList = [modifierData.resource];
                 let restrictionList = [modifierData.restriction];
-                if (SharkGame.Resources.isCategory(modifierData.resource)) {
-                    resourceList = SharkGame.Resources.getResourcesInCategory(modifierData.resource);
+                if (r.isCategory(modifierData.resource)) {
+                    resourceList = r.getResourcesInCategory(modifierData.resource);
                 }
-                if (SharkGame.Resources.isCategory(modifierData.restriction)) {
-                    restrictionList = SharkGame.Resources.getResourcesInCategory(modifierData.restriction);
+                if (r.isCategory(modifierData.restriction)) {
+                    restrictionList = r.getResourcesInCategory(modifierData.restriction);
                 }
                 _.each(resourceList, (resourceName) => {
                     _.each(restrictionList, (restriction) => {
@@ -177,11 +173,10 @@ SharkGame.World = {
                 });
             }
         });
-        SharkGame.Resources.buildApplicableNetworks();
+        r.buildApplicableNetworks();
     },
 
     applyGateCosts(_level) {
-        const w = SharkGame.World;
         const worldInfo = SharkGame.WorldTypes[w.worldType];
 
         // get multiplier
@@ -191,29 +186,28 @@ SharkGame.World = {
     },
 
     getWorldEntryMessage() {
-        const w = SharkGame.World;
         return SharkGame.WorldTypes[w.worldType].entry;
     },
 
     // does this resource exist on this planet?
     doesResourceExist(resourceName) {
-        return SharkGame.World.worldResources.get(resourceName).exists;
+        return w.worldResources.get(resourceName).exists;
     },
 
     forceExistence(resourceName) {
-        SharkGame.World.worldResources.get(resourceName).exists = true;
+        w.worldResources.get(resourceName).exists = true;
     },
 
     getWorldIncomeMultiplier(resourceName) {
-        return SharkGame.World.worldResources.get(resourceName).incomeMultiplier;
+        return w.worldResources.get(resourceName).incomeMultiplier;
     },
 
     getWorldBoostMultiplier(resourceName) {
-        return SharkGame.World.worldResources.get(resourceName).boostMultiplier;
+        return w.worldResources.get(resourceName).boostMultiplier;
     },
 
     getArtifactMultiplier(resourceName) {
-        const artifactMultiplier = SharkGame.World.worldResources.get(resourceName).artifactMultiplier;
+        const artifactMultiplier = w.worldResources.get(resourceName).artifactMultiplier;
         return artifactMultiplier;
     },
 

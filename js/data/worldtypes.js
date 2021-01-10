@@ -3,9 +3,9 @@
 //
 // secret plans for v0.2, please do not read if you don't wanna be spoiled:
 // marine: lobsters, clams
-// haven: dolphins, whales, and coral
-// chaotic: ??? possibly just throw in things as a chaotic mish-mash
-// tempestuous: swordfish, some new resource?
+// haven: dolphins, whales, and coral :check:
+// chaotic: scrap completely
+// tempestuous: swordfish and the storm. lots of stuff related to that storm
 // violent: shrimp, coral, sponge, algae, crustacean machines
 // abandoned: octopuses, sponge and clams?
 // shrouded: eels, chimaera, and jellyfish, no crabs
@@ -290,7 +290,7 @@ SharkGame.WorldTypes = {
             coral: 1e7,
             algae: 1e8,
             sponge: 1e6,
-            junk: 1e9,
+            junk: 5e8,
         },
     },
     abandoned: {
@@ -319,12 +319,12 @@ SharkGame.WorldTypes = {
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "tar", amount: 0.1 },
         ],
         gateCosts: {
-            junk: 1e8,
+            junk: 4e6,
             purifier: 5,
-            coralglass: 1e6,
+            coralglass: 2e6,
             spronge: 1e6,
-            delphinium: 1e6,
-            sharkonium: 1e7,
+            delphinium: 2e6,
+            sharkonium: 2e6,
         },
     },
     shrouded: {

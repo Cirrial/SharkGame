@@ -8,10 +8,10 @@ SharkGame.ArtifactUtil = {
         }
         const amount = Math.pow(5, level);
         // force existence
-        SharkGame.World.forceExistence(resourceName);
-        const res = SharkGame.Resources.getTotalResource(resourceName);
+        w.forceExistence(resourceName);
+        const res = r.getTotalResource(resourceName);
         if (res < amount) {
-            SharkGame.Resources.changeResource(resourceName, amount);
+            r.changeResource(resourceName, amount);
         }
     },
     totemCost(level) {
@@ -21,7 +21,7 @@ SharkGame.ArtifactUtil = {
         if (level < 1) {
             return;
         }
-        const wr = SharkGame.World.worldResources;
+        const wr = w.worldResources;
         const multiplier = level + 1;
         _.each(resourceList, (resourceName) => {
             if (wr.get(resourceName).artifactMultiplier) {
@@ -43,7 +43,7 @@ SharkGame.Artifacts = {
             return Math.floor(Math.pow(10, level + 1));
         },
         effect(level) {
-            SharkGame.Resources.specialMultiplier = Math.max(2 * level, 1);
+            r.specialMultiplier = Math.max(2 * level, 1);
         },
     },
     planetTerraformer: {
@@ -367,7 +367,7 @@ SharkGame.Artifacts = {
                 return;
             }
             const resourceList = ["tar", "ice"];
-            const wr = SharkGame.World.worldResources;
+            const wr = w.worldResources;
             const multiplier = 1 / (level + 1);
             _.each(resourceList, (resourceName) => {
                 if (wr.get(resourceName).artifactMultiplier) {

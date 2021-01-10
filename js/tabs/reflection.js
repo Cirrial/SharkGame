@@ -47,7 +47,6 @@ SharkGame.Reflection = {
     update() {},
 
     updateArtifactList() {
-        const m = SharkGame.Main;
         const listSel = $("#artifactList");
         $.each(SharkGame.Artifacts, (artifactKey, artifactData) => {
             if (artifactData.level > 0 && !artifactData.ignore) {

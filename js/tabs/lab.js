@@ -122,7 +122,6 @@ SharkGame.Lab = {
     },
 
     updateLabButton(upgradeName) {
-        const r = SharkGame.Resources;
         const button = $("#" + upgradeName);
         const ups = SharkGame.Upgrades.getUpgradeTable();
         const upgradeData = ups[upgradeName];
@@ -163,7 +162,6 @@ SharkGame.Lab = {
     },
 
     onLabButton() {
-        const r = SharkGame.Resources;
         const l = SharkGame.Lab;
         const u = SharkGame.Upgrades.getUpgradeTable();
 
@@ -194,7 +192,6 @@ SharkGame.Lab = {
 
     addUpgrade(upgradeId) {
         const l = SharkGame.Lab;
-        const r = SharkGame.Resources;
         const u = SharkGame.Upgrades.getUpgradeTable();
         const upgrade = u[upgradeId];
         if (upgrade) {
@@ -228,7 +225,6 @@ SharkGame.Lab = {
     },
 
     isUpgradePossible(upgradeName) {
-        const w = SharkGame.World;
         const l = SharkGame.Lab;
         const ups = SharkGame.Upgrades.getUpgradeTable();
         const upgradeData = ups[upgradeName];
@@ -243,10 +239,10 @@ SharkGame.Lab = {
             // if this upgrade is restricted to certain worlds,
             // check that the worldtype is acceptable for this upgrade to appear
             if (upgradeData.required.worlds) {
-                isPossible = isPossible && upgradeData.required.worlds.includes(SharkGame.World.worldType);
+                isPossible = isPossible && upgradeData.required.worlds.includes(w.worldType);
             }
             if (upgradeData.required.notWorlds) {
-                isPossible = isPossible && !upgradeData.required.notWorlds.includes(SharkGame.World.worldType);
+                isPossible = isPossible && !upgradeData.required.notWorlds.includes(w.worldType);
             }
             if (upgradeData.required.resources) {
                 // check if any related resources exist in the world for this to make sense
@@ -266,7 +262,7 @@ SharkGame.Lab = {
             if (upgradeData.required.seen) {
                 let seenOne = false;
                 _.each(upgradeData.required.seen, (v) => {
-                    seenOne = seenOne || SharkGame.Resources.getTotalResource(v) > 0;
+                    seenOne = seenOne || r.getTotalResource(v) > 0;
                 });
                 isPossible = isPossible && seenOne;
             }
@@ -287,8 +283,8 @@ SharkGame.Lab = {
             if (upgrade.effect.multiplier) {
                 let anyeffects = false;
                 $.each(upgrade.effect.multiplier, (k, v) => {
-                    if (SharkGame.World.doesResourceExist(k)) {
-                        effects += SharkGame.Resources.getResourceName(k, darken, true) + " power x " + v + ", ";
+                    if (w.doesResourceExist(k)) {
+                        effects += r.getResourceName(k, darken, true) + " power x " + v + ", ";
                         anyeffects = true;
                     }
                 });

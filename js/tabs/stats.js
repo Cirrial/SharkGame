@@ -20,7 +20,7 @@ SharkGame.Stats = {
         "</br>Disposing specialists returns them to their normal, previous lives.",
 
     init() {
-        const s = SharkGame.Stats;
+        
         // register tab
         SharkGame.Tabs[s.tabId] = {
             id: s.tabId,
@@ -33,7 +33,6 @@ SharkGame.Stats = {
     },
 
     switchTo() {
-        const s = SharkGame.Stats;
         const content = $("#content");
         content.append($("<div>").attr("id", "tabMessage"));
         const statsContainer = $("<div>").attr("id", "statsContainer");
@@ -75,12 +74,12 @@ SharkGame.Stats = {
 
         const genStats = $("#generalStats");
         genStats.append($("<h3>").html("General Stats"));
-        const firstTime = SharkGame.Main.isFirstTime();
+        const firstTime = m.isFirstTime();
         if (!firstTime) {
             genStats.append(
                 $("<p>").html(
                     "<span class='medDesc'>Climate Level</span><br>" +
-                        SharkGame.Main.beautify(SharkGame.World.planetLevel)
+                        m.beautify(w.planetLevel)
                 )
             );
         }
@@ -106,13 +105,10 @@ SharkGame.Stats = {
         }
         genStats.append(s.createTotalAmountTable());
 
-        SharkGame.Main.createBuyButtons("rid");
+        m.createBuyButtons("rid");
     },
 
     update() {
-        const m = SharkGame.Main;
-        const s = SharkGame.Stats;
-
         s.updateDisposeButtons();
         s.updateIncomeTable();
         s.updateTotalAmountTable();
@@ -129,9 +125,6 @@ SharkGame.Stats = {
     },
 
     createDisposeButtons() {
-        const r = SharkGame.Resources;
-        const s = SharkGame.Stats;
-        const m = SharkGame.Main;
         const buttonDiv = $("#disposeResource");
         SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0 && s.bannedDisposeCategories.indexOf(r.getCategoryOfResource(k)) === -1) {
@@ -139,15 +132,13 @@ SharkGame.Stats = {
                     "dispose-" + k,
                     "Dispose of " + r.getResourceName(k),
                     buttonDiv,
-                    SharkGame.Stats.onDispose
+                    s.onDispose
                 );
             }
         });
     },
 
     updateDisposeButtons() {
-        const r = SharkGame.Resources;
-        const m = SharkGame.Main;
         SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0) {
                 const button = $("#dispose-" + k);
@@ -175,7 +166,6 @@ SharkGame.Stats = {
     },
 
     onDispose() {
-        const r = SharkGame.Resources;
         const l = SharkGame.Log;
         const resourceName = $(this).attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
@@ -199,8 +189,6 @@ SharkGame.Stats = {
     },
 
     updateIncomeTable() {
-        const r = SharkGame.Resources;
-        const m = SharkGame.Main;
         SharkGame.ResourceMap.forEach((v, k, _map) => {
             if (r.getTotalResource(k) > 0 && SharkGame.ResourceMap.get(k).income) {
                 const income = SharkGame.ResourceMap.get(k).income;
@@ -221,8 +209,6 @@ SharkGame.Stats = {
     },
 
     updateTotalAmountTable() {
-        const r = SharkGame.Resources;
-        const m = SharkGame.Main;
         SharkGame.ResourceMap.forEach((v, k, _map) => {
             const totalResource = r.getTotalResource(k);
             if (totalResource > 0) {
@@ -233,9 +219,6 @@ SharkGame.Stats = {
     },
 
     createIncomeTable() {
-        const r = SharkGame.Resources;
-        const m = SharkGame.Main;
-        const w = SharkGame.World;
         let incomesTable = $("#incomeTable");
         if (incomesTable.length === 0) {
             incomesTable = $("<table>").attr("id", "incomeTable");
@@ -417,8 +400,6 @@ SharkGame.Stats = {
     },
 
     createTotalAmountTable() {
-        const r = SharkGame.Resources;
-        const m = SharkGame.Main;
         let totalAmountTable = $("#totalAmountTable");
         if (totalAmountTable.length === 0) {
             totalAmountTable = $("<table>").attr("id", "totalAmountTable");
