@@ -568,7 +568,7 @@ SharkGame.Resources = {
         } else {
             // iterate through data, if total amount > 0 add a row
             SharkGame.ResourceMap.forEach((v, key, _map) => {
-                if ((r.getTotalResource(key) > 0 || SharkGame.PlayerResources.get(v).discovered) && w.doesResourceExist(key)) {
+                if ((r.getTotalResource(key) > 0 || SharkGame.PlayerResources.get(key).discovered) && w.doesResourceExist(key)) {
                     const row = r.constructResourceTableRow(key);
                     rTable.append(row);
                     anyResourcesInTable = true;
