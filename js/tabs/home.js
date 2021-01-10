@@ -101,7 +101,7 @@ SharkGame.Home = {
         },
         {
             unlock: { world: "frigid" },
-            message: "So cold. The food supplies freeze quickly here. Too hard to chew.<br>&nbsp",
+            message: "So cold. Hard to move. Hard to do things.<br>&nbsp",
         },
 
         // BANKED ESSENCE
@@ -151,7 +151,7 @@ SharkGame.Home = {
         // DANGER STATUSES
         {
             unlock: { world: "abandoned", resource: { tar: 20 } },
-            message: "The tar is killing everything!<br>Maybe a machine can save us?",
+            message: "The tar clogging the machines and killing everything!<br>Maybe a different machine can save us?",
         },
         {
             unlock: { world: "abandoned", resource: { tar: 200 } },
@@ -162,7 +162,7 @@ SharkGame.Home = {
             message: "Something has to be done before the ice destroys us all!<br>Maybe a machine can save us?",
         },
         {
-            unlock: { world: "frigid", resource: { ice: 200 } },
+            unlock: { world: "frigid", resource: { ice: 250 } },
             message: "So cold. So hungry.<br><span class='smallDesc'>So hopeless.</span>",
         },
         /* {
@@ -725,7 +725,11 @@ SharkGame.Home = {
             if (amount < 0) {
                 if (!appendedConsume) {
                     appendedConsume = true;
-                    text += "<br/> <span class='littleTooltipText'>CONSUMES</span>";
+                    if (!appendedProduce) {
+                        text += "<span class='littleTooltipText'>CONSUMES</span>";
+                    } else {
+                        text += "<br/> <span class='littleTooltipText'>CONSUMES</span>";
+                    }
                 }
                 text += "<br/>" + SharkGame.Main.beautifyIncome(-amount, " " + SharkGame.Resources.getResourceName(incomeResource)).bold();
             }

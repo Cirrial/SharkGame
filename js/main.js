@@ -341,12 +341,12 @@ SharkGame.Main = {
         if (!also) {
             also = "";
         }
-        if (number < 0.001 && number > 0.000001) {
+        if (Math.abs(number) < 0.001 && Math.abs(number) > 0.000001) {
             number *= 3600;
             number = number.toFixed(3);
             number += also;
             number += "/h";
-        } else if (number > 0.001) {
+        } else if (Math.abs(number) >= 0.001) {
             number = SharkGame.Main.beautify(number, false, 2);
             number += also;
             number += "/s"
@@ -715,7 +715,6 @@ SharkGame.Main = {
             }
             // flag sidebar as shown
             SharkGame.sidebarHidden = false;
-            SharkGame.Log.adjustLogMaxHeight();
         }
     },
 
