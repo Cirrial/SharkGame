@@ -931,6 +931,7 @@ SharkGame.GeneratorIncomeAffectors = {
     ice: {
         multiply: {
             heater: 0.01,
+            ice: -0.001
         },
         exponentiate: {
             frenzy: 0.99
@@ -956,11 +957,7 @@ SharkGame.GeneratorIncomeAffectedApplicable = {
 };
 
 SharkGame.ResourceIncomeAffectors = {
-    ice: {
-        multiply: {
-            ice: -0.001,
-        },
-    },
+    
 };
 
 SharkGame.ResourceIncomeAffected = {
