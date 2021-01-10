@@ -92,7 +92,7 @@ $.extend(SharkGame, {
         "<p>If you are here because you think you have encountered a bug of some kind, report it on the <a href='https://discord.gg/nN7BQDJR2G' target='blank_'>discord</a>.</p>",
 
     donate:
-        "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
+        "<p>You can <a href='https://www.sharktrust.org/Listing/Category/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
         "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
         "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
         "<a href='https://www.paypal.com/cgi-bin/" +
