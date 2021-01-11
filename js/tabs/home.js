@@ -479,7 +479,7 @@ SharkGame.Home = {
 
         button.prop("disabled", !enableButton);
 
-        if(document.querySelector("#wrapper button.hoverbutton:hover:enabled") === null) {
+        if(document.querySelector("#wrapper button.hoverbutton:hover") === null) {
             h.onHomeUnhover();
         }
 
