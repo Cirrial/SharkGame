@@ -485,8 +485,6 @@ SharkGame.Resources = {
 
     // update values in table without adding rows
     updateResourcesTable() {
-        const rTable = $("#resourceTable");
-
         // if resource table does not exist, there are no resources, so do not construct table
         // if a resource became visible when it previously wasn't, reconstruct the table
         if (r.rebuildTable) {

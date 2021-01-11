@@ -7,16 +7,17 @@
     "scripts": {
         "lint": "eslint . --format visualstudio && prettier . --check",
         "fix": "eslint . --fix && prettier . --write",
-        "less-win": "cmd.exe /c less\\compile_styles.bat"
+        "less": "lessc ./less/style.less ./css/style.css && lessc -clean-css ./less/style.less ./css/style-min.css"
     },
     "devDependencies": {
-        "@types/jquery": "^3.5.4",
+        "@types/jquery": "^3.5.5",
+        "@types/lodash": "^4.14.167",
         "@types/pako": "^1.0.1",
-        "@types/underscore": "^1.10.24",
-        "eslint": "^7.14.0",
-        "eslint-config-prettier": "^6.15.0",
+        "eslint": "^7.17.0",
+        "eslint-config-prettier": "^7.1.0",
         "eslint-plugin-standard": "^5.0.0",
-        "less": "^3.12.2",
-        "prettier": "^2.2.0"
+        "less": "^4.1.0",
+        "less-plugin-clean-css": "^1.5.1",
+        "prettier": "^2.2.1"
     }
 }

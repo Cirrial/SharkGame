@@ -214,7 +214,7 @@ SharkGame.Home = {
         helpButtonDiv.css({ margin: "auto", clear: "both" });
         SharkGame.Button.makeButton(
             "helpButton",
-            "&nbsp Toggle hover descriptions &nbsp",
+            "Toggle hover descriptions",
             helpButtonDiv,
             h.toggleHelp
         ).addClass("min-block");
@@ -733,13 +733,11 @@ SharkGame.Home = {
         }
 
         if (text !== "") {
-            document.getElementById("tooltipbox").style.display = "block";
             document.getElementById("tooltipbox").innerHTML = text;
         }
     },
 
     onHomeUnhover() {
-        document.getElementById("tooltipbox").style.display = "none";
         document.getElementById("tooltipbox").innerHTML = "";
     },
 
