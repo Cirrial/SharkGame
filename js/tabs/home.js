@@ -683,8 +683,10 @@ SharkGame.Home = {
         const actionName = button.attr("id");
         const effects = SharkGame.HomeActions[actionName].effect;
         const validGenerators = {};
+        let numGen = 0;
         if (effects.resource) {
             $.each(effects.resource, (resource) => {
+                numGen += 1;
                 if (SharkGame.ResourceMap.get(resource).income) {
                     $.each(SharkGame.ResourceMap.get(resource).income, (incomeResource) => {
                         const genAmount = r.arbitraryProductAmountFromGeneratorResource(resource, incomeResource, 1);
@@ -730,6 +732,17 @@ SharkGame.Home = {
             } else {
                 text += "<span class='medDesc'>" + SharkGame.HomeActions[actionName].helpText + "</span>";
             }
+        }
+
+        if (numGen === 1) {
+            $.each(effects.resource, (resource) => {
+                const determiner = m.getDeterminer(resource);
+                if (determiner !== "") {
+                    text = m.getDeterminer(resource) + " " + r.getResourceName(resource, false, true).bold() + "<br>" + text;
+                } else {
+                    text = r.getResourceName(resource, false, true).bold() + "<br>" + text;
+                }
+            });
         }
 
         if (text !== "") {

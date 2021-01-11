@@ -1029,6 +1029,18 @@ SharkGame.Main = {
             }
         });
     },
+    
+    getDeterminer(name) {
+        firstLetter = name.charAt(0);
+        if (firstLetter === "a" || firstLetter === "e" || firstLetter === "i" || firstLetter === "o" || firstLetter === "u") {
+            return "an";
+            //note to self: make the next line not suck
+        } else if (name !== "algae" && name !== "coral" && name !== "spronge" && name !== "delphinium" && name !== "coralglass" && name !== "sharkonium" && name !== "residue" && name !== "tar" && name !== "ice") {
+            return "a";
+        } else {
+            return "";
+        }
+    },
 };
 
 SharkGame.Button = {
