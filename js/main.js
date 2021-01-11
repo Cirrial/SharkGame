@@ -651,14 +651,13 @@ SharkGame.Main = {
         // add buy buttons
         const buttonList = $("#tabButtons");
         buttonList.empty();
-        $.each(SharkGame.Settings.buyAmount.options, (_, v) => {
-            const amount = v;
-            const disableButton = v === SharkGame.Settings.current.buyAmount;
+        $.each(SharkGame.Settings.buyAmount.options, (_, amount) => {
+            const disableButton = amount === SharkGame.Settings.current.buyAmount;
             buttonList.prepend(
                 $("<li>").append(
                     $("<button>")
                         .addClass("min")
-                        .attr("id", "buy-" + v)
+                        .attr("id", "buy-" + amount)
                         .prop("disabled", disableButton)
                 )
             );
@@ -668,13 +667,13 @@ SharkGame.Main = {
                     label += "1/3 max";
                 } else if (amount < -1) {
                     label += "1/2 max";
-                } else if (amount < 0) {
+                } else {
                     label += "max";
                 }
             } else {
                 label += m.beautify(amount);
             }
-            $("#buy-" + v)
+            $("#buy-" + amount)
                 .html(label)
                 .on("click", function callback() {
                     const thisButton = $(this);
