@@ -110,9 +110,6 @@ $.extend(SharkGame, {
     choose(choices) {
         return choices[Math.floor(Math.random() * choices.length)];
     },
-    log10(val) {
-        return Math.log(val) / Math.LN10;
-    },
     plural(number) {
         return number === 1 ? "" : "s";
     },
@@ -303,10 +300,9 @@ SharkGame.Main = {
             }
         } else {
             const suffixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc"];
-            const digits = Math.floor(SharkGame.log10(number));
-            let precision = 2 - (digits % 3);
-            // in case the highest supported suffix is not specified
-            precision = Math.max(0, precision);
+            const digits = Math.floor(Math.log10(number));
+            // Max for a case where the supported suffix is not specified
+            const precision = Math.max(0, 2 - (digits % 3));
             const suffixIndex = Math.floor(digits / 3);
 
             let suffix;

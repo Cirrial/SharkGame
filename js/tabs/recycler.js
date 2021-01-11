@@ -449,7 +449,7 @@ SharkGame.Recycler = {
             if (n < Math.pow(10, evalue)) {
                 y.efficiency = baseEfficiency;
             } else {
-                y.efficiency = 1 / (SharkGame.log10(n) - evalue + Math.round(1 / baseEfficiency));
+                y.efficiency = 1 / (Math.log10(n) - evalue + Math.round(1 / baseEfficiency));
                 //otherwise, scale back based purely on the number to process
                 // 'cheating' by lowering the value of n is ok if the player wants to put in a ton of effort
                 // the system is more sensible, and people can get a feel for it easier if i make this change
