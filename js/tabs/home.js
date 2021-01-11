@@ -478,6 +478,11 @@ SharkGame.Home = {
         }
 
         button.prop("disabled", !enableButton);
+
+        if(document.querySelector("#wrapper button.hoverbutton:hover:enabled") === null) {
+            h.onHomeUnhover();
+        }
+
         button.html(label);
 
         const spritename = "actions/" + actionName;
@@ -490,11 +495,7 @@ SharkGame.Home = {
             );
             if (iconDiv) {
                 iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-                if (!enableButton) {
-                    button.prepend($("<div>").append(iconDiv).addClass("tint"));
-                } else {
-                    button.prepend(iconDiv);
-                }
+                button.prepend(iconDiv);
             }
         }
     },
@@ -745,9 +746,7 @@ SharkGame.Home = {
             });
         }
 
-        if (text !== "") {
-            document.getElementById("tooltipbox").innerHTML = text;
-        }
+        document.getElementById("tooltipbox").innerHTML = text;
     },
 
     onHomeUnhover() {

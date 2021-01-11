@@ -413,11 +413,7 @@ SharkGame.Gateway = {
                     );
                     if (iconDiv) {
                         iconDiv.addClass("button-icon-" + SharkGame.Settings.current.iconPositions);
-                        if (!enableButton) {
-                            button.prepend($("<div>").append(iconDiv).addClass("tint"));
-                        } else {
-                            button.prepend(iconDiv);
-                        }
+                        button.prepend(iconDiv);
                     }
                 }
             }
