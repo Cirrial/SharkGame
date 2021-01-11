@@ -47,7 +47,7 @@ SharkGame.Resources = {
                         r.changeResource(k, v);
                     }
                 });
-                SharkGame.r.recalculateIncomeTable();
+                r.recalculateIncomeTable();
                 timeDelta -= 1;
             }
             if (timeDelta > 172800) {
