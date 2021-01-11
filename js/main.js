@@ -1,11 +1,11 @@
 /* eslint-disable-next-line no-var, no-use-before-define */
 var SharkGame = SharkGame || {};
 
-window.onmousemove = function (e) {
+window.onmousemove = (e) => {
     const x = e.clientX;
     const y = e.clientY;
-    document.getElementById('tooltipbox').style.top = (y - 20) + 'px';
-    document.getElementById('tooltipbox').style.left = (x + 15) + 'px';
+    document.getElementById("tooltipbox").style.top = y - 20 + "px";
+    document.getElementById("tooltipbox").style.left = x + 15 + "px";
 };
 
 // CORE VARIABLES AND HELPER FUNCTIONS
@@ -38,7 +38,7 @@ $.extend(SharkGame, {
         "Shark Box",
         "Dolphin Heroes",
         "Maws",
-        "Sharky's Awkward Escapade: Part 6"
+        "Sharky's Awkward Escapade: Part 6",
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
@@ -255,7 +255,7 @@ SharkGame.TitleBar = {
             m.showPane("Donate", SharkGame.donate);
         },
     },
-    
+
     discordLink: {
         name: "discord",
         main: false,
@@ -336,7 +336,7 @@ SharkGame.Main = {
 
         return formatted;
     },
-    
+
     beautifyIncome(number, also) {
         if (!also) {
             also = "";
@@ -349,7 +349,7 @@ SharkGame.Main = {
         } else if (Math.abs(number) >= 0.001) {
             number = m.beautify(number, false, 2);
             number += also;
-            number += "/s"
+            number += "/s";
         } else {
             return 0;
         }
@@ -394,7 +394,14 @@ SharkGame.Main = {
         const overlay = $("#overlay");
         overlay.hide();
         $("#gameName").html("- " + SharkGame.GAME_NAME + " -");
-        $("#versionNumber").html("New Frontiers v " + SharkGame.VERSION + " - " + SharkGame.VERSION_NAME + "<br/> " + "Mod of v " + SharkGame.ORIGINAL_VERSION);
+        $("#versionNumber").html(
+            "New Frontiers v " +
+                SharkGame.VERSION +
+                " - " +
+                SharkGame.VERSION_NAME +
+                "<br/> Mod of v " +
+                SharkGame.ORIGINAL_VERSION
+        );
         SharkGame.sidebarHidden = true;
         SharkGame.gameOver = false;
 
@@ -417,9 +424,8 @@ SharkGame.Main = {
                 SharkGame.Settings.current[k] = v.defaultSetting;
             }
         });
-        
+
         // create the tooltip box
-        
 
         // initialise and reset resources
         SharkGame.Resources.init();
@@ -478,10 +484,7 @@ SharkGame.Main = {
         }
 
         if (m.autosaveHandler === -1) {
-            m.autosaveHandler = setInterval(
-                m.autosave,
-                SharkGame.Settings.current.autosaveFrequency * 60000
-            );
+            m.autosaveHandler = setInterval(m.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
         }
     },
 

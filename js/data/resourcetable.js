@@ -322,7 +322,7 @@ SharkGame.ResourceTable = {
         value: 3000,
     },
 
-   /*  rockLobster: {
+    /* rockLobster: {
         name: "rock lobsters",
         singleName: "rock lobster",
         color: "#9C706D",
@@ -915,7 +915,7 @@ SharkGame.GeneratorIncomeAffectors = {
     // perhaps...simply calculate everything over the given number of steps the player is gone for
     // but that could take a long time if the player leaves for too long. could take shortcut for long times.
     // will solve later. for now, simply make some resource offline-immune.
-    
+
     // problem has since been solved
     // introduced RK4 method, added income caps to stop over-zealous growth.
 
@@ -931,10 +931,10 @@ SharkGame.GeneratorIncomeAffectors = {
     ice: {
         multiply: {
             heater: 0.01,
-            ice: -0.001
+            ice: -0.001,
         },
         exponentiate: {
-            frenzy: 0.99
+            frenzy: 0.99,
         },
     },
     tar: {
@@ -956,9 +956,7 @@ SharkGame.GeneratorIncomeAffectedApplicable = {
     // see SharkGame.Resources.buildApplicableNetworks
 };
 
-SharkGame.ResourceIncomeAffectors = {
-    
-};
+SharkGame.ResourceIncomeAffectors = {};
 
 SharkGame.ResourceIncomeAffected = {
     // This table automatically populates with the affects on every relevant resource
@@ -1089,7 +1087,7 @@ SharkGame.ResourceCategories = {
             "science",
             //"knowledge",
         ],
-    }, 
+    },
     animals: {
         name: "Animals",
         disposeMessage: [
@@ -1116,11 +1114,11 @@ SharkGame.ResourceCategories = {
         ],
         resources: [
             "sand",
-            "crystal", 
+            "crystal",
             "kelp",
             "coral",
             "algae",
-            //"stone", 
+            //"stone",
             //"gravel",
         ],
     },
@@ -1205,5 +1203,5 @@ SharkGame.InternalCategories = {
     },
     kelpstuff: {
         resources: ["kelp", "seaApple"],
-    }
+    },
 };

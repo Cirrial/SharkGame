@@ -2688,10 +2688,10 @@ SharkGame.HomeActionCategories = {
         actions: [
             "catchFish",
             "prySponge",
-            //"stonePrySponge", 
+            //"stonePrySponge",
             "getClam",
             "getJellyfish",
-            ],
+        ],
     },
 
     frenzy: {

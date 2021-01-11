@@ -52,10 +52,7 @@ SharkGame.Settings = {
         options: [1, 2, 5, 10, 30],
         onChange() {
             clearInterval(m.autosaveHandler);
-            m.autosaveHandler = setInterval(
-                m.autosave,
-                SharkGame.Settings.current.autosaveFrequency * 60000
-            );
+            m.autosaveHandler = setInterval(m.autosave, SharkGame.Settings.current.autosaveFrequency * 60000);
             SharkGame.Log.addMessage(
                 "Now autosaving every " +
                     SharkGame.Settings.current.autosaveFrequency +

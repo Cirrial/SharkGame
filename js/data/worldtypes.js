@@ -32,7 +32,7 @@
 // shrouded justification: eels and chimaeras are both arguably mysterious creatures, and the eel pallete somewhat matches the theme.
 //
 // frigid justification: squids and sea urchin live in arctic seas. urchins eat kelp, giving kelp another use.
-// 
+//
 // SECRET PLANS
 // SECRET PLANS
 
@@ -60,15 +60,7 @@ SharkGame.WorldTypes = {
         shortDesc: "strange blue",
         entry: "You enter a familiar blue sea, all your previous knowledge a dim memory.",
         style: "default",
-        includedResources: [
-            "sharks",
-            "rays",
-            "crabs",
-            "basicmaterials",
-            "kelpstuff",
-            "sharkmachines",
-            "essence",
-        ],
+        includedResources: ["sharks", "rays", "crabs", "basicmaterials", "kelpstuff", "sharkmachines", "essence"],
         modifiers: [],
         // initial gate cost, scaled by planetary level
         gateCosts: {
@@ -99,16 +91,7 @@ SharkGame.WorldTypes = {
             "coral",
             "
         ], */
-        absentResources: [
-            "tar",
-            "ice",
-            "heater",
-            "purifier",
-            "shrimp",
-            "chimaera",
-            "eel",
-            "jellyfish",
-        ],
+        absentResources: ["tar", "ice", "heater", "purifier", "shrimp", "chimaera", "eel", "jellyfish"],
         modifiers: [{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1.5 }],
         gateCosts: {
             fish: 1e9,
@@ -174,15 +157,7 @@ SharkGame.WorldTypes = {
             "dolphinmachines",
             "coral"
         ], */
-        absentResources: [
-            "tar",
-            "ice",
-            "heater",
-            "purifier",
-            "chimaera",
-            "eel",
-            "jellyfish",
-        ],
+        absentResources: ["tar", "ice", "heater", "purifier", "chimaera", "eel", "jellyfish"],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "breeders", amount: 1 },
             { type: "multiplier", modifier: "planetaryResourceBoost", resource: "animals", amount: 0.5 },
@@ -217,14 +192,7 @@ SharkGame.WorldTypes = {
             "clam",
             "algae",
         ], */
-        absentResources: [
-            "tar",
-            "ice",
-            "heater",
-            "purifier",
-            "chimaera",
-            "jellyfish",
-        ],
+        absentResources: ["tar", "ice", "heater", "purifier", "chimaera", "jellyfish"],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "sand", amount: -0.5 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "kelp", amount: -0.5 },
@@ -265,17 +233,7 @@ SharkGame.WorldTypes = {
             "algae",
             "coral",
         ], */
-        absentResources: [
-            "tar",
-            "ice",
-            "heater",
-            "purifier",
-            "octopus",
-            "eel",
-            "chimaera",
-            "whale",
-            "jellyfish",
-        ],
+        absentResources: ["tar", "ice", "heater", "purifier", "octopus", "eel", "chimaera", "whale", "jellyfish"],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeReciprocalMultiplier", resource: "breeders", amount: 1 },
             { type: "multiplier", modifier: "planetaryIncome", resource: "sand", amount: 0.1 },
@@ -300,16 +258,7 @@ SharkGame.WorldTypes = {
         entry:
             "You do not know who left this world so torn and empty. Was it some predecessor of yours? Was it you yourself?",
         style: "abandoned",
-        absentResources: [
-            "ice",
-            "heater",
-            "shrimp",
-            "chimaera",
-            "eel",
-            "jellyfish",
-            "algae",
-            "whale"
-        ],
+        absentResources: ["ice", "heater", "shrimp", "chimaera", "eel", "jellyfish", "algae", "whale"],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "tar", amount: 0.01 },
             { type: "multiplier", modifier: "planetaryStartingResources", resource: "crystalMiner", amount: 1 },
@@ -343,16 +292,7 @@ SharkGame.WorldTypes = {
             "basicmaterials",
             "sharkmachines"
         ], */
-        absentResources: [
-            "tar",
-            "ice",
-            "heater",
-            "purifier",
-            "lobster",
-            "crab",
-            "shrimp",
-            "sponge"
-        ],
+        absentResources: ["tar", "ice", "heater", "purifier", "lobster", "crab", "shrimp", "sponge"],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncome", resource: "crystal", amount: 0.05 },
             { type: "multiplier", modifier: "planetaryResourceBoost", resource: "crystal", amount: 1 },
@@ -396,7 +336,12 @@ SharkGame.WorldTypes = {
         ],
         modifiers: [
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "machines", amount: 0.5 },
-            { type: "multiplier", modifier: "planetaryFixedIncomeReciprocalMultiplier", resource: "sponge", amount: 100 },
+            {
+                type: "multiplier",
+                modifier: "planetaryFixedIncomeReciprocalMultiplier",
+                resource: "sponge",
+                amount: 100,
+            },
             { type: "multiplier", modifier: "planetaryIncome", resource: "ice", amount: 0.002 },
             { type: "multiplier", modifier: "planetaryIncomeMultiplier", resource: "ice", amount: 0.1 },
         ],
