@@ -1048,6 +1048,7 @@ SharkGame.Button = {
         return $("<button>")
             .html(name)
             .attr("id", id)
+            .addClass("hoverbutton")
             .appendTo(div)
             .on("click", handler)
             .on("mouseenter", hhandler)
