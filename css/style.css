@@ -373,6 +373,9 @@ pre {
   overflow: hidden;
   padding: 0.5em;
 }
+#content #helpButton {
+  padding: 2px 5px 2px 5px;
+}
 #tabMessage {
   padding: 5px;
   margin: 5px;
