@@ -182,54 +182,56 @@
     --color-dark: @color-dark;
     --color-darker: @color-darker;
 
-    .abandoned {
-        --color-lighter: @color-lighter-abandoned;
-        --color-light: @color-light-abandoned;
-        --color-med: @color-med-abandoned;
-        --color-dark: @color-dark-abandoned;
-        --color-darker: @color-darker-abandoned;
-    }
-    .chaotic {
-        --color-lighter: @color-lighter-chaotic;
-        --color-light: @color-light-chaotic;
-        --color-med: @color-med-chaotic;
-        --color-dark: @color-dark-chaotic;
-        --color-darker: @color-darker-chaotic;
-    }
-    .frigid {
-        --color-lighter: @color-lighter-frigid;
-        --color-light: @color-light-frigid;
-        --color-med: @color-med-frigid;
-        --color-dark: @color-dark-frigid;
-        --color-darker: @color-darker-frigid;
-    }
-    .haven {
-        --color-lighter: @color-lighter-haven;
-        --color-light: @color-light-haven;
-        --color-med: @color-med-haven;
-        --color-dark: @color-dark-haven;
-        --color-darker: @color-darker-haven;
-    }
-    .shrouded {
-        --color-lighter: @color-lighter-shrouded;
-        --color-light: @color-light-shrouded;
-        --color-med: @color-med-shrouded;
-        --color-dark: @color-dark-shrouded;
-        --color-darker: @color-darker-shrouded;
-    }
-    .tempestuous {
-        --color-lighter: @color-lighter-tempestuous;
-        --color-light: @color-light-tempestuous;
-        --color-med: @color-med-tempestuous;
-        --color-dark: @color-dark-tempestuous;
-        --color-darker: @color-darker-tempestuous;
-    }
-    .violent {
-        --color-lighter: @color-lighter-violent;
-        --color-light: @color-light-violent;
-        --color-med: @color-med-violent;
-        --color-dark: @color-dark-violent;
-        --color-darker: @color-darker-violent;
+    :not(.no-theme) {
+        &.abandoned {
+            --color-lighter: @color-lighter-abandoned;
+            --color-light: @color-light-abandoned;
+            --color-med: @color-med-abandoned;
+            --color-dark: @color-dark-abandoned;
+            --color-darker: @color-darker-abandoned;
+        }
+        &.chaotic {
+            --color-lighter: @color-lighter-chaotic;
+            --color-light: @color-light-chaotic;
+            --color-med: @color-med-chaotic;
+            --color-dark: @color-dark-chaotic;
+            --color-darker: @color-darker-chaotic;
+        }
+        &.frigid {
+            --color-lighter: @color-lighter-frigid;
+            --color-light: @color-light-frigid;
+            --color-med: @color-med-frigid;
+            --color-dark: @color-dark-frigid;
+            --color-darker: @color-darker-frigid;
+        }
+        &.haven {
+            --color-lighter: @color-lighter-haven;
+            --color-light: @color-light-haven;
+            --color-med: @color-med-haven;
+            --color-dark: @color-dark-haven;
+            --color-darker: @color-darker-haven;
+        }
+        &.shrouded {
+            --color-lighter: @color-lighter-shrouded;
+            --color-light: @color-light-shrouded;
+            --color-med: @color-med-shrouded;
+            --color-dark: @color-dark-shrouded;
+            --color-darker: @color-darker-shrouded;
+        }
+        &.tempestuous {
+            --color-lighter: @color-lighter-tempestuous;
+            --color-light: @color-light-tempestuous;
+            --color-med: @color-med-tempestuous;
+            --color-dark: @color-dark-tempestuous;
+            --color-darker: @color-darker-tempestuous;
+        }
+        &.violent {
+            --color-lighter: @color-lighter-violent;
+            --color-light: @color-light-violent;
+            --color-med: @color-med-violent;
+            --color-dark: @color-dark-violent;
+            --color-darker: @color-darker-violent;
+        }
     }
 }
 
@@ -267,12 +269,12 @@ a {
 
     &:hover {
         color: var(--color-lighter);
-        filter: brightness(125%)
+        filter: brightness(125%);
     }
 
     &:active {
         color: var(--color-lighter);
-        filter: brightness(135%)
+        filter: brightness(135%);
     }
 }
 
@@ -400,11 +402,11 @@ pre {
     a:link,
     a:visited {
         color: var(--color-lighter);
-        filter: brightness(125%)
+        filter: brightness(125%);
     }
     a:hover {
         color: var(--color-lighter);
-        filter: brightness(130%)
+        filter: brightness(130%);
     }
 }
 
@@ -677,7 +679,7 @@ button.newlyDiscovered {
     }
     .evenRow {
         background: var(--color-darker);
-        filter: brightness(105%)
+        filter: brightness(105%);
     }
     .essenceGlow {
         text-shadow: 0 0 1em @color-essence;
@@ -807,7 +809,7 @@ button {
         .medDesc {
             font-size: 80%;
             color: var(--color-lighter);
-            filter: brightness(80%)
+            filter: brightness(80%);
         }
 
         div {
@@ -839,7 +841,7 @@ button {
         .medDesc {
             font-size: 80%;
             color: var(--color-lighter);
-            filter: brightness(75%)
+            filter: brightness(75%);
         }
 
         div {
@@ -1278,8 +1280,8 @@ button.planetButton {
     &:empty {
         display: none;
     }
-    
+
     .littleTooltipText {
         font-size: 0.6em;
-    }    
+    }
 }

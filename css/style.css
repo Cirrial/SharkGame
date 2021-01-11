@@ -23,49 +23,49 @@
   --color-dark: #152a55;
   --color-darker: #061639;
 }
-:root .abandoned {
+:root :not(.no-theme).abandoned {
   --color-lighter: #565168;
   --color-light: #363241;
   --color-med: #1f1b2c;
   --color-dark: #171226;
   --color-darker: #0e091c;
 }
-:root .chaotic {
+:root :not(.no-theme).chaotic {
   --color-lighter: #a2b3ae;
   --color-light: #69877d;
   --color-med: #45695d;
   --color-dark: #26453b;
   --color-darker: #113a2d;
 }
-:root .frigid {
+:root :not(.no-theme).frigid {
   --color-lighter: #7788aa;
   --color-light: #4e638e;
   --color-med: #2e4372;
   --color-dark: #152a55;
   --color-darker: #061639;
 }
-:root .haven {
+:root :not(.no-theme).haven {
   --color-lighter: #7788aa;
   --color-light: #4e638e;
   --color-med: #2e4372;
   --color-dark: #152a55;
   --color-darker: #061639;
 }
-:root .shrouded {
+:root :not(.no-theme).shrouded {
   --color-lighter: #565168;
   --color-light: #363241;
   --color-med: #1f1b2c;
   --color-dark: #171226;
   --color-darker: #0e091c;
 }
-:root .tempestuous {
+:root :not(.no-theme).tempestuous {
   --color-lighter: #7788aa;
   --color-light: #4e638e;
   --color-med: #2e4372;
   --color-dark: #152a55;
   --color-darker: #061639;
 }
-:root .violent {
+:root :not(.no-theme).violent {
   --color-lighter: #975f5f;
   --color-light: #714141;
   --color-med: #6b2b2b;

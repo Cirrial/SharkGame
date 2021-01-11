@@ -79,9 +79,9 @@ SharkGame.World = {
         return this._worldType;
     },
     set worldType(val) {
-        const body = document.querySelector("body")
-        body.classList.remove(this._worldType)
-        body.classList.add(val)
+        const body = document.querySelector("body");
+        body.classList.remove(this._worldType);
+        body.classList.add(val);
         this._worldType = val;
     },
     worldResources: new Map(),
