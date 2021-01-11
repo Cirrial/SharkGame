@@ -503,6 +503,9 @@ SharkGame.Home = {
     areActionPrereqsMet(actionName) {
         let prereqsMet = true; // assume true until proven false
         const action = SharkGame.HomeActions[actionName];
+        if (action.unauthorized) {
+            return false;
+        }
         // check to see if this action should be forcibly removed
         if (action.removedBy) {
             prereqsMet = !h.shouldRemoveHomeButton(action);

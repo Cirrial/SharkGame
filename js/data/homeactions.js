@@ -56,16 +56,16 @@ SharkGame.HomeActions = {
         helpText: "Use your natural shark prowess to find and catch a fish.",
     },
 
-    /* 'debugbutton': {
-        name: "Catch stuff",
+    debugbutton: {
+        name: "Debug stuff",
         effect: {
             resource: {
-                'fish': 100000000,
-                'crystal': 100000000,
-                'sharkonium': 1000000000,
-                'sand': 1000000000,
-                'kelp': 1000000000,
-                'science': 10000000000,
+                'fish': 10000000,
+                'crystal': 10000000,
+                'sharkonium': 100000000,
+                'sand': 100000000,
+                'kelp': 100000000,
+                'science': 1000000000,
                 'shark': 10000
             }
         },
@@ -76,18 +76,20 @@ SharkGame.HomeActions = {
         outcomes: [
             "Tested.",
             "Debugged.",
-            "Ah, yes. This doesn't work as intended.",
+            "Ah, yes...this doesn't work as intended.",
             "Very interesting results here.",
             "A gift from the developer.",
-            "You better be testing something.",
+            "You had better be testing something.",
             "Not intended for actual gameplay.",
-            "Cheater.",
+            "...cheater.",
+            "Oh, wow, you went into console and typed debug(). What a hacker!",
         ],
-        helpText: "Use your natural coding prowess to test the game.",
-        removedBy: {
+        helpText: "Use your natural coding prowess to find and catch bugs.",
+        /* removedBy: {
             upgrades: ["crystalContainer"],
-        },
-    }, */
+        }, */
+        unauthorized: true,
+    },
 
     prySponge: {
         name: "Pry sponge",

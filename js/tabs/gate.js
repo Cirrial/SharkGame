@@ -68,7 +68,7 @@ SharkGame.Gate = {
                     const resourceName = r.getResourceName(k);
                     SharkGame.Button.makeButton(
                         "gateCost-" + k,
-                        "Insert " + resourceName + " into " + resourceName + " slot",
+                        "Insert " + m.beautify(v) + " " + resourceName + " into " + resourceName + " slot",
                         buttonList,
                         gt.onGateButton
                     );
