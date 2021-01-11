@@ -63,7 +63,7 @@ SharkGame.Gate = {
         let amountOfSlots = 0;
         if (!gt.shouldBeOpen()) {
             const buttonList = $("#buttonList");
-            $.each(g.costs, (k, v) => {
+            $.each(gt.costs, (k, v) => {
                 if (!gt.costsMet[k]) {
                     const resourceName = r.getResourceName(k);
                     SharkGame.Button.makeButton(
