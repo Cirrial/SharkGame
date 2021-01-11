@@ -111,6 +111,21 @@ SharkGame.Settings = {
         },
     },
 
+    enableThemes: {
+        defaultSetting: true,
+        name: "Enable Planet-dependent Styles",
+        desc: "Makes your game look like the planet you're on.",
+        show: true,
+        options: [true, false],
+        onChange() {
+            if (SharkGame.Settings.current["enableThemes"]) {
+                document.querySelector("body").classList.remove("no-theme");
+            } else {
+                document.querySelector("body").classList.add("no-theme");
+            }
+        },
+    },
+
     iconPositions: {
         defaultSetting: "top",
         name: "Icon Positions",
