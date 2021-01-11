@@ -560,8 +560,7 @@ button.newlyDiscovered:disabled div {
   background: var(--color-darker);
 }
 #incomeData .evenRow {
-  background: var(--color-darker);
-  filter: brightness(105%);
+  background: var(--color-dark);
 }
 #incomeData .essenceGlow {
   text-shadow: 0 0 1em #ace3d1;
