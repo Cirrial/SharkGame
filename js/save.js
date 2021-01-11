@@ -833,27 +833,11 @@ SharkGame.Save = {
             save = $.extend(true, save, {
                 completedWorlds: {},
             });
+            _.each(["iterativeDesign", "superprocessing"], (v) => {
+                save.upgrades[v] = false;
+            });
             _.each(
-                [
-                    "iterativeDesign",
-                    "superprocessing",
-                ],
-                (v) => {
-                    save.upgrades[v] = false;
-                }
-            );
-            _.each(
-                [
-                    "start",
-                    "marine",
-                    "chaotic",
-                    "haven",
-                    "tempestuous",
-                    "violent",
-                    "abandoned",
-                    "shrouded",
-                    "frigid",
-                ],
+                ["start", "marine", "chaotic", "haven", "tempestuous", "violent", "abandoned", "shrouded", "frigid"],
                 (v) => {
                     save.completedWorlds[v] = false;
                 }

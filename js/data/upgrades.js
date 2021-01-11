@@ -520,8 +520,7 @@ SharkGame.Upgrades = {
 
         iterativeDesign: {
             name: "Iterative Design",
-            desc:
-                "The machines are useful, but they could be better. Maybe it's time we started over?",
+            desc: "The machines are useful, but they could be better. Maybe it's time we started over?",
             researchedMessage:
                 "As it turns out, science is about learning from mistakes, or so the scientists say. About their own mistakes.",
             effectDesc: "All shark machines run twice as fast. Again!",
@@ -548,7 +547,8 @@ SharkGame.Upgrades = {
 
         superprocessing: {
             name: "Superprocessing",
-            desc: "The recycler wasn't really meant for millions of fish at once. Seeing as that transaction is fairly common, we should probably do something about it.",
+            desc:
+                "The recycler wasn't really meant for millions of fish at once. Seeing as that transaction is fairly common, we should probably do something about it.",
             researchedMessage:
                 "Eureka! If we make the big things bigger, and the grinders grindier, we can process way more material at once!",
             effectDesc:
@@ -762,7 +762,7 @@ SharkGame.Upgrades = {
             required: {
                 upgrades: ["biology"],
                 resources: ["shrimp", "lobster"],
-                seen: ["shrimp","lobster"],
+                seen: ["shrimp", "lobster"],
             },
             effect: {
                 multiplier: {
@@ -1012,8 +1012,7 @@ SharkGame.Upgrades = {
             desc: "The octopuses claim they know ways to improve their routines and machines.",
             researchedMessage:
                 "We have no idea what thought processes guide these cephalopod allies of ours, but they know how to get results.",
-            effectDesc:
-                "Octopuses can specialise in different tasks, and octopuses work more efficiently.",
+            effectDesc: "Octopuses can specialise in different tasks, and octopuses work more efficiently.",
             cost: {
                 science: 8888,
                 clam: 88,

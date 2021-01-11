@@ -130,7 +130,6 @@ SharkGame.World = {
             });
         }
 
-
         // disable resources not allowed on planet
         if (worldInfo.absentResources) {
             $.each(worldInfo.absentResources, (i, v) => {

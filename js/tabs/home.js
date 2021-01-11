@@ -547,14 +547,14 @@ SharkGame.Home = {
         }
         return prereqsMet;
     },
-    
-    shouldRemoveHomeButton(action){
+
+    shouldRemoveHomeButton(action) {
         let disable = false;
         $.each(action.removedBy, (kind, by) => {
             switch (kind) {
                 case "otherActions":
                     $.each(by, (k, v) => {
-                        disable = disable || areActionPrereqsMet(v);
+                        disable = disable || h.areActionPrereqsMet(v);
                     });
                     break;
                 case "upgrades":
@@ -571,7 +571,14 @@ SharkGame.Home = {
         const buttonListSel = $("#buttonList");
         const actionData = SharkGame.HomeActions[actionName];
 
-        const buttonSelector = SharkGame.Button.makeHoverscriptButton(actionName, actionData.name, buttonListSel, h.onHomeButton, h.onHomeHover, h.onHomeUnhover);
+        const buttonSelector = SharkGame.Button.makeHoverscriptButton(
+            actionName,
+            actionData.name,
+            buttonListSel,
+            h.onHomeButton,
+            h.onHomeHover,
+            h.onHomeUnhover
+        );
         h.updateButton(actionName);
         if (SharkGame.Settings.current.showAnimations) {
             buttonSelector.hide().css("opacity", 0).slideDown(50).animate({ opacity: 1.0 }, 50);
@@ -667,7 +674,7 @@ SharkGame.Home = {
         // disable button until next frame
         button.prop("disabled", true);
     },
-    
+
     onHomeHover() {
         if (!SharkGame.Settings.current.showTabHelp) {
             return;
@@ -675,14 +682,14 @@ SharkGame.Home = {
         const button = $(this);
         const actionName = button.attr("id");
         const effects = SharkGame.HomeActions[actionName].effect;
-        let validGenerators = {};
+        const validGenerators = {};
         if (effects.resource) {
-            $.each(effects.resource, (resource, amount) => {
+            $.each(effects.resource, (resource) => {
                 if (SharkGame.ResourceMap.get(resource).income) {
-                    $.each(SharkGame.ResourceMap.get(resource).income, (incomeResource, income) => {
-                        const generatedAmount = r.arbitraryProductAmountFromGeneratorResource(resource, incomeResource, 1);
-                        if (generatedAmount !== 0 && w.doesResourceExist(incomeResource)) {
-                            validGenerators[incomeResource] = generatedAmount;
+                    $.each(SharkGame.ResourceMap.get(resource).income, (incomeResource) => {
+                        const genAmount = r.arbitraryProductAmountFromGeneratorResource(resource, incomeResource, 1);
+                        if (genAmount !== 0 && w.doesResourceExist(incomeResource)) {
+                            validGenerators[incomeResource] = genAmount;
                         }
                     });
                 }
@@ -726,13 +733,13 @@ SharkGame.Home = {
         }
 
         if (text !== "") {
-            document.getElementById('tooltipbox').style.display = 'block';
-            document.getElementById('tooltipbox').innerHTML = text;
+            document.getElementById("tooltipbox").style.display = "block";
+            document.getElementById("tooltipbox").innerHTML = text;
         }
     },
-    
+
     onHomeUnhover() {
-        document.getElementById('tooltipbox').style.display = 'none';
+        document.getElementById("tooltipbox").style.display = "none";
         document.getElementById("tooltipbox").innerHTML = "";
     },
 

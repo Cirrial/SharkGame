@@ -13,7 +13,15 @@
         "$": "readonly",
         "ascii85": "readonly",
         "pako": "readonly",
-        "SharkGame": "readonly"
+        "SharkGame": "readonly",
+
+        "r": "readonly",
+        "m": "readonly",
+        "y": "readonly",
+        "g": "readonly",
+        "s": "readonly",
+        "w": "readonly",
+        "h": "readonly"
     },
     "ignorePatterns": ["js/lib/**", "js/fallback/**", "js/reference/**", "js/menu/**"],
     "rules": {

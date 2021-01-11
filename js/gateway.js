@@ -325,7 +325,7 @@ SharkGame.Gateway = {
                     qualified = false;
                 }
             }
-            
+
             if (artifactData.ignore) {
                 qualified = false;
             }
@@ -551,7 +551,7 @@ SharkGame.Gateway = {
 
     // GOD THIS IS A MESS
     // I'M SO SORRY FUTURE ME AND ANYONE ELSE READING THIS
-    
+
     // i partially cleaned it up for you
     showPlanetAttributes(worldData, planetLevel, contentDiv) {
         // add known attributes
@@ -561,7 +561,7 @@ SharkGame.Gateway = {
             const gateSlots = _.size(worldData.gateCosts);
             const bannedResources = _.size(worldData.absentResources);
             const totalAttributes = modifiers + gateSlots + bannedResources;
-            const numberKnown = Math.floor(totalAttributes * pslevel / 5);
+            const numberKnown = Math.floor((totalAttributes * pslevel) / 5);
             let numberLeft = numberKnown;
 
             contentDiv.append(
@@ -596,7 +596,7 @@ SharkGame.Gateway = {
                 );
             }
             contentDiv.append(modifierList);
-            numberLeft = numberLeft - modifiers
+            numberLeft = numberLeft - modifiers;
 
             // if all modifiers are revealed, carry over to the gate requirements and abandoned resources
             if (numberLeft > 0) {
@@ -622,7 +622,7 @@ SharkGame.Gateway = {
                 contentDiv.append(gateList);
             }
 
-            numberLeft = numberLeft - gateSlots
+            numberLeft = numberLeft - gateSlots;
             if (numberLeft > 0) {
                 contentDiv.append(
                     $("<p>").html(
