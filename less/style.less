@@ -183,6 +183,7 @@
     --color-med: @color-med;
     --color-dark: @color-dark;
     --color-darker: @color-darker;
+    --color-title: rgba(red(@color-med), green(@color-med), blue(@color-med), 0.2);
 
     :not(.no-theme) {
         &.abandoned {
@@ -191,6 +192,12 @@
             --color-med: @color-med-abandoned;
             --color-dark: @color-dark-abandoned;
             --color-darker: @color-darker-abandoned;
+            --color-title: rgba(
+                red(@color-med-abandoned),
+                green(@color-med-abandoned),
+                blue(@color-med-abandoned),
+                0.2
+            );
         }
         &.chaotic {
             --color-lighter: @color-lighter-chaotic;
@@ -198,6 +205,7 @@
             --color-med: @color-med-chaotic;
             --color-dark: @color-dark-chaotic;
             --color-darker: @color-darker-chaotic;
+            --color-title: rgba(red(@color-med-chaotic), green(@color-med-chaotic), blue(@color-med-chaotic), 0.2);
         }
         &.frigid {
             --color-lighter: @color-lighter-frigid;
@@ -205,6 +213,7 @@
             --color-med: @color-med-frigid;
             --color-dark: @color-dark-frigid;
             --color-darker: @color-darker-frigid;
+            --color-title: rgba(red(@color-med-frigid), green(@color-med-frigid), blue(@color-med-frigid), 0.2);
         }
         &.haven {
             --color-lighter: @color-lighter-haven;
@@ -212,6 +221,7 @@
             --color-med: @color-med-haven;
             --color-dark: @color-dark-haven;
             --color-darker: @color-darker-haven;
+            --color-title: rgba(red(@color-med-haven), green(@color-med-haven), blue(@color-med-haven), 0.2);
         }
         &.shrouded {
             --color-lighter: @color-lighter-shrouded;
@@ -219,6 +229,7 @@
             --color-med: @color-med-shrouded;
             --color-dark: @color-dark-shrouded;
             --color-darker: @color-darker-shrouded;
+            --color-title: rgba(red(@color-med-shrouded), green(@color-med-shrouded), blue(@color-med-shrouded), 0.2);
         }
         &.tempestuous {
             --color-lighter: @color-lighter-tempestuous;
@@ -226,6 +237,12 @@
             --color-med: @color-med-tempestuous;
             --color-dark: @color-dark-tempestuous;
             --color-darker: @color-darker-tempestuous;
+            --color-title: rgba(
+                red(@color-med-tempestuous),
+                green(@color-med-tempestuous),
+                blue(@color-med-tempestuous),
+                0.2
+            );
         }
         &.violent {
             --color-lighter: @color-lighter-violent;
@@ -233,6 +250,7 @@
             --color-med: @color-med-violent;
             --color-dark: @color-dark-violent;
             --color-darker: @color-darker-violent;
+            --color-title: rgba(red(@color-med-violent), green(@color-med-violent), blue(@color-med-violent), 0.2);
         }
     }
 }
@@ -359,7 +377,7 @@ pre {
 #title {
     clear: both;
     .section;
-    background: linear-gradient(rgba(var(--color-med), 0.2), rgba(var(--color-med), 0.2)),
+    background: linear-gradient(var(--color-title), var(--color-title)),
         var(--color-med) url("../img/sharklogo.png") no-repeat center;
     text-shadow: 2px 2px 3px var(--color-darker);
 
