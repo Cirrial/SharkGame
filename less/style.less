@@ -57,6 +57,8 @@
 @color-dark-violent: #5c1919;
 @color-darker-violent: #450808;
 
+// -- END OF THEMES --
+
 @color-danger-lighter: #975f5f;
 @color-danger-light: #714141;
 @color-danger-med: #6b2b2b;
@@ -777,7 +779,6 @@ button {
     .no-select();
 
     font-size: 90%;
-    vertical-align: middle;
 
     &.min {
         padding: 0.1em;
@@ -893,7 +894,6 @@ button {
 }
 
 #tabSceneImage {
-    vertical-align: middle;
     display: block;
     margin: 0.1em auto 0.4em auto;
     .border-radius(5px);
@@ -1271,14 +1271,15 @@ button.planetButton {
     padding-right: 15px;
     padding-top: 12px;
     padding-bottom: 12px;
-    max-width: 200px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     opacity: 1;
     transition: opacity 0.3s;
 
     &:empty {
-        display: none;
+        opacity: 0;
+        transition: opacity 0s;
     }
 
     .littleTooltipText {

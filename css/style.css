@@ -635,7 +635,6 @@ button {
   -ms-user-select: none;
   user-select: none;
   font-size: 90%;
-  vertical-align: middle;
 }
 button.min {
   padding: 0.1em;
@@ -754,7 +753,6 @@ button:disabled div {
   pointer-events: none;
 }
 #tabSceneImage {
-  vertical-align: middle;
   display: block;
   margin: 0.1em auto 0.4em auto;
   -webkit-border-radius: 5px;
@@ -765,7 +763,6 @@ button:disabled div {
   box-shadow: 0 0 5px 5px var(--color-dark);
 }
 #tabSceneImageRed {
-  vertical-align: middle;
   display: block;
   margin: 0.1em auto 0.4em auto;
   -webkit-border-radius: 5px;
@@ -779,7 +776,6 @@ button:disabled div {
   box-shadow: 0 0 5px 5px #5c1919;
 }
 #tabSceneImageEssence {
-  vertical-align: middle;
   display: block;
   margin: 0.1em auto 0.4em auto;
   -webkit-border-radius: 5px;
@@ -1218,14 +1214,15 @@ button.planetButton:active {
   padding-right: 15px;
   padding-top: 12px;
   padding-bottom: 12px;
-  max-width: 200px;
+  width: 200px;
   position: fixed;
   z-index: 1;
   opacity: 1;
   transition: opacity 0.3s;
 }
 .tooltip:empty {
-  display: none;
+  opacity: 0;
+  transition: opacity 0s;
 }
 .tooltip .littleTooltipText {
   font-size: 0.6em;
