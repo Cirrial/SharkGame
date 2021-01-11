@@ -63,6 +63,11 @@ $.extend(SharkGame, {
 
     gameOver: false,
     wonGame: false,
+    
+    cheatsAndDebug: {
+        pause: false,
+        stop: false,
+    },
 
     credits:
         "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
@@ -485,6 +490,13 @@ SharkGame.Main = {
     },
 
     tick() {
+        if (SharkGame.cheatsAndDebug.pause) {
+            SharkGame.before = _.now();
+            return;
+        }
+        if (SharkGame.cheatsAndDebug.stop) {
+            return;
+        }
         if (SharkGame.gameOver) {
             // tick gateway stuff
             g.update();
@@ -501,6 +513,9 @@ SharkGame.Main = {
                 // Compensate for lost time.
                 m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
             } else {
+                if (CaD.chunky) {
+                    return;
+                }
                 m.processSimTime(SharkGame.dt);
             }
             r.updateResourcesTable();
@@ -1036,7 +1051,7 @@ SharkGame.Main = {
             return "an";
             //note to self: make the next line not suck
             // Possibly add an "uncountable" property to resources somehow? Manual works fine though
-        } else if (!["algae", "coral", "spronge", "delphinium", "coralglass", "sharkonium", "residue", "tar", "ice"].includes(name)) {
+        } else if (!["algae", "coral", "spronge", "delphinium", "coralglass", "sharkonium", "residue", "tar", "ice", "science"].includes(name)) {
             return "a";
         } else {
             return "";

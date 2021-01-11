@@ -34,6 +34,7 @@ SharkGame.Resources = {
         });
 
         r.specialMultiplier = 1;
+        r.clearNetworks();
         r.buildIncomeNetwork();
     },
 
@@ -222,6 +223,7 @@ SharkGame.Resources = {
             w.getWorldIncomeMultiplier(generator) *
             w.getWorldBoostMultiplier(product) *
             w.getArtifactMultiplier(generator) *
+            r.getSpecialMultiplier() *
             r.getResourceGeneratorMultiplier(generator) *
             r.getResourceIncomeMultiplier(product);
         if (rp.incomeCap[product]) {
@@ -245,6 +247,7 @@ SharkGame.Resources = {
             w.getWorldIncomeMultiplier(generator) *
             w.getWorldBoostMultiplier(product) *
             w.getArtifactMultiplier(generator) *
+            r.getSpecialMultiplier() *
             r.getResourceGeneratorMultiplier(generator) *
             r.getResourceIncomeMultiplier(product);
         if (rp.incomeCap[product]) {
@@ -297,8 +300,8 @@ SharkGame.Resources = {
             : true;
     },
 
-    getSpecialMultiplier(_generator) {
-        return 1;
+    getSpecialMultiplier() {
+        return r.specialMultiplier;
     },
 
     getIncome(resource) {
@@ -689,27 +692,17 @@ SharkGame.Resources = {
                                 );
                             }
                         }
-
                         // is it a category or a generator?
                         const nodes = r.isCategory(generator) ? rc[generator].resources : [generator];
-
                         // recursively reconstruct the table with the keys in the inverse order
                         $.each(nodes, (k, v) => {
-                            if (!rgad[v]) {
-                                rgad[v] = {};
-                            }
-                            if (!rgad[v][type]) {
-                                rgad[v][type] = {};
-                            }
-                            rgad[v][type][resource] = value;
+                            r.addNetworkNode(rgad, v, type, resource, value);
                         });
                     });
                 });
             });
         }
-
         // resources incomes below, generators above
-
         const ria = SharkGame.ResourceIncomeAffectors;
         const rad = SharkGame.ResourceIncomeAffected;
         if (!specifically) {
@@ -724,13 +717,7 @@ SharkGame.Resources = {
 
                         // recursively reconstruct the table with the keys in the inverse order
                         $.each(nodes, (k, v) => {
-                            if (!rad[v]) {
-                                rad[v] = {};
-                            }
-                            if (!rad[v][type]) {
-                                rad[v][type] = {};
-                            }
-                            rad[v][type][affectorResource] = degree;
+                            r.addNetworkNode(rad, v, type, affectorResource, degree);
                         });
                     });
                 });
@@ -740,6 +727,7 @@ SharkGame.Resources = {
 
     buildApplicableNetworks() {
         // this function builds two networks that contain all actually relevant relationships for a given world
+        // this is meant to save on calculations when searching the network
         const apprgad = SharkGame.GeneratorIncomeAffectedApplicable;
         const apprad = SharkGame.ResourceIncomeAffectedApplicable;
         const rgad = SharkGame.GeneratorIncomeAffected;
@@ -748,13 +736,7 @@ SharkGame.Resources = {
             $.each(rgad[generator], (type) => {
                 $.each(rgad[generator][type], (affector, degree) => {
                     if (w.worldResources.get(generator).exists && w.worldResources.get(affector).exists) {
-                        if (!apprgad[generator]) {
-                            apprgad[generator] = {};
-                        }
-                        if (!apprgad[generator][type]) {
-                            apprgad[generator][type] = {};
-                        }
-                        apprgad[generator][type][affector] = degree;
+                        r.addNetworkNode(apprgad, generator, type, affector, degree);
                     }
                 });
             });
@@ -763,17 +745,26 @@ SharkGame.Resources = {
             $.each(rad[resource], (type) => {
                 $.each(rad[resource][type], (affector, degree) => {
                     if (w.worldResources.get(resource).exists && w.worldResources.get(affector).exists) {
-                        if (!apprad[resource]) {
-                            apprad[resource] = {};
-                        }
-                        if (!apprad[resource][type]) {
-                            apprad[resource][type] = {};
-                        }
-                        apprad[resource][type][affector] = degree;
+                        r.addNetworkNode(apprad, resource, type, affector, degree);
                     }
                 });
             });
         });
+    },
+
+    clearNetworks() {
+        SharkGame.GeneratorIncomeAffectedApplicable = {};
+        SharkGame.ResourceIncomeAffectedApplicable = {};
+    },
+
+    addNetworkNode(network,main,effect,sub,degree) {
+        if (!network[main]) {
+            network[main] = {};
+        }
+        if (!network[main][effect]) {
+            network[main][effect] = {};
+        }
+        network[main][effect][sub] = degree;
     },
 
     getPurchaseAmount(resource) {
@@ -825,7 +816,6 @@ SharkGame.Resources = {
                 }
             }
         });
-
         return dependencies;
     },
 };

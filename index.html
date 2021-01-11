@@ -69,8 +69,184 @@
             var s = SharkGame.Stats;
             var w = SharkGame.World;
             var h = SharkGame.Home;
+            var CaD = SharkGame.cheatsAndDebug;
+            var cheats = "When you find a cheat code, put () after it and hit enter. I'm not going to tell you them."
+            var cheatcodes = "When you find a cheat code, put () after it and hit enter. I'm not going to tell you them."
+            var cheatCodes = "When you find a cheat code, put () after it and hit enter. I'm not going to tell you them."
+            var cheatsPlease = "When you find a cheat code, put () after it and hit enter. I'm not going to tell you them."
             function debug() {
                 SharkGame.HomeActions.debugbutton.unauthorized = false;
+            }
+            function pause() {
+                if (CaD.stop) {
+                    SharkGame.Log.addError("The game is stopped. You can't also pause it.")
+                    return "The game is stopped. You can't also pause it.";
+                }
+                if (!CaD.pause) {
+                    CaD.pause = true;
+                    return "Paused game.";
+                } else {
+                    SharkGame.Log.addError("The game is already paused.")
+                }
+            }
+            function unpause() {
+                if (CaD.pause || CaD.stop) {
+                    CaD.pause = false;
+                    CaD.stop = false;
+                } else {
+                    SharkGame.Log.addError("The game is not paused or stopped.")
+                    return "Resumed game.";
+                }
+            }
+            function stop() {
+                if (CaD.pause) {
+                    SharkGame.Log.addError("The game is paused. You can't also stop it.")
+                    return "The game is paused. You can't also stop it.";
+                }
+                if (!CaD.stop) {
+                    CaD.stop = true;
+                    return "Stopped game.";
+                } else {
+                    SharkGame.Log.addError("The game is already stopped.")
+                }
+            }
+            function freeze() {
+                w.forceExistence("ice");
+                SharkGame.PlayerResources.get("ice").discovered = true;
+                r.clearNetworks();
+                r.buildApplicableNetworks();
+                r.setResource("ice",1000);
+                r.setTotalResource("ice",1000);
+                r.rebuildTable = true;
+                SharkGame.Log.addMessage("ICE going, doofus!")
+                return "Game frozen.";
+            }
+            function unfreeze() {
+                r.setResource("ice",0);
+                SharkGame.Log.addMessage("What, did you need some bailing out?")
+                return "Game unfrozen.";
+            }
+            function exponentialGrowthPlease() {
+                if (w.doesResourceExist("sponge")) {
+                    r.addNetworkNode(SharkGame.ResourceIncomeAffectedApplicable,"sponge","multiply","sponge",0.00000001);
+                    if (w.doesResourceExist("algae") && w.doesResourceExist("shrimp")) {
+                        r.addNetworkNode(SharkGame.ResourceIncomeAffectedApplicable,"algae","multiply","sponge",0.00000001);
+                        r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"shrimp","multiply","algae",0.0000001);
+                    }
+                }
+                if (w.doesResourceExist("shark") && w.doesResourceExist("fish")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"shark","multiply","fish",0.000001);
+                }
+                if (w.doesResourceExist("ray") && w.doesResourceExist("sand")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"ray","multiply","sand",0.000001);
+                }
+                if (w.doesResourceExist("crab") && w.doesResourceExist("crystal")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"crab","multiply","crystal",0.001);
+                }
+                if (w.doesResourceExist("science") && w.doesResourceExist("scientist")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"scientist","multiply","science",0.000001);
+                }
+                if (w.doesResourceExist("kelp") && w.doesResourceExist("seaApple")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"kelp","multiply","seaApple",0.0001);
+                }
+                return "Growing exponentially.";
+            }
+            function stupidExponentialGrowthPlease() {
+                if (w.doesResourceExist("sponge")) {
+                    r.addNetworkNode(SharkGame.ResourceIncomeAffectedApplicable,"sponge","multiply","sponge",0.001);
+                    if (w.doesResourceExist("algae") && w.doesResourceExist("shrimp")) {
+                        r.addNetworkNode(SharkGame.ResourceIncomeAffectedApplicable,"algae","multiply","sponge",0.001);
+                        r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"shrimp","multiply","algae",0.001);
+                    }
+                }
+                if (w.doesResourceExist("shark") && w.doesResourceExist("fish")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"shark","multiply","fish",0.001);
+                }
+                if (w.doesResourceExist("ray") && w.doesResourceExist("sand")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"ray","multiply","sand",0.001);
+                }
+                if (w.doesResourceExist("crab") && w.doesResourceExist("crystal")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"crab","multiply","crystal",0.01);
+                }
+                if (w.doesResourceExist("science") && w.doesResourceExist("scientist")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"scientist","multiply","science",0.001);
+                }
+                if (w.doesResourceExist("kelp") && w.doesResourceExist("seaApple")) {
+                    r.addNetworkNode(SharkGame.GeneratorIncomeAffectedApplicable,"kelp","multiply","seaApple",0.01);
+                }
+                return "Growing really fast.";
+            }
+            function freeEssencePlease() {
+                r.changeResource("essence",1000);
+                return "Okay, but only because you asked nicely.";
+            }
+            function goFasterPlease() {
+                if (r.specialMultiplier === 4096) {
+                    return "I think you've had enough.";
+                }
+                let msg = "";
+                r.specialMultiplier *= 2;
+                switch (r.specialMultiplier) {
+                    case 2:
+                        msg = "Going twice as fast.";
+                        break;
+                    case 4096:
+                        msg = "Going...really fast."; 
+                        break;
+                    default:
+                        msg = "Going " + r.specialMultiplier + " times as fast."
+                        break;
+                }
+                return msg;
+            }
+            function giveMeLotsOfEverythingPlease() {
+                r.giveMeSomeOfEverything(100000000000000000000000000000000000000000);
+                return "Gave you lots of everything.";
+            }
+            function doSomethingCoolPlease() {
+                return "Did something really cool.";
+                // this doesn't do anything
+            }
+            function lowerClimatePlease() {
+                w.planetLevel -= 10;
+                if (w.planetLevel < 1) {
+                    w.planetLevel = 1;
+                }
+                w.apply();
+                return "Made the climate easier.";
+            }
+            function higherClimatePlease() {
+                w.planetLevel += 10;
+                w.apply();
+                return "Made the climate harder.";
+            }
+            function listAllCheatsPlease() {
+                return "Nice try.";
+            }
+            function makeEverythingCheapPlease() {
+                return "WIP."
+            }
+            function goSlowerPlease() {
+                r.specialMultiplier *= 0.5;
+                return "Slowed things down.";
+            }
+            function chunkyPlease() {
+                if (CaD.chunky) {
+                    return "Game is already chunky.";
+                }
+                CaD.chunky = true;
+                SharkGame.INTERVAL = 500;
+                SharkGame.dt = 1/2;
+                return "I uh...okay.";
+            }
+            function smoothPlease() {
+                if (!CaD.chunky) {
+                    return "Game is already smooth.";
+                }
+                CaD.chunky = false;
+                SharkGame.INTERVAL = 100;
+                SharkGame.dt = 1/10;
+                return "Returned game to smoothness.";
             }
         </script>
     </head>
