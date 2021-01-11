@@ -733,13 +733,11 @@ SharkGame.Home = {
         }
 
         if (text !== "") {
-            document.getElementById("tooltipbox").style.display = "block";
             document.getElementById("tooltipbox").innerHTML = text;
         }
     },
 
     onHomeUnhover() {
-        document.getElementById("tooltipbox").style.display = "none";
         document.getElementById("tooltipbox").innerHTML = "";
     },
 

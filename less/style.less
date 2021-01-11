@@ -1,16 +1,61 @@
 /*------------------------------------------------------
   MIXINS
 -------------------------------------------------------*/
-// default colours i guess!
+// default theme (marine)
 @color-lighter: #7788aa;
 @color-light: #4e638e;
 @color-med: #2e4372;
 @color-dark: #152a55;
 @color-darker: #061639;
 
-// select palette
-@palette: "marine"; // default is marine
-@import "@{palette}";
+//abandoned theme
+@color-lighter-abandoned: #565168;
+@color-light-abandoned: #363241;
+@color-med-abandoned: #1f1b2c;
+@color-dark-abandoned: #171226;
+@color-darker-abandoned: #0e091c;
+
+//chaotic theme
+@color-lighter-chaotic: #a2b3ae;
+@color-light-chaotic: #69877d;
+@color-med-chaotic: #45695d;
+@color-dark-chaotic: #26453b;
+@color-darker-chaotic: #113a2d;
+
+//frigid theme
+@color-lighter-frigid: #7788aa;
+@color-light-frigid: #4e638e;
+@color-med-frigid: #2e4372;
+@color-dark-frigid: #152a55;
+@color-darker-frigid: #061639;
+
+//haven theme
+@color-lighter-haven: #7788aa;
+@color-light-haven: #4e638e;
+@color-med-haven: #2e4372;
+@color-dark-haven: #152a55;
+@color-darker-haven: #061639;
+
+//shrouded theme
+@color-lighter-shrouded: #565168;
+@color-light-shrouded: #363241;
+@color-med-shrouded: #1f1b2c;
+@color-dark-shrouded: #171226;
+@color-darker-shrouded: #0e091c;
+
+//tempestuous theme
+@color-lighter-tempestuous: #7788aa;
+@color-light-tempestuous: #4e638e;
+@color-med-tempestuous: #2e4372;
+@color-dark-tempestuous: #152a55;
+@color-darker-tempestuous: #061639;
+
+//violent theme
+@color-lighter-violent: #975f5f;
+@color-light-violent: #714141;
+@color-med-violent: #6b2b2b;
+@color-dark-violent: #5c1919;
+@color-darker-violent: #450808;
 
 @color-danger-lighter: #975f5f;
 @color-danger-light: #714141;
@@ -31,7 +76,6 @@
 @color-discovery-bg-darkest: darken(@color-discovery, 60%);
 
 @color-text: white;
-@color-link: lighten(@color-lighter, 10%);
 
 @sidebar-width: 25%;
 
@@ -128,6 +172,68 @@
 }
 
 /*------------------------------------------------------
+  CSS VARIABLES FOR THEMES
+-------------------------------------------------------*/
+
+:root {
+    --color-lighter: @color-lighter;
+    --color-light: @color-light;
+    --color-med: @color-med;
+    --color-dark: @color-dark;
+    --color-darker: @color-darker;
+
+    .abandoned {
+        --color-lighter: @color-lighter-abandoned;
+        --color-light: @color-light-abandoned;
+        --color-med: @color-med-abandoned;
+        --color-dark: @color-dark-abandoned;
+        --color-darker: @color-darker-abandoned;
+    }
+    .chaotic {
+        --color-lighter: @color-lighter-chaotic;
+        --color-light: @color-light-chaotic;
+        --color-med: @color-med-chaotic;
+        --color-dark: @color-dark-chaotic;
+        --color-darker: @color-darker-chaotic;
+    }
+    .frigid {
+        --color-lighter: @color-lighter-frigid;
+        --color-light: @color-light-frigid;
+        --color-med: @color-med-frigid;
+        --color-dark: @color-dark-frigid;
+        --color-darker: @color-darker-frigid;
+    }
+    .haven {
+        --color-lighter: @color-lighter-haven;
+        --color-light: @color-light-haven;
+        --color-med: @color-med-haven;
+        --color-dark: @color-dark-haven;
+        --color-darker: @color-darker-haven;
+    }
+    .shrouded {
+        --color-lighter: @color-lighter-shrouded;
+        --color-light: @color-light-shrouded;
+        --color-med: @color-med-shrouded;
+        --color-dark: @color-dark-shrouded;
+        --color-darker: @color-darker-shrouded;
+    }
+    .tempestuous {
+        --color-lighter: @color-lighter-tempestuous;
+        --color-light: @color-light-tempestuous;
+        --color-med: @color-med-tempestuous;
+        --color-dark: @color-dark-tempestuous;
+        --color-darker: @color-darker-tempestuous;
+    }
+    .violent {
+        --color-lighter: @color-lighter-violent;
+        --color-light: @color-light-violent;
+        --color-med: @color-med-violent;
+        --color-dark: @color-dark-violent;
+        --color-darker: @color-darker-violent;
+    }
+}
+
+/*------------------------------------------------------
   ACTUAL CSS RULES SORTA
 -------------------------------------------------------*/
 
@@ -137,7 +243,7 @@ html {
 
 body {
     color: @color-text;
-    background-color: @color-darker;
+    background-color: var(--color-darker);
     font-family: Verdana, Geneva, sans-serif;
     font-size: 105%;
     text-align: center;
@@ -152,46 +258,49 @@ div {
 
 a {
     &:link {
-        color: darken(@color-link, 10%);
+        color: var(--color-lighter);
     }
 
     &:visited {
-        color: darken(@color-link, 10%);
+        color: var(--color-lighter);
     }
 
     &:hover {
-        color: lighten(@color-link, 15%);
+        color: var(--color-lighter);
+        filter: brightness(125%)
     }
 
     &:active {
-        color: lighten(@color-link, 25%);
+        color: var(--color-lighter);
+        filter: brightness(135%)
     }
 }
 
 h1 {
-    color: lighten(@color-lighter, 20%);
+    color: var(--color-lighter);
+    filter: brightness(130%);
     font-size: 2em;
-    text-shadow: 0 0 0.3em @color-darker;
+    text-shadow: 0 0 0.3em var(--color-darker);
 }
 
 h2 {
-    color: @color-lighter;
+    color: var(--color-lighter);
     font-size: 1.3em;
-    text-shadow: 0 0 0.3em @color-darker;
+    text-shadow: 0 0 0.3em var(--color-darker);
 }
 
 h3 {
-    color: @color-lighter;
+    color: var(--color-lighter);
     font-size: 1.1em;
     text-align: center;
-    text-shadow: 0 0 0.3em @color-darker;
+    text-shadow: 0 0 0.3em var(--color-darker);
 }
 
 h4 {
-    color: @color-lighter;
+    color: var(--color-lighter);
     font-size: 0.8em;
     text-align: center;
-    text-shadow: 0 0 0.3em @color-darker;
+    text-shadow: 0 0 0.3em var(--color-darker);
 }
 
 #shareWrapper {
@@ -201,14 +310,14 @@ h4 {
     text-align: center;
     margin-top: 0.8em;
     margin-bottom: 0.2em;
-    background: @color-med;
+    background: var(--color-med);
 
     .border-radius(3px);
-    .box-shadow(0, 0, 2px, 2px, @color-med);
+    .box-shadow(0, 0, 2px, 2px, var(--color-med));
 }
 
 #wrapper {
-    background-color: @color-dark;
+    background-color: var(--color-dark);
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
@@ -226,15 +335,15 @@ pre {
 }
 
 .section {
-    background-color: @color-med;
-    .box-shadow-inset(0, 0, 5px, 5px, darken(@color-dark, 2%));
+    background-color: var(--color-med);
+    .box-shadow-inset(0, 0, 5px, 5px, var(--color-dark));
     .border-radius(10px);
     padding: 5px;
     overflow: hidden;
 }
 
 .inner-section {
-    //border: 2px solid @color-med;
+    //border: 2px solid var(--color-med);
     padding: 5px;
     margin: 5px;
 }
@@ -246,12 +355,9 @@ pre {
 #title {
     clear: both;
     .section;
-    background: linear-gradient(
-            rgba(red(@color-med), green(@color-med), blue(@color-med), 0.2),
-            rgba(red(@color-med), green(@color-med), blue(@color-med), 0.2)
-        ),
-        @color-med url("../img/sharklogo.png") no-repeat center;
-    text-shadow: 2px 2px 3px @color-darker;
+    background: linear-gradient(rgba(var(--color-med), 0.2), rgba(var(--color-med), 0.2)),
+        var(--color-med) url("../img/sharklogo.png") no-repeat center;
+    text-shadow: 2px 2px 3px var(--color-darker);
 
     h1 {
         //text-align: left;
@@ -274,7 +380,7 @@ pre {
     overflow: hidden;
     text-align: center;
     font-weight: bold;
-    color: @color-lighter;
+    color: var(--color-lighter);
 
     li {
         padding: 0;
@@ -293,10 +399,12 @@ pre {
 #titlemenu {
     a:link,
     a:visited {
-        color: lighten(@color-lighter, 15%);
+        color: var(--color-lighter);
+        filter: brightness(125%)
     }
     a:hover {
-        color: lighten(@color-link, 20%);
+        color: var(--color-lighter);
+        filter: brightness(130%)
     }
 }
 
@@ -353,8 +461,8 @@ pre {
     table {
         margin-left: auto;
         margin-right: auto;
-        background-color: @color-darker;
-        border: 1px solid @color-lighter;
+        background-color: var(--color-darker);
+        border: 1px solid var(--color-lighter);
         padding: 0.5em;
         overflow: hidden;
         text-align: left;
@@ -368,9 +476,10 @@ pre {
             margin: auto;
             text-align: center;
             font-size: 0.9em;
-            color: lighten(@color-lighter, 20%);
-            border-top: 0.1em dashed @color-lighter;
-            border-bottom: 0.1em dashed @color-lighter;
+            color: var(--color-lighter), 20%;
+            filter: brightness(120%);
+            border-top: 0.1em dashed var(--color-lighter);
+            border-bottom: 0.1em dashed var(--color-lighter);
         }
     }
 
@@ -400,6 +509,9 @@ pre {
 #log {
     .inner-section;
     overflow: hidden;
+    /* overflow anchor fixes jittering! 
+    It disables scroll anchoring where chrome tries to help by scrolling the page */
+    overflow-anchor: none;
 
     h3 {
         display: inline;
@@ -436,8 +548,8 @@ pre {
     padding: 1.4em;
     background: repeat-x center;
     .border-radius(0.5em);
-    .box-shadow-inset(0, 0, 30px, 30px, @color-med);
-    text-shadow: 0 0 0.3em @color-dark;
+    .box-shadow-inset(0, 0, 30px, 30px, var(--color-med));
+    text-shadow: 0 0 0.3em var(--color-dark);
 }
 
 #extraMessage {
@@ -531,9 +643,9 @@ button.newlyDiscovered {
         margin-left: auto;
         margin-right: auto;
         padding: 0.1em;
-        border: 1px solid @color-lighter;
+        border: 1px solid var(--color-lighter);
         border-collapse: collapse;
-        background: @color-darker;
+        background: var(--color-darker);
         //border-spacing: 0;
     }
 
@@ -558,17 +670,18 @@ button.newlyDiscovered {
 
 #incomeData {
     padding: 0.1em 0.1em 1em;
-    border-bottom: 0.1em dashed @color-lighter;
+    border-bottom: 0.1em dashed var(--color-lighter);
 
     .oddRow {
-        background: @color-darker;
+        background: var(--color-darker);
     }
     .evenRow {
-        background: lighten(@color-darker, 5%);
+        background: var(--color-darker);
+        filter: brightness(105%)
     }
     .essenceGlow {
         text-shadow: 0 0 1em @color-essence;
-        background: @color-dark;
+        background: var(--color-dark);
     }
 }
 
@@ -581,7 +694,7 @@ button.newlyDiscovered {
 
 #disposeResource {
     padding: 0.1em 0.1em 0.5em;
-    border-bottom: 0.1em dashed @color-lighter;
+    border-bottom: 0.1em dashed var(--color-lighter);
 }
 
 #upgradeList {
@@ -590,7 +703,7 @@ button.newlyDiscovered {
     margin: auto;
     width: 40%;
     padding: 0.2em 0.2em 0.2em 2em;
-    border-left: 0.1em dashed @color-lighter;
+    border-left: 0.1em dashed var(--color-lighter);
 
     ul {
         list-style-type: square;
@@ -644,15 +757,15 @@ button.newlyDiscovered {
 //////////////////////////////////////////////////////////////
 
 #tabBorder {
-    border-bottom: 0.5em double @color-light;
+    border-bottom: 0.5em double var(--color-light);
 }
 
 button {
-    background-color: @color-light;
+    background-color: var(--color-light);
     color: @color-text;
 
     .border-radius(10px);
-    border: 2px solid @color-lighter;
+    border: 2px solid var(--color-lighter);
 
     padding: 10px;
     margin: 1% auto;
@@ -683,22 +796,23 @@ button {
     &:hover {
         //background-color: @highlight-color;
         //color: @super-highlight;
-        .box-shadow(0px, 0px, 2px, 2px, @color-lighter);
+        .box-shadow(0px, 0px, 2px, 2px, var(--color-lighter));
     }
 
     &:active {
-        background-color: @color-dark;
-        color: @color-light;
-        .box-shadow-inset(0px, 3px, 7px, 7px, @color-darker);
+        background-color: var(--color-dark);
+        color: var(--color-light);
+        .box-shadow-inset(0px, 3px, 7px, 7px, var(--color-darker));
 
         .medDesc {
             font-size: 80%;
-            color: darken(@color-lighter, 20%);
+            color: var(--color-lighter);
+            filter: brightness(80%)
         }
 
         div {
             .clear-box-shadow();
-            background-color: @color-dark;
+            background-color: var(--color-dark);
         }
     }
 
@@ -707,10 +821,12 @@ button {
     }
 
     &:disabled {
-        background-color: @color-darker;
-        color: lighten(@color-med, 10%);
+        background-color: var(--color-darker);
+        color: var(--color-med);
+        filter: brightness(110%);
+        backdrop-filter: brightness(90%);
         cursor: default;
-        border-color: lighten(@color-med, 10%);
+        border-color: var(--color-med);
 
         &:hover {
             box-shadow: none;
@@ -722,12 +838,13 @@ button {
 
         .medDesc {
             font-size: 80%;
-            color: darken(@color-lighter, 25%);
+            color: var(--color-lighter);
+            filter: brightness(75%)
         }
 
         div {
             .clear-box-shadow();
-            background-color: @color-darker;
+            background-color: var(--color-darker);
         }
     }
 }
@@ -738,9 +855,9 @@ button {
 
 .button-icon {
     vertical-align: middle;
-    background-color: @color-lighter;
+    background-color: var(--color-lighter);
 
-    .box-shadow(0, 0, 3px, 3px, @color-lighter);
+    .box-shadow(0, 0, 3px, 3px, var(--color-lighter));
     .border-radius(5px);
     .click-passthrough;
 }
@@ -769,7 +886,7 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(red(@color-darker), green(@color-darker), blue(@color-darker), 0.8);
+    background: rgba(var(--color-darker), 0.8);
     pointer-events: none;
 }
 
@@ -778,7 +895,7 @@ button {
     display: block;
     margin: 0.1em auto 0.4em auto;
     .border-radius(5px);
-    .box-shadow(0, 0, 5px, 5px, @color-dark);
+    .box-shadow(0, 0, 5px, 5px, var(--color-dark));
 }
 
 #tabSceneImageRed {
@@ -803,7 +920,7 @@ button {
 
 .smallDesc {
     font-size: 80%;
-    color: @color-lighter;
+    color: var(--color-lighter);
     .click-passthrough;
 }
 
@@ -814,20 +931,23 @@ button {
 
 .medDesc {
     font-size: 80%;
-    color: lighten(@color-lighter, 30%);
+    color: var(--color-lighter);
+    filter: brightness(130%);
     .click-passthrough;
 }
 
 .copyrightNotice {
     font-size: 80%;
-    color: lighten(@color-lighter, 30%);
+    color: var(--color-lighter);
+    filter: brightness(130%);
 }
 
 // PANE
 
 #pane {
-    background-color: @color-dark;
-    .box-shadow-inset(0, 0, 5px, 5px, darken(@color-darker, 2%));
+    background-color: var(--color-dark);
+    .box-shadow-inset(0, 0, 5px, 5px, var(--color-darker));
+    filter: brightness(98%);
     .border-radius(10px);
     padding: 1em 2em;
     margin: auto;
@@ -836,7 +956,7 @@ button {
     top: 50%;
     left: 50%;
     .translate(-50%, -50%);
-    border: double @color-med;
+    border: double var(--color-med);
     max-height: 90%;
     max-width: 90%;
 
@@ -844,11 +964,11 @@ button {
 
     h2 {
         padding-bottom: 0.5em;
-        //border-bottom: 0.4em double @color-med;
+        //border-bottom: 0.4em double var(--color-med);
     }
 
     #paneHeaderEnd {
-        border-bottom: 0.5em double @color-med;
+        border-bottom: 0.5em double var(--color-med);
     }
 
     #paneHeaderTitleDiv {
@@ -890,7 +1010,7 @@ button {
     }
 
     .paneContentDiv {
-        border-bottom: 0.4em double @color-med;
+        border-bottom: 0.4em double var(--color-med);
     }
 
     #changelogDiv {
@@ -1134,4 +1254,32 @@ button.planetButton {
     &:active {
         .clear-box-shadow();
     }
+}
+
+.tooltip {
+    display: block;
+    background-color: var(--color-light);
+    color: #fff;
+    text-align: center;
+    border-style: solid;
+    border-color: var(--color-lighter);
+    border-width: 5px;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    max-width: 200px;
+    position: fixed;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s;
+
+    &:empty {
+        display: none;
+    }
+    
+    .littleTooltipText {
+        font-size: 0.6em;
+    }    
 }
