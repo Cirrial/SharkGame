@@ -478,6 +478,11 @@ SharkGame.Home = {
         }
 
         button.prop("disabled", !enableButton);
+
+        if(document.querySelector("#wrapper button.hoverbutton:hover:enabled") === null) {
+            h.onHomeUnhover();
+        }
+
         button.html(label);
 
         const spritename = "actions/" + actionName;
