@@ -459,9 +459,6 @@ button.newlyDiscovered:disabled div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-button.newlyDiscovered div.tint:before {
-  background: rgba(23, 70, 54, 0.8);
-}
 #homeTabs {
   margin-bottom: 1em;
 }
@@ -690,8 +687,8 @@ button:focus {
 button:disabled {
   background-color: var(--color-darker);
   color: var(--color-med);
-  filter: brightness(110%);
-  backdrop-filter: brightness(90%);
+  filter: brightness(80%);
+  backdrop-filter: brightness(70%);
   cursor: default;
   border-color: var(--color-med);
 }
@@ -748,20 +745,6 @@ button:disabled div {
   pointer-events: none;
   display: inline-block;
   margin: 0em 0.4em 0.4em 0.4em;
-}
-.tint {
-  position: relative;
-}
-.tint:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(var(--color-darker), 0.8);
-  pointer-events: none;
 }
 #tabSceneImage {
   display: block;
@@ -988,9 +971,6 @@ button:disabled div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.gatewayButton div.tint:before {
-  background: rgba(23, 70, 54, 0.8);
-}
 .gateway button {
   background-color: #3eb890;
   border-color: #ace3d1;
@@ -1038,9 +1018,6 @@ button:disabled div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.gateway button div.tint:before {
-  background: rgba(23, 70, 54, 0.8);
-}
 button.gateway {
   background-color: #3eb890;
   border-color: #ace3d1;
@@ -1087,9 +1064,6 @@ button.gateway:disabled div {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-}
-button.gateway div.tint:before {
-  background: rgba(23, 70, 54, 0.8);
 }
 #pane.gateway {
   -webkit-border-radius: 3em;

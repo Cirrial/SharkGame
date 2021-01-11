@@ -1032,10 +1032,11 @@ SharkGame.Main = {
     
     getDeterminer(name) {
         firstLetter = name.charAt(0);
-        if (firstLetter === "a" || firstLetter === "e" || firstLetter === "i" || firstLetter === "o" || firstLetter === "u") {
+        if ("aeiou".includes(firstLetter)) {
             return "an";
             //note to self: make the next line not suck
-        } else if (name !== "algae" && name !== "coral" && name !== "spronge" && name !== "delphinium" && name !== "coralglass" && name !== "sharkonium" && name !== "residue" && name !== "tar" && name !== "ice") {
+            // Possibly add an "uncountable" property to resources somehow? Manual works fine though
+        } else if (!["algae", "coral", "spronge", "delphinium", "coralglass", "sharkonium", "residue", "tar", "ice"].includes(name)) {
             return "a";
         } else {
             return "";
@@ -1048,6 +1049,7 @@ SharkGame.Button = {
         return $("<button>")
             .html(name)
             .attr("id", id)
+            .addClass("hoverbutton")
             .appendTo(div)
             .on("click", handler)
             .on("mouseenter", hhandler)
