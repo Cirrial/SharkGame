@@ -156,7 +156,12 @@ SharkGame.Stats = {
                     label = "Can't dispose any more " + r.getResourceName(k, disableButton, forceSingular);
                 }
 
-                button.html(label).prop("disabled", disableButton);
+                button.html(label)
+                if(disableButton) {
+                    button.addClass("disabled")
+                } else {
+                    button.removeClass("disabled");
+                }
             }
         });
     },

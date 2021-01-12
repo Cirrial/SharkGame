@@ -63,7 +63,7 @@ $.extend(SharkGame, {
 
     gameOver: false,
     wonGame: false,
-    
+
     cheatsAndDebug: {
         pause: false,
         stop: false,
@@ -671,9 +671,8 @@ SharkGame.Main = {
             buttonList.prepend(
                 $("<li>").append(
                     $("<button>")
-                        .addClass("min")
+                        .addClass("min" + (disableButton ? " disabled" : ""))
                         .attr("id", "buy-" + amount)
-                        .prop("disabled", disableButton)
                 )
             );
             let label = customLabel ? customLabel + " " : "buy ";
@@ -692,9 +691,10 @@ SharkGame.Main = {
                 .html(label)
                 .on("click", function callback() {
                     const thisButton = $(this);
+                    if(thisButton.hasClass("disabled")) return;
                     SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
-                    $("button[id^='buy-']").prop("disabled", false);
-                    thisButton.prop("disabled", true);
+                    $("button[id^='buy-']").removeClass("disabled");
+                    thisButton.addClass("disabled");
                 });
         });
     },
@@ -755,8 +755,7 @@ SharkGame.Main = {
                     $("<td>").append(
                         $("<button>")
                             .attr("id", "optionButton-" + key + "-" + k)
-                            .addClass("option-button")
-                            .prop("disabled", isCurrentSetting)
+                            .addClass("option-button" + (isCurrentSetting ? " disabled" : ""))
                             .html(typeof v === "boolean" ? (v ? "on" : "off") : v)
                             .on("click", m.onOptionClick)
                     )
@@ -780,6 +779,7 @@ SharkGame.Main = {
                     .html("import")
                     .addClass("option-button")
                     .on("click", function callback() {
+                        if($(this).hasClass("disabled")) return;
                         const importText = $("#importExportField").val();
                         if (importText === "") {
                             SharkGame.hidePane();
@@ -796,6 +796,7 @@ SharkGame.Main = {
                     .html("export")
                     .addClass("option-button")
                     .on("click", function callback() {
+                        if($(this).hasClass("disabled")) return
                         $("#importExportField").val(SharkGame.Save.exportData());
                     })
             )
@@ -849,10 +850,10 @@ SharkGame.Main = {
         //     .html("(" + ((typeof newSetting === "boolean") ? (newSetting ? "on" : "off") : newSetting) + ")");
 
         // enable all buttons
-        $('button[id^="optionButton-' + settingName + '"]').prop("disabled", false);
+        $('button[id^="optionButton-' + settingName + '"]').removeClass("disabled");
 
         // disable this button
-        $(this).attr("disabled", "true");
+        $(this).addClass("disabled");
 
         // if there is a callback, call it, else call the no op
         (SharkGame.Settings[settingName].onChange || $.noop)();

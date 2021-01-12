@@ -153,7 +153,12 @@ SharkGame.Recycler = {
                     }
                 }
                 label += r.getResourceName(k, disableButton, forceSingular);
-                inputButton.html(label).prop("disabled", disableButton);
+                inputButton.html(label)
+                if(disableButton) {
+                    inputButton.addClass("disabled")
+                } else {
+                    inputButton.removeClass("disabled")
+                }
 
                 // update output button
                 disableButton = maxOutputAmount < outputAmount || outputAmount <= 0;
@@ -170,7 +175,12 @@ SharkGame.Recycler = {
                 }
 
                 label += r.getResourceName(k, disableButton, forceSingular);
-                outputButton.html(label).prop("disabled", disableButton);
+                outputButton.html(label)
+                if(disableButton) {
+                    outputButton.addClass("disabled")
+                } else {
+                    outputButton.removeClass("disabled");
+                }
             }
         });
     },
@@ -207,6 +217,7 @@ SharkGame.Recycler = {
     onInput() {
         const l = SharkGame.Log;
         const button = $(this);
+        if(button.hasClass("disabled")) return;
         const resourceName = button.attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
@@ -224,12 +235,13 @@ SharkGame.Recycler = {
         y.updateEfficiency(resourceName, r.getResource(resourceName));
 
         // disable button until next frame
-        button.prop("disabled", true);
+        button.addClass("disabled");
     },
 
     onOutput() {
         const l = SharkGame.Log;
         const button = $(this);
+        if(button.hasClass("disabled")) return;
         const resourceName = button.attr("id").split("-")[1];
         const junkAmount = r.getResource("junk");
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
@@ -272,7 +284,7 @@ SharkGame.Recycler = {
         }
 
         // disable button until next frame
-        button.prop("disabled", true);
+        button.addClass("disabled");
     },
 
     getMaxToBuy(resource) {
@@ -301,7 +313,7 @@ SharkGame.Recycler = {
         const resource = button.attr("id").split("-")[1];
         const amount = r.getResource(resource);
 
-        if (button.is(":disabled")) {
+        if (button.is(".disabled")) {
             return;
         }
 
@@ -320,7 +332,7 @@ SharkGame.Recycler = {
         const button = $(this);
         const resource = button.attr("id").split("-")[1];
 
-        if (button.is(":disabled")) {
+        if (button.is(".disabled")) {
             return;
         }
 

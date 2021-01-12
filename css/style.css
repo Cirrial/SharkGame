@@ -445,15 +445,15 @@ button.newlyDiscovered:active div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-button.newlyDiscovered:disabled {
+button.newlyDiscovered.disabled {
   background-color: #174636;
   color: #38a581;
   border-color: #38a581;
 }
-button.newlyDiscovered:disabled .medDesc {
+button.newlyDiscovered.disabled .medDesc {
   color: #3eb890;
 }
-button.newlyDiscovered:disabled div {
+button.newlyDiscovered.disabled div {
   background-color: #174636;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -683,7 +683,7 @@ button:active div {
 button:focus {
   outline: 0;
 }
-button:disabled {
+button.disabled {
   background-color: var(--color-darker);
   color: var(--color-med);
   filter: brightness(80%);
@@ -691,18 +691,18 @@ button:disabled {
   cursor: default;
   border-color: var(--color-med);
 }
-button:disabled:hover {
+button.disabled:hover {
   box-shadow: none;
 }
-button:disabled:active {
+button.disabled:active {
   box-shadow: none;
 }
-button:disabled .medDesc {
+button.disabled .medDesc {
   font-size: 80%;
   color: var(--color-lighter);
   filter: brightness(75%);
 }
-button:disabled div {
+button.disabled div {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -956,15 +956,15 @@ button:disabled div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.gatewayButton:disabled {
+.gatewayButton.disabled {
   background-color: #174636;
   color: #38a581;
   border-color: #38a581;
 }
-.gatewayButton:disabled .medDesc {
+.gatewayButton.disabled .medDesc {
   color: #3eb890;
 }
-.gatewayButton:disabled div {
+.gatewayButton.disabled div {
   background-color: #174636;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1003,15 +1003,15 @@ button:disabled div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.gateway button:disabled {
+.gateway button.disabled {
   background-color: #174636;
   color: #38a581;
   border-color: #38a581;
 }
-.gateway button:disabled .medDesc {
+.gateway button.disabled .medDesc {
   color: #3eb890;
 }
-.gateway button:disabled div {
+.gateway button.disabled div {
   background-color: #174636;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1050,15 +1050,15 @@ button.gateway:active div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-button.gateway:disabled {
+button.gateway.disabled {
   background-color: #174636;
   color: #38a581;
   border-color: #38a581;
 }
-button.gateway:disabled .medDesc {
+button.gateway.disabled .medDesc {
   color: #3eb890;
 }
-button.gateway:disabled div {
+button.gateway.disabled div {
   background-color: #174636;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
