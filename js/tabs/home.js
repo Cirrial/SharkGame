@@ -212,12 +212,9 @@ SharkGame.Home = {
         // help button
         const helpButtonDiv = $("<div>");
         helpButtonDiv.css({ margin: "auto", clear: "both" });
-        SharkGame.Button.makeButton(
-            "helpButton",
-            "Toggle hover descriptions",
-            helpButtonDiv,
-            h.toggleHelp
-        ).addClass("min-block");
+        SharkGame.Button.makeButton("helpButton", "Toggle hover descriptions", helpButtonDiv, h.toggleHelp).addClass(
+            "min-block"
+        );
         content.append(helpButtonDiv);
         // button list
         const buttonList = $("<div>").attr("id", "buttonList");
@@ -271,7 +268,7 @@ SharkGame.Home = {
                             .attr("href", "javascript:;")
                             .html(v.name)
                             .on("click", function callback() {
-                                if($(this).hasClass(".disablled")) return;
+                                if ($(this).hasClass(".disabled")) return;
                                 const tab = $(this).attr("id").split("-")[1];
                                 h.changeButtonTab(tab);
                             })
@@ -478,13 +475,13 @@ SharkGame.Home = {
             }
         }
 
-        if(enableButton) {
-            button.removeClass("disabled")
+        if (enableButton) {
+            button.removeClass("disabled");
         } else {
-            button.addClass("disabled")
+            button.addClass("disabled");
         }
 
-        if(document.querySelector("#wrapper button.hoverbutton:hover") === null) {
+        if (document.querySelector("#wrapper button.hoverbutton:hover") === null) {
             h.onHomeUnhover();
         }
 
@@ -619,7 +616,7 @@ SharkGame.Home = {
         const amountToBuy = SharkGame.Settings.current.buyAmount;
         // get related entry in home button table
         const button = $(this);
-        if(button.hasClass("disabled")) return;
+        if (button.hasClass("disabled")) return;
         const buttonName = button.attr("id");
         const action = SharkGame.HomeActions[buttonName];
         let actionCost = {};
@@ -748,7 +745,12 @@ SharkGame.Home = {
             $.each(effects.resource, (resource) => {
                 const determiner = m.getDeterminer(resource);
                 if (determiner !== "") {
-                    text = m.getDeterminer(resource) + " " + r.getResourceName(resource, false, true).bold() + "<br>" + text;
+                    text =
+                        m.getDeterminer(resource) +
+                        " " +
+                        r.getResourceName(resource, false, true).bold() +
+                        "<br>" +
+                        text;
                 } else {
                     text = r.getResourceName(resource, false, true).bold() + "<br>" + text;
                 }

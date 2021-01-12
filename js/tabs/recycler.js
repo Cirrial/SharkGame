@@ -153,11 +153,11 @@ SharkGame.Recycler = {
                     }
                 }
                 label += r.getResourceName(k, disableButton, forceSingular);
-                inputButton.html(label)
-                if(disableButton) {
-                    inputButton.addClass("disabled")
+                inputButton.html(label);
+                if (disableButton) {
+                    inputButton.addClass("disabled");
                 } else {
-                    inputButton.removeClass("disabled")
+                    inputButton.removeClass("disabled");
                 }
 
                 // update output button
@@ -175,9 +175,9 @@ SharkGame.Recycler = {
                 }
 
                 label += r.getResourceName(k, disableButton, forceSingular);
-                outputButton.html(label)
-                if(disableButton) {
-                    outputButton.addClass("disabled")
+                outputButton.html(label);
+                if (disableButton) {
+                    outputButton.addClass("disabled");
                 } else {
                     outputButton.removeClass("disabled");
                 }
@@ -217,7 +217,7 @@ SharkGame.Recycler = {
     onInput() {
         const l = SharkGame.Log;
         const button = $(this);
-        if(button.hasClass("disabled")) return;
+        if (button.hasClass("disabled")) return;
         const resourceName = button.attr("id").split("-")[1];
         const resourceAmount = r.getResource(resourceName);
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;
@@ -241,7 +241,7 @@ SharkGame.Recycler = {
     onOutput() {
         const l = SharkGame.Log;
         const button = $(this);
-        if(button.hasClass("disabled")) return;
+        if (button.hasClass("disabled")) return;
         const resourceName = button.attr("id").split("-")[1];
         const junkAmount = r.getResource("junk");
         const junkPerResource = SharkGame.ResourceMap.get(resourceName).value;

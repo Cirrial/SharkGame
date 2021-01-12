@@ -757,7 +757,7 @@ SharkGame.Resources = {
         SharkGame.ResourceIncomeAffectedApplicable = {};
     },
 
-    addNetworkNode(network,main,effect,sub,degree) {
+    addNetworkNode(network, main, effect, sub, degree) {
         if (!network[main]) {
             network[main] = {};
         }

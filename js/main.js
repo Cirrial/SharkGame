@@ -190,7 +190,7 @@ SharkGame.TitleBar = {
                     SharkGame.Save.saveGame();
                 } catch (err) {
                     SharkGame.Log.addError(err);
-                    console.log(err);
+                    console.error(err);
                 }
                 SharkGame.Log.addMessage("Saved game.");
             } catch (err) {
@@ -513,7 +513,7 @@ SharkGame.Main = {
                 // Compensate for lost time.
                 m.processSimTime(SharkGame.dt * (elapsedTime / SharkGame.INTERVAL));
             } else {
-                if (CaD.chunky) {
+                if (cad.chunky) {
                     return;
                 }
                 m.processSimTime(SharkGame.dt);
@@ -575,7 +575,7 @@ SharkGame.Main = {
             SharkGame.Log.addMessage("Autosaved.");
         } catch (err) {
             SharkGame.Log.addError(err.message);
-            console.log(err.trace);
+            console.error(err.trace);
         }
     },
 
@@ -691,7 +691,7 @@ SharkGame.Main = {
                 .html(label)
                 .on("click", function callback() {
                     const thisButton = $(this);
-                    if(thisButton.hasClass("disabled")) return;
+                    if (thisButton.hasClass("disabled")) return;
                     SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
                     $("button[id^='buy-']").removeClass("disabled");
                     thisButton.addClass("disabled");
@@ -779,7 +779,7 @@ SharkGame.Main = {
                     .html("import")
                     .addClass("option-button")
                     .on("click", function callback() {
-                        if($(this).hasClass("disabled")) return;
+                        if ($(this).hasClass("disabled")) return;
                         const importText = $("#importExportField").val();
                         if (importText === "") {
                             SharkGame.hidePane();
@@ -796,7 +796,7 @@ SharkGame.Main = {
                     .html("export")
                     .addClass("option-button")
                     .on("click", function callback() {
-                        if($(this).hasClass("disabled")) return
+                        if ($(this).hasClass("disabled")) return;
                         $("#importExportField").val(SharkGame.Save.exportData());
                     })
             )
@@ -837,7 +837,7 @@ SharkGame.Main = {
     },
 
     onOptionClick() {
-        if($(this).hasClass("disabled")) return;
+        if ($(this).hasClass("disabled")) return;
         const buttonLabel = $(this).attr("id");
         const settingInfo = buttonLabel.split("-");
         const settingName = settingInfo[1];
@@ -935,7 +935,7 @@ SharkGame.Main = {
                 SharkGame.Log.addMessage("Game saved.");
             } catch (err) {
                 SharkGame.Log.addError(err.message);
-                console.log(err.trace);
+                console.error(err.trace);
             }
         }
     },
@@ -1046,14 +1046,27 @@ SharkGame.Main = {
             }
         });
     },
-    
+
     getDeterminer(name) {
-        firstLetter = name.charAt(0);
+        const firstLetter = name.charAt(0);
         if ("aeiou".includes(firstLetter)) {
             return "an";
             //note to self: make the next line not suck
             // Possibly add an "uncountable" property to resources somehow? Manual works fine though
-        } else if (!["algae", "coral", "spronge", "delphinium", "coralglass", "sharkonium", "residue", "tar", "ice", "science"].includes(name)) {
+        } else if (
+            ![
+                "algae",
+                "coral",
+                "spronge",
+                "delphinium",
+                "coralglass",
+                "sharkonium",
+                "residue",
+                "tar",
+                "ice",
+                "science",
+            ].includes(name)
+        ) {
             return "a";
         } else {
             return "";
