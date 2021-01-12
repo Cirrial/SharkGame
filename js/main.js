@@ -837,6 +837,7 @@ SharkGame.Main = {
     },
 
     onOptionClick() {
+        if($(this).hasClass("disabled")) return;
         const buttonLabel = $(this).attr("id");
         const settingInfo = buttonLabel.split("-");
         const settingName = settingInfo[1];
