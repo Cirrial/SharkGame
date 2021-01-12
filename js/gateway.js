@@ -371,7 +371,7 @@ SharkGame.Gateway = {
             $("#essenceHeldDisplay").html(m.beautify(r.getResource("essence")));
         }
         // disable button until next frame
-        button.prop("disabled", true);
+        button.addClass("disabled");
     },
 
     updateArtifactButtons() {
@@ -401,7 +401,12 @@ SharkGame.Gateway = {
                     label +=
                         "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
                 }
-                button.prop("disabled", !enableButton).html(label);
+                if(enableButton) {
+                    button.removeClass("disabled");
+                } else {
+                    button.addClass("disabled");
+                }
+                button.html(label);
 
                 const spritename = "artifacts/" + artifactName;
                 if (SharkGame.Settings.current.iconPositions !== "off") {

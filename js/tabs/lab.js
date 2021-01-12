@@ -140,7 +140,12 @@ SharkGame.Lab = {
         if (costText !== "") {
             label += "<br/>Cost: " + costText;
         }
-        button.prop("disabled", !enableButton).html(label);
+        if(enableButton) {
+            button.removeClass("disabled")
+        } else {
+            button.addClass("disabled")
+        }
+        button.html(label)
 
         const spritename = "technologies/" + upgradeName;
         if (SharkGame.Settings.current.iconPositions !== "off") {

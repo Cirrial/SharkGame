@@ -268,6 +268,7 @@ SharkGame.Home = {
                             .attr("href", "javascript:;")
                             .html(v.name)
                             .on("click", function callback() {
+                                if($(this).hasClass(".disablled")) return;
                                 const tab = $(this).attr("id").split("-")[1];
                                 h.changeButtonTab(tab);
                             })
@@ -474,7 +475,11 @@ SharkGame.Home = {
             }
         }
 
-        button.prop("disabled", !enableButton);
+        if(enableButton) {
+            button.removeClass("disabled")
+        } else {
+            button.addClass("disabled")
+        }
 
         if (document.querySelector("#wrapper button.hoverbutton:hover") === null) {
             h.onHomeUnhover();
@@ -611,6 +616,7 @@ SharkGame.Home = {
         const amountToBuy = SharkGame.Settings.current.buyAmount;
         // get related entry in home button table
         const button = $(this);
+        if(button.hasClass("disabled")) return;
         const buttonName = button.attr("id");
         const action = SharkGame.HomeActions[buttonName];
         let actionCost = {};
@@ -673,7 +679,7 @@ SharkGame.Home = {
             button.removeClass("newlyDiscovered");
         }
         // disable button until next frame
-        button.prop("disabled", true);
+        button.addClass("disabled");
     },
 
     onHomeHover() {
