@@ -691,7 +691,7 @@ SharkGame.Main = {
                 .html(label)
                 .on("click", function callback() {
                     const thisButton = $(this);
-                    if(thisButton.hasClass("disabled")) return;
+                    if (thisButton.hasClass("disabled")) return;
                     SharkGame.Settings.current.buyAmount = parseInt(thisButton.attr("id").slice(4));
                     $("button[id^='buy-']").removeClass("disabled");
                     thisButton.addClass("disabled");
@@ -779,7 +779,7 @@ SharkGame.Main = {
                     .html("import")
                     .addClass("option-button")
                     .on("click", function callback() {
-                        if($(this).hasClass("disabled")) return;
+                        if ($(this).hasClass("disabled")) return;
                         const importText = $("#importExportField").val();
                         if (importText === "") {
                             SharkGame.hidePane();
@@ -796,7 +796,7 @@ SharkGame.Main = {
                     .html("export")
                     .addClass("option-button")
                     .on("click", function callback() {
-                        if($(this).hasClass("disabled")) return
+                        if ($(this).hasClass("disabled")) return;
                         $("#importExportField").val(SharkGame.Save.exportData());
                     })
             )
@@ -837,7 +837,7 @@ SharkGame.Main = {
     },
 
     onOptionClick() {
-        if($(this).hasClass("disabled")) return;
+        if ($(this).hasClass("disabled")) return;
         const buttonLabel = $(this).attr("id");
         const settingInfo = buttonLabel.split("-");
         const settingName = settingInfo[1];

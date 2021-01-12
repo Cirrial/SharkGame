@@ -401,7 +401,7 @@ SharkGame.Gateway = {
                     label +=
                         "</span><br>Cost: <span class='essenceCountBrighter'>" + m.beautify(cost) + "</span> essence";
                 }
-                if(enableButton) {
+                if (enableButton) {
                     button.removeClass("disabled");
                 } else {
                     button.addClass("disabled");

@@ -111,7 +111,17 @@ SharkGame.Lab = {
                     );
                     l.updateLabButton(key);
                     if (SharkGame.Settings.current.showAnimations) {
-                        buttonSelector.hide().css("opacity", 0).slideDown(50).animate({ opacity: 1.0 }, 50);
+                        buttonSelector
+                            .hide()
+                            .css("opacity", 0)
+                            .slideDown(50)
+                            .animate(
+                                { opacity: 1.0 },
+                                {
+                                    duration: 50,
+                                    done: (anim) => (anim.elem.style = null),
+                                }
+                            );
                     }
                 }
             } else {
@@ -140,12 +150,12 @@ SharkGame.Lab = {
         if (costText !== "") {
             label += "<br/>Cost: " + costText;
         }
-        if(enableButton) {
-            button.removeClass("disabled")
+        if (enableButton) {
+            button.removeClass("disabled");
         } else {
-            button.addClass("disabled")
+            button.addClass("disabled");
         }
-        button.html(label)
+        button.html(label);
 
         const spritename = "technologies/" + upgradeName;
         if (SharkGame.Settings.current.iconPositions !== "off") {
