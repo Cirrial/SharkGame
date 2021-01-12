@@ -61,14 +61,14 @@ SharkGame.HomeActions = {
         name: "Debug stuff",
         effect: {
             resource: {
-                'fish': 10000000,
-                'crystal': 10000000,
-                'sharkonium': 100000000,
-                'sand': 100000000,
-                'kelp': 100000000,
-                'science': 1000000000,
-                'shark': 10000
-            }
+                fish: 10000000,
+                crystal: 10000000,
+                sharkonium: 100000000,
+                sand: 100000000,
+                kelp: 100000000,
+                science: 1000000000,
+                shark: 10000,
+            },
         },
         cost: {},
         prereq: {

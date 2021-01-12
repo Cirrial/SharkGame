@@ -21,7 +21,8 @@
         "g": "readonly",
         "s": "readonly",
         "w": "readonly",
-        "h": "readonly"
+        "h": "readonly",
+        "cad": "readonly"
     },
     "ignorePatterns": ["js/lib/**", "js/fallback/**", "js/reference/**", "js/menu/**"],
     "rules": {

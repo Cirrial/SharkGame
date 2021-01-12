@@ -212,12 +212,9 @@ SharkGame.Home = {
         // help button
         const helpButtonDiv = $("<div>");
         helpButtonDiv.css({ margin: "auto", clear: "both" });
-        SharkGame.Button.makeButton(
-            "helpButton",
-            "Toggle hover descriptions",
-            helpButtonDiv,
-            h.toggleHelp
-        ).addClass("min-block");
+        SharkGame.Button.makeButton("helpButton", "Toggle hover descriptions", helpButtonDiv, h.toggleHelp).addClass(
+            "min-block"
+        );
         content.append(helpButtonDiv);
         // button list
         const buttonList = $("<div>").attr("id", "buttonList");
@@ -479,7 +476,7 @@ SharkGame.Home = {
 
         button.prop("disabled", !enableButton);
 
-        if(document.querySelector("#wrapper button.hoverbutton:hover") === null) {
+        if (document.querySelector("#wrapper button.hoverbutton:hover") === null) {
             h.onHomeUnhover();
         }
 
@@ -742,7 +739,12 @@ SharkGame.Home = {
             $.each(effects.resource, (resource) => {
                 const determiner = m.getDeterminer(resource);
                 if (determiner !== "") {
-                    text = m.getDeterminer(resource) + " " + r.getResourceName(resource, false, true).bold() + "<br>" + text;
+                    text =
+                        m.getDeterminer(resource) +
+                        " " +
+                        r.getResourceName(resource, false, true).bold() +
+                        "<br>" +
+                        text;
                 } else {
                     text = r.getResourceName(resource, false, true).bold() + "<br>" + text;
                 }

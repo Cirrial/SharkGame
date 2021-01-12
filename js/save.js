@@ -429,7 +429,7 @@ SharkGame.Save = {
             SharkGame.Save.loadGame(saveData);
         } catch (err) {
             SharkGame.Log.addError(err.message);
-            console.log(err.trace);
+            console.error(err.trace);
         }
         // refresh current tab
         m.setUpTab();
@@ -443,7 +443,7 @@ SharkGame.Save = {
                 saveData = SharkGame.Save.saveGame(true);
             } catch (err) {
                 SharkGame.Log.addError(err.message);
-                console.log(err.trace);
+                console.error(err.trace);
             }
         }
         // check if save isn't encoded
