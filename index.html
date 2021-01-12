@@ -239,20 +239,20 @@
                 return "Okay, but only because you asked nicely.";
             }
             function goFasterPlease() {
-                if (r.specialMultiplier === 4096) {
+                if (cad.speed === 512) {
                     return "I think you've had enough.";
                 }
                 let msg = "";
-                r.specialMultiplier *= 2;
-                switch (r.specialMultiplier) {
+                cad.speed *= 2;
+                switch (cad.speed) {
                     case 2:
                         msg = "Going twice as fast.";
                         break;
-                    case 4096:
+                    case 512:
                         msg = "Going...really fast.";
                         break;
                     default:
-                        msg = "Going " + r.specialMultiplier + " times as fast.";
+                        msg = "Going " + cad.speed + " times as fast.";
                         break;
                 }
                 return msg;
@@ -285,8 +285,8 @@
                 return "WIP.";
             }
             function goSlowerPlease() {
-                r.specialMultiplier *= 0.5;
-                return "Slowed things down.";
+                cad.speed *= 0.5;
+                return "Slowed things down to " + cad.speed + " times as fast.";
             }
             function chunkyPlease() {
                 if (cad.chunky) {

@@ -203,7 +203,7 @@ SharkGame.Resources = {
                     const affectedResourceBoostMultiplier = worldResources.get(name).boostMultiplier;
                     SharkGame.PlayerIncomeTable.set(
                         name,
-                        SharkGame.PlayerIncomeTable.get(name) + worldResourceIncome * affectedResourceBoostMultiplier
+                        SharkGame.PlayerIncomeTable.get(name) + worldResourceIncome * affectedResourceBoostMultiplier * cad.speed
                     );
                 }
             }
@@ -225,7 +225,8 @@ SharkGame.Resources = {
             w.getArtifactMultiplier(generator) *
             r.getSpecialMultiplier() *
             r.getResourceGeneratorMultiplier(generator) *
-            r.getResourceIncomeMultiplier(product);
+            r.getResourceIncomeMultiplier(product) *
+            cad.speed;
         if (rp.incomeCap[product]) {
             if (SharkGame.PlayerIncomeTable.get(product) + generated > rp.incomeCap[product]) {
                 return rp.incomeCap[product] - SharkGame.PlayerIncomeTable.get(product);
@@ -249,7 +250,8 @@ SharkGame.Resources = {
             w.getArtifactMultiplier(generator) *
             r.getSpecialMultiplier() *
             r.getResourceGeneratorMultiplier(generator) *
-            r.getResourceIncomeMultiplier(product);
+            r.getResourceIncomeMultiplier(product) *
+            cad.speed;
         if (rp.incomeCap[product]) {
             if (SharkGame.PlayerIncomeTable.get(product) + generated > rp.incomeCap[product]) {
                 return rp.incomeCap[product] - SharkGame.PlayerIncomeTable.get(product);

@@ -66,11 +66,13 @@ SharkGame.Gate = {
             $.each(gt.costs, (k, v) => {
                 if (!gt.costsMet[k]) {
                     const resourceName = r.getResourceName(k);
-                    SharkGame.Button.makeButton(
+                    SharkGame.Button.makeHoverscriptButton(
                         "gateCost-" + k,
                         "Insert " + m.beautify(v) + " " + resourceName + " into " + resourceName + " slot",
                         buttonList,
-                        gt.onGateButton
+                        gt.onGateButton,
+                        gt.onHover,
+                        gt.onUnhover
                     );
                     amountOfSlots++;
                 }
@@ -87,6 +89,27 @@ SharkGame.Gate = {
             tabMessageSel.css("background-image", "url('" + gt.tabBg + "')");
         }
         tabMessageSel.html(message);
+    },
+    
+    onHover() {
+        const gt = SharkGame.Gate;
+        const button = $(this);
+        const resourceName = button.attr("id").split("-")[1];
+        const amount = r.getResource(resourceName);
+        const required = gt.costs[resourceName];
+        if (amount < required) {
+            button.html("Need <span class='click-passthrough' style='color:#FFDE0A'>" + m.beautify(required - amount) + "</span> more " + r.getResourceName(resourceName) + " for " + r.getResourceName(resourceName) + " slot");
+        } else {
+            button.html("<span class='click-passthrough' style='color:#FFDE0A'>Insert " + m.beautify(required) + "</span> " + r.getResourceName(resourceName) + " into " + r.getResourceName(resourceName) + " slot");
+        }
+    },
+    
+    onUnhover() {
+        const gt = SharkGame.Gate;
+        const button = $(this);
+        const resourceName = button.attr("id").split("-")[1];
+        const required = gt.costs[resourceName];
+        button.html("Insert " + m.beautify(required) + " " + r.getResourceName(resourceName) + " into " + r.getResourceName(resourceName) + " slot");
     },
 
     update() {},
